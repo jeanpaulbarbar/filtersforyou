@@ -1,0 +1,167 @@
+FILTERS FOR YOU — WEBSITE INFORMATION EXTRACT
+Sourced from: https://www.filtersforyou.com.au
+Date extracted: 12 April 2026
+=======================================================
+
+NOTE: The website is built on Wix (Thunderbolt renderer) and all page content
+is JavaScript-rendered. Static extraction was used across the homepage, all
+product/system pages, contact page, book-online page, sitemap files, and
+product category pages. Items marked [NOT FOUND] could not be confirmed via
+any accessible page source.
+
+-------------------------------------------------------
+CONTACT DETAILS
+-------------------------------------------------------
+
+Phone Number:   [NOT FOUND — not exposed in any accessible page source]
+Email Address:  [NOT FOUND — not exposed in any accessible page source]
+
+Note: The contact and book-online pages exist at:
+  /contact
+  /book-online
+but their content is rendered dynamically and was not extractable.
+
+-------------------------------------------------------
+PRODUCT LINES (System Pages — from pages sitemap)
+-------------------------------------------------------
+
+These are the named filtration system product lines found in the site's
+page structure. Prices were not accessible.
+
+1.  Pure Essential
+2.  Pure Plus
+3.  Pure Home
+4.  Pure Advanced
+5.  Pure Premium
+6.  Pure Luxe
+7.  Pure Compact
+8.  Pure Barista
+9.  Pure Systems  (overview/comparison page)
+10. Service Plans  (/service-plans)
+
+-------------------------------------------------------
+REPLACEMENT CARTRIDGE & FILTER PRODUCTS (Store — 19 items)
+-------------------------------------------------------
+
+Product names derived from URL slugs in the store-products sitemap.
+Exact display names and prices were not accessible (JS-rendered store).
+
+ 1. Pure Essential 3-Stage Filter System Replacement Cartridges — 2 Year Pack
+ 2. Far Infra Red Rays Filter
+ 3. Asprinn Reverse Osmosis Membrane
+ 4. Hydrogen Rich High Alkaline Reverse Osmosis Post Filter
+ 5. Xstream Inline Alkaline Water Filter Cartridge
+ 6. One Stop Plus Hardness Conditioning Cartridge
+ 7. Fluoride Lead Cyst Removal 3-Stage Water Filter System Replacement Cartridges
+ 8. 0.5 Micron Coconut Carbon Block Filter Cartridge 10 x 2.5"
+ 9. 1 Micron Coconut Carbon Block Filter Cartridge 10 x 2.5"
+10. 5 Micron Coconut Carbon Block Filter Cartridge 10 x 2.5"
+11. Pure Plus 5 Stages Reverse Osmosis Water Filter System Replacement Cartridges
+12. Quick Change Granular Activated Carbon Water Filter Cartridge
+13. Coconut GAC Alkaline Mineral Reverse Osmosis Post Filter
+14. Quick Change Alkalising Water Filter Cartridge
+15. Quick Change Reverse Osmosis Membrane Cartridge
+16. Coconut Shell Activated Carbon Filter
+17. Quick Change 1 Micron Sediment Replacement Cartridge
+18. Quick Change 5 Micron Coconut Carbon Block Cartridge
+19. Xstream Inline Carbon Filter Cartridge
+
+Product Categories (from store-categories sitemap):
+  - Quick Change Cartridges
+  - Inline Cartridges & RO Membranes
+  - Sediment Cartridges
+  - Carbon Cartridges
+
+-------------------------------------------------------
+BRAND COLOURS
+-------------------------------------------------------
+
+Only a limited set of hard-coded hex values were found in the CSS across
+multiple page fetches. The majority of colours are stored as CSS custom
+properties (--color_11 through --color_48) whose resolved values are
+injected at runtime by Wix and were not accessible.
+
+Confirmed hex values in source:
+  #080808   — Near-black (used for primary text/dark elements)
+  #000000   — Pure black
+  #FFFFFF   — White
+
+Dynamic colour variables (unresolved — actual values not accessible):
+  --color_11 through --color_48  (Wix CSS custom properties)
+
+Note: Based on the product naming style, visual product line naming
+(Pure Luxe, Pure Premium, etc.) and the test.html you already have
+(blue #1a6fc4 + white + yellow), the brand palette appears to be
+built around blue, white, and accent colours — but this cannot be
+confirmed from the source alone without a rendered browser session.
+
+-------------------------------------------------------
+LOGO DESCRIPTION
+-------------------------------------------------------
+
+[NOT FOUND — Logo image is loaded from Wix static CDN (wixstatic.com)
+as a dynamic asset and was not accessible via the page source.
+No alt text, title, or descriptive text for the logo was found.]
+
+The site name "Filters For You" appears as text branding throughout.
+
+-------------------------------------------------------
+VISUAL AESTHETIC & DESIGN APPROACH
+-------------------------------------------------------
+
+Platform:       Wix (Thunderbolt framework v1.17110.0, site revision 607)
+Language/Locale: Australian English (en-au)
+
+Design approach (inferred from page structure and naming conventions):
+
+- CLEAN & PROFESSIONAL: Product line naming (Pure Essential, Pure Luxe,
+  Pure Premium, Pure Barista) suggests a premium, lifestyle-oriented
+  brand positioning — water filtration as a quality-of-life upgrade
+  rather than a commodity product.
+
+- PRODUCT-CENTRIC LAYOUT: Each system has its own dedicated page,
+  indicating a strong product showcase focus with individual feature
+  presentations per model tier.
+
+- TIERED PRODUCT RANGE: Products are named to indicate a clear hierarchy
+  (Essential → Plus → Home → Advanced → Premium → Luxe), suggesting a
+  good/better/best upsell structure.
+
+- RESPONSIVE & MOBILE-FIRST: Wix Thunderbolt mesh layout with CSS Grid,
+  responsive breakpoints, and mobile optimisation enabled.
+
+- SMOOTH INTERACTIONS: View transition animations, blur-in lazy loading
+  for images, custom cursor states — indicates attention to polished UX.
+
+- TYPOGRAPHY: Variable font system with standardised heading and body
+  text hierarchy.
+
+- ANALYTICS: Facebook Pixel (ID: 2577696515958185) — actively tracking
+  conversions, suggesting paid social advertising is part of their
+  marketing mix.
+
+- BOOKING INTEGRATION: Wix Bookings is enabled (/book-online), indicating
+  in-home installation/consultation services are offered alongside
+  product sales.
+
+- BLOG PRESENT: 3 published posts (as of Jan 2026):
+    "Top Benefits of Under-Sink Water Filtration Systems"
+    "Understanding Water Contaminants and Filtration Solutions"
+    "How to Choose the Right Water Filter for Home"
+  — suggests content marketing strategy targeting SEO for water
+    filtration search terms.
+
+-------------------------------------------------------
+ADDITIONAL SITE PAGES
+-------------------------------------------------------
+
+/about          — Company about page
+/pure-systems   — System overview/comparison
+/service-plans  — Ongoing service/maintenance plans
+/book-online    — Booking form (installation/consultation)
+/blog           — Blog index
+/contact        — Contact form
+
+=======================================================
+END OF EXTRACT
+=======================================================
