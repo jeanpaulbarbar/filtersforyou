@@ -223,7 +223,7 @@ a{text-decoration:none;color:inherit}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 32px;max-width:1280px;margin:0 auto;height:68px;gap:32px}
 .nav-logo img{height:42px;width:auto}
 .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{font-size:17px;font-weight:600;color:var(--dark);transition:color .2s}
+.nav-links a{font-size:15.5px;font-weight:600;color:var(--dark);transition:color .2s}
 .nav-links a:hover{color:var(--blue)}
 .nav-right{display:flex;align-items:center;gap:28px}
 .online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}
@@ -249,7 +249,7 @@ a{text-decoration:none;color:inherit}
 .hero-bullets li{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:500;color:rgba(255,255,255,.9)}
 .chk{width:20px;height:20px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--dark);font-size:11px;font-weight:800}
 .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
-.hero-chip{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:16px;font-weight:600;padding:8px 14px;border-radius:6px}
+.hero-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:16px;font-weight:600;padding:8px 14px;border-radius:6px}
 .hero-stars{display:flex;align-items:center;gap:8px;margin-bottom:22px}
 .stars{color:var(--yellow);font-size:19px;letter-spacing:1px}
 .stars-label{font-size:16px;color:rgba(255,255,255,.75);font-weight:500}
@@ -601,10 +601,14 @@ a{text-decoration:none;color:inherit}
   .f-row{grid-template-columns:1fr}
 
   /* Footer */
-  .footer{padding:44px 16px 24px}
+  .footer{padding:44px 16px 36px;overflow:hidden}
+  .footer-inner{max-width:100%}
   .footer-top{grid-template-columns:1fr;gap:28px;padding-bottom:28px}
-  .footer-bottom{flex-direction:column;gap:6px;text-align:center}
-  .footer-bottom span{font-size:11px}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center;padding-top:4px}
+  .footer-bottom span{font-size:11px;word-break:break-word;overflow-wrap:break-word;display:block;max-width:100%}
+  .footer-contact-item{word-break:break-word;overflow-wrap:break-word;flex-wrap:wrap}
+  .footer-contact-item a{word-break:break-all}
+  .footer-socials{flex-wrap:wrap}
 }
 
 /* ══ Small phones ≤390px ══ */
@@ -647,6 +651,62 @@ a{text-decoration:none;color:inherit}
   .hero-h1{font-size:36px}
 }
 </style>
+<style id="dropdown-nav-css">
+/* === DROPDOWN NAV === */
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px 6px;border-radius:7px;transition:background .2s;align-items:center;justify-content:center;flex-direction:column;gap:5px;-webkit-tap-highlight-color:transparent;flex-shrink:0}
+.nav-hamburger:hover{background:rgba(50,65,88,.08)}
+.ham-bar{display:block;width:22px;height:2px;background:#324158;border-radius:1px;transition:transform .25s cubic-bezier(.4,0,.2,1),opacity .25s,width .25s}
+.nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* Override old nav-links gap */
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none;margin:0;padding:0}
+.nav-item{position:relative}
+/* Invisible hover bridge prevents menu from closing when moving to dropdown */
+.nav-item::after{content:'';position:absolute;bottom:-10px;left:0;right:0;height:10px;background:transparent}
+.nav-link-btn{display:flex;align-items:center;gap:5px;font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#324158;background:none;border:none;cursor:pointer;padding:8px 11px;border-radius:7px;transition:color .2s,background .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;line-height:1}
+.nav-link-btn:hover,.nav-link-btn:focus-visible{color:#0b61f4;background:rgba(11,97,244,.06);outline:none}
+.nav-link-btn .chevron{transition:transform .22s cubic-bezier(.4,0,.2,1);flex-shrink:0}
+.nav-item:hover .nav-link-btn .chevron{transform:rotate(180deg)}
+.nav-link-plain{font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#324158;padding:8px 11px;border-radius:7px;display:block;transition:color .2s,background .2s;white-space:nowrap;text-decoration:none}
+.nav-link-plain:hover,.nav-link-plain:focus-visible{color:#0b61f4;background:rgba(11,97,244,.06);outline:none}
+.nav-link-plain.active{color:#0b61f4}
+/* Dropdown panel */
+.dropdown{position:absolute;top:calc(100% + 10px);left:0;background:#fff;border:1px solid rgba(50,65,88,.1);border-radius:12px;box-shadow:0 12px 40px rgba(11,97,244,.13),0 2px 8px rgba(0,0,0,.06);padding:6px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1),visibility .2s;z-index:500;pointer-events:none}
+.nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+.dropdown a{display:block;padding:9px 13px;font-family:'Sora',sans-serif;font-size:14.5px;font-weight:500;color:#324158;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;text-decoration:none}
+.dropdown a:hover,.dropdown a.active{background:rgba(11,97,244,.07);color:#0b61f4}
+.dropdown a.active{font-weight:600}
+.dropdown-2col{display:flex;flex-direction:row;min-width:440px}
+.dropdown-col{flex:1;padding:0 2px}
+/* Mobile nav overlay */
+.mobile-nav{display:none;position:fixed;inset:0;z-index:9999;background:#fff;overflow-y:auto;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);-webkit-overflow-scrolling:touch}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1.5px solid rgba(50,65,88,.1);position:sticky;top:0;background:#fff;z-index:2}
+.mobile-nav-close{background:none;border:none;cursor:pointer;padding:8px;border-radius:8px;transition:background .2s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
+.mobile-nav-close:hover{background:rgba(50,65,88,.07)}
+.mobile-nav-body{padding:4px 20px 60px}
+.mobile-section{border-bottom:1px solid rgba(50,65,88,.1)}
+.mobile-section-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 4px;font-family:'Sora',sans-serif;font-size:16.5px;font-weight:700;color:#324158;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent}
+.mobile-section-btn .chevron{transition:transform .25s cubic-bezier(.4,0,.2,1);flex-shrink:0}
+.mobile-section.open .mobile-section-btn .chevron{transform:rotate(180deg)}
+.mobile-section-links{display:none;padding:2px 0 10px}
+.mobile-section.open .mobile-section-links{display:block}
+.mobile-section-links a{display:block;padding:11px 12px;font-family:'Sora',sans-serif;font-size:15.5px;font-weight:500;color:#324158;border-radius:8px;transition:background .15s,color .15s;text-decoration:none}
+.mobile-section-links a:hover,.mobile-section-links a.active{background:rgba(11,97,244,.07);color:#0b61f4}
+.mobile-section-links a.active{font-weight:600}
+.mobile-plain-links{padding:4px 0}
+.mobile-plain-links a{display:block;padding:16px 4px;font-family:'Sora',sans-serif;font-size:16.5px;font-weight:700;color:#324158;border-bottom:1px solid rgba(50,65,88,.1);text-decoration:none;transition:color .15s}
+.mobile-plain-links a:hover{color:#0b61f4}
+.mobile-cta{display:flex;align-items:center;justify-content:center;gap:10px;background:#0b61f4;color:#fff;font-family:'Sora',sans-serif;font-size:18px;font-weight:700;padding:16px 20px;border-radius:10px;margin-top:20px;text-decoration:none;transition:background .2s,transform .2s}
+.mobile-cta:hover{background:#0c4bb9;transform:translateY(-1px)}
+@media(max-width:900px){
+  .nav-links{display:none!important}
+  .nav-hamburger{display:flex!important;order:99}
+  .mobile-nav{display:block}
+  .online-dot-wrap{display:none!important}
+}
+</style>
 </head>
 <body>
 
@@ -672,13 +732,73 @@ a{text-decoration:none;color:inherit}
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="42"></a>
-    <ul class="nav-links">
-      <li><a href="#whole-house">Whole House</a></li>
-      <li><a href="#systems">Our Systems</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#faq">FAQ</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown">
+          <a href="under-sink-water-filter-sydney.html">Under Sink Water Filter</a>
+          <a href="whole-house-water-filter-sydney.html">Whole House Water Filter</a>
+          <a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis System</a>
+          <a href="inline-fridge-water-filter-sydney.html">Inline Fridge Filter</a>
+          <a href="best-water-filter-sydney.html">Best Water Filter Sydney</a>
+          <a href="sydney-water-filter-cost-guide.html">Water Filter Pricing Guide</a>
+        </div>
+      </li>
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Locations <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown dropdown-2col">
+          <div class="dropdown-col">
+            <a href="water-filter-installation-ashfield.html">Ashfield</a>
+            <a href="water-filter-installation-balmain.html">Balmain</a>
+            <a href="water-filter-installation-bankstown.html">Bankstown</a>
+            <a href="water-filter-installation-burwood.html">Burwood</a>
+            <a href="water-filter-installation-campsie.html">Campsie</a>
+            <a href="water-filter-installation-canterbury.html">Canterbury</a>
+            <a href="water-filter-installation-concord.html">Concord</a>
+            <a href="water-filter-installation-croydon-park.html">Croydon Park</a>
+            <a href="water-filter-installation-drummoyne.html">Drummoyne</a>
+            <a href="water-filter-installation-enmore.html">Enmore</a>
+            <a href="water-filter-installation-erskineville.html">Erskineville</a>
+          </div>
+          <div class="dropdown-col">
+            <a href="water-filter-installation-five-dock.html">Five Dock</a>
+            <a href="water-filter-installation-glebe.html">Glebe</a>
+            <a href="water-filter-installation-homebush.html">Homebush</a>
+            <a href="water-filter-installation-homebush-west.html">Homebush West</a>
+            <a href="water-filter-installation-hurstville.html">Hurstville</a>
+            <a href="water-filter-installation-leichhardt.html">Leichhardt</a>
+            <a href="water-filter-installation-marrickville.html">Marrickville</a>
+            <a href="water-filter-installation-newtown.html">Newtown</a>
+            <a href="water-filter-installation-north-richmond.html">North Richmond</a>
+            <a href="water-filter-installation-petersham.html">Petersham</a>
+            <a href="water-filter-installation-pyrmont.html">Pyrmont</a>
+            <a href="water-filter-installation-richmond.html">Richmond</a>
+            <a href="water-filter-installation-rozelle.html">Rozelle</a>
+            <a href="water-filter-installation-strathfield.html">Strathfield</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Resources <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown">
+          <a href="is-sydney-water-safe.html">Is Sydney Water Safe?</a>
+          <a href="pfas-water-filter-sydney.html">PFAS Water Filters Sydney</a>
+          <a href="sydney-water-quality-guide.html">Sydney Water Quality Guide</a>
+          <a href="how-water-filters-work.html">How Water Filters Work</a>
+          <a href="whole-house-vs-under-sink-water-filter.html">Whole House vs Under Sink</a>
+          <a href="water-filter-maintenance-guide.html">Water Filter Maintenance</a>
+          <a href="water-filter-for-renters-sydney.html">Water Filters for Renters</a>
+          <a href="water-filter-apartment-sydney.html">Water Filters for Apartments</a>
+        </div>
+      </li>
+      <li><a href="index.html#reviews" class="nav-link-plain">Reviews</a></li>
+      <li><a href="index.html#about" class="nav-link-plain">About</a></li>
     </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+    </button>
     <div class="online-dot-wrap"><div class="dot"></div>Online</div>
     <a href="tel:0430546749" class="nav-cta">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
@@ -700,16 +820,16 @@ a{text-decoration:none;color:inherit}
       <h1 class="hero-h1">Pure Water.<br><span class="sh sh-y">Every</span> Tap.<br>Your Home.</h1>
       <p class="hero-p">We install, service and maintain premium home water filtration systems across Sydney — whole house water filtration, under sink water filters, reverse osmosis. Fixed prices. No surprises.</p>
       <ul class="hero-bullets">
-        <li><span class="chk">✓</span>Removes chlorine, sediment &amp; microplastics</li>
-        <li><span class="chk">✓</span>Healthier cooking, showering &amp; drinking water</li>
-        <li><span class="chk">✓</span>Filtered water at every tap in your home</li>
-        <li><span class="chk">✓</span>Scheduled and installed within one week</li>
+        <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Removes chlorine, sediment &amp; microplastics</li>
+        <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Healthier cooking, showering &amp; drinking water</li>
+        <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Filtered water at every tap in your home</li>
+        <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Scheduled and installed within one week</li>
       </ul>
       <div class="hero-chips">
-        <span class="hero-chip">🛡️ Licensed &amp; Insured</span>
-        <span class="hero-chip">♾️ Lifetime Warranty</span>
-        <span class="hero-chip">💬 Same-Day Quote</span>
-        <span class="hero-chip">💳 Finance Available</span>
+        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Licensed &amp; Insured</span>
+        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg> Lifetime Warranty</span>
+        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Same-Day Quote</span>
+        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Finance Available</span>
       </div>
       <div class="hero-stars">
         <span class="stars">★★★★★</span>
@@ -717,7 +837,7 @@ a{text-decoration:none;color:inherit}
       </div>
       <div class="hero-btns">
         <a href="#quote" class="btn btn-yellow btn-lg">Book Your Installation →</a>
-        <a href="tel:0430546749" class="btn btn-ghost btn-lg">📞 0430 546 749</a>
+        <a href="tel:0430546749" class="btn btn-ghost btn-lg"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg> 0430 546 749</a>
       </div>
     </div>
 
@@ -756,11 +876,11 @@ a{text-decoration:none;color:inherit}
 <!-- TRUST BAR -->
 <div class="trust-bar">
   <div class="trust-bar-inner">
-    <div class="trust-item"><div class="trust-icon">⭐</div><div><div class="trust-label">5.0 Google Rating</div><div class="trust-sub">6 verified reviews</div></div></div>
-    <div class="trust-item"><div class="trust-icon">🪪</div><div><div class="trust-label">Licensed &amp; Insured</div><div class="trust-sub">Lic. 461511C NSW</div></div></div>
-    <div class="trust-item"><div class="trust-icon">💧</div><div><div class="trust-label">WaterMark Certified</div><div class="trust-sub">Australian standard systems</div></div></div>
-    <div class="trust-item"><div class="trust-icon">💰</div><div><div class="trust-label">Fixed Price Guaranteed</div><div class="trust-sub">No upsells on the day</div></div></div>
-    <div class="trust-item"><div class="trust-icon">♾️</div><div><div class="trust-label">Lifetime Warranty</div><div class="trust-sub">On all workmanship</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFD900" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><div class="trust-label">5.0 Google Rating</div><div class="trust-sub">6 verified reviews</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="15" r="1" fill="#0B61F4"/><path d="M11 15h6"/></svg></div><div><div class="trust-label">Licensed &amp; Insured</div><div class="trust-sub">Lic. 461511C NSW</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div><div><div class="trust-label">WaterMark Certified</div><div class="trust-sub">Australian standard systems</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="trust-label">Fixed Price Guaranteed</div><div class="trust-sub">No upsells on the day</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg></div><div><div class="trust-label">Lifetime Warranty</div><div class="trust-sub">On all workmanship</div></div></div>
   </div>
 </div>
 
@@ -913,7 +1033,7 @@ a{text-decoration:none;color:inherit}
     <div class="why-photo-wrap">
       <img src="assets/photos/jp-hero.jpg" alt="Jean-Paul licensed plumber and founder of Filters For You water filtration Sydney" loading="lazy">
       <div class="why-badge">
-        <div class="why-badge-icon">🏆</div>
+        <div class="why-badge-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFD900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div>
         <div><div class="why-badge-main">5.0 ★ Google Rating</div><div class="why-badge-sub">6 verified reviews — all 5 stars</div></div>
       </div>
     </div>
@@ -1003,11 +1123,11 @@ a{text-decoration:none;color:inherit}
       <p>Jean-Paul founded Filters For You with one goal: to make clean, great-tasting water simple and accessible for every Sydney family. As Sydney's trusted home water filtration specialist, he turns up to every single job personally — no subcontractors, no surprises.</p>
       <p>Just a licensed, insured professional who takes genuine pride in every water filtration system installation he completes.</p>
       <ul class="about-creds">
-        <li class="about-cred"><div class="cred-icon">🪪</div>Licensed Plumber — Lic. 461511C NSW</li>
-        <li class="about-cred"><div class="cred-icon">🛡️</div>Fully insured — public liability &amp; professional indemnity</li>
-        <li class="about-cred"><div class="cred-icon">⭐</div>5.0 Google Rating — 6 verified reviews</li>
-        <li class="about-cred"><div class="cred-icon">📍</div>Serving Sydney within 20km of Croydon Park</li>
-        <li class="about-cred"><div class="cred-icon">♾️</div>Lifetime workmanship warranty on all installs</li>
+        <li class="about-cred"><div class="cred-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="15" r="1" fill="#0B61F4"/><path d="M11 15h6"/></svg></div>Licensed Plumber — Lic. 461511C NSW</li>
+        <li class="about-cred"><div class="cred-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Fully insured — public liability &amp; professional indemnity</li>
+        <li class="about-cred"><div class="cred-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD900" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>5.0 Google Rating — 6 verified reviews</li>
+        <li class="about-cred"><div class="cred-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>Serving Sydney within 20km of Croydon Park</li>
+        <li class="about-cred"><div class="cred-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg></div>Lifetime workmanship warranty on all installs</li>
       </ul>
       <a href="#quote" class="btn btn-blue">Book Jean-Paul Today →</a>
     </div>
@@ -1062,7 +1182,7 @@ a{text-decoration:none;color:inherit}
       <div class="yline"></div>
       <h2>Get Pure Water Flowing<br>in Your Home <span class="sh sh-y">This Week</span></h2>
       <p>Fixed price. Licensed plumber. Lifetime warranty. No obligation — just a free quote and honest advice about what your home actually needs.</p>
-      <div class="cta-phone">📞 0430 546 749</div>
+      <div class="cta-phone"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg> 0430 546 749</div>
       <div class="cta-phone-note">Mon–Sat 7am–6pm · Croydon Park, Sydney</div>
     </div>
     <div class="cta-form-card">
@@ -1085,17 +1205,18 @@ a{text-decoration:none;color:inherit}
 <!-- SITE DIRECTORY -->
 <section style="background:#FAFAFA;padding:64px 0 80px;border-top:1px solid #e8eef7;">
   <style>
-  .nav-grid{display:grid;grid-template-columns:1fr;gap:10px;}
-  @media(min-width:480px){.nav-grid{grid-template-columns:repeat(2,1fr);}}
+  .nav-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;}
   @media(min-width:768px){.suburb-grid.nav-grid{grid-template-columns:repeat(3,1fr);}.service-grid.nav-grid,.resource-grid.nav-grid{grid-template-columns:repeat(2,1fr);}}
-  @media(min-width:1024px){.suburb-grid.nav-grid{grid-template-columns:repeat(5,1fr);}.service-grid.nav-grid{grid-template-columns:repeat(3,1fr);}}
-  .nav-card{display:flex;align-items:center;gap:10px;padding:13px 16px;background:#fff;border-radius:10px;border:1.5px solid #e8eef7;color:#324158;text-decoration:none;font-family:'Sora',sans-serif;font-size:.875rem;font-weight:500;transition:border-color .2s,color .2s,box-shadow .2s;}
+  @media(min-width:1024px){.suburb-grid.nav-grid{grid-template-columns:repeat(4,1fr);}.service-grid.nav-grid{grid-template-columns:repeat(3,1fr);}}
+  .nav-card{display:flex;align-items:center;gap:7px;padding:9px 11px;background:#fff;border-radius:8px;border:1.5px solid #e8eef7;color:#324158;text-decoration:none;font-family:'Sora',sans-serif;font-size:.8rem;font-weight:500;line-height:1.3;transition:border-color .2s,color .2s,box-shadow .2s;}
   .nav-card:hover{border-color:#0B61F4;color:#0B61F4;box-shadow:0 4px 14px rgba(11,97,244,.1);}
   .nav-card:active{transform:scale(.98);}
   .nav-card svg{flex-shrink:0;opacity:.55;transition:opacity .2s;}
   .nav-card:hover svg{opacity:1;}
-  .nav-cat{font-family:'Sora',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0B61F4;display:flex;align-items:center;gap:8px;margin:0 0 14px;}
+  .nav-cat{font-family:'Sora',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0B61F4;display:flex;align-items:center;gap:8px;margin:0 0 12px;}
   .nav-cat::after{content:'';flex:1;height:1px;background:#e8eef7;}
+  .dir-block{margin-top:28px!important;}
+  @media(max-width:767px){.dir-block{margin-top:20px!important;}.nav-card{font-size:.75rem;padding:8px 10px;}}
   </style>
   <div class="container">
     <div class="sec-head">
@@ -1105,7 +1226,7 @@ a{text-decoration:none;color:inherit}
       <p class="sec-body sec-body-c">Find water filter installation for your Sydney suburb, or browse by system type.</p>
     </div>
 
-    <div style="margin-top:48px;">
+    <div class="dir-block" style="margin-top:40px;">
       <p class="nav-cat">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Our Service Areas
@@ -1124,7 +1245,7 @@ a{text-decoration:none;color:inherit}
       </div>
     </div>
 
-    <div style="margin-top:40px;">
+    <div class="dir-block" style="margin-top:32px;">
       <p class="nav-cat">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
         Filter Systems
@@ -1138,7 +1259,7 @@ a{text-decoration:none;color:inherit}
       </div>
     </div>
 
-    <div style="margin-top:40px;">
+    <div class="dir-block" style="margin-top:32px;">
       <p class="nav-cat">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         Resources
@@ -1159,9 +1280,9 @@ a{text-decoration:none;color:inherit}
         <img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" class="footer-logo">
         <p>Sydney's trusted home water filtration system specialist. We install whole house water filtration systems, under sink water filter systems and reverse osmosis filtration across all Sydney suburbs. Fixed prices, licensed plumber (Lic. 461511C), lifetime warranty.</p>
         <div class="footer-socials">
-          <a href="https://instagram.com/filtersforyouau" aria-label="Filters For You on Instagram" rel="noopener noreferrer" target="_blank">📷</a>
-          <a href="https://facebook.com/filtersforyouau" aria-label="Filters For You on Facebook" rel="noopener noreferrer" target="_blank">👍</a>
-          <a href="https://tiktok.com/@filtersforyouau" aria-label="Filters For You on TikTok" rel="noopener noreferrer" target="_blank">🎵</a>
+          <a href="https://instagram.com/filtersforyouau" aria-label="Filters For You on Instagram" rel="noopener noreferrer" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://facebook.com/filtersforyouau" aria-label="Filters For You on Facebook" rel="noopener noreferrer" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://tiktok.com/@filtersforyouau" aria-label="Filters For You on TikTok" rel="noopener noreferrer" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.03a8.16 8.16 0 0 0 4.77 1.52V7.1a4.85 4.85 0 0 1-1-.41z"/></svg></a>
         </div>
       </div>
       <div class="footer-col"><h4>Systems</h4><ul><li><a href="#whole-house">Whole House (HPF-3)</a></li><li><a href="#systems">Pure Essential</a></li><li><a href="#systems">Pure Plus+</a></li><li><a href="#systems">Pure Premium</a></li><li><a href="#systems">Pure Advanced</a></li><li><a href="#systems">Pure Luxe</a></li></ul></div>
@@ -1173,10 +1294,10 @@ a{text-decoration:none;color:inherit}
           <li><a href="/refund-policy.html">Refund Policy</a></li>
         </ul>
         <div style="margin-top:18px">
-          <div class="footer-contact-item">📞 <a href="tel:0430546749" style="color:rgba(255,255,255,.6)">0430 546 749</a></div>
-          <div class="footer-contact-item">✉️ <a href="mailto:info@filtersforyou.com.au" style="color:rgba(255,255,255,.6)">info@filtersforyou.com.au</a></div>
-          <div class="footer-contact-item">📍 Croydon Park, Sydney NSW</div>
-          <div class="footer-contact-item">🪪 Plumbing Lic. 461511C</div>
+          <div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0;opacity:.7;margin-top:1px"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg> <a href="tel:0430546749" style="color:rgba(255,255,255,.6)">0430 546 749</a></div>
+          <div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;opacity:.7;margin-top:1px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> <a href="mailto:info@filtersforyou.com.au" style="color:rgba(255,255,255,.6)">info@filtersforyou.com.au</a></div>
+          <div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;opacity:.7;margin-top:1px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Croydon Park, Sydney NSW</div>
+          <div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;opacity:.7;margin-top:1px"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="15" r="1" fill="currentColor"/><path d="M11 15h6"/></svg> Plumbing Lic. 461511C</div>
           <div class="footer-contact-item">ABN: 81 672 101 674</div>
         </div>
       </div>
@@ -1253,5 +1374,104 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </ul>
 </div>
 
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Navigation">
+  <div class="mobile-nav-header">
+    <a href="index.html"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="36"></a>
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 4l14 14M18 4L4 18" stroke="#324158" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav-body">
+    <div class="mobile-section">
+      <button class="mobile-section-btn">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="mobile-section-links">
+        <a href="under-sink-water-filter-sydney.html">Under Sink Water Filter</a>
+        <a href="whole-house-water-filter-sydney.html">Whole House Water Filter</a>
+        <a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis System</a>
+        <a href="inline-fridge-water-filter-sydney.html">Inline Fridge Filter</a>
+        <a href="best-water-filter-sydney.html">Best Water Filter Sydney</a>
+        <a href="sydney-water-filter-cost-guide.html">Water Filter Pricing Guide</a>
+      </div>
+    </div>
+    <div class="mobile-section">
+      <button class="mobile-section-btn">Locations <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="mobile-section-links">
+        <a href="water-filter-installation-ashfield.html">Ashfield</a>
+        <a href="water-filter-installation-balmain.html">Balmain</a>
+        <a href="water-filter-installation-bankstown.html">Bankstown</a>
+        <a href="water-filter-installation-burwood.html">Burwood</a>
+        <a href="water-filter-installation-campsie.html">Campsie</a>
+        <a href="water-filter-installation-canterbury.html">Canterbury</a>
+        <a href="water-filter-installation-concord.html">Concord</a>
+        <a href="water-filter-installation-croydon-park.html">Croydon Park</a>
+        <a href="water-filter-installation-drummoyne.html">Drummoyne</a>
+        <a href="water-filter-installation-enmore.html">Enmore</a>
+        <a href="water-filter-installation-erskineville.html">Erskineville</a>
+        <a href="water-filter-installation-five-dock.html">Five Dock</a>
+        <a href="water-filter-installation-glebe.html">Glebe</a>
+        <a href="water-filter-installation-homebush.html">Homebush</a>
+        <a href="water-filter-installation-homebush-west.html">Homebush West</a>
+        <a href="water-filter-installation-hurstville.html">Hurstville</a>
+        <a href="water-filter-installation-leichhardt.html">Leichhardt</a>
+        <a href="water-filter-installation-marrickville.html">Marrickville</a>
+        <a href="water-filter-installation-newtown.html">Newtown</a>
+        <a href="water-filter-installation-north-richmond.html">North Richmond</a>
+        <a href="water-filter-installation-petersham.html">Petersham</a>
+        <a href="water-filter-installation-pyrmont.html">Pyrmont</a>
+        <a href="water-filter-installation-richmond.html">Richmond</a>
+        <a href="water-filter-installation-rozelle.html">Rozelle</a>
+        <a href="water-filter-installation-strathfield.html">Strathfield</a>
+      </div>
+    </div>
+    <div class="mobile-section">
+      <button class="mobile-section-btn">Resources <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="mobile-section-links">
+        <a href="is-sydney-water-safe.html">Is Sydney Water Safe?</a>
+        <a href="pfas-water-filter-sydney.html">PFAS Water Filters Sydney</a>
+        <a href="sydney-water-quality-guide.html">Sydney Water Quality Guide</a>
+        <a href="how-water-filters-work.html">How Water Filters Work</a>
+        <a href="whole-house-vs-under-sink-water-filter.html">Whole House vs Under Sink</a>
+        <a href="water-filter-maintenance-guide.html">Water Filter Maintenance</a>
+        <a href="water-filter-for-renters-sydney.html">Water Filters for Renters</a>
+        <a href="water-filter-apartment-sydney.html">Water Filters for Apartments</a>
+      </div>
+    </div>
+    <div class="mobile-plain-links">
+      <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#about">About</a>
+    </div>
+    <a href="tel:0430546749" class="mobile-cta">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
+      Call 0430 546 749
+    </a>
+  </div>
+</div>
+<script id="dropdown-nav-js">
+(function(){
+  var ham=document.getElementById('navHamburger');
+  var mob=document.getElementById('mobileNav');
+  var cls=document.getElementById('mobileNavClose');
+  function openMob(){if(!mob)return;mob.classList.add('open');if(ham)ham.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function closeMob(){if(!mob)return;mob.classList.remove('open');if(ham)ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  if(ham)ham.addEventListener('click',openMob);
+  if(cls)cls.addEventListener('click',closeMob);
+  if(mob){
+    mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMob);});
+    mob.querySelectorAll('.mobile-section-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){btn.closest('.mobile-section').classList.toggle('open');});
+    });
+  }
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMob();});
+  // Active page highlight
+  var pg=(location.pathname.split('/').pop()||'index.html');
+  if(pg==='')pg='index.html';
+  document.querySelectorAll('.nav-links a[href],.dropdown a[href],.mobile-section-links a[href],.mobile-plain-links a[href]').forEach(function(a){
+    var href=a.getAttribute('href')||'';
+    if(href.includes('#'))return;
+    var h=href.split('#')[0];
+    if(h&&h===pg)a.classList.add('active');
+  });
+})();
+</script>
 </body>
 </html>

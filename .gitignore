@@ -1,2 +1,19 @@
+# Development files - never push
+node_modules/
+package.json
+package-lock.json
+serve.mjs
+screenshot.mjs
 .DS_Store
+*.bak
+
+# Internal docs - never push
+CLAUDE.md
+AGENCY/
+inspiration/
+"temporary screenshots"/
+"Start Claude.command"
+website-info.txt
+
+# macOS
 **/.DS_Store
