@@ -376,6 +376,7 @@ a{text-decoration:none;color:inherit}
   .pcard-body{padding:16px}
   .pcard-name{font-size:18px}
   .pcard-price{font-size:24px}
+  .pcard-tagline{font-size:14px}
   .pcard-features{font-size:14px}
   .pcard-costs{font-size:13px;padding:12px}
   
@@ -396,12 +397,26 @@ a{text-decoration:none;color:inherit}
   .f-input,.f-submit{font-size:16px}
 }
 
+@media(max-width:480px){
+  .products-grid{gap:10px}
+  .pcard-name{font-size:17px}
+  .pcard-price{font-size:22px}
+  .pcard-tagline{font-size:13px;min-height:auto}
+  .pcard-features{gap:6px}
+  .pcard-body{padding:14px}
+}
+
 @media(max-width:390px){
-  .products-grid{gap:8px}
+  .products-grid{gap:8px;grid-template-columns:1fr}
+  .pcard{border-radius:9px}
   .pcard-name{font-size:16px}
   .pcard-price{font-size:20px}
+  .pcard-tagline{font-size:12px}
+  .pcard-body{padding:12px}
+  .pcard-costs{font-size:12px;padding:10px}
   .lifestyle-text h3{font-size:20px}
   .hero-h1{font-size:28px}
+  .sec{padding:40px 16px}
 }
 
 /* REVEAL ON SCROLL */
@@ -477,7 +492,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Pure Essential</h3>
-          <p class="pcard-tagline">Twin-stage under-sink filtration for cleaner drinking water.</p>
+          <p class="pcard-tagline">2-stage catalytic carbon and sediment filter removes chlorine, chloramines, sediment, taste and odour. Perfect entry point for homeowners focused on taste improvement and basic water quality. Simple maintenance with reliable, proven performance.</p>
           <div class="pcard-price-row">
             <span class="pcard-price">$550</span>
           </div>
@@ -502,7 +517,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Pure Plus</h3>
-          <p class="pcard-tagline">5-stage reverse osmosis with tank storage system.</p>
+          <p class="pcard-tagline">5-stage reverse osmosis removes 99%+ contaminants including fluoride, heavy metals, microplastics, PFAS and more. Most popular system recommended for families wanting the highest purity drinking water. Includes alkaline mineral stage for balanced pH.</p>
           <div class="pcard-price-row">
             <span class="pcard-price">$840</span>
           </div>
@@ -527,7 +542,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Pure Premium</h3>
-          <p class="pcard-tagline">7-stage advanced reverse osmosis for maximum purity.</p>
+          <p class="pcard-tagline">Industry-leading 7-stage reverse osmosis with magnesium and hydrogen infusion technology. Delivers premium alkaline water (pH 8.5-10) with maximum contaminant removal and superior mineral content. Gold standard in under-sink water filtration.</p>
           <div class="pcard-price-row">
             <span class="pcard-price">$1,180</span>
           </div>
@@ -552,7 +567,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Pure Compact</h3>
-          <p class="pcard-tagline">Space-saving system perfect for apartments and small kitchens.</p>
+          <p class="pcard-tagline">3-stage alkaline reverse osmosis engineered for compact undersink spaces. Removes 95%+ contaminants while adding back healthy minerals for natural alkaline water. Perfect for smaller kitchens, apartments and homes where space is at a premium.</p>
           <div class="pcard-price-row">
             <span class="pcard-price">$930</span>
           </div>
@@ -577,7 +592,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Pure Advanced</h3>
-          <p class="pcard-tagline">Smart 7-stage system with monitoring technology.</p>
+          <p class="pcard-tagline">High-performance 5-stage reverse osmosis with revolutionary quick-change design. Cartridge replacement takes just 10 minutes without any tools. Perfect for tech-savvy households and busy families wanting superior filtration with effortless maintenance.</p>
           <div class="pcard-price-row">
             <span class="pcard-price">$1,280</span>
           </div>
@@ -602,7 +617,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Pure Luxe</h3>
-          <p class="pcard-tagline">Designer system with premium tap and advanced filtration.</p>
+          <p class="pcard-tagline">Pinnacle of under-sink reverse osmosis with built-in smart monitor and real-time tracking app. Intelligently tracks filter life and water quality directly from your smartphone. Premium 5-stage filtration meets modern technology for complete peace of mind.</p>
           <div class="pcard-price-row">
             <span class="pcard-price">$1,740</span>
           </div>
@@ -627,7 +642,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="pcard-body">
           <h3 class="pcard-name">Pure Home</h3>
-          <p class="pcard-tagline">HPF-3 whole-house system filters every tap in your home.</p>
+          <p class="pcard-tagline">Triple-stage whole-house HPF-3 system protects all water outlets throughout your entire home. Removes sediment, chlorine and contaminants from every tap—kitchen, bathroom, shower, laundry. Can be combined with any under-sink RO system for complete coverage.</p>
           <div class="pcard-price-row">
             <span class="pcard-price">$3,150</span>
           </div>
