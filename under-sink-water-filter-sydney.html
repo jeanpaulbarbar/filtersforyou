@@ -169,7 +169,7 @@ a{text-decoration:none;color:inherit}
 .system-price-note{font-size:13px;color:var(--muted);margin-top:4px;font-weight:500}
 /* COMPARISON TABLE */
 .table-scroll-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,.07)}
-.compare-table{width:100%;min-width:600px;border-collapse:collapse;border-radius:14px;overflow:hidden}
+.compare-table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden}
 .compare-table th{background:var(--blue);color:#fff;padding:16px 18px;font-size:14px;font-weight:700;text-align:left}
 .compare-table th:first-child{width:32%}
 .compare-table td{padding:14px 18px;font-size:15px;border-bottom:1px solid rgba(0,0,0,.06);background:#fff;vertical-align:middle}
@@ -261,7 +261,15 @@ a{text-decoration:none;color:inherit}
   .hero{padding:50px 20px}
   .sec{padding:50px 20px}
   .breadcrumb{padding:12px 20px}
-  .table-scroll-wrap{border-radius:10px}
+  .table-scroll-wrap{border-radius:10px;overflow-x:visible}
+}
+@media(max-width:600px){
+  .table-scroll-wrap{overflow-x:visible}
+  .compare-table th{padding:9px 6px;font-size:11px;line-height:1.3;word-break:break-word}
+  .compare-table th:first-child{width:28%}
+  .compare-table td{padding:9px 6px;font-size:12px;line-height:1.4}
+  .compare-table td strong{font-size:12px}
+  .ct-yes svg,.ct-no svg{width:12px;height:12px}
 }
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
 .reveal.visible{opacity:1;transform:none}
@@ -596,14 +604,14 @@ a{text-decoration:none;color:inherit}
         <tr>
           <td><strong>Nitrates</strong></td>
           <td class="ct-no">Not removed</td>
-          <td class="ct-yes ct-highlight"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Removes</td>
-          <td class="ct-yes"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Removes</td>
+          <td class="ct-yes ct-highlight"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 85%+ removed</td>
+          <td class="ct-yes"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 85%+ removed</td>
         </tr>
         <tr>
           <td><strong>Bacteria / Viruses</strong></td>
           <td class="ct-no">Not removed</td>
           <td class="ct-no ct-highlight">Not removed</td>
-          <td class="ct-yes"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> UV eliminates</td>
+          <td class="ct-no">Not removed</td>
         </tr>
         <tr>
           <td><strong>Alkaline minerals</strong></td>
