@@ -265,8 +265,9 @@ a{text-decoration:none;color:inherit}
 }
 @media(max-width:600px){
   .table-scroll-wrap{overflow-x:visible}
+  .compare-table th:nth-child(2),.compare-table td:nth-child(2){display:none}
   .compare-table th{padding:9px 6px;font-size:11px;line-height:1.3;word-break:break-word}
-  .compare-table th:first-child{width:28%}
+  .compare-table th:first-child{width:32%}
   .compare-table td{padding:9px 6px;font-size:12px;line-height:1.4}
   .compare-table td strong{font-size:12px}
   .ct-yes svg,.ct-no svg{width:12px;height:12px}
@@ -602,22 +603,22 @@ a{text-decoration:none;color:inherit}
           <td class="ct-yes"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Removes</td>
         </tr>
         <tr>
-          <td><strong>Nitrates</strong></td>
-          <td class="ct-no">Not removed</td>
-          <td class="ct-yes ct-highlight"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 85%+ removed</td>
-          <td class="ct-yes"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 85%+ removed</td>
-        </tr>
-        <tr>
-          <td><strong>Bacteria / Viruses</strong></td>
-          <td class="ct-no">Not removed</td>
-          <td class="ct-no ct-highlight">Not removed</td>
-          <td class="ct-no">Not removed</td>
-        </tr>
-        <tr>
           <td><strong>Alkaline minerals</strong></td>
           <td class="ct-no">Unchanged</td>
-          <td class="ct-no ct-highlight">Removed with RO</td>
+          <td class="ct-yes ct-highlight"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Re-added (alkaline stage)</td>
           <td class="ct-yes"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Re-added (alkaline stage)</td>
+        </tr>
+        <tr>
+          <td><strong>Hydrogen Rich Water</strong></td>
+          <td class="ct-no">Not included</td>
+          <td class="ct-no ct-highlight">Not included</td>
+          <td class="ct-yes"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Hydrogen-enriched</td>
+        </tr>
+        <tr>
+          <td><strong>Infrared Ceramic Stage</strong></td>
+          <td class="ct-no">Not included</td>
+          <td class="ct-no ct-highlight">Not included</td>
+          <td class="ct-yes"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Far infrared ceramic</td>
         </tr>
       </tbody>
     </table>
