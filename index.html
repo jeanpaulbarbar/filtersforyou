@@ -178,9 +178,9 @@ src="https://www.facebook.com/tr?id=2577696515958185&ev=PageView&noscript=1"
   --footer-bg: #1e2d40;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Sora',sans-serif;font-size:16px;font-weight:400;line-height:1.65;color:var(--dark);background:var(--white);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100vw}
+body{font-family:'Sora',sans-serif;font-size:16px;font-weight:400;line-height:1.65;color:var(--dark);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100vw}
+img{max-width:100%;display:block;height:auto}
 a{text-decoration:none;color:inherit}
 
 /* SHANTELL ACCENT */
@@ -208,7 +208,7 @@ a{text-decoration:none;color:inherit}
 .f-select:focus{border-color:var(--yellow)}
 .f-select option{background:var(--blue-dark);color:var(--white)}
 .f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.f-submit{width:100%;background:var(--yellow);color:var(--dark);font-family:'Sora',sans-serif;font-size:18px;font-weight:800;padding:15px;border:none;border-radius:8px;cursor:pointer;transition:background .2s,transform .2s;margin-top:6px}
+.f-submit{width:100%;background:var(--yellow);color:var(--dark);font-family:'Sora',sans-serif;font-size:18px;font-weight:800;padding:15px;border:none;border-radius:8px;cursor:pointer;transition:background .2s,transform .2s;margin-top:6px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .f-submit:hover{background:#ffe533;transform:translateY(-1px)}
 
 /* TICKER */
@@ -229,7 +229,7 @@ a{text-decoration:none;color:inherit}
 .online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}
 .dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
 @keyframes blink{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,.08)}}
-.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:17px;padding:11px 22px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap}
+.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:17px;padding:11px 22px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 
 /* HERO */
@@ -323,8 +323,12 @@ a{text-decoration:none;color:inherit}
 .pcard-desc{font-size:17px;color:var(--muted);line-height:1.6;margin-bottom:14px}
 .pcard-price{font-size:28px;font-weight:800;color:var(--blue);margin-bottom:3px}
 .pcard-note{font-size:15px;color:var(--muted);margin-bottom:16px}
-.pcard-cta{display:block;text-align:center;padding:12px;border:2px solid var(--blue);border-radius:8px;color:var(--blue);font-weight:700;font-size:17px;transition:background .2s,color .2s}
-.pcard-cta:hover,.pcard.hot .pcard-cta{background:var(--blue);color:#fff}
+.pcard-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.pcard-btn-details{display:block;text-align:center;padding:12px 8px;border:2px solid var(--blue);border-radius:8px;color:var(--blue);font-weight:700;font-size:16px;transition:background .2s,color .2s;text-decoration:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.pcard-btn-details:hover{background:rgba(11,97,244,.08)}
+.pcard-btn-book{display:block;text-align:center;padding:12px 8px;background:var(--blue);border:2px solid var(--blue);border-radius:8px;color:#fff;font-weight:700;font-size:16px;transition:background .2s;text-decoration:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.pcard-btn-book:hover,.pcard.hot .pcard-btn-book{background:var(--blue-dark)}
+@media(max-width:480px){.pcard-actions{grid-template-columns:1fr}.pcard-btn-details,.pcard-btn-book{font-size:15px;padding:13px 8px}}
 
 /* WHOLE HOUSE */
 .wh-wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;min-height:520px}
@@ -976,7 +980,10 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-name">Pure Essential</div>
         <div class="pcard-desc">Twin Stage Under Sink Filtration. Removes chlorine, sediment and improves taste and odour. The ideal starting point.</div>
         <div class="pcard-price">$550</div><div class="pcard-note">inc. supply &amp; install</div>
-        <a href="#quote" class="pcard-cta">Book Now →</a>
+        <div class="pcard-actions">
+          <a href="pure-essential-water-filter-sydney.html" class="pcard-btn-details">View Details →</a>
+          <a href="#quote" class="pcard-btn-book">Book Now →</a>
+        </div>
       </div>
     </article>
     <article class="pcard hot">
@@ -985,7 +992,10 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-name">Pure Plus+</div>
         <div class="pcard-desc">5 Stage Reverse Osmosis. Removes up to 99% of contaminants including fluoride, heavy metals and bacteria. Our best seller.</div>
         <div class="pcard-price">$840</div><div class="pcard-note">inc. supply &amp; install</div>
-        <a href="#quote" class="pcard-cta">Book Now →</a>
+        <div class="pcard-actions">
+          <a href="pure-plus-water-filter-sydney.html" class="pcard-btn-details">View Details →</a>
+          <a href="#quote" class="pcard-btn-book">Book Now →</a>
+        </div>
       </div>
     </article>
     <article class="pcard">
@@ -994,7 +1004,10 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-name">Pure Compact</div>
         <div class="pcard-desc">3 Stage Compact Alkaline RO. Space-saving design with alkaline mineralisation. Perfect for smaller kitchens.</div>
         <div class="pcard-price">$930</div><div class="pcard-note">inc. supply &amp; install</div>
-        <a href="#quote" class="pcard-cta">Book Now →</a>
+        <div class="pcard-actions">
+          <a href="pure-compact-water-filter-sydney.html" class="pcard-btn-details">View Details →</a>
+          <a href="#quote" class="pcard-btn-book">Book Now →</a>
+        </div>
       </div>
     </article>
     <article class="pcard">
@@ -1003,7 +1016,10 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-name">Pure Premium</div>
         <div class="pcard-desc">7 Stage Reverse Osmosis. The most comprehensive RO — seven stages including remineralisation and alkalising for hospital-grade purity.</div>
         <div class="pcard-price">$1,180</div><div class="pcard-note">inc. supply &amp; install</div>
-        <a href="#quote" class="pcard-cta">Book Now →</a>
+        <div class="pcard-actions">
+          <a href="pure-premium-water-filter-sydney.html" class="pcard-btn-details">View Details →</a>
+          <a href="#quote" class="pcard-btn-book">Book Now →</a>
+        </div>
       </div>
     </article>
     <article class="pcard">
@@ -1012,7 +1028,10 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-name">Pure Advanced</div>
         <div class="pcard-desc">5 Stage Quick Change Alkaline RO. Tool-free filter changes in seconds. Alkaline remineralisation for better hydration.</div>
         <div class="pcard-price">$1,280</div><div class="pcard-note">inc. supply &amp; install</div>
-        <a href="#quote" class="pcard-cta">Book Now →</a>
+        <div class="pcard-actions">
+          <a href="pure-advanced-water-filter-sydney.html" class="pcard-btn-details">View Details →</a>
+          <a href="#quote" class="pcard-btn-book">Book Now →</a>
+        </div>
       </div>
     </article>
     <article class="pcard">
@@ -1021,7 +1040,10 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-name">Pure Luxe</div>
         <div class="pcard-desc">Smart Monitoring 5 Stage RO with live water quality tracking. TDS monitoring, filter life alerts and a premium designer tap.</div>
         <div class="pcard-price">$1,740</div><div class="pcard-note">inc. supply &amp; install</div>
-        <a href="#quote" class="pcard-cta">Book Now →</a>
+        <div class="pcard-actions">
+          <a href="pure-luxe-water-filter-sydney.html" class="pcard-btn-details">View Details →</a>
+          <a href="#quote" class="pcard-btn-book">Book Now →</a>
+        </div>
       </div>
     </article>
   </div>
