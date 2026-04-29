@@ -189,7 +189,7 @@ a{text-decoration:none;color:inherit}
 .sh-b{color:var(--blue)}
 
 /* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-weight:700;font-size:18px;padding:14px 28px;border-radius:8px;border:none;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s,background .2s;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-weight:700;font-size:18px;padding:14px 28px;border-radius:8px;border:none;cursor:pointer;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .2s,background .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation;min-height:44px;position:relative;z-index:2}
 .btn:hover{transform:translateY(-2px)}
 .btn:active{transform:translateY(0)}
 .btn-yellow{background:var(--yellow);color:var(--dark);box-shadow:0 4px 20px rgba(255,217,0,.35)}
@@ -234,7 +234,7 @@ a{text-decoration:none;color:inherit}
 
 /* HERO */
 .hero{background:var(--blue-dark);position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr 1fr;overflow:hidden}
+.hero-bg{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr 1fr;overflow:hidden;pointer-events:none}
 .hero-bg-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(4,20,80,.93) 0%,rgba(8,45,148,.80) 50%,rgba(11,97,244,.55) 100%);pointer-events:none}
 .hero-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 440px;gap:48px;min-height:680px;align-items:stretch;position:relative;z-index:1}
@@ -739,7 +739,13 @@ a{text-decoration:none;color:inherit}
         <div class="dropdown">
           <a href="water-filter-systems.html">All Water Filter Systems</a>
           <a href="under-sink-water-filter-sydney.html">Under Sink Water Filter</a>
-          <a href="pure-essential-water-filter-sydney.html">Pure Essential Filter</a>
+          <a href="pure-essential-water-filter-sydney.html">Pure Essential — $550</a>
+          <a href="pure-plus-water-filter-sydney.html">Pure Plus+ — $840</a>
+          <a href="pure-compact-water-filter-sydney.html">Pure Compact — $930</a>
+          <a href="pure-premium-water-filter-sydney.html">Pure Premium — $1,180</a>
+          <a href="pure-advanced-water-filter-sydney.html">Pure Advanced — $1,280</a>
+          <a href="pure-luxe-water-filter-sydney.html">Pure Luxe — $1,740</a>
+          <a href="pure-home-water-filter-sydney.html">Pure Home — $3,150</a>
           <a href="whole-house-water-filter-sydney.html">Whole House Water Filter</a>
           <a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis System</a>
           <a href="inline-fridge-water-filter-sydney.html">Inline Fridge Filter</a>
@@ -1389,7 +1395,13 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       <button class="mobile-section-btn">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <div class="mobile-section-links">
         <a href="under-sink-water-filter-sydney.html">Under Sink Water Filter</a>
-        <a href="pure-essential-water-filter-sydney.html">Pure Essential Filter</a>
+        <a href="pure-essential-water-filter-sydney.html">Pure Essential — $550</a>
+        <a href="pure-plus-water-filter-sydney.html">Pure Plus+ — $840</a>
+        <a href="pure-compact-water-filter-sydney.html">Pure Compact — $930</a>
+        <a href="pure-premium-water-filter-sydney.html">Pure Premium — $1,180</a>
+        <a href="pure-advanced-water-filter-sydney.html">Pure Advanced — $1,280</a>
+        <a href="pure-luxe-water-filter-sydney.html">Pure Luxe — $1,740</a>
+        <a href="pure-home-water-filter-sydney.html">Pure Home — $3,150</a>
         <a href="whole-house-water-filter-sydney.html">Whole House Water Filter</a>
         <a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis System</a>
         <a href="inline-fridge-water-filter-sydney.html">Inline Fridge Filter</a>
