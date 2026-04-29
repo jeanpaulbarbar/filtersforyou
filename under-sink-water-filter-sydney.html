@@ -115,7 +115,7 @@ a{text-decoration:none;color:inherit}
 .nav-links{display:flex;align-items:center;gap:24px;list-style:none}
 .nav-links a{font-size:16px;font-weight:600;color:var(--dark);transition:color .2s}
 .nav-links a:hover{color:var(--blue)}
-.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:16px;padding:10px 20px;border-radius:8px;transition:background .2s,transform .2s;text-decoration:none}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:16px;padding:10px 20px;border-radius:8px;transition:background .2s,transform .2s;text-decoration:none;white-space:nowrap}
 .nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .nav-cta svg{flex-shrink:0}
 .breadcrumb{background:var(--light);padding:12px 32px;font-size:14px;color:var(--muted)}
@@ -329,6 +329,7 @@ a{text-decoration:none;color:inherit}
   .nav-hamburger{display:flex!important;order:99}
   .mobile-nav{display:block}
   .online-dot-wrap{display:none!important}
+  .nav-cta{white-space:nowrap;font-size:13px;padding:8px 12px}
 }
 </style>
 </head>
