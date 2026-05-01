@@ -15,8 +15,8 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Water Filter Systems Sydney | Pure Essential to Pure Home | Filters For You</title>
-  <meta name="description" content="Explore all 7 water filtration systems: Pure Essential ($550), Pure Plus+ ($840), Pure Premium ($1,180), Pure Compact ($930), Pure Advanced ($1,280), Pure Luxe ($1,740) and Pure Home ($3,150). Professional installation by licensed plumber. Fixed prices Sydney-wide.">
+  <title>Water Filter Systems Sydney | All Products | Filters For You</title>
+  <meta name="description" content="All 7 Filters For You systems: Pure Essential ($550) to Pure Home ($3,150). Professional installation by a licensed plumber. Fixed prices Sydney-wide.">
   <link rel="canonical" href="https://filtersforyou.com.au/water-filter-systems.html">
   <!-- Meta Pixel Code -->
   <script>
@@ -390,6 +390,9 @@
   </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au/"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","url":"https://filtersforyou.com.au/water-filter-systems.html","speakable":{"@type":"SpeakableSpecification","cssSelector":[".hero h1",".hero-sub",".sec-title"]}}
 </script>
 </head>
 <body>
@@ -1106,6 +1109,24 @@
   </div>
 </section>
 
+<!-- SAVINGS CALCULATOR -->
+<section class="sec sec-white" style="padding:56px 32px">
+  <div class="container" style="max-width:700px">
+    <div class="sec-head" style="margin-bottom:24px">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">See Your Savings</span>
+      <h2 class="sec-title sec-title-dark">How Much Are You Spending on Bottled Water?</h2>
+    </div>
+    <div id="savings-calculator"></div>
+    <script src="assets/js/savings-calculator.js"></script>
+    <div style="height:32px"></div>
+    <h2 class="sec-title sec-title-dark" style="text-align:center">When Does Your Filter Need Replacing?</h2>
+    <p style="text-align:center;color:var(--muted);margin:8px 0 24px">Find out your next service date and maintenance cost.</p>
+    <div id="filter-calculator"></div>
+    <script src="assets/js/filter-calculator.js"></script>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="quote">
   <div style="max-width:700px;margin:0 auto">
@@ -1114,29 +1135,86 @@
     <p>Fixed prices from $550. Licensed plumber. Lifetime warranty. Jean-Paul is based in Croydon Park and services greater Sydney.</p>
     <div class="cta-phone-big"><a href="tel:0430546749">0430 546 749</a></div>
     <div class="cta-phone-note">Mon–Sat 7am–6pm &middot; Most bookings within 3–5 business days</div>
-    <div class="cta-form-card">
-      <p class="cta-form-title">Request Your Free Fixed Quote</p>
-      <form action="https://formspree.io/f/mbdqdlve" method="POST">
-        <input class="f-input" type="text" name="name" placeholder="Your name" required>
-        <input class="f-input" type="tel" name="phone" placeholder="Phone number" required>
-        <input class="f-input" type="text" name="suburb" placeholder="Your suburb" required>
-        <select class="f-select" name="system">
-          <option value="" disabled selected>Which system are you interested in?</option>
-          <option>Pure Essential — Twin Stage Under Sink ($550)</option>
-          <option>Pure Plus+ — 5 Stage Reverse Osmosis ($840)</option>
-          <option>Pure Compact — 3 Stage Alkaline RO ($930)</option>
-          <option>Pure Premium — 7 Stage RO + Alkaline ($1,180)</option>
-          <option>Pure Advanced — Quick-Change RO ($1,280)</option>
-          <option>Pure Luxe — Smart Monitoring RO ($1,740)</option>
-          <option>Pure Home — Whole House HPF-3 ($3,150)</option>
-          <option>Not sure — need advice</option>
-        </select>
-        <div class="f-check-wrap">
-          <input type="checkbox" id="tc" name="agree_terms" required>
-          <label for="tc">I agree to the <a href="/terms-and-conditions.html" target="_blank">Terms and Conditions</a> and <a href="/privacy-policy.html" target="_blank">Privacy Policy</a></label>
+    <div class="cta-form-card" id="ffy-quote-widget-wfs">
+      <!-- 3-step quote form -->
+      <div class="ffy-qw-header-wfs">
+        <p class="cta-form-title">Get Your Free Quote</p>
+        <div class="ffy-steps-wfs" aria-label="Form steps">
+          <span class="ffy-dot-wfs ffy-dot-wfs-active" id="ffy-wfs-dot-1"></span>
+          <span class="ffy-dot-wfs" id="ffy-wfs-dot-2"></span>
+          <span class="ffy-dot-wfs" id="ffy-wfs-dot-3"></span>
         </div>
-        <button type="submit" class="f-submit">Send My Free Quote Request</button>
-      </form>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="ffy-step-wfs" id="ffy-wfs-step-1">
+        <p class="ffy-q-wfs">What are you looking for?</p>
+        <div class="ffy-btn-group-wfs">
+          <button type="button" class="ffy-choice-wfs" data-val="Under-sink Filter">Under-sink Filter</button>
+          <button type="button" class="ffy-choice-wfs" data-val="Whole House System">Whole House System</button>
+          <button type="button" class="ffy-choice-wfs" data-val="Not Sure Yet">Not Sure Yet</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="ffy-step-wfs ffy-hidden-wfs" id="ffy-wfs-step-2">
+        <p class="ffy-q-wfs">How many people in your home?</p>
+        <div class="ffy-btn-group-wfs">
+          <button type="button" class="ffy-choice-wfs" data-val="1-2 People">1&ndash;2 People</button>
+          <button type="button" class="ffy-choice-wfs" data-val="3-4 People">3&ndash;4 People</button>
+          <button type="button" class="ffy-choice-wfs" data-val="5+ People">5+ People</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="ffy-step-wfs ffy-hidden-wfs" id="ffy-wfs-step-3">
+        <p class="ffy-q-wfs">Almost done &mdash; where can we reach you?</p>
+        <form action="https://formspree.io/f/mbdqdlve" method="POST" style="display:flex;flex-direction:column;gap:10px">
+          <input type="hidden" name="system_type" id="ffy-wfs-h-system">
+          <input type="hidden" name="household_size" id="ffy-wfs-h-size">
+          <input class="f-input" type="text" name="name" placeholder="Your name" required>
+          <input class="f-input" type="tel" name="phone" placeholder="Phone number" required>
+          <textarea class="f-input" name="message" placeholder="Anything else? (optional)" rows="2" style="resize:vertical"></textarea>
+          <button type="submit" class="f-submit">Send My Free Quote Request</button>
+        </form>
+      </div>
+
+      <style>
+        #ffy-quote-widget-wfs{font-family:'Sora',sans-serif}
+        .ffy-steps-wfs{display:flex;gap:6px;margin:8px 0 16px}
+        .ffy-dot-wfs{width:9px;height:9px;border-radius:50%;background:#dde5f0;display:inline-block;transition:background .25s}
+        .ffy-dot-wfs-active{background:#0B61F4}
+        .ffy-hidden-wfs{display:none}
+        .ffy-q-wfs{font-size:15px;font-weight:600;color:#324158;margin-bottom:12px}
+        .ffy-btn-group-wfs{display:flex;flex-direction:column;gap:8px;margin-bottom:4px}
+        .ffy-choice-wfs{width:100%;padding:12px 16px;border-radius:7px;border:2px solid #dde5f0;background:#fff;color:#324158;font-size:14px;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;text-align:left;transition:background .18s,border-color .18s,color .18s}
+        .ffy-choice-wfs:hover{border-color:#0B61F4;color:#0B61F4}
+        .ffy-choice-wfs.selected{background:#0B61F4;border-color:#0B61F4;color:#fff}
+      </style>
+
+      <script>
+      (function(){
+        function showWfsStep(n){
+          for(var i=1;i<=3;i++){
+            document.getElementById('ffy-wfs-step-'+i).classList.toggle('ffy-hidden-wfs',i!==n);
+            var dot=document.getElementById('ffy-wfs-dot-'+i);
+            dot.classList.toggle('ffy-dot-wfs-active',i<=n);
+          }
+        }
+        document.querySelectorAll('#ffy-wfs-step-1 .ffy-choice-wfs').forEach(function(btn){
+          btn.addEventListener('click',function(){
+            document.getElementById('ffy-wfs-h-system').value=this.getAttribute('data-val');
+            showWfsStep(2);
+          });
+        });
+        document.querySelectorAll('#ffy-wfs-step-2 .ffy-choice-wfs').forEach(function(btn){
+          btn.addEventListener('click',function(){
+            document.getElementById('ffy-wfs-h-size').value=this.getAttribute('data-val');
+            showWfsStep(3);
+          });
+        });
+      })();
+      </script>
     </div>
   </div>
 </section>

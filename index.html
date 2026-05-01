@@ -716,6 +716,9 @@ a{text-decoration:none;color:inherit}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au/"}
 </script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","url":"https://filtersforyou.com.au/","speakable":{"@type":"SpeakableSpecification","cssSelector":[".hero h1",".hero-sub",".sec-title"]}}
+</script>
 </head>
 <body>
 
@@ -871,10 +874,10 @@ a{text-decoration:none;color:inherit}
         <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Scheduled and installed within one week</li>
       </ul>
       <div class="hero-chips">
-        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Licensed &amp; Insured</span>
+        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Licensed Plumber 461511C</span>
+        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg> WaterMark Certified</span>
+        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Fixed Upfront Price</span>
         <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg> Lifetime Warranty</span>
-        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Same-Day Quote</span>
-        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Finance Available</span>
       </div>
       <div class="hero-stars">
         <span class="stars">★★★★★</span>
@@ -893,26 +896,95 @@ a{text-decoration:none;color:inherit}
         <img src="assets/photos/install-17.jpg" alt="Reverse osmosis water filtration system installed under sink Sydney" loading="eager">
       </div>
       <div class="hero-form-panel" id="quote">
-        <p class="hfp-title">Get Your Free Quote</p>
-        <p class="hfp-sub">Fixed price · No obligation · Fast scheduling</p>
-        <form class="hfp-fields" name="hero-quote" action="https://formspree.io/f/mbdqdlve" method="POST">
-          <div class="f-row">
-            <input class="f-input" type="text" name="name" placeholder="Your name" required>
-            <input class="f-input" type="tel" name="phone" placeholder="Phone number" required>
+        <!-- 3-step quote form -->
+        <div id="ffy-quote-widget">
+          <div class="ffy-qw-header">
+            <p class="hfp-title">Get Your Free Quote</p>
+            <p class="hfp-sub">Fixed price &middot; No obligation &middot; Fast scheduling</p>
+            <div class="ffy-steps" aria-label="Form steps">
+              <span class="ffy-dot ffy-dot-active" id="ffy-dot-1"></span>
+              <span class="ffy-dot" id="ffy-dot-2"></span>
+              <span class="ffy-dot" id="ffy-dot-3"></span>
+            </div>
           </div>
-          <input class="f-input" type="text" name="suburb" placeholder="Your suburb" required style="width:100%">
-          <select class="f-select" name="system">
-            <option value="" disabled selected>What are you interested in?</option>
-            <option>Whole House Filtration (HPF-3) — $3,150–$3,550</option>
-            <option>Under Sink / RO System — $550–$1,740</option>
-            <option>Not sure — need advice</option>
-          </select>
-          <div class="f-check-wrap">
-            <input type="checkbox" id="hero-tc" name="agree_terms" required>
-            <label for="hero-tc">I agree to the <a href="/terms-and-conditions.html" target="_blank">Terms and Conditions</a> and <a href="/privacy-policy.html" target="_blank">Privacy Policy</a></label>
+
+          <!-- Step 1: System type -->
+          <div class="ffy-step" id="ffy-step-1">
+            <p class="ffy-q">What are you looking for?</p>
+            <div class="ffy-btn-group">
+              <button type="button" class="ffy-choice" data-val="Under-sink Filter">Under-sink Filter</button>
+              <button type="button" class="ffy-choice" data-val="Whole House System">Whole House System</button>
+              <button type="button" class="ffy-choice" data-val="Not Sure Yet">Not Sure Yet</button>
+            </div>
           </div>
-          <button type="submit" class="f-submit">Send My Free Quote Request →</button>
-        </form>
+
+          <!-- Step 2: Household size -->
+          <div class="ffy-step ffy-hidden" id="ffy-step-2">
+            <p class="ffy-q">How many people in your home?</p>
+            <div class="ffy-btn-group">
+              <button type="button" class="ffy-choice" data-val="1-2 People">1&ndash;2 People</button>
+              <button type="button" class="ffy-choice" data-val="3-4 People">3&ndash;4 People</button>
+              <button type="button" class="ffy-choice" data-val="5+ People">5+ People</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Contact details -->
+          <div class="ffy-step ffy-hidden" id="ffy-step-3">
+            <p class="ffy-q">Almost done — where can we reach you?</p>
+            <form action="https://formspree.io/f/mbdqdlve" method="POST" class="ffy-form" id="ffy-contact-form">
+              <input type="hidden" name="system_type" id="ffy-h-system">
+              <input type="hidden" name="household_size" id="ffy-h-size">
+              <input class="f-input" type="text" name="name" placeholder="Your name" required>
+              <input class="f-input" type="tel" name="phone" placeholder="Phone number" required>
+              <textarea class="f-input" name="message" placeholder="Anything else? (optional)" rows="2" style="resize:vertical"></textarea>
+              <button type="submit" class="f-submit" style="background:#FFD900;color:#324158;width:100%;font-size:16px;font-weight:800;padding:14px;border:none;border-radius:8px;cursor:pointer;font-family:inherit;margin-top:4px">Send My Free Quote &rarr;</button>
+            </form>
+          </div>
+        </div>
+
+        <style>
+          #ffy-quote-widget{font-family:'Sora',sans-serif}
+          .ffy-qw-header{margin-bottom:14px}
+          .ffy-steps{display:flex;gap:6px;margin-top:10px}
+          .ffy-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.28);transition:background .25s}
+          .ffy-dot-active{background:#FFD900}
+          .ffy-step{transition:opacity .22s}
+          .ffy-hidden{display:none}
+          .ffy-q{font-size:15px;font-weight:600;color:rgba(255,255,255,.9);margin-bottom:10px}
+          .ffy-btn-group{display:flex;flex-direction:column;gap:7px}
+          .ffy-choice{width:100%;padding:11px 14px;border-radius:7px;border:2px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;text-align:left;transition:background .18s,border-color .18s}
+          .ffy-choice:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.5)}
+          .ffy-choice.selected{background:#0B61F4;border-color:#0B61F4;color:#fff}
+          .ffy-form{display:flex;flex-direction:column;gap:8px}
+        </style>
+
+        <script>
+        (function(){
+          var step=1, systemVal='', sizeVal='';
+          function showStep(n){
+            for(var i=1;i<=3;i++){
+              document.getElementById('ffy-step-'+i).classList.toggle('ffy-hidden',i!==n);
+              var dot=document.getElementById('ffy-dot-'+i);
+              dot.classList.toggle('ffy-dot-active',i===n||i<n);
+            }
+            step=n;
+          }
+          document.querySelectorAll('#ffy-step-1 .ffy-choice').forEach(function(btn){
+            btn.addEventListener('click',function(){
+              systemVal=this.getAttribute('data-val');
+              document.getElementById('ffy-h-system').value=systemVal;
+              showStep(2);
+            });
+          });
+          document.querySelectorAll('#ffy-step-2 .ffy-choice').forEach(function(btn){
+            btn.addEventListener('click',function(){
+              sizeVal=this.getAttribute('data-val');
+              document.getElementById('ffy-h-size').value=sizeVal;
+              showStep(3);
+            });
+          });
+        })();
+        </script>
       </div>
     </div>
   </div>
@@ -1177,7 +1249,7 @@ a{text-decoration:none;color:inherit}
 <section class="sec sec-light reveal" id="about">
   <div class="about-wrap container">
     <div class="about-photo">
-      <img src="assets/photos/jp-hero.jpg" alt="Jean-Paul founder and lead water filtration system installer Sydney">
+      <img src="assets/photos/jp-hero.jpg" alt="Jean-Paul founder and lead water filtration system installer Sydney" loading="lazy">
       <div class="about-overlay"><div class="about-overlay-name">Jean-Paul</div><div class="about-overlay-role">Founder &amp; Lead Technician</div></div>
     </div>
     <div class="about-text">
@@ -1212,8 +1284,8 @@ a{text-decoration:none;color:inherit}
     <p>Serving Sydney · Within 20km of Croydon Park</p>
   </div>
   <div class="vb-vehicles">
-    <img src="assets/brand/ute-transparent.png" alt="Filters For You Ford Ranger ute">
-    <img src="assets/brand/van-transparent.png" alt="Filters For You Ford Transit van">
+    <img src="assets/brand/ute-transparent.png" alt="Filters For You Ford Ranger ute" loading="lazy">
+    <img src="assets/brand/van-transparent.png" alt="Filters For You Ford Transit van" loading="lazy">
   </div>
 </div>
 
