@@ -257,7 +257,8 @@ a{text-decoration:none;color:inherit}
 .photo-banner-sub{color:rgba(255,255,255,.8);font-size:15px;margin-top:6px}
 @media(max-width:768px){html,body{width:100%}.nav-links{display:none}.intro-grid{grid-template-columns:1fr}.intro-photo{display:block !important}.intro-photo img{height:240px}.footer-top{grid-template-columns:1fr 1fr}.hero{padding:50px 20px 44px}.sec{padding:50px 20px}.breadcrumb{padding:12px 20px}.services-grid{grid-template-columns:1fr}.why-grid{grid-template-columns:1fr 1fr}.reviews-grid{grid-template-columns:1fr}.hero-btns .btn{width:100%;justify-content:center;font-size:16px}.cta-phone-big{font-size:32px}.photo-gallery{grid-template-columns:1fr}.photo-gallery-sec{padding:0 20px 50px}.photo-banner img{height:220px}.photo-banner-overlay{padding:24px 20px 18px}}
 @media(min-width:640px){.pricing-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}}
-  </style>
+  .pcard[onclick]{cursor:pointer;transition:box-shadow .18s,transform .18s}.pcard[onclick]:hover{box-shadow:0 6px 24px rgba(11,97,244,.16);transform:translateY(-2px)}
+</style>
 <style id="dropdown-nav-css">
 /* === DROPDOWN NAV === */
 .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px 6px;border-radius:7px;transition:background .2s;align-items:center;justify-content:center;flex-direction:column;gap:5px;-webkit-tap-highlight-color:transparent;flex-shrink:0}
@@ -324,9 +325,7 @@ a{text-decoration:none;color:inherit}
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <img src="/assets/brand/logos/logo-transparent.svg" alt="Filters For You logo" width="160" height="40">
-    </a>
+    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="42"></a>
     <ul class="nav-links" id="navLinks">
       <li class="nav-item has-dropdown">
         <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -379,6 +378,33 @@ a{text-decoration:none;color:inherit}
             <a href="water-filter-installation-rozelle.html">Rozelle</a>
             <a href="water-filter-installation-strathfield.html">Strathfield</a>
           </div>
+          <div class="dropdown-col">
+            <a href="water-filter-installation-sydney-cbd.html">Sydney CBD</a>
+            <a href="water-filter-installation-surry-hills.html">Surry Hills</a>
+            <a href="water-filter-installation-redfern.html">Redfern</a>
+            <a href="water-filter-installation-chippendale.html">Chippendale</a>
+            <a href="water-filter-installation-ultimo.html">Ultimo</a>
+            <a href="water-filter-installation-randwick.html">Randwick</a>
+            <a href="water-filter-installation-kensington.html">Kensington</a>
+            <a href="water-filter-installation-mascot.html">Mascot</a>
+            <a href="water-filter-installation-botany.html">Botany</a>
+            <a href="water-filter-installation-kogarah.html">Kogarah</a>
+            <a href="water-filter-installation-st-george.html">St George</a>
+            <a href="water-filter-installation-rockdale.html">Rockdale</a>
+            <a href="water-filter-installation-brighton-le-sands.html">Brighton-Le-Sands</a>
+            <a href="water-filter-installation-ramsgate.html">Ramsgate</a>
+            <a href="water-filter-installation-maroubra.html">Maroubra</a>
+            <a href="water-filter-installation-coogee.html">Coogee</a>
+            <a href="water-filter-installation-bondi.html">Bondi</a>
+            <a href="water-filter-installation-manly.html">Manly</a>
+            <a href="water-filter-installation-chatswood.html">Chatswood</a>
+            <a href="water-filter-installation-parramatta.html">Parramatta</a>
+            <a href="water-filter-installation-auburn.html">Auburn</a>
+            <a href="water-filter-installation-lidcombe.html">Lidcombe</a>
+            <a href="water-filter-installation-granville.html">Granville</a>
+            <a href="water-filter-installation-fairfield.html">Fairfield</a>
+            <a href="water-filter-installation-liverpool.html">Liverpool</a>
+          </div>
         </div>
       </li>
       <li class="nav-item has-dropdown">
@@ -392,6 +418,7 @@ a{text-decoration:none;color:inherit}
           <a href="water-filter-maintenance-guide.html">Water Filter Maintenance</a>
           <a href="water-filter-for-renters-sydney.html">Water Filters for Renters</a>
           <a href="water-filter-apartment-sydney.html">Water Filters for Apartments</a>
+          <a href="water-filter-faq-sydney.html">Water Filter FAQ Sydney</a>
         </div>
       </li>
       <li><a href="index.html#reviews" class="nav-link-plain">Reviews</a></li>
@@ -402,8 +429,9 @@ a{text-decoration:none;color:inherit}
       <span class="ham-bar"></span>
       <span class="ham-bar"></span>
     </button>
+    <div class="online-dot-wrap"><div class="dot"></div>Online</div>
     <a href="tel:0430546749" class="nav-cta">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.46a16 16 0 0 0 5.63 5.63l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
       0430 546 749
     </a>
   </div>
@@ -584,7 +612,7 @@ a{text-decoration:none;color:inherit}
       <p class="sec-body sec-body-c">All prices include supply and professional installation by licensed plumber Jean-Paul. No call-out fees, no hidden costs on the day.</p>
     </div>
     <div class="pricing-cards reveal">
-      <div class="pcard">
+      <div class="pcard" onclick="window.location='pure-essential-water-filter-sydney.html'">
         <div class="pcard-top">
           <div class="pcard-name">Pure Essential — Twin Stage Under Sink</div>
           <div class="pcard-price">$550.88</div>
@@ -592,7 +620,7 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-body">Carbon block filtration for chlorine, chloramines and sediment removal. Dedicated filtered tap installed at your kitchen sink. Ideal starting point for families new to water filtration.</div>
         <div class="pcard-meta">Supply + installation &middot; 1.5 hr &middot; Lifetime workmanship warranty</div>
       </div>
-      <div class="pcard">
+      <div class="pcard" onclick="window.location='pure-plus-water-filter-sydney.html'">
         <div class="pcard-top">
           <div class="pcard-name">Pure Plus+ — 5 Stage Reverse Osmosis</div>
           <div class="pcard-price">$840</div>
@@ -600,7 +628,7 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-body">Full RO filtration removing fluoride, heavy metals, chloramines and microplastics. Remineralisation post-filter restores a balanced mineral profile. Most popular system for Sydney families of 3–5.</div>
         <div class="pcard-meta">Supply + installation &middot; 2 hr &middot; Lifetime workmanship warranty</div>
       </div>
-      <div class="pcard">
+      <div class="pcard" onclick="window.location='pure-premium-water-filter-sydney.html'">
         <div class="pcard-top">
           <div class="pcard-name">Pure Premium — 7 Stage Reverse Osmosis</div>
           <div class="pcard-price">$1,180</div>
@@ -608,7 +636,7 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-body">Seven stage RO with alkaline remineralisation. Highest purity drinking water with added minerals. Ideal for health-focused families who want the best possible water quality for children and adults alike.</div>
         <div class="pcard-meta">Supply + installation &middot; 2 hr &middot; Lifetime workmanship warranty</div>
       </div>
-      <div class="pcard">
+      <div class="pcard" onclick="window.location='pure-advanced-water-filter-sydney.html'">
         <div class="pcard-top">
           <div class="pcard-name">Pure Advanced — Quick Change Alkaline RO</div>
           <div class="pcard-price">$1,281.88</div>
@@ -616,7 +644,7 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-body">5 stage quick-change alkaline RO with twist-lock cartridge design — the most family-friendly system to maintain. No tools needed for annual cartridge changes. Alkaline mineralised water straight from the tap.</div>
         <div class="pcard-meta">Supply + installation &middot; DIY cartridge replacement &middot; Lifetime workmanship warranty</div>
       </div>
-      <div class="pcard" style="border-left-color:var(--yellow)">
+      <div class="pcard" style="border-left-color:var(--yellow);cursor:pointer" onclick="window.location='whole-house-water-filter-sydney.html'">
         <div class="pcard-top">
           <div class="pcard-name">HPF-3 Whole House System — Flagship</div>
           <div class="pcard-price">From $3,150</div>
@@ -624,7 +652,7 @@ a{text-decoration:none;color:inherit}
         <div class="pcard-body">Whole home filtration installed at the mains. Every tap, shower, bath and appliance in the home receives filtered water. Removes chlorine, sediment and microplastics. Protects appliances, skin and hair for the whole family.</div>
         <div class="pcard-meta">Final price $3,050–$3,350 depending on installation conditions &middot; Lifetime workmanship warranty</div>
       </div>
-      <div class="pcard">
+      <div class="pcard" onclick="window.location='pure-compact-water-filter-sydney.html'">
         <div class="pcard-top">
           <div class="pcard-name">Pure Compact — 3 Stage Alkaline RO</div>
           <div class="pcard-price">$930.88</div>
@@ -1063,6 +1091,31 @@ revealEls.forEach(function(el) { observer.observe(el); });
         <a href="water-filter-installation-richmond.html">Richmond</a>
         <a href="water-filter-installation-rozelle.html">Rozelle</a>
         <a href="water-filter-installation-strathfield.html">Strathfield</a>
+        <a href="water-filter-installation-sydney-cbd.html">Sydney CBD</a>
+        <a href="water-filter-installation-surry-hills.html">Surry Hills</a>
+        <a href="water-filter-installation-redfern.html">Redfern</a>
+        <a href="water-filter-installation-chippendale.html">Chippendale</a>
+        <a href="water-filter-installation-ultimo.html">Ultimo</a>
+        <a href="water-filter-installation-randwick.html">Randwick</a>
+        <a href="water-filter-installation-kensington.html">Kensington</a>
+        <a href="water-filter-installation-mascot.html">Mascot</a>
+        <a href="water-filter-installation-botany.html">Botany</a>
+        <a href="water-filter-installation-kogarah.html">Kogarah</a>
+        <a href="water-filter-installation-st-george.html">St George</a>
+        <a href="water-filter-installation-rockdale.html">Rockdale</a>
+        <a href="water-filter-installation-brighton-le-sands.html">Brighton-Le-Sands</a>
+        <a href="water-filter-installation-ramsgate.html">Ramsgate</a>
+        <a href="water-filter-installation-maroubra.html">Maroubra</a>
+        <a href="water-filter-installation-coogee.html">Coogee</a>
+        <a href="water-filter-installation-bondi.html">Bondi</a>
+        <a href="water-filter-installation-manly.html">Manly</a>
+        <a href="water-filter-installation-chatswood.html">Chatswood</a>
+        <a href="water-filter-installation-parramatta.html">Parramatta</a>
+        <a href="water-filter-installation-auburn.html">Auburn</a>
+        <a href="water-filter-installation-lidcombe.html">Lidcombe</a>
+        <a href="water-filter-installation-granville.html">Granville</a>
+        <a href="water-filter-installation-fairfield.html">Fairfield</a>
+        <a href="water-filter-installation-liverpool.html">Liverpool</a>
       </div>
     </div>
     <div class="mobile-section">
@@ -1076,6 +1129,7 @@ revealEls.forEach(function(el) { observer.observe(el); });
         <a href="water-filter-maintenance-guide.html">Water Filter Maintenance</a>
         <a href="water-filter-for-renters-sydney.html">Water Filters for Renters</a>
         <a href="water-filter-apartment-sydney.html">Water Filters for Apartments</a>
+        <a href="water-filter-faq-sydney.html">Water Filter FAQ Sydney</a>
       </div>
     </div>
     <div class="mobile-plain-links">
