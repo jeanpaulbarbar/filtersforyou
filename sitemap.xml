@@ -662,6 +662,58 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Region Hub Pages -->
+  <url>
+    <loc>https://filtersforyou.com.au/locations-inner-west.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://filtersforyou.com.au/locations-eastern-suburbs.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://filtersforyou.com.au/locations-south-sydney.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://filtersforyou.com.au/locations-inner-city.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://filtersforyou.com.au/locations-western-sydney.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://filtersforyou.com.au/locations-north-shore.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Calculator Pages -->
+  <url>
+    <loc>https://filtersforyou.com.au/water-savings-calculator.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://filtersforyou.com.au/filter-lifespan-calculator.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Policy Pages -->
   <url>
     <loc>https://filtersforyou.com.au/privacy-policy.html</loc>
