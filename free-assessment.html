@@ -236,6 +236,10 @@ a{text-decoration:none;color:inherit}
   .photo-gallery-sec{padding:0 20px 50px}
   .photo-banner img{height:220px}
   .photo-banner-overlay{padding:24px 20px 18px}
+  .faq-list{gap:10px}
+  .faq-q{padding:16px 18px;font-size:15px}
+  .faq-a{padding:0 18px;font-size:14px}
+  .faq-item.open .faq-a{max-height:500px;padding:0 18px 16px}
 }
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s}
 .reveal.visible{opacity:1;transform:none}
@@ -571,7 +575,9 @@ a{text-decoration:none;color:inherit}
       <div class="faq-item">
         <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
           Do you service all of Sydney?
-          <span class="faq-a">We service Greater Sydney within approximately 20km of Croydon Park. This covers most inner, middle and outer Sydney suburbs. Call 0430 546 749 to confirm we service your area.</div>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">We service Greater Sydney within approximately 20km of Croydon Park. This covers most inner, middle and outer Sydney suburbs. Call 0430 546 749 to confirm we service your area.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
@@ -713,12 +719,14 @@ a{text-decoration:none;color:inherit}
           <a href="locations-north-shore.html">North Shore &amp; Beyond</a>
         </div>
       </div>
+      <div class="mobile-plain-links">
+        <a href="free-assessment.html">Get a Free Assessment</a>
+      </div>
       <div class="mobile-section">
         <button class="mobile-section-btn" onclick="this.parentElement.classList.toggle('open')">
           Resources <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="mobile-section-links">
-          <a href="free-assessment.html">Free Water Assessment</a>
           <a href="how-water-filters-work.html">How Water Filters Work</a>
           <a href="is-sydney-water-safe.html">Is Sydney Water Safe?</a>
           <a href="sydney-water-quality-guide.html">Sydney Water Quality Guide</a>
