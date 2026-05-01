@@ -459,32 +459,368 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     </a>
   </div>
 </div>
-<script id="dropdown-nav-js">
-(function(){
-  var ham=document.getElementById('navHamburger');
-  var mob=document.getElementById('mobileNav');
-  var cls=document.getElementById('mobileNavClose');
-  function openMob(){if(!mob)return;mob.classList.add('open');if(ham)ham.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
-  function closeMob(){if(!mob)return;mob.classList.remove('open');if(ham)ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-  if(ham)ham.addEventListener('click',openMob);
-  if(cls)cls.addEventListener('click',closeMob);
-  if(mob){
-    mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMob);});
-    mob.querySelectorAll('.mobile-section-btn').forEach(function(btn){
-      btn.addEventListener('click',function(){btn.closest('.mobile-section').classList.toggle('open');});
-    });
-  }
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMob();});
-  // Active page highlight
-  var pg=(location.pathname.split('/').pop()||'index.html');
-  if(pg==='')pg='index.html';
-  document.querySelectorAll('.nav-links a[href],.dropdown a[href],.mobile-section-links a[href],.mobile-plain-links a[href]').forEach(function(a){
-    var href=a.getAttribute('href')||'';
-    if(href.includes('#'))return;
-    var h=href.split('#')[0];
-    if(h&&h===pg)a.classList.add('active');
+<div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="water-filter-systems.html">Water Filter Systems</a> &rsaquo; Pure Compact</div>
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><span class="ticker-item">$930 Supply + Installation</span><span class="ticker-item">Licensed Plumber Lic. 461511C</span><span class="ticker-item">Tankless Design — No Bulk</span><span class="ticker-item">380 LPD Output</span><span class="ticker-item">WaterMark Certified</span><span class="ticker-item">Lifetime Workmanship Warranty</span><span class="ticker-item">$930 Supply + Installation</span><span class="ticker-item">Licensed Plumber Lic. 461511C</span><span class="ticker-item">Tankless Design — No Bulk</span><span class="ticker-item">380 LPD Output</span><span class="ticker-item">WaterMark Certified</span><span class="ticker-item">Lifetime Workmanship Warranty</span></div></div>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Compact Tankless Reverse Osmosis — Perfect for Sydney Apartments</div>
+    <h1>Pure Compact<br><span class="sh sh-y">Tankless RO Filter</span></h1>
+    <p class="hero-sub">All the filtration power of reverse osmosis in half the space. The Pure Compact's three-stage inline design removes fluoride, chloramine and 99%+ of dissolved contaminants — with no bulky storage tank. Purpose-built for Sydney apartments and kitchens where space is at a premium.</p>
+    <div class="hero-stars"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="stars-label">5.0 Google Rating &middot; 6 verified reviews</span></div>
+    <div class="hero-trust">
+      <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Installation Included</span>
+      <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>Lifetime Workmanship Guarantee</span>
+      <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>12-Month System Warranty</span>
+      <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg>Licensed Plumber 461511C</span>
+      <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>WaterMark Certified</span>
+    </div>
+    <div class="hero-btns">
+      <a href="tel:0430546749" class="btn btn-yellow"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>Call 0430 546 749</a>
+      <a href="#quote" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4)">Get a Fixed Quote</a>
+    </div>
+  </div>
+</section>
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="tbi"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Supply + professional installation included</div>
+    <div class="tbi"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>Lifetime workmanship guarantee</div>
+    <div class="tbi"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>12-month system warranty</div>
+    <div class="tbi"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg>Licensed plumber Lic. 461511C</div>
+    <div class="tbi"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>WaterMark Certified</div>
+  </div>
+</div>
+<section class="sec sec-white reveal">
+  <div class="container">
+    <div class="product-layout">
+      <div class="product-gallery">
+        <div class="gallery-hero"><img src="assets/brochure/pure-compact.jpg" alt="Pure Compact 3-stage tankless alkaline RO water filter — GT1-CRO" width="720" height="540" loading="eager"></div>
+      </div>
+      <div class="product-info">
+        <div class="product-model">Model GT1-CRO &middot; 3-Stage Compact Tankless RO</div>
+        <h1 class="product-name">Pure Compact Water Filter</h1>
+        <p class="product-tagline">Reverse osmosis filtration designed for real-world Sydney apartment living. Three compact inline stages, 380 litres per day output, and no storage tank — everything fits under your sink without sacrificing cabinet space.</p>
+        <div class="product-price-block">
+          <div class="price-main">$930</div>
+          <div class="price-note">Supply + professional installation. Fixed price — no call-out fees.</div>
+          <div class="price-chips">
+            <div class="price-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Chrome filter tap included</div>
+            <div class="price-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>No tank required</div>
+            <div class="price-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>~$130/yr DIY</div>
+          </div>
+        </div>
+        <ul class="product-features">
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tankless design — no storage tank, half the under-sink footprint</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>380 LPD high-output inline membrane — never supply-limited</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Removes 99%+ TDS including fluoride, heavy metals and PFAS</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Alkaline remineralisation — pH 7.5–8.5, minerals added back</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Australian-assembled HPF system</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ideal for Sydney apartments and compact under-sink spaces</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>WaterMark certified — AS/NZS 3497 compliant</li>
+        </ul>
+        <div class="product-btns">
+          <a href="tel:0430546749" class="btn btn-yellow"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>Book Installation</a>
+          <a href="#quote" class="btn btn-blue">Get a Quote</a>
+        </div>
+        <div class="tap-callout">
+          <div class="tap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <div class="tap-content">
+            <h4>Tap Options</h4>
+            <p>Dedicated chrome filter tap installed as standard. A <strong>3-way mixer tap upgrade</strong> combines filtered and mains water in one fixture — available on request.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec sec-light reveal">
+  <div class="container">
+    <div class="content-body">
+      <div class="yline"></div>
+      <span class="eyebrow">About The System</span>
+      <h2>RO Performance Without the Tank</h2>
+      <p>Sydney apartments have limited under-sink space. Traditional reverse osmosis systems take up significant cabinet room — three large filter housings plus a bulky 12-litre pressurised tank. The Pure Compact solves this with a fundamentally different design: three compact inline filters (no large housings) and a high-output 380LPD membrane that operates tankless, filtering water on demand rather than storing it.</p>
+      <p>The filtration performance is equivalent to any other RO system in the range. The combined pre-filter removes sediment, chlorine and chloramine to protect the membrane. The 380LPD RO membrane rejects up to 99% of dissolved contaminants — fluoride (up to 95%), heavy metals, nitrates, PFAS, bacteria and microplastics. The alkaline remineralisation post-filter replenishes calcium, magnesium and potassium, raising the pH to 7.5–8.5 for balanced, naturally flavoursome water.</p>
+      <p>What's different is the form factor. No tank under the sink means more storage space, and the inline filter design takes up a fraction of the footprint of housing-based RO systems. Jean-Paul has installed the Pure Compact in Sydney apartments where a standard RO simply wouldn't fit — from tight terrace house kitchens to compact flat cabinetry in inner-city suburbs.</p>
+      <h2>Filter Stage Breakdown</h2>
+      <div class="stages-grid">
+        <div class="stage-card">
+          <div class="stage-num">1</div>
+          <div class="stage-name">Combined Sediment + Carbon Pre-Filter</div>
+          <div class="stage-rating">Sediment, chlorine, chloramine, taste & odour</div>
+          <div class="stage-desc">A compact inline combination filter that performs the work of two traditional housing-based stages. Removes physical particulates (sediment, silt, rust) while also reducing chlorine, chloramine, VOCs and chemical taste and odour. Protects and extends the life of the RO membrane. Replaced every 12 months.</div>
+          <div class="stage-tags"><span class="stage-tag">Sediment</span><span class="stage-tag">Chloramine</span><span class="stage-tag">Chlorine</span><span class="stage-tag">VOCs</span><span class="stage-tag">Membrane protection</span></div>
+        </div>
+        <div class="stage-card">
+          <div class="stage-num">2</div>
+          <div class="stage-name">High-Output RO Membrane (380 LPD)</div>
+          <div class="stage-rating">0.0001 micron — 99%+ TDS rejection — tankless</div>
+          <div class="stage-desc">A high-efficiency inline RO membrane rated at 380 litres per day — significantly higher output than standard 75 GPD membranes. Removes up to 99% of dissolved solids including fluoride (up to 95%), heavy metals, nitrates, PFAS, bacteria and microplastics. The tankless design means water is filtered on demand rather than stored.</div>
+          <div class="stage-tags"><span class="stage-tag">Fluoride 95%</span><span class="stage-tag">Heavy metals</span><span class="stage-tag">PFAS</span><span class="stage-tag">Nitrates</span><span class="stage-tag">380 LPD</span><span class="stage-tag">Tankless</span></div>
+        </div>
+        <div class="stage-card">
+          <div class="stage-num">3</div>
+          <div class="stage-name">Alkaline Remineralisation Post-Filter</div>
+          <div class="stage-rating">pH 7.5–8.5, minerals added</div>
+          <div class="stage-desc">A compact inline alkaline filter that replenishes beneficial minerals (calcium, magnesium, potassium) removed by the RO process, raising the pH to 7.5–8.5 for smooth, naturally balanced water. The final stage before the filter tap. Replaced every 12 months.</div>
+          <div class="stage-tags"><span class="stage-tag">Alkaline pH</span><span class="stage-tag">Calcium</span><span class="stage-tag">Magnesium</span><span class="stage-tag">Potassium</span><span class="stage-tag">Taste</span></div>
+        </div>
+        </div>
+    </div>
+  </div>
+</section>
+<section class="sec sec-white reveal">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">System Specifications</span>
+      <h2 class="sec-title sec-title-dark">Technical <span class="sh sh-b">Specifications</span></h2>
+    </div>
+    <div class="specs-table-wrap">
+      <table class="specs-table">
+        <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>System Model</td><td>GT1-CRO (Pure Compact)</td></tr>
+          <tr><td>Filtration Stages</td><td>3 (Combined Pre-Filter + RO Membrane + Alkaline Post-Filter)</td></tr>
+          <tr><td>System Design</td><td>Compact inline — no housing units, no storage tank</td></tr>
+          <tr><td>RO Membrane Output</td><td>380 LPD (approximately 100 GPD)</td></tr>
+          <tr><td>TDS Rejection</td><td>Up to 99%</td></tr>
+          <tr><td>Fluoride Reduction</td><td>Up to 95%</td></tr>
+          <tr><td>Output pH</td><td>7.5–8.5 (alkaline remineralisation)</td></tr>
+          <tr><td>Storage Tank</td><td>None — tankless on-demand filtration</td></tr>
+          <tr><td>Filter Service Interval</td><td>12 months (pre + post filters)</td></tr>
+          <tr><td>RO Membrane Service Interval</td><td>2–3 years</td></tr>
+          <tr><td>Origin</td><td>Australian-assembled HPF system</td></tr>
+          <tr><td>WaterMark Certification</td><td>AS/NZS 3497</td></tr>
+          <tr><td>Ideal For</td><td>Apartments, compact kitchens, limited under-sink space</td></tr>
+          <tr><td>Annual Service (professional)</td><td>$380/yr</td></tr>
+          <tr><td>Annual Service (DIY)</td><td>~$130/yr</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section class="sec sec-light reveal">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">Licensed Plumber</span>
+      <h2 class="sec-title sec-title-dark">Installed by <span class="sh sh-y">Jean-Paul</span></h2>
+      <p class="sec-body sec-body-c">Every system is installed by Jean-Paul Barber — a licensed plumber, not a contractor. Clean work across homes and apartments throughout Sydney.</p>
+    </div>
+    <div class="jp-collage">
+      <img src="assets/jp%20working/ffy-water-filter-installation-sydney-016.jpg" alt="Jean-Paul Barber installing compact water filter in Sydney apartment" loading="lazy">
+      <img src="assets/jp%20working/pure-plus-ro-installation-sydney-002.jpg" alt="Compact RO system installed under Sydney apartment kitchen sink" loading="lazy">
+      <img src="assets/jp%20working/ffy-water-filter-installation-sydney-021.jpg" alt="Licensed plumber completing compact water filter installation Sydney" loading="lazy">
+      <img src="assets/jp%20working/pure-plus-ro-installation-sydney-005.jpg" alt="Compact inline RO filter system connection under sink Sydney" loading="lazy">
+      <img src="assets/jp%20working/ffy-water-filter-installation-sydney-023.jpg" alt="Jean-Paul installing water filter in Sydney apartment kitchen" loading="lazy">
+      <img src="assets/jp%20working/pure-plus-ro-installation-sydney-009.jpg" alt="Compact water filter system tested and completed Sydney" loading="lazy">
+      <img src="assets/jp%20working/ffy-water-filter-installation-sydney-019.jpg" alt="Filters For You plumber at work in Sydney apartment" loading="lazy">
+      <img src="assets/jp%20working/ffy-water-filter-installation-sydney-017.jpg" alt="Water filter installation completed in inner-Sydney apartment" loading="lazy">
+    </div>
+    <p class="jp-installer-trust">Every Pure Compact is installed by Jean-Paul — licensed plumber, not a contractor. Apartment installations a specialty.</p>
+  </div>
+</section>
+<section class="sec sec-white reveal">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">Fixed Pricing</span>
+      <h2 class="sec-title sec-title-dark">What You <span class="sh sh-b">Pay</span></h2>
+      <p class="sec-body sec-body-c">No call-out fees. No hidden extras. One fixed price covers everything.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card featured">
+        <div class="pricing-badge">SUPPLY + INSTALL</div>
+        <div class="pc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2,17 12,22 22,17"/><polyline points="2,12 12,17 22,12"/></svg></div>
+        <div class="pc-title">Pure Compact — Installed</div>
+        <div class="pc-price">$930</div>
+        <div class="pc-note">One fixed price. Everything included.</div>
+        <ul class="pc-list">
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pure Compact GT1-CRO system (3 stages)</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>No storage tank — compact under-sink install</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Dedicated chrome filter tap</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>All fittings and connections</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Licensed installation by Jean-Paul</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Lifetime workmanship guarantee</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="pc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/></svg></div>
+        <div class="pc-title">Annual Service — Professional</div>
+        <div class="pc-price">$380<span style="font-size:18px;font-weight:600;color:var(--muted)">/yr</span></div>
+        <div class="pc-note">Jean-Paul attends, replaces all filters and checks all fittings.</div>
+        <ul class="pc-list">
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pre-filter replaced (combined sediment + carbon)</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Alkaline post-filter replaced</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>All connections checked and pressure-tested</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>System flushed and performance confirmed</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="pc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="pc-title">Annual Service — DIY</div>
+        <div class="pc-price">~$130<span style="font-size:18px;font-weight:600;color:var(--muted)">/yr</span></div>
+        <div class="pc-note">Self-replace cartridges — no specialist tools required for most stages.</div>
+        <ul class="pc-list">
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Inline pre-filter and alkaline post-filter swap</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Simple cartridge replacement, no tools needed</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>RO membrane swap every 2–3 yrs via service call</li>
+          <li><span class="chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Best option for budget-conscious apartment owners</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec sec-light reveal">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">Common Questions</span>
+      <h2 class="sec-title sec-title-dark">Frequently Asked <span class="sh sh-b">Questions</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">What is a tankless reverse osmosis system and how does it work?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">A tankless RO system filters water on demand rather than storing pre-filtered water in a pressurised tank. The Pure Compact pushes feed water through a high-output membrane in real time as you draw from the tap — 380 litres per day capacity. No tank means no waiting for it to fill, no under-sink bulk, and no stagnant water risk.</div></div>
+      <div class="faq-item"><button class="faq-q">Is a compact RO system good for apartments in Sydney?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The Pure Compact is purpose-built for apartments. Compact inline filters and no storage tank means it requires around half the under-sink space of a standard RO installation. Jean-Paul has installed the Pure Compact in apartments across inner Sydney with no space issues.</div></div>
+      <div class="faq-item"><button class="faq-q">Does a compact RO system produce the same water quality as a standard system?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes — water quality is equivalent. The RO membrane operates at 0.0001 microns and achieves 99%+ TDS rejection and up to 95% fluoride removal — identical to larger systems. The compact design affects footprint and tank presence, not filtration performance. The alkaline remineralisation stage delivers the same mineral-balanced output as the Pure Plus+.</div></div>
+      <div class="faq-item"><button class="faq-q">What is the daily output of the Pure Compact?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The Pure Compact is rated at 380 litres per day (LPD). For a household drawing 3–8 litres from the filter tap daily, the system is never supply-limited. The high output is achieved through the compact inline membrane design, which runs at higher efficiency than traditional 75 GPD tank systems.</div></div>
+      <div class="faq-item"><button class="faq-q">Does the Pure Compact need a storage tank?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">No. The Pure Compact is a tankless system — water is filtered on demand. This is the key space-saving advantage: no bulky pressurised tank under the sink. Flow rate at the tap is slightly lower than mains pressure but the 380LPD capacity means supply is never an issue.</div></div>
+      <div class="faq-item"><button class="faq-q">How long does a compact RO filter installation take?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Installation takes approximately 1.5–2 hours. Jean-Paul connects the three inline filters to your cold water supply, runs the drain line, and installs the filter tap. No tank means fewer fittings and a cleaner installation overall.</div></div>
+      <div class="faq-item"><button class="faq-q">How often do compact RO filters need replacing?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The pre-filter and alkaline post-filter are replaced every 12 months. The RO membrane typically lasts 2–3 years. Professional annual service is $380 including all filters and labour. DIY replacement is approximately $130 per year.</div></div>
+      <div class="faq-item"><button class="faq-q">Does a compact RO system remove fluoride?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes. The RO membrane removes up to 95% of fluoride — identical to all RO systems in the range. Fluoride rejection is a function of the membrane technology, not the size of the housing system around it.</div></div>
+    </div>
+  </div>
+</section>
+<section class="sec sec-white reveal">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">Compare Systems</span>
+      <h2 class="sec-title sec-title-dark">Other <span class="sh sh-y">Water Filter Systems</span></h2>
+      <p class="sec-body sec-body-c">Browse the full range — every system includes professional installation by Jean-Paul.</p>
+    </div>
+    <div class="systems-grid">
+      <div class="system-card">
+        <div class="system-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></div>
+        <div class="system-name">Pure Plus+</div>
+        <div class="system-price">$840</div>
+        <div class="system-note">5-stage RO with 12L tank + alkaline remineralisation. The full-size RO option for houses with more under-sink space.</div>
+        <a href="pure-plus-water-filter-sydney.html" class="system-link">View Pure Plus+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="system-card">
+        <div class="system-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></div>
+        <div class="system-name">Pure Advanced</div>
+        <div class="system-price">$1,280</div>
+        <div class="system-note">5-stage quick-change RO. Twist-off cartridges — no tools, no mess for servicing. Great for those who prefer hassle-free maintenance.</div>
+        <a href="pure-advanced-water-filter-sydney.html" class="system-link">View Pure Advanced <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="system-card">
+        <div class="system-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></div>
+        <div class="system-name">Pure Essential</div>
+        <div class="system-price">$550</div>
+        <div class="system-note">Twin-stage carbon filter. No RO — just chloramine, chlorine and VOC removal at full mains pressure. Entry-level option.</div>
+        <a href="pure-essential-water-filter-sydney.html" class="system-link">View Pure Essential <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px"><a href="water-filter-systems.html" class="btn btn-blue">View All 7 Systems</a></div>
+  </div>
+</section>
+<section class="cta-section" id="quote">
+  <h2>Ready to Get <span class="sh sh-y">Cleaner Water</span>?</h2>
+  <p>Book your installation or get a fixed price quote. Jean-Paul covers greater Sydney — same week appointments available.</p>
+  <div class="cta-phone-big"><a href="tel:0430546749">0430 546 749</a></div>
+  <div class="cta-phone-note">Mon–Sat 7am–6pm &middot; No call-out fee &middot; Fixed price</div>
+  <div class="cta-form-card">
+    <div class="cta-form-title">Request a Free Quote</div>
+    <form name="pure-compact-quote" method="POST" data-netlify="true" action="/thank-you.html">
+      <input type="hidden" name="form-name" value="pure-compact-quote">
+      <input class="f-input" type="text" name="name" placeholder="Your name" required autocomplete="name">
+      <input class="f-input" type="tel" name="phone" placeholder="Phone number" required autocomplete="tel">
+      <input class="f-input" type="email" name="email" placeholder="Email address" autocomplete="email">
+      <input class="f-input" type="text" name="suburb" placeholder="Your suburb" required autocomplete="address-level2">
+      <select class="f-select" name="system">
+        <option value="" disabled selected>System of interest</option>
+        <option>Pure Essential — Twin Stage ($550)</option>
+        <option>Pure Plus+ — 5 Stage RO ($840)</option>
+        <option selected>Pure Compact — RO Compact ($930)</option>
+        <option>Pure Premium — 7 Stage RO ($1,180)</option>
+        <option>Pure Advanced — Quick-Change RO ($1,280)</option>
+        <option>Pure Luxe — Smart Monitoring RO ($1,740)</option>
+        <option>Pure Home — Whole House ($3,150)</option>
+        <option>Not sure — need advice</option>
+      </select>
+      <div class="f-check-wrap">
+        <input type="checkbox" id="tc" name="agree_terms" required>
+        <label for="tc">I agree to the <a href="/terms-and-conditions.html" target="_blank">Terms and Conditions</a> and <a href="/privacy-policy.html" target="_blank">Privacy Policy</a></label>
+      </div>
+      <button type="submit" class="f-submit">Send My Free Quote Request</button>
+    </form>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" class="footer-logo" width="140" height="36">
+        <p>Sydney's trusted water filter specialist. Jean-Paul Barber personally installs every system across greater Sydney. Fixed prices from $550, Lic. 461511C, lifetime warranty.</p>
+        <div class="footer-social-row">
+          <a href="https://instagram.com/filtersforyouau" class="footer-social-link" rel="noopener noreferrer" target="_blank">Instagram</a>
+          <a href="https://facebook.com/filtersforyouau" class="footer-social-link" rel="noopener noreferrer" target="_blank">Facebook</a>
+          <a href="https://tiktok.com/@filtersforyouau" class="footer-social-link" rel="noopener noreferrer" target="_blank">TikTok</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Systems</h4>
+        <ul>
+          <li><a href="water-filter-systems.html">All Systems</a></li>
+          <li><a href="pure-essential-water-filter-sydney.html">Pure Essential</a></li>
+          <li><a href="pure-plus-water-filter-sydney.html">Pure Plus+</a></li>
+          <li><a href="pure-premium-water-filter-sydney.html">Pure Premium</a></li>
+          <li><a href="pure-compact-water-filter-sydney.html">Pure Compact</a></li>
+          <li><a href="pure-advanced-water-filter-sydney.html">Pure Advanced</a></li>
+          <li><a href="pure-luxe-water-filter-sydney.html">Pure Luxe</a></li>
+          <li><a href="pure-home-water-filter-sydney.html">Pure Home</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Suburbs</h4>
+        <ul>
+          <li><a href="/water-filter-installation-croydon-park.html">Croydon Park</a></li>
+          <li><a href="/water-filter-installation-newtown.html">Newtown</a></li>
+          <li><a href="/water-filter-installation-leichhardt.html">Leichhardt</a></li>
+          <li><a href="/water-filter-installation-marrickville.html">Marrickville</a></li>
+          <li><a href="/water-filter-installation-concord.html">Concord</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="/#about">About Jean-Paul</a></li>
+          <li><a href="/#reviews">Reviews</a></li>
+        </ul>
+        <div style="margin-top:14px">
+          <div class="footer-contact-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg><a href="tel:0430546749">0430 546 749</a></div>
+          <div class="footer-contact-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><a href="mailto:info@filtersforyou.com.au">info@filtersforyou.com.au</a></div>
+          <div class="footer-contact-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>Based Croydon Park, Greater Sydney</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Tapped Out Pty Ltd (Filters For You) &middot; ABN 81 672 101 674 &middot; Lic. 461511C &middot; Pure Compact Tankless RO Water Filter Sydney</span>
+      <span>filtersforyou.com.au</span>
+    </div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item');
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!open)item.classList.add('open');
   });
-})();
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 <script id="dropdown-nav-js">
 (function(){
