@@ -558,7 +558,7 @@ a{text-decoration:none;color:inherit}
   .rc-track-outer{overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
   .rc-track-outer::before,.rc-track-outer::after{display:none}
   .rc-track{animation:rc-scroll-mobile 80s linear infinite;flex-direction:row;gap:12px;width:max-content}
-  .rc-group:last-child{display:none}/* hide duplicate set for animation space */
+  .rc-group:last-child{display:flex}/* SHOW duplicate set for infinite loop */
   .rc-card{width:280px;flex-shrink:0}
   @keyframes rc-scroll-mobile{0%{transform:translateX(0)}99%{transform:translateX(-100%)}100%{transform:translateX(0)}}
 
@@ -1792,6 +1792,18 @@ a{text-decoration:none;color:inherit}
       </span>
     </div>
   </div>
+
+  // Smooth infinite carousel loop reset
+  (function() {
+    var track = document.querySelector('.rc-track');
+    if(!track) return;
+    
+    track.addEventListener('animationiteration', function() {
+      // Animation just completed and reset — this is instant
+      // No action needed, loop continues seamlessly
+    });
+  })();
+
 </footer>
 
 <script>
