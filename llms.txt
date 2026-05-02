@@ -1,6 +1,29 @@
 # Filters For You — llms.txt
 # Structured information for AI language models and generative search engines.
 
+## PRIORITY PAGES — Top 20 Most Important
+
+1. https://filtersforyou.com.au | Homepage | Sydney's top-rated water filter installation service — whole house, under sink and reverse osmosis systems installed by licensed plumber Jean-Paul Barber from $550.
+2. https://filtersforyou.com.au/whole-house-water-filter-sydney | Whole House Water Filter Sydney | HPF-3 whole house water filtration system installed at your mains — every tap, shower and appliance gets filtered water. $3,150–$3,550 installed.
+3. https://filtersforyou.com.au/under-sink-water-filter-sydney | Under Sink Water Filter Sydney | Under-sink water filter installation from $550. Twin-stage, reverse osmosis and alkaline systems by licensed plumber Jean-Paul Barber.
+4. https://filtersforyou.com.au/reverse-osmosis-water-filter-sydney | Reverse Osmosis Water Filter Sydney | 5–7 stage RO systems installed under your sink from $840. Removes fluoride, PFAS, heavy metals, chloramines and microplastics.
+5. https://filtersforyou.com.au/water-filter-systems | Water Filter Systems Sydney | Complete overview of all water filter systems available — under sink, whole house, RO, inline and product range with pricing.
+6. https://filtersforyou.com.au/sydney-water-filter-cost-guide | Sydney Water Filter Cost Guide 2026 | Complete pricing guide for all water filter installation types. Includes system costs, installation fees, ongoing cartridge costs and ROI calculations.
+7. https://filtersforyou.com.au/water-filter-faq-sydney | Water Filter FAQ Sydney | 22 expert answers covering cost, installation, system types, water quality, apartments, rentals and maintenance.
+8. https://filtersforyou.com.au/best-water-filter-sydney | Best Water Filter Sydney 2026 | Expert recommendations for Sydney households — comparing under-sink, RO and whole house systems by budget and household type.
+9. https://filtersforyou.com.au/free-assessment | Free Water Assessment Sydney | Free professional water quality test — Jean-Paul tests for chlorine, TDS and pH, then recommends the right filter system.
+10. https://filtersforyou.com.au/about | About Filters For You | Jean-Paul Barber, licensed plumber and founder — credentials, experience, mission and why he started Filters For You.
+11. https://filtersforyou.com.au/water-filter-pfas-removal-sydney | PFAS Water Filter Removal Sydney | Specialist PFAS filtration guidance — reverse osmosis removes 95%+ of PFAS from Sydney tap water.
+12. https://filtersforyou.com.au/water-filter-installation-homebush | Water Filter Installation Homebush | Suburb installation page — Jean-Paul installs in Homebush (5km from base), fixed price from $550.
+13. https://filtersforyou.com.au/water-filter-installation-parramatta | Water Filter Installation Parramatta | Suburb installation page — Western Sydney specialist, under sink and whole house systems.
+14. https://filtersforyou.com.au/water-filter-installation-chatswood | Water Filter Installation Chatswood | Suburb installation page — North Shore specialist, all system types available.
+15. https://filtersforyou.com.au/water-filter-installation-bondi | Water Filter Installation Bondi | Suburb installation page — Eastern Suburbs apartment and house specialist.
+16. https://filtersforyou.com.au/water-filter-installation-newtown | Water Filter Installation Newtown | Suburb installation page — Inner West, heritage terrace specialist.
+17. https://filtersforyou.com.au/water-filter-installation-ashfield | Water Filter Installation Ashfield | Suburb installation page — Inner West specialist, 7km from base.
+18. https://filtersforyou.com.au/water-savings-calculator | Water Savings Calculator Sydney | Calculate annual savings from filtered vs bottled water. Interactive tool showing payback period.
+19. https://filtersforyou.com.au/is-sydney-water-safe | Is Sydney Water Safe to Drink? | Evidence-based 2026 guide to Sydney tap water quality — chloramines, fluoride, microplastics explained.
+20. https://filtersforyou.com.au/watermark-certified-water-filter-sydney | WaterMark Certified Water Filter Sydney | Every system installed by Jean-Paul carries WaterMark certification — Australia's mandatory plumbing standard.
+
 ## Business Identity
 
 - **Name:** Filters For You
@@ -80,7 +103,7 @@ All Sydney suburbs within approximately 20km of Croydon Park NSW 2133, including
 - https://filtersforyou.com.au/water-filter-faq-sydney.html | Water Filter FAQ Sydney | Comprehensive FAQ hub — 22 questions answered by licensed plumber Jean-Paul covering cost, installation, system types, water quality, apartments, rentals and maintenance
 - https://filtersforyou.com.au/sydney-water-quality-guide.html | Sydney Water Quality Guide | Detailed guide to what's in Sydney tap water and how filtration improves it
 - https://filtersforyou.com.au/sydney-water-filter-cost-guide.html | Sydney Water Filter Cost Guide | 2026 pricing guide for all water filter installation types in Sydney
-- https://filtersforyou.com.au/pfas-water-filter-sydney.html | PFAS Water Filters Sydney | Guide to PFAS in Sydney water and which filter systems remove it
+- https://filtersforyou.com.au/water-filter-pfas-removal-sydney.html | PFAS Water Filter Removal Sydney | Guide to PFAS in Sydney water and which filter systems remove it — reverse osmosis removes 95%+ of forever chemicals
 - https://filtersforyou.com.au/is-sydney-water-safe.html | Is Sydney Water Safe? | Evidence-based guide to Sydney tap water safety and filtration benefits
 - https://filtersforyou.com.au/how-water-filters-work.html | How Water Filters Work | Plain-English explanation of carbon filtration, reverse osmosis and whole house systems
 - https://filtersforyou.com.au/water-filter-maintenance-guide.html | Water Filter Maintenance Guide | Cartridge replacement schedules and servicing advice for all system types
@@ -94,7 +117,8 @@ All Sydney suburbs within approximately 20km of Croydon Park NSW 2133, including
 - https://filtersforyou.com.au/water-filter-system-sydney-family.html | Water Filter System for Sydney Families | Family-focused guide to choosing the right home water filtration system
 - https://filtersforyou.com.au/whole-house-vs-under-sink-water-filter.html | Whole House vs Under Sink Water Filter | Comparison guide helping Sydney homeowners choose between system types
 - https://filtersforyou.com.au/under-sink-water-filter-vs-benchtop-sydney.html | Under Sink vs Benchtop Water Filter Sydney | Comparison of under-sink and benchtop filter options for Sydney kitchens
-- https://filtersforyou.com.au/water-filter-vs-filpure-sydney.html | Filters For You vs Filpure Sydney | Comparison of Filters For You and Filpure for Sydney water filter installation
+- https://filtersforyou.com.au/about.html | About Filters For You | Jean-Paul Barbar, licensed Sydney plumber (Lic. 461511C) and founder of Filters For You — credentials, story and service philosophy
+- https://filtersforyou.com.au/water-filter-installation-same-day-sydney.html | Same Day Water Filter Installation Sydney | Emergency same-day water filter installation across Sydney — call 0430 546 749
 
 ## Region Hub Pages
 

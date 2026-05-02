@@ -96,12 +96,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://filtersforyou.com.au/water-filter-installation-price-sydney</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
 
   <!-- Suburb Pages -->
   <url>
@@ -508,12 +502,6 @@
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://filtersforyou.com.au/pfas-water-filter-sydney</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
     <loc>https://filtersforyou.com.au/is-sydney-water-safe</loc>
     <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
@@ -611,12 +599,6 @@
   </url>
 
   <!-- Comparison Pages -->
-  <url>
-    <loc>https://filtersforyou.com.au/water-filter-vs-filpure-sydney</loc>
-    <lastmod>2026-04-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <url>
     <loc>https://filtersforyou.com.au/under-sink-water-filter-vs-benchtop-sydney</loc>
     <lastmod>2026-04-30</lastmod>
