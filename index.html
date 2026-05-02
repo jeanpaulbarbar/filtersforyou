@@ -371,10 +371,10 @@ a{text-decoration:none;color:inherit}
 .rc-track-outer::before,.rc-track-outer::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none}
 .rc-track-outer::before{left:0;background:linear-gradient(to right,var(--blue),transparent)}
 .rc-track-outer::after{right:0;background:linear-gradient(to left,var(--blue),transparent)}
-.rc-track{display:flex;animation:rc-scroll 100s linear infinite}
-.rc-track:hover{animation-play-state:paused}
+.rc-track{display:flex;animation:none !important}
+.rc-track:hover{}
 .rc-group{display:flex;gap:14px;padding-right:14px;flex-shrink:0}
-@keyframes rc-scroll{0%{transform:translateX(0)}99%{transform:translateX(-100%)}100%{transform:translateX(0)}}
+@keyframes rc-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 .rc-card{width:256px;background:#fff;border:1.5px solid rgba(50,65,88,.09);border-radius:10px;padding:16px 17px;box-shadow:0 2px 10px rgba(50,65,88,.06);flex-shrink:0;display:flex;flex-direction:column}
 .rc-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:9px}
 .rc-card-left{display:flex;align-items:center;gap:9px}
@@ -557,7 +557,7 @@ a{text-decoration:none;color:inherit}
   /* Mobile carousel — scroll horizontally */
   .rc-track-outer{overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
   .rc-track-outer::before,.rc-track-outer::after{display:none}
-  .rc-track{animation:rc-scroll-mobile 80s linear infinite;flex-direction:row;gap:12px;width:max-content}
+  .rc-track{animation:none !important;flex-direction:row;gap:12px;width:max-content}
   .rc-group:last-child{display:flex}/* SHOW duplicate set for infinite loop */
   .rc-card{width:280px;flex-shrink:0}
   @keyframes rc-scroll-mobile{0%{transform:translateX(0)}99%{transform:translateX(-100%)}100%{transform:translateX(0)}}
@@ -1793,15 +1793,85 @@ a{text-decoration:none;color:inherit}
     </div>
   </div>
 
-  // Smooth infinite carousel loop reset
+  // JavaScript Infinite Carousel Loop
   (function() {
-    var track = document.querySelector('.rc-track');
-    if(!track) return;
+    const track = document.querySelector('.rc-track');
+    const trackOuter = document.querySelector('.rc-track-outer');
+    if (!track || !trackOuter) return;
     
-    track.addEventListener('animationiteration', function() {
-      // Animation just completed and reset — this is instant
-      // No action needed, loop continues seamlessly
+    let scrollPos = 0;
+    let isAnimating = true;
+    let lastFrameTime = Date.now();
+    const scrollSpeed = 40; // pixels per second
+    let interruptTimeout = null;
+    
+    // Get the width of one complete set of cards (first group)
+    function getGroupWidth() {
+      const firstGroup = track.querySelector('.rc-group');
+      return firstGroup ? firstGroup.offsetWidth : 0;
+    }
+    
+    function updateScroll(timestamp) {
+      if (!isAnimating) {
+        lastFrameTime = timestamp;
+        return;
+      }
+      
+      const now = Date.now();
+      const elapsed = (now - lastFrameTime) / 1000; // Convert to seconds
+      const distance = scrollSpeed * elapsed;
+      
+      scrollPos += distance;
+      lastFrameTime = now;
+      
+      const groupWidth = getGroupWidth();
+      
+      // Reset to start when we've scrolled past one complete set
+      if (scrollPos >= groupWidth && groupWidth > 0) {
+        scrollPos = 0; // Instant reset, user won't see it
+      }
+      
+      track.style.transform = `translateX(-${scrollPos}px)`;
+      requestAnimationFrame(updateScroll);
+    }
+    
+    // Pause on hover
+    trackOuter.addEventListener('mouseenter', () => {
+      isAnimating = false;
+      if (interruptTimeout) clearTimeout(interruptTimeout);
     });
+    
+    // Resume after hover
+    trackOuter.addEventListener('mouseleave', () => {
+      isAnimating = true;
+      lastFrameTime = Date.now();
+      if (interruptTimeout) clearTimeout(interruptTimeout);
+    });
+    
+    // Pause on touch/drag
+    let touchStartX = 0;
+    let touched = false;
+    
+    trackOuter.addEventListener('touchstart', (e) => {
+      touched = true;
+      touchStartX = e.touches[0].clientX;
+      isAnimating = false;
+      if (interruptTimeout) clearTimeout(interruptTimeout);
+    }, { passive: true });
+    
+    trackOuter.addEventListener('touchend', () => {
+      touched = false;
+      // Resume after 2 seconds of no touch
+      if (interruptTimeout) clearTimeout(interruptTimeout);
+      interruptTimeout = setTimeout(() => {
+        isAnimating = true;
+        lastFrameTime = Date.now();
+      }, 2000);
+    }, { passive: true });
+    
+    // Start animation loop
+    lastFrameTime = Date.now();
+    requestAnimationFrame(updateScroll);
   })();
 
 </footer>
@@ -2156,94 +2226,8 @@ function sendBookingEmail(data){
 
 <script id="carousel-infinite-scroll-js">
 (function(){
-  var trackOuter = document.querySelector('.rc-track-outer');
-  var track = document.querySelector('.rc-track');
-  if(!trackOuter || !track) return;
-  
-  var isDragging = false;
-  var startX = 0;
-  var currentX = 0;
-  var threshold = 50;
-  
-  // Touch/swipe support for mobile
-  trackOuter.addEventListener('touchstart', function(e) {
-    isDragging = true;
-    startX = e.touches[0].clientX;
-  });
-  
-  trackOuter.addEventListener('touchmove', function(e) {
-    if(!isDragging) return;
-    currentX = e.touches[0].clientX - startX;
-  });
-  
-  trackOuter.addEventListener('touchend', function(e) {
-    isDragging = false;
-    if(Math.abs(currentX) > threshold) {
-      if(currentX > 0) {
-        // Swiped right — show previous
-        scrollCarousel(-1);
-      } else {
-        // Swiped left — show next
-        scrollCarousel(1);
-      }
-    }
-    currentX = 0;
-  });
-  
-  // Mouse wheel support for desktop
-  trackOuter.addEventListener('wheel', function(e) {
-    e.preventDefault();
-    if(e.deltaX > 0 || e.deltaY > 0) {
-      scrollCarousel(1);
-    } else {
-      scrollCarousel(-1);
-    }
-  }, { passive: false });
-  
-  function scrollCarousel(direction) {
-    var cardWidth = 280;
-    var scrollAmount = cardWidth + 12; // card width + gap
-    
-    // Pause animation while scrolling
-    track.style.animationPlayState = 'paused';
-    
-    // Get current transform
-    var computedStyle = window.getComputedStyle(track);
-    var transformMatrix = computedStyle.transform;
-    var currentX = 0;
-    
-    if(transformMatrix !== 'none') {
-      var matrix = transformMatrix.match(/^matrix\((.+)\)$/);
-      if(matrix) {
-        currentX = parseInt(matrix[1].split(',')[4]);
-      }
-    }
-    
-    var newX = currentX + (direction * scrollAmount);
-    track.style.transform = 'translateX(' + newX + 'px)';
-    
-    // Resume animation after a delay
-    setTimeout(function() {
-      track.style.animationPlayState = 'running';
-    }, 500);
-  }
-  
-  // Keep animation running continuously
-  setInterval(function() {
-    if(track.style.animationPlayState !== 'paused') {
-      // Animation keeps running
-    }
-  }, 100);
-  
-  // Re-apply animation if stuck
-  var observer = new MutationObserver(function() {
-    var animState = window.getComputedStyle(track).animationPlayState;
-    if(animState !== 'running' && !isDragging) {
-      track.style.animationPlayState = 'running';
-    }
-  });
-  
-  observer.observe(track, { attributes: true });
+  // Old CSS animation code removed — using JavaScript continuous scroll instead
+  // The new implementation handles touch pause/resume automatically
 })();
 
 // More button expand functionality
