@@ -369,10 +369,11 @@ a{text-decoration:none;color:inherit}
 .rc-google-wordmark{font-size:24px;font-weight:500;letter-spacing:-.2px}
 .rc-track-outer{flex:1;overflow:hidden;position:relative}
 .rc-track-outer::before,.rc-track-outer::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none}
-.rc-track-outer::before{left:0;background:linear-gradient(to right,var(--blue),transparent)}
+.rc-track-outer::before{left:0;background:linear-gradient(to right,var(--blue),transparent);pointer-events:none}
 .rc-track-outer::after{right:0;background:linear-gradient(to left,var(--blue),transparent)}
-.rc-track{display:flex;animation:none !important}
-.rc-track:hover{}
+.rc-track{display:flex;animation:rc-infinite 30s linear infinite;will-change:transform}
+.rc-track.paused{animation-play-state:paused}
+@keyframes rc-infinite{0%{transform:translateX(0)}50%{transform:translateX(-50%)}50.001%{transform:translateX(0)}100%{transform:translateX(0)}}
 .rc-group{display:flex;gap:14px;padding-right:14px;flex-shrink:0}
 @keyframes rc-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 .rc-card{width:256px;background:#fff;border:1.5px solid rgba(50,65,88,.09);border-radius:10px;padding:16px 17px;box-shadow:0 2px 10px rgba(50,65,88,.06);flex-shrink:0;display:flex;flex-direction:column}
@@ -560,7 +561,6 @@ a{text-decoration:none;color:inherit}
   .rc-track{animation:none !important;flex-direction:row;gap:12px;width:max-content}
   .rc-group:last-child{display:flex}/* SHOW duplicate set for infinite loop */
   .rc-card{width:280px;flex-shrink:0}
-  @keyframes rc-scroll-mobile{0%{transform:translateX(0)}99%{transform:translateX(-100%)}100%{transform:translateX(0)}}
 
   /* Process */
   .process-row{grid-template-columns:1fr 1fr;gap:20px}
@@ -1793,85 +1793,41 @@ a{text-decoration:none;color:inherit}
     </div>
   </div>
 
-  // JavaScript Infinite Carousel Loop
+  // Infinite Carousel Pause on Hover
   (function() {
     const track = document.querySelector('.rc-track');
     const trackOuter = document.querySelector('.rc-track-outer');
     if (!track || !trackOuter) return;
     
-    let scrollPos = 0;
-    let isAnimating = true;
-    let lastFrameTime = Date.now();
-    const scrollSpeed = 40; // pixels per second
-    let interruptTimeout = null;
-    
-    // Get the width of one complete set of cards (first group)
-    function getGroupWidth() {
-      const firstGroup = track.querySelector('.rc-group');
-      return firstGroup ? firstGroup.offsetWidth : 0;
-    }
-    
-    function updateScroll(timestamp) {
-      if (!isAnimating) {
-        lastFrameTime = timestamp;
-        return;
-      }
-      
-      const now = Date.now();
-      const elapsed = (now - lastFrameTime) / 1000; // Convert to seconds
-      const distance = scrollSpeed * elapsed;
-      
-      scrollPos += distance;
-      lastFrameTime = now;
-      
-      const groupWidth = getGroupWidth();
-      
-      // Reset to start when we've scrolled past one complete set
-      if (scrollPos >= groupWidth && groupWidth > 0) {
-        scrollPos = 0; // Instant reset, user won't see it
-      }
-      
-      track.style.transform = `translateX(-${scrollPos}px)`;
-      requestAnimationFrame(updateScroll);
-    }
+    let pauseTimeout = null;
     
     // Pause on hover
     trackOuter.addEventListener('mouseenter', () => {
-      isAnimating = false;
-      if (interruptTimeout) clearTimeout(interruptTimeout);
+      track.classList.add('paused');
+      if (pauseTimeout) clearTimeout(pauseTimeout);
     });
     
     // Resume after hover
     trackOuter.addEventListener('mouseleave', () => {
-      isAnimating = true;
-      lastFrameTime = Date.now();
-      if (interruptTimeout) clearTimeout(interruptTimeout);
+      if (pauseTimeout) clearTimeout(pauseTimeout);
+      pauseTimeout = setTimeout(() => {
+        track.classList.remove('paused');
+      }, 100);
     });
     
-    // Pause on touch/drag
-    let touchStartX = 0;
-    let touched = false;
-    
-    trackOuter.addEventListener('touchstart', (e) => {
-      touched = true;
-      touchStartX = e.touches[0].clientX;
-      isAnimating = false;
-      if (interruptTimeout) clearTimeout(interruptTimeout);
+    // Pause on touch
+    trackOuter.addEventListener('touchstart', () => {
+      track.classList.add('paused');
+      if (pauseTimeout) clearTimeout(pauseTimeout);
     }, { passive: true });
     
+    // Resume after touch
     trackOuter.addEventListener('touchend', () => {
-      touched = false;
-      // Resume after 2 seconds of no touch
-      if (interruptTimeout) clearTimeout(interruptTimeout);
-      interruptTimeout = setTimeout(() => {
-        isAnimating = true;
-        lastFrameTime = Date.now();
+      if (pauseTimeout) clearTimeout(pauseTimeout);
+      pauseTimeout = setTimeout(() => {
+        track.classList.remove('paused');
       }, 2000);
     }, { passive: true });
-    
-    // Start animation loop
-    lastFrameTime = Date.now();
-    requestAnimationFrame(updateScroll);
   })();
 
 </footer>
