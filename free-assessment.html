@@ -298,6 +298,45 @@ a{text-decoration:none;color:inherit}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au/"}
 </script>
+<style id="footer-v2-css">
+.footer-v2{background:#1e2d40;color:rgba(255,255,255,.6);padding:56px 32px 32px}
+.footer-v2 .fv2-inner{max-width:1380px;margin:0 auto}
+.fv2-brand-row{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:32px}
+.fv2-brand-info p{font-size:13.5px;line-height:1.7;margin-top:10px;max-width:300px;color:rgba(255,255,255,.55)}
+.fv2-social-row{display:flex;gap:10px;margin-top:14px}
+.fv2-social-link{font-family:'Sora',sans-serif;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:5px 12px;border-radius:4px;transition:color .2s,border-color .2s;text-decoration:none}
+.fv2-social-link:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.fv2-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-bottom:40px}
+.fv2-col h4{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.07em}
+.fv2-col ul{list-style:none;margin:0;padding:0}
+.fv2-col ul li{margin-bottom:4px}
+.fv2-col ul li a,.fv2-col>a{font-family:'Sora',sans-serif;font-size:12.5px;color:rgba(255,255,255,.55);transition:color .2s;text-decoration:none;display:block;line-height:1.5}
+.fv2-col ul li a:hover,.fv2-col>a:hover{color:#fff}
+.fv2-contact-line{font-family:'Sora',sans-serif;font-size:12.5px;margin-bottom:6px;display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.55)}
+.fv2-contact-line a{color:rgba(255,255,255,.55);transition:color .2s;text-decoration:none}
+.fv2-contact-line a:hover{color:#fff}
+.fv2-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-family:'Sora',sans-serif;font-size:12px;color:rgba(255,255,255,.35)}
+.fv2-flyout-cb{position:absolute;opacity:0;pointer-events:none;width:0;height:0;margin:0}
+.fv2-flyout-wrap{position:relative;margin-bottom:8px}
+.fv2-ftrig{font-family:'Sora',sans-serif;font-size:12.5px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:5px;cursor:default;user-select:none;line-height:1.5}
+.fv2-ftrig:hover{color:rgba(255,255,255,.85)}
+.fv2-caret{font-size:9px;color:rgba(255,255,255,.3);transition:color .15s}
+.fv2-flyout{position:absolute;bottom:calc(100% + 8px);left:0;background:#253a4e;border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:10px 14px;min-width:200px;z-index:200;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease;box-shadow:0 -8px 28px rgba(0,0,0,.4)}
+.fv2-f2c{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;min-width:320px}
+.fv2-flyout-wrap:hover .fv2-flyout{opacity:1;pointer-events:auto;transform:none}
+.fv2-flyout-wrap:hover .fv2-caret{color:rgba(255,255,255,.6)}
+.fv2-flyout a{font-family:'Sora',sans-serif;font-size:11.5px;color:rgba(255,255,255,.6);text-decoration:none;display:block;padding:2.5px 0;white-space:nowrap;transition:color .15s}
+.fv2-flyout a:hover{color:#fff}
+@media(max-width:1100px){.fv2-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){
+  .fv2-ftrig{cursor:pointer}
+  .fv2-flyout,.fv2-f2c{position:static;display:none;opacity:1;transform:none;pointer-events:auto;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:8px 10px;margin:4px 0 8px;box-shadow:none;min-width:0;transition:none;grid-template-columns:1fr}
+  .fv2-flyout-wrap:hover .fv2-flyout,.fv2-flyout-wrap:hover .fv2-f2c{display:none}
+  .fv2-flyout-cb:checked~.fv2-flyout,.fv2-flyout-cb:checked~.fv2-f2c{display:block}
+}
+@media(max-width:640px){.fv2-grid{grid-template-columns:1fr 1fr}.fv2-brand-row{flex-direction:column}}
+@media(max-width:400px){.fv2-grid{grid-template-columns:1fr}}
+
 </head>
 <body>
 
@@ -624,50 +663,215 @@ a{text-decoration:none;color:inherit}
 </section>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <svg class="footer-logo" viewBox="0 0 180 50" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="40" font-family="Sora, sans-serif" font-size="24" font-weight="800" fill="white">Filters For You</text></svg>
-        <p>Professional water filtration system installation across Sydney. Whole house, under sink &amp; reverse osmosis systems by licensed plumber Jean-Paul Barber.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="under-sink-water-filter-sydney.html">Under Sink Water Filter</a></li>
-          <li><a href="whole-house-water-filter-sydney.html">Whole House Water Filter</a></li>
-          <li><a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis</a></li>
-          <li><a href="water-filter-systems.html">View All Systems</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Resources</h4>
-        <ul>
-          <li><a href="free-assessment.html">Free Water Assessment</a></li>
-          <li><a href="how-water-filters-work.html">How Water Filters Work</a></li>
-          <li><a href="is-sydney-water-safe.html">Is Sydney Water Safe?</a></li>
-          <li><a href="water-filter-faq-sydney.html">Water Filter FAQ</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <div class="footer-contact-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <a href="tel:0430546749">0430 546 749</a>
-        </div>
-        <div class="footer-contact-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <a href="mailto:info@filtersforyou.com.au">info@filtersforyou.com.au</a>
+<footer class="footer-v2">
+  <div class="fv2-inner">
+    <div class="fv2-brand-row">
+      <div class="fv2-brand-info">
+        <img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" width="140" height="36" style="height:36px;width:auto">
+        <p>Sydney's trusted water filter installation specialist. Jean-Paul Barber personally installs every system across Greater Sydney. Fixed prices, Lic. 461511C, lifetime warranty.</p>
+        <div class="fv2-social-row">
+          <a href="https://instagram.com/filtersforyouau" class="fv2-social-link" rel="noopener noreferrer" target="_blank">Instagram</a>
+          <a href="https://facebook.com/filtersforyouau" class="fv2-social-link" rel="noopener noreferrer" target="_blank">Facebook</a>
+          <a href="https://tiktok.com/@filtersforyouau" class="fv2-social-link" rel="noopener noreferrer" target="_blank">TikTok</a>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 Filters For You. All rights reserved.</p>
-      <div class="footer-social-row">
-        <a href="https://instagram.com/filtersforyouau" class="footer-social-link" target="_blank">Instagram</a>
-        <a href="https://facebook.com/filtersforyouau" class="footer-social-link" target="_blank">Facebook</a>
-        <a href="https://tiktok.com/@filtersforyouau" class="footer-social-link" target="_blank">TikTok</a>
+    <div class="fv2-grid">
+      <!-- Services -->
+      <div class="fv2-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="under-sink-water-filter-sydney.html">Under Sink Water Filter Sydney</a></li>
+          <li><a href="whole-house-water-filter-sydney.html">Whole House Water Filter Sydney</a></li>
+          <li><a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis Sydney</a></li>
+          <li><a href="water-filter-systems.html">View All Systems</a></li>
+          <li><a href="water-filter-systems.html">Water Filter Systems Comparison</a></li>
+          <li><a href="whole-house-vs-under-sink-water-filter.html">Whole House vs Under Sink</a></li>
+        </ul>
       </div>
+      <!-- Service + Location -->
+      <div class="fv2-col">
+        <h4>Service + Location</h4>
+        <div class="fv2-flyout-wrap">
+          <input type="checkbox" id="fo-us" class="fv2-flyout-cb">
+          <label for="fo-us" class="fv2-ftrig">Under Sink<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
+          <div class="fv2-flyout">
+            <a href="under-sink-water-filter-bondi.html">Under Sink Bondi</a>
+            <a href="under-sink-water-filter-parramatta.html">Under Sink Parramatta</a>
+            <a href="under-sink-water-filter-randwick.html">Under Sink Randwick</a>
+          </div>
+        </div>
+        <div class="fv2-flyout-wrap">
+          <input type="checkbox" id="fo-wh" class="fv2-flyout-cb">
+          <label for="fo-wh" class="fv2-ftrig">Whole House<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
+          <div class="fv2-flyout">
+            <a href="whole-house-water-filter-bondi.html">Whole House Bondi</a>
+            <a href="whole-house-water-filter-parramatta.html">Whole House Parramatta</a>
+            <a href="whole-house-water-filter-chatswood.html">Whole House Chatswood</a>
+          </div>
+        </div>
+        <div class="fv2-flyout-wrap">
+          <input type="checkbox" id="fo-ro" class="fv2-flyout-cb">
+          <label for="fo-ro" class="fv2-ftrig">Reverse Osmosis<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
+          <div class="fv2-flyout">
+            <a href="reverse-osmosis-installation-bondi.html">Reverse Osmosis Bondi</a>
+            <a href="reverse-osmosis-installation-parramatta.html">Reverse Osmosis Parramatta</a>
+            <a href="reverse-osmosis-installation-chatswood.html">Reverse Osmosis Chatswood</a>
+          </div>
+        </div>
+      </div>
+      <!-- Locations -->
+      <div class="fv2-col">
+        <h4>Locations</h4>
+        <div class="fv2-flyout-wrap">
+          <input type="checkbox" id="fo-iw" class="fv2-flyout-cb">
+          <label for="fo-iw" class="fv2-ftrig">Inner West<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
+          <div class="fv2-flyout fv2-f2c">
+            <a href="water-filter-installation-ashfield.html">Ashfield</a>
+            <a href="water-filter-installation-balmain.html">Balmain</a>
+            <a href="water-filter-installation-burwood.html">Burwood</a>
+            <a href="water-filter-installation-campsie.html">Campsie</a>
+            <a href="water-filter-installation-concord.html">Concord</a>
+            <a href="water-filter-installation-croydon-park.html">Croydon Park</a>
+            <a href="water-filter-installation-drummoyne.html">Drummoyne</a>
+            <a href="water-filter-installation-enmore.html">Enmore</a>
+            <a href="water-filter-installation-erskineville.html">Erskineville</a>
+            <a href="water-filter-installation-five-dock.html">Five Dock</a>
+            <a href="water-filter-installation-glebe.html">Glebe</a>
+            <a href="water-filter-installation-homebush.html">Homebush</a>
+            <a href="water-filter-installation-homebush-west.html">Homebush West</a>
+            <a href="water-filter-installation-leichhardt.html">Leichhardt</a>
+            <a href="water-filter-installation-marrickville.html">Marrickville</a>
+            <a href="water-filter-installation-newtown.html">Newtown</a>
+            <a href="water-filter-installation-petersham.html">Petersham</a>
+            <a href="water-filter-installation-rozelle.html">Rozelle</a>
+            <a href="water-filter-installation-stanmore.html">Stanmore</a>
+            <a href="water-filter-installation-strathfield.html">Strathfield</a>
+            <a href="water-filter-installation-annandale.html">Annandale</a>
+          </div>
+        </div>
+        <div class="fv2-flyout-wrap">
+          <input type="checkbox" id="fo-es" class="fv2-flyout-cb">
+          <label for="fo-es" class="fv2-ftrig">Eastern Suburbs<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
+          <div class="fv2-flyout">
+            <a href="water-filter-installation-bondi.html">Bondi</a>
+            <a href="water-filter-installation-coogee.html">Coogee</a>
+            <a href="water-filter-installation-kensington.html">Kensington</a>
+            <a href="water-filter-installation-maroubra.html">Maroubra</a>
+            <a href="water-filter-installation-paddington.html">Paddington</a>
+            <a href="water-filter-installation-randwick.html">Randwick</a>
+            <a href="water-filter-installation-surry-hills.html">Surry Hills</a>
+            <a href="water-filter-installation-waterloo.html">Waterloo</a>
+            <a href="water-filter-installation-zetland.html">Zetland</a>
+          </div>
+        </div>
+        <div class="fv2-flyout-wrap">
+          <input type="checkbox" id="fo-ss" class="fv2-flyout-cb">
+          <label for="fo-ss" class="fv2-ftrig">South Sydney<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
+          <div class="fv2-flyout fv2-f2c">
+            <a href="water-filter-installation-alexandria.html">Alexandria</a>
+            <a href="water-filter-installation-arncliffe.html">Arncliffe</a>
+            <a href="water-filter-installation-beaconsfield.html">Beaconsfield</a>
+            <a href="water-filter-installation-botany.html">Botany</a>
+            <a href="water-filter-installation-brighton-le-sands.html">Brighton-le-Sands</a>
+            <a href="water-filter-installation-hurstville.html">Hurstville</a>
+            <a href="water-filter-installation-kogarah.html">Kogarah</a>
+            <a href="water-filter-installation-mascot.html">Mascot</a>
+            <a href="water-filter-installation-miranda.html">Miranda</a>
+            <a href="water-filter-installation-ramsgate.html">Ramsgate</a>
+            <a href="water-filter-installation-rockdale.html">Rockdale</a>
+            <a href="water-filter-installation-tempe.html">Tempe</a>
+          </div>
+        </div>
+        <div class="fv2-flyout-wrap">
+          <input type="checkbox" id="fo-ic" class="fv2-flyout-cb">
+          <label for="fo-ic" class="fv2-ftrig">Inner City &amp; CBD<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
+          <div class="fv2-flyout">
+            <a href="water-filter-installation-chippendale.html">Chippendale</a>
+            <a href="water-filter-installation-pyrmont.html">Pyrmont</a>
+            <a href="water-filter-installation-redfern.html">Redfern</a>
+            <a href="water-filter-installation-sydney-cbd.html">Sydney CBD</a>
+            <a href="water-filter-installation-ultimo.html">Ultimo</a>
+          </div>
+        </div>
+        <div class="fv2-flyout-wrap">
+          <input type="checkbox" id="fo-ws" class="fv2-flyout-cb">
+          <label for="fo-ws" class="fv2-ftrig">Western Sydney<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
+          <div class="fv2-flyout">
+            <a href="water-filter-installation-auburn.html">Auburn</a>
+            <a href="water-filter-installation-bankstown.html">Bankstown</a>
+            <a href="water-filter-installation-fairfield.html">Fairfield</a>
+            <a href="water-filter-installation-granville.html">Granville</a>
+            <a href="water-filter-installation-lidcombe.html">Lidcombe</a>
+            <a href="water-filter-installation-liverpool.html">Liverpool</a>
+            <a href="water-filter-installation-parramatta.html">Parramatta</a>
+          </div>
+        </div>
+        <div class="fv2-flyout-wrap">
+          <input type="checkbox" id="fo-ns" class="fv2-flyout-cb">
+          <label for="fo-ns" class="fv2-ftrig">North Shore<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
+          <div class="fv2-flyout">
+            <a href="water-filter-installation-chatswood.html">Chatswood</a>
+            <a href="water-filter-installation-manly.html">Manly</a>
+            <a href="water-filter-installation-north-richmond.html">North Richmond</a>
+            <a href="water-filter-installation-richmond.html">Richmond</a>
+          </div>
+        </div>
+      </div>
+      <!-- Resources -->
+      <div class="fv2-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="how-water-filters-work.html">How Water Filters Work</a></li>
+          <li><a href="is-sydney-water-safe.html">Is Sydney Water Safe?</a></li>
+          <li><a href="sydney-water-quality-guide.html">Sydney Water Quality Guide</a></li>
+          <li><a href="water-filter-faq-sydney.html">Water Filter FAQ</a></li>
+          <li><a href="sydney-water-filter-cost-guide.html">Cost Guide</a></li>
+          <li><a href="water-filter-maintenance-guide.html">Maintenance Guide</a></li>
+          <li><a href="water-savings-calculator.html">Water Savings Calculator</a></li>
+          <li><a href="filter-lifespan-calculator.html">Filter Lifespan Calculator</a></li>
+          <li><a href="water-filter-pfas-removal-sydney.html">PFAS Removal Guide</a></li>
+          <li><a href="water-filter-baby-safe-sydney.html">Baby Safe Water</a></li>
+          <li><a href="best-water-filter-sydney.html">Best Water Filter Sydney</a></li>
+          <li><a href="watermark-certified-water-filter-sydney.html">WaterMark Certified</a></li>
+        </ul>
+      </div>
+      <!-- Company -->
+      <div class="fv2-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+        </ul>
+        <div style="margin-top:14px">
+          <div class="fv2-contact-line">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
+            <a href="tel:0430546749">0430 546 749</a>
+          </div>
+          <div class="fv2-contact-line">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="mailto:info@filtersforyou.com.au">info@filtersforyou.com.au</a>
+          </div>
+          <div class="fv2-contact-line">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+            Croydon Park NSW
+          </div>
+          <div class="fv2-contact-line">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11.5h-2V13H9v2.5H7V8h2v3h4V8h2v7.5z"/></svg>
+            Lic. 461511C
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fv2-bottom">
+      <span>&copy; 2025 Filters For You &middot; ABN 81 672 101 674 &middot; Lic. 461511C &middot; filtersforyou.com.au</span>
+      <span>
+        <a href="privacy-policy.html" style="color:rgba(255,255,255,.35);text-decoration:none;margin-right:14px">Privacy</a>
+        <a href="terms-and-conditions.html" style="color:rgba(255,255,255,.35);text-decoration:none">Terms</a>
+      </span>
     </div>
   </div>
 </footer>
