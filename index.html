@@ -371,9 +371,9 @@ a{text-decoration:none;color:inherit}
 .rc-track-outer::before,.rc-track-outer::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none}
 .rc-track-outer::before{left:0;background:linear-gradient(to right,var(--blue),transparent);pointer-events:none}
 .rc-track-outer::after{right:0;background:linear-gradient(to left,var(--blue),transparent)}
-.rc-track{display:flex;animation:rc-infinite 45s linear infinite;will-change:transform}
+.rc-track{display:flex;animation:rc-infinite 50s linear infinite;will-change:transform}
 .rc-track.paused{animation-play-state:paused}
-@keyframes rc-infinite{0%{transform:translateX(0)}99%{transform:translateX(-100%)}100%{transform:translateX(0)}}
+@keyframes rc-infinite{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .rc-group{display:flex;gap:14px;padding-right:14px;flex-shrink:0}
 @keyframes rc-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 .rc-card{width:256px;background:#fff;border:1.5px solid rgba(50,65,88,.09);border-radius:10px;padding:16px 17px;box-shadow:0 2px 10px rgba(50,65,88,.06);flex-shrink:0;display:flex;flex-direction:column}
@@ -558,8 +558,7 @@ a{text-decoration:none;color:inherit}
   /* Mobile carousel — scroll horizontally */
   .rc-track-outer{overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
   .rc-track-outer::before,.rc-track-outer::after{display:none}
-  .rc-track{animation:rc-infinite-mobile 45s linear infinite;flex-direction:row;gap:12px;width:max-content}
-  @keyframes rc-infinite-mobile{0%{transform:translateX(0)}99%{transform:translateX(-100%)}100%{transform:translateX(0)}}
+  .rc-track{animation:rc-infinite 50s linear infinite;flex-direction:row;gap:12px;width:max-content}
   .rc-group:last-child{display:flex}/* SHOW duplicate set for infinite loop */
   .rc-card{width:280px;flex-shrink:0}
 
