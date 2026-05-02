@@ -371,7 +371,7 @@ a{text-decoration:none;color:inherit}
 .rc-track-outer::before,.rc-track-outer::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none}
 .rc-track-outer::before{left:0;background:linear-gradient(to right,var(--blue),transparent)}
 .rc-track-outer::after{right:0;background:linear-gradient(to left,var(--blue),transparent)}
-.rc-track{display:flex;animation:rc-scroll 34s linear infinite}
+.rc-track{display:flex;animation:rc-scroll 50s linear infinite}
 .rc-track:hover{animation-play-state:paused}
 .rc-group{display:flex;gap:14px;padding-right:14px;flex-shrink:0}
 @keyframes rc-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -556,13 +556,14 @@ a{text-decoration:none;color:inherit}
   .rc-inner{padding:0 16px;flex-direction:column;gap:20px}
   .rc-summary{width:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.15);padding-right:0;padding-bottom:16px;margin-right:0;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
   .rc-count{margin-bottom:0}
-  /* Kill animated scroll on mobile — show stacked cards */
-  .rc-track-outer{overflow:visible}
+  /* Mobile carousel — scroll horizontally */
+  .rc-track-outer{overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
   .rc-track-outer::before,.rc-track-outer::after{display:none}
-  .rc-track{animation:none;transform:none !important;flex-direction:column;gap:12px}
-  .rc-group:last-child{display:none}/* hide duplicate set */
-  .rc-card{width:100%;flex-shrink:unset}
+  .rc-track{animation:rc-scroll-mobile 40s linear infinite;flex-direction:row;gap:12px;width:max-content}
+  .rc-group:last-child{display:none}/* hide duplicate set for animation space */
+  .rc-card{width:280px;flex-shrink:0}
   .rc-body{-webkit-line-clamp:3}
+  @keyframes rc-scroll-mobile{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
   /* Process */
   .process-row{grid-template-columns:1fr 1fr;gap:20px}
@@ -2142,6 +2143,114 @@ function sendBookingEmail(data){
     }
   });
 }
+</script>
+
+<script id="carousel-infinite-scroll-js">
+(function(){
+  var trackOuter = document.querySelector('.rc-track-outer');
+  var track = document.querySelector('.rc-track');
+  if(!trackOuter || !track) return;
+  
+  var isDragging = false;
+  var startX = 0;
+  var currentX = 0;
+  var threshold = 50;
+  
+  // Touch/swipe support for mobile
+  trackOuter.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+  });
+  
+  trackOuter.addEventListener('touchmove', function(e) {
+    if(!isDragging) return;
+    currentX = e.touches[0].clientX - startX;
+  });
+  
+  trackOuter.addEventListener('touchend', function(e) {
+    isDragging = false;
+    if(Math.abs(currentX) > threshold) {
+      if(currentX > 0) {
+        // Swiped right — show previous
+        scrollCarousel(-1);
+      } else {
+        // Swiped left — show next
+        scrollCarousel(1);
+      }
+    }
+    currentX = 0;
+  });
+  
+  // Mouse wheel support for desktop
+  trackOuter.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    if(e.deltaX > 0 || e.deltaY > 0) {
+      scrollCarousel(1);
+    } else {
+      scrollCarousel(-1);
+    }
+  }, { passive: false });
+  
+  function scrollCarousel(direction) {
+    var cardWidth = 280;
+    var scrollAmount = cardWidth + 12; // card width + gap
+    
+    // Pause animation while scrolling
+    track.style.animationPlayState = 'paused';
+    
+    // Get current transform
+    var computedStyle = window.getComputedStyle(track);
+    var transformMatrix = computedStyle.transform;
+    var currentX = 0;
+    
+    if(transformMatrix !== 'none') {
+      var matrix = transformMatrix.match(/^matrix\((.+)\)$/);
+      if(matrix) {
+        currentX = parseInt(matrix[1].split(',')[4]);
+      }
+    }
+    
+    var newX = currentX + (direction * scrollAmount);
+    track.style.transform = 'translateX(' + newX + 'px)';
+    
+    // Resume animation after a delay
+    setTimeout(function() {
+      track.style.animationPlayState = 'running';
+    }, 500);
+  }
+  
+  // Keep animation running continuously
+  setInterval(function() {
+    if(track.style.animationPlayState !== 'paused') {
+      // Animation keeps running
+    }
+  }, 100);
+  
+  // Re-apply animation if stuck
+  var observer = new MutationObserver(function() {
+    var animState = window.getComputedStyle(track).animationPlayState;
+    if(animState !== 'running' && !isDragging) {
+      track.style.animationPlayState = 'running';
+    }
+  });
+  
+  observer.observe(track, { attributes: true });
+})();
+
+// More button expand functionality
+document.addEventListener('DOMContentLoaded', function() {
+  var moreButtons = document.querySelectorAll('.rc-more');
+  moreButtons.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var body = this.closest('.rc-card').querySelector('.rc-body');
+      if(body) {
+        body.classList.toggle('expanded');
+        this.textContent = body.classList.contains('expanded') ? 'Show less' : 'Read more';
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
