@@ -293,6 +293,14 @@ a{text-decoration:none;color:inherit}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au/"}
 </script>
+<style>
+.local-insights-section{background:linear-gradient(135deg,#0b61f4 0%,#0848c0 100%);border-radius:16px;padding:28px 24px;margin:32px 0;}
+.li-label{display:flex;align-items:center;gap:8px;margin-bottom:18px;}
+.li-label span{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#EAAF00;}
+.li-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.li-card{background:rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;font-size:.875rem;line-height:1.65;color:rgba(255,255,255,0.92);border:1px solid rgba(255,255,255,0.15);}
+@media(max-width:640px){.li-grid{grid-template-columns:1fr;}.local-insights-section{padding:22px 16px;}}
+</style>
 </head>
 <body>
 
@@ -442,13 +450,16 @@ a{text-decoration:none;color:inherit}
   </div>
 </section>
 
-<section class="local-knowledge-section" style="background:#f8faff;padding:24px 20px;border-radius:12px;margin:24px 0;border-left:4px solid #0b61f4;">
-  <h3 style="color:#0b61f4;margin:0 0 12px;font-size:1.05rem;">Water Filtration in Croydon Park</h3>
-  <ul style="margin:0;padding-left:20px;color:#444;line-height:1.7;">
-    <li>Croydon Park homes were largely built between 1910 and 1940 — many still have original copper and galvanised iron pipes that can contribute metallic taste and sediment to drinking water as they age.</li>
-    <li>The suburb's predominantly freestanding home stock makes it ideal for whole house HPF-3 filtration, which treats all water at the mains before it reaches any tap, shower or appliance in the home.</li>
-    <li>Jean-Paul lives and works in Croydon Park — local residents get same-week bookings and the fastest possible response time of any suburb Filters For You serves.</li>
-  </ul>
+<section class="local-insights-section">
+  <div class="li-label">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EAAF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span>Croydon Park Local Insights</span>
+  </div>
+  <div class="li-grid">
+    <div class="li-card">Croydon Park homes were largely built between 1910 and 1940 — many still have original copper and galvanised iron pipes that can contribute metallic taste and sediment to drinking water as they age.</div>
+    <div class="li-card">The suburb's predominantly freestanding home stock makes it ideal for whole house HPF-3 filtration, which treats all water at the mains before it reaches any tap, shower or appliance in the home.</div>
+    <div class="li-card">Jean-Paul lives and works in Croydon Park — local residents get same-week bookings and the fastest possible response time of any suburb Filters For You serves.</div>
+  </div>
 </section>
 
 <!-- SERVICES -->

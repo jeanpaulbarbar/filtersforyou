@@ -312,6 +312,14 @@ a{text-decoration:none;color:inherit}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au/"}
 </script>
+<style>
+.local-insights-section{background:linear-gradient(135deg,#0b61f4 0%,#0848c0 100%);border-radius:16px;padding:28px 24px;margin:32px 0;}
+.li-label{display:flex;align-items:center;gap:8px;margin-bottom:18px;}
+.li-label span{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#EAAF00;}
+.li-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.li-card{background:rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;font-size:.875rem;line-height:1.65;color:rgba(255,255,255,0.92);border:1px solid rgba(255,255,255,0.15);}
+@media(max-width:640px){.li-grid{grid-template-columns:1fr;}.local-insights-section{padding:22px 16px;}}
+</style>
 </head>
 <body>
 
@@ -500,13 +508,16 @@ a{text-decoration:none;color:inherit}
 </div>
 
 <!-- SERVICES -->
-<section class="local-knowledge-section" style="background:#f8faff;padding:24px 20px;border-radius:12px;margin:24px 0;border-left:4px solid #0b61f4;">
-  <h3 style="color:#0b61f4;margin:0 0 12px;font-size:1.05rem;">Water Filtration in Richmond</h3>
-  <ul style="margin:0;padding-left:20px;color:#444;line-height:1.7;">
-    <li>Richmond properties on rural lots frequently use rainwater tanks or bore water — unfiltered, these sources can carry sediment, organic material, bacteria and contaminants not present in treated metropolitan water. Multi-stage whole house filtration is strongly recommended.</li>
-    <li>Older Richmond town centre homes were built when lead and copper pipework was standard — an under-sink system at the kitchen tap provides an immediate improvement in drinking water quality for households connected to the town supply.</li>
-    <li>Jean-Paul travels approximately 55km from Croydon Park to Richmond — bookings are planned carefully in advance and often grouped with other Hawkesbury area jobs.</li>
-  </ul>
+<section class="local-insights-section">
+  <div class="li-label">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EAAF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span>Richmond Local Insights</span>
+  </div>
+  <div class="li-grid">
+    <div class="li-card">Richmond properties on rural lots frequently use rainwater tanks or bore water — unfiltered, these sources can carry sediment, organic material, bacteria and contaminants not present in treated metropolitan water. Multi-stage whole house filtration is strongly recommended.</div>
+    <div class="li-card">Older Richmond town centre homes were built when lead and copper pipework was standard — an under-sink system at the kitchen tap provides an immediate improvement in drinking water quality for households connected to the town supply.</div>
+    <div class="li-card">Jean-Paul travels approximately 55km from Croydon Park to Richmond — bookings are planned carefully in advance and often grouped with other Hawkesbury area jobs.</div>
+  </div>
 </section>
 
 <section class="sec sec-light reveal">

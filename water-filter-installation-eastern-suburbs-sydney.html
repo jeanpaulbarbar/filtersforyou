@@ -251,6 +251,14 @@ a{text-decoration:none;color:inherit}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au/"}
 </script>
+<style>
+.local-insights-section{background:linear-gradient(135deg,#0b61f4 0%,#0848c0 100%);border-radius:16px;padding:28px 24px;margin:32px 0;}
+.li-label{display:flex;align-items:center;gap:8px;margin-bottom:18px;}
+.li-label span{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#EAAF00;}
+.li-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.li-card{background:rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;font-size:.875rem;line-height:1.65;color:rgba(255,255,255,0.92);border:1px solid rgba(255,255,255,0.15);}
+@media(max-width:640px){.li-grid{grid-template-columns:1fr;}.local-insights-section{padding:22px 16px;}}
+</style>
 </head>
 <body>
 
@@ -457,13 +465,16 @@ a{text-decoration:none;color:inherit}
 </section>
 
 <!-- SERVICES -->
-<section class="local-knowledge-section" style="background:#f8faff;padding:24px 20px;border-radius:12px;margin:24px 0;border-left:4px solid #0b61f4;">
-  <h3 style="color:#0b61f4;margin:0 0 12px;font-size:1.05rem;">Water Filtration in Sydney's Eastern Suburbs</h3>
-  <ul style="margin:0;padding-left:20px;color:#444;line-height:1.7;">
-    <li>Properties across the Eastern Suburbs range from Victorian terraces built in the 1880s to new-build apartments completed in the last few years — filtration needs differ significantly, and Jean-Paul recommends the right system for each property type after a quick consultation.</li>
-    <li>Beachside suburbs in the Eastern Suburbs (Bondi, Coogee, Maroubra) have elevated salt air exposure, which can affect external plumbing fixtures — a quality under-sink or whole house filter protects the water you drink and cook with regardless of external conditions.</li>
-    <li>Jean-Paul travels from Croydon Park and covers all Eastern Suburbs postcodes — travel times range from 7km (Surry Hills) to 16km (Maroubra and Coogee), with most bookings scheduled within 5 business days.</li>
-  </ul>
+<section class="local-insights-section">
+  <div class="li-label">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EAAF00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span>Sydney's Eastern Suburbs Local Insights</span>
+  </div>
+  <div class="li-grid">
+    <div class="li-card">Properties across the Eastern Suburbs range from Victorian terraces built in the 1880s to new-build apartments completed in the last few years — filtration needs differ significantly, and Jean-Paul recommends the right system for each property type after a quick consultation.</div>
+    <div class="li-card">Beachside suburbs in the Eastern Suburbs (Bondi, Coogee, Maroubra) have elevated salt air exposure, which can affect external plumbing fixtures — a quality under-sink or whole house filter protects the water you drink and cook with regardless of external conditions.</div>
+    <div class="li-card">Jean-Paul travels from Croydon Park and covers all Eastern Suburbs postcodes — travel times range from 7km (Surry Hills) to 16km (Maroubra and Coogee), with most bookings scheduled within 5 business days.</div>
+  </div>
 </section>
 
 <section class="sec sec-white reveal">
