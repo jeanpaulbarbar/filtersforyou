@@ -1972,17 +1972,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
           </select>
           <div class="bm-error-msg">Please select a system</div>
         </div>
-        <div class="bm-form-group">
-          <label class="bm-label bm-required">Preferred timeframe</label>
-          <select class="bm-select" name="timeframe" required>
-            <option value="">Select a timeframe...</option>
-            <option value="ASAP">ASAP</option>
-            <option value="This week">This week</option>
-            <option value="Next week">Next week</option>
-            <option value="Flexible">Flexible</option>
-          </select>
-          <div class="bm-error-msg">Please select a timeframe</div>
-        </div>
+
         <div class="bm-form-group">
           <label class="bm-label">Additional Message (optional)</label>
           <textarea class="bm-textarea" name="message" placeholder="Tell us anything else we should know..."></textarea>
@@ -2106,7 +2096,6 @@ function handleBookingSubmit(e){
     phone:formData.get('phone'),
     email:formData.get('email'),
     system:formData.get('system'),
-    timeframe:formData.get('timeframe'),
     message:formData.get('message')
   };
   
@@ -2122,7 +2111,7 @@ function sendBookingEmail(data){
   
   // Send to Formspree endpoint (configure with JP's form ID)
   // Change 'your-form-id' to the actual Formspree form ID
-  var payload={fullName:data.fullName,phone:data.phone,email:data.email,system:data.system,timeframe:data.timeframe,message:data.message};
+  var payload={fullName:data.fullName,phone:data.phone,email:data.email,system:data.system,message:data.message};
   
   fetch('https://formspree.io/f/mbdqdlve',{
     method:'POST',
