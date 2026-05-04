@@ -372,7 +372,7 @@ a{text-decoration:none;color:inherit}
 .rc-track-outer::before,.rc-track-outer::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none}
 .rc-track-outer::before{left:0;background:linear-gradient(to right,var(--blue),transparent);pointer-events:none}
 .rc-track-outer::after{right:0;background:linear-gradient(to left,var(--blue),transparent)}
-.rc-track{display:flex;animation:rc-infinite 25s linear infinite;will-change:transform}
+.rc-track{display:flex;width:max-content;animation:rc-infinite 25s linear infinite;will-change:transform}
 .rc-track.paused{animation-play-state:paused}
 @keyframes rc-infinite{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .rc-group{display:flex;gap:14px;padding-right:14px;flex-shrink:0}
