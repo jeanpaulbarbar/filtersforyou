@@ -49,23 +49,6 @@ a{text-decoration:none;color:inherit}
 .btn-yellow:hover{background:#ffe633}
 .btn-blue{background:var(--blue);color:#fff;box-shadow:0 4px 20px rgba(11,97,244,.3)}
 .btn-blue:hover{background:var(--blue-dark)}
-/* NAV */
-.nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);position:sticky;top:0;z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 32px;max-width:1280px;margin:0 auto;height:68px;gap:32px}
-.nav-logo img{height:40px;width:auto}
-.nav-links{display:flex;align-items:center;gap:24px;list-style:none}
-.nav-links a{font-size:16px;font-weight:600;color:var(--dark);transition:color .2s}
-.nav-links a:hover{color:var(--blue)}
-.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
-.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;text-decoration:none;white-space:nowrap}
-.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
-.nav-cta svg{flex-shrink:0}
-/* TICKER */
-.ticker{background:var(--yellow);color:var(--dark);font-size:14px;font-weight:700;padding:10px 0;overflow:hidden;white-space:nowrap}
-.ticker-track{display:inline-flex;animation:tick 30s linear infinite}
-.ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
-.ticker-item+.ticker-item::before{content:'';width:4px;height:4px;background:var(--dark);border-radius:50%;opacity:.4;margin-right:20px;flex-shrink:0}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 /* HERO */
 .hero{background:linear-gradient(135deg,#041450 0%,#082D94 55%,#0b61f4 100%);padding:70px 32px 60px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:420px;height:420px;background:rgba(255,217,0,.05);border-radius:50%;pointer-events:none}
@@ -189,9 +172,6 @@ a{text-decoration:none;color:inherit}
 /* RESPONSIVE */
 @media(max-width:768px){
   html,body{width:100%}
-  .nav{position:fixed;top:0;z-index:1000;left:0;right:0;width:100%}
-  .nav-inner{padding:0 16px;height:60px}
-  .nav-links{display:none}
   .intro-grid{grid-template-columns:1fr}
   .intro-photo{display:block !important}
   .intro-photo img{height:240px}
@@ -248,8 +228,29 @@ a{text-decoration:none;color:inherit}
 .pfas-alert-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
 .pfas-alert-text{font-size:14px;color:rgba(255,255,255,.85);line-height:1.6}
 .pcard[onclick]{cursor:pointer;transition:box-shadow .18s,transform .18s}.pcard[onclick]:hover{box-shadow:0 6px 24px rgba(11,97,244,.16);transform:translateY(-2px)}
-.nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
+
+/* ── HOMEPAGE NAV SYNC ── */
+/* TICKER */
+.ticker{background:var(--yellow);color:var(--dark);font-size:15px;font-weight:700;padding:11px 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
+.ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
+.ticker-item::before{content:'●';color:var(--dark);font-size:7px;opacity:.5}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);position:sticky;top:0;z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 32px;max-width:1280px;margin:0 auto;height:68px;gap:32px}
+.nav-logo{flex-shrink:0}.nav-logo img{height:40px;width:auto}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:15.5px;font-weight:600;color:var(--dark);transition:color .2s}
+.nav-links a:hover{color:var(--blue)}
+.nav-right{display:flex;align-items:center;gap:28px}
+.online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}
+.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
 @keyframes blink{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,.08)}}
+.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
 </style>
 <style id="dropdown-nav-css">
 /* === DROPDOWN NAV === */
@@ -339,7 +340,7 @@ a{text-decoration:none;color:inherit}
 </head>
 <body>
 
-<!-- NAV -->
+<!-- TICKER -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
     <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
@@ -356,6 +357,8 @@ a{text-decoration:none;color:inherit}
     <span class="ticker-item">WaterMark Certified Systems</span>
   </div>
 </div>
+
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="40"></a>
@@ -426,9 +429,6 @@ a{text-decoration:none;color:inherit}
     </a>
   </div>
 </nav>
-
-
-<!-- TICKER -->
 
 <!-- HERO -->
 <section class="hero">

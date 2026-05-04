@@ -48,21 +48,6 @@ a{text-decoration:none;color:inherit}
 .btn-yellow:hover{background:#ffe633}
 .btn-blue{background:var(--blue);color:#fff;box-shadow:0 4px 20px rgba(11,97,244,.3)}
 .btn-blue:hover{background:var(--blue-dark)}
-.nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);position:sticky;top:0;z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 32px;max-width:1280px;margin:0 auto;height:68px;gap:32px}
-.nav-logo img{height:40px;width:auto}
-.nav-links{display:flex;align-items:center;gap:24px;list-style:none}
-.nav-links a{font-size:16px;font-weight:600;color:var(--dark);transition:color .2s}
-.nav-links a:hover{color:var(--blue)}
-.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
-.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;text-decoration:none;white-space:nowrap}
-.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
-.nav-cta svg{flex-shrink:0}
-.ticker{background:var(--yellow);color:var(--dark);font-size:14px;font-weight:700;padding:10px 0;overflow:hidden;white-space:nowrap}
-.ticker-track{display:inline-flex;animation:tick 30s linear infinite}
-.ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
-.ticker-item+.ticker-item::before{content:'';width:4px;height:4px;background:var(--dark);border-radius:50%;opacity:.4;margin-right:20px;flex-shrink:0}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .hero{background:linear-gradient(135deg,#041450 0%,#082D94 55%,#0b61f4 100%);padding:70px 32px 60px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:420px;height:420px;background:rgba(255,217,0,.05);border-radius:50%;pointer-events:none}
 .hero-inner{max-width:800px;margin:0 auto;position:relative;z-index:1}
@@ -165,7 +150,6 @@ a{text-decoration:none;color:inherit}
 .footer-social-link{font-size:13px;font-weight:600;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.15);padding:5px 12px;border-radius:4px;transition:color .2s,border-color .2s}
 .footer-social-link:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:13px}
-@media(max-width:768px){html,body{width:100%}.nav-links{display:none}.intro-grid{grid-template-columns:1fr}.intro-photo{display:block !important}.intro-photo img{height:240px}.footer-top{grid-template-columns:1fr 1fr}.hero{padding:50px 20px 44px}.sec{padding:50px 20px}.services-grid{grid-template-columns:1fr}.why-grid{grid-template-columns:1fr 1fr}.reviews-grid{grid-template-columns:1fr}.hero-btns .btn{width:100%;justify-content:center;font-size:16px}.cta-phone-big{font-size:32px}.photo-gallery{grid-template-columns:1fr}.photo-gallery-sec{padding:0 20px 50px}.photo-banner img{height:220px}.photo-banner-overlay{padding:24px 20px 18px}}
 .intro-grid{grid-template-columns:1fr}.intro-photo{display:none}.footer-top{grid-template-columns:1fr 1fr}.hero{padding:50px 20px}.sec{padding:50px 20px}}
 .pricing-cards{display:flex;flex-direction:column;gap:14px}
 .pcard{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 2px 16px rgba(0,0,0,.06);border-left:4px solid var(--blue)}
@@ -189,8 +173,29 @@ a{text-decoration:none;color:inherit}
 .photo-banner-sub{color:rgba(255,255,255,.8);font-size:15px;margin-top:6px}
 .pricing-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .pcard[onclick]{cursor:pointer;transition:box-shadow .18s,transform .18s}.pcard[onclick]:hover{box-shadow:0 6px 24px rgba(11,97,244,.16);transform:translateY(-2px)}
-.nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
+
+/* ── HOMEPAGE NAV SYNC ── */
+/* TICKER */
+.ticker{background:var(--yellow);color:var(--dark);font-size:15px;font-weight:700;padding:11px 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
+.ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
+.ticker-item::before{content:'●';color:var(--dark);font-size:7px;opacity:.5}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);position:sticky;top:0;z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 32px;max-width:1280px;margin:0 auto;height:68px;gap:32px}
+.nav-logo{flex-shrink:0}.nav-logo img{height:40px;width:auto}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:15.5px;font-weight:600;color:var(--dark);transition:color .2s}
+.nav-links a:hover{color:var(--blue)}
+.nav-right{display:flex;align-items:center;gap:28px}
+.online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}
+.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
 @keyframes blink{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,.08)}}
+.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
 </style>
 <style id="dropdown-nav-css">
 /* === DROPDOWN NAV === */
@@ -275,7 +280,7 @@ a{text-decoration:none;color:inherit}
 </head>
 <body>
 
-<!-- NAV -->
+<!-- TICKER -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
     <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
@@ -292,6 +297,8 @@ a{text-decoration:none;color:inherit}
     <span class="ticker-item">WaterMark Certified Systems</span>
   </div>
 </div>
+
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="40"></a>

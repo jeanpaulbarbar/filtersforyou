@@ -46,25 +46,7 @@ a{text-decoration:none;color:inherit}
 .sh-y{color:var(--yellow)}
 .sh-b{color:var(--blue)}
 
-/* TICKER */
-.ticker{background:var(--yellow);color:var(--dark);font-size:15px;font-weight:700;padding:11px 0;overflow:hidden;white-space:nowrap}
-.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
-.ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
-.ticker-item::before{content:'●';color:var(--dark);font-size:7px;opacity:.5}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* NAV */
-.nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);position:sticky;top:0;z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 32px;max-width:1280px;margin:0 auto;height:68px;gap:32px}
-.nav-logo img{height:40px;width:auto}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{font-size:17px;font-weight:600;color:var(--dark);transition:color .2s}
-.nav-links a:hover{color:var(--blue)}
-.online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}
-.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
-@keyframes blink{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,.08)}}
-.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap}
-.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 
 /* PAGE HERO */
 .page-hero{background:var(--blue);padding:60px 32px 52px;position:relative;overflow:hidden}
@@ -125,11 +107,32 @@ a{text-decoration:none;color:inherit}
 
 @media(max-width:980px){.footer-top{grid-template-columns:1fr 1fr}.cancel-table{font-size:14px}}
 @media(max-width:580px){
-  .nav-links{display:none}
   .footer-top{grid-template-columns:1fr}
   .policy-wrap{padding:44px 20px 60px}
   .cancel-table th,.cancel-table td{padding:10px 12px}
 }
+
+/* ── HOMEPAGE NAV SYNC ── */
+/* TICKER */
+.ticker{background:var(--yellow);color:var(--dark);font-size:15px;font-weight:700;padding:11px 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
+.ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
+.ticker-item::before{content:'●';color:var(--dark);font-size:7px;opacity:.5}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);position:sticky;top:0;z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 32px;max-width:1280px;margin:0 auto;height:68px;gap:32px}
+.nav-logo{flex-shrink:0}.nav-logo img{height:40px;width:auto}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:15.5px;font-weight:600;color:var(--dark);transition:color .2s}
+.nav-links a:hover{color:var(--blue)}
+.nav-right{display:flex;align-items:center;gap:28px}
+.online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}
+.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
+@keyframes blink{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,.08)}}
+.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
 </style>
 <style id="dropdown-nav-css">
@@ -208,8 +211,6 @@ a{text-decoration:none;color:inherit}
 <body>
 
 <!-- TICKER -->
-
-<!-- NAV -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
     <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
@@ -226,6 +227,8 @@ a{text-decoration:none;color:inherit}
     <span class="ticker-item">WaterMark Certified Systems</span>
   </div>
 </div>
+
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="40"></a>
@@ -296,17 +299,7 @@ a{text-decoration:none;color:inherit}
     </a>
   </div>
 </nav>
-<div class="trust-bar">
-  <div class="trust-bar-inner">
-    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFD900" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><div class="trust-label">5.0 Google Rating</div><div class="trust-sub">8 verified reviews</div></div></div>
-    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="15" r="1" fill="#0B61F4"/><path d="M11 15h6"/></svg></div><div><div class="trust-label">Licensed &amp; Insured</div><div class="trust-sub">Lic. 461511C NSW</div></div></div>
-    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div><div><div class="trust-label">WaterMark Certified</div><div class="trust-sub">Australian standard systems</div></div></div>
-    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="trust-label">Fixed Price Guaranteed</div><div class="trust-sub">No upsells on the day</div></div></div>
-    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg></div><div><div class="trust-label">Lifetime Warranty</div><div class="trust-sub">On all workmanship</div></div></div>
-  </div>
-</div>
 
-<!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero-inner">
         <h1>Refund <span class="sh sh-y">Policy</span></h1>
