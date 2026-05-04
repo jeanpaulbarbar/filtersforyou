@@ -256,13 +256,19 @@ a{text-decoration:none;color:inherit}
 
     <meta property="article:published_time" content="2026-04-01T00:00:00+10:00">
     <meta property="article:modified_time" content="2026-05-02T00:00:00+10:00">
+<style>
+/* Nav consistency fix */
+.online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}
+.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
+@keyframes blink{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,.08)}}
+</style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="42"></a>
+    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="40"></a>
     <ul class="nav-links" id="navLinks">
       <li class="nav-item has-dropdown">
         <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -315,7 +321,7 @@ a{text-decoration:none;color:inherit}
       </li>
       <li><a href="about.html" class="nav-link-plain">About</a></li>
       <li><a href="contact.html" class="nav-link-plain">Contact</a></li>
-      <li><a href="index#reviews.html" class="nav-link-plain">Reviews</a></li>
+      <li><a href="index.html#reviews" class="nav-link-plain">Reviews</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
       <span class="ham-bar"></span>
@@ -330,6 +336,15 @@ a{text-decoration:none;color:inherit}
     </a>
   </div>
 </nav>
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFD900" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><div class="trust-label">5.0 Google Rating</div><div class="trust-sub">8 verified reviews</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="15" r="1" fill="#0B61F4"/><path d="M11 15h6"/></svg></div><div><div class="trust-label">Licensed &amp; Insured</div><div class="trust-sub">Lic. 461511C NSW</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div><div><div class="trust-label">WaterMark Certified</div><div class="trust-sub">Australian standard systems</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="trust-label">Fixed Price Guaranteed</div><div class="trust-sub">No upsells on the day</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg></div><div><div class="trust-label">Lifetime Warranty</div><div class="trust-sub">On all workmanship</div></div></div>
+  </div>
+</div>
 
 
 <div class="ticker" aria-hidden="true">
@@ -965,8 +980,8 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     <div class="mobile-plain-links">
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-        <a href="index#reviews.html">Reviews</a>
-      <a href="index#contact.html">Get a Free Quote</a>
+        <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#contact">Get a Free Quote</a>
       <a href="free-assessment.html">Get a Free Assessment</a>
     </div>
     <a href="tel:0430546749" class="mobile-cta">
