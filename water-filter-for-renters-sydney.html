@@ -1278,17 +1278,18 @@ revealEls.forEach(function(el) { observer.observe(el); });
     if(sp)sp.style.height=h.offsetHeight+'px';
   }
   function update(){
-    var y=window.scrollY||window.pageYOffset;
-    if(y<=0){
+    var y=Math.max(0,window.scrollY||window.pageYOffset);
+    var delta=y-lastY;
+    if(Math.abs(delta)<4){ticking=false;return;}
+    if(y<=tickH+4){
       h.classList.remove('header-hidden','nav-only');
       if(sp)sp.style.height=h.offsetHeight+'px';
-    } else if(y>lastY&&y>80){
+    } else if(delta>0&&y>80){
       h.classList.add('header-hidden');
       h.classList.remove('nav-only');
-    } else if(y<lastY){
+    } else if(delta<0){
       h.classList.remove('header-hidden');
       h.classList.add('nav-only');
-      if(sp)sp.style.height=(h.offsetHeight-tickH)+'px';
     }
     lastY=y;ticking=false;
   }
