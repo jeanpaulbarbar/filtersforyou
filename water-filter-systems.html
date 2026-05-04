@@ -94,7 +94,7 @@
 
   /* TICKER */
   .ticker{background:var(--yellow);color:var(--dark);font-size:14px;font-weight:700;padding:10px 0;overflow:hidden;white-space:nowrap}
-  .ticker-track{display:inline-flex;animation:tick 28s linear infinite}
+  .ticker-track{display:inline-flex;animation:tick 30s linear infinite}
   .ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
   .ticker-item+.ticker-item::before{content:'';width:4px;height:4px;background:var(--dark);border-radius:50%;opacity:.4;margin-right:20px;flex-shrink:0}
   @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -288,62 +288,890 @@
 
   <!-- DROPDOWN NAV CSS -->
   <style id="dropdown-nav-css">
-/* === DROPDOWN NAV === */
-.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px 6px;border-radius:7px;transition:background .2s;align-items:center;justify-content:center;flex-direction:column;gap:5px;-webkit-tap-highlight-color:transparent;flex-shrink:0}
-.nav-hamburger:hover{background:rgba(50,65,88,.08)}
-.ham-bar{display:block;width:22px;height:2px;background:#324158;border-radius:1px;transition:transform .25s cubic-bezier(.4,0,.2,1),opacity .25s,width .25s}
-.nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(2){opacity:0;transform:scaleX(0)}
-.nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-/* Override old nav-links gap */
-.nav-links{display:flex;align-items:center;gap:2px;list-style:none;margin:0;padding:0}
-.nav-item{position:relative}
-/* Invisible hover bridge prevents menu from closing when moving to dropdown */
-.nav-item::after{content:'';position:absolute;bottom:-10px;left:0;right:0;height:10px;background:transparent}
-.nav-link-btn{display:flex;align-items:center;gap:5px;font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#324158;background:none;border:none;cursor:pointer;padding:8px 11px;border-radius:7px;transition:color .2s,background .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;line-height:1}
-.nav-link-btn:hover,.nav-link-btn:focus-visible{color:#0b61f4;background:rgba(11,97,244,.06);outline:none}
-.nav-link-btn .chevron{transition:transform .22s cubic-bezier(.4,0,.2,1);flex-shrink:0}
-.nav-item:hover .nav-link-btn .chevron{transform:rotate(180deg)}
-.nav-link-plain{font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#324158;padding:8px 11px;border-radius:7px;display:block;transition:color .2s,background .2s;white-space:nowrap;text-decoration:none}
-.nav-link-plain:hover,.nav-link-plain:focus-visible{color:#0b61f4;background:rgba(11,97,244,.06);outline:none}
-.nav-link-plain.active{color:#0b61f4}
-/* Dropdown panel */
-.dropdown{position:absolute;top:calc(100% + 10px);left:0;background:#fff;border:1px solid rgba(50,65,88,.1);border-radius:12px;box-shadow:0 12px 40px rgba(11,97,244,.13),0 2px 8px rgba(0,0,0,.06);padding:6px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1),visibility .2s;z-index:500;pointer-events:none}
-.nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
-.dropdown a{display:block;padding:9px 13px;font-family:'Sora',sans-serif;font-size:14.5px;font-weight:500;color:#324158;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;text-decoration:none}
-.dropdown a:hover,.dropdown a.active{background:rgba(11,97,244,.07);color:#0b61f4}
-.dropdown a.active{font-weight:600}
-.dropdown-2col{display:flex;flex-direction:row;min-width:440px}
-.dropdown-col{flex:1;padding:0 2px}
-/* Mobile nav overlay */
-.mobile-nav{display:none;position:fixed;inset:0;z-index:9999;background:#fff;overflow-y:auto;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);-webkit-overflow-scrolling:touch}
-.mobile-nav.open{transform:translateX(0)}
-.mobile-nav-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1.5px solid rgba(50,65,88,.1);position:sticky;top:0;background:#fff;z-index:2}
-.mobile-nav-close{background:none;border:none;cursor:pointer;padding:8px;border-radius:8px;transition:background .2s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
-.mobile-nav-close:hover{background:rgba(50,65,88,.07)}
-.mobile-nav-body{padding:4px 20px 60px}
-.mobile-section{border-bottom:1px solid rgba(50,65,88,.1)}
-.mobile-section-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 4px;font-family:'Sora',sans-serif;font-size:16.5px;font-weight:700;color:#324158;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent}
-.mobile-section-btn .chevron{transition:transform .25s cubic-bezier(.4,0,.2,1);flex-shrink:0}
-.mobile-section.open .mobile-section-btn .chevron{transform:rotate(180deg)}
-.mobile-section-links{display:none;padding:2px 0 10px}
-.mobile-section.open .mobile-section-links{display:block}
-.mobile-section-links a{display:block;padding:11px 12px;font-family:'Sora',sans-serif;font-size:15.5px;font-weight:500;color:#324158;border-radius:8px;transition:background .15s,color .15s;text-decoration:none}
-.mobile-section-links a:hover,.mobile-section-links a.active{background:rgba(11,97,244,.07);color:#0b61f4}
-.mobile-section-links a.active{font-weight:600}
-.mobile-plain-links{padding:4px 0}
-.mobile-plain-links a{display:block;padding:16px 4px;font-family:'Sora',sans-serif;font-size:16.5px;font-weight:700;color:#324158;border-bottom:1px solid rgba(50,65,88,.1);text-decoration:none;transition:color .15s}
-.mobile-plain-links a:hover{color:#0b61f4}
-.mobile-cta{display:flex;align-items:center;justify-content:center;gap:10px;background:#0b61f4;color:#fff;font-family:'Sora',sans-serif;font-size:18px;font-weight:700;padding:16px 20px;border-radius:10px;margin-top:20px;text-decoration:none;transition:background .2s,transform .2s}
-.mobile-cta:hover{background:#0c4bb9;transform:translateY(-1px)}
-@media(max-width:900px){
-  .nav{position:fixed;top:0;z-index:1000;left:0;right:0;width:100%}
-  .nav-links{display:none!important}
-  .nav-hamburger{display:flex!important;order:99}
-  .mobile-nav{display:block}
-  .online-dot-wrap{display:none!important}
-  .nav-cta{white-space:nowrap;font-size:13px;padding:8px 12px}
+  .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px 6px;border-radius:7px;transition:background .2s;align-items:center;justify-content:center;flex-direction:column;gap:5px;-webkit-tap-highlight-color:transparent;flex-shrink:0}
+  .nav-hamburger:hover{background:rgba(50,65,88,.08)}
+  .ham-bar{display:block;width:22px;height:2px;background:#324158;border-radius:1px;transition:transform .25s cubic-bezier(.4,0,.2,1),opacity .25s,width .25s}
+  .nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(2){opacity:0;transform:scaleX(0)}
+  .nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .nav-links{display:flex;align-items:center;gap:2px;list-style:none;margin:0;padding:0}
+  .nav-item{position:relative}
+  .nav-item::after{content:'';position:absolute;bottom:-10px;left:0;right:0;height:10px;background:transparent}
+  .nav-link-btn{display:flex;align-items:center;gap:5px;font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#324158;background:none;border:none;cursor:pointer;padding:8px 11px;border-radius:7px;transition:color .2s,background .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;line-height:1}
+  .nav-link-btn:hover,.nav-link-btn:focus-visible{color:#0b61f4;background:rgba(11,97,244,.06);outline:none}
+  .nav-link-btn .chevron{transition:transform .22s cubic-bezier(.4,0,.2,1);flex-shrink:0}
+  .nav-item:hover .nav-link-btn .chevron{transform:rotate(180deg)}
+  .nav-link-plain{font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#324158;padding:8px 11px;border-radius:7px;display:block;transition:color .2s,background .2s;white-space:nowrap;text-decoration:none}
+  .nav-link-plain:hover,.nav-link-plain:focus-visible{color:#0b61f4;background:rgba(11,97,244,.06);outline:none}
+  .nav-link-plain.active{color:#0b61f4}
+  .dropdown{position:absolute;top:calc(100% + 10px);left:0;background:#fff;border:1px solid rgba(50,65,88,.1);border-radius:12px;box-shadow:0 12px 40px rgba(11,97,244,.13),0 2px 8px rgba(0,0,0,.06);padding:6px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1),visibility .2s;z-index:500;pointer-events:none}
+  .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+  .dropdown a{display:block;padding:9px 13px;font-family:'Sora',sans-serif;font-size:14.5px;font-weight:500;color:#324158;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;text-decoration:none}
+  .dropdown a:hover,.dropdown a.active{background:rgba(11,97,244,.07);color:#0b61f4}
+  .dropdown a.active{font-weight:600}
+  .dropdown-2col{display:flex;flex-direction:row;min-width:440px}
+  .dropdown-col{flex:1;padding:0 2px}
+  .mobile-nav{display:none;position:fixed;inset:0;z-index:9999;background:#fff;overflow-y:auto;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);-webkit-overflow-scrolling:touch}
+  .mobile-nav.open{transform:translateX(0)}
+  .mobile-nav-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1.5px solid rgba(50,65,88,.1);position:sticky;top:0;background:#fff;z-index:2}
+  .mobile-nav-close{background:none;border:none;cursor:pointer;padding:8px;border-radius:8px;transition:background .2s;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center}
+  .mobile-nav-close:hover{background:rgba(50,65,88,.07)}
+  .mobile-nav-body{padding:4px 20px 60px}
+  .mobile-section{border-bottom:1px solid rgba(50,65,88,.1)}
+  .mobile-section-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 4px;font-family:'Sora',sans-serif;font-size:16.5px;font-weight:700;color:#324158;background:none;border:none;cursor:pointer;text-align:left;-webkit-tap-highlight-color:transparent}
+  .mobile-section-btn .chevron{transition:transform .25s cubic-bezier(.4,0,.2,1);flex-shrink:0}
+  .mobile-section.open .mobile-section-btn .chevron{transform:rotate(180deg)}
+  .mobile-section-links{display:none;padding:2px 0 10px}
+  .mobile-section.open .mobile-section-links{display:block}
+  .mobile-section-links a{display:block;padding:11px 12px;font-family:'Sora',sans-serif;font-size:15.5px;font-weight:500;color:#324158;border-radius:8px;transition:background .15s,color .15s;text-decoration:none}
+  .mobile-section-links a:hover,.mobile-section-links a.active{background:rgba(11,97,244,.07);color:#0b61f4}
+  .mobile-section-links a.active{font-weight:600}
+  .mobile-plain-links{padding:4px 0}
+  .mobile-plain-links a{display:block;padding:16px 4px;font-family:'Sora',sans-serif;font-size:16.5px;font-weight:700;color:#324158;border-bottom:1px solid rgba(50,65,88,.1);text-decoration:none;transition:color .15s}
+  .mobile-plain-links a:hover{color:#0b61f4}
+  .mobile-cta{display:flex;align-items:center;justify-content:center;gap:10px;background:#0b61f4;color:#fff;font-family:'Sora',sans-serif;font-size:18px;font-weight:700;padding:16px 20px;border-radius:10px;margin-top:20px;text-decoration:none;transition:background .2s,transform .2s}
+  .mobile-cta:hover{background:#0c4bb9;transform:translateY(-1px)}
+  @media(max-width:900px){
+    .nav-links{display:none!important}
+    .nav-hamburger{display:flex!important;order:99}
+    .mobile-nav{display:block}
+    .online-dot-wrap{display:none!important}
+    .nav-cta{white-space:nowrap;font-size:13px;padding:8px 12px}
+  }
+  </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au/"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","url":"https://filtersforyou.com.au/water-filter-systems.html","speakable":{"@type":"SpeakableSpecification","cssSelector":[".hero h1",".hero-sub",".sec-title"]}}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="42"></a>
+    <ul class="nav-links" id="navLinks">
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown dropdown-2col">
+          <div class="dropdown-col">
+            <a href="under-sink-water-filter-sydney.html">Under Sink Water Filter</a>
+            <a href="whole-house-water-filter-sydney.html">Whole House Water Filter</a>
+            <a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis</a>
+            <a href="water-filter-systems.html">View All Systems</a>
+            <a href="service-plans.html">Service Plans</a>
+            <div style="border-top:1px solid rgba(50,65,88,.1);margin:5px 2px 3px"></div>
+            <a href="pure-essential-water-filter-sydney.html">Pure Essential</a>
+            <a href="pure-plus-water-filter-sydney.html">Pure Plus+</a>
+            <a href="pure-premium-water-filter-sydney.html">Pure Premium</a>
+          </div>
+          <div class="dropdown-col">
+            <a href="pure-advanced-water-filter-sydney.html">Pure Advanced</a>
+            <a href="pure-luxe-water-filter-sydney.html">Pure Luxe</a>
+            <a href="pure-home-water-filter-sydney.html">Pure Home</a>
+            <a href="pure-compact-water-filter-sydney.html">Pure Compact</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Locations <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown">
+          <a href="locations-inner-west.html">Inner West</a>
+          <a href="locations-eastern-suburbs.html">Eastern Suburbs</a>
+          <a href="locations-south-sydney.html">South Sydney</a>
+          <a href="locations-inner-city.html">Inner City &amp; CBD</a>
+          <a href="locations-western-sydney.html">Western Sydney</a>
+          <a href="locations-north-shore.html">North Shore &amp; Beyond</a>
+        </div>
+      </li>
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Resources <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown">
+          <a href="free-assessment.html">Free Water Assessment</a>
+          <a href="how-water-filters-work.html">How Water Filters Work</a>
+          <a href="is-sydney-water-safe.html">Is Sydney Water Safe?</a>
+          <a href="sydney-water-quality-guide.html">Sydney Water Quality Guide</a>
+          <a href="sydney-water-filter-cost-guide.html">Water Filter Cost Guide</a>
+          <a href="water-filter-faq-sydney.html">Water Filter FAQ</a>
+          <a href="water-filter-maintenance-guide.html">Maintenance Guide</a>
+          <a href="water-savings-calculator.html">Water Savings Calculator</a>
+          <a href="filter-lifespan-calculator.html">Filter Lifespan Calculator</a>
+          <a href="water-filter-pfas-removal-sydney.html">PFAS Water Filter Guide</a>
+          <a href="best-water-filter-sydney.html">Best Water Filter Sydney</a>
+        </div>
+      </li>
+      <li><a href="about.html" class="nav-link-plain">About</a></li>
+      <li><a href="contact.html" class="nav-link-plain">Contact</a></li>
+      <li><a href="index.html#reviews" class="nav-link-plain">Reviews</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+    </button>
+    <div class="online-dot-wrap"><div class="dot"></div>Online</div>
+    <a href="contact.html" class="nav-cta-quote">Get a Free Quote</a>
+    <a href="tel:0430546749" class="nav-cta">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
+      0430 546 749
+    </a>
+  </div>
+</nav>
+
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">7 Systems From $550 Installed</span>
+    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
+    <span class="ticker-item">5.0 Star Google Rating</span>
+    <span class="ticker-item">Serving Greater Sydney</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
+    <span class="ticker-item">Lifetime Workmanship Warranty</span>
+    <span class="ticker-item">7 Systems From $550 Installed</span>
+    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
+    <span class="ticker-item">5.0 Star Google Rating</span>
+    <span class="ticker-item">Serving Greater Sydney</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
+    <span class="ticker-item">Lifetime Workmanship Warranty</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      7 Premium Systems Available
+    </div>
+    <h1 class="hero-h1">Water Filter Systems <br><span class="sh sh-y">Sydney</span></h1>
+    <p class="hero-p">From entry-level under-sink filtration to complete whole-house systems. Every system professionally installed by a licensed NSW plumber. Fixed prices, lifetime warranty.</p>
+    <div class="hero-trust">
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        WaterMark Certified
+      </span>
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+        Fixed Prices
+      </span>
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        Greater Sydney
+      </span>
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        Licensed Plumber 461511C
+      </span>
+    </div>
+    <div class="hero-btns">
+      <a href="#products" class="btn btn-yellow">View All Systems</a>
+      <a href="tel:0430546749" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
+        Call 0430 546 749
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS SECTION -->
+<section class="sec sec-light" id="products">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">Our Range</span>
+      <h2 class="sec-title sec-title-dark">Premium Water Filtration Systems</h2>
+      <p class="sec-body sec-body-c">Every system includes supply, licensed installation, a dedicated filtered water tap and lifetime workmanship warranty. Fixed price, no surprises.</p>
+    </div>
+
+    <div class="products-grid reveal">
+
+      <!-- 1. PURE ESSENTIAL -->
+      <div class="pcard" id="pure-essential" onclick="window.location='pure-essential-water-filter-sydney.html'" style="cursor:pointer">
+        <div class="pcard-img">
+          <img src="/assets/brochure/pure-essential.jpg" alt="Pure Essential Water Filter System" loading="lazy">
+          <span class="pbadge">Entry Level</span>
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Pure Essential</h3>
+          <p class="pcard-tagline">2-stage catalytic carbon and sediment filter. Removes chlorine, chloramines, taste and odour.</p>
+          <div class="pcard-price-row">
+            <span class="pcard-price">$550</span>
+          </div>
+          <ul class="pcard-features">
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Under-sink installation</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>2-stage cartridge system</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full mains pressure flow</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Installs in approx. 1.5 hrs</li>
+          </ul>
+          <div class="pcard-costs">
+            <strong>Annual Maintenance:</strong>
+            <span>Service: $340/yr &nbsp;|&nbsp; DIY: $80/yr</span>
+          </div>
+          <a href="pure-essential-water-filter-sydney.html" class="pcard-cta">View System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 2. PURE PLUS+ -->
+      <div class="pcard featured" id="pure-plus" onclick="window.location='pure-plus-water-filter-sydney.html'" style="cursor:pointer">
+        <div class="pcard-img">
+          <img src="/assets/brochure/pure-plus.jpg" alt="Pure Plus Reverse Osmosis System" loading="lazy">
+          <span class="pbadge pop">Most Popular</span>
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Pure Plus+</h3>
+          <p class="pcard-tagline">5-stage reverse osmosis removes 99%+ contaminants including fluoride, heavy metals and PFAS. Includes alkaline mineral stage.</p>
+          <div class="pcard-price-row">
+            <span class="pcard-price">$840</span>
+          </div>
+          <ul class="pcard-features">
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>5-stage reverse osmosis</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pressurised storage tank included</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Alkaline remineralisation stage</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Premium quality tap included</li>
+          </ul>
+          <div class="pcard-costs">
+            <strong>Annual Maintenance:</strong>
+            <span>Service: $420/yr &nbsp;|&nbsp; DIY: $180/yr</span>
+          </div>
+          <a href="pure-plus-water-filter-sydney.html" class="pcard-cta">View System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 3. PURE PREMIUM -->
+      <div class="pcard" id="pure-premium" onclick="window.location='pure-premium-water-filter-sydney.html'" style="cursor:pointer">
+        <div class="pcard-img">
+          <img src="/assets/brochure/pure-premium.jpg" alt="Pure Premium Advanced Filtration System" loading="lazy">
+          <span class="pbadge">Advanced</span>
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Pure Premium</h3>
+          <p class="pcard-tagline">7-stage RO with alkaline remineralisation, hydrogen infusion and far infrared ceramic. Gold standard under-sink filtration.</p>
+          <div class="pcard-price-row">
+            <span class="pcard-price">$1,180</span>
+          </div>
+          <ul class="pcard-features">
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>7-stage RO filtration</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Hydrogen-enriched alkaline water</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Far infrared ceramic stage</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>pH 8.5–10 alkaline output</li>
+          </ul>
+          <div class="pcard-costs">
+            <strong>Annual Maintenance:</strong>
+            <span>Service: $475/yr &nbsp;|&nbsp; DIY: $220/yr</span>
+          </div>
+          <a href="pure-premium-water-filter-sydney.html" class="pcard-cta">View System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 4. PURE COMPACT -->
+      <div class="pcard" id="pure-compact" onclick="window.location='pure-compact-water-filter-sydney.html'" style="cursor:pointer">
+        <div class="pcard-img">
+          <img src="/assets/brochure/pure-compact.jpg" alt="Pure Compact Space-Saving Filter" loading="lazy">
+          <span class="pbadge">Compact</span>
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Pure Compact</h3>
+          <p class="pcard-tagline">3-stage alkaline RO engineered for small undersink spaces. Removes 95%+ contaminants. Perfect for apartments and small kitchens.</p>
+          <div class="pcard-price-row">
+            <span class="pcard-price">$930</span>
+          </div>
+          <ul class="pcard-features">
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Slim compact design</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>3-stage alkaline RO</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ideal for apartments</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Fluoride and chloramine removal</li>
+          </ul>
+          <div class="pcard-costs">
+            <strong>Annual Maintenance:</strong>
+            <span>Service: $380/yr &nbsp;|&nbsp; DIY: $130/yr</span>
+          </div>
+          <a href="pure-compact-water-filter-sydney.html" class="pcard-cta">View System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 5. PURE ADVANCED -->
+      <div class="pcard" id="pure-advanced" onclick="window.location='pure-advanced-water-filter-sydney.html'" style="cursor:pointer">
+        <div class="pcard-img">
+          <img src="/assets/brochure/pure-advanced.jpg" alt="Pure Advanced Smart Filtration System" loading="lazy">
+          <span class="pbadge">Smart</span>
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Pure Advanced</h3>
+          <p class="pcard-tagline">5-stage RO with quick-change cartridge design. Replacement takes just 10 minutes with no tools. Built for busy households.</p>
+          <div class="pcard-price-row">
+            <span class="pcard-price">$1,280</span>
+          </div>
+          <ul class="pcard-features">
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>5-stage quick-change RO</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tool-free cartridge swaps</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Premium alkaline stage</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Premium tap included</li>
+          </ul>
+          <div class="pcard-costs">
+            <strong>Annual Maintenance:</strong>
+            <span>Service: $475/yr &nbsp;|&nbsp; DIY: $220/yr</span>
+          </div>
+          <a href="pure-advanced-water-filter-sydney.html" class="pcard-cta">View System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 6. PURE LUXE -->
+      <div class="pcard" id="pure-luxe" onclick="window.location='pure-luxe-water-filter-sydney.html'" style="cursor:pointer">
+        <div class="pcard-img">
+          <img src="/assets/brochure/pure-luxe.jpg" alt="Pure Luxe Smart Monitoring Filter System" loading="lazy">
+          <span class="pbadge">Premium</span>
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Pure Luxe</h3>
+          <p class="pcard-tagline">Smart RO with built-in app monitoring. Tracks filter life and water quality from your phone. Designer tap included.</p>
+          <div class="pcard-price-row">
+            <span class="pcard-price">$1,740</span>
+          </div>
+          <ul class="pcard-features">
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>App-connected smart monitor</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Real-time water quality tracking</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Designer premium tap</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>7-stage advanced RO</li>
+          </ul>
+          <div class="pcard-costs">
+            <strong>Annual Maintenance:</strong>
+            <span>Service: $475/yr &nbsp;|&nbsp; DIY: $220/yr</span>
+          </div>
+          <a href="pure-luxe-water-filter-sydney.html" class="pcard-cta">View System &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 7. PURE HOME -->
+      <div class="pcard featured" id="pure-home" style="grid-column:span 1;cursor:pointer" onclick="window.location='pure-home-water-filter-sydney.html'">
+        <div class="pcard-img">
+          <img src="/assets/brochure/pure-home.jpg" alt="Pure Home Whole House Water Filter System" loading="lazy">
+          <span class="pbadge pop">Whole House</span>
+        </div>
+        <div class="pcard-body">
+          <h3 class="pcard-name">Pure Home</h3>
+          <p class="pcard-tagline">HPF-3 triple-stage whole-house system. Filters every tap, shower and appliance. Can combine with any under-sink RO.</p>
+          <div class="pcard-price-row">
+            <span class="pcard-price">$3,150</span>
+          </div>
+          <ul class="pcard-features">
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Whole-home coverage</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Every tap, shower &amp; appliance</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Commercial-grade HPF-3 filter</li>
+            <li><span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Can pair with any under-sink RO</li>
+          </ul>
+          <div class="pcard-costs">
+            <strong>Annual Maintenance:</strong>
+            <span>Service: $550/yr &nbsp;|&nbsp; DIY: $380/yr</span>
+          </div>
+          <a href="pure-home-water-filter-sydney.html" class="pcard-cta">View System &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM COMPARISON -->
+<section class="sec sec-white reveal">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">Compare Systems</span>
+      <h2 class="sec-title sec-title-dark">Which System Is Right for You?</h2>
+      <p class="sec-body sec-body-c">Compare every system side by side. All prices are fully inclusive — supply, installation, tap and lifetime warranty.</p>
+    </div>
+    <div class="table-scroll-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>System</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Annual Service</th>
+            <th>DIY Maintenance</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-col">Pure Essential</td>
+            <td>Under-sink 2-stage carbon</td>
+            <td><strong style="color:var(--blue)">$550</strong></td>
+            <td>$340/yr</td>
+            <td>$80/yr</td>
+            <td>Taste improvement on a budget</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Pure Plus+</td>
+            <td>Under-sink RO 5-stage</td>
+            <td><strong style="color:var(--blue)">$840</strong></td>
+            <td>$420/yr</td>
+            <td>$180/yr</td>
+            <td>Families wanting maximum purity</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Pure Premium</td>
+            <td>Under-sink RO 7-stage</td>
+            <td><strong style="color:var(--blue)">$1,180</strong></td>
+            <td>$475/yr</td>
+            <td>$220/yr</td>
+            <td>Premium alkaline + hydrogen water</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Pure Compact</td>
+            <td>Compact alkaline RO 3-stage</td>
+            <td><strong style="color:var(--blue)">$930</strong></td>
+            <td>$380/yr</td>
+            <td>$130/yr</td>
+            <td>Apartments &amp; small kitchens</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Pure Advanced</td>
+            <td>Quick-change RO 5-stage</td>
+            <td><strong style="color:var(--blue)">$1,280</strong></td>
+            <td>$475/yr</td>
+            <td>$220/yr</td>
+            <td>Easy maintenance, busy households</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Pure Luxe</td>
+            <td>Smart RO 7-stage + app</td>
+            <td><strong style="color:var(--blue)">$1,740</strong></td>
+            <td>$475/yr</td>
+            <td>$220/yr</td>
+            <td>Premium kitchen &amp; smart monitoring</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Pure Home</td>
+            <td>Whole-house HPF-3</td>
+            <td><strong style="color:var(--blue)">$3,150</strong></td>
+            <td>$550/yr</td>
+            <td>$380/yr</td>
+            <td>Complete whole-home filtration</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO CHOOSE -->
+<section class="sec sec-light reveal">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">How to Choose</span>
+      <h2 class="sec-title sec-title-dark">Find Your Perfect System</h2>
+      <p class="sec-body sec-body-c">Not sure which system suits your home? Here's a quick guide based on your priorities.</p>
+    </div>
+    <div class="choose-grid">
+      <div class="choose-card">
+        <div class="choose-for">Best for taste improvement</div>
+        <h3>Pure Essential</h3>
+        <p>You want noticeably better-tasting water and to remove chlorine, sediment and odour from Sydney tap water. No need for RO — a quality carbon filter solves this at a lower cost.</p>
+        <div class="choose-price">$550</div>
+      </div>
+      <div class="choose-card" style="border-color:var(--blue)">
+        <div class="choose-for">Best for families</div>
+        <h3>Pure Plus+</h3>
+        <p>You want the highest purity drinking water for your household — removing fluoride, heavy metals, microplastics and PFAS. Bottled-water quality from your own tap, every day.</p>
+        <div class="choose-price">$840</div>
+      </div>
+      <div class="choose-card">
+        <div class="choose-for">Best for premium health water</div>
+        <h3>Pure Premium</h3>
+        <p>You want the gold standard — full RO filtration plus alkaline remineralisation, hydrogen enrichment and far infrared ceramic for structured, health-optimised water.</p>
+        <div class="choose-price">$1,180</div>
+      </div>
+      <div class="choose-card">
+        <div class="choose-for">Best for apartments</div>
+        <h3>Pure Compact</h3>
+        <p>You have limited undersink space — apartment, small kitchen, or tight cabinet. Compact 3-stage alkaline RO that delivers RO-quality water without the bulk.</p>
+        <div class="choose-price">$930</div>
+      </div>
+      <div class="choose-card">
+        <div class="choose-for">Best for tech-savvy homes</div>
+        <h3>Pure Luxe</h3>
+        <p>You want full smart monitoring — real-time water quality data, filter life tracking and alerts from your smartphone. The most advanced under-sink option in the range.</p>
+        <div class="choose-price">$1,740</div>
+      </div>
+      <div class="choose-card">
+        <div class="choose-for">Best for whole-home coverage</div>
+        <h3>Pure Home</h3>
+        <p>You want filtered water at every tap, shower and appliance — not just the kitchen. The HPF-3 whole-house system protects your entire home. Can combine with any RO system.</p>
+        <div class="choose-price">$3,150</div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:32px;font-size:15px;color:var(--muted)">Not sure? Call Jean-Paul on <a href="tel:0430546749" style="color:var(--blue);font-weight:700">0430 546 749</a> — he'll help you pick the right system for your home and budget.</p>
+  </div>
+</section>
+
+<!-- WHY FFY — LIFESTYLE 1 -->
+<section class="sec sec-white reveal">
+  <div class="container">
+    <div class="lifestyle-sec">
+      <div class="lifestyle-photo">
+        <img src="/assets/photos/install-01.jpg" alt="Jean-Paul Barbar — Licensed Plumber installing water filter system Sydney" loading="lazy">
+      </div>
+      <div class="lifestyle-text">
+        <div class="yline"></div>
+        <h3>Installed by Jean-Paul, Personally</h3>
+        <p>Every system is installed by Jean-Paul Barbar, a licensed NSW plumber. You get expert knowledge and craftsmanship — not a sub-contractor, not a sales rep.</p>
+        <ul>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            NSW Plumbing Licence #461511C
+          </li>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            WaterMark certified systems only
+          </li>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Lifetime workmanship warranty
+          </li>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Same-day bookings available
+          </li>
+        </ul>
+        <a href="tel:0430546749" class="btn btn-blue">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
+          Call 0430 546 749
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY FFY — LIFESTYLE 2 -->
+<section class="sec sec-light reveal">
+  <div class="container">
+    <div class="lifestyle-sec alt">
+      <div class="lifestyle-photo">
+        <img src="/assets/photos/install-03.jpg" alt="Water filter system maintenance and service Sydney" loading="lazy">
+      </div>
+      <div class="lifestyle-text">
+        <div class="yline"></div>
+        <h3>Ongoing Support and Maintenance</h3>
+        <p>Your system keeps performing at peak levels with our maintenance service. We handle cartridge replacements and health checks annually — or walk you through doing it yourself.</p>
+        <ul>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Annual cartridge replacement service
+          </li>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            System health checks included
+          </li>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Full DIY guide provided at installation
+          </li>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            All replacement filters supplied
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY FFY — LIFESTYLE 3 -->
+<section class="sec sec-white reveal">
+  <div class="container">
+    <div class="lifestyle-sec">
+      <div class="lifestyle-photo">
+        <img src="/assets/photos/install-07.jpg" alt="Pure clean filtered water from Filters For You system" loading="lazy">
+      </div>
+      <div class="lifestyle-text">
+        <div class="yline"></div>
+        <h3>Pure, Clean Water for Your Whole Family</h3>
+        <p>Enjoy the confidence that comes with filtered water throughout your home. Remove chlorine, microplastics, PFAS and heavy metals — contaminants that affect both taste and health.</p>
+        <ul>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            99%+ contaminant removal (RO systems)
+          </li>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Better tasting drinking water
+          </li>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Safer for babies, children and pets
+          </li>
+          <li>
+            <span class="sf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Stop buying bottled water for good
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec sec-light reveal">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">Customer Reviews</span>
+      <h2 class="sec-title sec-title-dark">What Sydney Customers Say</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="rc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="rc-text">"We recently had Jean Paul from Filters for You come out to install a water filter for us and he was absolutely lovely to deal with. He arrived on time, worked neatly and made the whole process very simple. The water tastes much cleaner now."</p>
+        <div class="rc-name">Elly Barbar &mdash; Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="rc-text">"Jean Paul from Filters for You was amazing. He installed our five stage reverse osmosis system and walked us through everything so we understood exactly how it works. The setup is super neat and the tap looks beautiful. Our water tastes exceptionally clean."</p>
+        <div class="rc-name">Kayla Kagaras &mdash; Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="rc-text">"Very pleased with Jean-Paul after installing our 5 stage reverse osmosis system. He explained how the smart system worked and guided us through everything we need to know about replacing the filters ourselves."</p>
+        <div class="rc-name">Jere Skorin &mdash; Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="rc-text">"OMG!!! Now that's water! Thank you filters for you, I don't have to buy bottled water anymore. We upgraded our filtration system and what a difference. It's hard to control what is in the foods we eat these days, but at least I can control the water I drink. And the service and care taken to instal this was nothing but professional, detailed and above all clean!"</p>
+        <div class="rc-name">Mandy Boustani &mdash; Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="rc-text">"Wow what difference! Honestly amazing service from Jean-Paul. We got the 5 stage reverse osmosis system and you can never go back to drinking normal tap water after having this system installed. Thank you so much for the recommendation!!"</p>
+        <div class="rc-name">Jade Danielle &mdash; Google Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-white reveal" id="faq">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">FAQ</span>
+      <h2 class="sec-title sec-title-dark">Water Filter System Questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">What is the best water filter system for a Sydney home?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 2v6M2 5h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a">The best system depends on your budget and goals. For taste improvement, the Pure Essential ($550) is a proven entry point. For families wanting maximum contaminant removal — including fluoride, heavy metals and microplastics — the Pure Plus+ ($840) reverse osmosis is our most popular system. For premium alkaline water with hydrogen enrichment, the Pure Premium ($1,180) is the gold standard. Call Jean-Paul on 0430 546 749 for a personalised recommendation.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Are all systems WaterMark certified?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 2v6M2 5h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a">Yes. Every system in the Filters For You range is WaterMark certified to Australian standards. WaterMark certification ensures the product is safe and fit for its intended use when installed in a plumbing system — a requirement for all plumbing products connected to mains water in NSW.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need a licensed plumber to install a water filter in Sydney?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 2v6M2 5h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a">Yes. In NSW, any connection to the mains cold water supply requires a licensed plumber. Using an unlicensed installer can void your home insurance, the filter warranty, and is non-compliant with NSW plumbing regulations. Jean-Paul holds NSW Plumbing Licence 461511C and personally installs every system.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What is included in the installation price?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 2v6M2 5h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a">All prices are fully inclusive — the complete filter system, all fittings, a dedicated filtered water tap, licensed installation by Jean-Paul, and lifetime workmanship warranty. There are no call-out fees, no separate labour charges, and no hidden extras. The price you see is the price you pay.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How long does installation take?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 2v6M2 5h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a">A standard twin-stage carbon filter takes approximately 1.5 hours. Reverse osmosis systems take around 2 hours. The whole-house Pure Home system typically takes 2–3 hours. Jean-Paul always allows time to walk you through how your system works before he leaves.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can a water filter be installed in a Sydney apartment?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 2v6M2 5h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a">Yes. Under-sink water filters are ideal for Sydney apartments. They connect to the cold water supply under the kitchen sink — no mains access or strata approval is required in most cases. For very limited space, the Pure Compact is specifically engineered for tight undersink cabinets. Jean-Paul has installed in apartments of all sizes across inner Sydney.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What suburbs does Filters For You service?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 2v6M2 5h6" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a">Filters For You installs across greater Sydney within approximately 20km of Croydon Park. Regularly serviced suburbs include Burwood, Strathfield, Homebush, Ashfield, Leichhardt, Newtown, Marrickville, Petersham, Concord, Balmain, Drummoyne, Glebe and many more. Call 0430 546 749 to confirm your suburb is covered.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREAS -->
+<section class="sec sec-light reveal">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">Service Area</span>
+      <h2 class="sec-title sec-title-dark">Water Filter Installation Across Sydney</h2>
+    </div>
+    <div class="suburb-links">
+      <a href="/water-filter-installation-croydon-park.html" class="suburb-link">Croydon Park</a>
+      <a href="/water-filter-installation-burwood.html" class="suburb-link">Burwood</a>
+      <a href="/water-filter-installation-strathfield.html" class="suburb-link">Strathfield</a>
+      <a href="/water-filter-installation-homebush.html" class="suburb-link">Homebush</a>
+      <a href="/water-filter-installation-ashfield.html" class="suburb-link">Ashfield</a>
+      <a href="/water-filter-installation-leichhardt.html" class="suburb-link">Leichhardt</a>
+      <a href="/water-filter-installation-newtown.html" class="suburb-link">Newtown</a>
+      <a href="/water-filter-installation-marrickville.html" class="suburb-link">Marrickville</a>
+      <a href="/water-filter-installation-petersham.html" class="suburb-link">Petersham</a>
+      <a href="/water-filter-installation-concord.html" class="suburb-link">Concord</a>
+      <a href="/water-filter-installation-balmain.html" class="suburb-link">Balmain</a>
+      <a href="/water-filter-installation-drummoyne.html" class="suburb-link">Drummoyne</a>
+      <a href="/water-filter-installation-glebe.html" class="suburb-link">Glebe</a>
+      <a href="/water-filter-installation-campsie.html" class="suburb-link">Campsie</a>
+      <a href="/water-filter-installation-bankstown.html" class="suburb-link">Bankstown</a>
+      <a href="/water-filter-installation-hurstville.html" class="suburb-link">Hurstville</a>
+    </div>
+  </div>
+</section>
+
+<!-- SAVINGS CALCULATOR -->
+<section class="sec sec-white" style="padding:56px 32px">
+  <div class="container" style="max-width:700px">
+    <div class="sec-head" style="margin-bottom:24px">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">See Your Savings</span>
+      <h2 class="sec-title sec-title-dark">How Much Are You Spending on Bottled Water?</h2>
+    </div>
+    <div id="savings-calculator"></div>
+    <script src="assets/js/savings-calculator.js"></script>
+    <div style="height:32px"></div>
+    <h2 class="sec-title sec-title-dark" style="text-align:center">When Does Your Filter Need Replacing?</h2>
+    <p style="text-align:center;color:var(--muted);margin:8px 0 24px">Find out your next service date and maintenance cost.</p>
+    <div id="filter-calculator"></div>
+    <script src="assets/js/filter-calculator.js"></script>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="quote">
+  <div style="max-width:700px;margin:0 auto">
+    <div class="yline yline-c"></div>
+    <h2>Get Your Water Filter System<br>Installed <span class="sh sh-y">This Week</span></h2>
+    <p>Fixed prices from $550. Licensed plumber. Lifetime warranty. Jean-Paul is based in Croydon Park and services greater Sydney.</p>
+    <div class="cta-phone-big"><a href="tel:0430546749">0430 546 749</a></div>
+    <div class="cta-phone-note">Mon–Sat 7am–6pm &middot; Most bookings within 3–5 business days</div>
+    <div class="cta-form-card" id="ffy-quote-widget-wfs">
+      <!-- 3-step quote form -->
+      <div class="ffy-qw-header-wfs">
+        <p class="cta-form-title">Get Your Free Quote</p>
+        <div class="ffy-steps-wfs" aria-label="Form steps">
+          <span class="ffy-dot-wfs ffy-dot-wfs-active" id="ffy-wfs-dot-1"></span>
+          <span class="ffy-dot-wfs" id="ffy-wfs-dot-2"></span>
+          <span class="ffy-dot-wfs" id="ffy-wfs-dot-3"></span>
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="ffy-step-wfs" id="ffy-wfs-step-1">
+        <p class="ffy-q-wfs">What are you looking for?</p>
+        <div class="ffy-btn-group-wfs">
+          <button type="button" class="ffy-choice-wfs" data-val="Under-sink Filter">Under-sink Filter</button>
+          <button type="button" class="ffy-choice-wfs" data-val="Whole House System">Whole House System</button>
+          <button type="button" class="ffy-choice-wfs" data-val="Not Sure Yet">Not Sure Yet</button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="ffy-step-wfs ffy-hidden-wfs" id="ffy-wfs-step-2">
+        <p class="ffy-q-wfs">How many people in your home?</p>
+        <div class="ffy-btn-group-wfs">
+          <button type="button" class="ffy-choice-wfs" data-val="1-2 People">1&ndash;2 People</button>
+          <button type="button" class="ffy-choice-wfs" data-val="3-4 People">3&ndash;4 People</button>
+          <button type="button" class="ffy-choice-wfs" data-val="5+ People">5+ People</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="ffy-step-wfs ffy-hidden-wfs" id="ffy-wfs-step-3">
+        <p class="ffy-q-wfs">Almost done &mdash; where can we reach you?</p>
+        <form action="https://formspree.io/f/mbdqdlve" method="POST" style="display:flex;flex-direction:column;gap:10px">
+          <input type="hidden" name="system_type" id="ffy-wfs-h-system">
+          <input type="hidden" name="household_size" id="ffy-wfs-h-size">
+          <input class="f-input" type="text" name="name" placeholder="Your name" required>
+          <input class="f-input" type="tel" name="phone" placeholder="Phone number" required>
+          <textarea class="f-input" name="message" placeholder="Anything else? (optional)" rows="2" style="resize:vertical"></textarea>
+          <button type="submit" class="f-submit">Send My Free Quote Request</button>
+        </form>
+      </div>
+
+      <style>
+        #ffy-quote-widget-wfs{font-family:'Sora',sans-serif}
+        .ffy-steps-wfs{display:flex;gap:6px;margin:8px 0 16px}
+        .ffy-dot-wfs{width:9px;height:9px;border-radius:50%;background:#dde5f0;display:inline-block;transition:background .25s}
+        .ffy-dot-wfs-active{background:#0B61F4}
+        .ffy-hidden-wfs{display:none}
+        .ffy-q-wfs{font-size:15px;font-weight:600;color:#324158;margin-bottom:12px}
+        .ffy-btn-group-wfs{display:flex;flex-direction:column;gap:8px;margin-bottom:4px}
+        .ffy-choice-wfs{width:100%;padding:12px 16px;border-radius:7px;border:2px solid #dde5f0;background:#fff;color:#324158;font-size:14px;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;text-align:left;transition:background .18s,border-color .18s,color .18s}
+        .ffy-choice-wfs:hover{border-color:#0B61F4;color:#0B61F4}
+        .ffy-choice-wfs.selected{background:#0B61F4;border-color:#0B61F4;color:#fff}
+      </style>
+
+      <script>
+      (function(){
+        function showWfsStep(n){
+          for(var i=1;i<=3;i++){
+            document.getElementById('ffy-wfs-step-'+i).classList.toggle('ffy-hidden-wfs',i!==n);
+            var dot=document.getElementById('ffy-wfs-dot-'+i);
+            dot.classList.toggle('ffy-dot-wfs-active',i<=n);
+          }
+        }
+        document.querySelectorAll('#ffy-wfs-step-1 .ffy-choice-wfs').forEach(function(btn){
+          btn.addEventListener('click',function(){
+            document.getElementById('ffy-wfs-h-system').value=this.getAttribute('data-val');
+            showWfsStep(2);
+          });
+        });
+        document.querySelectorAll('#ffy-wfs-step-2 .ffy-choice-wfs').forEach(function(btn){
+          btn.addEventListener('click',function(){
+            document.getElementById('ffy-wfs-h-size').value=this.getAttribute('data-val');
+            showWfsStep(3);
+          });
+        });
+      })();
+      </script>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<style id="footer-v2-css">
+.footer-v2{background:#1e2d40;color:rgba(255,255,255,.6);padding:56px 32px 32px}
+.footer-v2 .fv2-inner{max-width:1380px;margin:0 auto}
+.fv2-brand-row{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:32px}
+.fv2-brand-info p{font-size:13.5px;line-height:1.7;margin-top:10px;max-width:300px;color:rgba(255,255,255,.55)}
+.fv2-social-row{display:flex;gap:10px;margin-top:14px}
+.fv2-social-link{font-family:'Sora',sans-serif;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:5px 12px;border-radius:4px;transition:color .2s,border-color .2s;text-decoration:none}
+.fv2-social-link:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.fv2-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-bottom:40px}
+.fv2-col h4{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.07em}
+.fv2-col ul{list-style:none;margin:0;padding:0}
+.fv2-col ul li{margin-bottom:4px}
+.fv2-col ul li a,.fv2-col>a{font-family:'Sora',sans-serif;font-size:12.5px;color:rgba(255,255,255,.55);transition:color .2s;text-decoration:none;display:block;line-height:1.5}
+.fv2-col ul li a:hover,.fv2-col>a:hover{color:#fff}
+.fv2-contact-line{font-family:'Sora',sans-serif;font-size:12.5px;margin-bottom:6px;display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.55)}
+.fv2-contact-line a{color:rgba(255,255,255,.55);transition:color .2s;text-decoration:none}
+.fv2-contact-line a:hover{color:#fff}
+.fv2-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-family:'Sora',sans-serif;font-size:12px;color:rgba(255,255,255,.35)}
+.fv2-flyout-cb{position:absolute;opacity:0;pointer-events:none;width:0;height:0;margin:0}
+.fv2-flyout-wrap{position:relative;margin-bottom:8px}
+.fv2-ftrig{font-family:'Sora',sans-serif;font-size:12.5px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:5px;cursor:default;user-select:none;line-height:1.5}
+.fv2-ftrig:hover{color:rgba(255,255,255,.85)}
+.fv2-caret{font-size:9px;color:rgba(255,255,255,.3);transition:color .15s}
+.fv2-flyout{position:absolute;bottom:calc(100% + 8px);left:0;background:#253a4e;border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:10px 14px;min-width:200px;z-index:200;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease;box-shadow:0 -8px 28px rgba(0,0,0,.4)}
+.fv2-f2c{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;min-width:320px}
+.fv2-flyout-wrap:hover .fv2-flyout{opacity:1;pointer-events:auto;transform:none}
+.fv2-flyout-wrap:hover .fv2-caret{color:rgba(255,255,255,.6)}
+.fv2-flyout a{font-family:'Sora',sans-serif;font-size:11.5px;color:rgba(255,255,255,.6);text-decoration:none;display:block;padding:2.5px 0;white-space:nowrap;transition:color .15s}
+.fv2-flyout a:hover{color:#fff}
+@media(max-width:1100px){.fv2-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){
+  .fv2-ftrig{cursor:pointer}
+  .fv2-flyout,.fv2-f2c{position:static;display:none;opacity:1;transform:none;pointer-events:auto;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:8px 10px;margin:4px 0 8px;box-shadow:none;min-width:0;transition:none;grid-template-columns:1fr}
+  .fv2-flyout-wrap:hover .fv2-flyout,.fv2-flyout-wrap:hover .fv2-f2c{display:none}
+  .fv2-flyout-cb:checked~.fv2-flyout,.fv2-flyout-cb:checked~.fv2-f2c{display:block}
 }
+@media(max-width:640px){.fv2-grid{grid-template-columns:1fr 1fr}.fv2-brand-row{flex-direction:column}}
+@media(max-width:400px){.fv2-grid{grid-template-columns:1fr}}
 </style>
 <footer class="footer-v2">
   <div class="fv2-inner">

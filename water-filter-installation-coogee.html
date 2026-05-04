@@ -61,11 +61,10 @@ a{text-decoration:none;color:inherit}
 .nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .nav-cta svg{flex-shrink:0}
 /* TICKER */
-.ticker{background:var(--yellow);color:var(--dark);font-size:15px;font-weight:700;padding:11px 0;overflow:hidden;white-space:nowrap}
-.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
+.ticker{background:var(--yellow);color:var(--dark);font-size:14px;font-weight:700;padding:10px 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:tick 30s linear infinite}
 .ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
-.ticker-item::before{content:'●';color:var(--dark);font-size:7px;opacity:.5}
-@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-item+.ticker-item::before{content:'';width:4px;height:4px;background:var(--dark);border-radius:50%;opacity:.4;margin-right:20px;flex-shrink:0}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 /* HERO */
 .hero{background:linear-gradient(135deg,#041450 0%,#082D94 55%,#0b61f4 100%);padding:70px 32px 60px;text-align:center;position:relative;overflow:hidden}
@@ -318,28 +317,10 @@ a{text-decoration:none;color:inherit}
 </head>
 <body>
 
-<!-- TICKER -->
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
-    <span class="ticker-item">Sydney Wide Service</span>
-    <span class="ticker-item">Payment Plans Available</span>
-    <span class="ticker-item">No Hidden Fees · Free Quotes</span>
-    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
-    <span class="ticker-item">WaterMark Certified Systems</span>
-    <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
-    <span class="ticker-item">Sydney Wide Service</span>
-    <span class="ticker-item">Payment Plans Available</span>
-    <span class="ticker-item">No Hidden Fees · Free Quotes</span>
-    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
-    <span class="ticker-item">WaterMark Certified Systems</span>
-  </div>
-</div>
-
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="40"></a>
+    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="42"></a>
     <ul class="nav-links" id="navLinks">
       <li class="nav-item has-dropdown">
         <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -392,7 +373,7 @@ a{text-decoration:none;color:inherit}
       </li>
       <li><a href="about.html" class="nav-link-plain">About</a></li>
       <li><a href="contact.html" class="nav-link-plain">Contact</a></li>
-      <li><a href="index.html#reviews" class="nav-link-plain">Reviews</a></li>
+      <li><a href="index#reviews.html" class="nav-link-plain">Reviews</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
       <span class="ham-bar"></span>
@@ -407,6 +388,25 @@ a{text-decoration:none;color:inherit}
     </a>
   </div>
 </nav>
+
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Fixed Price — No Hidden Fees</span>
+    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
+    <span class="ticker-item">5.0 Star Google Rating</span>
+    <span class="ticker-item">11km from Coogee — Fast Response</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
+    <span class="ticker-item">Lifetime Workmanship Warranty</span>
+    <span class="ticker-item">Fixed Price — No Hidden Fees</span>
+    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
+    <span class="ticker-item">5.0 Star Google Rating</span>
+    <span class="ticker-item">11km from Coogee — Fast Response</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
+    <span class="ticker-item">Lifetime Workmanship Warranty</span>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1124,8 +1124,8 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     <div class="mobile-plain-links">
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-        <a href="index.html#reviews">Reviews</a>
-      <a href="index.html#contact">Get a Free Quote</a>
+        <a href="index#reviews.html">Reviews</a>
+      <a href="index#contact.html">Get a Free Quote</a>
       <a href="free-assessment.html">Get a Free Assessment</a>
     </div>
     <a href="tel:0430546749" class="mobile-cta">
