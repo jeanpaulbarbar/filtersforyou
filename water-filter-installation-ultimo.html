@@ -52,10 +52,11 @@ a{text-decoration:none;color:inherit}
 .nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;text-decoration:none;white-space:nowrap}
 .nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .nav-cta svg{flex-shrink:0}
-.ticker{background:var(--yellow);color:var(--dark);font-size:14px;font-weight:700;padding:10px 0;overflow:hidden;white-space:nowrap}
-.ticker-track{display:inline-flex;animation:tick 30s linear infinite}
+.ticker{background:var(--yellow);color:var(--dark);font-size:15px;font-weight:700;padding:11px 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
 .ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
-.ticker-item+.ticker-item::before{content:'';width:4px;height:4px;background:var(--dark);border-radius:50%;opacity:.4;margin-right:20px;flex-shrink:0}
+.ticker-item::before{content:'●';color:var(--dark);font-size:7px;opacity:.5}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .hero{background:linear-gradient(135deg,#041450 0%,#082D94 55%,#0b61f4 100%);padding:70px 32px 60px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:420px;height:420px;background:rgba(255,217,0,.05);border-radius:50%;pointer-events:none}
@@ -209,14 +210,17 @@ a{text-decoration:none;color:inherit}
 @keyframes blink{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,.08)}}
 </style>
 <style id="dropdown-nav-css">
+/* === DROPDOWN NAV === */
 .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px 6px;border-radius:7px;transition:background .2s;align-items:center;justify-content:center;flex-direction:column;gap:5px;-webkit-tap-highlight-color:transparent;flex-shrink:0}
 .nav-hamburger:hover{background:rgba(50,65,88,.08)}
 .ham-bar{display:block;width:22px;height:2px;background:#324158;border-radius:1px;transition:transform .25s cubic-bezier(.4,0,.2,1),opacity .25s,width .25s}
 .nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(2){opacity:0;transform:scaleX(0)}
 .nav-hamburger[aria-expanded="true"] .ham-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* Override old nav-links gap */
 .nav-links{display:flex;align-items:center;gap:2px;list-style:none;margin:0;padding:0}
 .nav-item{position:relative}
+/* Invisible hover bridge prevents menu from closing when moving to dropdown */
 .nav-item::after{content:'';position:absolute;bottom:-10px;left:0;right:0;height:10px;background:transparent}
 .nav-link-btn{display:flex;align-items:center;gap:5px;font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#324158;background:none;border:none;cursor:pointer;padding:8px 11px;border-radius:7px;transition:color .2s,background .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;line-height:1}
 .nav-link-btn:hover,.nav-link-btn:focus-visible{color:#0b61f4;background:rgba(11,97,244,.06);outline:none}
@@ -225,11 +229,15 @@ a{text-decoration:none;color:inherit}
 .nav-link-plain{font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#324158;padding:8px 11px;border-radius:7px;display:block;transition:color .2s,background .2s;white-space:nowrap;text-decoration:none}
 .nav-link-plain:hover,.nav-link-plain:focus-visible{color:#0b61f4;background:rgba(11,97,244,.06);outline:none}
 .nav-link-plain.active{color:#0b61f4}
+/* Dropdown panel */
 .dropdown{position:absolute;top:calc(100% + 10px);left:0;background:#fff;border:1px solid rgba(50,65,88,.1);border-radius:12px;box-shadow:0 12px 40px rgba(11,97,244,.13),0 2px 8px rgba(0,0,0,.06);padding:6px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1),visibility .2s;z-index:500;pointer-events:none}
 .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
 .dropdown a{display:block;padding:9px 13px;font-family:'Sora',sans-serif;font-size:14.5px;font-weight:500;color:#324158;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;text-decoration:none}
 .dropdown a:hover,.dropdown a.active{background:rgba(11,97,244,.07);color:#0b61f4}
 .dropdown a.active{font-weight:600}
+.dropdown-2col{display:flex;flex-direction:row;min-width:440px}
+.dropdown-col{flex:1;padding:0 2px}
+/* Mobile nav overlay */
 .mobile-nav{display:none;position:fixed;inset:0;z-index:9999;background:#fff;overflow-y:auto;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);-webkit-overflow-scrolling:touch}
 .mobile-nav.open{transform:translateX(0)}
 .mobile-nav-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1.5px solid rgba(50,65,88,.1);position:sticky;top:0;background:#fff;z-index:2}
@@ -273,10 +281,28 @@ a{text-decoration:none;color:inherit}
 </head>
 <body>
 
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
+    <span class="ticker-item">Sydney Wide Service</span>
+    <span class="ticker-item">Payment Plans Available</span>
+    <span class="ticker-item">No Hidden Fees · Free Quotes</span>
+    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
+    <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
+    <span class="ticker-item">Sydney Wide Service</span>
+    <span class="ticker-item">Payment Plans Available</span>
+    <span class="ticker-item">No Hidden Fees · Free Quotes</span>
+    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="42"></a>
+    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="40"></a>
     <ul class="nav-links" id="navLinks">
       <li class="nav-item has-dropdown">
         <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -329,7 +355,7 @@ a{text-decoration:none;color:inherit}
       </li>
       <li><a href="about.html" class="nav-link-plain">About</a></li>
       <li><a href="contact.html" class="nav-link-plain">Contact</a></li>
-      <li><a href="index#reviews.html" class="nav-link-plain">Reviews</a></li>
+      <li><a href="index.html#reviews" class="nav-link-plain">Reviews</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
       <span class="ham-bar"></span>
@@ -344,24 +370,6 @@ a{text-decoration:none;color:inherit}
     </a>
   </div>
 </nav>
-
-
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">Fixed Price — No Hidden Fees</span>
-    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
-    <span class="ticker-item">5.0 Star Google Rating</span>
-    <span class="ticker-item">8km from Ultimo — Fast Response</span>
-    <span class="ticker-item">WaterMark Certified Systems</span>
-    <span class="ticker-item">Lifetime Workmanship Warranty</span>
-    <span class="ticker-item">Fixed Price — No Hidden Fees</span>
-    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
-    <span class="ticker-item">5.0 Star Google Rating</span>
-    <span class="ticker-item">8km from Ultimo — Fast Response</span>
-    <span class="ticker-item">WaterMark Certified Systems</span>
-    <span class="ticker-item">Lifetime Workmanship Warranty</span>
-  </div>
-</div>
 
 <section class="hero">
   <div class="hero-inner">
@@ -941,8 +949,8 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     <div class="mobile-plain-links">
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-        <a href="index#reviews.html">Reviews</a>
-      <a href="index#contact.html">Get a Free Quote</a>
+        <a href="index.html#reviews">Reviews</a>
+      <a href="index.html#contact">Get a Free Quote</a>
       <a href="free-assessment.html">Get a Free Assessment</a>
     </div>
     <a href="tel:0430546749" class="mobile-cta">

@@ -117,10 +117,11 @@ a{text-decoration:none;color:inherit}
 .btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.45)}
 .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.8)}
 /* TICKER */
-.ticker{background:var(--yellow);color:var(--dark);font-size:14px;font-weight:700;padding:10px 0;overflow:hidden;white-space:nowrap}
-.ticker-track{display:inline-flex;animation:tick 30s linear infinite}
+.ticker{background:var(--yellow);color:var(--dark);font-size:15px;font-weight:700;padding:11px 0;overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
 .ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
-.ticker-item+.ticker-item::before{content:'';width:4px;height:4px;background:var(--dark);border-radius:50%;opacity:.4;margin-right:20px;flex-shrink:0}
+.ticker-item::before{content:'●';color:var(--dark);font-size:7px;opacity:.5}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 /* NAV */
 .nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);position:sticky;top:0;z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
@@ -385,23 +386,25 @@ a{text-decoration:none;color:inherit}
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
-    <span class="ticker-item">Annual Service Plans from $149</span>
-    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
-    <span class="ticker-item">WaterMark Certified Replacement Parts</span>
+    <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
     <span class="ticker-item">Sydney Wide Service</span>
-    <span class="ticker-item">Same Technician Every Time</span>
-    <span class="ticker-item">Annual Service Plans from $149</span>
+    <span class="ticker-item">Payment Plans Available</span>
+    <span class="ticker-item">No Hidden Fees · Free Quotes</span>
     <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
-    <span class="ticker-item">WaterMark Certified Replacement Parts</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
+    <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
     <span class="ticker-item">Sydney Wide Service</span>
-    <span class="ticker-item">Same Technician Every Time</span>
+    <span class="ticker-item">Payment Plans Available</span>
+    <span class="ticker-item">No Hidden Fees · Free Quotes</span>
+    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
   </div>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="42"></a>
+    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="40"></a>
     <ul class="nav-links" id="navLinks">
       <li class="nav-item has-dropdown">
         <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -411,7 +414,7 @@ a{text-decoration:none;color:inherit}
             <a href="whole-house-water-filter-sydney.html">Whole House Water Filter</a>
             <a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis</a>
             <a href="water-filter-systems.html">View All Systems</a>
-            <a href="service-plans.html" class="active">Service Plans</a>
+            <a href="service-plans.html">Service Plans</a>
             <div style="border-top:1px solid rgba(50,65,88,.1);margin:5px 2px 3px"></div>
             <a href="pure-essential-water-filter-sydney.html">Pure Essential</a>
             <a href="pure-plus-water-filter-sydney.html">Pure Plus+</a>
@@ -457,7 +460,9 @@ a{text-decoration:none;color:inherit}
       <li><a href="index.html#reviews" class="nav-link-plain">Reviews</a></li>
     </ul>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
-      <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
     </button>
     <div class="online-dot-wrap"><div class="dot"></div>Online</div>
     <a href="contact.html" class="nav-cta-quote">Get a Free Quote</a>
@@ -467,7 +472,6 @@ a{text-decoration:none;color:inherit}
     </a>
   </div>
 </nav>
-
 
 <!-- HERO -->
 <section class="hero">
@@ -1023,7 +1027,7 @@ a{text-decoration:none;color:inherit}
         <a href="whole-house-water-filter-sydney.html">Whole House Water Filter</a>
         <a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis</a>
         <a href="water-filter-systems.html">View All Systems</a>
-        <a href="service-plans.html" class="active">Service Plans</a>
+        <a href="service-plans.html">Service Plans</a>
         <a href="pure-essential-water-filter-sydney.html">Pure Essential</a>
         <a href="pure-plus-water-filter-sydney.html">Pure Plus+</a>
         <a href="pure-premium-water-filter-sydney.html">Pure Premium</a>
@@ -1062,7 +1066,7 @@ a{text-decoration:none;color:inherit}
     <div class="mobile-plain-links">
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-      <a href="index.html#reviews">Reviews</a>
+        <a href="index.html#reviews">Reviews</a>
       <a href="index.html#contact">Get a Free Quote</a>
       <a href="free-assessment.html">Get a Free Assessment</a>
     </div>
