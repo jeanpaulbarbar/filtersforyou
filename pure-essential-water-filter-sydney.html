@@ -309,9 +309,19 @@ a{text-decoration:none;color:inherit}
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au/"}
 </script>
+<style>
+@media(min-width:901px){
+.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.site-header.header-hidden{transform:translateY(-100%)}
+.site-header.nav-only{transform:translateY(calc(var(--ticker-h,42px)*-1))}
+.nav-spacer{width:100%}
+.nav{position:static!important;top:auto!important}
+}
+</style>
 </head>
 <body>
 
+<div class="site-header">
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
@@ -401,6 +411,8 @@ a{text-decoration:none;color:inherit}
     </a>
   </div>
 </nav>
+</div>
+<div class="nav-spacer" id="navSpacer"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1253,6 +1265,26 @@ document.querySelectorAll('.gallery-thumb').forEach(thumb=>{
     var h=href.split('#')[0];
     if(h&&h===pg)a.classList.add('active');
   });
+})();
+</script>
+<script>
+(function(){
+  var h=document.querySelector('.site-header');
+  if(!h)return;
+  var tk=h.querySelector('.ticker');
+  var sp=document.getElementById('navSpacer');
+  var lastY=0,ticking=false,tickH=0;
+  function init(){tickH=tk?tk.offsetHeight:0;h.style.setProperty('--ticker-h',tickH+'px');if(sp)sp.style.height=h.offsetHeight+'px';}
+  function update(){
+    var y=window.scrollY||window.pageYOffset;
+    if(y<=0){h.classList.remove('header-hidden','nav-only');if(sp)sp.style.height=h.offsetHeight+'px';}
+    else if(y>lastY&&y>80){h.classList.add('header-hidden');h.classList.remove('nav-only');}
+    else if(y<lastY){h.classList.remove('header-hidden');h.classList.add('nav-only');if(sp)sp.style.height=(h.offsetHeight-tickH)+'px';}
+    lastY=y;ticking=false;
+  }
+  init();
+  window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true;}},{passive:true});
+  window.addEventListener('resize',init);
 })();
 </script>
 </body>
