@@ -289,36 +289,6 @@ a{text-decoration:none;color:inherit}
 .trust-sub{font-size:15px;font-weight:400;color:var(--muted)}
 @media(max-width:768px){.trust-bar{padding:18px 16px}.trust-bar-inner{gap:14px}.trust-item{gap:8px}.trust-icon{width:34px;height:34px;font-size:15px}.trust-label{font-size:15px}.trust-sub{font-size:13px}}
 </style>
-<style>
-/* === Homepage nav/ticker override — DO NOT EDIT === */
-.ticker{background:var(--yellow);color:var(--dark);font-size:15px;font-weight:700;padding:11px 0;overflow:hidden;white-space:nowrap}
-.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
-.ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
-.ticker-item::before{content:'●';color:var(--dark);font-size:7px;opacity:.5}
-.ticker{font-size:13px}
-@keyframes tick{from{transform:translateX(0)}
-@keyframes blink{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}
-.nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);position:sticky;top:0;z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
-.nav{position:fixed;top:0;z-index:1000;left:0;right:0;width:100%}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 32px;max-width:1280px;margin:0 auto;height:68px;gap:32px}
-.nav-inner{padding:0 16px;height:60px}
-.nav-logo{flex-shrink:0}
-.nav-logo img{height:40px;width:auto}
-.nav-logo img{height:40px}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{font-size:15.5px;font-weight:600;color:var(--dark);transition:color .2s}
-.nav-links a:hover{color:var(--blue)}
-.nav-links{display:none}
-.online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}
-.online-dot-wrap{display:none}
-.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
-.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
-.nav-cta{font-size:13px;padding:8px 12px}
-.nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}
-.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}
-.nav-cta-quote{display:none}
-</style>
 </head>
 <body>
 <!-- NAV -->
