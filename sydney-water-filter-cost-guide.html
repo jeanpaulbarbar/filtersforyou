@@ -168,7 +168,7 @@ a{text-decoration:none;color:inherit}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* NAV */
-.nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);position:sticky;top:0;z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
+.nav{background:var(--white);border-bottom:1px solid rgba(50,65,88,.1);z-index:1000;box-shadow:0 2px 14px rgba(11,97,244,.07)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 32px;max-width:1280px;margin:0 auto;height:68px;gap:32px}
 .nav-logo{flex-shrink:0}.nav-logo img{height:40px;width:auto}
 .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
@@ -181,6 +181,12 @@ a{text-decoration:none;color:inherit}
 .nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
+
+/* SITE-HEADER SCROLL BEHAVIOUR */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.site-header.header-hidden{transform:translateY(-100%)}
+.site-header.nav-only{transform:translateY(calc(var(--ticker-h,40px) * -1))}
+.nav-spacer{width:100%}
 </style>
 <style id="dropdown-nav-css">
 /* === DROPDOWN NAV === */
@@ -259,6 +265,7 @@ a{text-decoration:none;color:inherit}
 </style>
 </head>
 <body>
+<div class="site-header">
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
   <div class="ticker-track">
@@ -348,6 +355,8 @@ a{text-decoration:none;color:inherit}
     </a>
   </div>
 </nav>
+</div><!-- /.site-header -->
+<div class="nav-spacer"></div>
 
 <section class="hero">
   <div class="hero-inner">
@@ -953,6 +962,39 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     var h=href.split('#')[0];
     if(h&&h===pg)a.classList.add('active');
   });
+})();
+</script>
+
+<script>
+(function(){
+  var h=document.querySelector('.site-header');
+  if(!h)return;
+  var tk=h.querySelector('.ticker');
+  var sp=document.querySelector('.nav-spacer');
+  var lastY=0,ticking=false,tickH=0;
+  function init(){
+    tickH=tk?tk.offsetHeight:0;
+    h.style.setProperty('--ticker-h',tickH+'px');
+    if(sp)sp.style.height=h.offsetHeight+'px';
+  }
+  function update(){
+    var y=window.scrollY||window.pageYOffset;
+    if(y<=0){
+      h.classList.remove('header-hidden','nav-only');
+      if(sp)sp.style.height=h.offsetHeight+'px';
+    } else if(y>lastY&&y>80){
+      h.classList.add('header-hidden');
+      h.classList.remove('nav-only');
+    } else if(y<lastY){
+      h.classList.remove('header-hidden');
+      h.classList.add('nav-only');
+      if(sp)sp.style.height=(h.offsetHeight-tickH)+'px';
+    }
+    lastY=y;ticking=false;
+  }
+  init();
+  window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true;}},{passive:true});
+  window.addEventListener('resize',init);
 })();
 </script>
 </body>
