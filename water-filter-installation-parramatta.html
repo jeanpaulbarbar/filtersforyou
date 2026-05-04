@@ -190,13 +190,6 @@ a{text-decoration:none;color:inherit}
 .pricing-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .pcard[onclick]{cursor:pointer;transition:box-shadow .18s,transform .18s}.pcard[onclick]:hover{box-shadow:0 6px 24px rgba(11,97,244,.16);transform:translateY(-2px)}
 
-
-
-/* SITE-HEADER SCROLL BEHAVIOUR */
-.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:transform .35s cubic-bezier(.4,0,.2,1)}
-.site-header.header-hidden{transform:translateY(-100%)}
-.site-header.nav-only{transform:translateY(calc(var(--ticker-h,40px) * -1))}
-
 /* ── HOMEPAGE NAV SYNC ── */
 /* TICKER */
 .ticker{background:var(--yellow);color:var(--dark);font-size:15px;font-weight:700;padding:11px 0;overflow:hidden;white-space:nowrap}
@@ -219,6 +212,12 @@ a{text-decoration:none;color:inherit}
 .nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
+
+/* SITE-HEADER SCROLL BEHAVIOUR */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.site-header.header-hidden{transform:translateY(-100%)}
+.site-header.nav-only{transform:translateY(calc(var(--ticker-h,40px) * -1))}
+.nav-spacer{width:100%}
 </style>
 <style id="dropdown-nav-css">
 /* === DROPDOWN NAV === */
@@ -270,7 +269,7 @@ a{text-decoration:none;color:inherit}
 .mobile-cta{display:flex;align-items:center;justify-content:center;gap:10px;background:#0b61f4;color:#fff;font-family:'Sora',sans-serif;font-size:18px;font-weight:700;padding:16px 20px;border-radius:10px;margin-top:20px;text-decoration:none;transition:background .2s,transform .2s}
 .mobile-cta:hover{background:#0c4bb9;transform:translateY(-1px)}
 @media(max-width:900px){
-  .nav-inner{padding:0 16px;height:60px}
+  .nav{position:fixed;top:0;z-index:1000;left:0;right:0;width:100%}
   .nav-links{display:none!important}
   .nav-hamburger{display:flex!important;order:99}
   .mobile-nav{display:block}
@@ -399,6 +398,8 @@ a{text-decoration:none;color:inherit}
     </a>
   </div>
 </nav>
+</div><!-- /.site-header -->
+<div class="nav-spacer"></div>
 
 <!-- HERO -->
 <section class="hero">
