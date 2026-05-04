@@ -563,11 +563,9 @@ a{text-decoration:none;color:inherit}
   .rc-sum-stars{font-size:16px;letter-spacing:1px}
   .rc-rating-num{font-size:24px}
   /* Mobile carousel — scroll horizontally */
-  .rc-track-outer{overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
-  .rc-track-outer::before,.rc-track-outer::after{display:none}
-  .rc-track{animation:rc-infinite 50s linear infinite;flex-direction:row;gap:12px;width:max-content}
-  .rc-group:last-child{display:flex}/* SHOW duplicate set for infinite loop */
-  .rc-card{width:280px;flex-shrink:0}
+  .rc-track-outer{overflow:hidden}
+  .rc-track{animation:rc-infinite 50s linear infinite;width:max-content}
+  .rc-card{width:240px;flex-shrink:0}
 
   /* Process */
   .process-row{grid-template-columns:1fr 1fr;gap:20px}
