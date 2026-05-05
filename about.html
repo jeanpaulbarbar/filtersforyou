@@ -46,7 +46,10 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["Plumber","LocalBusiness"],
+      "@type": [
+        "Plumber",
+        "LocalBusiness"
+      ],
       "@id": "https://filtersforyou.com.au/#business",
       "name": "Filters For You",
       "description": "Professional water filter installation across Greater Sydney. Under sink, reverse osmosis and whole house systems supplied and installed by licensed plumber Jean-Paul Barbar.",
@@ -56,11 +59,37 @@
       "logo": "https://filtersforyou.com.au/assets/brand/logos/logo-transparent.svg",
       "image": "https://filtersforyou.com.au/assets/photos/jp-hero.jpg",
       "priceRange": "$$",
-      "openingHours": ["Mo-Sa 07:00-18:00"],
-      "address": {"@type":"PostalAddress","addressLocality":"Croydon Park","addressRegion":"NSW","postalCode":"2133","addressCountry":"AU"},
-      "geo": {"@type":"GeoCoordinates","latitude":-33.9013,"longitude":151.1264},
-      "areaServed": [{"@type":"City","name":"Sydney"},{"@type":"City","name":"Greater Sydney"}],
-      "aggregateRating": {"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"8","bestRating":"5"},
+      "openingHours": [
+        "Mo-Sa 07:00-18:00"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Croydon Park",
+        "addressRegion": "NSW",
+        "postalCode": "2133",
+        "addressCountry": "AU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -33.9013,
+        "longitude": 151.1264
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Sydney"
+        },
+        {
+          "@type": "City",
+          "name": "Greater Sydney"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "8",
+        "bestRating": "5"
+      },
       "founder": {
         "@type": "Person",
         "@id": "https://filtersforyou.com.au/#founder",
@@ -71,10 +100,160 @@
           "credentialCategory": "licence",
           "name": "NSW Plumbing Licence",
           "identifier": "461511C",
-          "recognizedBy": {"@type":"Organization","name":"NSW Fair Trading"}
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "NSW Fair Trading"
+          }
         }
       },
-      "sameAs": ["https://www.instagram.com/filtersforyouau","https://www.facebook.com/filtersforyouau","https://www.tiktok.com/@filtersforyouau"]
+      "sameAs": [
+        "https://www.instagram.com/filtersforyouau",
+        "https://www.facebook.com/filtersforyouau",
+        "https://www.tiktok.com/@filtersforyouau"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+61430546749",
+        "contactType": "customer service",
+        "areaServed": "Greater Sydney",
+        "availableLanguage": "English"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Saturday"
+          ],
+          "opens": "08:00",
+          "closes": "15:00"
+        }
+      ],
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Jade Danielle"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-06-01",
+          "reviewBody": "Wow what difference! Honestly amazing service from Jean-Paul. We got the 5 stage reverse osmosis system and you can never go back to drinking normal tap water after having this system installed. Thank you so much for the recommendation!!"
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Mandy Boustani"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-07-01",
+          "reviewBody": "OMG!!! Now that's water! Thank you filters for you, I don't have to buy bottled water anymore. We upgraded our filtration system and what a difference. It's hard to control what is in the foods we eat these days, but at least I can control the water I drink. And the service and care taken to instal this was nothing but professional, detailed and above all clean!"
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Elly Barbar"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-08-01",
+          "reviewBody": "We recently had Jean Paul from Filters for You come out to install a water filter for us and he was absolutely lovely to deal with. He arrived on time, worked neatly and made the whole process very simple. The water tastes much cleaner now and we are very pleased with the result. I would gladly recommend him."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Irene Evans"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-09-01",
+          "reviewBody": "We had Jean-Paul install our smart reverse osmosis system and he has done a wonderful job. He was very kind and treated everything so professional. Our water quality is absolutely great! I would recommend this to absolutely everyone who is looking to focus on their health more."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Alexander Barbarigos"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-10-01",
+          "reviewBody": "Thank you so much for handling our zip system! Filters for you did an amazing job and Jean-Paul was a great technician that installed the zip system. We couldn't recommend them enough!"
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Kayla Kagaras"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-11-01",
+          "reviewBody": "Jean Paul from Filters for You was amazing. He installed our five stage reverse osmosis system and walked us through everything so we understood exactly how it works. The setup is super neat and the tap looks beautiful. Our water tastes exceptionally clean and fresh. He was professional and easy to deal with. Definitely recommend."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Yous"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-12-01",
+          "reviewBody": "Great job from Jean-Paul installing our 7 stage reverse osmosis. Very happy with the install."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Jere Skorin"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2026-01-01",
+          "reviewBody": "Very pleased with Jean-Paul after installing our 5 stage reverse osmosis system. He explained how the smart system worked and guided us through everything we need to know about replacing the filters ourselves. Highly recommend filters for you and many thanks to Jean-Paul! Our water taste significantly better now."
+        }
+      ]
     },
     {
       "@type": "Person",
@@ -83,34 +262,96 @@
       "givenName": "Jean-Paul",
       "familyName": "Barbar",
       "jobTitle": "Licensed Plumber & Founder",
-      "worksFor": {"@id": "https://filtersforyou.com.au/#business"},
-      "address": {"@type":"PostalAddress","addressLocality":"Croydon Park","addressRegion":"NSW","postalCode":"2133","addressCountry":"AU"},
+      "worksFor": {
+        "@id": "https://filtersforyou.com.au/#business"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Croydon Park",
+        "addressRegion": "NSW",
+        "postalCode": "2133",
+        "addressCountry": "AU"
+      },
       "hasCredential": {
         "@type": "EducationalOccupationalCredential",
         "credentialCategory": "licence",
         "name": "NSW Plumbing Licence",
         "identifier": "461511C",
-        "recognizedBy": {"@type":"Organization","name":"NSW Fair Trading"}
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "NSW Fair Trading"
+        }
       },
-      "knowsAbout": ["Water filtration systems","Plumbing","Water quality Sydney","Reverse osmosis systems","Whole house water filtration"],
+      "knowsAbout": [
+        "Water filtration systems",
+        "Plumbing",
+        "Water quality Sydney",
+        "Reverse osmosis systems",
+        "Whole house water filtration"
+      ],
       "url": "https://filtersforyou.com.au/about",
       "image": "https://filtersforyou.com.au/assets/photos/jp-hero.jpg"
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type":"ListItem","position":1,"name":"Home","item":"https://filtersforyou.com.au/"},
-        {"@type":"ListItem","position":2,"name":"About Filters For You","item":"https://filtersforyou.com.au/about"}
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://filtersforyou.com.au/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About Filters For You",
+          "item": "https://filtersforyou.com.au/about"
+        }
       ]
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type":"Question","name":"Who is Jean-Paul Barbar from Filters For You?","acceptedAnswer":{"@type":"Answer","text":"Jean-Paul Barbar is a 24-year-old licensed NSW plumber (Licence #461511C) and founder of Filters For You, Sydney's trusted water filter installation specialist. Based in Croydon Park, Jean-Paul personally attends and installs every system across Greater Sydney — no subcontractors."}},
-        {"@type":"Question","name":"Is Filters For You a licensed plumbing company?","acceptedAnswer":{"@type":"Answer","text":"Yes. Filters For You is operated by Jean-Paul Barbar, a fully licensed NSW plumber holding Licence #461511C, verifiable at NSW Fair Trading. Jean-Paul is insured and all systems installed are WaterMark certified to Australian standards."}},
-        {"@type":"Question","name":"Where is Filters For You based?","acceptedAnswer":{"@type":"Answer","text":"Filters For You is based in Croydon Park, Sydney NSW 2133. Jean-Paul services all of Greater Sydney within approximately 20km of Croydon Park, including the Inner West, Eastern Suburbs, North Shore, Parramatta, Western Sydney and surrounding areas."}},
-        {"@type":"Question","name":"Does Jean-Paul personally install every system?","acceptedAnswer":{"@type":"Answer","text":"Yes — Jean-Paul personally attends every single installation. Filters For You does not use subcontractors. When you book with Filters For You, Jean-Paul Barbar is the technician who arrives at your home, installs your system and walks you through how it works. Call 0430 546 749 to book."}},
-        {"@type":"Question","name":"How long has Filters For You been operating?","acceptedAnswer":{"@type":"Answer","text":"Jean-Paul Barbar started his plumbing career at 21, founding Tapped Out Plumbing. He launched Filters For You in 2023 with a specific focus on water filter installation for Sydney families, growing it to a 5.0-star Google-rated business serving Greater Sydney."}}
+        {
+          "@type": "Question",
+          "name": "Who is Jean-Paul Barbar from Filters For You?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jean-Paul Barbar is a 24-year-old licensed NSW plumber (Licence #461511C) and founder of Filters For You, Sydney's trusted water filter installation specialist. Based in Croydon Park, Jean-Paul personally attends and installs every system across Greater Sydney — no subcontractors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Filters For You a licensed plumbing company?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Filters For You is operated by Jean-Paul Barbar, a fully licensed NSW plumber holding Licence #461511C, verifiable at NSW Fair Trading. Jean-Paul is insured and all systems installed are WaterMark certified to Australian standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is Filters For You based?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Filters For You is based in Croydon Park, Sydney NSW 2133. Jean-Paul services all of Greater Sydney within approximately 20km of Croydon Park, including the Inner West, Eastern Suburbs, North Shore, Parramatta, Western Sydney and surrounding areas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Jean-Paul personally install every system?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — Jean-Paul personally attends every single installation. Filters For You does not use subcontractors. When you book with Filters For You, Jean-Paul Barbar is the technician who arrives at your home, installs your system and walks you through how it works. Call 0430 546 749 to book."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long has Filters For You been operating?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Jean-Paul Barbar started his plumbing career at 21, founding Tapped Out Plumbing. He launched Filters For You in 2023 with a specific focus on water filter installation for Sydney families, growing it to a 5.0-star Google-rated business serving Greater Sydney."
+          }
+        }
       ]
     }
   ]
@@ -463,6 +704,40 @@ a{text-decoration:none;color:inherit}
 .geo-quote::after{content:'”';font-size:36px;color:#0B61F4;opacity:.35;font-style:normal;line-height:1;vertical-align:-10px;margin-left:4px}
 @media(max-width:768px){.geo-quote-section{padding:18px 16px}.geo-quote{font-size:15px;padding:0 8px}}
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "About Jean-Paul Barbar — Licensed Plumber & Founder of Filters For You",
+  "description": "About Jean-Paul Barbar, NSW licensed plumber (Licence 461511C) and founder of Filters For You — Sydney's trusted water filtration installation specialist.",
+  "url": "https://filtersforyou.com.au/about.html",
+  "datePublished": "2024-06-01",
+  "dateModified": "2026-05-05",
+  "image": "https://filtersforyou.com.au/assets/photos/jp-hero.jpg",
+  "author": {
+    "@type": "Person",
+    "@id": "https://filtersforyou.com.au/#jean-paul",
+    "name": "Jean-Paul Barbar",
+    "jobTitle": "Licensed Plumber & Founder",
+    "url": "https://filtersforyou.com.au/about.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://filtersforyou.com.au/#business",
+    "name": "Filters For You",
+    "url": "https://filtersforyou.com.au",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://filtersforyou.com.au/assets/logos/ffy-logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://filtersforyou.com.au/about.html"
+  }
+}
+</script>
 </head>
 <body>
 

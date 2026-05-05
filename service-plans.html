@@ -33,66 +33,329 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Shantell+Sans:ital,wght@1,700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@graph":[
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@type":["Plumber","LocalBusiness"],
-      "@id":"https://filtersforyou.com.au/#business",
-      "name":"Filters For You",
-      "description":"Water filter installation and annual service plans across Greater Sydney. Licensed plumber Jean-Paul Barbar personally services every system.",
-      "url":"https://filtersforyou.com.au/service-plans",
-      "telephone":"+61430546749",
-      "email":"info@filtersforyou.com.au",
-      "logo":"https://filtersforyou.com.au/assets/brand/logos/logo-transparent.svg",
-      "image":"https://filtersforyou.com.au/assets/photos/jp-hero.jpg",
-      "priceRange":"$$",
-      "openingHours":["Mo-Sa 07:00-18:00"],
-      "address":{"@type":"PostalAddress","addressLocality":"Croydon Park","addressRegion":"NSW","postalCode":"2133","addressCountry":"AU"},
-      "geo":{"@type":"GeoCoordinates","latitude":-33.9013,"longitude":151.1264},
-      "areaServed":[{"@type":"City","name":"Sydney"}],
-      "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"8","bestRating":"5"},
-      "founder":{"@type":"Person","name":"Jean-Paul Barbar","jobTitle":"Licensed Plumber & Founder","hasCredential":{"@type":"EducationalOccupationalCredential","name":"NSW Plumbing Licence","identifier":"461511C","recognizedBy":{"@type":"Organization","name":"NSW Fair Trading"}}},
-      "sameAs":["https://www.instagram.com/filtersforyouau","https://www.facebook.com/filtersforyouau","https://www.tiktok.com/@filtersforyouau"]
-    },
-    {
-      "@type":"Service",
-      "name":"Basic Water Filter Service Plan",
-      "provider":{"@id":"https://filtersforyou.com.au/#business"},
-      "description":"Annual filter cartridge replacement, system flush and visual inspection. Suitable for all under sink and reverse osmosis systems.",
-      "areaServed":{"@type":"City","name":"Sydney"},
-      "offers":{"@type":"Offer","price":"149","priceCurrency":"AUD","availability":"https://schema.org/InStock","priceValidUntil":"2027-12-31"}
-    },
-    {
-      "@type":"Service",
-      "name":"Standard Water Filter Service Plan",
-      "provider":{"@id":"https://filtersforyou.com.au/#business"},
-      "description":"Annual filter cartridge replacement, system pressure check, sanitisation and water quality test.",
-      "areaServed":{"@type":"City","name":"Sydney"},
-      "offers":{"@type":"Offer","price":"199","priceCurrency":"AUD","availability":"https://schema.org/InStock","priceValidUntil":"2027-12-31"}
-    },
-    {
-      "@type":"Service",
-      "name":"Premium Water Filter Service Plan",
-      "provider":{"@id":"https://filtersforyou.com.au/#business"},
-      "description":"Full system disassembly and clean, all O-rings and seals replaced, detailed water quality report. Annual.",
-      "areaServed":{"@type":"City","name":"Sydney"},
-      "offers":{"@type":"Offer","price":"279","priceCurrency":"AUD","availability":"https://schema.org/InStock","priceValidUntil":"2027-12-31"}
-    },
-    {
-      "@type":"BreadcrumbList",
-      "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"Home","item":"https://filtersforyou.com.au/"},
-        {"@type":"ListItem","position":2,"name":"Service Plans","item":"https://filtersforyou.com.au/service-plans"}
+      "@type": [
+        "Plumber",
+        "LocalBusiness"
+      ],
+      "@id": "https://filtersforyou.com.au/#business",
+      "name": "Filters For You",
+      "description": "Water filter installation and annual service plans across Greater Sydney. Licensed plumber Jean-Paul Barbar personally services every system.",
+      "url": "https://filtersforyou.com.au/service-plans",
+      "telephone": "+61430546749",
+      "email": "info@filtersforyou.com.au",
+      "logo": "https://filtersforyou.com.au/assets/brand/logos/logo-transparent.svg",
+      "image": "https://filtersforyou.com.au/assets/photos/jp-hero.jpg",
+      "priceRange": "$$",
+      "openingHours": [
+        "Mo-Sa 07:00-18:00"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Croydon Park",
+        "addressRegion": "NSW",
+        "postalCode": "2133",
+        "addressCountry": "AU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -33.9013,
+        "longitude": 151.1264
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Sydney"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "8",
+        "bestRating": "5"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Jean-Paul Barbar",
+        "jobTitle": "Licensed Plumber & Founder",
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "name": "NSW Plumbing Licence",
+          "identifier": "461511C",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "NSW Fair Trading"
+          }
+        }
+      },
+      "sameAs": [
+        "https://www.instagram.com/filtersforyouau",
+        "https://www.facebook.com/filtersforyouau",
+        "https://www.tiktok.com/@filtersforyouau"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+61430546749",
+        "contactType": "customer service",
+        "areaServed": "Greater Sydney",
+        "availableLanguage": "English"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Saturday"
+          ],
+          "opens": "08:00",
+          "closes": "15:00"
+        }
+      ],
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Jade Danielle"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-06-01",
+          "reviewBody": "Wow what difference! Honestly amazing service from Jean-Paul. We got the 5 stage reverse osmosis system and you can never go back to drinking normal tap water after having this system installed. Thank you so much for the recommendation!!"
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Mandy Boustani"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-07-01",
+          "reviewBody": "OMG!!! Now that's water! Thank you filters for you, I don't have to buy bottled water anymore. We upgraded our filtration system and what a difference. It's hard to control what is in the foods we eat these days, but at least I can control the water I drink. And the service and care taken to instal this was nothing but professional, detailed and above all clean!"
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Elly Barbar"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-08-01",
+          "reviewBody": "We recently had Jean Paul from Filters for You come out to install a water filter for us and he was absolutely lovely to deal with. He arrived on time, worked neatly and made the whole process very simple. The water tastes much cleaner now and we are very pleased with the result. I would gladly recommend him."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Irene Evans"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-09-01",
+          "reviewBody": "We had Jean-Paul install our smart reverse osmosis system and he has done a wonderful job. He was very kind and treated everything so professional. Our water quality is absolutely great! I would recommend this to absolutely everyone who is looking to focus on their health more."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Alexander Barbarigos"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-10-01",
+          "reviewBody": "Thank you so much for handling our zip system! Filters for you did an amazing job and Jean-Paul was a great technician that installed the zip system. We couldn't recommend them enough!"
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Kayla Kagaras"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-11-01",
+          "reviewBody": "Jean Paul from Filters for You was amazing. He installed our five stage reverse osmosis system and walked us through everything so we understood exactly how it works. The setup is super neat and the tap looks beautiful. Our water tastes exceptionally clean and fresh. He was professional and easy to deal with. Definitely recommend."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Yous"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2025-12-01",
+          "reviewBody": "Great job from Jean-Paul installing our 7 stage reverse osmosis. Very happy with the install."
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Jere Skorin"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2026-01-01",
+          "reviewBody": "Very pleased with Jean-Paul after installing our 5 stage reverse osmosis system. He explained how the smart system worked and guided us through everything we need to know about replacing the filters ourselves. Highly recommend filters for you and many thanks to Jean-Paul! Our water taste significantly better now."
+        }
       ]
     },
     {
-      "@type":"FAQPage",
-      "mainEntity":[
-        {"@type":"Question","name":"How often should I service my water filter?","acceptedAnswer":{"@type":"Answer","text":"Most under sink and reverse osmosis water filter systems should be serviced annually. Filter cartridges typically last 6–12 months depending on usage and water quality. RO membranes last 2–3 years. Jean-Paul at Filters For You will advise the correct schedule for your specific system at installation."}},
-        {"@type":"Question","name":"What water filter systems do you service?","acceptedAnswer":{"@type":"Answer","text":"Filters For You services all major brands including HPF, Filter Systems Australia (FSA), Puretec, Zip, Billi and most other under sink, reverse osmosis and whole house systems — whether installed by Filters For You or another provider. Call 0430 546 749 to confirm your brand."}},
-        {"@type":"Question","name":"Do I need to be home for the service?","acceptedAnswer":{"@type":"Answer","text":"Yes — Jean-Paul will need access to the system, which is typically under the kitchen sink or at the mains. Most service visits take 45–90 minutes. Jean-Paul will confirm the time window when you book."}},
-        {"@type":"Question","name":"How long does a water filter service take?","acceptedAnswer":{"@type":"Answer","text":"Most annual service visits take between 45 minutes and 1.5 hours depending on the service tier and system type. Jean-Paul will confirm expected duration when you book."}},
-        {"@type":"Question","name":"Are the replacement cartridges WaterMark certified?","acceptedAnswer":{"@type":"Answer","text":"Yes. All replacement filter cartridges and parts used by Filters For You are WaterMark certified to Australian standards. Only quality-certified parts are used — never cheap generic alternatives that could compromise your water quality."}}
+      "@type": "Service",
+      "name": "Basic Water Filter Service Plan",
+      "provider": {
+        "@id": "https://filtersforyou.com.au/#business"
+      },
+      "description": "Annual filter cartridge replacement, system flush and visual inspection. Suitable for all under sink and reverse osmosis systems.",
+      "areaServed": {
+        "@type": "City",
+        "name": "Sydney"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "149",
+        "priceCurrency": "AUD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2027-12-31"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Standard Water Filter Service Plan",
+      "provider": {
+        "@id": "https://filtersforyou.com.au/#business"
+      },
+      "description": "Annual filter cartridge replacement, system pressure check, sanitisation and water quality test.",
+      "areaServed": {
+        "@type": "City",
+        "name": "Sydney"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "199",
+        "priceCurrency": "AUD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2027-12-31"
+      }
+    },
+    {
+      "@type": "Service",
+      "name": "Premium Water Filter Service Plan",
+      "provider": {
+        "@id": "https://filtersforyou.com.au/#business"
+      },
+      "description": "Full system disassembly and clean, all O-rings and seals replaced, detailed water quality report. Annual.",
+      "areaServed": {
+        "@type": "City",
+        "name": "Sydney"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "279",
+        "priceCurrency": "AUD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2027-12-31"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://filtersforyou.com.au/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Service Plans",
+          "item": "https://filtersforyou.com.au/service-plans"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How often should I service my water filter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most under sink and reverse osmosis water filter systems should be serviced annually. Filter cartridges typically last 6–12 months depending on usage and water quality. RO membranes last 2–3 years. Jean-Paul at Filters For You will advise the correct schedule for your specific system at installation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What water filter systems do you service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Filters For You services all major brands including HPF, Filter Systems Australia (FSA), Puretec, Zip, Billi and most other under sink, reverse osmosis and whole house systems — whether installed by Filters For You or another provider. Call 0430 546 749 to confirm your brand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to be home for the service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — Jean-Paul will need access to the system, which is typically under the kitchen sink or at the mains. Most service visits take 45–90 minutes. Jean-Paul will confirm the time window when you book."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a water filter service take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most annual service visits take between 45 minutes and 1.5 hours depending on the service tier and system type. Jean-Paul will confirm expected duration when you book."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the replacement cartridges WaterMark certified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All replacement filter cartridges and parts used by Filters For You are WaterMark certified to Australian standards. Only quality-certified parts are used — never cheap generic alternatives that could compromise your water quality."
+          }
+        }
       ]
     }
   ]
