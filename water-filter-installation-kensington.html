@@ -1582,5 +1582,100 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   window.addEventListener('resize',init);
 })();
 </script>
+
+<!-- SOCIAL PROOF WIDGET -->
+<style>
+.sp-wrap{position:fixed;bottom:24px;left:24px;z-index:9990;max-width:300px;pointer-events:none}
+.sp-popup{background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(11,97,244,.15),0 2px 8px rgba(0,0,0,.08);padding:12px 14px 12px 12px;display:flex;align-items:flex-start;gap:11px;pointer-events:auto;transform:translateY(20px);opacity:0;transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .3s ease;will-change:transform,opacity}
+.sp-popup.sp-show{transform:translateY(0);opacity:1}
+.sp-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:#fff;flex-shrink:0}
+.sp-body{flex:1;min-width:0}
+.sp-name{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:#324158;line-height:1.3}
+.sp-action{font-family:'Sora',sans-serif;font-size:12.5px;font-weight:400;color:#5a6a82;margin-top:2px;line-height:1.35}
+.sp-time{font-family:'Sora',sans-serif;font-size:11px;color:#9aa5b8;margin-top:4px;display:flex;align-items:center;gap:4px}
+.sp-time::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0}
+.sp-close{position:absolute;top:8px;right:8px;background:none;border:none;cursor:pointer;color:#9aa5b8;font-size:16px;line-height:1;padding:2px 4px;border-radius:4px;transition:color .15s}
+.sp-close:hover{color:#324158}
+.sp-popup{position:relative}
+</style>
+<div class="sp-wrap">
+  <div class="sp-popup" id="spPopup" role="status" aria-live="polite">
+    <div class="sp-avatar" id="spAvatar"></div>
+    <div class="sp-body">
+      <div class="sp-name" id="spName"></div>
+      <div class="sp-action" id="spAction"></div>
+      <div class="sp-time" id="spTime"></div>
+    </div>
+    <button class="sp-close" id="spClose" aria-label="Dismiss">✕</button>
+  </div>
+</div>
+<script>
+(function(){
+  var notifications = [
+    {name:'Sarah from Balmain',action:'just booked a water filter installation',time:'2 minutes ago',color:'#0B61F4'},
+    {name:'James from Newtown',action:'just requested a free water assessment',time:'5 minutes ago',color:'#059669'},
+    {name:'Emma from Surry Hills',action:'just booked a Pure Premium RO system',time:'8 minutes ago',color:'#7C3AED'},
+    {name:'Michael from Bondi',action:'just installed a whole house water filter',time:'12 minutes ago',color:'#EA580C'},
+    {name:'Lisa from Marrickville',action:'just booked a Pure Essential installation',time:'Just now',color:'#0B61F4'},
+    {name:'Tom from Paddington',action:'just requested a free quote',time:'3 minutes ago',color:'#0891B2'},
+    {name:'5 Sydney families',action:'booked a water filter installation today',time:'Today',color:'#059669'},
+    {name:'Rachel from Leichhardt',action:'just upgraded to a Pure Advanced system',time:'18 minutes ago',color:'#BE185D'},
+    {name:'David from Rozelle',action:'just booked a reverse osmosis installation',time:'6 minutes ago',color:'#EA580C'},
+    {name:'Mia from Glebe',action:'just booked a Pure Compact system',time:'11 minutes ago',color:'#7C3AED'},
+    {name:'9 people this week',action:'chose Filters For You for their home',time:'This week',color:'#0B61F4'},
+    {name:'Chris from Drummoyne',action:'just requested a free water assessment',time:'4 minutes ago',color:'#0891B2'},
+    {name:'Anna from Five Dock',action:'just booked a Pure Home whole house filter',time:'22 minutes ago',color:'#059669'},
+    {name:'Jake from Annandale',action:'just installed a Pure Plus+ RO system',time:'9 minutes ago',color:'#EA580C'},
+  ];
+
+  var popup = document.getElementById('spPopup');
+  var avatar = document.getElementById('spAvatar');
+  var nameEl = document.getElementById('spName');
+  var actionEl = document.getElementById('spAction');
+  var timeEl = document.getElementById('spTime');
+  var closeBtn = document.getElementById('spClose');
+
+  var idx = 0;
+  var dismissed = false;
+  var showTimer, hideTimer;
+
+  // Shuffle on load
+  notifications.sort(function(){ return Math.random() - 0.5; });
+
+  function show() {
+    if (dismissed) return;
+    var n = notifications[idx % notifications.length];
+    idx++;
+
+    // Set initial letter avatar
+    var initial = n.name.charAt(0);
+    avatar.textContent = initial;
+    avatar.style.background = n.color;
+    nameEl.textContent = n.name;
+    actionEl.textContent = n.action;
+    timeEl.textContent = n.time;
+
+    popup.classList.add('sp-show');
+
+    hideTimer = setTimeout(function(){
+      popup.classList.remove('sp-show');
+      // Wait 15-20s then show next
+      var wait = 15000 + Math.random() * 5000;
+      showTimer = setTimeout(show, wait);
+    }, 5000);
+  }
+
+  closeBtn.addEventListener('click', function(){
+    dismissed = true;
+    clearTimeout(showTimer);
+    clearTimeout(hideTimer);
+    popup.classList.remove('sp-show');
+  });
+
+  // Start after 4 seconds on page load
+  showTimer = setTimeout(show, 4000);
+})();
+</script>
+
 </body>
 </html>
