@@ -566,10 +566,10 @@ a{text-decoration:none;color:inherit}
 .dropdown-2col{display:flex;flex-direction:row;min-width:440px}
 .dropdown-col{flex:1;padding:0 2px}
 /* Flyout submenu */
-.has-sub{position:relative}
+.has-sub{position:relative;padding-right:10px}
 .has-sub>a{display:flex;align-items:center;justify-content:space-between}
 .has-sub>a::after{content:'›';font-size:16px;line-height:1;color:#9aa5b8;margin-left:8px}
-.sub-dropdown{position:absolute;left:calc(100% + 6px);top:-6px;background:#fff;border:1px solid rgba(50,65,88,.1);border-radius:12px;box-shadow:0 12px 40px rgba(11,97,244,.13),0 2px 8px rgba(0,0,0,.06);padding:6px;min-width:220px;opacity:0;visibility:hidden;transform:translateX(8px);transition:opacity .18s cubic-bezier(.4,0,.2,1),transform .18s cubic-bezier(.4,0,.2,1),visibility .18s;z-index:600;pointer-events:none}
+.sub-dropdown{position:absolute;left:100%;top:-6px;background:#fff;border:1px solid rgba(50,65,88,.1);border-radius:12px;box-shadow:0 12px 40px rgba(11,97,244,.13),0 2px 8px rgba(0,0,0,.06);padding:6px;min-width:220px;opacity:0;visibility:hidden;transform:translateX(4px);transition:opacity .18s cubic-bezier(.4,0,.2,1),transform .18s cubic-bezier(.4,0,.2,1),visibility .18s;z-index:600;pointer-events:none}
 .has-sub:hover .sub-dropdown{opacity:1;visibility:visible;transform:translateX(0);pointer-events:auto}
 .sub-dropdown a{display:block;padding:9px 13px;font-family:'Sora',sans-serif;font-size:14.5px;font-weight:500;color:#324158;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;text-decoration:none}
 .sub-dropdown a:hover{background:rgba(11,97,244,.07);color:#0b61f4}
@@ -1482,16 +1482,16 @@ a{text-decoration:none;color:inherit}
       </div>
     </div>
     <div class="mobile-section">
-      <button class="mobile-section-btn">Company <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="mobile-section-btn">Our Brands <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <div class="mobile-section-links">
-        <a href="about.html">About Us</a>
-        <a href="index.html#reviews">Reviews</a>
-        <a href="contact.html">Contact</a>
         <a href="high-performance-filtration-sydney.html">High Performance Filtration</a>
         <a href="filter-systems-australia-sydney.html">Filter Systems Australia</a>
       </div>
     </div>
     <div class="mobile-plain-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="index.html#reviews">Reviews</a>
       <a href="index.html#contact">Get a Free Quote</a>
       <a href="free-assessment.html">Get a Free Assessment</a>
     </div>
