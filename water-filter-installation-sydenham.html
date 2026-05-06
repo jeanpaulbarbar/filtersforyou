@@ -1852,23 +1852,46 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 
 <script id="ffy-mobile-nav-fallback-js">
-/* Fallback hamburger handler — binds click handler on DOMContentLoaded so it works even if the page's main dropdown-nav-js script ran before the mobile-nav HTML existed in DOM. Idempotent: marks elements as bound to avoid duplicate handlers. */
+/* FFY mobile-nav handler — clones nodes to strip any pre-existing listeners (from page-level dropdown-nav-js scripts that may have run before mobile-nav was in DOM, or that already bound), then attaches a single canonical handler set. Runs at DOMContentLoaded so the static mobile-nav element is guaranteed to exist. */
 (function(){
-  function bind(){
-    var ham=document.getElementById('navHamburger');
+  function setup(){
     var mob=document.getElementById('mobileNav');
-    var cls=document.getElementById('mobileNavClose');
-    if(!ham||!mob)return;
-    function openMob(){mob.classList.add('open');ham.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
-    function closeMob(){mob.classList.remove('open');ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-    if(!ham.__ffyBound){ham.addEventListener('click',openMob);ham.__ffyBound=true;}
-    if(cls&&!cls.__ffyBound){cls.addEventListener('click',closeMob);cls.__ffyBound=true;}
-    if(!mob.__ffyBound){
-      mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMob);});
-      mob.querySelectorAll('.mobile-section-btn').forEach(function(btn){btn.addEventListener('click',function(){btn.closest('.mobile-section').classList.toggle('open');});});
-      mob.__ffyBound=true;
+    if(!mob)return;
+    /* Clone-replace the hamburger so any pre-existing click handlers from older scripts are dropped */
+    var ham=document.getElementById('navHamburger');
+    if(ham){
+      var hamClone=ham.cloneNode(true);
+      ham.parentNode.replaceChild(hamClone,ham);
+      ham=hamClone;
     }
-    if(!document.__ffyEscBound){document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMob();});document.__ffyEscBound=true;}
+    /* Clone-replace the close button */
+    var cls=mob.querySelector('#mobileNavClose,.mobile-nav-close');
+    if(cls){
+      var clsClone=cls.cloneNode(true);
+      cls.parentNode.replaceChild(clsClone,cls);
+      cls=clsClone;
+    }
+    function openMob(){mob.classList.add('open');if(ham)ham.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+    function closeMob(){mob.classList.remove('open');if(ham)ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+    if(ham)ham.addEventListener('click',openMob);
+    if(cls)cls.addEventListener('click',closeMob);
+    /* Clone-replace each anchor so old close-on-click handlers are dropped, then bind ours once */
+    mob.querySelectorAll('a').forEach(function(a){
+      var c=a.cloneNode(true);
+      a.parentNode.replaceChild(c,a);
+      c.addEventListener('click',closeMob);
+    });
+    /* Clone-replace each section toggle button so the original page-level handler is removed and only ours fires (prevents double-toggle that cancels itself) */
+    mob.querySelectorAll('.mobile-section-btn').forEach(function(btn){
+      var c=btn.cloneNode(true);
+      btn.parentNode.replaceChild(c,btn);
+      c.addEventListener('click',function(){c.closest('.mobile-section').classList.toggle('open');});
+    });
+    if(!document.__ffyEsc){
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMob();});
+      document.__ffyEsc=true;
+    }
+    /* Active page highlight in nav links */
     var pg=(location.pathname.split('/').pop()||'index.html');
     if(pg==='')pg='index.html';
     document.querySelectorAll('.nav-links a[href],.dropdown a[href],.mobile-section-links a[href],.mobile-plain-links a[href]').forEach(function(a){
@@ -1878,7 +1901,7 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
       if(h&&h===pg)a.classList.add('active');
     });
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',bind);}else{bind();}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',setup);}else{setup();}
 })();
 </script>
 </body>
