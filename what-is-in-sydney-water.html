@@ -246,6 +246,34 @@ img{max-width:100%;display:block}
 .link-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
 .link-pill{background:#fff;border:1px solid rgba(11,97,244,.2);color:var(--blue);padding:8px 16px;border-radius:100px;font-size:13px;font-weight:600;transition:background .15s,color .15s}
 .link-pill:hover{background:var(--blue);color:#fff}
+
+/* ── CANONICAL HERO + TRUST PATTERN ── */
+.hero{background:linear-gradient(135deg,#041450 0%,#082D94 55%,#0b61f4 100%)!important;padding:70px 32px 60px!important;position:relative;overflow:hidden;text-align:center}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:420px;height:420px;background:rgba(255,217,0,.05);border-radius:50%;pointer-events:none}
+.hero-inner{max-width:800px!important;margin:0 auto;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);padding:7px 18px;border-radius:100px;font-size:14px;font-weight:600;color:#fff;margin-bottom:20px}
+.hero-badge-dot{width:7px;height:7px;background:var(--yellow);border-radius:50%;display:inline-block;flex-shrink:0}
+.hero h1{font-size:clamp(32px,5vw,56px)!important;font-weight:800;color:#fff;line-height:1.1;margin-bottom:18px;letter-spacing:-.025em}
+.hero-sub{font-size:18px!important;color:rgba(255,255,255,.82)!important;margin-bottom:26px!important;max-width:620px;margin-left:auto;margin-right:auto;line-height:1.65}
+.hero-stars{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:26px}
+.stars-label{font-size:15px;color:rgba(255,255,255,.75);font-weight:500}
+.hero-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:30px}
+.trust-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:13px;font-weight:600;padding:7px 14px;border-radius:6px}
+.trust-chip svg{flex-shrink:0;opacity:.85}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:17px;padding:13px 26px;border-radius:8px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;text-decoration:none;line-height:1}
+.btn:hover{transform:translateY(-2px)}
+.btn-yellow{background:var(--yellow);color:var(--dark);box-shadow:0 4px 20px rgba(255,217,0,.35)}
+.btn-yellow:hover{background:#ffe633}
+.btn-outline{background:rgba(255,255,255,.12);color:#fff;border:2px solid rgba(255,255,255,.4)}
+.btn-outline:hover{background:rgba(255,255,255,.22)}
+.trust-bar{background:#fff!important;border-bottom:1px solid rgba(50,65,88,.08)!important;padding:24px 32px!important;margin-top:0}
+.trust-bar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:20px}
+.trust-item{display:flex;align-items:center;gap:12px}
+.trust-icon{width:42px;height:42px;background:rgba(11,97,244,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.trust-label{font-size:19px;font-weight:700;color:var(--dark);line-height:1.25}
+.trust-sub{font-size:15px;font-weight:400;color:#5a6a7e}
+@media(max-width:768px){.trust-bar{padding:18px 16px!important}.trust-bar-inner{gap:14px}.trust-item{gap:8px}.trust-icon{width:34px;height:34px;font-size:15px}.trust-label{font-size:15px}.trust-sub{font-size:13px}}
 </style>
 <style id="dropdown-nav-css">
 .site-header{background:transparent!important}
@@ -547,27 +575,47 @@ img{max-width:100%;display:block}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-      Sydney Water Quality Guide
-    </div>
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Sydney Water Quality Guide</div>
     <h1>What Is in <span class="sh sh-y">Sydney Water?</span></h1>
     <p class="hero-sub">Chlorine, chloramines, fluoride, PFAS, trihalomethanes and more. Here's exactly what's in your Sydney tap water, the concentrations, the health context — and how to remove what concerns you.</p>
-    <div class="hero-actions">
-      <a href="#quote" class="btn-primary">Get a Free Quote</a>
-      <a href="tel:0430546749" class="btn-secondary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
-        0430 546 749
-      </a>
+    <div class="hero-stars">
+      <span class="stars-label">Sydney Water Quality &middot; Jean-Paul Barbar, Licensed Plumber 461511C &middot; Greater Sydney</span>
     </div>
-    <div class="trust-bar">
-      <div class="trust-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FFD900" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> 5.0 Stars — 8 Reviews</div>
-      <div class="trust-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FFD900" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg> Lic. 461511C</div>
-      <div class="trust-chip">Based on Sydney Water Data</div>
-      <div class="trust-chip">Expert Filtration Advice</div>
+    <div class="hero-trust">
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        Licensed Plumber 461511C
+      </span>
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        Greater Sydney
+      </span>
+      <span class="trust-chip">Based on Sydney Water Data</span>
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        Expert Filtration Advice
+      </span>
+    </div>
+    <div class="hero-btns">
+      <a href="tel:0430546749" class="btn btn-yellow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
+        Call 0430 546 749
+      </a>
+      <a href="#quote" class="btn btn-outline">Get a Free Quote</a>
     </div>
   </div>
 </section>
+
+<!-- ── TRUST BAR ── -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFD900" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><div class="trust-label">5.0 Google Rating</div><div class="trust-sub">9 verified reviews</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="15" r="1" fill="#0B61F4"/><path d="M11 15h6"/></svg></div><div><div class="trust-label">Licensed &amp; Insured</div><div class="trust-sub">Lic. 461511C NSW</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div><div><div class="trust-label">WaterMark Certified</div><div class="trust-sub">Australian standard systems</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="trust-label">Fixed Price Guaranteed</div><div class="trust-sub">No upsells on the day</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg></div><div><div class="trust-label">Lifetime Warranty</div><div class="trust-sub">On all workmanship</div></div></div>
+  </div>
+</div>
 
 <!-- STAT ROW -->
 <section class="sec sec-white">

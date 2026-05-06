@@ -389,6 +389,31 @@
     .compare-table{font-size:.78rem;}
     .compare-table td,.compare-table th{padding:9px 10px;}
   }
+
+  /* ── CANONICAL HERO + TRUST PATTERN ── */
+  .hero{background:linear-gradient(135deg,#041450 0%,#082D94 55%,#0b61f4 100%)!important;padding:70px 32px 60px!important;position:relative;overflow:hidden;text-align:center}
+  .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:420px;height:420px;background:rgba(255,217,0,.05);border-radius:50%;pointer-events:none}
+  .hero-inner{max-width:800px!important;margin:0 auto;position:relative;z-index:1}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);padding:7px 18px;border-radius:100px;font-size:14px;font-weight:600;color:#fff;margin-bottom:20px}
+  .hero-badge-dot{width:7px;height:7px;background:var(--yellow);border-radius:50%;display:inline-block;flex-shrink:0}
+  .hero h1{font-size:clamp(32px,5vw,56px)!important;font-weight:800;color:#fff;line-height:1.1;margin-bottom:18px;letter-spacing:-.025em}
+  .sh{font-family:'Shantell Sans',cursive;font-style:italic;font-weight:700;font-size:1.08em;display:inline}
+  .sh-y{color:var(--yellow)}
+  .sh-b{color:var(--blue)}
+  .hero-sub{font-size:18px!important;color:rgba(255,255,255,.82)!important;margin-bottom:26px!important;max-width:620px;margin-left:auto;margin-right:auto;line-height:1.65}
+  .hero-stars{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:26px}
+  .stars-label{font-size:15px;color:rgba(255,255,255,.75);font-weight:500}
+  .hero-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:30px}
+  .trust-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:13px;font-weight:600;padding:7px 14px;border-radius:6px}
+  .trust-chip svg{flex-shrink:0;opacity:.85}
+  .hero-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .trust-bar{background:#fff!important;border-bottom:1px solid rgba(50,65,88,.08)!important;padding:24px 32px!important}
+  .trust-bar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:20px}
+  .trust-item{display:flex;align-items:center;gap:12px}
+  .trust-icon{width:42px;height:42px;background:rgba(11,97,244,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+  .trust-label{font-size:19px;font-weight:700;color:var(--dark);line-height:1.25}
+  .trust-sub{font-size:15px;font-weight:400;color:#5a6a7e}
+  @media(max-width:768px){.trust-bar{padding:18px 16px!important}.trust-bar-inner{gap:14px}.trust-item{gap:8px}.trust-icon{width:34px;height:34px;font-size:15px}.trust-label{font-size:15px}.trust-sub{font-size:13px}}
 </style>
 <style id="dropdown-nav-css">
 .site-header{background:transparent!important}
@@ -597,39 +622,48 @@
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">Sydney Water Filter Decision Guide</div>
-    <h1>How to Choose a Water Filter for Your <span class="sh-y">Sydney</span> Home</h1>
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Sydney Water Filter Decision Guide</div>
+    <h1>How to Choose a Water Filter<br>for Your <span class="sh sh-y">Sydney</span> Home</h1>
     <p class="hero-sub">Budget, contaminants, household size — Jean-Paul Barbar walks you through the four questions that determine the right water filter for your situation.</p>
+    <div class="hero-stars">
+      <span class="stars-label">Decision Guide &middot; Jean-Paul Barbar, Licensed Plumber 461511C &middot; Greater Sydney</span>
+    </div>
+    <div class="hero-trust">
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        Licensed Plumber 461511C
+      </span>
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        Greater Sydney
+      </span>
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+        Fixed Upfront Price
+      </span>
+      <span class="trust-chip">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        Lifetime Warranty
+      </span>
+    </div>
     <div class="hero-btns">
-      <a href="free-assessment.html" class="btn btn-yellow">Get a Personalised Recommendation</a>
-      <a href="tel:0430546749" class="btn btn-outline">Call 0430 546 749</a>
+      <a href="tel:0430546749" class="btn btn-yellow">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
+        Call 0430 546 749
+      </a>
+      <a href="free-assessment.html" class="btn btn-outline">Get a Personalised Recommendation</a>
     </div>
   </div>
 </section>
 
 <!-- ── TRUST BAR ── -->
 <div class="trust-bar">
-  <div class="trust-inner">
-    <div class="trust-item">
-      <span class="stars">★★★★★</span>
-      <span>5.0 · 9 Reviews</span>
-    </div>
-    <div class="trust-item">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Licensed Plumber — Lic. 461511C
-    </div>
-    <div class="trust-item">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-      Fixed Price — No Upsells
-    </div>
-    <div class="trust-item">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Installed Within One Week
-    </div>
-    <div class="trust-item">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-      Lifetime Workmanship Warranty
-    </div>
+  <div class="trust-bar-inner">
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFD900" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><div class="trust-label">5.0 Google Rating</div><div class="trust-sub">9 verified reviews</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="15" r="1" fill="#0B61F4"/><path d="M11 15h6"/></svg></div><div><div class="trust-label">Licensed &amp; Insured</div><div class="trust-sub">Lic. 461511C NSW</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div><div><div class="trust-label">WaterMark Certified</div><div class="trust-sub">Australian standard systems</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div><div class="trust-label">Fixed Price Guaranteed</div><div class="trust-sub">No upsells on the day</div></div></div>
+    <div class="trust-item"><div class="trust-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg></div><div><div class="trust-label">Lifetime Warranty</div><div class="trust-sub">On all workmanship</div></div></div>
   </div>
 </div>
 
