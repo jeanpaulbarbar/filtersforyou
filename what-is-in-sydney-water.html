@@ -445,6 +445,7 @@ body{font-size:16px!important;line-height:1.65!important}
   .nav{top:46px!important}
   .nav-inner{height:60px!important;padding:0 16px!important}
   body{padding-top:106px!important}
+  #navSpacer,.nav-spacer{height:0!important}
 }
 @media(min-width:901px){
   .site-header{position:fixed!important;top:0!important;left:0!important;right:0!important;z-index:1000!important;transition:transform .35s cubic-bezier(.4,0,.2,1)!important}
@@ -1092,5 +1093,35 @@ if(sc)sc.addEventListener('click',()=>{sp.classList.remove('sp-show');});
   <p>Filters For You provides expert information on Sydney tap water quality — chloramines, fluoride, microplastics and PFAS — and installs water filter systems across Greater Sydney to remove these contaminants. Jean-Paul Barbar, NSW Licensed Plumber 461511C, based in Croydon Park. Phone: 0430 546 749. Website: filtersforyou.com.au.</p>
 </div>
 
+<script id="ffy-mobile-nav-fallback-js">
+/* Fallback hamburger handler — binds click handler on DOMContentLoaded so it works even if the page's main dropdown-nav-js script ran before the mobile-nav HTML existed in DOM. Idempotent: marks elements as bound to avoid duplicate handlers. */
+(function(){
+  function bind(){
+    var ham=document.getElementById('navHamburger');
+    var mob=document.getElementById('mobileNav');
+    var cls=document.getElementById('mobileNavClose');
+    if(!ham||!mob)return;
+    function openMob(){mob.classList.add('open');ham.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+    function closeMob(){mob.classList.remove('open');ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+    if(!ham.__ffyBound){ham.addEventListener('click',openMob);ham.__ffyBound=true;}
+    if(cls&&!cls.__ffyBound){cls.addEventListener('click',closeMob);cls.__ffyBound=true;}
+    if(!mob.__ffyBound){
+      mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMob);});
+      mob.querySelectorAll('.mobile-section-btn').forEach(function(btn){btn.addEventListener('click',function(){btn.closest('.mobile-section').classList.toggle('open');});});
+      mob.__ffyBound=true;
+    }
+    if(!document.__ffyEscBound){document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMob();});document.__ffyEscBound=true;}
+    var pg=(location.pathname.split('/').pop()||'index.html');
+    if(pg==='')pg='index.html';
+    document.querySelectorAll('.nav-links a[href],.dropdown a[href],.mobile-section-links a[href],.mobile-plain-links a[href]').forEach(function(a){
+      var href=a.getAttribute('href')||'';
+      if(href.includes('#'))return;
+      var h=href.split('#')[0];
+      if(h&&h===pg)a.classList.add('active');
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',bind);}else{bind();}
+})();
+</script>
 </body>
 </html>

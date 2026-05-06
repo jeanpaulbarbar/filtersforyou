@@ -2897,5 +2897,35 @@ document.addEventListener('DOMContentLoaded', function() {
   showTimer = setTimeout(show, 15000 + Math.random() * 5000);
 })();
 </script>
+<script id="ffy-mobile-nav-fallback-js">
+/* Fallback hamburger handler — binds click handler on DOMContentLoaded so it works even if the page's main dropdown-nav-js script ran before the mobile-nav HTML existed in DOM. Idempotent: marks elements as bound to avoid duplicate handlers. */
+(function(){
+  function bind(){
+    var ham=document.getElementById('navHamburger');
+    var mob=document.getElementById('mobileNav');
+    var cls=document.getElementById('mobileNavClose');
+    if(!ham||!mob)return;
+    function openMob(){mob.classList.add('open');ham.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+    function closeMob(){mob.classList.remove('open');ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+    if(!ham.__ffyBound){ham.addEventListener('click',openMob);ham.__ffyBound=true;}
+    if(cls&&!cls.__ffyBound){cls.addEventListener('click',closeMob);cls.__ffyBound=true;}
+    if(!mob.__ffyBound){
+      mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMob);});
+      mob.querySelectorAll('.mobile-section-btn').forEach(function(btn){btn.addEventListener('click',function(){btn.closest('.mobile-section').classList.toggle('open');});});
+      mob.__ffyBound=true;
+    }
+    if(!document.__ffyEscBound){document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMob();});document.__ffyEscBound=true;}
+    var pg=(location.pathname.split('/').pop()||'index.html');
+    if(pg==='')pg='index.html';
+    document.querySelectorAll('.nav-links a[href],.dropdown a[href],.mobile-section-links a[href],.mobile-plain-links a[href]').forEach(function(a){
+      var href=a.getAttribute('href')||'';
+      if(href.includes('#'))return;
+      var h=href.split('#')[0];
+      if(h&&h===pg)a.classList.add('active');
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',bind);}else{bind();}
+})();
+</script>
 </body>
 </html>
