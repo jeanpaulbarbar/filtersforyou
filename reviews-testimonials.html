@@ -277,6 +277,56 @@ img{max-width:100%;display:block}
 .trust-label{font-size:19px;font-weight:700;color:var(--dark);line-height:1.25}
 .trust-sub{font-size:15px;font-weight:400;color:#5a6a7e}
 @media(max-width:768px){.trust-bar{padding:18px 16px!important}.trust-bar-inner{gap:14px}.trust-item{gap:8px}.trust-icon{width:34px;height:34px;font-size:15px}.trust-label{font-size:15px}.trust-sub{font-size:13px}}
+
+/* ── CANONICAL NAV (override) ── */
+.ticker{background:var(--yellow)!important;color:var(--dark)!important;font-size:15px!important;font-weight:700!important;padding:11px 0!important;overflow:hidden;white-space:nowrap;display:block!important}
+.ticker-track{display:inline-flex;animation:tick 28s linear infinite}
+.ticker-item{padding:0 28px;display:inline-flex;align-items:center;gap:8px}
+.ticker-item::before{content:'●';color:var(--dark);font-size:7px;opacity:.5}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.nav{background:#fff!important;border-bottom:1px solid rgba(50,65,88,.1)!important;box-shadow:0 2px 14px rgba(11,97,244,.07);padding:0!important;height:auto!important}
+.nav-inner{display:flex!important;align-items:center;justify-content:space-between;padding:0 32px!important;max-width:1280px;margin:0 auto;height:68px!important;gap:32px}
+.nav-logo img{height:40px!important;width:auto}
+.online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}
+.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:blink 2s infinite;box-shadow:0 0 0 2px rgba(34,197,94,.2)}
+@keyframes blink{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,.2)}50%{box-shadow:0 0 0 5px rgba(34,197,94,.08)}}
+.nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue)!important;color:#fff!important;font-weight:700;font-size:15px;padding:11px 20px!important;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap}
+.nav-cta:hover{background:#0C4BB9!important;transform:translateY(-1px)}
+.nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235!important;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none}
+.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}
+@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px 6px;border-radius:7px;align-items:center;justify-content:center;flex-direction:column;gap:5px;flex-shrink:0}
+.nav-hamburger:hover{background:rgba(50,65,88,.08)}
+.ham-bar{display:block;width:22px;height:2px;background:#324158;border-radius:1px}
+.nav-links{display:flex!important;align-items:center;gap:2px!important;list-style:none;margin:0;padding:0}
+.nav-item{position:relative}
+.nav-item::after{content:'';position:absolute;bottom:-10px;left:0;right:0;height:10px;background:transparent}
+.nav-link-btn{display:flex;align-items:center;gap:5px;font-family:'Sora',sans-serif;font-size:15.5px;font-weight:600;color:#324158;background:none;border:none;cursor:pointer;padding:8px 11px;border-radius:7px;transition:color .2s,background .2s;white-space:nowrap;line-height:1}
+.nav-link-btn:hover,.nav-link-btn:focus-visible{color:#0b61f4;background:rgba(11,97,244,.06);outline:none}
+.nav-link-btn .chevron{transition:transform .22s;flex-shrink:0}
+.nav-item:hover .nav-link-btn .chevron{transform:rotate(180deg)}
+.dropdown{position:absolute;top:calc(100% + 10px);left:0;background:#fff;border:1px solid rgba(50,65,88,.1);border-radius:12px;box-shadow:0 12px 40px rgba(11,97,244,.13),0 2px 8px rgba(0,0,0,.06);padding:6px;min-width:230px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s;z-index:500;pointer-events:none}
+.nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+.dropdown a{display:block;padding:9px 13px;font-family:'Sora',sans-serif;font-size:14.5px;font-weight:500;color:#324158;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;text-decoration:none}
+.dropdown a:hover,.dropdown a.active{background:rgba(11,97,244,.07);color:#0b61f4}
+.dropdown a.active{font-weight:600}
+.dropdown-2col{display:flex;flex-direction:row;min-width:440px}
+.dropdown-col{flex:1;padding:0 2px}
+.has-sub{position:relative;padding-right:10px}
+.has-sub>a{display:flex;align-items:center;justify-content:space-between}
+.has-sub>a::after{content:'›';font-size:16px;line-height:1;color:#9aa5b8;margin-left:8px}
+.sub-dropdown{position:absolute;left:100%;top:-6px;background:#fff;border:1px solid rgba(50,65,88,.1);border-radius:12px;box-shadow:0 12px 40px rgba(11,97,244,.13),0 2px 8px rgba(0,0,0,.06);padding:6px;min-width:220px;opacity:0;visibility:hidden;transform:translateX(4px);transition:opacity .18s,transform .18s,visibility .18s;z-index:600;pointer-events:none}
+.has-sub:hover .sub-dropdown{opacity:1;visibility:visible;transform:translateX(0);pointer-events:auto}
+.sub-dropdown a{display:block;padding:9px 13px;font-family:'Sora',sans-serif;font-size:14.5px;font-weight:500;color:#324158;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;text-decoration:none}
+.sub-dropdown a:hover{background:rgba(11,97,244,.07);color:#0b61f4}
+.dropdown-divider{border:none;border-top:1px solid rgba(50,65,88,.1);margin:5px 2px 3px}
+.nav-ctas{display:flex;align-items:center;gap:10px}
+.nav-ctas .online-dot-wrap{margin-right:30px}
+@media(max-width:900px){.nav-links{display:none!important}.nav-hamburger{display:flex!important;order:99}.online-dot-wrap{display:none!important}}
+
+/* ── CANONICAL TYPOGRAPHY NORMALISATION ── */
+body{font-size:16px!important;line-height:1.65!important}
+.sec-body{font-size:17px!important;line-height:1.65!important;max-width:580px!important;color:#5a6a7e!important}
 </style>
 </head>
 <body>
@@ -295,62 +345,119 @@ img{max-width:100%;display:block}
 </div>
 
 <!-- HEADER -->
-<header class="site-header" id="siteHeader">
-  <div class="ticker">
-    <span>5.0 Stars &mdash; 8 Google Reviews &mdash; Sydney's Most Trusted Water Filter Installer &mdash; <a href="tel:0430546749">0430 546 749</a></span>
+<div class="site-header">
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
+    <span class="ticker-item">Sydney Wide Service</span>
+    <span class="ticker-item">Payment Plans Available</span>
+    <span class="ticker-item">No Hidden Fees · Free Quotes</span>
+    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
+    <span class="ticker-item">Removes Chlorine, Sediment &amp; Microplastics</span>
+    <span class="ticker-item">Sydney Wide Service</span>
+    <span class="ticker-item">Payment Plans Available</span>
+    <span class="ticker-item">No Hidden Fees · Free Quotes</span>
+    <span class="ticker-item">Licensed Plumber Lic. 461511C</span>
+    <span class="ticker-item">WaterMark Certified Systems</span>
   </div>
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Filters For You Home">
-        <img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" width="140" height="36">
-      </a>
-      <ul class="nav-links" role="list">
-        <li>
-          <button aria-haspopup="true" aria-expanded="false">Systems <svg class="nav-chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="dropdown" role="menu">
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="assets/brand/logos/logo-transparent.svg" alt="Filters For You" height="40"></a>
+    <ul class="nav-links" id="navLinks">
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Systems <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown dropdown-2col">
+          <div class="dropdown-col">
             <a href="under-sink-water-filter-sydney.html">Under Sink Water Filter</a>
             <a href="whole-house-water-filter-sydney.html">Whole House Water Filter</a>
             <a href="reverse-osmosis-water-filter-sydney.html">Reverse Osmosis</a>
-            <a href="alkaline-water-filter-sydney.html">Alkaline Water Filter</a>
             <a href="water-filter-systems.html">View All Systems</a>
             <a href="service-plans.html">Service Plans</a>
+            <div style="border-top:1px solid rgba(50,65,88,.1);margin:5px 2px 3px"></div>
+            <a href="pure-essential-water-filter-sydney.html">Pure Essential</a>
+            <a href="pure-plus-water-filter-sydney.html">Pure Plus+</a>
+            <a href="pure-premium-water-filter-sydney.html">Pure Premium</a>
+          </div>
+          <div class="dropdown-col">
+            <a href="pure-advanced-water-filter-sydney.html">Pure Advanced</a>
+            <a href="pure-luxe-water-filter-sydney.html">Pure Luxe</a>
+            <a href="pure-home-water-filter-sydney.html">Pure Home</a>
+            <a href="pure-compact-water-filter-sydney.html">Pure Compact</a>
+            <a href="alkaline-water-filter-sydney.html">Alkaline Water Filter</a>
             <a href="water-filter-cartridge-replacement-sydney.html">Cartridge Replacement</a>
           </div>
-        </li>
-        <li>
-          <button aria-haspopup="true" aria-expanded="false">Locations <svg class="nav-chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="dropdown" role="menu">
-            <a href="locations-inner-west.html">Inner West</a>
-            <a href="locations-eastern-suburbs.html">Eastern Suburbs</a>
-            <a href="locations-south-sydney.html">South Sydney</a>
-            <a href="locations-inner-city.html">Inner City &amp; CBD</a>
-            <a href="locations-western-sydney.html">Western Sydney</a>
-            <a href="locations-north-shore.html">North Shore &amp; Beyond</a>
+        </div>
+      </li>
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Locations <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown">
+          <a href="locations-inner-west.html">Inner West</a>
+          <a href="locations-eastern-suburbs.html">Eastern Suburbs</a>
+          <a href="locations-south-sydney.html">South Sydney</a>
+          <a href="locations-inner-city.html">Inner City &amp; CBD</a>
+          <a href="locations-western-sydney.html">Western Sydney</a>
+          <a href="locations-north-shore.html">North Shore &amp; Beyond</a>
+        </div>
+      </li>
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Resources <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown">
+          <a href="free-assessment.html">Free Water Assessment</a>
+          <a href="how-water-filters-work.html">How Water Filters Work</a>
+          <a href="is-sydney-water-safe.html">Is Sydney Water Safe?</a>
+          <a href="sydney-water-quality-guide.html">Sydney Water Quality Guide</a>
+          <a href="sydney-water-filter-cost-guide.html">Water Filter Cost Guide</a>
+          <a href="water-filter-faq-sydney.html">Water Filter FAQ</a>
+          <a href="water-filter-maintenance-guide.html">Maintenance Guide</a>
+          <a href="water-savings-calculator.html">Water Savings Calculator</a>
+          <a href="filter-lifespan-calculator.html">Filter Lifespan Calculator</a>
+          <a href="water-filter-pfas-removal-sydney.html">PFAS Water Filter Guide</a>
+          <a href="best-water-filter-sydney.html">Best Water Filter Sydney</a>
+          <a href="how-to-choose-water-filter-sydney.html">How to Choose a Water Filter</a>
+          <a href="reverse-osmosis-vs-whole-house-water-filter-sydney.html">RO vs Whole House</a>
+          <a href="water-filter-brand-comparison-sydney.html">Brand Comparison</a>
+          <a href="fluoride-in-sydney-water.html">Fluoride in Sydney Water</a>
+          <a href="what-is-in-sydney-water.html">What's in Sydney Water?</a>
+        </div>
+      </li>
+      <li class="nav-item has-dropdown">
+        <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Company <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown">
+          <a href="about.html">About Us</a>
+          <a href="reviews-testimonials.html" class="active">Reviews &amp; Testimonials</a>
+          <a href="contact.html">Contact</a>
+          <hr class="dropdown-divider">
+          <div class="has-sub">
+            <a href="#">Our Brands</a>
+            <div class="sub-dropdown">
+              <a href="high-performance-filtration-sydney.html">High Performance Filtration</a>
+              <a href="filter-systems-australia-sydney.html">Filter Systems Australia</a>
+            </div>
           </div>
-        </li>
-        <li>
-          <button aria-haspopup="true" aria-expanded="false">Resources <svg class="nav-chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="dropdown" role="menu">
-            <a href="how-water-filters-work.html">How Water Filters Work</a>
-            <a href="is-sydney-water-safe.html">Is Sydney Water Safe?</a>
-            <a href="what-is-in-sydney-water.html">What's in Sydney Water?</a>
-            <a href="sydney-water-filter-cost-guide.html">Cost Guide</a>
-            <a href="best-water-filter-sydney.html">Best Water Filter Sydney</a>
-            <a href="how-to-choose-water-filter-sydney.html">How to Choose a Water Filter</a>
-            <a href="reverse-osmosis-vs-whole-house-water-filter-sydney.html">RO vs Whole House</a>
-            <a href="water-filter-brand-comparison-sydney.html">Brand Comparison</a>
-            <a href="fluoride-in-sydney-water.html">Fluoride in Sydney Water</a>
-          </div>
-        </li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="free-assessment.html" class="nav-cta">Free Assessment</a></li>
-      </ul>
-      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
-        <span></span><span></span><span></span>
-      </button>
+        </div>
+      </li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+    </button>
+    <div class="nav-ctas">
+      <div class="online-dot-wrap"><div class="dot"></div>Online</div>
+      <a href="contact.html" class="nav-cta-quote">Get a Free Quote</a>
+      <a href="tel:0430546749" class="nav-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>
+        0430 546 749
+      </a>
     </div>
-  </nav>
-</header>
+  </div>
+</nav>
+</div>
 <div id="navSpacer" aria-hidden="true"></div>
 
 <!-- MOBILE NAV -->
