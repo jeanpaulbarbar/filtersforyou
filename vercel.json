@@ -1,16 +1,4 @@
 {
-  "rewrites": [
-    {
-      "source": "/under-sink-water-filter-sydney",
-      "destination": "/under-sink-water-filter-sydney.html"
-    },
-    {
-      "source": "/water-filter-installation-auburn",
-      "destination": "/water-filter-installation-auburn.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/about.html"
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
