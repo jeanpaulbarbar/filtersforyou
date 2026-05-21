@@ -2362,45 +2362,42 @@ a{text-decoration:none;color:inherit}
       </span>
     </div>
   </div>
-
-  // Infinite Carousel Pause on Hover
-  (function() {
-    const track = document.querySelector('.rc-track');
-    const trackOuter = document.querySelector('.rc-track-outer');
-    if (!track || !trackOuter) return;
-    
-    let pauseTimeout = null;
-    
-    // Pause on hover
-    trackOuter.addEventListener('mouseenter', () => {
-      track.classList.add('paused');
-      if (pauseTimeout) clearTimeout(pauseTimeout);
-    });
-    
-    // Resume after hover
-    trackOuter.addEventListener('mouseleave', () => {
-      if (pauseTimeout) clearTimeout(pauseTimeout);
-      pauseTimeout = setTimeout(() => {
-        track.classList.remove('paused');
-      }, 100);
-    });
-    
-    // Pause on touch
-    trackOuter.addEventListener('touchstart', () => {
-      track.classList.add('paused');
-      if (pauseTimeout) clearTimeout(pauseTimeout);
-    }, { passive: true });
-    
-    // Resume after touch
-    trackOuter.addEventListener('touchend', () => {
-      if (pauseTimeout) clearTimeout(pauseTimeout);
-      pauseTimeout = setTimeout(() => {
-        track.classList.remove('paused');
-      }, 2000);
-    }, { passive: true });
-  })();
-
 </footer>
+
+<script>
+(function() {
+  const track = document.querySelector('.rc-track');
+  const trackOuter = document.querySelector('.rc-track-outer');
+  if (!track || !trackOuter) return;
+
+  let pauseTimeout = null;
+
+  trackOuter.addEventListener('mouseenter', () => {
+    track.classList.add('paused');
+    if (pauseTimeout) clearTimeout(pauseTimeout);
+  });
+
+  trackOuter.addEventListener('mouseleave', () => {
+    if (pauseTimeout) clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => {
+      track.classList.remove('paused');
+    }, 100);
+  });
+
+  trackOuter.addEventListener('touchstart', () => {
+    track.classList.add('paused');
+    if (pauseTimeout) clearTimeout(pauseTimeout);
+  }, { passive: true });
+
+  trackOuter.addEventListener('touchend', () => {
+    if (pauseTimeout) clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => {
+      track.classList.remove('paused');
+    }, 2000);
+  }, { passive: true });
+})();
+</script>
+
 
 <script>
 document.querySelectorAll('.rc-more').forEach(btn => {
