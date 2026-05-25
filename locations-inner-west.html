@@ -493,6 +493,15 @@ a{text-decoration:none;color:inherit}
 .nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
+
+/* SHOW-MORE-TOGGLE */
+.suburb-card.is-hidden{display:none!important}
+.suburb-grid.is-expanded .suburb-card.is-hidden{display:block!important}
+.show-more-wrap{text-align:center;margin-top:28px}
+.show-more-btn{background:var(--blue);color:#fff;padding:13px 32px;border-radius:10px;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:background .2s,transform .2s;display:inline-flex;align-items:center;gap:8px}
+.show-more-btn:hover{background:#0C4BB9;transform:translateY(-1px)}
+.show-more-btn svg{transition:transform .25s}
+.show-more-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
 </style>
 <style id="dropdown-nav-css">
 /* === DROPDOWN NAV === */
@@ -1728,5 +1737,34 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-ap1.hs-scripts.com/443181620.js"></script>
 <!-- End of HubSpot Embed Code -->
+
+<!-- SHOW-MORE-TOGGLE -->
+<script>
+// "Show more" toggle for region hub suburb grids with >30 cards
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.suburb-grid').forEach(function(grid) {
+    var cards = grid.querySelectorAll(':scope > .suburb-card');
+    if (cards.length <= 30) return;
+    var hiddenCount = cards.length - 30;
+    cards.forEach(function(card, i) {
+      if (i >= 30) card.classList.add('is-hidden');
+    });
+    var wrap = document.createElement('div');
+    wrap.className = 'show-more-wrap';
+    var btn = document.createElement('button');
+    btn.className = 'show-more-btn';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = 'Show ' + hiddenCount + ' More Suburbs <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    wrap.appendChild(btn);
+    grid.parentNode.insertBefore(wrap, grid.nextSibling);
+    btn.addEventListener('click', function() {
+      var expanded = grid.classList.toggle('is-expanded');
+      btn.setAttribute('aria-expanded', expanded);
+      btn.innerHTML = (expanded ? 'Show Less' : 'Show ' + hiddenCount + ' More Suburbs') + ' <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    });
+  });
+});
+</script>
+
 </body>
 </html>
