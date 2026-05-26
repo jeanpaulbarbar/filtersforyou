@@ -1147,6 +1147,7 @@ a{text-decoration:none;color:inherit}
 .fv2-ftrig:hover{color:rgba(255,255,255,.85)}
 .fv2-caret{font-size:9px;color:rgba(255,255,255,.3);transition:color .15s}
 .fv2-flyout{position:absolute;bottom:calc(100% + 8px);left:0;background:#253a4e;border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:10px 14px;min-width:200px;z-index:200;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease;box-shadow:0 -8px 28px rgba(0,0,0,.4)}
+.fv2-flyout::before{content:"";position:absolute;left:0;right:0;bottom:-10px;height:10px;background:transparent}
 .fv2-f2c{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;min-width:320px}
 .fv2-flyout-wrap:hover .fv2-flyout{opacity:1;pointer-events:auto;transform:none}
 .fv2-flyout-wrap:hover .fv2-caret{color:rgba(255,255,255,.6)}
