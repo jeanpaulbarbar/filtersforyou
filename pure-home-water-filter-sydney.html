@@ -338,7 +338,7 @@
           "name": "How often does the whole house filter need servicing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The three filter cartridges in the HPF-3 are typically replaced every 6–12 months depending on water quality and usage volume. Jean-Paul offers a professional annual service for $500 including all three cartridges and labour. DIY replacement is $380 per year, the large-format housings are standard 20 x 4.5 inch units with a filter housing wrench."
+            "text": "The three filter cartridges in the HPF-3 are replaced annually, once every 12 months. Jean-Paul offers a professional annual service for $500 including all three cartridges and labour. DIY replacement is $380 per year, the large-format housings are standard 20 x 4.5 inch units with a filter housing wrench."
           }
         },
         {
@@ -426,7 +426,8 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .content-body ul{margin:0 0 16px 20px}.content-body ul li{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:6px}
 .stages-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}
 .stage-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.08);border:1.5px solid rgba(11,97,244,.06);position:relative}
-.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
+.stage-img{display:block;width:100%;height:160px;object-fit:contain;background:linear-gradient(180deg,#f5f9ff,#e9f1ff);border-radius:12px;padding:12px;margin-bottom:18px}
 .stage-name{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.2}
 .stage-rating{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:12px}
 .stage-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:14px}
@@ -439,6 +440,13 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .specs-table td:last-child{text-align:right;font-weight:600;color:var(--dark)}
 .specs-table tr:last-child td{border-bottom:none}.specs-table tr:hover td{background:var(--light)}
 .specs-table-wrap{overflow-x:auto;border-radius:14px}
+.spec-drop{max-width:780px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}
+.spec-drop-q{width:100%;text-align:left;background:none;border:none;padding:18px 24px;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.spec-drop-q .faq-icon{transition:transform .25s}
+.spec-drop.open .faq-icon{transform:rotate(45deg)}
+.spec-drop-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
+.spec-drop.open .spec-drop-a{max-height:1400px;padding:0 16px 18px}
+.spec-drop .specs-table{box-shadow:none}
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
 .pricing-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.09);border:1.5px solid rgba(11,97,244,.08)}
 .pricing-card.featured{border-color:var(--blue);background:linear-gradient(135deg,#f0f6ff 0%,#fff 100%);position:relative}
@@ -945,7 +953,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         </div>
         <ul class="product-features">
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Filters every tap, shower, laundry, dishwasher and hot water system</li>
-          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>3-stage: sediment + carbon block + fine carbon/ceramic final stage</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>3-stage: 5-micron sediment + 20-micron carbon block + 0.5-micron catalytic carbon</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Removes chloramine, chlorine, VOCs and sediment at the whole-house level</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Stainless steel weatherproof enclosure, outdoor wall mount</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Installed on main supply line, upstream of all outlets</li>
@@ -985,24 +993,27 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="stages-grid">
         <div class="stage-card">
           <div class="stage-num">1</div>
-          <div class="stage-name">5-Micron Sediment Filter</div>
-          <div class="stage-rating">Particles, silt, rust, suspended solids</div>
-          <div class="stage-desc">The first stage captures physical particulates from your mains supply, sand, silt, rust, scale and suspended solids. Protects the downstream carbon stages and your home's appliances, hot water system and tapware from sediment damage. Standard 20x4.5" housing, replaced every 6–12 months.</div>
+          <img class="stage-img" src="assets/supplier/pp4520-05.webp" alt="5 micron polypropylene spun sediment filter cartridge for the HPF-3 whole house system, 20 x 4.5 inch" width="600" height="600" loading="lazy">
+          <div class="stage-name">5-Micron Polypropylene Spun Sediment Filter</div>
+          <div class="stage-rating">Sediment, silt, rust, scale and suspended solids</div>
+          <div class="stage-desc">The first stage is a triple-gradient polypropylene spun cartridge that captures physical particulates from your mains supply, sand, silt, rust, scale and suspended solids. It protects the downstream carbon stages and your home's appliances, hot water system and tapware from sediment damage. Standard 20 x 4.5" housing, replaced annually (every 12 months).</div>
           <div class="stage-tags"><span class="stage-tag">Sediment</span><span class="stage-tag">Silt</span><span class="stage-tag">Rust</span><span class="stage-tag">Scale</span><span class="stage-tag">Appliance protection</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">2</div>
-          <div class="stage-name">Carbon Block Filter</div>
-          <div class="stage-rating">Chlorine, chloramine, VOCs, chemical taste & odour</div>
-          <div class="stage-desc">The core treatment stage. A high-grade activated carbon block (or catalytic carbon for chloramine) removes chlorine, chloramine, VOCs, herbicides, pesticides, and chemical taste and odour from all water entering the home. This is the stage that makes every shower, tap and appliance outlet run on chloramine-reduced water. Replaced every 6–12 months.</div>
-          <div class="stage-tags"><span class="stage-tag">Chloramine</span><span class="stage-tag">Chlorine</span><span class="stage-tag">VOCs</span><span class="stage-tag">Whole-home treatment</span></div>
+          <img class="stage-img" src="assets/supplier/gt4-19lpd.webp" alt="20 micron low pressure drop coconut carbon block filter cartridge for the HPF-3 whole house system, 20 x 4.5 inch" width="600" height="600" loading="lazy">
+          <div class="stage-name">20-Micron Low Pressure Drop Carbon Block</div>
+          <div class="stage-rating">Chlorine, VOCs, chemical taste & odour</div>
+          <div class="stage-desc">The core treatment stage. A coconut-shell activated carbon block removes chlorine, VOCs, herbicides, pesticides, and chemical taste and odour from all water entering the home. Its low pressure drop design keeps strong flow and water pressure to every tap, shower and appliance while it treats the whole supply. Replaced annually (every 12 months).</div>
+          <div class="stage-tags"><span class="stage-tag">Chlorine</span><span class="stage-tag">VOCs</span><span class="stage-tag">Taste &amp; odour</span><span class="stage-tag">Strong flow</span><span class="stage-tag">Whole-home treatment</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">3</div>
-          <div class="stage-name">Fine Carbon Block or Ceramic Filter</div>
-          <div class="stage-rating">Final polish, fine particles and residual chemicals</div>
-          <div class="stage-desc">The third stage provides a finer post-treatment pass, typically a 1-micron carbon block or ceramic filter that catches any fine particles and residual chemical compounds that passed through the first two stages. Final water quality check before distribution through the home. Replaced every 12 months.</div>
-          <div class="stage-tags"><span class="stage-tag">Fine particles</span><span class="stage-tag">Residual chemicals</span><span class="stage-tag">Post-polish</span><span class="stage-tag">Final quality check</span></div>
+          <img class="stage-img" src="assets/supplier/gt4-19crc.webp" alt="0.5 micron catalytic coconut carbon block chloramine reduction filter cartridge for the HPF-3 whole house system, 20 x 4.5 inch" width="600" height="600" loading="lazy">
+          <div class="stage-name">0.5-Micron Catalytic Carbon Block (Chloramine Reduction)</div>
+          <div class="stage-rating">Chloramine plus fine 0.5-micron polish</div>
+          <div class="stage-desc">The final stage is a catalytic coconut carbon block specifically selected to reduce chloramine, the harder-to-remove disinfectant Sydney Water uses. At 0.5 micron it also polishes out fine particles and residual chemical compounds that passed the earlier stages. This is the stage that makes every shower and tap in the home run on chloramine-reduced water. Replaced annually (every 12 months).</div>
+          <div class="stage-tags"><span class="stage-tag">Chloramine</span><span class="stage-tag">Fine 0.5 micron</span><span class="stage-tag">Residual chemicals</span><span class="stage-tag">Final polish</span></div>
         </div>
         </div>
     </div>
@@ -1015,25 +1026,32 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <span class="eyebrow">System Specifications</span>
       <h2 class="sec-title sec-title-dark">Technical <span class="sh sh-b">Specifications</span></h2>
     </div>
-    <div class="specs-table-wrap">
-      <table class="specs-table">
-        <thead><tr><th>Specification</th><th>Value</th></tr></thead>
-        <tbody>
-          <tr><td>System Model</td><td>HPF-3 (Pure Home)</td></tr>
-          <tr><td>Filtration Stages</td><td>3 (Sediment + Carbon Block + Fine Carbon/Ceramic)</td></tr>
-          <tr><td>Installation Point</td><td>Main supply line, upstream of all outlets</td></tr>
-          <tr><td>Enclosure</td><td>Stainless steel, weatherproof, outdoor-rated</td></tr>
-          <tr><td>Housing Size</td><td>20 x 4.5 inch (standard industry size)</td></tr>
-          <tr><td>Filters Included</td><td>3 (Sediment + Carbon Block + Fine Carbon/Ceramic)</td></tr>
-          <tr><td>Chloramine Removal</td><td>Yes, catalytic/activated carbon stage</td></tr>
-          <tr><td>Fluoride Removal</td><td>No, combine with under-sink RO for fluoride reduction</td></tr>
-          <tr><td>Suitable For</td><td>Houses, townhouses, strata (where approved)</td></tr>
-          <tr><td>Filter Service Interval</td><td>6–12 months (sediment); 12 months (carbon stages)</td></tr>
-          <tr><td>Manufacturer</td><td>High Performance Filtration (HPF)</td></tr>
-          <tr><td>Annual Service (professional)</td><td>$500/yr</td></tr>
-          <tr><td>Annual Service (DIY)</td><td>$380/yr</td></tr>
-        </tbody>
-      </table>
+    <div class="spec-drop">
+      <button class="spec-drop-q" aria-expanded="false">View full technical specifications<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
+      <div class="spec-drop-a">
+        <div class="specs-table-wrap">
+          <table class="specs-table">
+            <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>System Model</td><td>HPF-3 (Pure Home)</td></tr>
+              <tr><td>Filtration Stages</td><td>3 (Sediment + Carbon Block + Catalytic Carbon)</td></tr>
+              <tr><td>Installation Point</td><td>Main supply line, upstream of all outlets</td></tr>
+              <tr><td>Enclosure</td><td>Stainless steel, weatherproof, outdoor-rated</td></tr>
+              <tr><td>Housing Size</td><td>20 x 4.5 inch (standard industry size)</td></tr>
+              <tr><td>Stage 1 Cartridge</td><td>5-micron polypropylene spun sediment</td></tr>
+              <tr><td>Stage 2 Cartridge</td><td>20-micron low pressure drop carbon block</td></tr>
+              <tr><td>Stage 3 Cartridge</td><td>0.5-micron catalytic carbon block (chloramine)</td></tr>
+              <tr><td>Chloramine Removal</td><td>Yes, 0.5-micron catalytic carbon stage</td></tr>
+              <tr><td>Fluoride Removal</td><td>No, combine with under-sink RO for fluoride reduction</td></tr>
+              <tr><td>Suitable For</td><td>Houses, townhouses, strata (where approved)</td></tr>
+              <tr><td>Filter Service Interval</td><td>Annually (every 12 months), all three cartridges</td></tr>
+              <tr><td>Manufacturer</td><td>High Performance Filtration (HPF)</td></tr>
+              <tr><td>Annual Service (professional)</td><td>$500/yr</td></tr>
+              <tr><td>Annual Service (DIY)</td><td>$380/yr</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1122,7 +1140,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="faq-item"><button class="faq-q">Does a whole house filter remove chloramine from shower water?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes. The carbon block stage in the HPF-3 targets chloramine at the point of entry, so water reaching every shower in the home has already had chloramine reduced. This is one of the key advantages of whole house filtration: protection at every outlet, not just the kitchen tap.</div></div>
       <div class="faq-item"><button class="faq-q">How long does a whole house water filter installation take?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Installation typically takes 2–3 hours. Jean-Paul connects the HPF-3 to your main supply line, mounts the stainless steel enclosure on an external wall, and pressure-tests before leaving. Duration varies by property plumbing configuration.</div></div>
       <div class="faq-item"><button class="faq-q">Does a whole house filter require council or strata approval?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">For standalone residential properties in NSW, no council approval is typically required. For strata properties, body corporate approval may be needed if the installation affects common property plumbing. Jean-Paul advises at quote stage.</div></div>
-      <div class="faq-item"><button class="faq-q">How often does the whole house filter need servicing?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Filter cartridges are replaced every 6–12 months depending on water quality and usage. Professional annual service is $500 including all three cartridges and labour. DIY replacement is $380 per year using standard 20x4.5" housings and a filter wrench.</div></div>
+      <div class="faq-item"><button class="faq-q">How often does the whole house filter need servicing?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Filter cartridges are replaced annually, once every 12 months. Professional annual service is $500 including all three cartridges and labour. DIY replacement is $380 per year using standard 20x4.5" housings and a filter wrench.</div></div>
       <div class="faq-item"><button class="faq-q">Does a whole house filter remove fluoride?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Carbon filtration does not remove fluoride, fluoride passes through carbon media. The HPF-3 targets sediment, chlorine, chloramine and VOCs. If fluoride removal is required for drinking water, an additional under-sink RO system in the kitchen provides the combined solution: whole house carbon protection + kitchen RO purity.</div></div>
       <div class="faq-item"><button class="faq-q">What is included in the $3,150 installation price?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The $3,150 fixed price covers the HPF-3 stainless steel whole house filter system (including all three cartridges), all pipe fittings, isolation valves, and licensed installation by Jean-Paul on your main supply line. Specialist wall mounting for unusual property types may incur a small additional charge, Jean-Paul advises at quote stage.</div></div>
     </div>
@@ -1593,6 +1611,13 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
     const open=item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
     if(!open)item.classList.add('open');
+  });
+});
+document.querySelectorAll('.spec-drop-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const drop=btn.closest('.spec-drop');
+    const open=drop.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
   });
 });
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.07});
