@@ -502,6 +502,7 @@ a{text-decoration:none;color:inherit}
 /* TAP CALLOUT */
 .tap-callout{background:linear-gradient(135deg,#f0f6ff 0%,#e8f0ff 100%);border:1.5px solid rgba(11,97,244,.15);border-radius:16px;padding:24px 28px;margin-top:24px;display:flex;gap:16px;align-items:flex-start}
 .tap-icon{width:44px;height:44px;min-width:44px;background:var(--blue);border-radius:12px;display:flex;align-items:center;justify-content:center}
+a.tap-icon:hover{background:var(--blue-dark);transform:translateY(-2px)}
 .tap-content h4{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px}
 .tap-content p{font-size:14px;color:var(--muted);line-height:1.65}
 /* CONTENT / DESCRIPTION */
@@ -1095,9 +1096,9 @@ a{text-decoration:none;color:inherit}
         </div>
         <!-- TAP CALLOUT -->
         <div class="tap-callout">
-          <div class="tap-icon">
+          <a href="faucets-and-mixers-sydney" class="tap-icon" aria-label="View filter taps and mixer options" style="transition:transform .2s,background .2s">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
+          </a>
           <div class="tap-content">
             <h4>Tap Options</h4>
             <p>A dedicated chrome filter tap is installed as standard, through your benchtop or sink beside your existing mixer. Prefer a cleaner look? A <a href="faucets-and-mixers-sydney" style="color:var(--blue);font-weight:700;text-decoration:none"><strong>3-way mixer tap upgrade</strong></a> is available on request, combining your hot/cold and filtered water into a single premium fixture. No extra hole required.</p>
