@@ -314,7 +314,7 @@
           "name": "Does a compact RO system produce the same water quality as a standard system?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, water quality is equivalent. The RO membrane in the Pure Compact operates at 0.0001 microns and achieves the same 99%+ TDS rejection and up to 95% fluoride removal as larger systems. The compact design affects footprint and tank presence, not filtration performance. The alkaline remineralisation stage is also included, delivering the same alkaline mineral-balanced output as the Pure Plus+."
+            "text": "Yes, water quality is equivalent. The RO membrane in the Pure Compact operates at 0.0001 microns and achieves the same up to 98% TDS rejection and up to 95% fluoride removal as larger systems. The compact design affects footprint and tank presence, not filtration performance. The alkaline remineralisation stage is also included, delivering the same alkaline mineral-balanced output as the Pure Plus+."
           }
         },
         {
@@ -419,6 +419,8 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .product-btns{display:flex;flex-wrap:wrap;gap:12px}
 .tap-callout{background:linear-gradient(135deg,#f0f6ff 0%,#e8f0ff 100%);border:1.5px solid rgba(11,97,244,.15);border-radius:16px;padding:24px 28px;margin-top:24px;display:flex;gap:16px;align-items:flex-start}
 .tap-icon{width:44px;height:44px;min-width:44px;background:var(--blue);border-radius:12px;display:flex;align-items:center;justify-content:center}
+a.tap-icon:hover{background:var(--blue-dark);transform:translateY(-2px)}
+.tap-content h4 a{color:var(--blue);text-decoration:none}.tap-content h4 a:hover{text-decoration:underline}
 .tap-content h4{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px}.tap-content p{font-size:14px;color:var(--muted);line-height:1.65}
 .content-body{max-width:800px;margin:0 auto}
 .content-body h2{font-size:26px;font-weight:800;color:var(--dark);margin:36px 0 14px;line-height:1.2}
@@ -426,12 +428,21 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .content-body ul{margin:0 0 16px 20px}.content-body ul li{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:6px}
 .stages-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}
 .stage-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.08);border:1.5px solid rgba(11,97,244,.06);position:relative}
-.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
 .stage-name{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.2}
 .stage-rating{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:12px}
 .stage-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:14px}
 .stage-tags{display:flex;flex-wrap:wrap;gap:6px}
 .stage-tag{background:var(--light);border-radius:20px;font-size:12px;font-weight:600;color:var(--blue);padding:4px 10px}
+.stage-img{display:block;width:100%;height:170px;object-fit:contain;background:#fff;border-radius:12px;padding:10px;margin-bottom:18px}
+.stage-model{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.spec-drop{max-width:780px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}
+.spec-drop-q{width:100%;text-align:left;background:none;border:none;padding:18px 24px;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.spec-drop-q .faq-icon{transition:transform .25s}
+.spec-drop.open .faq-icon{transform:rotate(45deg)}
+.spec-drop-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
+.spec-drop.open .spec-drop-a{max-height:1600px;padding:0 16px 18px}
+.spec-drop .specs-table{box-shadow:none}
 .specs-table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.07)}
 .specs-table th{background:var(--blue);color:#fff;padding:14px 18px;font-size:14px;font-weight:700;text-align:left}
 .specs-table th:last-child{text-align:right}
@@ -893,7 +904,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
   <div class="hero-inner">
     <div class="hero-badge"><span class="hero-badge-dot"></span>Compact Tankless Reverse Osmosis, Perfect for Sydney Apartments</div>
     <h1>Pure Compact<br><span class="sh sh-y">Tankless RO Filter</span></h1>
-    <p class="hero-sub">All the filtration power of alkaline reverse osmosis in half the space. The Pure Compact's three-stage inline design removes fluoride, chloramine and 99%+ of dissolved contaminants, then adds alkaline remineralisation, with no bulky storage tank. Purpose-built for Sydney apartments and kitchens where space is at a premium.</p>
+    <p class="hero-sub">All the filtration power of alkaline reverse osmosis in half the space. The Pure Compact's three-stage inline design removes fluoride, chloramine and up to 98% of dissolved contaminants, then adds alkaline remineralisation, with no bulky storage tank. Purpose-built for Sydney apartments and kitchens where space is at a premium.</p>
     <div class="hero-stars"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="stars-label">5.0 Google Rating &middot; 6 verified reviews</span></div>
     <div class="hero-trust">
       <span class="trust-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Installation Included</span>
@@ -939,21 +950,21 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         <ul class="product-features">
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tankless design, no storage tank, half the under-sink footprint</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>380 LPD high-output inline membrane, never supply-limited</li>
-          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Removes 99%+ TDS including fluoride, heavy metals and PFAS</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Removes up to 98% TDS including fluoride, heavy metals and PFAS</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Alkaline remineralisation, pH 7.5–8.5, minerals added back</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Australian-assembled HPF system</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ideal for Sydney apartments and compact under-sink spaces</li>
-          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>WaterMark certified, AS/NZS 3497 compliant</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>WaterMark certified to AS 3497:2021 (Cert. No. 23247)</li>
         </ul>
         <div class="product-btns">
           <a href="tel:0430546749" class="btn btn-yellow"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg>Book Installation</a>
           <a href="#quote" class="btn btn-blue">Get a Quote</a>
         </div>
         <div class="tap-callout">
-          <div class="tap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <a href="faucets-and-mixers-sydney" class="tap-icon" aria-label="View filter taps and mixer options" style="transition:transform .2s,background .2s"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           <div class="tap-content">
             <h4>Tap Options</h4>
-            <p>Dedicated chrome filter tap installed as standard. A <strong>3-way mixer tap upgrade</strong> combines filtered and mains water in one fixture, available on request.</p>
+            <p>Dedicated chrome filter tap installed as standard. A <a href="faucets-and-mixers-sydney" style="color:var(--blue);font-weight:700;text-decoration:none"><strong>3-way mixer tap upgrade</strong></a> combines filtered and mains water in one fixture, available on request.</p>
           </div>
         </div>
       </div>
@@ -967,7 +978,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <span class="eyebrow">About The System</span>
       <h2>RO Performance Without the Tank</h2>
       <p>Sydney apartments have limited under-sink space. Traditional reverse osmosis systems take up significant cabinet room, three large filter housings plus a bulky 12-litre pressurised tank. The Pure Compact solves this with a fundamentally different design: three compact inline filters (no large housings) and a high-output 380LPD membrane that operates tankless, filtering water on demand rather than storing it.</p>
-      <p>The filtration performance is equivalent to any other RO system in the range. The combined pre-filter removes sediment, chlorine and chloramine to protect the membrane. The 380LPD RO membrane rejects up to 99% of dissolved contaminants, fluoride (up to 95%), heavy metals, nitrates, PFAS, bacteria and microplastics. The alkaline remineralisation post-filter replenishes calcium, magnesium and potassium, raising the pH to 7.5–8.5 for balanced, naturally flavoursome water.</p>
+      <p>The filtration performance is equivalent to any other RO system in the range. The coconut carbon pre-filter reduces chlorine, VOCs and the chemical taste and odour they cause, protecting the membrane. The 380LPD RO membrane rejects up to 98% of dissolved contaminants, fluoride (up to 95%), heavy metals, nitrates, PFAS, bacteria and microplastics. The alkaline remineralisation post-filter replenishes calcium, magnesium and potassium, raising the pH to 7.5–8.5 for balanced, naturally flavoursome water.</p>
       <p>What's different is the form factor. No tank under the sink means more storage space, and the inline filter design takes up a fraction of the footprint of housing-based RO systems. Jean-Paul has installed the Pure Compact in Sydney apartments where a standard RO simply wouldn't fit, from tight terrace house kitchens to compact flat cabinetry in inner-city suburbs.</p>
       <!-- HPF/FSA BRAND CALLOUT -->
       <div style="background:var(--light);border-radius:14px;padding:20px 24px;margin:24px 0 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-left:4px solid var(--blue)">
@@ -984,23 +995,29 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="stages-grid">
         <div class="stage-card">
           <div class="stage-num">1</div>
-          <div class="stage-name">Combined Sediment + Carbon Pre-Filter</div>
-          <div class="stage-rating">Sediment, chlorine, chloramine, taste & odour</div>
-          <div class="stage-desc">A compact inline combination filter that performs the work of two traditional housing-based stages. Removes physical particulates (sediment, silt, rust) while also reducing chlorine, chloramine, VOCs and chemical taste and odour. Protects and extends the life of the RO membrane. Replaced every 12 months.</div>
-          <div class="stage-tags"><span class="stage-tag">Sediment</span><span class="stage-tag">Chloramine</span><span class="stage-tag">Chlorine</span><span class="stage-tag">VOCs</span><span class="stage-tag">Membrane protection</span></div>
+          <img class="stage-img" src="assets/supplier/coconutshell_carbon.webp" alt="Coconut shell activated carbon inline pre-filter cartridge T-GAC for the Pure Compact reverse osmosis system" width="500" height="500" loading="lazy">
+          <div class="stage-model">T-GAC</div>
+          <div class="stage-name">Coconut Shell Activated Carbon Pre-Filter</div>
+          <div class="stage-rating">Chlorine, VOCs, taste & odour</div>
+          <div class="stage-desc">A compact inline coconut shell activated carbon filter that reduces chlorine, VOCs and the chemical taste and odour they cause. Its fine pore structure also protects and extends the life of the RO membrane downstream. Replaced every 12 months.</div>
+          <div class="stage-tags"><span class="stage-tag">Chlorine</span><span class="stage-tag">VOCs</span><span class="stage-tag">Taste &amp; odour</span><span class="stage-tag">Membrane protection</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">2</div>
+          <img class="stage-img" src="assets/supplier/ro_membrane_standard.webp" alt="High-output 100 GPD reverse osmosis membrane element for the Pure Compact 380 LPD tankless RO system" width="500" height="500" loading="lazy">
+          <div class="stage-model">100 GPD / 380 LPD</div>
           <div class="stage-name">High-Output RO Membrane (380 LPD)</div>
-          <div class="stage-rating">0.0001 micron, 99%+ TDS rejection, tankless</div>
-          <div class="stage-desc">A high-efficiency inline RO membrane rated at 380 litres per day, significantly higher output than standard 75 GPD membranes. Removes up to 99% of dissolved solids including fluoride (up to 95%), heavy metals, nitrates, PFAS, bacteria and microplastics. The tankless design means water is filtered on demand rather than stored.</div>
+          <div class="stage-rating">0.0001 micron, up to 98% TDS rejection, tankless</div>
+          <div class="stage-desc">A high-output 100 GPD reverse osmosis membrane rated at 380 litres per day, well above older 50–75 GPD tank membranes. Removes up to 98% of dissolved solids including fluoride (up to 95%), heavy metals, nitrates, PFAS, bacteria and microplastics. The tankless design means water is filtered on demand rather than stored. NSF/ANSI 58 compliant.</div>
           <div class="stage-tags"><span class="stage-tag">Fluoride 95%</span><span class="stage-tag">Heavy metals</span><span class="stage-tag">PFAS</span><span class="stage-tag">Nitrates</span><span class="stage-tag">380 LPD</span><span class="stage-tag">Tankless</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">3</div>
-          <div class="stage-name">Alkaline Remineralisation Post-Filter</div>
-          <div class="stage-rating">pH 7.5–8.5, minerals added</div>
-          <div class="stage-desc">A compact inline alkaline filter that replenishes beneficial minerals (calcium, magnesium, potassium) removed by the RO process, raising the pH to 7.5–8.5 for smooth, naturally balanced water. The final stage before the filter tap. Replaced every 12 months.</div>
+          <img class="stage-img" src="assets/supplier/neutral_gac.webp" alt="Inline GAC and alkaline mineral 2-in-1 remineralising post-filter cartridge T-ALK-GAC for the Pure Compact RO system" width="500" height="500" loading="lazy">
+          <div class="stage-model">T-ALK-GAC</div>
+          <div class="stage-name">GAC + Alkaline Mineral Post-Filter</div>
+          <div class="stage-rating">2-in-1, pH 7.5–8.5, minerals added</div>
+          <div class="stage-desc">A 2-in-1 inline filter combining granular activated coconut carbon for a final taste polish with alkaline mineral media that replenishes calcium, magnesium and potassium removed by the RO process, raising the pH to 7.5–8.5 for smooth, naturally balanced water. The final stage before the filter tap. Replaced every 12 months.</div>
           <div class="stage-tags"><span class="stage-tag">Alkaline pH</span><span class="stage-tag">Calcium</span><span class="stage-tag">Magnesium</span><span class="stage-tag">Potassium</span><span class="stage-tag">Taste</span></div>
         </div>
         </div>
@@ -1014,27 +1031,32 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <span class="eyebrow">System Specifications</span>
       <h2 class="sec-title sec-title-dark">Technical <span class="sh sh-b">Specifications</span></h2>
     </div>
+    <div class="spec-drop">
+      <button class="spec-drop-q" aria-expanded="false">View full technical specifications<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
+      <div class="spec-drop-a">
     <div class="specs-table-wrap">
       <table class="specs-table">
         <thead><tr><th>Specification</th><th>Value</th></tr></thead>
         <tbody>
           <tr><td>System Model</td><td>GT1-CRO (Pure Compact)</td></tr>
-          <tr><td>Filtration Stages</td><td>3 (Combined Pre-Filter + RO Membrane + Alkaline Post-Filter)</td></tr>
-          <tr><td>System Design</td><td>Compact inline, no housing units, no storage tank</td></tr>
+          <tr><td>Filtration Stages</td><td>3 (Carbon Pre-Filter + RO Membrane + GAC/Alkaline Post-Filter)</td></tr>
+          <tr><td>System Design</td><td>Compact inline quick-connect, no housing units, no storage tank</td></tr>
           <tr><td>RO Membrane Output</td><td>380 LPD (approximately 100 GPD)</td></tr>
-          <tr><td>TDS Rejection</td><td>Up to 99%</td></tr>
+          <tr><td>TDS Rejection</td><td>Up to 98%</td></tr>
           <tr><td>Fluoride Reduction</td><td>Up to 95%</td></tr>
           <tr><td>Output pH</td><td>7.5–8.5 (alkaline remineralisation)</td></tr>
           <tr><td>Storage Tank</td><td>None, tankless on-demand filtration</td></tr>
           <tr><td>Filter Service Interval</td><td>12 months (pre + post filters)</td></tr>
           <tr><td>RO Membrane Service Interval</td><td>2–3 years</td></tr>
-          <tr><td>Origin</td><td>Australian-assembled HPF system</td></tr>
-          <tr><td>WaterMark Certification</td><td>AS/NZS 3497</td></tr>
+          <tr><td>Origin</td><td>Australian-assembled HPF/FSA system</td></tr>
+          <tr><td>WaterMark Certification</td><td>Certificate No. 23247 (AS 3497:2021)</td></tr>
           <tr><td>Ideal For</td><td>Apartments, compact kitchens, limited under-sink space</td></tr>
           <tr><td>Annual Service (professional)</td><td>$350/yr</td></tr>
           <tr><td>Annual Service (DIY)</td><td>$130/yr</td></tr>
         </tbody>
       </table>
+    </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1120,7 +1142,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <div class="faq-list">
       <div class="faq-item"><button class="faq-q">What is a tankless reverse osmosis system and how does it work?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">A tankless RO system filters water on demand rather than storing pre-filtered water in a pressurised tank. The Pure Compact pushes feed water through a high-output membrane in real time as you draw from the tap, 380 litres per day capacity. No tank means no waiting for it to fill, no under-sink bulk, and no stagnant water risk.</div></div>
       <div class="faq-item"><button class="faq-q">Is a compact RO system good for apartments in Sydney?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The Pure Compact is purpose-built for apartments. Compact inline filters and no storage tank means it requires around half the under-sink space of a standard RO installation. Jean-Paul has installed the Pure Compact in apartments across inner Sydney with no space issues.</div></div>
-      <div class="faq-item"><button class="faq-q">Does a compact RO system produce the same water quality as a standard system?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes, water quality is equivalent. The RO membrane operates at 0.0001 microns and achieves 99%+ TDS rejection and up to 95% fluoride removal, identical to larger systems. The compact design affects footprint and tank presence, not filtration performance. The alkaline remineralisation stage delivers the same mineral-balanced output as the Pure Plus+.</div></div>
+      <div class="faq-item"><button class="faq-q">Does a compact RO system produce the same water quality as a standard system?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes, water quality is equivalent. The RO membrane operates at 0.0001 microns and achieves up to 98% TDS rejection and up to 95% fluoride removal, identical to larger systems. The compact design affects footprint and tank presence, not filtration performance. The alkaline remineralisation stage delivers the same mineral-balanced output as the Pure Plus+.</div></div>
       <div class="faq-item"><button class="faq-q">What is the daily output of the Pure Compact?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The Pure Compact is rated at 380 litres per day (LPD). For a household drawing 3–8 litres from the filter tap daily, the system is never supply-limited. The high output is achieved through the compact inline membrane design, which runs at higher efficiency than traditional 75 GPD tank systems.</div></div>
       <div class="faq-item"><button class="faq-q">Does the Pure Compact need a storage tank?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">No. The Pure Compact is a tankless system, water is filtered on demand. This is the key space-saving advantage: no bulky pressurised tank under the sink. Flow rate at the tap is slightly lower than mains pressure but the 380LPD capacity means supply is never an issue.</div></div>
       <div class="faq-item"><button class="faq-q">How long does a compact RO filter installation take?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Installation takes approximately 1.5–2 hours. Jean-Paul connects the three inline filters to your cold water supply, runs the drain line, and installs the filter tap. No tank means fewer fittings and a cleaner installation overall.</div></div>
@@ -1595,6 +1617,13 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
     const open=item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
     if(!open)item.classList.add('open');
+  });
+});
+document.querySelectorAll('.spec-drop-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const drop=btn.closest('.spec-drop');
+    const open=drop.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
   });
 });
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.07});
