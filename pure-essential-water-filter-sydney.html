@@ -514,7 +514,8 @@ a{text-decoration:none;color:inherit}
 /* FILTER STAGES */
 .stages-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}
 .stage-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.08);border:1.5px solid rgba(11,97,244,.06);position:relative}
-.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
+.stage-img{display:block;width:100%;height:170px;object-fit:contain;background:#fff;border-radius:12px;padding:10px;margin-bottom:18px}
 .stage-model{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
 .stage-name{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.2}
 .stage-rating{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:12px}
@@ -530,6 +531,14 @@ a{text-decoration:none;color:inherit}
 .specs-table tr:last-child td{border-bottom:none}
 .specs-table tr:hover td{background:var(--light)}
 .specs-table-wrap{overflow-x:auto;border-radius:14px}
+/* SPEC DROPDOWN */
+.spec-drop{max-width:780px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}
+.spec-drop-q{width:100%;text-align:left;background:none;border:none;padding:18px 24px;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.spec-drop-q .faq-icon{transition:transform .25s}
+.spec-drop.open .faq-icon{transform:rotate(45deg)}
+.spec-drop-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
+.spec-drop.open .spec-drop-a{max-height:1600px;padding:0 16px 18px}
+.spec-drop .specs-table{box-shadow:none}
 /* PRICING */
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
 .pricing-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.09);border:1.5px solid rgba(11,97,244,.08)}
@@ -1129,6 +1138,7 @@ a{text-decoration:none;color:inherit}
       <div class="stages-grid">
         <div class="stage-card">
           <div class="stage-num">1</div>
+          <img class="stage-img" src="assets/supplier/lpd_carbon.webp" alt="20 micron low pressure drop coconut carbon block filter cartridge for the Pure Essential undersink system, 10 x 2.5 inch" width="500" height="500" loading="lazy">
           <div class="stage-model">GT4-6LPD</div>
           <div class="stage-name">20 Micron Low Pressure Drop Carbon Block</div>
           <div class="stage-rating">Pre-filter, Sediment + Chlorine + Taste &amp; Odour</div>
@@ -1142,6 +1152,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="stage-card">
           <div class="stage-num">2</div>
+          <img class="stage-img" src="assets/supplier/catalytic_carbon.webp" alt="0.5 micron catalytic coconut carbon block chloramine reduction filter cartridge for the Pure Essential undersink system, 10 x 2.5 inch" width="500" height="500" loading="lazy">
           <div class="stage-model">GT4-6CRC</div>
           <div class="stage-name">0.5 Micron Catalytic Coconut Carbon Block</div>
           <div class="stage-rating">Primary filter, Chloramine + Chlorine + VOCs</div>
@@ -1167,14 +1178,17 @@ a{text-decoration:none;color:inherit}
       <h2 class="sec-title sec-title-dark">Technical <span class="sh sh-b">Specifications</span></h2>
       <p class="sec-body sec-body-c">Full technical data for the Pure Essential GT1-46WM system as supplied and installed in Sydney.</p>
     </div>
-    <div class="specs-table-wrap">
-      <table class="specs-table">
-        <thead>
-          <tr>
-            <th>Specification</th>
-            <th>Value</th>
-          </tr>
-        </thead>
+    <div class="spec-drop">
+      <button class="spec-drop-q" aria-expanded="false">View full technical specifications<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
+      <div class="spec-drop-a">
+        <div class="specs-table-wrap">
+          <table class="specs-table">
+            <thead>
+              <tr>
+                <th>Specification</th>
+                <th>Value</th>
+              </tr>
+            </thead>
         <tbody>
           <tr><td>System Model</td><td>GT1-46WM (Pure Essential)</td></tr>
           <tr><td>Dimensions (H &times; W &times; D)</td><td>36 &times; 24 &times; 13 cm</td></tr>
@@ -1194,8 +1208,10 @@ a{text-decoration:none;color:inherit}
           <tr><td>Manufacturer</td><td>High Performance Filtration (HPF)</td></tr>
           <tr><td>Annual Service (professional)</td><td>$300/yr (includes labour + cartridges)</td></tr>
           <tr><td>Annual Service (DIY)</td><td>$80/yr (push-fit replacement, no tools)</td></tr>
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1850,6 +1866,13 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
     const open=item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
     if(!open)item.classList.add('open');
+  });
+});
+document.querySelectorAll('.spec-drop-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const drop=btn.closest('.spec-drop');
+    const open=drop.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
   });
 });
 const obs=new IntersectionObserver(entries=>{
