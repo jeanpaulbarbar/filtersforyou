@@ -338,7 +338,7 @@
           "name": "Does the Pure Luxe remove fluoride from Sydney tap water?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The RO membrane operates at 0.0001 microns and removes up to 95% of fluoride, identical to all other RO systems in the range. The digital TDS display does not measure fluoride specifically (fluoride is part of overall TDS), but a low TDS reading is a strong indicator of effective fluoride reduction."
+            "text": "Yes. The RO membrane operates at 0.0001 microns and removes up to 98% of fluoride, identical to all other RO systems in the range. The digital TDS display does not measure fluoride specifically (fluoride is part of overall TDS), but a low TDS reading is a strong indicator of effective fluoride reduction."
           }
         },
         {
@@ -346,7 +346,7 @@
           "name": "Can I service the Pure Luxe myself?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Like the Pure Advanced, the Pure Luxe uses the quick-change twist-fit cartridge system for all five filter stages. Cartridge replacement requires no tools, twist out the old, twist in the new. Annual DIY service runs approximately $220. The RO membrane typically needs replacing every 2–3 years and is best handled by Jean-Paul at a service visit."
+            "text": "Yes. Like the Pure Advanced, the Pure Luxe uses the quick-change twist-fit cartridge system for all five filter stages. Cartridge replacement requires no tools, twist out the old, twist in the new. Annual DIY service runs approximately $220. The RO membrane typically needs replacing every 3–5 years and is best handled by Jean-Paul at a service visit."
           }
         },
         {
@@ -419,6 +419,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .product-btns{display:flex;flex-wrap:wrap;gap:12px}
 .tap-callout{background:linear-gradient(135deg,#f0f6ff 0%,#e8f0ff 100%);border:1.5px solid rgba(11,97,244,.15);border-radius:16px;padding:24px 28px;margin-top:24px;display:flex;gap:16px;align-items:flex-start}
 .tap-icon{width:44px;height:44px;min-width:44px;background:var(--blue);border-radius:12px;display:flex;align-items:center;justify-content:center}
+a.tap-icon:hover{background:var(--blue-dark);transform:translateY(-2px)}
 .tap-content h4{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px}.tap-content p{font-size:14px;color:var(--muted);line-height:1.65}
 .content-body{max-width:800px;margin:0 auto}
 .content-body h2{font-size:26px;font-weight:800;color:var(--dark);margin:36px 0 14px;line-height:1.2}
@@ -426,7 +427,9 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .content-body ul{margin:0 0 16px 20px}.content-body ul li{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:6px}
 .stages-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}
 .stage-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.08);border:1.5px solid rgba(11,97,244,.06);position:relative}
-.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
+.stage-img{display:block;width:100%;height:170px;object-fit:contain;background:#fff;border-radius:12px;padding:10px;margin-bottom:18px}
+.stage-model{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
 .stage-name{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.2}
 .stage-rating{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:12px}
 .stage-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:14px}
@@ -439,6 +442,13 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .specs-table td:last-child{text-align:right;font-weight:600;color:var(--dark)}
 .specs-table tr:last-child td{border-bottom:none}.specs-table tr:hover td{background:var(--light)}
 .specs-table-wrap{overflow-x:auto;border-radius:14px}
+.spec-drop{max-width:780px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}
+.spec-drop-q{width:100%;text-align:left;background:none;border:none;padding:18px 24px;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.spec-drop-q .faq-icon{transition:transform .25s}
+.spec-drop.open .faq-icon{transform:rotate(45deg)}
+.spec-drop-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
+.spec-drop.open .spec-drop-a{max-height:1600px;padding:0 16px 18px}
+.spec-drop .specs-table{box-shadow:none}
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
 .pricing-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.09);border:1.5px solid rgba(11,97,244,.08)}
 .pricing-card.featured{border-color:var(--blue);background:linear-gradient(135deg,#f0f6ff 0%,#fff 100%);position:relative}
@@ -939,8 +949,8 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         <ul class="product-features">
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Built-in digital TDS display, real-time water quality on the tap</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>5-stage quick-change RO, twist-fit cartridges, no tools needed</li>
-          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>99%+ TDS rejection, fluoride up to 95%, heavy metals and PFAS removed</li>
-          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Alkaline remineralisation, pH 7.5–8.5, minerals added back</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Up to 98% TDS rejection, fluoride up to 98%, heavy metals and PFAS removed</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Calcium remineralisation, balanced pH 7–8 drinking water</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>WaterMark certified, AS/NZS 3497 compliant</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>See when your membrane needs replacing, no guessing</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>12L storage tank, water available on demand</li>
@@ -968,7 +978,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <h2>Know Your Water Quality. At the Tap.</h2>
       <p>Reverse osmosis is the most comprehensive residential water filtration method available, but it works invisibly. You turn the tap, draw filtered water, and trust that the system is performing. With the Pure Luxe, you don't have to trust blindly. The built-in digital TDS display shows you exactly how your filtered water is performing, in real time, at the tap, every single time you use it.</p>
       <p>Sydney mains water typically reads 80–180 ppm TDS. A well-maintained RO system should deliver under 20 ppm. The Pure Luxe monitors both feed water and filtered output continuously, displaying the results on an LED screen built into the premium tap body. When the TDS reading starts creeping up, you know the membrane is due for service, before your water quality actually degrades.</p>
-      <p>On top of the monitoring capability, the Pure Luxe uses the same quick-change twist-fit cartridge system as the Pure Advanced, no tools required for annual servicing. All five cartridges are accessible under the sink and replaced with a simple quarter-turn. The RO membrane is the only stage that typically requires a service visit (every 2–3 years).</p>
+      <p>On top of the monitoring capability, the Pure Luxe uses the same quick-change twist-fit cartridge system as the Pure Advanced, no tools required for annual servicing. All five cartridges are accessible under the sink and replaced with a simple quarter-turn. The RO membrane is the only stage that typically requires a service visit (every 3–5 years).</p>
       <p>Jean-Paul installs every Pure Luxe personally. Fixed price of $1,520 includes the system, 12L tank, digital TDS monitor tap, all fittings, and licensed installation.</p>
       <!-- HPF/FSA BRAND CALLOUT -->
       <div style="background:var(--light);border-radius:14px;padding:20px 24px;margin:24px 0 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;border-left:4px solid var(--blue)">
@@ -985,38 +995,48 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="stages-grid">
         <div class="stage-card">
           <div class="stage-num">1</div>
-          <div class="stage-name">Sediment Quick-Change Cartridge</div>
-          <div class="stage-rating">Particles, silt, rust, membrane protection</div>
-          <div class="stage-desc">Twist-fit 1-micron sediment cartridge. Removes physical particles before the RO membrane. Quarter-turn replacement, no tools, no housing to open.</div>
-          <div class="stage-tags"><span class="stage-tag">Sediment</span><span class="stage-tag">Silt</span><span class="stage-tag">Quick-change</span></div>
+          <img class="stage-img" src="assets/supplier/quick_sediment.webp" alt="1 micron quick-change sediment cartridge for the Pure Luxe smart monitor reverse osmosis system" width="500" height="500" loading="lazy">
+          <div class="stage-model">2-46-1 (ST-01)</div>
+          <div class="stage-name">1-Micron Sediment Quick-Change Cartridge</div>
+          <div class="stage-rating">Pre-filter, Particles, silt, rust</div>
+          <div class="stage-desc">A 1-micron melt-blown polypropylene sediment cartridge that removes sand, silt, rust and suspended solids, protecting the carbon pre-filters and RO membrane from clogging. Quick-change twist-fit, no tools. Replaced every 6 months.</div>
+          <div class="stage-tags"><span class="stage-tag">Sediment</span><span class="stage-tag">Silt</span><span class="stage-tag">Rust</span><span class="stage-tag">Quick-change</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">2</div>
-          <div class="stage-name">Carbon Block Quick-Change Cartridge</div>
-          <div class="stage-rating">Chlorine, chloramine, taste & odour</div>
-          <div class="stage-desc">Quick-change carbon block pre-filter that removes chlorine, chloramine and VOCs to protect the RO membrane. Quarter-turn replacement.</div>
-          <div class="stage-tags"><span class="stage-tag">Chloramine</span><span class="stage-tag">Chlorine</span><span class="stage-tag">VOCs</span><span class="stage-tag">Quick-change</span></div>
+          <img class="stage-img" src="assets/supplier/quick_gac.webp" alt="Granular activated carbon GAC quick-change pre-filter cartridge for the Pure Luxe RO system" width="500" height="500" loading="lazy">
+          <div class="stage-model">4-55-GAC (ST-33)</div>
+          <div class="stage-name">Granular Activated Carbon (GAC) Pre-Filter</div>
+          <div class="stage-rating">Pre-filter, Chlorine, organic chemicals</div>
+          <div class="stage-desc">A loosely-packed granular activated carbon cartridge that allows high flow while taking the first hit at the chlorine and organic chemicals that would otherwise damage the RO membrane. Protects and extends the life of every stage after it. Replaced every 6 months.</div>
+          <div class="stage-tags"><span class="stage-tag">Chlorine</span><span class="stage-tag">Organic chemicals</span><span class="stage-tag">High flow</span><span class="stage-tag">Quick-change</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">3</div>
-          <div class="stage-name">RO Membrane</div>
-          <div class="stage-rating">0.0001 micron, 99%+ TDS rejection</div>
-          <div class="stage-desc">Thin-film composite RO membrane rejecting up to 99% of dissolved solids. The TDS monitor reads the output of this stage continuously. Membrane lasts 2–3 years.</div>
-          <div class="stage-tags"><span class="stage-tag">Fluoride 95%</span><span class="stage-tag">Heavy metals</span><span class="stage-tag">PFAS</span><span class="stage-tag">TDS monitored</span></div>
+          <img class="stage-img" src="assets/supplier/quick_carbon.webp" alt="5 micron coconut carbon block CTO quick-change pre-filter cartridge for the Pure Luxe RO system" width="500" height="500" loading="lazy">
+          <div class="stage-model">4-55-CTO (ST-CTO)</div>
+          <div class="stage-name">5-Micron Coconut Carbon Block (CTO)</div>
+          <div class="stage-rating">Pre-filter, Chlorine, VOCs, Taste &amp; Odour</div>
+          <div class="stage-desc">A 5-micron coconut carbon block with a dense matrix for maximum surface area and contact time. This stage takes the biggest load of chemical reduction, chlorine, VOCs, taste and odour, right before the membrane. Replaced every 12 months.</div>
+          <div class="stage-tags"><span class="stage-tag">Chlorine</span><span class="stage-tag">VOCs</span><span class="stage-tag">Taste &amp; odour</span><span class="stage-tag">Quick-change</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">4</div>
-          <div class="stage-name">Post Carbon Quick-Change Cartridge</div>
-          <div class="stage-rating">Final taste polish</div>
-          <div class="stage-desc">Quick-change coconut carbon post-filter. Removes residual taste and odour from the storage tank before water reaches the smart tap. Annual quick-change replacement.</div>
-          <div class="stage-tags"><span class="stage-tag">Taste</span><span class="stage-tag">Odour</span><span class="stage-tag">Post-tank</span><span class="stage-tag">Quick-change</span></div>
+          <img class="stage-img" src="assets/supplier/quick_membrane.webp" alt="50 GPD Filmtec reverse osmosis membrane quick-change cartridge for the Pure Luxe smart monitor system" width="500" height="500" loading="lazy">
+          <div class="stage-model">13-RO50 (ST-RO50)</div>
+          <div class="stage-name">50 GPD Filmtec RO Membrane</div>
+          <div class="stage-rating">Primary filter, 0.0001 micron, up to 98% reduction</div>
+          <div class="stage-desc">The engine room. The Filmtec thin-film composite membrane filters to 0.0001 micron, rejecting fluoride (up to 98%), heavy metals, nitrates, PFAS, salts, bacteria and cysts. The compact booster pump drives it at higher pressure for stronger rejection and lower TDS, and the smart monitor reads this stage's output continuously. Long-life quick-change cartridge, replaced every 3–5 years.</div>
+          <div class="stage-tags"><span class="stage-tag">Fluoride</span><span class="stage-tag">Heavy metals</span><span class="stage-tag">PFAS</span><span class="stage-tag">Nitrates</span><span class="stage-tag">TDS monitored</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">5</div>
-          <div class="stage-name">Alkaline Remineralisation Quick-Change</div>
-          <div class="stage-rating">pH 7.5–8.5, minerals added</div>
-          <div class="stage-desc">Quick-change alkaline cartridge replenishing calcium, magnesium and potassium after RO, raising pH to 7.5–8.5. Annual twist-fit replacement.</div>
-          <div class="stage-tags"><span class="stage-tag">Alkaline pH</span><span class="stage-tag">Calcium</span><span class="stage-tag">Magnesium</span><span class="stage-tag">Quick-change</span></div>
+          <img class="stage-img" src="assets/supplier/quick_alkaline.webp" alt="Japanese coconut carbon and calcium alkalising dual finishing quick-change post-filter cartridge for the Pure Luxe RO system" width="500" height="500" loading="lazy">
+          <div class="stage-model">4-55-ALK (ST-34ALK)</div>
+          <div class="stage-name">Carbon + Calcium Alkalising Finishing Stage</div>
+          <div class="stage-rating">Post-filter, pH 7–8, calcium added</div>
+          <div class="stage-desc">A dual finishing cartridge: the finest Japanese activated coconut carbon for a clean, pure taste, then calcite (calcium carbonate) media that lifts and buffers the final pH to a balanced 7–8 without adding hardness. Annual replacement, twist out, twist in.</div>
+          <div class="stage-tags"><span class="stage-tag">Calcium</span><span class="stage-tag">Alkaline pH</span><span class="stage-tag">Taste polish</span><span class="stage-tag">Quick-change</span></div>
         </div>
         </div>
     </div>
@@ -1029,26 +1049,35 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <span class="eyebrow">System Specifications</span>
       <h2 class="sec-title sec-title-dark">Technical <span class="sh sh-b">Specifications</span></h2>
     </div>
-    <div class="specs-table-wrap">
-      <table class="specs-table">
-        <thead><tr><th>Specification</th><th>Value</th></tr></thead>
-        <tbody>
-          <tr><td>System Model</td><td>H1-302B (Pure Luxe)</td></tr>
-          <tr><td>Filtration Stages</td><td>5 (Quick-Change Sediment + Carbon + RO Membrane + Post Carbon + Alkaline)</td></tr>
-          <tr><td>Cartridge System</td><td>Quick-change twist-fit, no tools required</td></tr>
-          <tr><td>Water Quality Monitor</td><td>Built-in digital TDS display on tap, real-time ppm readout</td></tr>
-          <tr><td>RO Membrane</td><td>Thin-film composite, 0.0001 micron</td></tr>
-          <tr><td>TDS Rejection</td><td>Up to 99%</td></tr>
-          <tr><td>Fluoride Reduction</td><td>Up to 95%</td></tr>
-          <tr><td>Output pH</td><td>7.5–8.5 (alkaline remineralisation)</td></tr>
-          <tr><td>Storage Tank</td><td>Approximately 12L pressurised</td></tr>
-          <tr><td>WaterMark Certification</td><td>AS/NZS 3497</td></tr>
-          <tr><td>Manufacturer</td><td>High Performance Filtration (HPF)</td></tr>
-          <tr><td>Annual Service (professional)</td><td>$465/yr (includes labour + all annual cartridges)</td></tr>
-          <tr><td>Annual Service (DIY)</td><td>$240/yr cartridges</td></tr>
-          <tr><td>Pre-Filter Service (every 6 months)</td><td>$260 professional / $85 DIY</td></tr>
-        </tbody>
-      </table>
+    <div class="spec-drop">
+      <button class="spec-drop-q" aria-expanded="false">View full technical specifications<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
+      <div class="spec-drop-a">
+        <div class="specs-table-wrap">
+          <table class="specs-table">
+            <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>System Model</td><td>H1-302B (Pure Luxe)</td></tr>
+              <tr><td>Filtration Stages</td><td>5 (Sediment + GAC Carbon + Carbon Block + RO Membrane + Carbon &amp; Calcium Alkaline)</td></tr>
+              <tr><td>Cartridge System</td><td>Quick-change twist-fit, no tools required</td></tr>
+              <tr><td>Smart Monitor</td><td>Real-time TDS readout, filter-change reminders, automatic leak detection &amp; shut-off</td></tr>
+              <tr><td>Booster Pump</td><td>Compact booster pump, boosts working pressure to ~620 kPa for higher rejection &amp; lower waste</td></tr>
+              <tr><td>RO Membrane</td><td>50 GPD Filmtec thin-film composite, 0.0001 micron</td></tr>
+              <tr><td>TDS Rejection</td><td>Up to 98% (under optimal pressure)</td></tr>
+              <tr><td>Fluoride Reduction</td><td>Up to 98%</td></tr>
+              <tr><td>Output pH</td><td>7–8 (calcium remineralisation, neutral to alkaline)</td></tr>
+              <tr><td>Storage Tank</td><td>Approximately 12L pressurised</td></tr>
+              <tr><td>WaterMark Certification</td><td>AS/NZS 3497</td></tr>
+              <tr><td>Pre-filter Service Interval</td><td>Sediment + GAC every 6 months; carbon block every 12 months</td></tr>
+              <tr><td>Post-filter Service Interval</td><td>12 months (carbon + calcium alkaline)</td></tr>
+              <tr><td>RO Membrane Service Interval</td><td>3–5 years (water-quality dependent)</td></tr>
+              <tr><td>Manufacturer</td><td>High Performance Filtration (HPF)</td></tr>
+              <tr><td>Annual Service (professional)</td><td>$465/yr (includes labour + all annual cartridges)</td></tr>
+              <tr><td>Annual Service (DIY)</td><td>$240/yr cartridges</td></tr>
+              <tr><td>Pre-Filter Service (every 6 months)</td><td>$260 professional / $85 DIY</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1137,8 +1166,8 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="faq-item"><button class="faq-q">What TDS reading should I expect from a reverse osmosis system?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Sydney mains water typically measures 80–180 ppm TDS. After RO filtration, the output should read under 30 ppm, often under 15 ppm on a well-maintained system. If the reading creeps above 30–40 ppm consistently, it's a clear signal the RO membrane needs replacing.</div></div>
       <div class="faq-item"><button class="faq-q">Is the Pure Luxe the same as the Pure Advanced but with a monitor?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Essentially yes. Both use a 5-stage quick-change RO system with alkaline remineralisation and WaterMark certification. The Pure Luxe adds the built-in digital TDS monitoring display on the tap. The Pure Advanced is $1,280 installed; the Pure Luxe is $1,520 installed. The $240 difference buys the real-time water quality monitoring capability.</div></div>
       <div class="faq-item"><button class="faq-q">Does the TDS monitor require maintenance?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The TDS display is powered by a small battery lasting 1–2 years. Replacement is straightforward. The probes do not require cleaning under normal use conditions.</div></div>
-      <div class="faq-item"><button class="faq-q">Does the Pure Luxe remove fluoride?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes. The RO membrane operates at 0.0001 microns and removes up to 95% of fluoride, identical to all RO systems in the range. A low TDS reading from the digital display is a strong indicator of effective fluoride reduction.</div></div>
-      <div class="faq-item"><button class="faq-q">Can I service the Pure Luxe myself?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes. All five cartridges use the quick-change twist-fit system. Annual DIY service runs approximately $220. The RO membrane needs replacing every 2–3 years and is best handled by Jean-Paul at a service visit.</div></div>
+      <div class="faq-item"><button class="faq-q">Does the Pure Luxe remove fluoride?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes. The RO membrane operates at 0.0001 microns and removes up to 98% of fluoride, identical to all RO systems in the range. A low TDS reading from the digital display is a strong indicator of effective fluoride reduction.</div></div>
+      <div class="faq-item"><button class="faq-q">Can I service the Pure Luxe myself?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes. All five cartridges use the quick-change twist-fit system. Annual DIY service runs approximately $220. The RO membrane needs replacing every 3–5 years and is best handled by Jean-Paul at a service visit.</div></div>
       <div class="faq-item"><button class="faq-q">What makes the Pure Luxe worth the premium over the Pure Advanced?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Built-in real-time TDS monitoring, the ability to see your water quality on demand, at the tap, every time you use it. For households who want certainty that their system is performing correctly between service visits, this is invaluable. If you do not need this visibility, the Pure Advanced at $1,280 delivers the same quick-change RO filtration at a lower price.</div></div>
     </div>
   </div>
@@ -1609,6 +1638,13 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
     const open=item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
     if(!open)item.classList.add('open');
+  });
+});
+document.querySelectorAll('.spec-drop-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const drop=btn.closest('.spec-drop');
+    const open=drop.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
   });
 });
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.07});
