@@ -331,7 +331,7 @@
           "name": "How often do 7-stage RO filters need servicing?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The 7-stage Pure Premium has staged service intervals. 6 cartridges including hydrogen, alkaline, FIR and post-carbon stages are replaced annually. Pre-filter cartridges (sediment and carbon block) are recommended every 6 months to protect the RO membrane. The RO membrane lasts 2 to 4 years and is checked at every service. Jean-Paul's professional annual service is $450 including all annual filter media and labour. Pre-filter service runs $220 every 6 months, or $70 DIY."
+            "text": "The 7-stage Pure Premium has staged service intervals. The hydrogen-rich alkaline and carbon polish post-filters are replaced every 12 months, and the two pre-filters (sediment and carbon block) every 6 months to protect the RO membrane. The far infrared ceramic stage lasts about 2 years and the inline magnetic conditioner never needs replacing. The RO membrane lasts 2 to 4 years and is checked at every service. Jean-Paul's professional annual service is $450 including all annual filter media and labour. Pre-filter service runs $220 every 6 months, or $70 DIY."
           }
         },
         {
@@ -339,7 +339,7 @@
           "name": "Does the 7-stage system remove fluoride?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The RO membrane in the Pure Premium operates at 0.0001 microns and rejects up to 95% of fluoride, the same as the Pure Plus+ 5-stage system. All RO systems share this core fluoride-rejection capability, regardless of the number of enhancement stages before and after the membrane."
+            "text": "Yes. The RO membrane in the Pure Premium operates at 0.0001 microns and rejects up to 98% of fluoride, the same as the Pure Plus+ 5-stage system. All RO systems share this core fluoride-rejection capability, regardless of the number of enhancement stages before and after the membrane."
           }
         },
         {
@@ -355,7 +355,7 @@
           "name": "What is the difference between the Pure Premium and Pure Plus+?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Both systems use RO membrane filtration to remove 99%+ of dissolved contaminants. The Pure Plus+ (5-stage, $840) adds alkaline remineralisation post-RO for a pH of 7.5–8.5. The Pure Premium (7-stage, $1,180) goes further with a high-alkaline magnesium stage (pH 8.5–10), a hydrogen-rich filter for antioxidant benefits, a far infrared ceramic stage, and an additional post-carbon polish. Choose the Pure Plus+ for comprehensive filtration with alkalinity. Choose the Pure Premium for the full health-enhancement experience."
+            "text": "Both systems use RO membrane filtration to remove 99%+ of dissolved contaminants. The Pure Plus+ (5-stage, $840) adds alkaline magnesium remineralisation post-RO for a pH of 8–9.5. The Pure Premium (7-stage, $1,180) goes further with a high-alkaline hydrogen-rich magnesium stage (pH 8.5–10), molecular hydrogen for antioxidant benefits, a far infrared ceramic stage, a coconut carbon polish, and an inline magnetic conditioner. Choose the Pure Plus+ for comprehensive filtration with alkalinity. Choose the Pure Premium for the full health-enhancement experience."
           }
         }
       ]
@@ -420,6 +420,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .product-btns{display:flex;flex-wrap:wrap;gap:12px}
 .tap-callout{background:linear-gradient(135deg,#f0f6ff 0%,#e8f0ff 100%);border:1.5px solid rgba(11,97,244,.15);border-radius:16px;padding:24px 28px;margin-top:24px;display:flex;gap:16px;align-items:flex-start}
 .tap-icon{width:44px;height:44px;min-width:44px;background:var(--blue);border-radius:12px;display:flex;align-items:center;justify-content:center}
+a.tap-icon:hover{background:var(--blue-dark);transform:translateY(-2px)}
 .tap-content h4{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px}.tap-content p{font-size:14px;color:var(--muted);line-height:1.65}
 .content-body{max-width:800px;margin:0 auto}
 .content-body h2{font-size:26px;font-weight:800;color:var(--dark);margin:36px 0 14px;line-height:1.2}
@@ -427,7 +428,9 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .content-body ul{margin:0 0 16px 20px}.content-body ul li{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:6px}
 .stages-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}
 .stage-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.08);border:1.5px solid rgba(11,97,244,.06);position:relative}
-.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
+.stage-img{display:block;width:100%;height:170px;object-fit:contain;background:#fff;border-radius:12px;padding:10px;margin-bottom:18px}
+.stage-model{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
 .stage-name{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.2}
 .stage-rating{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:12px}
 .stage-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:14px}
@@ -440,6 +443,13 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
 .specs-table td:last-child{text-align:right;font-weight:600;color:var(--dark)}
 .specs-table tr:last-child td{border-bottom:none}.specs-table tr:hover td{background:var(--light)}
 .specs-table-wrap{overflow-x:auto;border-radius:14px}
+.spec-drop{max-width:780px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}
+.spec-drop-q{width:100%;text-align:left;background:none;border:none;padding:18px 24px;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.spec-drop-q .faq-icon{transition:transform .25s}
+.spec-drop.open .faq-icon{transform:rotate(45deg)}
+.spec-drop-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
+.spec-drop.open .spec-drop-a{max-height:1600px;padding:0 16px 18px}
+.spec-drop .specs-table{box-shadow:none}
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
 .pricing-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.09);border:1.5px solid rgba(11,97,244,.08)}
 .pricing-card.featured{border-color:var(--blue);background:linear-gradient(135deg,#f0f6ff 0%,#fff 100%);position:relative}
@@ -943,7 +953,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Molecular hydrogen (H2) enrichment, antioxidant, anti-inflammatory</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Far infrared ceramic stage for enhanced water structure and taste</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Removes up to 99% of TDS including fluoride, heavy metals and PFAS</li>
-          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>WaterMark certified, AS/NZS 3497 compliant</li>
+          <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>WaterMark certified to AS 3497:2021 (Cert. 23247)</li>
           <li><span class="pf-chk"><svg width="9" height="7" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="#324158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>12L pressurised storage tank, water on demand</li>
         </ul>
         <div class="product-btns">
@@ -951,10 +961,10 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
           <a href="#quote" class="btn btn-blue">Get a Quote</a>
         </div>
         <div class="tap-callout">
-          <div class="tap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <a href="faucets-and-mixers-sydney" class="tap-icon" aria-label="View filter taps and mixer options" style="transition:transform .2s,background .2s"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           <div class="tap-content">
             <h4>Tap Options</h4>
-            <p>Dedicated chrome filter tap installed as standard. A <strong>3-way mixer tap upgrade</strong> combines filtered and mains water in one premium fixture, available on request.</p>
+            <p>Dedicated chrome filter tap installed as standard. A <a href="faucets-and-mixers-sydney" style="color:var(--blue);font-weight:700;text-decoration:none"><strong>3-way mixer tap upgrade</strong></a> combines filtered and mains water in one premium fixture, available on request.</p>
           </div>
         </div>
       </div>
@@ -968,7 +978,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <span class="eyebrow">About The System</span>
       <h2>The Most Advanced Under-Sink Water Filter Available in Sydney</h2>
       <p>The Pure Premium starts with the same RO membrane purity as the Pure Plus+, removing up to 99% of dissolved contaminants including fluoride, chloramine, heavy metals, PFAS and microplastics. But it doesn't stop at filtration. Four additional post-treatment stages actively transform the water into something significantly more than just clean.</p>
-      <p>The high-alkaline magnesium stage infuses dissolved molecular hydrogen (H2), a potent antioxidant with researched anti-inflammatory and cellular energy benefits, while simultaneously raising the pH to 8.5–10 with magnesium and potassium enrichment. The far infrared ceramic stage adds a further dimension, restructuring water molecules for improved cellular absorption. A secondary alkaline post-filter stabilises pH consistency over time, and an activated coconut carbon final stage ensures every glass tastes crisp and clean from the tap.</p>
+      <p>The high-alkaline magnesium stage infuses dissolved molecular hydrogen (H2), a potent antioxidant with researched anti-inflammatory and cellular energy benefits, while simultaneously raising the pH to 8.5–10 with magnesium and potassium enrichment. The far infrared ceramic stage adds a further dimension, restructuring water molecules for improved cellular absorption. An activated coconut carbon stage then gives the water its final taste polish, and a last inline magnetic conditioner helps reduce scale at the dispensing tap.</p>
       <p>The result is water that performs at two levels simultaneously: hospital-grade filtration purity at the RO membrane stage, and health-optimised enhancement at the post-treatment stage. This is the system for households that treat water as part of a wellness routine, not just a utility.</p>
       <p>Jean-Paul installs every Pure Premium personally across Sydney. Fixed price of $1,180 covers system, 12L tank, chrome filter tap, all fittings, and licensed installation. No extras.</p>
       <h2>The Benefits of Hydrogen-Rich Water</h2>
@@ -997,52 +1007,66 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <div class="stages-grid">
         <div class="stage-card">
           <div class="stage-num">1</div>
-          <div class="stage-name">5-Micron Sediment Pre-Filter</div>
-          <div class="stage-rating">Sediment, particles, silt</div>
-          <div class="stage-desc">Removes physical particulates from the feed water, sand, silt, rust and suspended solids, protecting the RO membrane and all downstream stages from clogging. Replaced every 6 months.</div>
+          <img class="stage-img" src="assets/supplier/sediment_standard.webp" alt="5 micron polyspun sediment pre-filter cartridge for the Pure Premium 7-stage reverse osmosis system, 10 x 2.5 inch" width="500" height="500" loading="lazy">
+          <div class="stage-model">GT2-2K</div>
+          <div class="stage-name">5-Micron Polyspun Sediment Filter</div>
+          <div class="stage-rating">Pre-filter, Sediment, particles, silt</div>
+          <div class="stage-desc">A 5-micron melt-blown polypropylene cartridge that removes physical particulates from the feed water, sand, silt, rust and suspended solids, protecting the carbon pre-filter, RO membrane and all downstream stages from clogging. Replaced every 6 months.</div>
           <div class="stage-tags"><span class="stage-tag">Sediment</span><span class="stage-tag">Particles</span><span class="stage-tag">Rust</span><span class="stage-tag">Membrane protection</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">2</div>
-          <div class="stage-name">CTO Carbon Block Pre-Filter</div>
-          <div class="stage-rating">Chlorine, chloramine, VOCs</div>
-          <div class="stage-desc">Removes free chlorine, chloramine and organic chemical compounds that would otherwise degrade the RO membrane. Also reduces VOCs, herbicides, pesticides and chemical taste and odour.</div>
-          <div class="stage-tags"><span class="stage-tag">Chloramine</span><span class="stage-tag">Chlorine</span><span class="stage-tag">VOCs</span><span class="stage-tag">Membrane protection</span></div>
+          <img class="stage-img" src="assets/supplier/carbon.webp" alt="5 micron coconut carbon block CTO pre-filter cartridge for the Pure Premium reverse osmosis system, 10 x 2.5 inch" width="500" height="500" loading="lazy">
+          <div class="stage-model">GT4-7CTO</div>
+          <div class="stage-name">5-Micron Coconut Carbon Block (CTO)</div>
+          <div class="stage-rating">Pre-filter, Chlorine, VOCs, Taste &amp; Odour</div>
+          <div class="stage-desc">A high-grade activated coconut carbon block that adsorbs free chlorine before the water reaches the RO membrane, chlorine is particularly damaging to the membrane, so this stage protects it. Also reduces VOCs, herbicides, pesticides and chemical taste and odour. Replaced every 6 months.</div>
+          <div class="stage-tags"><span class="stage-tag">Chlorine</span><span class="stage-tag">VOCs</span><span class="stage-tag">Taste &amp; odour</span><span class="stage-tag">Membrane protection</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">3</div>
-          <div class="stage-name">75 GPD RO Membrane</div>
-          <div class="stage-rating">0.0001 micron, 99%+ TDS rejection</div>
-          <div class="stage-desc">The core of the system. Rejects up to 99% of dissolved contaminants: fluoride (up to 95%), heavy metals, nitrates, PFAS, bacteria, cysts and microplastics. The membrane lasts 2–3 years.</div>
+          <img class="stage-img" src="assets/supplier/ro_membrane_standard.webp" alt="Asprinn 50 GPD reverse osmosis membrane element for the Pure Premium undersink RO system" width="500" height="500" loading="lazy">
+          <div class="stage-model">GT13-59-ALP</div>
+          <div class="stage-name">50 GPD Reverse Osmosis Membrane</div>
+          <div class="stage-rating">Primary filter, 0.0001 micron, up to 98% reduction</div>
+          <div class="stage-desc">The core of the system. The Asprinn thin-film composite RO membrane filters to 0.0001 micron, rejecting the vast majority of dissolved contaminants: fluoride (up to 98%), heavy metals, nitrates, PFAS, salts, bacteria, cysts and microplastics. It produces up to 190 litres of purified water per day. Replaced every 2–4 years depending on your water quality.</div>
           <div class="stage-tags"><span class="stage-tag">Fluoride</span><span class="stage-tag">Heavy metals</span><span class="stage-tag">PFAS</span><span class="stage-tag">Nitrates</span><span class="stage-tag">Bacteria</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">4</div>
-          <div class="stage-name">High-Alkaline Magnesium & Hydrogen-Rich Stage</div>
+          <img class="stage-img" src="assets/supplier/hydrogen_rich.webp" alt="T300 hydrogen-rich high alkaline magnesium mineral post-filter cartridge GT6-32 for the Pure Premium RO system" width="500" height="500" loading="lazy">
+          <div class="stage-model">GT6-32 (T300)</div>
+          <div class="stage-name">Hydrogen-Rich High Alkaline Mineral Stage</div>
           <div class="stage-rating">pH 8.5–10, molecular hydrogen, antioxidant</div>
-          <div class="stage-desc">The defining stage of the Pure Premium. Passes RO-pure water through magnesium media that infuses dissolved molecular hydrogen (H2), a potent antioxidant, and raises pH to 8.5–10 with magnesium and potassium mineral enrichment.</div>
+          <div class="stage-desc">The defining stage of the Pure Premium. The T300 cartridge passes RO-pure water through sub-nanometer magnesium and potassium mineral media that infuses dissolved molecular hydrogen (H2), a potent antioxidant, and lifts the pH into the high-alkaline 8.5–10 range with stable mineral enrichment. Replaced every 12 months.</div>
           <div class="stage-tags"><span class="stage-tag">Hydrogen H2</span><span class="stage-tag">Alkaline pH</span><span class="stage-tag">Magnesium</span><span class="stage-tag">Antioxidant</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">5</div>
+          <img class="stage-img" src="assets/supplier/ceramin_infared.webp" alt="Life energy far infrared ceramic media post-filter cartridge GT6-10 for the Pure Premium RO system" width="500" height="500" loading="lazy">
+          <div class="stage-model">GT6-10</div>
           <div class="stage-name">Far Infrared Ceramic Stage</div>
-          <div class="stage-rating">Cellular absorption enhancement</div>
-          <div class="stage-desc">Far infrared ceramic media emits FIR energy to restructure water molecules into smaller clusters, believed to improve cellular hydration and absorption. Adds a further dimension to the water enhancement beyond chemistry alone.</div>
-          <div class="stage-tags"><span class="stage-tag">Far infrared</span><span class="stage-tag">Micro-clustering</span><span class="stage-tag">Cellular uptake</span></div>
+          <div class="stage-rating">Post-filter, Cellular absorption enhancement</div>
+          <div class="stage-desc">Far infrared ceramic media emits FIR energy that interacts with the water molecules, believed to improve cellular hydration and absorption. It adds a further dimension to the water enhancement beyond chemistry alone. Long-life media, replaced every 2 years.</div>
+          <div class="stage-tags"><span class="stage-tag">Far infrared</span><span class="stage-tag">Activated water</span><span class="stage-tag">Cellular uptake</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">6</div>
-          <div class="stage-name">Activated Coconut Carbon Post-Filter</div>
-          <div class="stage-rating">Final taste polish</div>
-          <div class="stage-desc">A high-grade coconut activated carbon inline filter that removes any residual taste or odour from the storage tank, ensuring every glass is crisp and clean. Replaced annually.</div>
-          <div class="stage-tags"><span class="stage-tag">Taste</span><span class="stage-tag">Odour</span><span class="stage-tag">Post-tank polish</span></div>
+          <img class="stage-img" src="assets/supplier/coconutshell_carbon.webp" alt="100 percent activated coconut carbon final polish post-filter cartridge GT6-21 for the Pure Premium RO system" width="500" height="500" loading="lazy">
+          <div class="stage-model">GT6-21</div>
+          <div class="stage-name">Activated Coconut Carbon Final Polish</div>
+          <div class="stage-rating">Post-filter, Final taste &amp; odour polish</div>
+          <div class="stage-desc">A 100% activated coconut carbon inline filter that gives the water its final polish, stripping any residual tastes and odours and imparting a clean, naturally sweet finish at the tap. Replaced every 12 months.</div>
+          <div class="stage-tags"><span class="stage-tag">Taste</span><span class="stage-tag">Odour</span><span class="stage-tag">Coconut carbon</span><span class="stage-tag">Final polish</span></div>
         </div>
         <div class="stage-card">
           <div class="stage-num">7</div>
-          <div class="stage-name">Inline Alkaline Post-Filter</div>
-          <div class="stage-rating">Secondary alkaline stage, final pH stabilisation</div>
-          <div class="stage-desc">A secondary alkaline filter that stabilises and maintains the elevated pH from stage 4, ensuring consistent alkaline output from the filter tap even as the primary stages age between service intervals.</div>
-          <div class="stage-tags"><span class="stage-tag">Alkaline stability</span><span class="stage-tag">pH maintenance</span><span class="stage-tag">Post-carbon</span></div>
+          <img class="stage-img" src="assets/supplier/magnetic_inline.webp" alt="Inline magnetic water conditioner for the Pure Premium RO system, reduces scale at the dispensing tap" width="500" height="500" loading="lazy">
+          <div class="stage-model">Inline Conditioner</div>
+          <div class="stage-name">Inline Magnetic Water Conditioner</div>
+          <div class="stage-rating">Scale reduction, never needs replacing</div>
+          <div class="stage-desc">A final inline magnetic stage that applies a strong magnetic field to the water as it flows to the tap, helping to reduce scale build-up at the dispensing faucet. It's a maintenance-free, chemical-free device that never needs replacing.</div>
+          <div class="stage-tags"><span class="stage-tag">Scale reduction</span><span class="stage-tag">Magnetic</span><span class="stage-tag">Maintenance-free</span></div>
         </div>
         </div>
     </div>
@@ -1055,29 +1079,35 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
       <span class="eyebrow">System Specifications</span>
       <h2 class="sec-title sec-title-dark">Technical <span class="sh sh-b">Specifications</span></h2>
     </div>
-    <div class="specs-table-wrap">
-      <table class="specs-table">
-        <thead><tr><th>Specification</th><th>Value</th></tr></thead>
-        <tbody>
-          <tr><td>System Model</td><td>GT1-26-7 (Pure Premium)</td></tr>
-          <tr><td>Filtration Stages</td><td>7 (Sediment + CTO Carbon + RO Membrane + H2 Alkaline + FIR Ceramic + Post Carbon + Alkaline)</td></tr>
-          <tr><td>RO Membrane</td><td>75 GPD thin-film composite (NSF/ANSI 58 tested)</td></tr>
-          <tr><td>TDS Rejection</td><td>Up to 99%</td></tr>
-          <tr><td>Fluoride Reduction</td><td>Up to 95%</td></tr>
-          <tr><td>Output pH</td><td>8.5–10 (high-alkaline)</td></tr>
-          <tr><td>Hydrogen Enrichment</td><td>Yes, dissolved H2 via magnesium media</td></tr>
-          <tr><td>Far Infrared Ceramic</td><td>Yes, post-RO stage</td></tr>
-          <tr><td>Storage Tank</td><td>Approximately 12L pressurised</td></tr>
-          <tr><td>Pre-filter Service Interval</td><td>6–12 months</td></tr>
-          <tr><td>RO Membrane Service Interval</td><td>2–3 years</td></tr>
-          <tr><td>Post-filter Service Interval</td><td>12 months</td></tr>
-          <tr><td>WaterMark Certification</td><td>AS/NZS 3497</td></tr>
-          <tr><td>Manufacturer</td><td>High Performance Filtration (HPF)</td></tr>
-          <tr><td>Annual Service (professional)</td><td>$450/yr (includes labour + all annual filters)</td></tr>
-          <tr><td>Annual Service (DIY)</td><td>$220/yr cartridges</td></tr>
-          <tr><td>Pre-Filter Service (every 6 months)</td><td>$220 professional / $70 DIY</td></tr>
-        </tbody>
-      </table>
+    <div class="spec-drop">
+      <button class="spec-drop-q" aria-expanded="false">View full technical specifications<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
+      <div class="spec-drop-a">
+        <div class="specs-table-wrap">
+          <table class="specs-table">
+            <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>System Model</td><td>GT1-26-7 (Pure Premium)</td></tr>
+              <tr><td>Filtration Stages</td><td>7 (Sediment + CTO Carbon + RO Membrane + H2 Alkaline + FIR Ceramic + Carbon Polish + Magnetic Conditioner)</td></tr>
+              <tr><td>RO Membrane</td><td>50 GPD Asprinn thin-film composite (NSF/ANSI 58 tested)</td></tr>
+              <tr><td>RO Membrane Output</td><td>Up to approximately 190 litres/day</td></tr>
+              <tr><td>TDS Rejection</td><td>Up to 98%</td></tr>
+              <tr><td>Fluoride Reduction</td><td>Up to 98%</td></tr>
+              <tr><td>Output pH</td><td>8.5–10 (high-alkaline, hydrogen-rich stage)</td></tr>
+              <tr><td>Hydrogen Enrichment</td><td>Yes, dissolved H2 via T300 magnesium media</td></tr>
+              <tr><td>Far Infrared Ceramic</td><td>Yes, post-RO stage</td></tr>
+              <tr><td>Storage Tank</td><td>Approximately 12L pressurised</td></tr>
+              <tr><td>Pre-filter Service Interval</td><td>Every 6 months (sediment + CTO carbon)</td></tr>
+              <tr><td>RO Membrane Service Interval</td><td>2–4 years (water-quality dependent)</td></tr>
+              <tr><td>Post-filter Service Interval</td><td>12 months (hydrogen + carbon); FIR every 2 years</td></tr>
+              <tr><td>WaterMark Certification</td><td>Certificate No. 23247 (AS 3497:2021)</td></tr>
+              <tr><td>Manufacturer</td><td>High Performance Filtration (HPF)</td></tr>
+              <tr><td>Annual Service (professional)</td><td>$450/yr (includes labour + all annual filters)</td></tr>
+              <tr><td>Annual Service (DIY)</td><td>$220/yr cartridges</td></tr>
+              <tr><td>Pre-Filter Service (every 6 months)</td><td>$220 professional / $70 DIY</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1163,12 +1193,12 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
     <div class="faq-list">
       <div class="faq-item"><button class="faq-q">What is hydrogen-rich water and what are its benefits?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Hydrogen-rich water contains dissolved molecular hydrogen (H2), a potent antioxidant that may help neutralise harmful free radicals. Research suggests potential benefits including reduced oxidative stress, anti-inflammatory properties, improved athletic recovery and enhanced cellular energy. The Pure Premium generates hydrogen-rich water via its magnesium-media stage, which reacts with pure RO water to produce dissolved H2, raising hydrogen concentration significantly above standard tap water.</div></div>
       <div class="faq-item"><button class="faq-q">What does far infrared ceramic do in a water filter?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Far infrared ceramic (FIR) media emits far infrared rays that interact with water molecules. Proponents claim this improves water absorption at the cellular level and enhances taste and softness. The FIR stage in the Pure Premium follows the hydrogen and alkaline stages, adding a further enhancement layer for those seeking the most comprehensive residential water treatment available.</div></div>
-      <div class="faq-item"><button class="faq-q">What pH does the Pure Premium produce?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The Pure Premium is rated to produce water at pH 8.5–10, depending on feed water conditions and filter age. This is achieved through the high-alkaline magnesium stage combined with the inline alkaline post-filter, significantly higher than the 7.5–8.5 output of the Pure Plus+.</div></div>
+      <div class="faq-item"><button class="faq-q">What pH does the Pure Premium produce?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The Pure Premium is rated to produce water at pH 8.5–10, depending on feed water conditions and filter age. This is achieved through the high-alkaline hydrogen-rich magnesium (T300) stage, significantly higher than the 8–9.5 output of the Pure Plus+.</div></div>
       <div class="faq-item"><button class="faq-q">Is a 7-stage water filter better than a 5-stage system?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Not necessarily in terms of contamination removal, both achieve comparable RO-grade purity at the membrane stage. The additional stages in the 7-stage system enhance the output water beyond filtration with hydrogen enrichment, higher alkalinity and cellular-uptake optimisation. If your goal is maximum contaminant removal, the Pure Plus+ ($840) is the pragmatic choice. If you want health-focused water enhancement, the Pure Premium ($1,180) is the upgrade.</div></div>
-      <div class="faq-item"><button class="faq-q">How often do 7-stage RO filters need servicing?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">6 cartridges including hydrogen, alkaline, FIR and post-carbon stages are replaced annually. Pre-filter cartridges (sediment and carbon block) are recommended every 6 months to protect the RO membrane. RO membrane lasts 2 to 4 years and is checked at every service. Jean-Paul's professional annual service is $450 including all annual filter media and labour. Pre-filter service runs $220 every 6 months, or $70 DIY.</div></div>
-      <div class="faq-item"><button class="faq-q">Does the 7-stage system remove fluoride?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes. The RO membrane operates at 0.0001 microns and rejects up to 95% of fluoride, the same as the Pure Plus+ and all RO systems in the range. The number of enhancement stages doesn't affect fluoride rejection, which is handled entirely by the membrane.</div></div>
+      <div class="faq-item"><button class="faq-q">How often do 7-stage RO filters need servicing?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">The hydrogen-rich alkaline and carbon polish post-filters are replaced every 12 months, and the two pre-filters (sediment and carbon block) every 6 months to protect the RO membrane. The far infrared ceramic stage lasts about 2 years and the inline magnetic conditioner never needs replacing. RO membrane lasts 2 to 4 years and is checked at every service. Jean-Paul's professional annual service is $450 including all annual filter media and labour. Pre-filter service runs $220 every 6 months, or $70 DIY.</div></div>
+      <div class="faq-item"><button class="faq-q">Does the 7-stage system remove fluoride?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes. The RO membrane operates at 0.0001 microns and rejects up to 98% of fluoride, the same as the Pure Plus+ and all RO systems in the range. The number of enhancement stages doesn't affect fluoride rejection, which is handled entirely by the membrane.</div></div>
       <div class="faq-item"><button class="faq-q">Can a 7-stage RO system be installed in a Sydney apartment?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Yes. The Pure Premium installs under your kitchen sink like any standard under-sink RO system. No strata approval required in most cases. Jean-Paul has installed in apartments of every size across inner Sydney. Installation takes approximately 2 hours.</div></div>
-      <div class="faq-item"><button class="faq-q">What is the difference between the Pure Premium and Pure Plus+?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Both use RO membrane filtration to remove 99%+ of contaminants. The Pure Plus+ ($840) adds basic alkaline remineralisation (pH 7.5–8.5). The Pure Premium ($1,180) adds a high-alkaline magnesium stage (pH 8.5–10), molecular hydrogen enrichment, far infrared ceramic, and a secondary alkaline post-filter. Choose the Pure Plus+ for filtration + mild alkalinity. Choose the Pure Premium for the full health-enhancement experience.</div></div>
+      <div class="faq-item"><button class="faq-q">What is the difference between the Pure Premium and Pure Plus+?<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button><div class="faq-a">Both use RO membrane filtration to remove 99%+ of contaminants. The Pure Plus+ ($840) adds alkaline magnesium remineralisation (pH 8–9.5). The Pure Premium ($1,180) adds a high-alkaline hydrogen-rich magnesium stage (pH 8.5–10), molecular hydrogen enrichment, far infrared ceramic, and an inline magnetic conditioner. Choose the Pure Plus+ for filtration + mild alkalinity. Choose the Pure Premium for the full health-enhancement experience.</div></div>
     </div>
   </div>
 </section>
@@ -1185,7 +1215,7 @@ img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
         <div class="system-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></div>
         <div class="system-name">Pure Plus+</div>
         <div class="system-price">$840</div>
-        <div class="system-note">5-stage RO + alkaline remineralisation. Removes 99%+ of contaminants including fluoride. pH 7.5–8.5. Sydney's most popular RO system.</div>
+        <div class="system-note">5-stage RO + alkaline remineralisation. Removes 99%+ of contaminants including fluoride. pH 8–9.5. Sydney's most popular RO system.</div>
         <a href="pure-plus-water-filter-sydney" class="system-link">View Pure Plus+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="system-card">
@@ -1638,6 +1668,13 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
     const open=item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
     if(!open)item.classList.add('open');
+  });
+});
+document.querySelectorAll('.spec-drop-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const drop=btn.closest('.spec-drop');
+    const open=drop.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
   });
 });
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.07});
