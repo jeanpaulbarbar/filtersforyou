@@ -483,6 +483,7 @@ a{text-decoration:none;color:inherit}
 .product-btns{display:flex;flex-wrap:wrap;gap:12px}
 .tap-callout{background:linear-gradient(135deg,#f0f6ff 0%,#e8f0ff 100%);border:1.5px solid rgba(11,97,244,.15);border-radius:16px;padding:24px 28px;margin-top:24px;display:flex;gap:16px;align-items:flex-start}
 .tap-icon{width:44px;height:44px;min-width:44px;background:var(--blue);border-radius:12px;display:flex;align-items:center;justify-content:center}
+a.tap-icon:hover{background:var(--blue-dark);transform:translateY(-2px)}
 .tap-content h4{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px}
 .tap-content p{font-size:14px;color:var(--muted);line-height:1.65}
 .content-body{max-width:800px;margin:0 auto}
@@ -493,13 +494,21 @@ a{text-decoration:none;color:inherit}
 .content-body ul li{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:6px}
 .stages-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px}
 .stage-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(11,97,244,.08);border:1.5px solid rgba(11,97,244,.06);position:relative}
-.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.stage-num{position:absolute;top:-14px;left:24px;width:32px;height:32px;background:var(--blue);color:#fff;font-size:16px;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2}
 .stage-model{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
 .stage-name{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.2}
 .stage-rating{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:12px}
 .stage-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:14px}
 .stage-tags{display:flex;flex-wrap:wrap;gap:6px}
 .stage-tag{background:var(--light);border-radius:20px;font-size:12px;font-weight:600;color:var(--blue);padding:4px 10px}
+.stage-img{display:block;width:100%;height:170px;object-fit:contain;background:#fff;border-radius:12px;padding:10px;margin-bottom:18px}
+.spec-drop{max-width:780px;margin:0 auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.05);overflow:hidden}
+.spec-drop-q{width:100%;text-align:left;background:none;border:none;padding:18px 24px;font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.spec-drop-q .faq-icon{transition:transform .25s}
+.spec-drop.open .faq-icon{transform:rotate(45deg)}
+.spec-drop-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s}
+.spec-drop.open .spec-drop-a{max-height:1600px;padding:0 16px 18px}
+.spec-drop .specs-table{box-shadow:none}
 .specs-table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.07)}
 .specs-table th{background:var(--blue);color:#fff;padding:14px 18px;font-size:14px;font-weight:700;text-align:left}
 .specs-table th:last-child{text-align:right}
@@ -1000,10 +1009,10 @@ a{text-decoration:none;color:inherit}
         </div>
         <!-- TAP CALLOUT -->
         <div class="tap-callout">
-          <div class="tap-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <a href="faucets-and-mixers-sydney" class="tap-icon" aria-label="View filter taps and mixer options" style="transition:transform .2s,background .2s"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
           <div class="tap-content">
             <h4>Tap Options</h4>
-            <p>A dedicated chrome filter tap is installed as standard, through your benchtop or sink. Prefer a cleaner look? A <strong>3-way mixer tap upgrade</strong> is available on request, combining hot/cold and filtered water into one premium fixture. No extra hole required.</p>
+            <p>A dedicated chrome filter tap is installed as standard, through your benchtop or sink. Prefer a cleaner look? A <a href="faucets-and-mixers-sydney" style="color:var(--blue);font-weight:700;text-decoration:none"><strong>3-way mixer tap upgrade</strong></a> is available on request, combining hot/cold and filtered water into one premium fixture. No extra hole required.</p>
           </div>
         </div>
       </div>
@@ -1041,6 +1050,7 @@ a{text-decoration:none;color:inherit}
       <div class="stages-grid">
         <div class="stage-card">
           <div class="stage-num">1</div>
+          <img class="stage-img" src="assets/supplier/sediment_standard.webp" alt="5 micron polyspun sediment pre-filter cartridge GT2-2K for the Pure Balance reverse osmosis system, 10 x 2.5 inch" width="500" height="500" loading="lazy">
           <div class="stage-model">GT2-2K</div>
           <div class="stage-name">5-Micron Polyspun Sediment Filter</div>
           <div class="stage-rating">Pre-filter, Sediment, Particles, Silt</div>
@@ -1049,6 +1059,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="stage-card">
           <div class="stage-num">2</div>
+          <img class="stage-img" src="assets/supplier/carbon.webp" alt="5 micron coconut carbon block CTO pre-filter cartridge GT4-7CTO for the Pure Balance reverse osmosis system, 10 x 2.5 inch" width="500" height="500" loading="lazy">
           <div class="stage-model">GT4-7CTO</div>
           <div class="stage-name">Coconut Carbon Block Pre-Filter</div>
           <div class="stage-rating">Pre-filter, Chlorine, Chloramine, Taste &amp; Odour</div>
@@ -1057,6 +1068,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="stage-card">
           <div class="stage-num">3</div>
+          <img class="stage-img" src="assets/supplier/ro_membrane_standard.webp" alt="Asprinn 50 GPD reverse osmosis membrane element GT36-59 for the Pure Balance undersink RO system" width="500" height="500" loading="lazy">
           <div class="stage-model">GT36-59</div>
           <div class="stage-name">50 GPD RO Membrane</div>
           <div class="stage-rating">Primary filter, 0.0001 micron, up to 98% TDS rejection</div>
@@ -1065,6 +1077,7 @@ a{text-decoration:none;color:inherit}
         </div>
         <div class="stage-card">
           <div class="stage-num">4</div>
+          <img class="stage-img" src="assets/supplier/coconutshell_carbon.webp" alt="100% activated coconut carbon inline post-filter cartridge GT6-21LS for the Pure Balance RO system" width="500" height="500" loading="lazy">
           <div class="stage-model">GT6-21LS</div>
           <div class="stage-name">100% Coconut Carbon Post-Filter</div>
           <div class="stage-rating">Post-filter, Final taste polish, No minerals added</div>
@@ -1085,6 +1098,9 @@ a{text-decoration:none;color:inherit}
       <h2 class="sec-title sec-title-dark">Technical <span class="sh sh-b">Specifications</span></h2>
       <p class="sec-body sec-body-c">Full technical data for the Pure Balance GT1-26-4 system as supplied and installed in Sydney.</p>
     </div>
+    <div class="spec-drop">
+      <button class="spec-drop-q" aria-expanded="false">View full technical specifications<span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span></button>
+      <div class="spec-drop-a">
     <div class="specs-table-wrap">
       <table class="specs-table">
         <thead><tr><th>Specification</th><th>Value</th></tr></thead>
@@ -1108,6 +1124,8 @@ a{text-decoration:none;color:inherit}
           <tr><td>Pre-Filter Service (every 6 months)</td><td>$220 professional / $70 DIY</td></tr>
         </tbody>
       </table>
+    </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1693,6 +1711,13 @@ document.querySelectorAll('.faq-q').forEach(btn=>{
     const open=item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
     if(!open)item.classList.add('open');
+  });
+});
+document.querySelectorAll('.spec-drop-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const drop=btn.closest('.spec-drop');
+    const open=drop.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open);
   });
 });
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.07});
