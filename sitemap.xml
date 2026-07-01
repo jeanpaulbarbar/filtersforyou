@@ -2450,6 +2450,13 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Warranty -->
+  <url>
+    <loc>https://filtersforyou.com.au/lifetime-warranty</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <!-- Policy Pages -->
   <url>
     <loc>https://filtersforyou.com.au/privacy-policy</loc>
@@ -2459,7 +2466,7 @@
   </url>
   <url>
     <loc>https://filtersforyou.com.au/terms-and-conditions</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-07-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
