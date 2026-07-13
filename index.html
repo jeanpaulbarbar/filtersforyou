@@ -646,7 +646,6 @@ a{text-decoration:none;color:inherit}
 /* Brickwork: two rows scrolling opposite directions, second row offset half a card */
 .rc-track{display:flex;width:max-content;flex:0 0 auto;animation:rc-infinite 32s linear infinite;will-change:transform}
 .rc-track.rc-row-b{animation:rc-infinite-rev 32s linear infinite;margin-left:-135px}
-.rc-track.paused,.rc-track-outer:hover .rc-track{animation-play-state:paused}
 @keyframes rc-infinite{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes rc-infinite-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .rc-group{display:flex;gap:14px;padding-right:14px;flex-shrink:0}
@@ -843,7 +842,7 @@ a{text-decoration:none;color:inherit}
   .rc-rating-num{font-size:24px}
   /* Mobile carousel — scroll horizontally */
   .rc-track-outer{overflow:hidden}
-  .rc-track{animation:rc-infinite 50s linear infinite;width:max-content}
+  .rc-track{animation-duration:50s;width:max-content}
   .rc-card{width:240px;flex-shrink:0}
 
   /* Process */
@@ -2523,39 +2522,6 @@ a{text-decoration:none;color:inherit}
   </div>
 </footer>
 
-<script>
-(function() {
-  const track = document.querySelector('.rc-track');
-  const trackOuter = document.querySelector('.rc-track-outer');
-  if (!track || !trackOuter) return;
-
-  let pauseTimeout = null;
-
-  trackOuter.addEventListener('mouseenter', () => {
-    track.classList.add('paused');
-    if (pauseTimeout) clearTimeout(pauseTimeout);
-  });
-
-  trackOuter.addEventListener('mouseleave', () => {
-    if (pauseTimeout) clearTimeout(pauseTimeout);
-    pauseTimeout = setTimeout(() => {
-      track.classList.remove('paused');
-    }, 100);
-  });
-
-  trackOuter.addEventListener('touchstart', () => {
-    track.classList.add('paused');
-    if (pauseTimeout) clearTimeout(pauseTimeout);
-  }, { passive: true });
-
-  trackOuter.addEventListener('touchend', () => {
-    if (pauseTimeout) clearTimeout(pauseTimeout);
-    pauseTimeout = setTimeout(() => {
-      track.classList.remove('paused');
-    }, 2000);
-  }, { passive: true });
-})();
-</script>
 
 
 <script>
