@@ -2844,7 +2844,7 @@ function handleBookingSubmit(e){
     if(input.hasAttribute('required')&&!input.value.trim()){
       group.classList.add('has-error');
       isValid=false;
-    }else if(input.type==='email'&&input.value&&!input.value.includes('@')){
+    }else if(input.type==='email'&&input.value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)){
       group.classList.add('has-error');
       isValid=false;
     }else if(input.type==='tel'&&input.value.replace(/\D/g,'').length!==10){
@@ -3098,11 +3098,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-ap1.hs-scripts.com/443181620.js"></script>
 <!-- End of HubSpot Embed Code -->
-<!-- ffy-phone-cap: enforce exactly 10-digit AU phone on all tel inputs -->
+<!-- ffy-phone-cap: enforce exactly 10-digit AU phone + valid email on lead forms -->
 <script>
 (function(){
   function digits(v){return (v||'').replace(/\D/g,'').slice(0,10);}
-  document.querySelectorAll('input[type="tel"]').forEach(function(el){
+  // email must be: text @ text . text  (any provider, must contain @ and a dotted domain)
+  var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  var tels=document.querySelectorAll('input[type="tel"]');
+  tels.forEach(function(el){
     el.setAttribute('inputmode','numeric');
     el.setAttribute('maxlength','10');
     el.setAttribute('pattern','\\d{10}');
@@ -3114,6 +3118,34 @@ document.addEventListener('DOMContentLoaded', function() {
     el.addEventListener('input',check);
     el.addEventListener('blur',check);
     check();
+  });
+
+  var emails=document.querySelectorAll('input[type="email"]');
+  emails.forEach(function(el){
+    function check(){
+      var v=(el.value||'').trim();
+      if(v!==el.value)el.value=v;
+      el.setCustomValidity((v==='')?(el.required?'Please enter your email address':''):(EMAIL_RE.test(v)?'':'Please enter a valid email address (e.g. name@example.com)'));
+    }
+    el.addEventListener('input',check);
+    el.addEventListener('blur',check);
+    check();
+  });
+
+  // Guard submit for any form containing a tel or email input (capture phase beats AJAX handlers)
+  var seen=[];
+  [].forEach.call(document.querySelectorAll('input[type="tel"],input[type="email"]'),function(el){
+    var f=el.form;
+    if(f&&seen.indexOf(f)===-1){
+      seen.push(f);
+      f.addEventListener('submit',function(e){
+        if(!f.checkValidity()){
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          f.reportValidity();
+        }
+      },true);
+    }
   });
 })();
 </script>

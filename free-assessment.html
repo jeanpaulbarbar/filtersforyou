@@ -1911,10 +1911,13 @@ a{text-decoration:none;color:inherit}
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-ap1.hs-scripts.com/443181620.js"></script>
 <!-- End of HubSpot Embed Code -->
-<!-- ffy-phone-cap: enforce exactly 10-digit AU phone on all tel inputs -->
+<!-- ffy-phone-cap: enforce exactly 10-digit AU phone + valid email on lead forms -->
 <script>
 (function(){
   function digits(v){return (v||'').replace(/\D/g,'').slice(0,10);}
+  // email must be: text @ text . text  (any provider, must contain @ and a dotted domain)
+  var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   var tels=document.querySelectorAll('input[type="tel"]');
   tels.forEach(function(el){
     el.setAttribute('inputmode','numeric');
@@ -1929,9 +1932,22 @@ a{text-decoration:none;color:inherit}
     el.addEventListener('blur',check);
     check();
   });
-  // Guard submit for forms that contain a tel input (capture phase runs before AJAX handlers)
+
+  var emails=document.querySelectorAll('input[type="email"]');
+  emails.forEach(function(el){
+    function check(){
+      var v=(el.value||'').trim();
+      if(v!==el.value)el.value=v;
+      el.setCustomValidity((v==='')?(el.required?'Please enter your email address':''):(EMAIL_RE.test(v)?'':'Please enter a valid email address (e.g. name@example.com)'));
+    }
+    el.addEventListener('input',check);
+    el.addEventListener('blur',check);
+    check();
+  });
+
+  // Guard submit for any form containing a tel or email input (capture phase beats AJAX handlers)
   var seen=[];
-  tels.forEach(function(el){
+  [].forEach.call(document.querySelectorAll('input[type="tel"],input[type="email"]'),function(el){
     var f=el.form;
     if(f&&seen.indexOf(f)===-1){
       seen.push(f);
