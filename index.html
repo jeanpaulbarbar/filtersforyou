@@ -1318,6 +1318,7 @@ a{text-decoration:none;color:inherit}
               <input type="hidden" name="household_size" id="ffy-h-size">
               <input class="f-input" type="text" name="name" placeholder="Your name" required>
               <input class="f-input" type="tel" name="phone" placeholder="Phone number" required>
+              <input class="f-input" type="email" name="email" placeholder="Email address" required autocomplete="email">
               <textarea class="f-input" name="message" placeholder="Anything else? (optional)" rows="2" style="resize:vertical"></textarea>
               <button type="submit" class="f-submit" style="background:#FFD900;color:#324158;width:100%;font-size:16px;font-weight:800;padding:14px;border:none;border-radius:8px;cursor:pointer;font-family:inherit;margin-top:4px">Send My Free Quote &rarr;</button>
             </form>
@@ -1786,6 +1787,7 @@ a{text-decoration:none;color:inherit}
       <form action="https://formspree.io/f/mbdqdlve" method="POST" style="display:flex;flex-direction:column;gap:9px;">
         <input class="f-input" type="text" name="name" placeholder="Your name" required>
         <input class="f-input" type="tel" name="phone" placeholder="Phone number" required>
+        <input class="f-input" type="email" name="email" placeholder="Email address" required autocomplete="email">
         <input class="f-input" type="text" name="suburb" placeholder="Your suburb" required>
         <select class="f-select" name="system"><option value="" disabled selected>System interested in?</option><option>Whole House Filtration (HPF-3)</option><option>Under Sink / RO System, $810–$2,290</option><option>Not sure, need advice</option></select>
         <div class="f-check-wrap">
@@ -2845,7 +2847,7 @@ function handleBookingSubmit(e){
     }else if(input.type==='email'&&input.value&&!input.value.includes('@')){
       group.classList.add('has-error');
       isValid=false;
-    }else if(input.type==='tel'&&input.value&&input.value.replace(/\D/g,'').length<9){
+    }else if(input.type==='tel'&&input.value.replace(/\D/g,'').length!==10){
       group.classList.add('has-error');
       isValid=false;
     }else{
@@ -3096,5 +3098,24 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-ap1.hs-scripts.com/443181620.js"></script>
 <!-- End of HubSpot Embed Code -->
+<!-- ffy-phone-cap: enforce exactly 10-digit AU phone on all tel inputs -->
+<script>
+(function(){
+  function digits(v){return (v||'').replace(/\D/g,'').slice(0,10);}
+  document.querySelectorAll('input[type="tel"]').forEach(function(el){
+    el.setAttribute('inputmode','numeric');
+    el.setAttribute('maxlength','10');
+    el.setAttribute('pattern','\\d{10}');
+    function check(){
+      var d=digits(el.value);
+      if(el.value!==d)el.value=d;
+      el.setCustomValidity(d.length===10?'':'Please enter your 10-digit phone number');
+    }
+    el.addEventListener('input',check);
+    el.addEventListener('blur',check);
+    check();
+  });
+})();
+</script>
 </body>
 </html>

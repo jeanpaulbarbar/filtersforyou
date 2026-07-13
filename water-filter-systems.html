@@ -1658,6 +1658,7 @@
           <input type="hidden" name="household_size" id="ffy-wfs-h-size">
           <input class="f-input" type="text" name="name" placeholder="Your name" required>
           <input class="f-input" type="tel" name="phone" placeholder="Phone number" required>
+          <input class="f-input" type="email" name="email" placeholder="Email address" required autocomplete="email">
           <textarea class="f-input" name="message" placeholder="Anything else? (optional)" rows="2" style="resize:vertical"></textarea>
           <button type="submit" class="f-submit">Send My Free Quote Request</button>
         </form>
@@ -2442,5 +2443,24 @@
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-ap1.hs-scripts.com/443181620.js"></script>
 <!-- End of HubSpot Embed Code -->
+<!-- ffy-phone-cap: enforce exactly 10-digit AU phone on all tel inputs -->
+<script>
+(function(){
+  function digits(v){return (v||'').replace(/\D/g,'').slice(0,10);}
+  document.querySelectorAll('input[type="tel"]').forEach(function(el){
+    el.setAttribute('inputmode','numeric');
+    el.setAttribute('maxlength','10');
+    el.setAttribute('pattern','\\d{10}');
+    function check(){
+      var d=digits(el.value);
+      if(el.value!==d)el.value=d;
+      el.setCustomValidity(d.length===10?'':'Please enter your 10-digit phone number');
+    }
+    el.addEventListener('input',check);
+    el.addEventListener('blur',check);
+    check();
+  });
+})();
+</script>
 </body>
 </html>

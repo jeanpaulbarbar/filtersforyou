@@ -2114,5 +2114,40 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBooking
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-ap1.hs-scripts.com/443181620.js"></script>
 <!-- End of HubSpot Embed Code -->
+<!-- ffy-phone-cap: enforce exactly 10-digit AU phone on all tel inputs -->
+<script>
+(function(){
+  function digits(v){return (v||'').replace(/\D/g,'').slice(0,10);}
+  var tels=document.querySelectorAll('input[type="tel"]');
+  tels.forEach(function(el){
+    el.setAttribute('inputmode','numeric');
+    el.setAttribute('maxlength','10');
+    el.setAttribute('pattern','\\d{10}');
+    function check(){
+      var d=digits(el.value);
+      if(el.value!==d)el.value=d;
+      el.setCustomValidity(d.length===10?'':'Please enter your 10-digit phone number');
+    }
+    el.addEventListener('input',check);
+    el.addEventListener('blur',check);
+    check();
+  });
+  // Guard submit for forms that contain a tel input (capture phase runs before AJAX handlers)
+  var seen=[];
+  tels.forEach(function(el){
+    var f=el.form;
+    if(f&&seen.indexOf(f)===-1){
+      seen.push(f);
+      f.addEventListener('submit',function(e){
+        if(!f.checkValidity()){
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          f.reportValidity();
+        }
+      },true);
+    }
+  });
+})();
+</script>
 </body>
 </html>

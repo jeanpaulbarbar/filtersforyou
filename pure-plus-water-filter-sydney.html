@@ -1302,7 +1302,7 @@ a.tap-icon:hover{background:var(--blue-dark);transform:translateY(-2px)}
       <input type="hidden" name="form-name" value="pure-plus-quote">
       <input class="f-input" type="text" name="name" placeholder="Your name" required autocomplete="name">
       <input class="f-input" type="tel" name="phone" placeholder="Phone number" required autocomplete="tel">
-      <input class="f-input" type="email" name="email" placeholder="Email address" autocomplete="email">
+      <input class="f-input" type="email" name="email" placeholder="Email address" required autocomplete="email">
       <input class="f-input" type="text" name="suburb" placeholder="Your suburb" required autocomplete="address-level2">
       <select class="f-select" name="system">
         <option value="" disabled selected>System of interest</option>
@@ -2041,5 +2041,24 @@ document.querySelectorAll('.gallery-thumb').forEach(thumb=>{
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-ap1.hs-scripts.com/443181620.js"></script>
 <!-- End of HubSpot Embed Code -->
+<!-- ffy-phone-cap: enforce exactly 10-digit AU phone on all tel inputs -->
+<script>
+(function(){
+  function digits(v){return (v||'').replace(/\D/g,'').slice(0,10);}
+  document.querySelectorAll('input[type="tel"]').forEach(function(el){
+    el.setAttribute('inputmode','numeric');
+    el.setAttribute('maxlength','10');
+    el.setAttribute('pattern','\\d{10}');
+    function check(){
+      var d=digits(el.value);
+      if(el.value!==d)el.value=d;
+      el.setCustomValidity(d.length===10?'':'Please enter your 10-digit phone number');
+    }
+    el.addEventListener('input',check);
+    el.addEventListener('blur',check);
+    check();
+  });
+})();
+</script>
 </body>
 </html>
