@@ -1975,5 +1975,67 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js-ap1.hs-scripts.com/443181620.js"></script>
 <!-- End of HubSpot Embed Code -->
+<!-- FFY ATTRIBUTION — added 2026-08-05 -->
+<script>
+/* Two gaps this closes, both measured 2026-08-05:
+   1. Every website lead reached the CRM carrying the single word "Website".
+      No page could ever be credited with an install, so no SEO or content
+      decision was judgeable. form_watcher.py already reads landing_page,
+      submitted_page and referrer — this is the half that sends them.
+   2. GA4 records zero tel: clicks. The phone is the primary above-fold CTA on
+      all 545 pages and it has never been counted once.
+   NOT added: form_submit / form_start. GA4 enhanced measurement already fires
+   both with the page attached (48 events in July, verified). Firing our own
+   would double-count against a key event that counts once per session. */
+(function () {
+  var KEY = 'ffy_landing', REF = 'ffy_referrer';
+  function store() {
+    try {
+      if (!sessionStorage.getItem(KEY)) {
+        sessionStorage.setItem(KEY, location.pathname);
+        sessionStorage.setItem(REF, document.referrer || '');
+      }
+    } catch (e) {}
+  }
+  function get(k, fallback) {
+    try { return sessionStorage.getItem(k) || fallback; } catch (e) { return fallback; }
+  }
+  function set(form, name, value) {
+    var el = form.querySelector('input[name="' + name + '"]');
+    if (!el) {
+      el = document.createElement('input');
+      el.type = 'hidden'; el.name = name;
+      form.appendChild(el);
+    }
+    el.value = value;
+  }
+  function fill() {
+    var landing = get(KEY, location.pathname);
+    var ref = get(REF, document.referrer || '');
+    var forms = document.querySelectorAll('form[action*="formspree"]');
+    for (var i = 0; i < forms.length; i++) {
+      set(forms[i], 'landing_page', landing);
+      set(forms[i], 'submitted_page', location.pathname);
+      set(forms[i], 'referrer', ref);
+    }
+  }
+  store();
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    while (t && t !== document) {
+      if (t.tagName === 'A' && (t.getAttribute('href') || '').indexOf('tel:') === 0) {
+        if (typeof gtag === 'function') {
+          gtag('event', 'phone_click', { page_path: location.pathname });
+        }
+        return;
+      }
+      t = t.parentNode;
+    }
+  }, true);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fill);
+  } else { fill(); }
+})();
+</script>
 </body>
 </html>
