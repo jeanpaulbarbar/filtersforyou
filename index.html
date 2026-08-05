@@ -728,7 +728,14 @@ a{text-decoration:none;color:inherit}
 /* REVIEWS CAROUSEL */
 .rc-section{background:var(--blue);padding:68px 0}
 .rc-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;padding:0 40px;gap:0}
-.rc-summary{flex-shrink:0;width:200px;padding-right:28px;border-right:2px solid rgba(255,255,255,.2);margin-right:28px}
+.rc-summary{flex-shrink:0;width:200px;padding-right:28px;border-right:2px solid rgba(255,255,255,.2);margin-right:28px;display:block;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.rc-verify{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:14px;font-weight:700;color:var(--yellow);white-space:nowrap;border-bottom:1.5px solid rgba(255,217,0,.35);padding-bottom:2px;transition:border-color .2s}
+.rc-verify .rc-arrow{transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.rc-summary:hover .rc-verify{border-bottom-color:var(--yellow)}
+.rc-summary:hover .rc-verify .rc-arrow{transform:translateX(3px)}
+.rc-summary:active{opacity:.85}
+.rc-summary:focus-visible{outline:3px solid var(--yellow);outline-offset:6px;border-radius:6px}
+@media(prefers-reduced-motion:reduce){.rc-verify .rc-arrow{transition:none}}
 .rc-excellent{font-size:23px;font-weight:800;color:var(--yellow);letter-spacing:.06em;margin-bottom:4px}
 .rc-sum-stars{color:#FBBC04;font-size:21px;letter-spacing:2px;line-height:1;margin-bottom:5px}
 .rc-rating-num{font-size:31px;font-weight:800;color:#fff;line-height:1;margin-bottom:5px}
@@ -1652,13 +1659,14 @@ a{text-decoration:none;color:inherit}
     <p style="font-size:16px;color:rgba(255,255,255,.72);max-width:520px;margin:12px auto 0;line-height:1.4;">Every review is real. Every customer is a Sydney family just like yours.</p>
   </div>
   <div class="rc-inner">
-    <div class="rc-summary">
+    <a class="rc-summary" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" target="_blank" rel="noopener" aria-label="Read every Filters For You review on Google">
       <div class="rc-excellent">EXCELLENT</div>
       <div class="rc-sum-stars">★★★★★</div>
       <div class="rc-rating-num">5.0</div>
       <div class="rc-count">Based on 21 Google reviews</div>
       <div class="rc-google-wordmark"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC04">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></div>
-    </div>
+      <div class="rc-verify">Verify on Google <span class="rc-arrow">&rarr;</span></div>
+    </a>
     <div class="rc-track-outer">
       <div class="rc-track">
         <div class="rc-group">
