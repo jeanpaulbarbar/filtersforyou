@@ -520,7 +520,7 @@ a{text-decoration:none;color:inherit}
 .hero-bullets{list-style:none;margin-bottom:26px;display:flex;flex-direction:column;gap:9px}
 .hero-bullets li{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:500;color:rgba(255,255,255,.9)}
 .chk{width:20px;height:20px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--dark);font-size:11px;font-weight:800}
-.hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.hero-chips{display:grid;grid-template-columns:auto auto;justify-content:start;gap:8px;margin-bottom:24px}
 .hero-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:16px;font-weight:600;padding:8px 14px;border-radius:6px}
 .hero-stars{display:flex;align-items:center;gap:8px;margin-bottom:14px}
 .stars{color:var(--yellow);font-size:19px;letter-spacing:1px}
@@ -537,7 +537,13 @@ a{text-decoration:none;color:inherit}
 .hero-photos{display:grid;grid-template-columns:3fr 2fr;grid-template-rows:1fr 1fr;gap:3px;height:340px;flex-shrink:0;border-radius:16px 16px 0 0;overflow:hidden}
 .hero-photos img{width:100%;height:100%;object-fit:cover;display:block}
 .hero-photos .hp-main{grid-row:1/3}
-.hero-form-panel{background:var(--blue-dark);border-top:4px solid var(--yellow);padding:24px 26px 26px;flex:1}
+.hero-form-panel{background:var(--blue-dark);border-top:4px solid var(--yellow);padding:24px 26px 26px;flex:1;position:relative}
+/* The hero CTA scrolls to this panel. On desktop the panel is already on
+   screen, so without a visible cue the button looks dead. Opacity only. */
+.hero-form-panel::after{content:'';position:absolute;inset:0;border:3px solid var(--yellow);opacity:0;pointer-events:none}
+.hero-form-panel.ffy-pulse::after{animation:ffyPulse 1.15s ease-out 1}
+@keyframes ffyPulse{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.hero-form-panel.ffy-pulse::after{animation:none;opacity:1}}
 .hfp-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:3px}
 .hfp-sub{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:16px}
 .hfp-fields{display:flex;flex-direction:column;gap:9px}
@@ -1265,8 +1271,6 @@ a{text-decoration:none;color:inherit}
         <div class="hsr-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>RO Systems</div>
       </div>
       <ul class="hero-bullets">
-        <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Removes chlorine, sediment &amp; microplastics</li>
-        <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Healthier cooking, showering &amp; drinking</li>
         <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>If the sealed system fails we replace it, plumbing and all</li>
         <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Scheduled and installed within one week</li>
       </ul>
@@ -1281,7 +1285,7 @@ a{text-decoration:none;color:inherit}
         <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg> Lifetime Warranty</span>
       </div>
       <div class="hero-btns">
-        <a href="#quote" class="btn btn-yellow btn-lg">Get My Fixed Price →</a>
+        <a href="#quote" class="btn btn-yellow btn-lg" onclick="return ffyStartQuote(event)">Get My Fixed Price →</a>
         <a href="tel:0430546749" class="btn btn-ghost btn-lg"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg> 0430 546 749</a>
       </div>
       <p class="hero-price-note">Fixed price, quoted before we start. No upsells on the day.</p>
@@ -2539,6 +2543,23 @@ document.querySelectorAll('.rc-more').forEach(btn => {
     btn.textContent = expanded ? 'Show less' : 'Read more';
   });
 });
+// Hero CTA: scroll to the quote widget and visibly start it. On desktop the
+// panel is already on screen, so a bare #quote jump looks like a dead button.
+function ffyStartQuote(e) {
+  const panel = document.getElementById('quote');
+  if (!panel) return true;
+  if (e) e.preventDefault();
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  panel.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+  window.setTimeout(() => {
+    panel.classList.add('ffy-pulse');
+    const first = panel.querySelector('.ffy-choice');
+    if (first) first.focus({ preventScroll: true });
+    window.setTimeout(() => panel.classList.remove('ffy-pulse'), 1300);
+  }, reduce ? 0 : 420);
+  return false;
+}
+
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
