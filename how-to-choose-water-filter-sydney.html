@@ -418,6 +418,17 @@
   /* ── CANONICAL TYPOGRAPHY NORMALISATION ── */
   body{font-size:16px!important;line-height:1.65!important}
   .sec-body{font-size:17px!important;line-height:1.65!important;max-width:580px!important;color:#5a6a7e!important}
+
+.crumbs{background:#f6f8fb;border-bottom:1px solid rgba(50,65,88,.08);font-family:'Sora',sans-serif}
+.crumbs ol{max-width:1200px;margin:0 auto;padding:10px 32px;display:flex;flex-wrap:wrap;align-items:center;gap:7px;list-style:none;font-size:13px;color:#6b7688}
+.crumbs li{display:flex;align-items:center;gap:7px}
+.crumbs li+li::before{content:'\203A';color:#9aa5b8;font-size:15px;line-height:1}
+.crumbs a{color:#0b61f4;text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.crumbs [aria-current]{color:#324158;font-weight:600}
+@media(max-width:640px){.crumbs ol{padding:9px 18px;font-size:12px;gap:5px}}
+
+.dd-group{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9aa5b8;padding:9px 13px 3px;font-family:'Sora',sans-serif}
 </style>
 <style id="dropdown-nav-css">
 .site-header{background:transparent!important}
@@ -661,25 +672,33 @@
       </li>
       <li class="nav-item has-dropdown">
         <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Resources <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="dropdown">
-          <a href="faucets-and-mixers-sydney">Filter Taps &amp; Mixers</a>
-          <a href="free-assessment">Free Water Assessment</a>
-          <a href="how-water-filters-work">How Water Filters Work</a>
-          <a href="is-sydney-water-safe">Is Sydney Water Safe?</a>
-          <a href="sydney-water-quality-guide">Sydney Water Quality Guide</a>
-          <a href="sydney-water-filter-cost-guide">Water Filter Cost Guide</a>
-          <a href="water-filter-faq-sydney">Water Filter FAQ</a>
-          <a href="water-filter-maintenance-guide">Maintenance Guide</a>
-          <a href="water-savings-calculator">Water Savings Calculator</a>
-          <a href="filter-lifespan-calculator">Filter Lifespan Calculator</a>
-          <a href="water-filter-pfas-removal-sydney">PFAS Water Filter Guide</a>
-          <a href="best-water-filter-sydney">Best Water Filter Sydney</a>
-          <a href="lifetime-warranty">Lifetime Warranty</a>
-          <a href="how-to-choose-water-filter-sydney">How to Choose a Water Filter</a>
-          <a href="reverse-osmosis-vs-whole-house-water-filter-sydney">RO vs Whole House</a>
-          <a href="water-filter-brand-comparison-sydney">Brand Comparison</a>
-          <a href="fluoride-in-sydney-water">Fluoride in Sydney Water</a>
-          <a href="what-is-in-sydney-water">What's in Sydney Water?</a>
+        <div class="dropdown dropdown-2col">
+          <div class="dropdown-col">
+            <div class="dd-group">Understand Your Water</div>
+            <a href="is-sydney-water-safe">Is Sydney Water Safe?</a>
+            <a href="what-is-in-sydney-water">What's in Sydney Water?</a>
+            <a href="sydney-water-quality-guide">Sydney Water Quality Guide</a>
+            <a href="fluoride-in-sydney-water">Fluoride in Sydney Water</a>
+            <a href="water-filter-pfas-removal-sydney">PFAS Water Filter Guide</a>
+            <a href="how-water-filters-work">How Water Filters Work</a>
+            <div class="dd-group">Tools</div>
+            <a href="water-savings-calculator">Water Savings Calculator</a>
+            <a href="filter-lifespan-calculator">Filter Lifespan Calculator</a>
+            <a href="free-assessment">Free Water Assessment</a>
+          </div>
+          <div class="dropdown-col">
+            <div class="dd-group">Choose a System</div>
+            <a href="best-water-filter-sydney">Best Water Filter Sydney</a>
+            <a href="how-to-choose-water-filter-sydney">How to Choose a Water Filter</a>
+            <a href="reverse-osmosis-vs-whole-house-water-filter-sydney">RO vs Whole House</a>
+            <a href="water-filter-brand-comparison-sydney">Brand Comparison</a>
+            <a href="sydney-water-filter-cost-guide">Water Filter Cost Guide</a>
+            <a href="faucets-and-mixers-sydney">Filter Taps &amp; Mixers</a>
+            <div class="dd-group">Owning One</div>
+            <a href="water-filter-faq-sydney">Water Filter FAQ</a>
+            <a href="water-filter-maintenance-guide">Maintenance Guide</a>
+            <a href="lifetime-warranty">Lifetime Warranty</a>
+          </div>
         </div>
       </li>
       <li class="nav-item has-dropdown">
@@ -689,13 +708,9 @@
           <a href="reviews-testimonials">Reviews &amp; Testimonials</a>
           <a href="contact">Contact</a>
           <hr class="dropdown-divider">
-          <div class="has-sub">
-            <a href="#">Our Brands</a>
-            <div class="sub-dropdown">
-              <a href="high-performance-filtration-sydney">High Performance Filtration</a>
-              <a href="filter-systems-australia-sydney">Filter Systems Australia</a>
-            </div>
-          </div>
+          <div class="dd-group">Our Brands</div>
+          <a href="high-performance-filtration-sydney">High Performance Filtration</a>
+          <a href="filter-systems-australia-sydney">Filter Systems Australia</a>
         </div>
       </li>
     </ul>
@@ -716,6 +731,13 @@
 </nav>
 </div>
 <div class="nav-spacer" id="navSpacer"></div>
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="resources">Resources</a></li>
+    <li><span aria-current="page">How to Choose a Water Filter Sydney</span></li>
+  </ol>
+</nav>
 
 <!-- ── HERO ── -->
 <section class="hero">

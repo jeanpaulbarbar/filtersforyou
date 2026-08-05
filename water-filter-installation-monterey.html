@@ -307,7 +307,13 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Water Filter Installation Monterey",
+          "name": "St George",
+          "item": "https://filtersforyou.com.au/locations-st-george"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Monterey",
           "item": "https://filtersforyou.com.au/water-filter-installation-monterey"
         }
       ]
@@ -555,6 +561,17 @@ a{text-decoration:none;color:inherit}
 .nav-cta{display:flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px)}
 .nav-cta-quote{display:flex;align-items:center;background:#EAAF00;color:#1a2235;font-weight:700;font-size:15px;padding:11px 20px;border-radius:8px;transition:background .2s,transform .2s;white-space:nowrap;text-decoration:none;-webkit-tap-highlight-color:transparent}.nav-cta-quote:hover{background:#d4990a;transform:translateY(-1px)}@media(max-width:900px){.nav-cta-quote{display:none}.online-dot-wrap{display:none}}
+
+.crumbs{background:#f6f8fb;border-bottom:1px solid rgba(50,65,88,.08);font-family:'Sora',sans-serif}
+.crumbs ol{max-width:1200px;margin:0 auto;padding:10px 32px;display:flex;flex-wrap:wrap;align-items:center;gap:7px;list-style:none;font-size:13px;color:#6b7688}
+.crumbs li{display:flex;align-items:center;gap:7px}
+.crumbs li+li::before{content:'\203A';color:#9aa5b8;font-size:15px;line-height:1}
+.crumbs a{color:#0b61f4;text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+.crumbs [aria-current]{color:#324158;font-weight:600}
+@media(max-width:640px){.crumbs ol{padding:9px 18px;font-size:12px;gap:5px}}
+
+.dd-group{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#9aa5b8;padding:9px 13px 3px;font-family:'Sora',sans-serif}
 </style>
 <style id="dropdown-nav-css">
 /* === DROPDOWN NAV === */
@@ -833,25 +850,33 @@ a{text-decoration:none;color:inherit}
       </li>
       <li class="nav-item has-dropdown">
         <button class="nav-link-btn" aria-haspopup="true" aria-expanded="false">Resources <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="dropdown">
-          <a href="faucets-and-mixers-sydney">Filter Taps &amp; Mixers</a>
-          <a href="free-assessment">Free Water Assessment</a>
-          <a href="how-water-filters-work">How Water Filters Work</a>
-          <a href="is-sydney-water-safe">Is Sydney Water Safe?</a>
-          <a href="sydney-water-quality-guide">Sydney Water Quality Guide</a>
-          <a href="sydney-water-filter-cost-guide">Water Filter Cost Guide</a>
-          <a href="water-filter-faq-sydney">Water Filter FAQ</a>
-          <a href="water-filter-maintenance-guide">Maintenance Guide</a>
-          <a href="water-savings-calculator">Water Savings Calculator</a>
-          <a href="filter-lifespan-calculator">Filter Lifespan Calculator</a>
-          <a href="water-filter-pfas-removal-sydney">PFAS Water Filter Guide</a>
-          <a href="best-water-filter-sydney">Best Water Filter Sydney</a>
-          <a href="lifetime-warranty">Lifetime Warranty</a>
-          <a href="how-to-choose-water-filter-sydney">How to Choose a Water Filter</a>
-          <a href="reverse-osmosis-vs-whole-house-water-filter-sydney">RO vs Whole House</a>
-          <a href="water-filter-brand-comparison-sydney">Brand Comparison</a>
-          <a href="fluoride-in-sydney-water">Fluoride in Sydney Water</a>
-          <a href="what-is-in-sydney-water">What's in Sydney Water?</a>
+        <div class="dropdown dropdown-2col">
+          <div class="dropdown-col">
+            <div class="dd-group">Understand Your Water</div>
+            <a href="is-sydney-water-safe">Is Sydney Water Safe?</a>
+            <a href="what-is-in-sydney-water">What's in Sydney Water?</a>
+            <a href="sydney-water-quality-guide">Sydney Water Quality Guide</a>
+            <a href="fluoride-in-sydney-water">Fluoride in Sydney Water</a>
+            <a href="water-filter-pfas-removal-sydney">PFAS Water Filter Guide</a>
+            <a href="how-water-filters-work">How Water Filters Work</a>
+            <div class="dd-group">Tools</div>
+            <a href="water-savings-calculator">Water Savings Calculator</a>
+            <a href="filter-lifespan-calculator">Filter Lifespan Calculator</a>
+            <a href="free-assessment">Free Water Assessment</a>
+          </div>
+          <div class="dropdown-col">
+            <div class="dd-group">Choose a System</div>
+            <a href="best-water-filter-sydney">Best Water Filter Sydney</a>
+            <a href="how-to-choose-water-filter-sydney">How to Choose a Water Filter</a>
+            <a href="reverse-osmosis-vs-whole-house-water-filter-sydney">RO vs Whole House</a>
+            <a href="water-filter-brand-comparison-sydney">Brand Comparison</a>
+            <a href="sydney-water-filter-cost-guide">Water Filter Cost Guide</a>
+            <a href="faucets-and-mixers-sydney">Filter Taps &amp; Mixers</a>
+            <div class="dd-group">Owning One</div>
+            <a href="water-filter-faq-sydney">Water Filter FAQ</a>
+            <a href="water-filter-maintenance-guide">Maintenance Guide</a>
+            <a href="lifetime-warranty">Lifetime Warranty</a>
+          </div>
         </div>
       </li>
       <li class="nav-item has-dropdown">
@@ -861,13 +886,9 @@ a{text-decoration:none;color:inherit}
           <a href="reviews-testimonials">Reviews &amp; Testimonials</a>
           <a href="contact">Contact</a>
           <hr class="dropdown-divider">
-          <div class="has-sub">
-            <a href="#">Our Brands</a>
-            <div class="sub-dropdown">
-              <a href="high-performance-filtration-sydney">High Performance Filtration</a>
-              <a href="filter-systems-australia-sydney">Filter Systems Australia</a>
-            </div>
-          </div>
+          <div class="dd-group">Our Brands</div>
+          <a href="high-performance-filtration-sydney">High Performance Filtration</a>
+          <a href="filter-systems-australia-sydney">Filter Systems Australia</a>
         </div>
       </li>
     </ul>
@@ -888,6 +909,13 @@ a{text-decoration:none;color:inherit}
 </nav>
 </div>
 <div class="nav-spacer" id="navSpacer"></div>
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="locations-st-george">St George</a></li>
+    <li><span aria-current="page">Monterey</span></li>
+  </ol>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -1401,7 +1429,7 @@ a{text-decoration:none;color:inherit}
 .fv2-social-row{display:flex;gap:10px;margin-top:14px}
 .fv2-social-link{font-family:'Sora',sans-serif;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:5px 12px;border-radius:4px;transition:color .2s,border-color .2s;text-decoration:none}
 .fv2-social-link:hover{color:#fff;border-color:rgba(255,255,255,.4)}
-.fv2-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:28px;margin-bottom:40px}
+.fv2-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-bottom:40px}
 .fv2-col h4{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.07em}
 .fv2-col ul{list-style:none;margin:0;padding:0}
 .fv2-col ul li{margin-bottom:4px}
@@ -1460,258 +1488,25 @@ a{text-decoration:none;color:inherit}
         </ul>
       </div>
       <!-- Service + Location -->
-      <div class="fv2-col">
-        <h4>Service + Location</h4>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-us" class="fv2-flyout-cb">
-          <label for="fo-us" class="fv2-ftrig">Under Sink<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout">
-            <a href="under-sink-water-filter-bondi">Under Sink Bondi</a>
-            <a href="under-sink-water-filter-parramatta">Under Sink Parramatta</a>
-            <a href="under-sink-water-filter-randwick">Under Sink Randwick</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-wh" class="fv2-flyout-cb">
-          <label for="fo-wh" class="fv2-ftrig">Whole House<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout">
-            <a href="whole-house-water-filter-bondi">Whole House Bondi</a>
-            <a href="whole-house-water-filter-parramatta">Whole House Parramatta</a>
-            <a href="whole-house-water-filter-chatswood">Whole House Chatswood</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-ro" class="fv2-flyout-cb">
-          <label for="fo-ro" class="fv2-ftrig">Reverse Osmosis<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout">
-            <a href="reverse-osmosis-installation-bondi">Reverse Osmosis Bondi</a>
-            <a href="reverse-osmosis-installation-parramatta">Reverse Osmosis Parramatta</a>
-            <a href="reverse-osmosis-installation-chatswood">Reverse Osmosis Chatswood</a>
-          </div>
-        </div>
-      </div>
+      
       <!-- Locations -->
-      <div class="fv2-col">
-        <h4>Locations</h4>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-ic" class="fv2-flyout-cb">
-          <label for="fo-ic" class="fv2-ftrig">Inner City &amp; CBD<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-barangaroo">Barangaroo</a>
-            <a href="water-filter-installation-chippendale">Chippendale</a>
-            <a href="water-filter-installation-darlinghurst">Darlinghurst</a>
-            <a href="water-filter-installation-glebe">Glebe</a>
-            <a href="water-filter-installation-newtown">Newtown</a>
-            <a href="water-filter-installation-paddington">Paddington</a>
-            <a href="water-filter-installation-pyrmont">Pyrmont</a>
-            <a href="water-filter-installation-redfern">Redfern</a>
-            <a href="water-filter-installation-surry-hills">Surry Hills</a>
-            <a href="water-filter-installation-sydney-cbd">Sydney CBD</a>
-            <a href="water-filter-installation-the-rocks">The Rocks</a>
-            <a href="water-filter-installation-ultimo">Ultimo</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-iw" class="fv2-flyout-cb">
-          <label for="fo-iw" class="fv2-ftrig">Inner West<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-ashfield">Ashfield</a>
-            <a href="water-filter-installation-balmain">Balmain</a>
-            <a href="water-filter-installation-burwood">Burwood</a>
-            <a href="water-filter-installation-concord">Concord</a>
-            <a href="water-filter-installation-croydon">Croydon</a>
-            <a href="water-filter-installation-croydon-park">Croydon Park</a>
-            <a href="water-filter-installation-drummoyne">Drummoyne</a>
-            <a href="water-filter-installation-five-dock">Five Dock</a>
-            <a href="water-filter-installation-leichhardt">Leichhardt</a>
-            <a href="water-filter-installation-marrickville">Marrickville</a>
-            <a href="water-filter-installation-petersham">Petersham</a>
-            <a href="water-filter-installation-rozelle">Rozelle</a>
-            <a href="water-filter-installation-stanmore">Stanmore</a>
-            <a href="water-filter-installation-strathfield">Strathfield</a>
-            <a href="water-filter-installation-summer-hill">Summer Hill</a>
-            <a href="water-filter-installation-sydenham">Sydenham</a>
-            <a href="water-filter-installation-tempe">Tempe</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-es" class="fv2-flyout-cb">
-          <label for="fo-es" class="fv2-ftrig">Eastern Suburbs<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-bondi">Bondi</a>
-            <a href="water-filter-installation-bondi-junction">Bondi Junction</a>
-            <a href="water-filter-installation-centennial-park">Centennial Park</a>
-            <a href="water-filter-installation-coogee">Coogee</a>
-            <a href="water-filter-installation-double-bay">Double Bay</a>
-            <a href="water-filter-installation-kensington">Kensington</a>
-            <a href="water-filter-installation-maroubra">Maroubra</a>
-            <a href="water-filter-installation-mascot">Mascot</a>
-            <a href="water-filter-installation-randwick">Randwick</a>
-            <a href="water-filter-installation-rose-bay">Rose Bay</a>
-            <a href="water-filter-installation-vaucluse">Vaucluse</a>
-            <a href="water-filter-installation-woollahra">Woollahra</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-cb" class="fv2-flyout-cb">
-          <label for="fo-cb" class="fv2-ftrig">Canterbury-Bankstown<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-bankstown">Bankstown</a>
-            <a href="water-filter-installation-belmore">Belmore</a>
-            <a href="water-filter-installation-campsie">Campsie</a>
-            <a href="water-filter-installation-canterbury">Canterbury</a>
-            <a href="water-filter-installation-earlwood">Earlwood</a>
-            <a href="water-filter-installation-kingsgrove">Kingsgrove</a>
-            <a href="water-filter-installation-lakemba">Lakemba</a>
-            <a href="water-filter-installation-padstow">Padstow</a>
-            <a href="water-filter-installation-punchbowl">Punchbowl</a>
-            <a href="water-filter-installation-revesby">Revesby</a>
-            <a href="water-filter-installation-riverwood">Riverwood</a>
-            <a href="water-filter-installation-yagoona">Yagoona</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-sg" class="fv2-flyout-cb">
-          <label for="fo-sg" class="fv2-ftrig">St George<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-arncliffe">Arncliffe</a>
-            <a href="water-filter-installation-bexley">Bexley</a>
-            <a href="water-filter-installation-beverly-hills">Beverly Hills</a>
-            <a href="water-filter-installation-brighton-le-sands">Brighton-le-Sands</a>
-            <a href="water-filter-installation-hurstville">Hurstville</a>
-            <a href="water-filter-installation-kogarah">Kogarah</a>
-            <a href="water-filter-installation-mortdale">Mortdale</a>
-            <a href="water-filter-installation-oatley">Oatley</a>
-            <a href="water-filter-installation-penshurst">Penshurst</a>
-            <a href="water-filter-installation-ramsgate">Ramsgate</a>
-            <a href="water-filter-installation-rockdale">Rockdale</a>
-            <a href="water-filter-installation-wolli-creek">Wolli Creek</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-su" class="fv2-flyout-cb">
-          <label for="fo-su" class="fv2-ftrig">St George<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-caringbah">Caringbah</a>
-            <a href="water-filter-installation-como">Como</a>
-            <a href="water-filter-installation-cronulla">Cronulla</a>
-            <a href="water-filter-installation-engadine">Engadine</a>
-            <a href="water-filter-installation-gymea">Gymea</a>
-            <a href="water-filter-installation-jannali">Jannali</a>
-            <a href="water-filter-installation-kirrawee">Kirrawee</a>
-            <a href="water-filter-installation-menai">Menai</a>
-            <a href="water-filter-installation-monterey">Monterey</a>
-            <a href="water-filter-installation-oyster-bay">Oyster Bay</a>
-            <a href="water-filter-installation-sutherland">Sutherland</a>
-            <a href="water-filter-installation-sylvania">Sylvania</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-sw" class="fv2-flyout-cb">
-          <label for="fo-sw" class="fv2-ftrig">South West Sydney<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-bonnyrigg">Bonnyrigg</a>
-            <a href="water-filter-installation-cabramatta">Cabramatta</a>
-            <a href="water-filter-installation-casula">Casula</a>
-            <a href="water-filter-installation-edmondson-park">Edmondson Park</a>
-            <a href="water-filter-installation-fairfield">Fairfield</a>
-            <a href="water-filter-installation-liverpool">Liverpool</a>
-            <a href="water-filter-installation-moorebank">Moorebank</a>
-            <a href="water-filter-installation-prestons">Prestons</a>
-            <a href="water-filter-installation-smithfield">Smithfield</a>
-            <a href="water-filter-installation-warwick-farm">Warwick Farm</a>
-            <a href="water-filter-installation-wetherill-park">Wetherill Park</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-ws" class="fv2-flyout-cb">
-          <label for="fo-ws" class="fv2-ftrig">Greater Western Sydney<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-auburn">Auburn</a>
-            <a href="water-filter-installation-blacktown">Blacktown</a>
-            <a href="water-filter-installation-castle-hill">Castle Hill</a>
-            <a href="water-filter-installation-eastwood">Eastwood</a>
-            <a href="water-filter-installation-epping">Epping</a>
-            <a href="water-filter-installation-granville">Granville</a>
-            <a href="water-filter-installation-merrylands">Merrylands</a>
-            <a href="water-filter-installation-parramatta">Parramatta</a>
-            <a href="water-filter-installation-penrith">Penrith</a>
-            <a href="water-filter-installation-seven-hills">Seven Hills</a>
-            <a href="water-filter-installation-st-marys">St Marys</a>
-            <a href="water-filter-installation-westmead">Westmead</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-hd" class="fv2-flyout-cb">
-          <label for="fo-hd" class="fv2-ftrig">Hills District<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-baulkham-hills">Baulkham Hills</a>
-            <a href="water-filter-installation-beaumont-hills">Beaumont Hills</a>
-            <a href="water-filter-installation-bella-vista">Bella Vista</a>
-            <a href="water-filter-installation-castle-hill">Castle Hill</a>
-            <a href="water-filter-installation-cherrybrook">Cherrybrook</a>
-            <a href="water-filter-installation-dural">Dural</a>
-            <a href="water-filter-installation-glenhaven">Glenhaven</a>
-            <a href="water-filter-installation-kellyville">Kellyville</a>
-            <a href="water-filter-installation-norwest">Norwest</a>
-            <a href="water-filter-installation-rouse-hill">Rouse Hill</a>
-            <a href="water-filter-installation-west-pennant-hills">West Pennant Hills</a>
-            <a href="water-filter-installation-box-hill">Box Hill</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-ns" class="fv2-flyout-cb">
-          <label for="fo-ns" class="fv2-ftrig">North Shore<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-artarmon">Artarmon</a>
-            <a href="water-filter-installation-chatswood">Chatswood</a>
-            <a href="water-filter-installation-cremorne">Cremorne</a>
-            <a href="water-filter-installation-crows-nest">Crows Nest</a>
-            <a href="water-filter-installation-gordon">Gordon</a>
-            <a href="water-filter-installation-hornsby">Hornsby</a>
-            <a href="water-filter-installation-killara">Killara</a>
-            <a href="water-filter-installation-lane-cove">Lane Cove</a>
-            <a href="water-filter-installation-lindfield">Lindfield</a>
-            <a href="water-filter-installation-mosman">Mosman</a>
-            <a href="water-filter-installation-neutral-bay">Neutral Bay</a>
-            <a href="water-filter-installation-north-sydney">North Sydney</a>
-            <a href="water-filter-installation-pymble">Pymble</a>
-            <a href="water-filter-installation-st-ives">St Ives</a>
-            <a href="water-filter-installation-turramurra">Turramurra</a>
-            <a href="water-filter-installation-wahroonga">Wahroonga</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-nb" class="fv2-flyout-cb">
-          <label for="fo-nb" class="fv2-ftrig">Northern Beaches<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout fv2-f2c">
-            <a href="water-filter-installation-avalon-beach">Avalon Beach</a>
-            <a href="water-filter-installation-balgowlah">Balgowlah</a>
-            <a href="water-filter-installation-collaroy">Collaroy</a>
-            <a href="water-filter-installation-curl-curl">Curl Curl</a>
-            <a href="water-filter-installation-dee-why">Dee Why</a>
-            <a href="water-filter-installation-freshwater">Freshwater</a>
-            <a href="water-filter-installation-manly">Manly</a>
-            <a href="water-filter-installation-mona-vale">Mona Vale</a>
-            <a href="water-filter-installation-narrabeen">Narrabeen</a>
-            <a href="water-filter-installation-newport">Newport</a>
-            <a href="water-filter-installation-palm-beach">Palm Beach</a>
-            <a href="water-filter-installation-warriewood">Warriewood</a>
-          </div>
-        </div>
-        <div class="fv2-flyout-wrap">
-          <input type="checkbox" id="fo-fd" class="fv2-flyout-cb">
-          <label for="fo-fd" class="fv2-ftrig">Forest District<span class="fv2-caret" aria-hidden="true">&#x25B4;</span></label>
-          <div class="fv2-flyout">
-            <a href="water-filter-installation-belrose">Belrose</a>
-            <a href="water-filter-installation-davidson">Davidson</a>
-            <a href="water-filter-installation-forestville">Forestville</a>
-            <a href="water-filter-installation-frenchs-forest">Frenchs Forest</a>
-            <a href="water-filter-installation-killarney-heights">Killarney Heights</a>
-            <a href="water-filter-installation-terrey-hills">Terrey Hills</a>
-            <a href="water-filter-installation-duffys-forest">Duffys Forest</a>
-          </div>
-        </div>
+            <div class="fv2-col">
+        <h4>Areas We Serve</h4>
+        <ul>
+          <li><a href="locations-inner-city">Inner City &amp; CBD</a></li>
+          <li><a href="locations-inner-west">Inner West</a></li>
+          <li><a href="locations-eastern-suburbs">Eastern Suburbs</a></li>
+          <li><a href="locations-south-sydney">South Sydney</a></li>
+          <li><a href="locations-canterbury-bankstown">Canterbury-Bankstown</a></li>
+          <li><a href="locations-st-george">St George</a></li>
+          <li><a href="locations-sutherland-shire">Sutherland Shire</a></li>
+          <li><a href="locations-south-west-sydney">South West Sydney</a></li>
+          <li><a href="locations-western-sydney">Greater Western Sydney</a></li>
+          <li><a href="locations-hills-district">Hills District</a></li>
+          <li><a href="locations-north-shore">North Shore</a></li>
+          <li><a href="locations-northern-beaches">Northern Beaches</a></li>
+          <li><a href="locations-forest-district">Forest District</a></li>
+        </ul>
       </div>
       <!-- Resources -->
       <div class="fv2-col">
