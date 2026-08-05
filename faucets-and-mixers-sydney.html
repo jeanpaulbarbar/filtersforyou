@@ -587,16 +587,23 @@
 .hero-showcase img{width:100%;height:auto;display:block}
 .hero-showcase figcaption{margin-top:10px;font-size:12.5px;font-weight:600;color:var(--muted);text-align:center;letter-spacing:.02em}
 
-/* — TYPE CHOOSER — */
-.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.type-card{display:flex;flex-direction:column;text-align:left;background:#fff;border:1.5px solid rgba(50,65,88,.1);border-radius:16px;padding:24px 22px 22px;cursor:pointer;font-family:'Sora',sans-serif;transition:transform .25s cubic-bezier(.34,1.4,.64,1),box-shadow .25s,border-color .25s}
-.type-card:hover{transform:translateY(-4px);border-color:var(--blue);box-shadow:0 18px 40px -14px rgba(11,97,244,.3)}
+/* — TYPE CHOOSER —
+   Deliberately compact: this is a signpost to the gallery, not a destination.
+   Anything taller pushes the mixers further down the page, which is the exact
+   problem the rebuild exists to fix. */
+.sec-tight{padding-top:44px;padding-bottom:40px}
+.sec-head-tight{margin-bottom:22px}
+.sec-head-tight .sec-title{font-size:clamp(23px,3vw,32px);margin-bottom:8px}
+.sec-head-tight .sec-body{font-size:15px}
+.sec-head-tight .eyebrow{margin-bottom:10px}
+.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.type-card{display:flex;flex-direction:column;text-align:left;background:#fff;border:1.5px solid rgba(50,65,88,.1);border-radius:14px;padding:17px 19px 16px;cursor:pointer;font-family:'Sora',sans-serif;transition:transform .25s cubic-bezier(.34,1.4,.64,1),box-shadow .25s,border-color .25s}
+.type-card:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:0 14px 32px -14px rgba(11,97,244,.3)}
 .type-card:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-.type-card .tc-ico{width:40px;height:40px;border-radius:11px;background:rgba(11,97,244,.09);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-.type-card h3{font-size:19px;font-weight:800;color:var(--dark);margin-bottom:7px;line-height:1.2}
-.type-card p{font-size:14.5px;color:var(--muted);line-height:1.65;margin-bottom:14px}
-.type-card .tc-price{font-size:13.5px;font-weight:700;color:var(--dark);margin-top:auto}
-.type-card .tc-go{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:var(--blue);margin-top:10px}
+.type-card h3{font-size:17px;font-weight:800;color:var(--dark);margin-bottom:5px;line-height:1.2}
+.type-card p{font-size:13.5px;color:var(--muted);line-height:1.55;margin-bottom:10px}
+.type-card .tc-price{font-size:12.5px;font-weight:700;color:var(--dark);margin-top:auto}
+.type-card .tc-go{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--blue);margin-top:8px}
 .type-card:hover .tc-go svg{transform:translateX(3px)}
 .type-card .tc-go svg{transition:transform .25s}
 
@@ -720,6 +727,10 @@
   .enq-inner{grid-template-columns:1fr;gap:34px}
 }
 @media(max-width:767px){
+  .sec-tight{padding-top:30px;padding-bottom:28px}
+  .sec-head-tight{margin-bottom:16px}
+  .type-grid{gap:10px}
+  .type-card{padding:14px 16px 13px}
   .tw-grid{grid-template-columns:repeat(2,1fr);gap:12px}
   .tw-bar{margin:0 -16px 22px;padding:11px 16px 12px;top:var(--stick,106px)}
   .tw-bar-inner{gap:9px}
@@ -925,33 +936,29 @@
 </section>
 
 <!-- WHICH TYPE -->
-<section class="sec sec-white">
+<section class="sec sec-white sec-tight">
   <div class="container">
-    <div class="sec-head">
+    <div class="sec-head sec-head-tight">
       <span class="eyebrow eyebrow-blue">Start Here</span>
-      <div class="yline yline-c"></div>
       <h2 class="sec-title sec-title-dark">Three Ways To Pour Filtered <span class="sh sh-b">Water</span></h2>
       <p class="sec-body sec-body-c">Pick the one that suits your kitchen and we will show you every finish it comes in.</p>
     </div>
     <div class="type-grid">
       <button type="button" class="type-card" data-jump="tap">
-        <span class="tc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 21V11"/><path d="M7 11V8a5 5 0 0 1 5-5h1"/><path d="M4 21h6"/><path d="M17 8v3"/></svg></span>
         <h3>Filter Taps</h3>
-        <p>A second slimline tap, just for filtered water. Your kitchen mixer stays exactly where it is. The most popular upgrade.</p>
-        <span class="tc-price">Chrome included with every system &middot; other finishes $150</span>
+        <p>A second slimline tap just for filtered water. Your kitchen mixer stays.</p>
+        <span class="tc-price">Chrome included &middot; other finishes $150</span>
         <span class="tc-go">See 6 finishes <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg></span>
       </button>
       <button type="button" class="type-card" data-jump="mixer">
-        <span class="tc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V9"/><path d="M6 9a6 6 0 0 1 12 0v3"/><path d="M3 21h6"/><path d="M6 13h5"/></svg></span>
         <h3>3-Way Mixers</h3>
-        <p>Replaces your kitchen tap completely. Hot, cold and filtered water from one spout, so the bench stays clear. Pull-out hose on the Luxe models.</p>
-        <span class="tc-price">$500 to $1,050, depending on finish and pull-out</span>
+        <p>Replaces your kitchen tap. Hot, cold and filtered from one spout.</p>
+        <span class="tc-price">$500 to $1,050 &middot; pull-out hose on Luxe</span>
         <span class="tc-go">See 9 mixers <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg></span>
       </button>
       <button type="button" class="type-card" data-jump="sprayer">
-        <span class="tc-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 21V8"/><path d="M6 8a6 6 0 0 1 11-3"/><path d="M3 21h6"/><path d="M17 9v4"/><path d="M15 17.5l1-1M17 19v-1.5M19 17.5l-1-1"/></svg></span>
         <h3>Vegie Sprayer Mixers</h3>
-        <p>A 3-way mixer with a pull-out spray head that switches between a soft stream and a strong spray, for washing produce and rinsing the sink.</p>
+        <p>A 3-way mixer with a pull-out spray head for washing produce.</p>
         <span class="tc-price">$600 in stainless &middot; $750 in colour</span>
         <span class="tc-go">See 5 sprayers <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5"/></svg></span>
       </button>
@@ -960,13 +967,12 @@
 </section>
 
 <!-- THE GALLERY -->
-<section class="sec sec-light" id="tapware">
+<section class="sec sec-light sec-tight" id="tapware">
   <div class="container">
-    <div class="sec-head" style="margin-bottom:26px">
+    <div class="sec-head sec-head-tight">
       <span class="eyebrow eyebrow-blue">The Full Range</span>
-      <div class="yline yline-c"></div>
       <h2 class="sec-title sec-title-dark">Every Tap, Every <span class="sh sh-b">Finish</span></h2>
-      <p class="sec-body sec-body-c">Filter it by what you want. Tap any tap to add it to your quote, and Jean-Paul comes back with a fixed price.</p>
+      <p class="sec-body sec-body-c">Filter by what you want. Tap any tap to add it to your quote.</p>
     </div>
   </div>
 
