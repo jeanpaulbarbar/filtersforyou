@@ -526,6 +526,11 @@ a{text-decoration:none;color:inherit}
 .stars{color:var(--yellow);font-size:19px;letter-spacing:1px}
 .stars-label{font-size:16px;color:rgba(255,255,255,.75);font-weight:500}
 .hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.hero-price-note{margin:16px 0 0;color:rgba(255,255,255,.9);font-size:15px;font-weight:600;letter-spacing:.005em}
+.hero-book-link{display:inline-block;margin-top:7px;background:none;border:none;padding:0;font-family:'Sora',sans-serif;font-size:15px;font-weight:600;color:var(--yellow);text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:opacity .2s}
+.hero-book-link:hover{opacity:.72}
+.hero-book-link:active{opacity:.6}
+.hero-book-link:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;border-radius:3px}
 
 /* HERO RIGHT */
 .hero-right{display:flex;flex-direction:column;overflow:hidden;padding-top:24px;border-radius:16px 16px 0 0}
@@ -741,6 +746,8 @@ a{text-decoration:none;color:inherit}
 .f-check-wrap input[type="checkbox"]{width:17px;height:17px;flex-shrink:0;accent-color:var(--yellow);cursor:pointer;margin-top:2px}
 .f-check-wrap label{font-size:14px;color:rgba(255,255,255,.7);line-height:1.5;cursor:pointer}
 .f-check-wrap label a{color:var(--yellow);text-decoration:underline;text-underline-offset:2px}
+.f-consent-note{margin:10px 0 0;font-size:13px;line-height:1.5;color:rgba(255,255,255,.62);text-align:center}
+.f-consent-note a{color:var(--yellow);text-decoration:underline;text-underline-offset:2px}
 
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
@@ -783,6 +790,8 @@ a{text-decoration:none;color:inherit}
   .hero-btns{flex-direction:column;gap:10px}
   .hero-btns .btn{width:100%;justify-content:center;font-size:17px;padding:15px 20px}
   .hero-stars .stars-label{font-size:13px}
+  .hero-price-note{font-size:13.5px;margin-top:14px;text-align:center}
+  .hero-book-link{font-size:13.5px;display:block;width:100%;text-align:center}
 
   /* Trust bar */
   .trust-bar{padding:18px 16px}
@@ -1244,8 +1253,8 @@ a{text-decoration:none;color:inherit}
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-badge"><span class="hero-badge-dot">●</span>Sydney's Trusted Water Filtration Specialist</div>
-      <h1 class="hero-h1">Pure Water.<br><span class="sh sh-y">Every</span> Tap.<br>Your Home.</h1>
-      <p class="hero-p">We install, service and maintain premium home water filtration systems across Sydney, from whole house water filtration to under sink water filters and reverse osmosis. Get professional <a href="water-filter-installation-sydney" style="color:inherit;text-decoration:underline;text-underline-offset:2px">water filter installation in Sydney</a> at a fixed price. No surprises.</p>
+      <h1 class="hero-h1">Filtered Water at Every Tap.<br>Covered for <span class="sh sh-y">Life</span>.</h1>
+      <p class="hero-p">One fixed price, licensed plumber, and we come back every year to service it. <a href="water-filter-installation-sydney" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Water filter installation in Sydney</a> for whole house, under sink and reverse osmosis.</p>
       <!-- Mobile-only service row: replaces paragraph -->
       <div class="hero-services-row">
         <div class="hsr-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v6m0 0c0 2-2 4-4 6H6a2 2 0 0 0-2 2v1h16v-1a2 2 0 0 0-2-2h-2c-2-2-4-4-4-6z"/><path d="M8 22h8"/></svg>Under Sink</div>
@@ -1255,13 +1264,13 @@ a{text-decoration:none;color:inherit}
       <ul class="hero-bullets">
         <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Removes chlorine, sediment &amp; microplastics</li>
         <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Healthier cooking, showering &amp; drinking</li>
-        <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Filtered water at every tap in your home</li>
+        <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>If the sealed system fails we replace it, plumbing and all</li>
         <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Scheduled and installed within one week</li>
       </ul>
       <div class="hero-chips">
         <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Lic. Plumber 461511C</span>
         <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg> WaterMark Certified</span>
-        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Fixed Upfront Price</span>
+        <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> $810 to $3,850</span>
         <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg> Lifetime Warranty</span>
       </div>
       <div class="hero-stars">
@@ -1269,9 +1278,11 @@ a{text-decoration:none;color:inherit}
         <span class="stars-label">5.0 Google Rating · 21 Reviews</span>
       </div>
       <div class="hero-btns">
-        <button onclick="openBookingModal()" class="btn btn-yellow btn-lg">Book Your Installation →</button>
+        <a href="#quote" class="btn btn-yellow btn-lg">Get My Fixed Price →</a>
         <a href="tel:0430546749" class="btn btn-ghost btn-lg"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02L6.6 10.8z"/></svg> 0430 546 749</a>
       </div>
+      <p class="hero-price-note">Fixed price, quoted before we start. No upsells on the day.</p>
+      <button type="button" class="hero-book-link" onclick="openBookingModal()">Already decided? Book your installation</button>
     </div>
 
     <div class="hero-right">
@@ -1774,6 +1785,7 @@ a{text-decoration:none;color:inherit}
       <p class="sec-body sec-body-c">Everything you need to know before you book.</p>
     </div>
     <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">How much does a system cost?<span class="faq-icon">+</span></button><div class="faq-a">Under sink and reverse osmosis systems are $810 to $2,290, including supply, professional installation and GST. Whole house HPF-3 filtration starts from $3,850 depending on your plumbing. You get the exact fixed price before any work begins, and there are no upsells on the day.</div></div>
       <div class="faq-item"><button class="faq-q">How long does installation take?<span class="faq-icon">+</span></button><div class="faq-a">Under-sink and RO systems typically take 1.5–2 hours. Whole house HPF-3 installations take 2–3 hours. Jean-Paul will confirm the timeframe when booking.</div></div>
       <div class="faq-item"><button class="faq-q">Do you supply the system or do I need to buy it separately?<span class="faq-icon">+</span></button><div class="faq-a">All prices include supply and professional installation. You don't need to source anything, we take care of everything from start to finish.</div></div>
       <div class="faq-item"><button class="faq-q">What areas do you service?<span class="faq-icon">+</span></button><div class="faq-a">We service all of Sydney within approximately 50km of Croydon Park. If you're unsure whether your suburb is covered, give us a call on 0430 546 749.</div></div>
@@ -1801,13 +1813,10 @@ a{text-decoration:none;color:inherit}
         <input class="f-input" type="text" name="name" placeholder="Your name" required>
         <input class="f-input" type="tel" name="phone" placeholder="Phone number" required>
         <input class="f-input" type="email" name="email" placeholder="Email address" required autocomplete="email">
-        <input class="f-input" type="text" name="suburb" placeholder="Your suburb" required>
+        <input class="f-input" type="text" name="suburb" placeholder="Your suburb">
         <select class="f-select" name="system"><option value="" disabled selected>System interested in?</option><option>Whole House Filtration (HPF-3)</option><option>Under Sink / RO System, $810–$2,290</option><option>Not sure, need advice</option></select>
-        <div class="f-check-wrap">
-          <input type="checkbox" id="cta-tc" name="agree_terms" required>
-          <label for="cta-tc">I agree to the <a href="/terms-and-conditions" target="_blank">Terms and Conditions</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a></label>
-        </div>
         <button type="submit" class="f-submit">Send My Free Quote Request →</button>
+        <p class="f-consent-note">By sending this you agree to our <a href="/terms-and-conditions" target="_blank">Terms and Conditions</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a>.</p>
       </form>
     </div>
   </div>
