@@ -520,11 +520,11 @@ a{text-decoration:none;color:inherit}
 .hero-bullets{list-style:none;margin-bottom:26px;display:flex;flex-direction:column;gap:9px}
 .hero-bullets li{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:500;color:rgba(255,255,255,.9)}
 .chk{width:20px;height:20px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--dark);font-size:11px;font-weight:800}
-.hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
 .hero-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:16px;font-weight:600;padding:8px 14px;border-radius:6px}
-.hero-stars{display:flex;align-items:center;gap:8px;margin-bottom:22px}
+.hero-stars{display:flex;align-items:center;gap:8px;margin-bottom:14px}
 .stars{color:var(--yellow);font-size:19px;letter-spacing:1px}
-.stars-label{font-size:16px;color:rgba(255,255,255,.75);font-weight:500}
+.stars-label{font-size:16px;color:rgba(255,255,255,.92);font-weight:600}
 .hero-btns{display:flex;flex-wrap:wrap;gap:12px}
 .hero-price-note{margin:16px 0 0;color:rgba(255,255,255,.9);font-size:15px;font-weight:600;letter-spacing:.005em}
 .hero-book-link{display:inline-block;margin-top:7px;background:none;border:none;padding:0;font-family:'Sora',sans-serif;font-size:15px;font-weight:600;color:var(--yellow);text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:opacity .2s}
@@ -954,9 +954,12 @@ a{text-decoration:none;color:inherit}
   .hfp-title{font-size:20px}
   .hfp-sub{font-size:14px;margin-bottom:12px}
   .hero-badge{font-size:13px;padding:6px 13px}
+  /* Let the install photo actually read on mobile: the 120deg desktop scrim
+     hits .93 exactly where the single-column text sits, so the hero reads as
+     a blue wall. Vertical scrim keeps the headline legible and opens up. */
+  .hero-bg::after{background:linear-gradient(180deg,rgba(4,20,80,.92) 0%,rgba(5,32,112,.78) 38%,rgba(8,52,170,.62) 100%)}
   .hero-bullets li{font-size:13px}
   .hero-p{font-size:15px;color:rgba(255,255,255,.94);font-weight:500;line-height:1.6;margin-bottom:18px}
-  .hero-services-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
   .hsr-item{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.95);font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:100px;white-space:nowrap}
   .hero-bullets{border-top:1px solid rgba(255,255,255,.15);padding-top:14px}
   .hero-chips{display:grid;grid-template-columns:1fr 1fr;gap:6px}
@@ -1267,15 +1270,15 @@ a{text-decoration:none;color:inherit}
         <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>If the sealed system fails we replace it, plumbing and all</li>
         <li><span class="chk"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 6 5 9 10 3"/></svg></span>Scheduled and installed within one week</li>
       </ul>
+      <div class="hero-stars">
+        <span class="stars">★★★★★</span>
+        <span class="stars-label">5.0 Google Rating · 21 Reviews</span>
+      </div>
       <div class="hero-chips">
         <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Lic. Plumber 461511C</span>
         <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg> WaterMark Certified</span>
         <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> $810 to $3,850</span>
         <span class="hero-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12c-2-2.5-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.5 6-4zm0 0c2 2.5 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.5-6 4z"/></svg> Lifetime Warranty</span>
-      </div>
-      <div class="hero-stars">
-        <span class="stars">★★★★★</span>
-        <span class="stars-label">5.0 Google Rating · 21 Reviews</span>
       </div>
       <div class="hero-btns">
         <a href="#quote" class="btn btn-yellow btn-lg">Get My Fixed Price →</a>
