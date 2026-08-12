@@ -1739,5 +1739,39 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   } else { fill(); }
 })();
 </script>
+<!-- FFY META LEAD EVENT — added 2026-08-12, CRM task 411 -->
+<script>
+/* Every form on this site posts to Formspree and fired no fbq Lead. The pixel
+   was initialised and sent PageView only, so Meta could never report, attribute
+   or optimise for a single website conversion. That is what this closes.
+
+   Fires once per form, on a submit that already passed validation — the
+   capture-phase validity guard in the block above calls stopImmediatePropagation
+   on an invalid form, so this listener never sees one.
+
+   It does NOT intercept or delay the submit. The native Formspree forms navigate
+   away on submit and the pixel's own beacon handles that; a delay here would put
+   the lead itself at risk to save a tracking event, which is the wrong trade.
+
+   eventID is generated so a Conversions API send can be matched to this browser
+   event later without double counting. */
+(function () {
+  var fired = [];
+  document.addEventListener('submit', function (e) {
+    var f = e.target;
+    if (!f || f.tagName !== 'FORM') return;
+    if ((f.getAttribute('action') || '').indexOf('formspree') === -1 &&
+        f.id !== 'bookingForm') return;
+    if (fired.indexOf(f) !== -1) return;
+    fired.push(f);
+    if (typeof fbq !== 'function') return;
+    fbq('track', 'Lead', {
+      content_name: f.id || 'website_form',
+      content_category: 'website_form',
+      source_page: location.pathname
+    }, { eventID: 'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) });
+  }, false);
+})();
+</script>
 </body>
 </html>
