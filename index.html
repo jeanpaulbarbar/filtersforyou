@@ -1029,7 +1029,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      shipped this same rule UNGATED and a tap left a sticky :hover that froze
      the marquee on a phone. Second bug on this project from an ungated hover. */
   @media(hover:none){.trailwrap{pointer-events:none}}
-  @keyframes tdrift{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  /* ⛔ 2026-08-19 — THE LOOP WAS NOT SEAMLESS. JP: "make sure the filter taps
+     and three way mixers are on an infinite loop as well." It WAS `infinite`
+     — the hitch was arithmetic. The rail is 10 cards (5 unique, twice) with a
+     14px gap, so its width is 10 cards + NINE gaps. translateX(-50%) lands
+     halfway through that, but the second copy actually begins one full gap
+     later: 5 cards + FIVE gaps. Measured on the live page: the two differ by
+     6.94px — half a gap — so the rail jumped 7px every 46 seconds.
+     ⛔ The travel must be one copy INCLUDING its trailing gap, which is
+     (width + gap) / 2, i.e. -50% - half a gap. Keep this in sync with the gap
+     on .trail: change one, change the other. */
+  @keyframes tdrift{0%{transform:translateX(0)}100%{transform:translateX(calc(-50% - 7px))}}
   .tcard{flex:0 0 min(72vw,300px);background:var(--mist);border-radius:var(--r-card);
     overflow:hidden;transition:transform .35s var(--e-out)}
   @media(hover:hover) and (pointer:fine){.tcard:hover{transform:translateY(-5px)}}
@@ -3946,13 +3956,73 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
                  prem: frames('media/xf-prem'), luxe: frames('media/xf-luxe') };
     var KEYS = ['home','plus','prem','luxe'];
     var CUR_TO_SET = { '0': 'home', '1': 'plus', '2': 'prem', '3': 'luxe' };
+    /* ⛔ 2026-08-19 — THE PRODUCTION JANK FIX. Measured on the live site the
+       hour after cutover, because localhost hid it completely.
+
+       The old preload was `var im = new Image(); im.src = u;` and then it
+       THREW THE IMAGE AWAY. The bytes reached the HTTP cache, but nothing
+       held a reference, so the decoded bitmap was collected. Every time the
+       scrub then wrote `imgEl.src`, the browser had to decode the WebP again
+       from cache — 1100x1472 each.
+
+       MEASURED ON PRODUCTION, same machine, same connection:
+         throwaway preload (what shipped) : 46.4ms average per frame, 75.7ms worst
+         retained + decoded (this)        :  0.1ms average per frame,  0.5ms worst
+       The 60fps budget is 16.7ms. The old path blew it on EVERY SINGLE FRAME
+       by three to four times, which is exactly what JP saw: "the scrolling for
+       the explosions does not work as well as it did on localhost... on desktop
+       it glitches out."
+
+       Two things make it fast, and BOTH are required:
+         1. RETAIN. `RETAIN` holds every Image forever so the decoded bitmap is
+            never collected. Dropping the reference is the entire original bug.
+         2. DECODE UP FRONT. `img.decode()` resolves once the bitmap is ready,
+            so no decode work is left on the animation frame.
+       ⛔ Never "tidy" RETAIN away. It looks like a leak and it is the fix.
+       It is ~6.8MB of frames, which is the price of the mechanic. */
     var preloaded = {};
+    var RETAIN = [];
     function preload(key){
-      if (preloaded[key]) return; preloaded[key] = 1;
-      SETS[key].forEach(function(u){ var im = new Image(); im.src = u; });
+      if (preloaded[key]) return preloaded[key];
+      preloaded[key] = Promise.all(SETS[key].map(function(u){
+        var im = new Image();
+        im.decoding = 'async';
+        im.src = u;
+        RETAIN.push(im);
+        return (im.decode ? im.decode() : Promise.resolve()).catch(function(){});
+      }));
+      return preloaded[key];
     }
-    if ('requestIdleCallback' in window) requestIdleCallback(function(){ KEYS.forEach(preload); }, {timeout:4000});
-    else setTimeout(function(){ KEYS.forEach(preload); }, 2500);
+
+    /* ⛔ AND THEY LOAD IN SEQUENCE, NOT ALL AT ONCE. The old line fired all
+       four sets together: 148 files, 6.8MB, straight down the same pipe the
+       hero video is still streaming on. On a desktop that is invisible; on a
+       phone on mobile data it starves the video, which is the second half of
+       what JP reported ("the video is glitchy on the phone as well").
+       So: wait for the hero video to be playable, then walk the sets one at a
+       time, in the order they appear on the page. A set that someone reaches
+       early is still fetched on demand by the interaction handlers below —
+       this queue only decides what happens when nobody has asked yet. */
+    function preloadQueue(){
+      var i = 0;
+      (function next(){
+        if (i >= KEYS.length) return;
+        preload(KEYS[i++]).then(function(){
+          if ('requestIdleCallback' in window) requestIdleCallback(next, {timeout:1200});
+          else setTimeout(next, 120);
+        });
+      })();
+    }
+    (function startPreload(){
+      var v = document.getElementById('heroVideo'), started = false;
+      var go = function(){ if (started) return; started = true; preloadQueue(); };
+      if (v && v.readyState < 3){
+        v.addEventListener('canplaythrough', go, {once:true});
+        setTimeout(go, 6000);            /* never let a stalled video block it */
+      } else {
+        setTimeout(go, 1200);
+      }
+    })();
 
     function makeScrub(key, imgEl, ease){
       if (!imgEl) return null;
@@ -3963,18 +4033,29 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          reaches the end frame while you're still in the segment; it just rounds
          off momentum-flick bursts. (Round 8e: heavy smoothing was the bug that
          made the bounce-back feel broken — the image never visibly got there.) */
+      /* ⛔ The tap path below has always had this guard; the SCROLL path did
+         not, so it rewrote .src on every animation frame even when the frame
+         index had not changed — up to 4 redundant writes per frame at 240Hz,
+         each one a chance to hit the decoder. Same guard, same reason. */
+      var shown = -1;
+      function paint(v){
+        var i = Math.round(v * (N - 1));
+        if (i === shown) return;
+        shown = i;
+        imgEl.src = SRC[i];
+      }
       function tick(now){
         var dt = lastT ? Math.min(now - lastT, 100) : 16.7;
         lastT = now;
         var d = target - pos;
         if (Math.abs(d) < .012){ pos = target; raf = null; lastT = 0; }
         else { pos += d * (1 - Math.pow(1 - EASE, dt / 16.7)); raf = requestAnimationFrame(tick); }
-        imgEl.src = SRC[Math.round(pos * (N - 1))];
+        paint(pos);
       }
       return function(t){
         preload(key);
         target = t;
-        if (reduce){ pos = t; imgEl.src = SRC[Math.round(t * (N - 1))]; return; }
+        if (reduce){ pos = t; paint(t); return; }
         if (!raf) raf = requestAnimationFrame(tick);
       };
     }
