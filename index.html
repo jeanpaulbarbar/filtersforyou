@@ -4421,6 +4421,101 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     rset(ri+1);
   }, 5500);
 
+  /* ── THE TAPS RAIL — driven in JS, not by a CSS keyframe ────────────────
+     ⛔ 2026-08-19, second report. JP: "3 way mixer infinite still glitches on
+     mobile and stops working."
+
+     The arithmetic fix earlier today was real and is still here (the travel is
+     one copy INCLUDING its trailing gap, not a bare -50%), and measured in
+     Chromium at 390px the rail runs dead straight: 13.1px every 500ms, zero
+     stalls over six seconds, wrap error 0.06px. It is right in the browser I
+     can drive and wrong on his phone — the same shape as the round-26 flicker
+     that passed puppeteer and failed on his iPhone.
+
+     ⛔ So stop trying to reproduce it and remove the thing that causes it.
+     A `animation: … infinite` on a 2388px-wide element, inside a masked
+     overflow-hidden wrapper, on a 24,795px page is a compositor layer iOS
+     Safari is entitled to throw away when it scrolls far offscreen, and to
+     throttle during momentum scroll. When it comes back it resumes at where
+     the animation's CLOCK says it should be, not where it left off — and the
+     clock never stopped. That is both symptoms in one mechanism: it jumps
+     (the catch-up) and it appears to stop (the discarded layer).
+
+     A CSS keyframe gives us no say in any of that. This does:
+       · dt is CLAMPED to 50ms, so no elapsed time can ever be "caught up" —
+         the rail can fall behind, it can never leap.
+       · the wrap is `x += span` modulo arithmetic on the real measured span,
+         so it is exact on every cycle at every viewport, not a percentage.
+       · it only advances while the rail is ON SCREEN, and stops on a hidden
+         tab. Nothing to discard, nothing to resume.
+       · it re-measures on resize/orientation, because the card width is a vw
+         unit and the span moves with it.
+     ⛔ The CSS animation stays in the sheet as the no-JS fallback and is
+     switched off here only once this is actually running. */
+  (function(){
+    var wrap = document.querySelector('.trailwrap');
+    var trail = document.querySelector('.trail');
+    if (!wrap || !trail) return;
+    /* under prefers-reduced-motion the sheet already kills the animation and
+       turns the rail into a manual scroller — do not take that away */
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var cards = [].slice.call(trail.querySelectorAll('.tcard'));
+    if (cards.length < 2) return;
+    var span = 0, speed = 0;
+
+    function measure(){
+      var cs = getComputedStyle(trail);
+      var gap = parseFloat(cs.columnGap || cs.gap) || 0;
+      var half = Math.floor(cards.length / 2);   /* the rail is one copy, twice */
+      var w = 0;
+      for (var i = 0; i < half; i++) w += cards[i].getBoundingClientRect().width + gap;
+      span = w;
+      speed = span / 46;                          /* keep the old 46s cadence */
+    }
+    measure();
+    if (!span) return;
+
+    trail.style.animation = 'none';               /* JS owns it from here */
+    trail.style.willChange = 'transform';
+
+    var x = 0, last = 0, raf = null, onScreen = false, visible = true;
+
+    function frame(now){
+      raf = null;
+      if (!onScreen || !visible) { last = 0; return; }
+      var dt = last ? Math.min((now - last) / 1000, .05) : 0;
+      last = now;
+      x -= speed * dt;
+      while (x <= -span) x += span;               /* exact, every cycle */
+      trail.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      raf = requestAnimationFrame(frame);
+    }
+    function run(){ if (!raf && onScreen && visible){ last = 0; raf = requestAnimationFrame(frame); } }
+
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        onScreen = es[0].isIntersecting;
+        if (onScreen) run(); else last = 0;
+      }, {rootMargin: '150px 0px'}).observe(wrap);
+    } else { onScreen = true; run(); }
+
+    document.addEventListener('visibilitychange', function(){
+      visible = !document.hidden;
+      if (visible) run(); else last = 0;
+    });
+
+    var rt;
+    addEventListener('resize', function(){
+      clearTimeout(rt);
+      rt = setTimeout(function(){
+        var before = span;
+        measure();
+        if (span && before) x = x / before * span;  /* hold position across a resize */
+      }, 150);
+    });
+  })();
+
   /* ── the enquiry form — 3 steps, shared component ──────────────────────
      ⛔ CUTOVER 2026-08-19. Until today this form transmitted NOTHING — the
      mockup faked its own success screen ("mockup only: nothing is
