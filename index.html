@@ -2641,7 +2641,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
            deck flips to on load, "because that's initially actually where I
            wanted it". The phone's own copy (.gcard.gm, top of the range
            section) is untouched — only one of the two ever renders. -->
-      <p class="lede">Water filtration installed across Sydney by licensed plumbers.</p>
+      <!-- round 34b, JP: "I want that one to have the same animation as well,
+           following the title." Same .hw/.hch glyph reveal, handed off from the
+           headline rather than queued behind it — it starts at .9s, which is the
+           moment the headline's LAST letter begins, so the two sweeps read as one
+           continuous move across the hero instead of two separate events.
+           ⛔ Tighter than the headline on purpose: 55 glyphs at .012s, not .018s.
+           The headline's pace on a line this small reads as a typewriter. -->
+      <p class="lede" id="heroLede" aria-label="Water filtration installed across Sydney by licensed plumbers."><span aria-hidden="true"><span class="hw"><span class="hch">W</span><span class="hch">a</span><span class="hch">t</span><span class="hch">e</span><span class="hch">r</span></span> <span class="hw"><span class="hch">f</span><span class="hch">i</span><span class="hch">l</span><span class="hch">t</span><span class="hch">r</span><span class="hch">a</span><span class="hch">t</span><span class="hch">i</span><span class="hch">o</span><span class="hch">n</span></span> <span class="hw"><span class="hch">i</span><span class="hch">n</span><span class="hch">s</span><span class="hch">t</span><span class="hch">a</span><span class="hch">l</span><span class="hch">l</span><span class="hch">e</span><span class="hch">d</span></span> <span class="hw"><span class="hch">a</span><span class="hch">c</span><span class="hch">r</span><span class="hch">o</span><span class="hch">s</span><span class="hch">s</span></span> <span class="hw"><span class="hch">S</span><span class="hch">y</span><span class="hch">d</span><span class="hch">n</span><span class="hch">e</span><span class="hch">y</span></span> <span class="hw"><span class="hch">b</span><span class="hch">y</span></span> <span class="hw"><span class="hch">l</span><span class="hch">i</span><span class="hch">c</span><span class="hch">e</span><span class="hch">n</span><span class="hch">s</span><span class="hch">e</span><span class="hch">d</span></span> <span class="hw"><span class="hch">p</span><span class="hch">l</span><span class="hch">u</span><span class="hch">m</span><span class="hch">b</span><span class="hch">e</span><span class="hch">r</span><span class="hch">s</span><span class="hch">.</span></span></span></p>
     </div>
   </div>
   <div class="in" style="position:absolute;left:0;right:0;bottom:0;pointer-events:none">
@@ -4801,7 +4808,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        1.0), which now overlap the tail instead of queueing behind it. */
     gsap.to('#heroLine .hch', {opacity:1, y:0, scale:1,
       duration:.55, ease:'power3.out', stagger:.018, delay:.15});
-    gsap.fromTo('#heroSub', {y:18, opacity:0}, {y:0, opacity:1, duration:.8, ease:'power3.out', delay:.75});
+    gsap.to('#heroLede .hch', {opacity:1, y:0, scale:1,
+      duration:.45, ease:'power3.out', stagger:.012, delay:.9});
     gsap.fromTo('#hdeck', {y:30, opacity:0}, {y:0, opacity:1, duration:.9, ease:'power3.out', delay:1});
     /* slow ambient push-in on the video, scrubbed with scroll */
     gsap.fromTo('#heroVideo', {scale:1}, {scale:1.08, ease:'none',
