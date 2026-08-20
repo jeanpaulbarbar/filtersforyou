@@ -164,6 +164,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      rounded, just not pill-soft — 24 → 14 on cards, 16 → 8 on the small
      photo squares. Every rounded surface reads off these two tokens. */
   --r-card:14px; --r-sm:8px; --r-full:999px; --arc:64px;
+    /* round 39 — the hero frame. Radius and gutter measured off C&C's reveal
+       card (24px / 12px, 2026-08-20). --r-hero is the ONE surface allowed
+       past the 14px card law: it is a viewport-scale frame, not a card.
+       --utilh is the strip's RENDERED height — measured 44px at 1440 on
+       2026-08-20 (the .rowu min-height is 26, line boxes pad it out). */
+    --r-hero:24px; --hframe:12px; --utilh:44px;
     --shadow-lg:0 59px 59px rgba(4,16,46,.10), 0 15px 32px rgba(4,16,46,.13);
     --shadow-sm:0 12px 12px rgba(4,16,46,.05), 0 3px 7px rgba(4,16,46,.07);
     --g-field:linear-gradient(160deg,#0B61F4 0%,#0846BE 78%,#063A9E 100%);
@@ -405,7 +411,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      were already the LARGER of the two: links 17px, rating 12px. So the thing
      that actually read wrong was the 12px rating, not the links. Both are now
      the same 15px — his "same size", without shrinking anything he can see. */
-  .util{background:var(--ink-blue);color:#fff;font-size:15px}
+  /* round 39: the strip sits ON the mist frame ground, the way C&C's mini
+     header lives in their border band — ink text now, not white on ink-blue. */
+  .util{background:var(--mist);color:var(--ink);font-size:15px}
   /* round 14: the links group with the socials on the right, so the strip
      reads rating | ————— | links + socials, instead of three spread thirds. */
   .util .rowu{display:flex;align-items:center;gap:16px;min-height:26px;justify-content:flex-start}
@@ -425,7 +433,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .util .soc a{min-height:26px;display:grid;place-items:center}
   .util .soc a i{display:grid;place-items:center;transition:color .3s ease-in-out}
   .util .soc svg{width:19px;height:19px}
-  @media(hover:hover) and (pointer:fine){.util .soc a:hover i{color:var(--yellow)}}
+  /* round 39: hover was yellow — invisible on the mist ground (≈1.5:1), and
+     yellow belongs to the ask anyway. Blue, same as every other quiet hover. */
+  @media(hover:hover) and (pointer:fine){.util .soc a:hover i{color:var(--blue)}}
   @media(max-width:1079px){.util{display:none}}
   .hdr.mini .util{display:none}
   /* systems dropdown */
@@ -476,8 +486,40 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdr.mini .row{min-height:62px}
   .hdr.mini .mark{height:36px}
 
-  /* ── HERO — full bleed, giant type, floating proof card ─── */
-  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;background:var(--ink-blue);overflow:hidden}
+  /* ── HERO — framed film, giant type, floating proof card ─── */
+  /* ⭐ ROUND 39 — THE OPENING. Measured off C&C's home load, 2026-08-20:
+     their film sits in a radius-24 card inset 12px on the PAGE ground, the
+     mini utility strip lives in that top border band, and on load the card
+     opens out from a small centred rectangle (~1.15s, decelerating), the
+     main header following on a delay. Ours is the same grammar with one
+     deliberate difference JP asked for: the frame ground is --mist — the
+     NEXT scene's ground — so the hero's bottom border hands straight into
+     the range section with no seam.
+     The card is .hcard; film, veil, copy, cue and deck all live inside it.
+     The reveal is a pure-CSS clip-path inset animation: no transform is ever
+     left on an ancestor (sticky/ScrollTrigger safe), the radius stays
+     constant while it opens, and it still runs if the GSAP CDN dies.
+     `backwards` fill on purpose — after it ends the clip-path returns to
+     none and the corners are carried by border-radius + overflow:clip. */
+  .hero{position:relative;background:var(--mist);
+    padding:calc(var(--utilh) + var(--hframe)) var(--hframe) var(--hframe)}
+  .hcard{position:relative;min-height:calc(100svh - var(--utilh) - 2*var(--hframe));
+    display:flex;align-items:flex-end;background:var(--ink-blue);
+    border-radius:var(--r-hero);overflow:clip}
+  @media (prefers-reduced-motion: no-preference){
+    .hcard{animation:hcardin 1.15s var(--e-out) .12s backwards}
+    .hdr .row{animation:hdrin .8s var(--e-out) .85s backwards}
+  }
+  /* the from-state is ~32% wide × 26% tall of the card, centred — C&C's small
+     card measured ~400×240 at 1440. Both ends carry the same round() so the
+     radius never pops when the animation hands off to border-radius. */
+  @keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round var(--r-hero))}
+    to{clip-path:inset(0 round var(--r-hero))}}
+  @keyframes hdrin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+  /* under 1080 the utility strip is display:none, so its band collapses */
+  @media(max-width:1079px){.hero{padding-top:var(--hframe)}
+    .hcard{min-height:calc(100svh - 2*var(--hframe))}}
+  @media(max-width:599px){.hero{--hframe:8px}}
   .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 46%;
     filter:saturate(.94) contrast(1.05) brightness(.92);transform-origin:50% 50%}
   .hero .caustics{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen;opacity:.55}
@@ -2778,6 +2820,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 
 <!-- ═════════ 1 · HERO — three lines, set enormous ═════════ -->
 <section class="hero" id="top">
+  <!-- round 39: .hcard is the framed film — everything in the hero lives
+       inside it so the load reveal clips one element, not five. -->
+  <div class="hcard">
   <!-- ═══ ROUND 24 — THE HERO IN REAL QUALITY ═══
        The old hero.mp4 was the six-cut montage rendered once at 1440w and
        ~1.0 Mbps — that bitrate was the softness JP could see. The montage was
@@ -2876,6 +2921,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       </div>
     </div>
   </div>
+  </div><!-- /.hcard -->
 </section>
 
 <!-- ═════════ 3 · THE SHOWCASE — sticky stage, systems scroll past ═════════ -->
@@ -5013,11 +5059,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        .77s sweep — fast enough to read as one gesture, slow enough to see
        the letters land. The sub and the deck keep their old cues (.75 /
        1.0), which now overlap the tail instead of queueing behind it. */
+    /* round 39: the whole hero sequence now queues behind the card opening
+       (.hcard's CSS clip reveal, .12s → 1.27s). Headline starts at .8 — the
+       card is ~85% open and decelerating, so the sweep rides its tail the way
+       C&C's copy types in while their card is still landing. The lede keeps
+       its round-34b relationship: it starts the moment the headline's LAST
+       letter begins (.8 + 43×.018 ≈ 1.57). */
     gsap.to('#heroLine .hch', {opacity:1, y:0, scale:1,
-      duration:.55, ease:'power3.out', stagger:.018, delay:.15});
+      duration:.55, ease:'power3.out', stagger:.018, delay:.8});
     gsap.to('#heroLede .hch', {opacity:1, y:0, scale:1,
-      duration:.45, ease:'power3.out', stagger:.012, delay:.9});
-    gsap.fromTo('#hdeck', {y:30, opacity:0}, {y:0, opacity:1, duration:.9, ease:'power3.out', delay:1});
+      duration:.45, ease:'power3.out', stagger:.012, delay:1.55});
+    gsap.fromTo('#hdeck', {y:30, opacity:0}, {y:0, opacity:1, duration:.9, ease:'power3.out', delay:1.65});
     /* slow ambient push-in on the video, scrubbed with scroll */
     gsap.fromTo('#heroVideo', {scale:1}, {scale:1.08, ease:'none',
       scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
