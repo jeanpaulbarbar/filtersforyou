@@ -516,10 +516,28 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round var(--r-hero))}
     to{clip-path:inset(0 round var(--r-hero))}}
   @keyframes hdrin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
-  /* under 1080 the utility strip is display:none, so its band collapses */
+  /* under 1080 the utility strip is display:none, so its band collapses.
+     ROUND 40 — the header clears the band: without the strip the fixed row
+     started at y=0 and the white mark's top pixels sat ON the mist strip,
+     which read as a cut-off logo on JP's phone. The row now starts below
+     the frame band, over the film, where white belongs. */
   @media(max-width:1079px){.hero{padding-top:var(--hframe)}
-    .hcard{min-height:calc(100svh - 2*var(--hframe))}}
-  @media(max-width:599px){.hero{--hframe:8px}}
+    .hcard{min-height:calc(100svh - 2*var(--hframe))}
+    .hdr{padding-top:var(--hframe)}}
+  /* round 40: on :root, not .hero — the header reads it too */
+  @media(max-width:599px){:root{--hframe:8px}}
+  /* ⛔ ROUND 40 — THE PHONE GETS ITS OWN OPENING. Two measured reasons:
+     ① a centred mini-rectangle of a PORTRAIT card is a skinny sliver — the
+     desktop gesture doesn't translate ("the card looks off on mobile", JP,
+     20 Aug); ② clip-path animation re-rasterises the rounded mask every
+     frame over a decoding video — jank on iPhone that headless Chromium
+     cannot show (standing law). transform+opacity are compositor-only, so
+     the phone gets a soft settle-and-fade instead: same duration, same
+     ease, same queue behind it, no shape morph. */
+  @media(max-width:859px){
+    .hcard{animation-name:hcardin-m;transform-origin:50% 46%}
+  }
+  @keyframes hcardin-m{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
   .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 46%;
     filter:saturate(.94) contrast(1.05) brightness(.92);transform-origin:50% 50%}
   .hero .caustics{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen;opacity:.55}
