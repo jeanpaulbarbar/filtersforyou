@@ -263,7 +263,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 
   /* ── HEADER ─────────────────────────────────────────────── */
   .hdr{position:fixed;top:0;left:0;right:0;z-index:60;color:#fff;
-    transition:background .35s ease-in-out,color .35s ease-in-out,box-shadow .35s ease-in-out}
+    transition:background .35s ease-in-out,color .35s ease-in-out,box-shadow .35s ease-in-out,
+      transform .3s ease-in-out}
+  /* ⭐ ROUND 37 — the header steps aside on the way down and returns on the way
+     up (C&C header state machine, interaction-library.md Part 6). Only past
+     the hero, never while the menu is open, and a 6px deadband so trackpad
+     jitter can't flicker it. JS drives .hide from scroll direction. */
+  .hdr.hide{transform:translateY(-100%)}
+  body.mopen .hdr{transform:none}
   .hdr .row{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:78px;
     transition:min-height .35s var(--e-out)}
   .hdr .mark-link{display:inline-flex;align-items:center;min-height:44px}
@@ -1152,7 +1159,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .taps .head2{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;flex-wrap:wrap;margin-bottom:44px}
   .taps h2{max-width:16ch;margin-top:14px}
   .trailwrap{overflow:hidden;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut)}
-  .trail{display:flex;gap:14px;width:max-content;padding:4px 0 14px;animation:tdrift 46s linear infinite}
+  /* ⛔ ROUND 37 — the rail is DRIVEN BY rAF NOW, not a CSS keyframe. The
+     standing iOS law (localhost-hides lesson): Safari discards a long-running
+     keyframe's layer offscreen and resumes it on the ANIMATION'S clock, so the
+     rail jumps AND looks stopped. rAF with clamped dt + modulo wrap + pause
+     offscreen, in the JS beside the other rails. Reduced motion: the rail
+     simply rests — every tap is still reachable by swipe. */
+  .trail{display:flex;gap:14px;width:max-content;padding:4px 0 14px}
   /* ⛔ ROUND 19 — THE HOVER PAUSE IS DELETED. JP: "I don't like how, when you
      hover over the mixers on the desktop version, it stops the mixer types."
      The rail now runs continuously on every device. The card lift and the image
@@ -1171,10 +1184,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      ⛔ The travel must be one copy INCLUDING its trailing gap, which is
      (width + gap) / 2, i.e. -50% - half a gap. Keep this in sync with the gap
      on .trail: change one, change the other. */
-  @keyframes tdrift{0%{transform:translateX(0)}100%{transform:translateX(calc(-50% - 7px))}}
+  /* tdrift keyframe deleted round 37 — the rail runs on rAF (see above) */
   .tcard{flex:0 0 min(72vw,300px);background:var(--mist);border-radius:var(--r-card);
     overflow:hidden;transition:transform .35s var(--e-out)}
-  @media(hover:hover) and (pointer:fine){.tcard:hover{transform:translateY(-5px)}}
+  /* ⛔ ROUND 37 — the -5px card lift is gone. The hover law (one grammar,
+     sitewide): the card never moves, only the image inside it breathes.
+     The 1.05 zoom below already carries the response. */
   .tcard .shot{aspect-ratio:1/1;overflow:hidden;background:var(--mist-2)}
   .tcard .shot img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--e-out)}
   @media(hover:hover) and (pointer:fine){.tcard:hover .shot img{transform:scale(1.05)}}
@@ -1413,6 +1428,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .xopen .hs:nth-child(1){transition-delay:.05s} .xopen .hs:nth-child(2){transition-delay:.1s}
   .xopen .hs:nth-child(3){transition-delay:.15s} .xopen .hs:nth-child(4){transition-delay:.2s}
   .xopen .hs:nth-child(5){transition-delay:.25s}
+  /* ⛔ ROUND 37 — children 6 and 7 had NO delay, so on any 7-marker set the
+     shower and bath arrived BEFORE the mains. The cascade now covers all 7. */
+  .xopen .hs:nth-child(6){transition-delay:.3s} .xopen .hs:nth-child(7){transition-delay:.35s}
   /* the DOT stays small so it doesn't cover the product; the BUTTON around it
      is a full 44px so it is actually tappable. Sizing the button itself to 30
      put 17 controls under the tap-target floor. */
@@ -1432,6 +1450,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     0%,100%{box-shadow:0 0 0 4px rgba(255,217,0,.25), 0 3px 10px rgba(4,16,46,.34)}
     50%{box-shadow:0 0 0 12px rgba(255,217,0,.12), 0 3px 12px rgba(4,16,46,.26)}
   }
+  /* ⭐ ROUND 37 — the ding. Overshoot to 1.22, dip, settle: a marker LANDS
+     rather than fades in. ⛔ TOP LEVEL, never inside a media query — a
+     keyframe declared inside one does not exist outside it (round 36, paid). */
+  @keyframes hspop{
+    0%{scale:.2;opacity:0}
+    55%{scale:1.22;opacity:1}
+    78%{scale:.94}
+    100%{scale:1;opacity:1}
+  }
   @media(prefers-reduced-motion:reduce){.hs > button > i{animation:none!important}}
   .hs > button > i::before{content:"";width:12px;height:2px;background:currentColor;border-radius:2px;
     grid-area:1/1;transition:transform .28s var(--e-out)}
@@ -1440,6 +1467,43 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hs.on > button > i::after{transform:rotate(90deg)}
   .hs > button:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:50%}
   @media(hover:hover) and (pointer:fine){.hs > button:hover{transform:scale(1.12)}}
+
+  /* ⭐ ROUND 37 — THE TOUR MARKERS POP. JP: "make the plus signs bigger...
+     they just don't pop. Make them pop one by one... ding, ding, ding, from
+     whole house to under the sink to the bathroom."
+     TD's DOM order already IS that route (mains → RO → tap → laundry → basin
+     → shower → bath), so the cascade is pure nth-child. SCOPED TO .timg —
+     .hs is shared with the system morphs and those markers stay 30px.
+     ⚠️ Entrance scale lives on the DOT, never .hs (the tip-shear law above).
+     The pop and the round-22 pulse share one animation list: pop lands first,
+     the glow breathes after — different properties, no fight. */
+  .timg .hs > button{width:56px;height:56px}
+  .timg .hs > button > i{width:44px;height:44px}
+  .timg .hs > button > i::before{width:18px;height:2.5px}
+  .timg .hs > button > i::after{width:2.5px;height:18px}
+  @media(max-width:859px){
+    .timg .hs > button{width:50px;height:50px}
+    .timg .hs > button > i{width:38px;height:38px}
+    .timg .hs > button > i::before{width:16px}
+    .timg .hs > button > i::after{height:16px}
+  }
+  .timg.xopen .hs > button > i{
+    animation:hspop .55s var(--e-out) both, hspulse 2.4s ease-in-out infinite}
+  .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,.95s}
+  .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.12s,1.07s}
+  .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.24s,1.19s}
+  .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.36s,1.31s}
+  .timg.xopen .hs:nth-child(5) > button > i{animation-delay:.48s,1.43s}
+  .timg.xopen .hs:nth-child(6) > button > i{animation-delay:.6s,1.55s}
+  .timg.xopen .hs:nth-child(7) > button > i{animation-delay:.72s,1.67s}
+  /* the wrapper fade keeps step with its dot */
+  .timg.xopen .hs:nth-child(1){transition-delay:0s}
+  .timg.xopen .hs:nth-child(2){transition-delay:.12s}
+  .timg.xopen .hs:nth-child(3){transition-delay:.24s}
+  .timg.xopen .hs:nth-child(4){transition-delay:.36s}
+  .timg.xopen .hs:nth-child(5){transition-delay:.48s}
+  .timg.xopen .hs:nth-child(6){transition-delay:.6s}
+  .timg.xopen .hs:nth-child(7){transition-delay:.72s}
   .hs .tip{position:absolute;left:50%;bottom:calc(100% + 11px);transform:translateX(-50%) translateY(5px);
     width:min(214px,42vw);background:var(--ink-blue);color:#fff;border-radius:var(--r-sm);
     padding:11px 13px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;
@@ -1466,7 +1530,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   }
   @media(prefers-reduced-motion:reduce){.hs{transition:none} .hs .tip{transition:none}}
 
-  .rv{opacity:0;transform:translateY(22px)}
+  /* ⭐ ROUND 37 — travel 22px → 40px. Measured off C&C 2026-08-20: their reveal
+     travels 50px and ours read timid beside it (interaction-library.md §2.1).
+     40 fits our tighter rhythm; phones drop to 24px — ±50px sideways at 390
+     caused real horizontal overflow in the kit test, and long travel on a
+     short screen reads as lag, not luxury. */
+  .rv{opacity:0;transform:translateY(40px)}
+  @media(max-width:767px){.rv{transform:translateY(24px)}}
   .rv.on{opacity:1;transform:none}
 
   /* every in-page jump has to clear the fixed header, or the thing you tapped
@@ -3593,7 +3663,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     document.body.classList.toggle('fabon', y > heroH());
     /* the quiet sticky: nothing on the hero, appears just after it */
     document.body.classList.toggle('pickon', y > heroH() - 60);
+    /* ⭐ ROUND 37 — past the hero the header steps aside going down and returns
+       the moment you scroll up (C&C, measured: hide on down, return on up,
+       300ms). 6px deadband kills trackpad jitter; the menu pins it open. */
+    if (y <= heroH() || document.body.classList.contains('mopen')){
+      hdr.classList.remove('hide');
+    } else if (Math.abs(y - lastHdrY) > 6){
+      hdr.classList.toggle('hide', y > lastHdrY);
+    }
+    lastHdrY = y;
   }
+  var lastHdrY = 0;
   addEventListener('scroll', function(){ onHdr(scrollY); }, {passive:true}); onHdr(scrollY);
   /* ROUND 35 — .pick only lives while the systems are on screen. */
   var rangeSec = document.getElementById('range');
@@ -3888,6 +3968,33 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       gl.uniform2f(uR, cv.width, cv.height); gl.uniform1f(uT, (performance.now()-t0)/1000);
       gl.drawArrays(gl.TRIANGLES,0,3); requestAnimationFrame(loop); }
     loop();
+  })();
+
+  /* ── ROUND 37: the taps rail, on rAF ─────────────────────
+     Replaces `animation:tdrift 46s linear infinite`. Same speed: half the
+     rail (one full set + half the 14px gap) per 46 seconds. dt clamped so a
+     background tab can't teleport it; modulo wrap so it never runs out; IO
+     pauses it offscreen; reduced motion never starts it (the wrap scrolls
+     by hand instead — CSS above). */
+  (function(){
+    var trail = document.querySelector('.trail');
+    if (!trail || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var x = 0, last = 0, running = false, raf = 0;
+    function step(t){
+      if (!running) return;
+      var dt = Math.min((t - last) || 0, 50); last = t;
+      var span = trail.scrollWidth / 2 + 7;
+      x = (x + span / 46000 * dt) % span;
+      trail.style.transform = 'translate3d(' + (-x).toFixed(2) + 'px,0,0)';
+      raf = requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(e){
+        var vis = e[0].isIntersecting;
+        if (vis && !running){ running = true; last = performance.now(); raf = requestAnimationFrame(step); }
+        else if (!vis && running){ running = false; cancelAnimationFrame(raf); }
+      }).observe(trail);
+    } else { running = true; last = performance.now(); requestAnimationFrame(step); }
   })();
 
   /* ── systems dropdown ──────────────────────────────────── */
@@ -4998,9 +5105,36 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         return gsap.from(a.children, {y:26, opacity:0, duration:.7, ease:'power3.out', stagger:.06,
           scrollTrigger:{trigger:a, start:'top 78%', once:true}});
       });
+      /* ⭐ ROUND 37 — THE MAGNETIC SETTLE. JP: "when you're scrolling through
+         the systems, they should lock into the system for a section."
+         ⛔ NOT the round-36 pin coming back — no pin, no scrub, the page never
+         stops. You scroll freely; when you STOP inside the range, the page
+         eases the nearest system to centre, where the stage observer already
+         picks it up. Snap points are the articles' real centres, recomputed
+         per call, so unequal first-article padding cannot skew them. */
+      function snapPts(){
+        var l = sysArts[sysArts.length-1];
+        var c0 = sysArts[0].offsetTop + sysArts[0].offsetHeight/2;
+        var cN = l.offsetTop + l.offsetHeight/2;
+        return sysArts.map(function(a){
+          return (a.offsetTop + a.offsetHeight/2 - c0)/(cN - c0);
+        });
+      }
+      var snapST = ScrollTrigger.create({
+        trigger: sysArts[0], start: 'center center',
+        endTrigger: sysArts[sysArts.length-1], end: 'center center',
+        snap: {
+          snapTo: function(v){
+            var b = 0; snapPts().forEach(function(x){ if (Math.abs(x-v) < Math.abs(b-v)) b = x; });
+            return b;
+          },
+          duration: {min:.25, max:.6}, delay:.15, ease:'power2.out'
+        }
+      });
       return function(){
         if (obs) obs.disconnect();
         if (arriveIO) arriveIO.disconnect();
+        if (snapST) snapST.kill();
         tws.forEach(function(t){ if (t && t.scrollTrigger) t.scrollTrigger.kill(); if (t) t.kill(); });
         if (stageEl2) stageEl2.classList.remove('tapin','xopened');
         sysArts.forEach(function(a){ gsap.set(a.children, {clearProps:'opacity,transform'}); });
