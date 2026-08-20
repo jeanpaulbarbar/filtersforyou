@@ -167,9 +167,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     /* round 39 — the hero frame. Radius and gutter measured off C&C's reveal
        card (24px / 12px, 2026-08-20). --r-hero is the ONE surface allowed
        past the 14px card law: it is a viewport-scale frame, not a card.
-       --utilh is the strip's RENDERED height — measured 44px at 1440 on
-       2026-08-20 (the .rowu min-height is 26, line boxes pad it out). */
-    --r-hero:24px; --hframe:12px; --utilh:44px;
+       --utilh is the strip's RENDERED height — round 41 slimmed the strip
+       to a 24px line (measured 24px at 1440, 2026-08-20). If the strip's
+       type or min-heights change, re-measure this. */
+    --r-hero:24px; --hframe:12px; --utilh:24px;
     --shadow-lg:0 59px 59px rgba(4,16,46,.10), 0 15px 32px rgba(4,16,46,.13);
     --shadow-sm:0 12px 12px rgba(4,16,46,.05), 0 3px 7px rgba(4,16,46,.07);
     --g-field:linear-gradient(160deg,#0B61F4 0%,#0846BE 78%,#063A9E 100%);
@@ -413,24 +414,33 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      the same 15px — his "same size", without shrinking anything he can see. */
   /* round 39: the strip sits ON the mist frame ground, the way C&C's mini
      header lives in their border band — ink text now, not white on ink-blue. */
-  .util{background:var(--mist);color:var(--ink);font-size:15px}
+  /* ⛔ ROUND 41 — "make the mini header a lot smaller" (JP, on his phone
+     verdict). The strip rendered 44px because .ulinks is a <nav> inside
+     .hdr, so `.hdr nav a{min-height:44px}` silently won over `.util a`'s 26.
+     Everything in the strip now sits on a 24px line: rating 12px (C&C's own
+     strip runs 12), glyphs 15, stars 10. Desktop-only chrome — the strip is
+     display:none under 1080, so no phone tap target changes. */
+  .util{background:var(--mist);color:var(--ink);font-size:12px}
+  .util nav.ulinks a{min-height:24px}
+  .util .soc svg{width:15px;height:15px}
+  .util .ustars svg{width:10px;height:10px}
   /* round 14: the links group with the socials on the right, so the strip
      reads rating | ————— | links + socials, instead of three spread thirds. */
-  .util .rowu{display:flex;align-items:center;gap:16px;min-height:26px;justify-content:flex-start}
+  .util .rowu{display:flex;align-items:center;gap:16px;min-height:24px;justify-content:flex-start}
   /* round 14: five stars, not one — a single star next to "5.0" read as a
      1-star rating at a glance. Sized with the nav links. */
   .util .ustars{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600}
   .util .ustars .st5{display:inline-flex;gap:1.5px}
   .util .ustars svg{width:11px;height:11px}
   .util nav.ulinks{display:flex;gap:14px;margin-left:auto}
-  .util a{display:inline-flex;align-items:center;min-height:26px;font-size:15px;font-weight:600;color:inherit;text-decoration:none}
+  .util a{display:inline-flex;align-items:center;min-height:24px;font-size:12px;font-weight:600;color:inherit;text-decoration:none}
   /* ⚠️ JP asked for "half the size". Half of 15px is 7.5px, which is below
      readable on a 1440 screen, so this stops at 11px — the practical floor for
      utility text (C&C's own strip runs 12px). Said out loud rather than
      silently shipping something unreadable. */
   .util nav.ulinks a{font-size:11px;font-weight:600;letter-spacing:.01em}
   .util .soc{display:flex;gap:12px;margin-left:20px}
-  .util .soc a{min-height:26px;display:grid;place-items:center}
+  .util .soc a{min-height:24px;display:grid;place-items:center}
   .util .soc a i{display:grid;place-items:center;transition:color .3s ease-in-out}
   .util .soc svg{width:19px;height:19px}
   /* round 39: hover was yellow — invisible on the mist ground (≈1.5:1), and
@@ -516,6 +526,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round var(--r-hero))}
     to{clip-path:inset(0 round var(--r-hero))}}
   @keyframes hdrin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+  /* ⛔ ROUND 41 — the main row steps fully INTO the card. Measured before:
+     the Book now pill's top sat EXACTLY on the card's top seam (both y=56)
+     — JP read it as the header being cut off. 10px of desktop padding puts
+     the whole row inside the film, which is where C&C carry theirs too. */
+  @media(min-width:1080px){.hdr{padding-top:10px}}
   /* under 1080 the utility strip is display:none, so its band collapses.
      ROUND 40 — the header clears the band: without the strip the fixed row
      started at y=0 and the white mark's top pixels sat ON the mist strip,
@@ -1707,6 +1722,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .hdeck .chead{padding:9px 60px 0 14px}
     .hdeck:not(.open) .tgl{position:absolute;right:9px;top:50%;transform:translateY(-50%);z-index:5}
     .hdeck.open .chead{padding:8px 10px 0 15px}
+    /* ⛔ ROUND 41 — the closed phone face gets its OWN columns. It was still
+       on the desktop's `1fr 220px`, so at ~318px of card the 64px image sat
+       in a 220px column and the TITLE got the remainder — measured 67px,
+       "Whole House Filtration System" wrapping down a sliver and the card
+       ballooning to 185px tall (round 23 had it at ~115). The open state
+       keeps the desktop columns for its 218px image. */
+    .hdeck:not(.open) .face{grid-template-columns:1fr 76px}
     .hdeck .face{padding:2px 60px 9px 14px;gap:12px}
     .hdeck .face img{width:64px;height:64px}
     .hdeck .t b{font-size:15.5px}
