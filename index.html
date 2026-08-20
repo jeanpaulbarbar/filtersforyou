@@ -565,7 +565,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdeck .under.u2{transform:translateY(23px) scale(.91);background:rgba(255,253,250,.3)}
   /* round 7: faint blue ground so the card matches the product footage; pill badge on top.
      round 8: pill straddles the card's top edge, corners eased back to 16px. */
-  .hdeck .card{position:relative;z-index:2;background:var(--mist);border-radius:var(--r-card);box-shadow:var(--shadow-lg);overflow:hidden}
+  /* round 35: --mist → #fff, and it is a LITERAL on purpose, not --paper.
+     The faint blue ground existed to match the product FOOTAGE. The new
+     photography is shot on pure white, and --paper is #FFFDFA — measured in
+     the render, that 5-level gap drew a visible white rectangle behind every
+     unit. The card ground has to BE the photography's ground.
+     ⛔ If the product shots are ever re-rendered on a different white, this
+     value moves with them. Sample the webp, do not guess. */
+  .hdeck .card{position:relative;z-index:2;background:#fff;border-radius:var(--r-card);box-shadow:var(--shadow-lg);overflow:hidden}
   /* ── THE CARD HEAD — the tag and the toggle, round 19 ────
      ⛔ THE PILL IS GONE. JP: "I don't like them as pills. I don't like them at
      all, and I don't like the different colours." It was a filled slab
@@ -590,18 +597,43 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdeck.open .tgl svg{transform:rotate(180deg)}
   @media(hover:hover) and (pointer:fine){.hdeck .tgl:hover{background:var(--ink);color:#fff}}
   .hdeck .tgl:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-  /* round 6: banner gone — the card says less. The image is the explosion video.
-     Round 19: the card is LONGER and the product is bigger in it — JP could not
-     see the unit at 112px. 112 → 152 closed, 290 → 336 open. */
-  .hdeck .face{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;width:100%;padding:12px 18px 20px;
+  /* ⭐ ROUND 35 — REAL PRODUCT PHOTOGRAPHY, ON THE RIGHT, ON WHITE.
+     JP, 20 Aug: "replace the cards on the hero with those photos... make the
+     systems larger in the actual card... don't change the size of the card...
+     make the card white... I want the photo of the image on the card moved to
+     the right rather than on the left."
+
+     ⛔ THE IMAGE IS NO LONGER THE EXPLOSION VIDEO. Round 6 fed this <img> the
+     37-frame xf-* sequence and scrubbed it on scroll, so the card played a
+     film of the unit coming apart. The deck scrub engine is DELETED (see the
+     note where deckScrub used to be assigned). One still photograph now.
+     ⛔ AND THE RADIAL MASK IS GONE WITH IT. That mask feathered the edges of a
+     video frame into a blue card. Against a white card and a white-background
+     photograph it does nothing but eat the edges of the product.
+
+     THE SWAP: `1fr auto` puts the text column first and the product second, and
+     the two explicit grid-column placements are what actually move it — DOM
+     order stays image-then-text so the alt-less decorative image is never read
+     between the name and the price.
+
+     ⛔ CARD SIZE IS UNCHANGED AND THAT IS A CONSTRAINT, NOT A HOPE. 148 → 188
+     is paid for out of the gap (18 → 14) and the side padding (18 → 16), and
+     the closed card measures the same height as it did before. Measured at
+     1440, both states. If you grow the image again, re-measure the card. */
+  .hdeck .face{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;width:100%;padding:12px 16px 20px;
     border:0;background:none;cursor:pointer;text-align:left;font-family:var(--sans);color:var(--ink)}
   .hdeck .face:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}
-  .hdeck .face img{width:148px;height:148px;object-fit:contain;border-radius:var(--r-sm);
-    -webkit-mask-image:radial-gradient(ellipse 72% 68% at 50% 50%, #000 48%, transparent 78%);
-    mask-image:radial-gradient(ellipse 72% 68% at 50% 50%, #000 48%, transparent 78%);
+  .hdeck .face img{grid-column:2;grid-row:1;width:188px;height:188px;object-fit:contain;
     transition:width .5s var(--e-out),height .5s var(--e-out)}
+  .hdeck .face .t{grid-column:1;grid-row:1}
+  /* ⛔ THE OPEN CARD IS UNCHANGED — image above text, 336px, and the card still
+     measures 736px tall. Growing it to 392 pushed the card to 792 and "don't
+     change the size of the card" applies to both states. The product reads
+     bigger here anyway: the old frame carried ~25% white margin AND a radial
+     mask eating its edges, and the new photograph is cropped to the unit. */
   .hdeck.open .face{grid-template-columns:1fr;justify-items:center;text-align:center;gap:8px;padding:14px 22px 12px}
-  .hdeck.open .face img{width:336px;height:336px}
+  .hdeck.open .face img{grid-column:1;grid-row:1;width:336px;height:336px}
+  .hdeck.open .face .t{grid-column:1;grid-row:2}
   .hdeck .t b{display:block;font-size:22px;font-weight:600;line-height:1.22;transition:font-size .5s var(--e-out)}
   .hdeck.open .t b{font-size:32px;max-width:20ch}
   .hdeck.open .more li{font-size:18px}
@@ -675,8 +707,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        came out 148 / 158.8 / 180 and the slab visibly resized on every flip.
        C&C's is a constant 176. The face is the grid, so `align-items:center`
        centres both columns inside the fixed height. */
-    .hdeck:not(.open) .face{gap:16px;padding:16px 66px 16px 18px;min-height:180px}
-    .hdeck:not(.open) .face img{width:116px;height:116px}
+    /* ⭐ round 35: the product is 116 → 160, and the card did NOT move. The 44px
+       came out of the vertical padding (16 → 10), because 160 + 10 + 10 is
+       exactly the 180px min-height that makes this a deck. The text column
+       measures ~100px so the image governs the height on its own.
+       ⛔ THE 66px RIGHT RESERVE IS WHY THE PHOTO IS NOT FLUSH RIGHT. The toggle
+       floats at the card's right edge; the photo sits just inside it. Take the
+       reserve away and the chevron lands on the product. */
+    .hdeck:not(.open) .face{gap:16px;padding:10px 66px 10px 18px;min-height:180px}
+    .hdeck:not(.open) .face img{width:160px;height:160px}
     /* ⛔ :not(.notag) is LOAD-BEARING — this rule sits later in the sheet than
        the base `.hdeck.notag .dtag{display:none}` and matches at the same
        specificity, so without it an empty kicker still reserved its 3px bar
@@ -690,7 +729,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     /* ── the Google card's turn in the deck (HD[1]) ──
        Same slab, same 116px left column — the G takes the product's place so
        the card does not resize as the deck flips through it. */
-    .hdeck.isg .gcard{padding:16px 22px 16px 18px;gap:16px;min-height:180px}
+    /* round 35: row-reverse so the G sits on the RIGHT, same side as the product
+     photograph on every other card in the deck. Cycling the deck otherwise
+     threw the artwork left, right, right, right — the slab has to read as ONE
+     object turning over, not four different cards. Padding mirrors with it.
+     ⛔ Deck only. The phone's standalone .gcard.gm is untouched. */
+    .hdeck.isg .gcard{flex-direction:row-reverse;padding:16px 66px 16px 22px;gap:16px;min-height:180px}
+    .hdeck.isg .gcard .gt{align-items:flex-start}
     .hdeck.isg .gcard .g{width:104px;height:104px;flex:0 0 104px}
     .hdeck.isg .gcard .gt{gap:6px}
     .hdeck.isg .gcard .gs svg{width:26px;height:26px}
@@ -2666,7 +2711,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         <button class="tgl" type="button" id="hdTgl" aria-label="Show what is included" aria-expanded="false" aria-controls="hdMore"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
       <button class="face" type="button" id="hdFace" aria-expanded="false" aria-controls="hdMore">
-        <img id="hdImg" src="media/xf-home/f00.webp" alt="" width="1100" height="1472">
+        <img id="hdImg" src="media/systems/pure-home.webp" alt="" width="1200" height="1200">
         <!-- round 28: the SECOND kicker. The desktop closed card has no head row
              any more (the toggle floats at the card's right edge), so the kicker
              rides in the text column instead. Two elements, never both visible —
@@ -3822,7 +3867,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* ── the hero deck — click to expand, arrows to cycle ───── */
   /* Round 6: no coloured banner (say less, feel like more) \u2014 and the card image
      IS the explosion video: opens on click, closes on close. */
-  var deckScrub = null;  /* assigned by the morph engine below */
+  /* ⛔ ROUND 35 — `deckScrub` IS GONE. It drove the hero card's <img> through
+     the 37-frame xf-* sequence on scroll, which is the "video with the cards"
+     JP asked to be rid of. The frame sets themselves STAY — the showcase
+     section's scroll explosion still runs on them and that is a different
+     section and a deliberate signature. Only the CARD stopped playing. */
   var stageEase = null;  /* (key, t) -> eases the STAGE layer toward t. round 8c: scroll sets the
                             target, the image catches up over ~a second — momentum flicks stay cinematic */
   var mimgEase = null;   /* (key, t) -> same for the mobile card images */
@@ -3852,17 +3901,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      I wanted it." It has no set, no price and no drawer; hdApply branches on
      `google` before it touches any of the product fields. */
   var HD = [
-    {sys:'Pure Home', set:'home', img:'media/xf-home/f00.webp', tag:'', tagc:'var(--blue)',
+    {sys:'Pure Home', set:'home', img:'media/systems/pure-home.webp', tag:'', tagc:'var(--blue)',
      name:'Whole House Filtration System', pure:'Pure Home', pre:'from', amt:'$3,850', suf:'installed', cta:'Book a free inspection',
      ticks:['Chlorine and chloramines out','Sediment, rust and microplastics','No pool water taste or smell','The good minerals stay in']},
     {google:true, tagc:'var(--blue)'},
-    {sys:'Pure Plus', set:'plus', img:'media/xf-plus/f00.webp', tag:'', tagc:'var(--blue)',
+    {sys:'Pure Plus', set:'plus', img:'media/systems/pure-plus.webp', tag:'', tagc:'var(--blue)',
      name:'5 Stage Alkaline Reverse Osmosis', pure:'Pure Plus', pre:'', amt:'$1,280', suf:'installed', cta:'Get a fixed price',
      ticks:['Up to 99% of contaminants out','PFAS, fluoride and heavy metals','Alkaline, mineral rich water','Its own dedicated drinking tap']},
-    {sys:'Pure Premium', set:'prem', img:'media/xf-prem/f00.webp', tag:'Best seller!', tagc:'var(--purple)',
+    {sys:'Pure Premium', set:'prem', img:'media/systems/pure-premium.webp', tag:'Best seller!', tagc:'var(--purple)',
      name:'7 Stage Hydrogen Rich Reverse Osmosis', pure:'Pure Premium', pre:'', amt:'$1,590', suf:'installed', cta:'Get a fixed price',
      ticks:['Up to 99% of contaminants out','PFAS, fluoride and heavy metals','Hydrogen rich and alkaline','Remineralised as it filters']},
-    {sys:'Pure Luxe', set:'luxe', img:'media/xf-luxe/f00.webp', tag:'', tagc:'var(--purple)',
+    {sys:'Pure Luxe', set:'luxe', img:'media/systems/pure-luxe.webp', tag:'', tagc:'var(--purple)',
      name:'Smart 5 Stage Alkaline Reverse Osmosis', pure:'Pure Luxe', pre:'', amt:'$2,290', suf:'installed', cta:'Get a fixed price',
      ticks:['Up to 99% of contaminants out','PFAS and microplastics gone','Alkaline, mineral rich water','Watch the purity live on screen']}
   ];
@@ -3909,7 +3958,6 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       /* ONE place sets the accent. The kicker bar, its text and anything else on
          the card read `--ac` off the deck. Only two values exist: blue, purple. */
       hdeck.style.setProperty('--ac', d.tagc);
-      if (deckScrub) deckScrub(d.set, hdeck.classList.contains('open') ? 1 : 0);
       var get = document.getElementById('hdGet');
       get.setAttribute('data-sys', d.sys);
       get.lastChild.textContent = '';
@@ -3958,7 +4006,6 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       hdFace.setAttribute('aria-expanded', open ? 'true' : 'false');
       hdTgl.setAttribute('aria-expanded', open ? 'true' : 'false');
       hdTgl.setAttribute('aria-label', open ? 'Hide what is included' : 'Show what is included');
-      if (deckScrub) deckScrub(HD[hdi].set, open ? 1 : 0);
     }
     hdFace.addEventListener('click', hdToggle);
     hdTgl.addEventListener('click', hdToggle);
@@ -4377,27 +4424,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       });
     };
 
-    /* the hero deck scrub — one engine, retargets to whichever system the card shows */
-    var deckImg = document.getElementById('hdImg');
-    if (deckImg){
-      var dKey = 'home', dPos = 0, dTarget = 0, dRaf = null, dLastT = 0;
-      var dTick = function(now){
-        var dt = dLastT ? Math.min(now - dLastT, 100) : 16.7;
-        dLastT = now;
-        var d = dTarget - dPos;
-        if (Math.abs(d) < .012){ dPos = dTarget; dRaf = null; dLastT = 0; }
-        else { dPos += d * (1 - Math.pow(1 - .06, dt / 16.7)); dRaf = requestAnimationFrame(dTick); }
-        deckImg.src = SETS[dKey][Math.round(dPos * (N - 1))];
-      };
-      deckScrub = function(key, t){
-        if (!SETS[key]) return;
-        preload(key);
-        if (dKey !== key){ dKey = key; dPos = 0; }
-        dTarget = t;
-        if (reduce){ dPos = t; deckImg.src = SETS[key][Math.round(t * (N - 1))]; return; }
-        if (!dRaf) dRaf = requestAnimationFrame(dTick);
-      };
-    }
+    /* ⛔ round 35: the hero deck scrub engine was here and is deleted. The card
+       shows one still photograph now. See the note at the top of this script. */
   })();
 
   /* ── REVIEWS — spotlight rotation ──────────────────────── */
