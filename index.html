@@ -213,6 +213,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   em.hb{font-style:normal;color:var(--blue);font-weight:600}
   .wm{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.14em;margin-bottom:-.1em}
   .wm > span{display:inline-block;transform:translateY(108%)}
+  /* ── THE GLYPH REVEAL — the shared mechanic, two classes ──
+     .hw is ONE WORD, inline-block so a word can never break mid-letter.
+     .hch is ONE LETTER and it is the thing that moves: a fade, a .26em rise
+     and a .92 scale, so it lands rather than drifts. Because the rise is in
+     em it reads the same at 86px in the hero and 35px on the ledger.
+     Used by #heroLine (on load) and #ledgerLine (on scroll). ⛔ No overflow
+     mask on either — .wm masks its word, and a mask shears the scale-up. */
+  .hw{display:inline-block}
+  .hch{display:inline-block;opacity:0;
+    transform:translateY(.26em) scale(.92);transform-origin:50% 80%}
 
   .ul{background-image:linear-gradient(currentColor,currentColor);background-position:0 100%;
     background-repeat:no-repeat;background-size:0 1px;text-decoration:none;
@@ -502,10 +512,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      headline creeps 11px down at 1440 and 5px on a phone — and the phone
      hero proportion has been locked to the pixel since round 16. Measured
      old vs new, both viewports, 20 Aug: identical with it, off without. */
-  .hero h1 .hw{display:inline-block;vertical-align:bottom;
-    padding-bottom:.14em;margin-bottom:-.1em}
-  .hero h1 .hch{display:inline-block;opacity:0;
-    transform:translateY(.26em) scale(.92);transform-origin:50% 80%}
+  .hero h1 .hw{vertical-align:bottom;padding-bottom:.14em;margin-bottom:-.1em}
   /* ⛔ Round 19: the sub is a COLUMN, not a row. The Google card was laid
      beside the lede and ran straight under the hero deck (measured at 1440: the
      deck's left edge is x=918, the flowed card reached x=1140). Stacking it
@@ -1828,7 +1835,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     html{scroll-behavior:auto}
     .rv{opacity:1!important;transform:none!important}
     .wm > span{transform:none!important}
-    .hero h1 .hch{opacity:1!important;transform:none!important}
+    .hch{opacity:1!important;transform:none!important}
     .trail{animation:none}
     .trailwrap{overflow-x:auto}
     .hero .cue svg{animation:none}
@@ -2960,7 +2967,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          stays a table at every width.
          ⛔ Prices are the LOCKED ladder + the combo rule. Nothing invented. -->
     <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">Servicing and prices</span>
-    <h2 class="d2 rv">Every cost, for every system. Published.</h2>
+    <!-- round 34: the same glyph reveal as the hero, fired on scroll instead of
+         on load. JP asked for it here specifically, and it earns its place: the
+         argument of this section is that every cost is itemised and published,
+         and letters setting themselves down one at a time IS that argument.
+         ⛔ .rv is GONE from this h2 — .rv is the generic 22px fade-up and both
+         running at once would fight over the same opacity. -->
+    <h2 class="d2" id="ledgerLine" aria-label="Every cost, for every system. Published."><span aria-hidden="true"><span class="hw"><span class="hch">E</span><span class="hch">v</span><span class="hch">e</span><span class="hch">r</span><span class="hch">y</span></span> <span class="hw"><span class="hch">c</span><span class="hch">o</span><span class="hch">s</span><span class="hch">t</span><span class="hch">,</span></span> <span class="hw"><span class="hch">f</span><span class="hch">o</span><span class="hch">r</span></span> <span class="hw"><span class="hch">e</span><span class="hch">v</span><span class="hch">e</span><span class="hch">r</span><span class="hch">y</span></span> <span class="hw"><span class="hch">s</span><span class="hch">y</span><span class="hch">s</span><span class="hch">t</span><span class="hch">e</span><span class="hch">m</span><span class="hch">.</span></span> <span class="hw"><span class="hch">P</span><span class="hch">u</span><span class="hch">b</span><span class="hch">l</span><span class="hch">i</span><span class="hch">s</span><span class="hch">h</span><span class="hch">e</span><span class="hch">d</span><span class="hch">.</span></span></span></h2>
     <p class="lede rv">Pick your system. Three numbers, and not one of them moves later.</p>
 
     <!-- ROUND 33 — THE SWITCHER. JP, 2026-08-18: "that servicing section is
@@ -4770,7 +4783,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 
   /* ── no GSAP: show everything, lose nothing ────────────── */
   if (!hasGsap){
-    document.querySelectorAll('.rv,.wm > span,#heroLine .hch').forEach(function(e){ e.style.opacity = 1; e.style.transform = 'none'; });
+    document.querySelectorAll('.rv,.wm > span,.hch').forEach(function(e){ e.style.opacity = 1; e.style.transform = 'none'; });
     return;
   }
   gsap.registerPlugin(ScrollTrigger);
@@ -4796,6 +4809,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   } else {
     gsap.set('#heroLine .hch', {opacity:1, y:0, scale:1});
     gsap.set('#heroSub, #hdeck', {y:0, opacity:1});
+  }
+
+  /* the ledger headline — same glyph reveal as the hero, on arrival instead of
+     on load. once:true; re-animating on scroll-back is what makes a page cheap. */
+  if (!reduce){
+    gsap.to('#ledgerLine .hch', {opacity:1, y:0, scale:1, duration:.55, ease:'power3.out',
+      stagger:.018, scrollTrigger:{trigger:'#ledgerLine', start:'top 85%', once:true}});
   }
 
   /* section headline word rises — intro + pillars + $0 */
