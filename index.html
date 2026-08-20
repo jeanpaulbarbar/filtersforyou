@@ -525,6 +525,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hero .cue span{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
   .hero .cue svg{width:13px;height:13px;animation:nudge 2.4s var(--e-out) infinite}
   @keyframes nudge{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+  /* ⛔ TOP LEVEL ON PURPOSE. Round 36 gave the DESKTOP stage the same Tap me
+     bubble, and a @keyframes declared inside a media query does not exist
+     outside it — the desktop bubble would simply sit still. */
+  @keyframes tapbob{0%,68%,100%{transform:translateY(0)}34%{transform:translateY(-11px)}}
   /* ── THE GOOGLE CARD — round 19 ──────────────────────────
      JP: "add a card in, like a Google logo. Similar to how their one had a card
      that said proudly awarded. Let's have ours be five star rating, Google. Get
@@ -809,6 +813,35 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .show .stage .xhint{position:absolute;right:22px;bottom:16px;z-index:3;font-size:15px;font-weight:600;
       color:var(--muted);opacity:0;transition:opacity .3s ease-in-out;pointer-events:none}
     .show .stage[data-cur] .xhint{opacity:1}
+    /* ⭐ ROUND 36 — THE DESKTOP STAGE IS TAPPED, and it says so.
+       Identical bubble to the phone's, same colour, same bob, so the page keeps
+       ONE vocabulary for "this thing opens". It springs in when the range
+       section actually arrives (.tapin, set by an IntersectionObserver) and
+       leaves the moment the unit is opened, because by then it has done its job.
+       ⛔ Not yellow. Yellow is for buttons. */
+    .show .stage{cursor:pointer}
+    .show .stage::after{content:"Tap me!";
+      position:absolute;right:8%;top:11%;z-index:7;
+      display:inline-flex;align-items:center;white-space:nowrap;
+      padding:11px 20px;border-radius:18px 18px 18px 3px;
+      background:var(--blue);color:#fff;
+      box-shadow:0 10px 26px rgba(11,97,244,.38), 0 2px 6px rgba(4,16,46,.18);
+      font-family:var(--badge);font-size:15px;font-weight:700;letter-spacing:.06em;
+      text-transform:uppercase;pointer-events:none;
+      opacity:0;scale:.8;
+      animation:tapbob 1.9s var(--e-out) infinite;
+      transition:opacity .3s ease-in-out,scale .42s var(--e-out)}
+    .show .stage.tapin:not(.xopened)::after{opacity:1;scale:1}
+    .show .stage.xopened::after{opacity:0;scale:.86;animation:none}
+    /* THE ARRIVAL. JP: "make the top one really pop on the desktop when you get
+       to us, so people can't miss it." The live layer lands from 0.86 with a
+       lift — one gesture, once, and it is what the eye catches instead of the
+       scroll lock that used to do that job. */
+    .show .stage .ly.on{animation:stagepop .78s var(--e-out) both}
+    @keyframes stagepop{
+      0%{opacity:0;transform:scale(.86) translateY(26px)}
+      60%{opacity:1}
+      100%{opacity:1;transform:none}}
     .show .stage .ly.on{opacity:1;transform:none}
     /* ⛔ THE STAGE PILL IS GONE TOO — round 19, same call as the hero card.
        No fill, no shadow, no radius: a 3px accent bar and the label in the
@@ -863,17 +896,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .show .sys .incl svg{width:21px;height:21px;flex:0 0 21px;margin-top:3px}
   .show .sys .go{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
   .show .foot{margin-top:40px;text-align:left}
-  /* ── PIN MODE — the range locks in one system at a time (round 5).
-     Desktop + motion + GSAP only; phones keep the stacked flow. ── */
-  @media(min-width:960px){
-    .show.pinmode .wrap{height:calc(100svh - 128px);min-height:520px;align-items:stretch}
-    .show.pinmode .stage{position:relative;top:0;height:100%;min-height:0}
-    .show.pinmode .list{display:grid;min-height:0}
-    .show.pinmode .sys{grid-area:1/1;min-height:0;padding:0;border-top:0;opacity:0;visibility:hidden;
-      display:flex;flex-direction:column;justify-content:center}
-    .show.pinmode .sys.cur{opacity:1;visibility:visible}
-    .show.pinmode .xhint{display:none} /* round 7: scroll drives the morph — no instruction needed */
-  }
+  /* ⛔ ROUND 36 — PIN MODE IS DELETED, CSS AND ENGINE.
+     JP: "can we get rid of the explosions when we scroll to the systems...
+     Let's get rid of the scroll act and just do a tap me version, like a
+     mobile... Get rid of the locking mechanism and whatnot as well."
+     It held `.show .wrap` pinned for 1000% of viewport height and cross-faded
+     one system at a time while scroll scrubbed the explosion. The section now
+     scrolls like every other section on the page and the stage is TAPPED. */
 
   /* ── EXPANDER — kept, editorial copy ────────────────────── */
   /* ⛔ Round 22: NO bottom padding — the 40px paper strip under the photo was
@@ -1676,7 +1705,6 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        It already bobbed — 6px over 2.5s, which is a breath, not a signal. 11px
        over 1.9s with a hold at the bottom reads as a nudge you cannot miss.
        ⛔ Still transform-only, still killed under prefers-reduced-motion. */
-    @keyframes tapbob{0%,68%,100%{transform:translateY(0)}34%{transform:translateY(-11px)}}
 
     /* round 11: "make the explosion ones a little bit larger" — 44 → 58svh,
        and it may use the full gutter-to-gutter width now. */
@@ -2813,7 +2841,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         <div class="ly xscrub" data-i="1"><img id="xsImg1" src="media/xf-plus/f00.webp" alt="" width="1100" height="1472"></div>
         <div class="ly xscrub" data-i="2"><img id="xsImg2" src="media/xf-prem/f00.webp" alt="" width="1100" height="1472"></div>
         <div class="ly xscrub" data-i="3"><img id="xsImg3" src="media/xf-luxe/f00.webp" alt="" width="1100" height="1472"></div>
-        <span class="xhint" aria-hidden="true">Hover it to see inside</span>
+        <span class="xhint" aria-hidden="true">Tap it to see inside</span>
       </div>
       <div class="list" id="sysList">
         <article class="sys" data-i="0" data-tag="Every tap covered" data-btag="blue" style="--ac:var(--blue)">
@@ -4051,7 +4079,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     if (!stage) return;
     stage.setAttribute('data-cur', i);
     var xh = stage.querySelector('.xhint');
-    if (xh) xh.textContent = 'Hover it \u2014 watch it open';
+    if (xh) xh.textContent = 'Tap it \u2014 watch it open';
     stageLys.forEach(function(l){ l.classList.toggle('on', +l.getAttribute('data-i') === i); });
     var a = sysArts[i]; if (!a) return;
     stageTag.textContent = a.getAttribute('data-tag');
@@ -4204,17 +4232,27 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     stageEase = function(key, t){ if (go[key]) go[key](Math.max(0, Math.min(1, t))); };
     function curKey(){ return stageEl ? CUR_TO_SET[stageEl.getAttribute('data-cur')] : null; }
     if (stageEl){
-      if (matchMedia('(hover:hover) and (pointer:fine)').matches){
-        stageEl.addEventListener('mouseenter', function(){ if (SCRUB) return; var k = curKey(); if (k && go[k]){ go[k](1); if (spotsAt) spotsAt(k, 1); } });
-        stageEl.addEventListener('mouseleave', function(){ if (SCRUB) return; KEYS.forEach(function(k){ if (go[k]) go[k](0); if (spotsAt) spotsAt(k, 0); }); });
-      } else {
-        var xOpen = false;
-        stageEl.addEventListener('click', function(){
-          if (SCRUB) return;
-          var k = curKey(); if (!k || !go[k]) return;
-          xOpen = !xOpen; go[k](xOpen ? 1 : 0);
-        });
-      }
+      /* ⭐ ROUND 36 — CLICK, ON EVERY POINTER. The mouse branch used to open the
+         unit on mouseenter and shut it on mouseleave, which meant the desktop
+         explosion was something that happened AT you. JP asked for the phone's
+         behaviour on desktop: you tap it, it opens, it stays open, you tap it
+         again. One interaction model across the whole page.
+         ⛔ A hotspot click is not a close click — the markers live inside the
+         stage and their own handler owns them. */
+      var xOpen = false;
+      stageEl.addEventListener('click', function(e){
+        if (e.target.closest && e.target.closest('.hs')) return;
+        var k = curKey(); if (!k || !go[k]) return;
+        xOpen = !xOpen;
+        go[k](xOpen ? 1 : 0);
+        if (spotsAt) spotsAt(k, xOpen ? 1 : 0);
+        stageEl.classList.toggle('xopened', xOpen);
+      });
+      /* the stage follows the article you are reading, so an open unit has to
+         shut when the deck moves on — otherwise the next one arrives exploded */
+      new MutationObserver(function(){
+        if (xOpen){ xOpen = false; stageEl.classList.remove('xopened'); }
+      }).observe(stageEl, {attributes:true, attributeFilter:['data-cur']});
       new MutationObserver(function(){
         var curK = SCRUB ? curKey() : null; /* scroll owns the current layer — ease the leaving ones home */
         KEYS.forEach(function(k){ if (k !== curK && go[k]) go[k](0); });
@@ -4934,37 +4972,38 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       return 1 - (seg - .88) / .12;                /* closes on the way out */
     };
     var mmShow = gsap.matchMedia();
+    /* ⭐ ROUND 36 — DESKTOP IS TAP MODE TOO. No pin, no scrub, no lock.
+       What was here: ScrollTrigger pinned `.show .wrap` for `+=1000%` — ten
+       screens of scroll where the page did not move — and drove the explosion
+       off scroll progress while cross-fading one system at a time.
+       ⛔ SCRUB STAYS FALSE. Every hover/tap engine on this page stands down
+       while SCRUB is true; leaving it set is what would silently kill the tap.
+       The stage now follows whichever article is in the middle of the screen
+       (the same IntersectionObserver the phone has always used) and the unit
+       opens because someone tapped it. */
     mmShow.add('(min-width:960px)', function(){
-      var showEl = document.querySelector('.show');
-      showEl.classList.add('pinmode');
-      SCRUB = true;
-      var showCur = -1;
-      function showSet(i){
-        i = clamp(i, 0, sysArts.length - 1);
-        if (i === showCur) return;
-        showCur = i;
-        stageTo(i);
-        sysArts.forEach(function(a, j){ a.classList.toggle('cur', j === i); });
-        gsap.fromTo(sysArts[i].children, {y:16, opacity:0},
-          {y:0, opacity:1, duration:.45, ease:'power3.out', stagger:.045, overwrite:'auto'});
-      }
-      showSet(0);
-      var stPin = ScrollTrigger.create({
-        trigger:'.show .wrap', start:'top 108px', end:'+=1000%', pin:true, anticipatePin:1,
-        onUpdate:function(self){
-          var p = Math.min(self.progress, .9999) * 4;
-          var i = Math.floor(p);
-          showSet(i);
-          var st = segT(p - i);
-          if (stageEase) stageEase(SEGKEY[i], st);
-          if (spotsAt) spotsAt(SEGKEY[i], st);
-        }
+      var obs = setupShowObs();
+      stageTo(0);
+      /* the bubble and the arrival pop fire when the range actually reaches you */
+      var stageEl2 = document.getElementById('stage');
+      var arriveIO = null;
+      if (stageEl2 && 'IntersectionObserver' in window){
+        arriveIO = new IntersectionObserver(function(es){
+          es.forEach(function(en){ stageEl2.classList.toggle('tapin', en.intersectionRatio >= .45); });
+        }, {threshold:[.45]});
+        arriveIO.observe(stageEl2);
+      } else if (stageEl2){ stageEl2.classList.add('tapin'); }
+      /* each article arrives on its own, the same soft entrance the phone uses */
+      var tws = sysArts.map(function(a){
+        return gsap.from(a.children, {y:26, opacity:0, duration:.7, ease:'power3.out', stagger:.06,
+          scrollTrigger:{trigger:a, start:'top 78%', once:true}});
       });
       return function(){
-        SCRUB = false;
-        stPin.kill();
-        showEl.classList.remove('pinmode');
-        sysArts.forEach(function(a){ a.classList.remove('cur'); gsap.set(a.children, {clearProps:'opacity,transform'}); });
+        if (obs) obs.disconnect();
+        if (arriveIO) arriveIO.disconnect();
+        tws.forEach(function(t){ if (t && t.scrollTrigger) t.scrollTrigger.kill(); if (t) t.kill(); });
+        if (stageEl2) stageEl2.classList.remove('tapin','xopened');
+        sysArts.forEach(function(a){ gsap.set(a.children, {clearProps:'opacity,transform'}); });
       };
     });
     mmShow.add('(max-width:959px)', function(){
