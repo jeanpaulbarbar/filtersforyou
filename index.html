@@ -572,7 +572,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      unit. The card ground has to BE the photography's ground.
      ⛔ If the product shots are ever re-rendered on a different white, this
      value moves with them. Sample the webp, do not guess. */
-  .hdeck .card{position:relative;z-index:2;background:#fff;border-radius:var(--r-card);box-shadow:var(--shadow-lg);overflow:hidden}
+  /* ⛔ round 36: overflow is VISIBLE. The product photograph is cut out to alpha
+     and stands a third of its height PROUD of the card's top edge, over the
+     video. `hidden` would guillotine it. Nothing else in the card bleeds — the
+     drawer clips on its own inner div (`.more > div{overflow:hidden}`), which
+     is what the open/close tween actually needs. */
+  .hdeck .card{position:relative;z-index:2;background:#fff;border-radius:var(--r-card);box-shadow:var(--shadow-lg);overflow:visible}
   /* ── THE CARD HEAD — the tag and the toggle, round 19 ────
      ⛔ THE PILL IS GONE. JP: "I don't like them as pills. I don't like them at
      all, and I don't like the different colours." It was a filled slab
@@ -620,11 +625,31 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      is paid for out of the gap (18 → 14) and the side padding (18 → 16), and
      the closed card measures the same height as it did before. Measured at
      1440, both states. If you grow the image again, re-measure the card. */
-  .hdeck .face{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;width:100%;padding:12px 16px 20px;
+  .hdeck .face{position:relative;display:grid;grid-template-columns:1fr 220px;gap:14px;align-items:center;width:100%;padding:12px 16px 20px;
     border:0;background:none;cursor:pointer;text-align:left;font-family:var(--sans);color:var(--ink)}
   .hdeck .face:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}
-  .hdeck .face img{grid-column:2;grid-row:1;width:188px;height:188px;object-fit:contain;
-    transition:width .5s var(--e-out),height .5s var(--e-out)}
+  /* ⭐ ROUND 36 — THE PRODUCT STANDS OUT OF THE CARD.
+     JP: "have them pop out of the card a little bit... two-thirds are in the
+     card and one-third is out of the card, coming from the top."
+     THE ARITHMETIC, and it is exact: the closed card is a fixed 180px and the
+     abspos grid area runs to the card's PADDING edge, so an image aligned to the
+     BOTTOM of it has its foot at 180 — measured, not assumed. At 270px tall its head is at
+     180 − 270 = −90, and 90/270 is one third. Change either number and the
+     other has to move with it.
+     ⛔ Sized by HEIGHT, not width. The shots are cut to alpha at their own
+     natural aspect — Pure Flow is a 0.27 slab, Pure Home is 0.82 — so a square
+     box would shrink the thin ones to nothing. The column is pinned at 220px,
+     which is Pure Home at 270 tall, so the text edge cannot move as
+     the deck flips. */
+  /* ⛔ ABSOLUTE, and that is the whole trick. In flow, a 255px image inside a
+     180px card just makes the card 275px tall — measured, first attempt. Taken
+     out of flow it hangs off the top and the card keeps its height. It is still
+     placed by GRID (`grid-column:2` on an abspos child of a relative grid
+     container resolves its containing block to that grid AREA), so the 210px
+     column is still reserved and the text edge cannot move. */
+  .hdeck .face img{position:absolute;grid-column:2;grid-row:1;align-self:end;justify-self:center;
+    height:270px;width:auto;max-width:220px;object-fit:contain;
+    transition:height .5s var(--e-out),max-width .5s var(--e-out)}
   .hdeck .face .t{grid-column:1;grid-row:1}
   /* ⛔ THE OPEN CARD IS UNCHANGED — image above text, 336px, and the card still
      measures 736px tall. Growing it to 392 pushed the card to 792 and "don't
@@ -632,7 +657,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      bigger here anyway: the old frame carried ~25% white margin AND a radial
      mask eating its edges, and the new photograph is cropped to the unit. */
   .hdeck.open .face{grid-template-columns:1fr;justify-items:center;text-align:center;gap:8px;padding:14px 22px 12px}
-  .hdeck.open .face img{grid-column:1;grid-row:1;width:336px;height:336px}
+  /* open: back inside the card, centred, sized on height again. No pop — the card
+     is already 736px tall and a product hanging off the top of that is a mess. */
+  .hdeck.open .face img{position:static;grid-column:1;grid-row:1;align-self:auto;height:336px;width:auto;max-width:100%}
   .hdeck.open .face .t{grid-column:1;grid-row:2}
   .hdeck .t b{display:block;font-size:22px;font-weight:600;line-height:1.22;transition:font-size .5s var(--e-out)}
   .hdeck.open .t b{font-size:32px;max-width:20ch}
@@ -714,8 +741,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        ⛔ THE 66px RIGHT RESERVE IS WHY THE PHOTO IS NOT FLUSH RIGHT. The toggle
        floats at the card's right edge; the photo sits just inside it. Take the
        reserve away and the chevron lands on the product. */
-    .hdeck:not(.open) .face{gap:16px;padding:10px 66px 10px 18px;min-height:180px}
-    .hdeck:not(.open) .face img{width:160px;height:160px}
+    .hdeck:not(.open) .face{grid-template-columns:1fr 220px;gap:16px;padding:10px 66px 10px 18px;min-height:180px}
+    .hdeck:not(.open) .face img{height:270px;width:auto;max-width:220px}
     /* ⛔ :not(.notag) is LOAD-BEARING — this rule sits later in the sheet than
        the base `.hdeck.notag .dtag{display:none}` and matches at the same
        specificity, so without it an empty kicker still reserved its 3px bar
@@ -1635,7 +1662,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.06em;
       text-transform:uppercase;pointer-events:none;
       opacity:0;scale:.8;
-      animation:tapbob 2.5s var(--e-out) infinite;
+      animation:tapbob 1.9s var(--e-out) infinite;
       transition:opacity .3s ease-in-out,scale .42s var(--e-out)}
     /* the shoulders, per frame set (right/top as % of the image box):
        home = stainless box, corner at ~90/23 · plus + prem = the top inline
@@ -1645,7 +1672,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .show .sys .mimg.tapmode[data-set="luxe"]::after{right:4%;top:8.5%}
     .show .sys .mimg.tapmode.tapin:not(.opened)::after{opacity:1;scale:1}
     .show .sys .mimg.tapmode.opened::after{opacity:0;scale:.86;animation:none}
-    @keyframes tapbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    /* round 36, JP: "make the tap me bubble up and down so people recognise it."
+       It already bobbed — 6px over 2.5s, which is a breath, not a signal. 11px
+       over 1.9s with a hold at the bottom reads as a nudge you cannot miss.
+       ⛔ Still transform-only, still killed under prefers-reduced-motion. */
+    @keyframes tapbob{0%,68%,100%{transform:translateY(0)}34%{transform:translateY(-11px)}}
 
     /* round 11: "make the explosion ones a little bit larger" — 44 → 58svh,
        and it may use the full gutter-to-gutter width now. */
@@ -2711,7 +2742,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         <button class="tgl" type="button" id="hdTgl" aria-label="Show what is included" aria-expanded="false" aria-controls="hdMore"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
       <button class="face" type="button" id="hdFace" aria-expanded="false" aria-controls="hdMore">
-        <img id="hdImg" src="media/systems/pure-home.webp" alt="" width="1200" height="1200">
+        <img id="hdImg" src="media/systems/pure-home.webp" alt="" width="734" height="900">
         <!-- round 28: the SECOND kicker. The desktop closed card has no head row
              any more (the toggle floats at the card's right edge), so the kicker
              rides in the text column instead. Two elements, never both visible —
