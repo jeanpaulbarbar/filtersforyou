@@ -1730,7 +1730,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        keeps the desktop columns for its 218px image. */
     .hdeck:not(.open) .face{grid-template-columns:1fr 76px}
     .hdeck .face{padding:2px 60px 9px 14px;gap:12px}
-    .hdeck .face img{width:64px;height:64px}
+    /* ⛔ ROUND 42b — sized by HEIGHT, like every product shot on the site
+       (the asset convention: own aspect, never squared). The forced 64x64
+       square letterboxed the shots small and squat — JP: "the system on the
+       card in hero is disproportionate". 74px tall fills the card's face;
+       width follows each system's own aspect. */
+    .hdeck .face img{width:auto;height:74px;max-width:76px}
     .hdeck .t b{font-size:15.5px}
     .hdeck .t .pure{font-size:13px;margin-top:2px}
     .hdeck .t .p{margin-top:2px}
@@ -4296,7 +4301,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* ── the explosion morphs — frame sets scrubbed by hover ── */
   (function(){
     var N = 37;
-    function frames(dir){ var a = []; for (var i = 0; i < N; i++) a.push(dir + '/f' + (i < 10 ? '0' + i : i) + '.webp'); return a; }
+    /* ⛔ ROUND 42b — PHONES GET THEIR OWN FRAME SIZE. The sets shipped one
+       size: 1100x1472, painted ~350px wide on a phone. Decoding 1100x1472
+       WebP is the measured 46ms-class cost (see the 19 Aug note below), and
+       148 retained bitmaps at that size is ~950MB decoded — iOS evicts them
+       under pressure and the tap stutters through re-decodes. The -m sets
+       are 550x736 (generated 20 Aug, Pillow q82, 3.4MB the lot): quarter
+       the decode, quarter the memory, same look at phone size. */
+    var FRX = matchMedia('(max-width:859px)').matches ? '-m' : '';
+    function frames(dir){ var a = []; for (var i = 0; i < N; i++) a.push(dir + '/f' + (i < 10 ? '0' + i : i) + FRX + '.webp'); return a; }
     var SETS = { home: frames('media/xf-home'), plus: frames('media/xf-plus'),
                  prem: frames('media/xf-prem'), luxe: frames('media/xf-luxe') };
     var KEYS = ['home','plus','prem','luxe'];
@@ -4326,6 +4339,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        ⛔ Never "tidy" RETAIN away. It looks like a leak and it is the fix.
        It is ~6.8MB of frames, which is the price of the mechanic. */
     var preloaded = {};
+    var READY = {};   /* round 42b: set -> every frame fetched AND decoded */
     var RETAIN = [];
     function preload(key){
       if (preloaded[key]) return preloaded[key];
@@ -4348,6 +4362,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         RETAIN.push(im);
         return (im.decode ? im.decode() : Promise.resolve()).catch(function(){});
       }));
+      preloaded[key].then(function(){ READY[key] = true; });
       return preloaded[key];
     }
 
@@ -4512,15 +4527,33 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           if (spotsAt) spotsAt(key, pos);  /* hotspots follow the REAL progress */
           if (t < 1) raf = requestAnimationFrame(step); else raf = null;
         };
-        g = function(target){
-          preload(key);
-          if (reduce){ pos = target; draw(target); return; }
+        /* ⛔ ROUND 42b — THE TWEEN NEVER RACES THE NETWORK. Measured on the
+           deployed site under phone throttling: a tap on a cold set ran the
+           whole tween while the frames were still in flight (the img ended
+           at f36 with complete:false) — src writes to bitmaps that had not
+           arrived, which paints as freezes and jumps. THAT is the phone
+           glitch. A cold set now starts its unfold the moment preload
+           resolves; a warm set (the normal case — the idle queue fills them)
+           starts instantly. `pend` keeps only the LATEST target, so tapping
+           again mid-wait just changes where it goes when ready. */
+        var start = function(target){
           if (raf){ cancelAnimationFrame(raf); raf = null; }
           from = pos;                      /* mid-flight taps reverse from here */
           to = target;
           if (from === to) return;
           t0 = performance.now();
           raf = requestAnimationFrame(step);
+        };
+        var pend = null;
+        g = function(target){
+          if (reduce){ pos = target; draw(target); return; }
+          if (!READY[key]){
+            var first = pend === null;
+            pend = target;
+            if (first) preload(key).then(function(){ var t = pend; pend = null; start(t); });
+            return;
+          }
+          start(target);
         };
         MSCRUB[key] = g;
       } else {
