@@ -12,26 +12,59 @@
      ⛔ HubSpot's embed was deliberately NOT carried over. The HubSpot CRM was
      retired; the tag was loading a third-party script on every view for a
      system we no longer read. ═══════════════════════════════════════════ -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TK2P95MELV"></script>
+<!-- ═══ GA4 + META PIXEL — QUEUED NOW, FETCHED ON FIRST INTERACTION (2026-08-25) ═══
+     Measured before this change: GTM 168KB and the Pixel 176KB were fetched AHEAD of the
+     hero poster on a 1.6Mbps pipe. 344KB of someone else's JavaScript in front of the first
+     thing a visitor sees, on a page whose deployed LCP was 5440ms.
+
+     ⛔ THE EVENTS ARE NOT DELAYED, ONLY THE DOWNLOAD IS. Both vendors ship a queueing stub
+     by design: gtag() pushes to dataLayer, fbq() pushes to fbq.queue. Both libraries drain
+     their queue on load. So 'js', 'config', 'init' and PageView are all recorded at the
+     moment they happen and SENT a moment later. Nothing is renamed, reordered or dropped.
+
+     ⭐ fbq('track','Lead') is safe. Submitting a form requires a pointerdown or a keydown,
+     and either one has already loaded the library. A Lead can never outrun the fetch.
+
+     ⚠️ THE ACCEPTED COST, JP's call 2026-08-25: someone who opens the page, touches nothing
+     and leaves inside 3 seconds is never counted. PageView volume will read slightly lower.
+     Lead attribution is unaffected, because a lead is an interaction by definition.
+     If PageView volume drops more than expected, this block reverts on its own. ═══ -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-TK2P95MELV');
 </script>
-<!-- Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+!function(f,b,e,n){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document,'script');
 fbq('init', '1519453236218387');
 fbq('track', 'PageView');
+</script>
+<script>
+(function(){
+  var fired = false;
+  function load(){
+    if (fired) return;
+    fired = true;
+    ['https://www.googletagmanager.com/gtag/js?id=G-TK2P95MELV',
+     'https://connect.facebook.net/en_US/fbevents.js'].forEach(function(src){
+      var t = document.createElement('script');
+      t.async = true; t.src = src;
+      document.head.appendChild(t);
+    });
+  }
+  ['scroll','pointerdown','keydown','touchstart','mousemove'].forEach(function(ev){
+    window.addEventListener(ev, load, { once: true, passive: true });
+  });
+  // The backstop, so a genuinely idle reader is still counted.
+  setTimeout(load, 3000);
+  // A tab opened in the background does not run timers reliably; catch it on focus.
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'visible') load();
+  }, { once: true });
+})();
 </script>
 <noscript><img height="1" width="1" style="display:none" alt=""
 src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
@@ -119,11 +152,51 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      5440ms on Slow 4G. If the hero poster is ever renamed, THIS LINE MOVES WITH IT. -->
 <link rel="preload" as="image" href="media/hero-poster.webp" fetchpriority="high">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="font" type="font/woff2" crossorigin
-  href="https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vb.woff2">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&family=Archivo:wght@700&display=swap" rel="stylesheet">
+<!-- ⭐ FONTS ARE OURS NOW (2026-08-25). Was a render-blocking <link> to fonts.googleapis.com:
+     227ms measured, just to be TOLD which file to fetch, then a second hop to gstatic. Two
+     origins, two handshakes, in front of first paint, on all 545 pages.
+     The faces are declared in their own inline block below, so there is no stylesheet request.
+     ⛔ crossorigin is REQUIRED on a font preload even though this is same-origin — fonts are
+     always fetched in CORS mode, and without it the browser downloads the file twice. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/plus-jakarta-sans-latin.woff2">
+<style>
+/* Self-hosted 2026-08-25. Was a render-blocking request to fonts.googleapis.com on all
+   545 pages: 227ms just to be told which file to fetch, then a second hop to gstatic.
+   Latin and latin-ext only. unicode-range means the browser fetches latin-ext only if a
+   page actually uses one of those characters, exactly as Google's own CSS does. */
+@font-face{
+  font-family:'Archivo';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url('/fonts/archivo-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Archivo';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url('/fonts/archivo-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:'Plus Jakarta Sans';
+  font-style:normal;
+  font-weight:200 800;
+  font-display:swap;
+  src:url('/fonts/plus-jakarta-sans-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Plus Jakarta Sans';
+  font-style:normal;
+  font-weight:200 800;
+  font-display:swap;
+  src:url('/fonts/plus-jakarta-sans-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
 <style>
   /* ═══════════════════════════════════════════════════════════
      VARIATION D — 13 Aug 2026. New bones, not a repaint.
