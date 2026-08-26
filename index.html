@@ -238,6 +238,19 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        else (project_typeface_plus_jakarta_sans). */
     --badge:"Archivo","Plus Jakarta Sans",system-ui,sans-serif;
     --e-out:cubic-bezier(.22,1,.36,1);
+    /* ── THE OPEN EASE — round 45 ────────────────────────────
+       JP: "I don't like how sharp the animation is when you click on the card
+       and it opens up very chaotically. I want that to be very smooth, nice,
+       and slow."
+       --e-out is an ease-OUT: it spends most of its travel in the first third,
+       which is exactly right for something ARRIVING (it lands and settles) and
+       exactly wrong for something the user OPENS (it flings, then crawls).
+       --e-soft is symmetric — slow at both ends, quickest in the middle — so a
+       thing that opens under your finger also closes under it the same way.
+       ⛔ It does NOT replace --e-out and it is not a second reveal grammar.
+       Two things on this page open AND close on demand: the hero deck drawer
+       and the product explosion. Only those two spend this ease. */
+    --e-soft:cubic-bezier(.65,.02,.28,1);
     --container:1368px; --gutter:36px; --gut:22px;
     /* round 13, JP: "too rounded, and that goes throughout the page." Still
      rounded, just not pill-soft — 24 → 14 on cards, 16 → 8 on the small
@@ -650,7 +663,23 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(max-width:859px){.hero .copy{padding-block:96px 240px}.hero .cue{display:none}}
   /* round 23, his split: "Pure filtered water in every tap." BOLD, "Handled
      for life." normal — and still yellow. Two weights, one line, deliberate. */
-  .hero h1{color:#fff;font-weight:700;font-size:clamp(2.6rem,6.2vw,5.4rem);letter-spacing:-.01em;line-height:1.04;max-width:15ch}
+  /* ⭐ ROUND 45 — THE MEASURE IS 13ch, AND IT IS WHAT KEEPS THE CARD OFF THE
+     HEADLINE. JP: "I don't want it to open past the hero title. I don't like
+     how it opens and just takes up the middle of it."
+     MEASURED at 1440, 2026-08-26: at 15ch the headline set
+       "Pure filtered water in / every tap. Handled for / life."
+     with its longest line ending at x=984 and an orphaned "life." — and the
+     open card's left edge landed at 714, straight through the middle of it.
+     At 13ch it sets
+       "Pure filtered water / in every tap. / Handled for life."
+     ending at x=836, the SAME three lines, the SAME 280px box (top 393, bottom
+     673 — unchanged, measured both ways), and the yellow half now owns its own
+     line instead of breaking across two. The card zone starts at 872.
+     ⛔ So this is not a cosmetic tightening. 36px of clear air between the
+     headline's last glyph and the card is the whole reason the card may grow.
+     If the headline's measure, size or wording moves, RE-MEASURE the rag and
+     the right edge before touching the deck's width. */
+  .hero h1{color:#fff;font-weight:700;font-size:clamp(2.6rem,6.2vw,5.4rem);letter-spacing:-.01em;line-height:1.04;max-width:13ch}
   .hero h1 em.hl{font-weight:400}
   .hero h1 .ln{display:block}
   /* ⭐ ROUND 34 — THE HEADLINE ARRIVES LETTER BY LETTER, LEFT TO RIGHT.
@@ -721,9 +750,20 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* the hero deck — stacked system cards, click to expand, arrows to cycle */
   /* round 20, JP: closed card "a little bit too big, width-wise" — 510 → 460.
      The open width stays; it was never named. */
-  .hdeck{position:absolute;right:36px;bottom:36px;z-index:12;width:min(460px,88vw);
-    transition:width .5s var(--e-out)}
-  .hdeck.open{width:min(690px,92vw)}
+  /* ⭐ ROUND 45 — THE CARD ONLY EVER CHANGES HEIGHT. JP: "I don't like how
+     sharp the animation is when you click on the card and it opens up very
+     chaotically... I want that to be very smooth, nice, and slow."
+     It used to change WIDTH (460 → 690) and height (180 → 735) at once, on an
+     ease-out, while the face re-flowed from a two-column landscape into a
+     centred portrait stack and the product jumped 270 → 336. Four things
+     moving on two axes in half a second is the "chaotic". Now ONE dimension
+     moves, on --e-soft, over .8s, and the internal grammar never changes:
+     text left, product right, closed and open.
+     ⛔ THE WIDTH IS A CONSTANT AND IT IS LOAD-BEARING. 520 at right:36 puts
+     the card's left edge at 872 on a 1440 screen; the 13ch headline ends at
+     836. That 36px is the clearance JP asked for and it only exists because
+     the card cannot widen. Never re-introduce a width change here. */
+  .hdeck{position:absolute;right:36px;bottom:36px;z-index:12;width:min(520px,88vw)}
   @media(max-width:859px){.hdeck{display:none}}
   .hdeck .under{position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(255,253,250,.5);border-radius:var(--r-card);
     transform:translateY(12px) scale(.955);z-index:0}
@@ -737,12 +777,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      unit. The card ground has to BE the photography's ground.
      ⛔ If the product shots are ever re-rendered on a different white, this
      value moves with them. Sample the webp, do not guess. */
-  /* ⛔ round 36: overflow is VISIBLE. The product photograph is cut out to alpha
-     and stands a third of its height PROUD of the card's top edge, over the
-     video. `hidden` would guillotine it. Nothing else in the card bleeds — the
-     drawer clips on its own inner div (`.more > div{overflow:hidden}`), which
-     is what the open/close tween actually needs. */
-  .hdeck .card{position:relative;z-index:2;background:#fff;border-radius:var(--r-card);box-shadow:var(--shadow-lg);overflow:visible}
+  /* ⛔ ROUND 45 — OVERFLOW IS HIDDEN AGAIN, AND THE POP-OUT IS GONE.
+     Round 36 made this `visible` so the product could stand a third of its
+     height proud of the card's top edge, over the video. JP, 26 Aug: "I don't
+     like how it's popping out of the card anymore on the hero on the landing
+     page." The product now lives INSIDE the card in both states, so the card
+     is a closed surface again and nothing can bleed onto the film.
+     ⛔ The drawer still clips on its own inner div (`.more > div{overflow:
+     hidden}`) — that is what the open/close tween needs and this does not
+     replace it. */
+  .hdeck .card{position:relative;z-index:2;background:#fff;border-radius:var(--r-card);box-shadow:var(--shadow-lg);overflow:hidden}
   /* ── THE CARD HEAD — the tag and the toggle, round 19 ────
      ⛔ THE PILL IS GONE. JP: "I don't like them as pills. I don't like them at
      all, and I don't like the different colours." It was a filled slab
@@ -753,8 +797,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      ⛔ And the hint line is deleted. JP: "get rid of 'Tap to see what's
      included' and just put a little arrow at the top that goes up and down when
      you click in, like Clean and Clear's one." The chevron lives here now. */
-  .hdeck .chead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  /* ⛔ `margin-left:auto` on the toggle, not `justify-content:space-between`.
+     Three of the four cards carry no kicker (round 28), so on those the row has
+     ONE child and space-between pins it LEFT — the open card rendered with its
+     close chevron floating in the top-left corner. Seen at 1440, 2026-08-26. */
+  .hdeck .chead{display:flex;align-items:center;gap:12px;
     padding:15px 16px 0 18px}
+  .hdeck .chead .tgl{margin-left:auto}
   .hdeck .dtag{display:inline-flex;align-items:center;gap:9px;
     font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
     color:var(--ac,var(--blue));pointer-events:none}
@@ -763,7 +812,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdeck .tgl{width:44px;height:44px;flex:0 0 44px;border-radius:50%;border:1px solid var(--rule);
     background:var(--paper);color:var(--ink);cursor:pointer;display:grid;place-items:center;
     transition:background .3s ease-in-out,color .3s ease-in-out}
-  .hdeck .tgl svg{width:17px;height:17px;transition:transform .45s var(--e-out)}
+  .hdeck .tgl svg{width:17px;height:17px;transition:transform .8s var(--e-soft)}
   .hdeck.open .tgl svg{transform:rotate(180deg)}
   @media(hover:hover) and (pointer:fine){.hdeck .tgl:hover{background:var(--ink);color:#fff}}
   .hdeck .tgl:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
@@ -806,47 +855,96 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      box would shrink the thin ones to nothing. The column is pinned at 220px,
      which is Pure Home at 270 tall, so the text edge cannot move as
      the deck flips. */
-  /* ⛔ ABSOLUTE, and that is the whole trick. In flow, a 255px image inside a
-     180px card just makes the card 275px tall — measured, first attempt. Taken
-     out of flow it hangs off the top and the card keeps its height. It is still
-     placed by GRID (`grid-column:2` on an abspos child of a relative grid
-     container resolves its containing block to that grid AREA), so the 210px
-     column is still reserved and the text edge cannot move. */
-  .hdeck .face img{position:absolute;grid-column:2;grid-row:1;align-self:end;justify-self:center;
-    height:270px;width:auto;max-width:220px;object-fit:contain;
-    transition:height .5s var(--e-out),max-width .5s var(--e-out)}
+  /* ⛔ ROUND 45 — IN FLOW, IN THE CARD, IN BOTH STATES.
+     Round 36 took this out of flow so it could hang off the card's top edge.
+     JP killed the pop-out on 26 Aug, and the moment it is back in flow the
+     card sizes to it again — which is now what we WANT: the closed card's
+     height is the product's height plus its padding, one number, and the open
+     card grows underneath it instead of around it.
+     ⛔ ONLY THE HEIGHT ANIMATES, and on --e-soft. The old rule tweened height
+     AND max-width on --e-out at the same time as the whole face re-flowed. */
+  .hdeck .face img{position:static;grid-column:2;grid-row:1;align-self:center;justify-self:center;
+    height:186px;width:auto;max-width:100%;object-fit:contain;
+    transition:height .8s var(--e-soft)}
   .hdeck .face .t{grid-column:1;grid-row:1}
-  /* ⛔ THE OPEN CARD IS UNCHANGED — image above text, 336px, and the card still
-     measures 736px tall. Growing it to 392 pushed the card to 792 and "don't
-     change the size of the card" applies to both states. The product reads
-     bigger here anyway: the old frame carried ~25% white margin AND a radial
-     mask eating its edges, and the new photograph is cropped to the unit. */
-  .hdeck.open .face{grid-template-columns:1fr;justify-items:center;text-align:center;gap:8px;padding:14px 22px 12px}
-  /* open: back inside the card, centred, sized on height again. No pop — the card
-     is already 736px tall and a product hanging off the top of that is a mess. */
-  .hdeck.open .face img{position:static;grid-column:1;grid-row:1;align-self:auto;height:336px;width:auto;max-width:100%}
-  .hdeck.open .face .t{grid-column:1;grid-row:2}
-  .hdeck .t b{display:block;font-size:22px;font-weight:600;line-height:1.22;transition:font-size .5s var(--e-out)}
-  .hdeck.open .t b{font-size:32px;max-width:20ch}
-  .hdeck.open .more li{font-size:18px}
-  .hdeck .t .pure{display:block;font-size:17px;font-weight:700;color:var(--blue);margin-top:4px}
-  /* ── THE PRICE — JP: "definitely make the price stand out." The number is now
-     its own element so it can be set big; the words around it stay quiet. */
-  .hdeck .t .p{display:block;margin-top:8px;color:var(--ink)}
-  .hdeck .t .p b{display:inline;font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1;
-    transition:font-size .5s var(--e-out)}
-  .hdeck .t .p i{font-style:normal;font-size:16px;font-weight:700;color:var(--muted);margin:0 2px}
-  .hdeck.open .t .pure{font-size:18px}
-  .hdeck.open .t .p b{font-size:40px}
+  /* ⛔ THE OPEN CARD KEEPS THE CLOSED CARD'S GRAMMAR — text left, product
+     right. It used to become a centred portrait stack (image above text),
+     which is the re-flow JP read as chaotic and the reason the open card was
+     735px tall and full of white. It now grows in ONE direction and the eye
+     never has to re-find the name, the price or the product. */
+  .hdeck.open .face img{height:250px}
+  .hdeck .t b{display:block;font-size:19px;font-weight:600;line-height:1.22;transition:font-size .8s var(--e-soft)}
+  .hdeck.open .t b{font-size:23px}
+  .hdeck .t .pure{display:block;font-size:15px;font-weight:700;color:var(--blue);margin-top:2px}
+  /* ⭐ ROUND 45 — THE PRICE IS THE BIGGEST THING ON THE CARD.
+     JP: "I want to make the price a lot larger on the cards as well... I want
+     the price to be the biggest one, and then everything else falls out and is
+     clean and clear, like how it has done it on the Pure Luxe card."
+     The Pure Luxe card he means is the showcase article, where `.money` runs
+     clamp(2.9rem,4.4vw,4.2rem) and outsizes everything around it. The deck
+     card is a 520px slab, not a half-page column, so it cannot carry 67px —
+     but the RELATIONSHIP is what he asked for and that is what is copied:
+     MEASURED at 1440, 2026-08-26 — name 19px, Pure Home 15px, price 46px.
+     The number is 2.4× the name, where before it was 28 against 20 (1.4×) and
+     read as just another line. Open: 46 → 56, still the loudest thing there. */
+  /* ⛔ THE PRICE ROW IS A BLOCK, NOT A BASELINE ROW, AND THAT IS MEASURED.
+     First attempt kept the round-19 shape — `from`, the number and `installed`
+     all inline on one baseline. At 28px that fitted. At 46px in a 274px text
+     column it does not: "from $3,850 installed" needs ~350px, so the two <i>s
+     wrapped and stacked themselves down the left of the number. Rendered at
+     1440 and looked at, 2026-08-26.
+     THE SHAPE NOW, and it is the showcase's `.rowp` treatment JP pointed at:
+     "from" rides the BIG size (it is part of the number, not a caption), and
+     "installed" drops to its own quiet line underneath. `from $3,850` measures
+     ~207px at 46px, inside the column with room to spare. */
+  .hdeck .t .p{display:block;margin-top:8px;color:var(--ink);line-height:1;
+    font-size:46px;transition:font-size .8s var(--e-soft)}
+  .hdeck .t .p b{display:inline;font-size:1em;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .hdeck .t .p i.pre{font-style:normal;font-size:.5em;font-weight:700;letter-spacing:-.015em;margin-right:2px}
+  .hdeck .t .p i.suf{display:block;font-style:normal;font-size:15px;font-weight:700;color:var(--muted);margin-top:6px}
+  .hdeck.open .t .pure{font-size:16px}
+  .hdeck.open .t .p{font-size:56px}
+  /* ⭐ ROUND 45 — THE LIFETIME WARRANTY RIDES ON THE CARD.
+     JP: "On the card, put 'Lifetime Warranty' on it as well. That way, people
+     can see, 'Oh.'" It is the thing the business is not getting paid for
+     (business-profile: "the lifetime warranty and locked-in servicing is a
+     goldmine customers never hear"), so it sits on the CLOSED card, under the
+     price, where the eye is already looking.
+     ⛔ Not yellow. Yellow only ever touches the thing you want clicked. It
+     takes the card's own accent, so it can never introduce a third colour. */
+  .hdeck .warr{display:inline-flex;align-items:center;gap:7px;margin-top:9px;
+    font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ac,var(--blue))}
+  .hdeck .warr svg{width:14px;height:14px;flex:0 0 14px}
+  .hdeck.open .warr{font-size:12.5px}
+  /* ⭐ ROUND 45 — WHO IT IS FOR. JP: "Have us have a small little description
+     on it, like who this is for: families looking for pure, clean, filtered
+     water while getting hydrogen water on tap. Give them a little bit more of
+     a thing." One sentence per system, open state only — the closed card is a
+     560px banner and has no room for a sentence without losing the price. */
+  .hdeck .who{display:none;font-size:14.5px;line-height:1.45;color:var(--muted);font-weight:500;
+    margin-top:10px;padding-top:10px;border-top:1px solid var(--rule)}
+  .hdeck.open .who{display:block}
   .hdeck.open .more .btn{width:100%;justify-content:center}
-  .hdeck .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--e-out)}
+  /* round 45: .5s --e-out → .8s --e-soft. Same mechanic, symmetric curve, and
+     slow enough to read as an opening rather than a snap. */
+  .hdeck .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .8s var(--e-soft)}
   .hdeck.open .more{grid-template-rows:1fr}
   .hdeck .more > div{overflow:hidden}
   .hdeck .more .inner2{padding:2px 18px 18px;border-top:1px solid var(--rule)}
   .hdeck .more ul{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;padding:14px 0}
   .hdeck .more li{display:flex;gap:9px;font-size:17px;color:var(--ink);font-weight:500;align-items:flex-start;line-height:1.35}
   .hdeck .more li svg{width:17px;height:17px;flex:0 0 17px;margin-top:3px}
-  .hdeck .nav{position:absolute;left:-54px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:3}
+  /* ⛔ ROUND 45 — THE ARROWS HANG OFF THE BOTTOM, NOT THE MIDDLE.
+     They sat at top:50% of the deck. Closed that was harmless. Open, the deck
+     is 548px tall starting at y=304, so its middle is y=578 at x=818 — which
+     is the second line of the headline. MEASURED at 1440 and seen in the
+     render: two ghost rings sitting on the word "tap".
+     Anchored to the deck's FOOT they stay at y≈740–852 whatever the card is
+     doing, which is below the headline (ends 673) and clear of the lede's
+     right edge (745). The deck only ever grows UPWARDS, so this is the one
+     edge that does not move. */
+  .hdeck .nav{position:absolute;left:-54px;bottom:8px;top:auto;transform:none;display:flex;flex-direction:column;gap:8px;z-index:3}
   /* round 20, JP: "make the arrows clear, like Clean and Clear's" — ghost ring,
      no fill, no blur slab. Hover still fills white for pointer users. */
   .hdeck .nav button{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.65);background:transparent;
@@ -884,8 +982,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      ⛔ DESKTOP ONLY, AND CLOSED ONLY. The phone card is JP-approved through
      three passes (round 19b, 23) and must not move; the OPEN card was never
      complained about, so it keeps its round-19 scale. */
+  /* ⛔ ROUND 45 UPDATES THIS: 560 → 520, and the width no longer changes on
+     open (see the base `.hdeck` rule). 520 is what buys the 36px of clear air
+     beside the 13ch headline. The card is now 520 × ~206 closed — still a
+     landscape slab, still C&C's family (2.5:1 against their 2.45:1). */
   @media(min-width:860px){
-    .hdeck{width:min(560px,88vw)}
     /* ⛔ THE HEAD ROW IS TAKEN OUT OF FLOW, NEVER `display:none` — the toggle
        lives inside it, and a child of a hidden parent measures 0×0 no matter
        how it is positioned. That cost one probe round; the 44px tap floor
@@ -906,18 +1007,36 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        ⛔ THE 66px RIGHT RESERVE IS WHY THE PHOTO IS NOT FLUSH RIGHT. The toggle
        floats at the card's right edge; the photo sits just inside it. Take the
        reserve away and the chevron lands on the product. */
-    .hdeck:not(.open) .face{grid-template-columns:1fr 220px;gap:16px;padding:10px 66px 10px 18px;min-height:180px}
-    .hdeck:not(.open) .face img{height:270px;width:auto;max-width:220px}
+    /* ⭐ ROUND 45 — the product is back IN the card, so the card's height is
+       now the product's height plus its padding: 186 + 10 + 10 = 206. The
+       min-height still exists for the same reason it always did (a deck whose
+       slab resizes on every flip is not a deck) and it is now the same number
+       the image produces, so nothing fights.
+       ⛔ The product column is 176, not 220. The card lost 40px of width and
+       the text column has to carry a 46px price without wrapping "$3,850". */
+    .hdeck:not(.open) .face{grid-template-columns:1fr 176px;gap:14px;padding:10px 62px 10px 18px;min-height:206px}
+    .hdeck:not(.open) .face img{height:186px;max-width:176px}
+    /* OPEN — same two columns, same edges. Only the vertical scale moves. */
+    /* `align-items:start` on open, not `center`. The text column runs ~330px
+       once the who-line is in and the product is 228 — centred, the unit
+       floated in the middle of the column with the name hanging above it and
+       the description beside empty space. Aligned to the top, the product's
+       head sits level with the system name, which is the closed card's
+       relationship held through the open state. */
+    .hdeck.open .face{grid-template-columns:1fr 200px;gap:16px;padding:6px 18px 14px;align-items:start}
+    .hdeck.open .face img{max-width:200px;margin-top:6px}
     /* ⛔ :not(.notag) is LOAD-BEARING — this rule sits later in the sheet than
        the base `.hdeck.notag .dtag{display:none}` and matches at the same
        specificity, so without it an empty kicker still reserved its 3px bar
        and 20px of height on the three cards that no longer carry one. */
     .hdeck:not(.open):not(.notag) .dt2{display:inline-flex;margin-bottom:5px;font-size:12px}
-    .hdeck:not(.open) .t b{font-size:20px}
-    .hdeck:not(.open) .t .pure{font-size:16px;margin-top:3px}
-    .hdeck:not(.open) .t .p{margin-top:6px}
-    .hdeck:not(.open) .t .p b{font-size:28px}
-    .hdeck:not(.open) .t .p i{font-size:15px}
+    /* ⛔ ROUND 45 — THE CLOSED TYPE SCALE IS SET IN THE BASE RULES NOW, NOT
+       HERE. This block used to re-declare name 20 / pure 16 / price 28 at
+       `:not(.open)` specificity, which silently beat any base change — the
+       46px price landed at 28 on the first attempt and nothing in the source
+       said why. The name and the kicker still need their desktop-closed
+       trim; the PRICE does not, so it is gone from here on purpose. */
+    .hdeck:not(.open) .t .pure{margin-top:3px}
     /* ── the Google card's turn in the deck (HD[1]) ──
        Same slab, same 116px left column — the G takes the product's place so
        the card does not resize as the deck flips through it. */
@@ -926,7 +1045,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      threw the artwork left, right, right, right — the slab has to read as ONE
      object turning over, not four different cards. Padding mirrors with it.
      ⛔ Deck only. The phone's standalone .gcard.gm is untouched. */
-    .hdeck.isg .gcard{flex-direction:row-reverse;padding:16px 66px 16px 22px;gap:16px;min-height:180px}
+    /* round 45: matches the product card's new 206px slab and 62px reserve,
+       or the deck visibly resizes as it flips onto Google. */
+    .hdeck.isg .gcard{flex-direction:row-reverse;padding:16px 62px 16px 20px;gap:14px;min-height:206px}
     .hdeck.isg .gcard .gt{align-items:flex-start}
     .hdeck.isg .gcard .g{width:104px;height:104px;flex:0 0 104px}
     .hdeck.isg .gcard .gt{gap:6px}
@@ -3017,7 +3138,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
              .dt2 is desktop-closed only, #hdTag is the phone's head row, exactly
              as round 23 left it. Both are written by the same .js-hdtag write,
              so they can never disagree. -->
-        <span class="t"><span class="dtag dt2 js-hdtag"></span><b id="hdName">Whole House Filtration System</b><span class="pure" id="hdPure">Pure Home</span><span class="p" id="hdPrice"><i>from</i> <b>$3,850</b> <i>installed</i></span></span>
+        <!-- round 45: the price is the biggest thing here and the lifetime
+             warranty sits directly under it, on the CLOSED card. Both are
+             inside .t so they ride the text column and can never collide with
+             the product photograph in column 2. -->
+        <span class="t"><span class="dtag dt2 js-hdtag"></span><b id="hdName">Whole House Filtration System</b><span class="pure" id="hdPure">Pure Home</span><span class="p" id="hdPrice"><i class="pre">from</i><b>$3,850</b><i class="suf">installed</i></span><span class="warr"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.8 4.5 6v6.1c0 4.4 3.1 7.6 7.5 9.1 4.4-1.5 7.5-4.7 7.5-9.1V6L12 2.8Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="m8.7 12.1 2.3 2.3 4.3-4.3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Lifetime warranty</span><span class="who" id="hdWho"></span></span>
       </button>
       <div class="more" id="hdMore"><div><div class="inner2">
         <ul id="hdTicks"></ul>
@@ -4247,19 +4372,32 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      pop-up when you load the website, because that's initially actually where
      I wanted it." It has no set, no price and no drawer; hdApply branches on
      `google` before it touches any of the product fields. */
+  /* ⭐ ROUND 45 — `who` IS WHO THE SYSTEM IS FOR, and it only shows on the open
+     card. JP: "Have us have a small little description on it, like who this is
+     for: families looking for pure, clean, filtered water while getting
+     hydrogen water on tap. Give them a little bit more of a thing."
+     His sentence is the Pure Premium one, near enough verbatim. The other three
+     are written to the same shape: WHO, then what they get.
+     ⛔ Voice rules apply here like anywhere else — no dashes, no banned words,
+     the hedge lives in the verb, and nothing names a condition or promises a
+     result on a person. These describe the WATER and the household. */
   var HD = [
     {sys:'Pure Home', set:'home', img:'media/systems/pure-home.webp', tag:'', tagc:'var(--blue)',
      name:'Whole House Filtration System', pure:'Pure Home', pre:'from', amt:'$3,850', suf:'installed', cta:'Book a free inspection',
+     who:'For families who want the chlorine taste and smell gone from every tap in the house, not just the kitchen one.',
      ticks:['Chlorine and chloramines out','Sediment, rust and microplastics','No pool water taste or smell','The good minerals stay in']},
     {google:true, tagc:'var(--blue)'},
     {sys:'Pure Plus', set:'plus', img:'media/systems/pure-plus.webp', tag:'', tagc:'var(--blue)',
      name:'5 Stage Alkaline Reverse Osmosis', pure:'Pure Plus', pre:'', amt:'$1,280', suf:'installed', cta:'Get a fixed price',
+     who:'For families who want pure, clean drinking water on its own tap, without paying for bottled water again.',
      ticks:['Up to 99% of contaminants out','PFAS, fluoride and heavy metals','Alkaline, mineral rich water','Its own dedicated drinking tap']},
     {sys:'Pure Premium', set:'prem', img:'media/systems/pure-premium.webp', tag:'Best seller!', tagc:'var(--purple)',
      name:'7 Stage Hydrogen Rich Reverse Osmosis', pure:'Pure Premium', pre:'', amt:'$1,590', suf:'installed', cta:'Get a fixed price',
+     who:'For families looking for pure, clean, filtered water while getting hydrogen water on tap.',
      ticks:['Up to 99% of contaminants out','PFAS, fluoride and heavy metals','Hydrogen rich and alkaline','Remineralised as it filters']},
     {sys:'Pure Luxe', set:'luxe', img:'media/systems/pure-luxe.webp', tag:'', tagc:'var(--purple)',
      name:'Smart 5 Stage Alkaline Reverse Osmosis', pure:'Pure Luxe', pre:'', amt:'$2,290', suf:'installed', cta:'Get a fixed price',
+     who:'For families who want the same pure, alkaline water and a screen that shows them the purity as they pour it.',
      ticks:['Up to 99% of contaminants out','PFAS and microplastics gone','Alkaline, mineral rich water','Watch the purity live on screen']}
   ];
   var hdeck = document.getElementById('hdeck');
@@ -4298,10 +4436,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       document.getElementById('hdImg').src = d.img;
       document.getElementById('hdName').textContent = d.name;
       document.getElementById('hdPure').textContent = d.pure;
+      document.getElementById('hdWho').textContent = d.who || '';
       /* the number is its own <b> so it can be set big — round 19, "make the
          price stand out". The words around it stay quiet. */
+      /* round 45: .pre rides the big size, .suf drops to its own quiet line.
+         The classes are load-bearing — a bare <i> here has no size rule now. */
       document.getElementById('hdPrice').innerHTML =
-        (d.pre ? '<i>' + d.pre + '</i> ' : '') + '<b>' + d.amt + '</b> <i>' + d.suf + '</i>';
+        (d.pre ? '<i class="pre">' + d.pre + '</i>' : '') + '<b>' + d.amt + '</b><i class="suf">' + d.suf + '</i>';
       /* ONE place sets the accent. The kicker bar, its text and anything else on
          the card read `--ac` off the deck. Only two values exist: blue, purple. */
       hdeck.style.setProperty('--ac', d.tagc);
@@ -4389,7 +4530,31 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   if (!hasGsap || reduce) setupShowObs();
   /* ── the explosion morphs — frame sets scrubbed by hover ── */
   (function(){
-    var N = 37;
+    /* ⭐ ROUND 45 — DESKTOP RUNS ALL 73 SOURCE FRAMES. PHONES STAY AT 37.
+       JP, 26 Aug: "is there a way to get higher-quality animations for the
+       explosion? I feel like they're just really low quality."
+
+       MEASURED FIRST, 2026-08-26, because two different things were on trial:
+       ① THE PIXELS ARE ALREADY AT THE CEILING. The source clips are
+          1244x1664 h264. A native-resolution q95 re-encode was cropped against
+          the shipped q78 frame at the exact size the browser paints it
+          (1091x1460 device px at 1440/DPR2) and compared at 1:1 — the
+          cartridge labels are unreadable in BOTH. THE SOFTNESS IS IN THE
+          RENDER, not in our encode. This reproduces the round-42 audit
+          independently. ⛔ Re-cutting the sets at higher quality buys nothing;
+          the only lane that raises sharpness is JP re-exporting the four
+          clips at 2K or better, and then this same pipeline rebuilds them.
+       ② THE FRAME RATE WAS NOT. The sets were cut at every SECOND source
+          frame — 37 of 73 — so a 3 second animation played back as a
+          flick-book. That is what reads as "low quality", and it was free to
+          fix: we own the sources. All 73 now ship on desktop.
+
+       THE PRICE, named: 6.0MB → 12.1MB across the four desktop sets, and
+       double the retained bitmaps. It is paid for below by NOT preloading all
+       four up front any more (see preloadQueue) — eager transfer actually
+       DROPS from 6.0MB to 2.7MB. Phones keep 37 because 292 retained bitmaps
+       is where iOS starts evicting, which is the round-43 bug. */
+    var N = matchMedia('(max-width:859px)').matches ? 37 : 73;
     /* ⛔ ROUND 42b — PHONES GET THEIR OWN FRAME SIZE. The sets shipped one
        size: 1100x1472, painted ~350px wide on a phone. Decoding 1100x1472
        WebP is the measured 46ms-class cost (see the 19 Aug note below), and
@@ -4464,15 +4629,38 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        time, in the order they appear on the page. A set that someone reaches
        early is still fetched on demand by the interaction handlers below —
        this queue only decides what happens when nobody has asked yet. */
+    /* ⭐ ROUND 45 — ONLY THE FIRST SET IS EAGER NOW. This is what pays for the
+       73 frame sets, and it makes the page LIGHTER than it was, not heavier:
+         before  37 frames x 4 sets, all four fetched on idle = 6.0MB eager
+         after   73 frames x 1 set  fetched on idle           = 2.7MB eager
+       Sets 2 to 4 wait until the visitor has actually left the hero (40% of a
+       screen of scroll), which is several screens before the range section and
+       far more warning than the interaction handlers' own on-demand preload
+       ever gave them. Someone who bounces off the hero now downloads a third
+       of what they used to.
+       ⛔ It is a DELAY, never a gate. The handlers still call preload(key)
+       directly and walk straight past this queue — round 42b's rule, and the
+       reason a set that someone reaches early is never withheld. */
     function preloadQueue(){
       var i = 0;
-      (function next(){
+      function next(){
         if (i >= KEYS.length) return;
         preload(KEYS[i++]).then(function(){
           if ('requestIdleCallback' in window) requestIdleCallback(next, {timeout:1200});
           else setTimeout(next, 120);
         });
-      })();
+      }
+      preload(KEYS[i++]);                       /* the first set, straight away */
+      var armed = false;
+      function arm(){
+        if (armed || scrollY < innerHeight * .4) return;
+        armed = true;
+        removeEventListener('scroll', arm);
+        if ('requestIdleCallback' in window) requestIdleCallback(next, {timeout:2000});
+        else setTimeout(next, 400);
+      }
+      addEventListener('scroll', arm, {passive:true});
+      arm();                                    /* deep-linked mid-page? go now */
     }
     (function startPreload(){
       var v = document.getElementById('heroVideo'), started = false;
@@ -4513,13 +4701,57 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         else { pos += d * (1 - Math.pow(1 - EASE, dt / 16.7)); raf = requestAnimationFrame(tick); }
         paint(pos);
       }
-      return function(t){
+      /* ⭐ ROUND 45 — A TAP GETS A TIMED, SYMMETRIC TWEEN. THE LERP STAYS FOR
+         SCROLL, AND THAT SPLIT IS THE WHOLE POINT.
+         JP: "I don't like how sharp the animation is when you click on the
+         card and it opens up very chaotically. I want that to be very smooth,
+         nice, and slow."
+
+         WHY IT WAS SHARP, and it is arithmetic, not taste: the lerp is an
+         exponential decay at EASE=.10, so it covers ~65% of the distance in
+         the first 200ms and then crawls the rest over half a second. Front
+         loading a 73 frame sequence like that means ~47 of the frames strobe
+         past in a fifth of a second and the last handful creep. It reads as a
+         flinch followed by a stall.
+
+         A decay is the RIGHT shape for scroll — it has no end time, it just
+         chases wherever the finger left the target, which is exactly what a
+         scrubbed morph needs. It is the WRONG shape for a tap, which has a
+         beginning and an end and should be slow at both.
+
+         So: pass a duration and you get a cubic ease-in-out over that time,
+         the JS twin of --e-soft. Pass nothing and you get the decay, untouched.
+         ⛔ The two paths share `raf`, so each MUST cancel the other before it
+         schedules — see both guards below. Leaving a stale decay running under
+         a tween is how the image ends up somewhere nobody asked for. */
+      var tw = null;
+      function softEase(x){ return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2; }
+      function tickTw(now){
+        if (!tw){ raf = null; return; }
+        var p = Math.min(1, (now - tw.t0) / tw.dur);
+        pos = tw.from + (tw.to - tw.from) * softEase(p);
+        paint(pos);
+        if (p < 1){ raf = requestAnimationFrame(tickTw); }
+        else { target = pos = tw.to; tw = null; raf = null; lastT = 0; }
+      }
+      return function(t, dur){
         preload(key);
+        if (reduce){ pos = target = t; paint(t); return; }
+        if (dur){
+          if (raf) cancelAnimationFrame(raf);
+          tw = {from:pos, to:t, t0:(window.performance ? performance.now() : Date.now()), dur:dur};
+          raf = requestAnimationFrame(tickTw);
+          return;
+        }
+        if (tw){ if (raf) cancelAnimationFrame(raf); tw = null; raf = null; lastT = 0; }
         target = t;
-        if (reduce){ pos = t; paint(t); return; }
         if (!raf) raf = requestAnimationFrame(tick);
       };
     }
+    /* round 45: one number for every tap-driven open and close on the page.
+       1300ms over 73 frames is ~56 distinct images a second — the point at
+       which it stops reading as a sequence and starts reading as footage. */
+    var XDUR = 1300;
 
     var stageEl = document.getElementById('stage');
     var XSIMG = { home: document.getElementById('xsImg0'), plus: document.getElementById('xsImg1'),
@@ -4542,8 +4774,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         if (e.target.closest && e.target.closest('.hs')) return;
         var k = curKey(); if (!k || !go[k]) return;
         xOpen = !xOpen;
-        go[k](xOpen ? 1 : 0);
-        if (spotsAt) spotsAt(k, xOpen ? 1 : 0);
+        go[k](xOpen ? 1 : 0, XDUR);
+        /* round 45: the hotspots belong to the END frame, so they wait for it.
+           They used to be switched on in the same tick as the tween started,
+           which was survivable at the old ~700ms flick and is not at 1300ms —
+           the markers would hang in mid air over a unit still coming apart.
+           ⛔ Re-check xOpen inside the timer: a second tap during the open
+           must not be overtaken by the first tap's marker call. */
+        if (spotsAt){
+          if (xOpen) setTimeout(function(){ if (xOpen) spotsAt(k, 1); }, XDUR - 160);
+          else spotsAt(k, 0);
+        }
         stageEl.classList.toggle('xopened', xOpen);
       });
       /* the stage follows the article you are reading, so an open unit has to
@@ -4553,7 +4794,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       }).observe(stageEl, {attributes:true, attributeFilter:['data-cur']});
       new MutationObserver(function(){
         var curK = SCRUB ? curKey() : null; /* scroll owns the current layer — ease the leaving ones home */
-        KEYS.forEach(function(k){ if (k !== curK && go[k]) go[k](0); });
+        /* round 45: a layer the deck has moved off is reassembled on the same
+           soft curve as a tap close, not flicked shut by the decay. */
+        KEYS.forEach(function(k){ if (k !== curK && go[k]) go[k](0, XDUR); });
       }).observe(stageEl, {attributes:true, attributeFilter:['data-cur']});
     }
     var MSCRUB = {};
@@ -5341,15 +5584,44 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         trigger: sysArts[0], start: 'center center',
         endTrigger: sysArts[sysArts.length-1], end: 'center center',
         snap: {
-          /* ROUND 38, JP: "I don't want anything to feel jumpy... when it goes
-             to lock in." Two changes: it only engages when you stop CLOSE to a
-             system (within ~40% of a gap — a mid-way stop is left alone, no
-             long drag), and the glide itself is a slow ease-in-out. */
+          /* ⭐ ROUND 45 — IT CATCHES EVERY SYSTEM, AND IT CATCHES THEM SOFTLY.
+             JP, 26 Aug: "as you scroll to it, it doesn't softly lock into the
+             whole house. It can just glide and scroll. I wanted to catch on to
+             the whole house one and then catch on to the five-stage... I'm
+             looking for it to scroll to the next section, lock in, lock in,
+             lock in, but very nice and softly, and I want it to leave nice and
+             softly as well."
+
+             WHAT WAS WRONG, and it was one line: round 38 added a .13
+             threshold so a stop further than ~13% of the range's travel from a
+             centre was left alone. With four systems the gaps are ~.33 apart,
+             so anything past 40% of a gap simply did not catch — which is
+             exactly "it moves back to it, but it's not really what I'm looking
+             for". Half the stops caught and half did not, and an inconsistent
+             catch reads as a glitch rather than a mechanic.
+             ⛔ The threshold is GONE. Every stop inside the range now finds
+             its nearest system.
+
+             SOFTLY is the other half, and it is three numbers:
+               delay .28  — it never fights a scroll still in progress. GSAP
+                            waits this long after the last scroll event, so a
+                            continuous scroll through the whole range is never
+                            interrupted. That is JP's "it can just glide".
+               duration   — .95 to 1.7s, up from .7 to 1.15. The long end is
+                            what a full gap costs, and at 1.7s a 700px glide
+                            reads as the page settling, not as being dragged.
+               power1.inOut — was power2.inOut. A quadratic starts and ends
+                            almost stationary, which is what made the catch
+                            feel like it grabbed you; power1 leaves and arrives
+                            with the gentler shoulder, so it "leaves nice and
+                            softly" too.
+             ⛔ Still no pin and no scrub. The page never stops moving — round
+             36 deleted the pin and this must never quietly restore it. */
           snapTo: function(v){
             var b = 0; snapPts().forEach(function(x){ if (Math.abs(x-v) < Math.abs(b-v)) b = x; });
-            return Math.abs(b - v) < .13 ? b : v;
+            return b;
           },
-          duration: {min:.7, max:1.15}, delay:.2, ease:'power2.inOut'
+          duration: {min:.95, max:1.7}, delay:.28, ease:'power1.inOut', inertia:false
         }
       });
       return function(){
