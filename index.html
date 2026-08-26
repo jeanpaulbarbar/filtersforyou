@@ -218,7 +218,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        blue, purple) are now TWO: blue for Pure Home + Pure Plus, purple for the
        two premium ROs. Nothing else on the page may introduce a third. */
     --purple:#6D28D9;
-    --yellow:#FFD900; --paper:#FFFDFA; --mist:#EFF4FB; --mist-2:#E6EEFA;
+    /* ⭐ ROUND 54 — THE WHITES ARE C&C's, MEASURED. JP: "I like the white that
+       they use… if we're using white, use that white… or just straight rip
+       theirs." Measured off their live page 2026-08-26: body #FFFEFC, hero
+       tint #EDF3F7, review-card tint #F4F8F9. Ours were a bluer, more
+       saturated tint (#EFF4FB) and it read as a painted canvas next to theirs.
+       ⛔ The "glow" he saw is NOT a gradient in the white — it is the hero
+       tint fading DOWN into the paper over 376px (their hero's ::after), on a
+       page that is otherwise flat. That seam lives on `.show` now. */
+    --yellow:#FFD900; --paper:#FFFEFC; --mist:#EDF3F7; --mist-2:#F4F8F9;
     /* ⛔ Round 19, JP: "maybe we should do navy blue for our black text instead
        of black — a really, really dark navy blue." Was #0B1428, which measured
        navy but READ black. #0F2748 is unmistakably navy and still 13.1:1 on
@@ -256,6 +264,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      rounded, just not pill-soft — 24 → 14 on cards, 16 → 8 on the small
      photo squares. Every rounded surface reads off these two tokens. */
   --r-card:14px; --r-sm:8px; --r-full:999px; --arc:64px;
+    /* ⭐ ROUND 54 — THE DECK. Cards on a held stage (C&C's "Don't just take it
+       from us", measured 2026-08-26: a sticky 900px stage, three cards riding
+       in from 900px below over ~600px of scroll each, resting tilted −6°/+5°
+       on desktop and ∓2° on phones, earlier cards left in place underneath).
+       --deck-top  where a card locks: below the heading band, which stays.
+       --deck-gap  the card's side and bottom inset (their 36px / 12px gutter).
+       --deck-run  scroll per card: hold, then the next one climbs over.
+       --deck-pad  where the heading lockup sits inside the stage. */
+    --deck-top:24svh; --deck-gap:36px; --deck-run:128svh; --deck-pad:76px;
     /* round 39 — the hero frame. Radius and gutter measured off C&C's reveal
        card (24px / 12px, 2026-08-20). --r-hero is the ONE surface allowed
        past the 14px card law: it is a viewport-scale frame, not a card.
@@ -582,7 +599,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .ddpanel b{display:block;font-size:15px;font-weight:600;line-height:1.25;color:var(--ink)}
   .ddpanel b + span{display:block;font-size:15px;color:var(--blue);font-weight:700;margin-top:2px}
   .ddpanel .all{justify-content:center;font-weight:700;color:var(--blue);margin-top:6px;border-top:1px solid var(--rule);border-radius:0 0 12px 12px}
-  .hdr.solid{background:rgba(255,253,250,.94);backdrop-filter:blur(12px);color:var(--ink);box-shadow:0 1px 0 var(--rule)}
+  /* ⭐ ROUND 54 — NO BLUR ON THE FIXED HEADER. Measured on C&C 2026-08-26: their
+     scrolled header is rgba(255,254,252,.92) and NO backdrop-filter, at every
+     scroll position, on both viewports. A fixed element with backdrop-filter
+     re-blurs everything under it on every scroll frame, and on iOS Safari that
+     is a standing scroll-jank source that headless Chromium cannot show. */
+  .hdr.solid{background:rgba(255,254,252,.92);color:var(--ink);box-shadow:0 1px 0 var(--rule)}
   .hdr.solid .mark{filter:none}
   .hdr.solid .burger{background:rgba(10,16,32,.07)}
   .hdr.mini .row{min-height:62px}
@@ -603,7 +625,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      constant while it opens, and it still runs if the GSAP CDN dies.
      `backwards` fill on purpose — after it ends the clip-path returns to
      none and the corners are carried by border-radius + overflow:clip. */
-  .hero{position:relative;background:var(--mist);
+  /* round 54: the frame around the hero card is PAPER, like theirs. The cool
+     tint starts under the card and fades out (see .show). */
+  .hero{position:relative;background:var(--paper);
     padding:calc(var(--utilh) + var(--hframe)) var(--hframe) var(--hframe)}
   .hcard{position:relative;min-height:calc(100svh - var(--utilh) - 2*var(--hframe));
     display:flex;align-items:flex-end;background:var(--ink-blue);
@@ -1320,9 +1344,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   }
 
   /* ── SHOWCASE — sticky stage left, systems scroll right ─── */
-  .show{background:var(--mist);z-index:6;padding:100px 0 90px;position:relative}
-  .show::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-    background:radial-gradient(42% 30% at 88% 2%,rgba(11,97,244,.08),transparent 65%)}
+  /* ⭐ ROUND 54 — THE SEAM. C&C's hero carries a ::after that fades #EDF3F7
+     into #FFFEFC over exactly 376px; it is the only "glow" on their page and
+     it is what JP was pointing at. Ours goes on the section under the card.
+     ⛔ The radial blue wash that was here is deleted — a tinted flat plane with
+     a corner glow is the "canvas" he named. Theirs is flat. */
+  .show{background:linear-gradient(180deg,var(--mist) 0,var(--paper) 376px);z-index:6;padding:100px 0 90px;position:relative}
   .show .shead{max-width:900px;margin-bottom:60px;position:relative}
   .show .shead h2{margin-top:14px}
   /* real marks, not text pills (round 5; round 6: NSW + WaterMark + NSF only — no supplier logos) */
@@ -1702,7 +1729,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      now ends flush at the section's bottom edge. Top padding stays for entry. */
   .xp{position:relative;padding:40px 0 0;background:var(--paper);z-index:8}
   .xp .frame{position:relative;overflow:hidden;min-height:135svh;display:flex;align-items:center;
-    clip-path:inset(0% 7% round 48px);will-change:clip-path;background:var(--ink-blue)}
+    /* round 54: the closed state is C&C's expander exactly — inset(80px 36px
+       round 48px), measured 2026-08-26 — so it reads as a CARD in the paper
+       opening out to full bleed, not two sides pinching in. JP: "supposed to be
+       the same one… it just doesn't feel the same." The vertical inset was the
+       difference. Phones still get no clip (round 27). */
+    clip-path:inset(80px 36px round 48px);will-change:clip-path;background:var(--ink-blue)}
   .xp .ph{position:absolute;inset:-8% 0;will-change:transform}
   .xp .ph img{width:100%;height:100%;object-fit:cover;object-position:66% 40%}
   .xp .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,16,46,.82) 0%,rgba(4,16,46,.44) 50%,rgba(4,16,46,.1) 100%)}
@@ -1857,9 +1889,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .tour .legend{position:absolute;left:14px;right:14px;bottom:2.5%;display:flex;
       flex-wrap:wrap;justify-content:center;gap:8px;z-index:6;pointer-events:none}
     .tour .legend li{display:flex;gap:8px;align-items:center;font-size:15px;font-weight:600;
-      color:#fff;background:rgba(4,16,46,.62);border:1px solid rgba(255,255,255,.16);
-      border-radius:var(--r-sm);padding:6px 11px;
-      -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+      color:#fff;background:rgba(4,16,46,.8);border:1px solid rgba(255,255,255,.16);
+      border-radius:var(--r-sm);padding:6px 11px}
+    /* round 54: the six blur-backed chips were six backdrop-filter layers on a
+       sticky, clip-path-driven panel — on a phone. Solid ink at .8 instead. */
     .tour .legend svg{width:15px;height:15px;flex:0 0 15px}
     .tour .legend svg path{stroke:#fff}
   }
@@ -1905,7 +1938,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      the ladder 8 < 9 < 10 < 11 < 12 paints over the one before it. */
   .pillars-head{position:sticky;top:0;height:100svh;z-index:8;
     background:var(--paper);text-align:center;padding:120px 0 100px}
-  .pillars-head h2{max-width:17ch;margin:16px auto 0}
+  /* round 54: one line on desktop — the heading now shares the screen with the
+     card below it and has a band, not a stage, to sit in. */
+  .pillars-head h2{max-width:none;margin:16px auto 0}
   /* ⛔ ROUND 28 — the exit curtain's rules are at the END of this sheet, with
      the lock. Search "ROUND 28b — THE LOCK". */
   /* ⭐⭐ ROUND 52 — THE THREE PILLARS ARE A DECK OF CARDS NOW, AND IT IS ONE
@@ -1942,10 +1977,34 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      starts climbing — the lock he can feel, without anything taking the scroll
      off him. `.zero` (Servicing and prices) then rises over the last card the
      same way, so the deck hands over instead of being escaped. */
-  .slide{position:sticky;top:0;min-height:128svh;display:flex;align-items:center;overflow:hidden;color:#fff;background:var(--ink-blue)}
+  /* ⭐⭐ ROUND 54 — THE SLIDES ARE INSET CARDS ON A HELD STAGE, NOT SCREENS.
+     JP, on C&C's stack: "the cards really nicely stack into each other… the way
+     it locks into each other, ours doesn't have that… when that card comes up,
+     it doesn't feel like the card sticks." MEASURED on theirs 2026-08-26: the
+     heading NEVER leaves — it sits in a sticky stage while three cards, each
+     smaller than the screen, ride up over it one at a time and are left in
+     place. Ours were full-bleed 128svh screens with an arc, each one covering
+     the last edge to edge, so nothing was ever left showing and the heading
+     was gone before the first card landed. There was no stack to see.
+     Now: the card is `100svh − --deck-top − --deck-gap` tall, inset by the
+     gutter, 24px radius (--r-hero: the one measured card surface), and it
+     locks at --deck-top so the heading band above it stays in view. The
+     runway is unchanged (--deck-run, margin-bottom makes up the difference
+     between the card's box and the runway), so each card still holds about a
+     quarter screen before the next climbs. `.arc` is overridden here on
+     purpose: a card has four corners, not a curved top edge.
+     ⛔ The z-ladder 8 < 9 < 10 < 11 < 12 is untouched and still load-bearing.
+     ⛔ ONE gesture per card: the card itself arrives, tilts to rest (the JS
+     scrub, transform only), and nothing inside it moves any more — the photo
+     scale, the parallax, the copy stagger and the tilted install shot are all
+     gone. Count what moves: it was five, it is one. */
+  .slide{position:sticky;top:var(--deck-top);height:calc(100svh - var(--deck-top) - var(--deck-gap));min-height:0;
+    margin:0 var(--deck-gap) calc(var(--deck-run) - 100svh + var(--deck-top) + var(--deck-gap));
+    border-radius:var(--r-hero);transform-origin:50% 50%;
+    display:flex;align-items:center;overflow:hidden;color:#fff;background:var(--ink-blue)}
   /* ⛔ reduced motion keeps the deck — sticky is not motion, it is layout, and
      the FINISHED state of a card deck is the cards stacked. Nothing animates. */
-  .slide .ph{position:absolute;inset:-7% 0;will-change:transform}
+  .slide .ph{position:absolute;inset:0}
   .slide .ph img{width:100%;height:100%;object-fit:cover}
   .slide .veil{position:absolute;inset:0}
   .s1{z-index:9}
@@ -1955,7 +2014,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     background:radial-gradient(52% 70% at 88% 6%,rgba(255,255,255,.16),transparent 62%)}
   .s3{z-index:11}
   .s3 .veil{background:linear-gradient(90deg,rgba(4,16,46,.15) 0%,rgba(4,16,46,.5) 55%,rgba(4,16,46,.85) 100%)}
-  .slide .inwrap{position:relative;z-index:3;width:100%;padding-block:120px}
+  .slide .inwrap{position:relative;z-index:3;width:100%;padding-block:64px}
   .slide .num{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;letter-spacing:.09em;color:var(--yellow)}
   .slide .num i{display:inline-block;width:30px;height:2px;border-radius:2px;background:currentColor;opacity:.6}
   .slide h3{font-weight:500;letter-spacing:-.01em;line-height:1.02;font-size:clamp(2.6rem,6vw,5rem);margin-top:18px;max-width:13ch}
@@ -1964,7 +2023,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .s3 .inwrap .box h3,.s3 .inwrap .box p{margin-left:auto}
   .s2 .cols{display:grid;gap:40px;align-items:center}
   @media(min-width:960px){.s2 .cols{grid-template-columns:1.05fr .95fr}}
-  .s2 .pic{border-radius:var(--r-card);overflow:hidden;max-height:64svh;box-shadow:0 30px 60px rgba(0,0,0,.32)}
+  .s2 .pic{border-radius:var(--r-card);overflow:hidden;max-height:calc(100svh - var(--deck-top) - var(--deck-gap) - 128px);box-shadow:0 30px 60px rgba(0,0,0,.32)}
   .s2 .pic img{width:100%;height:100%;object-fit:cover}
   @media(max-width:959px){.s2 .pic{display:none}}
 
@@ -1982,7 +2041,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .zero h2 b{font-weight:700}
   .zero .years{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:56px}
   .zero .y{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:var(--r-full);
-    backdrop-filter:blur(6px);padding:12px 22px;display:inline-flex;align-items:baseline;gap:10px}
+    padding:12px 22px;display:inline-flex;align-items:baseline;gap:10px}
   .zero .y .k{font-size:15px;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.72)}
   .zero .y b{font-size:21px;font-weight:600}
   .zero .y.free{background:rgba(255,255,255,.94);color:var(--ink)}
@@ -2034,9 +2093,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .tcard .cap span{font-size:17px;color:var(--muted);font-weight:700}
 
   /* ── REVIEWS — one spotlight quote at a time ────────────── */
-  .revs{background:var(--mist);z-index:14;padding:130px 0 110px;position:relative;overflow:hidden}
-  .revs::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-    background:radial-gradient(44% 40% at 10% 8%,rgba(11,97,244,.07),transparent 65%)}
+  /* round 54: flat, on their review-card tint. The radial wash is gone. */
+  .revs{background:var(--mist-2);z-index:14;padding:130px 0 110px;position:relative;overflow:hidden}
   .revs .in{position:relative}
   .revs .qmark{font-size:clamp(6rem,12vw,10rem);font-weight:700;line-height:.6;color:var(--blue);opacity:.18;display:block}
   .revs .stagewrap{display:grid;gap:40px;align-items:center;margin-top:10px}
@@ -2282,9 +2340,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      keeps the static ring — gentler, not off. */
   .xopen .hs > button > i{animation:hspulse 2.4s ease-in-out infinite}
   .hs.on > button > i{animation:none}
+  /* round 54, JP: "that glow one was supposed to be a little bit softer, almost
+     like an echo." Ring 15 → 10px at half the white, bloom 24 → 18px, scale
+     1.2 → 1.12, and it takes 600ms instead of 520 so it breathes rather than
+     flashes. */
   @keyframes hsglow{
     0%  {box-shadow:0 0 0 4px rgba(255,217,0,.25), 0 3px 10px rgba(4,16,46,.34); scale:1}
-    38% {box-shadow:0 0 0 15px rgba(255,255,255,.5), 0 0 24px 9px rgba(255,217,0,.72), 0 3px 12px rgba(4,16,46,.22); scale:1.2}
+    40% {box-shadow:0 0 0 10px rgba(255,255,255,.32), 0 0 18px 6px rgba(255,217,0,.55), 0 3px 12px rgba(4,16,46,.22); scale:1.12}
     100%{box-shadow:0 0 0 4px rgba(255,217,0,.25), 0 3px 10px rgba(4,16,46,.34); scale:1}}
 
   @keyframes hspulse{
@@ -2357,14 +2419,28 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      three animations start on the SAME class change, so nothing inherits a
      clock from something already running. That is the distinction. */
   .timg.xopen .hs > button > i{
-    animation:hspop .7s var(--e-out) both, hspulse 2.4s ease-in-out infinite, hsglow .52s ease-out 1}
-  .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,1.78s}
-  .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,1.89s}
-  .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,2s}
-  .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,2.11s}
-  .timg.xopen .hs:nth-child(5) > button > i{animation-delay:.64s,1.79s,2.22s}
-  .timg.xopen .hs:nth-child(6) > button > i{animation-delay:.8s,1.95s,2.33s}
-  .timg.xopen .hs:nth-child(7) > button > i{animation-delay:.96s,2.11s,2.44s}
+    animation:hspop .7s var(--e-out) both, hspulse 2.4s ease-in-out infinite, hsglow .6s ease-out 1}
+  /* ⭐⭐ ROUND 54 — THE SWEEP STARTS THE MOMENT THE LAST MARKER HAS LANDED.
+     JP: "right now it loads, waits like a second, and then it does the glow."
+     MEASURED on the deployed page 2026-08-26, both viewports: the sweep was
+     pinned at 1.78s. On DESKTOP the seventh marker's pop starts at .96s and,
+     on an ease-out, is visibly landed by ~1.4s — so a 0.4s wait. On the PHONE
+     there are only FOUR markers (.hswrap.m), the last starts at .48s and is
+     landed by ~.9s — the sweep then waited 0.85s. That is his "second".
+     Desktop sweeps from 1.42s, the phone from .94s (below), 110ms apart. */
+  .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,1.42s}
+  .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,1.53s}
+  .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,1.64s}
+  .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,1.75s}
+  .timg.xopen .hs:nth-child(5) > button > i{animation-delay:.64s,1.79s,1.86s}
+  .timg.xopen .hs:nth-child(6) > button > i{animation-delay:.8s,1.95s,1.97s}
+  .timg.xopen .hs:nth-child(7) > button > i{animation-delay:.96s,2.11s,2.08s}
+  @media(max-width:859px){
+    .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,.94s}
+    .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,1.05s}
+    .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,1.16s}
+    .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,1.27s}
+  }
   /* the wrapper fade keeps step with its dot */
   .timg.xopen .hs:nth-child(1){transition-delay:0s}
   .timg.xopen .hs:nth-child(2){transition-delay:.16s}
@@ -2437,7 +2513,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        the phone frame is edge-to-edge now (its clip gesture is gone too). */
     .xp{padding:0}
     .pillars-head{padding:78px 0 60px}
-    .slide .inwrap{padding-block:92px}
+    .slide .inwrap{padding-block:56px}
     .zero{padding:92px 0 76px}
     .taps{padding:74px 0 62px}
     .newdev{padding:74px 0}
@@ -2708,6 +2784,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 
     /* ── the whole-home expander ── */
     .xp .frame{min-height:auto}
+    .xp .ph{inset:0;will-change:auto}   /* round 54: no parallax on phones */
     .xp .copy{padding-block:76px}
     .xp .veil{background:linear-gradient(180deg,rgba(4,16,46,.62) 0%,rgba(4,16,46,.74) 60%,rgba(4,16,46,.9) 100%)}
     .xp .box{max-width:none}
@@ -2732,6 +2809,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        the curve climbed straight over "…cannot do." Arc scaled to the narrower
        width, and the head keeps clear air beneath the line. */
     :root{--arc:44px}
+    /* round 54: the deck on a phone. 12px gutter (theirs), the heading band is
+       three lines tall so the card locks lower, and the runway is 112svh (round
+       53's phone number, unchanged). */
+    :root{--deck-top:28svh; --deck-gap:12px; --deck-run:112svh; --deck-pad:74px}
     .pillars-head{padding:78px 0 92px}
     /* ⛔⛔ ROUND 53 — `min-height:auto` WAS SILENTLY KILLING THE DECK ON PHONES.
        He asked for the card deck to transfer to mobile, and it did — the ORDER
@@ -2744,7 +2825,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        112svh gives the phone ~945px, about 1.1 screens each, matching the
        desktop feel. The cards are full-bleed photographs, so the extra height
        is more picture, not empty space. */
-    .slide{min-height:112svh}
+    /* round 54: `.slide{min-height:112svh}` is gone — the runway is --deck-run
+       now (set above) and the card's own height is derived from --deck-top. */
     /* "03 — NOTHING RUSHED, NOTHING HIDDEN" wrapped into a hanging second line
        that no longer lined up with the number. Let it wrap as a block instead. */
     .slide .num{flex-wrap:wrap;align-items:baseline;gap:8px;line-height:1.45}
@@ -2923,10 +3005,28 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      Growing the wrap 100svh AND pulling `.s1` up 100svh moves the release point
      without moving the card: heading now releases at 10689 while `.s1` covers
      it at 10625, so it is covered 64px BEFORE it would ever let go. */
-  .pilwrap{position:relative;z-index:9;height:350svh;margin-top:-200svh;pointer-events:none}
-  /* ⛔ AFTER `.arc`, which also sets margin-top at equal specificity. Source
-     order decides, and this must win. */
-  .s1{margin-top:calc(var(--arc) * -1 - 100svh)}
+  /* ⭐⭐ ROUND 54 — THE HEADING HOLDS FOR THE WHOLE DECK. C&C's stage never
+     leaves while its cards arrive; ours released one card in. The arithmetic,
+     with T = --deck-top, R = --deck-run, A = --arc, S = where s1 starts:
+       S = 215svh into the wrap: 100 wipe + 15 hold + its own 100. (Round 28b
+       held 50svh, but a CARD appears at the viewport bottom S − 100 after the
+       wrap's top, so 15svh is the stage alone for 135px and then the first
+       card climbs — the stage no longer sits empty for half a screen.)
+       m1 = S − H.  The stage releases at  wrapTop + H − 100svh.  `.zero`
+       reaches the heading band (its top at T) at  s1start + 3R − A − T.
+       Setting those equal:
+         H  = S + 100svh + 3R − A − T  = 315svh + 3R − A − T
+         m1 = A + T − 100svh − 3R
+     Desktop (T 24, R 128, A 64px): H = 675svh − 64px, m1 = 64px − 460svh.
+     Phone   (T 28, R 112, A 44px): H = 623svh − 44px, m1 = 44px − 408svh.
+     ⛔ First cut had +T in H and −T in m1; the desktop numbers matched by
+     coincidence (24 either way) and the PHONE released 67px late, measured.
+     The stage lets go on the exact frame `.zero` reaches the heading band, so
+     heading and `.zero` travel up together and no paper is ever bare. */
+  .pilwrap{position:relative;z-index:9;height:calc(315svh + 3*var(--deck-run) - var(--arc) - var(--deck-top));margin-top:-200svh;pointer-events:none}
+  /* ⛔ AFTER `.arc` AND after `.slide`, which both set margin-top at equal
+     specificity. Source order decides, and this must win. */
+  .s1{margin-top:calc(var(--arc) + var(--deck-top) - 100svh - 3*var(--deck-run))}
   .pillars-head{position:sticky;top:0;height:100svh;padding:0;overflow:hidden;background:none}
   /* ⭐⭐ ROUND 53 — THE HEADING IS THE FIRST CARD OF THE DECK.
      JP: "It was supposed to have the card scroll upwards onto the three things
@@ -2959,8 +3059,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      it now holds for the wrap's full remaining travel — right up until `.s1`
      climbs over it. Same lesson as the standing one: **sticky dies on
      overflow, and it dies quietly.** */
+  /* round 54: the lockup sits in the TOP BAND of the stage (--deck-pad down),
+     not the centre — the cards lock at --deck-top and would cover a centred
+     heading. pillarsWipe() lands the copy exactly here as the curtain completes. */
   .ppanel{position:absolute;inset:0;background:var(--paper);pointer-events:auto;
-    display:flex;align-items:center;justify-content:center;clip-path:inset(100% 0 0)}
+    display:flex;align-items:flex-start;justify-content:center;padding-top:var(--deck-pad);clip-path:inset(100% 0 0)}
   /* "About us" targets #pillars, whose flow position is now the START of the
      wipe — a jump there would land on the tour with the curtain still down. */
   #pillars{scroll-margin-top:-100svh}
@@ -2974,9 +3077,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .xp .frame{position:static;height:auto;align-items:center}
     .pilwrap{height:auto;margin-top:0;pointer-events:auto}
     .pillars-head{position:static;height:auto;padding:120px 0 100px;background:var(--paper)}
-    .ppanel{position:static;clip-path:none!important;display:block}
+    .ppanel{position:static;clip-path:none!important;display:block;padding-top:0}
     /* the deck's first card stands down with the rest of the curtain */
     .pillars-head{position:static;height:auto}
+    /* round 54: the cards become plain inset blocks in flow — the finished
+       state of a deck is the cards, stacked. */
+    .s1{margin-top:0}
+    .slide{position:relative;top:auto;height:auto;min-height:0;margin:0 var(--deck-gap) 16px;transform:none!important}
     #pillars{scroll-margin-top:86px}
     .show .sys .mimg.tapmode::after{animation:none}
     html{scroll-behavior:auto}
@@ -3365,7 +3472,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      when closed, which no pure-CSS height trick can animate through. */
   .fq .fa{overflow:hidden}
   .fq[open]{box-shadow:0 1px 2px rgba(15,39,72,.04),0 14px 34px -20px rgba(15,39,72,.34)}
-  .fpic img{will-change:transform}
+  @media(min-width:860px){.fpic img{will-change:transform}}
 
   /* ── inline body links: hit area without touching the line ──
      Four links inside running sentences measured 18-21px tall and tripped the
@@ -3792,7 +3899,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     var v = document.getElementById('heroVideo');
     var big = matchMedia('(min-width:860px)').matches;
     var hevc = v.canPlayType('video/mp4; codecs="hvc1.1.6.L123.b0"') !== '';
-    v.src = 'media/hero-' + (big ? '1600' : '1080') + (hevc ? '-hevc' : '') + '.mp4';
+    /* round 54: phones get a 720 cut. The 1080 HEVC was 2.6MB of a 6.2MB phone
+       load (measured 2026-08-26); hero-720-hevc is 624KB, painted at 390px wide. */
+    v.src = 'media/hero-' + (big ? '1600' : '720') + (hevc ? '-hevc' : '') + '.mp4';
   })();
   </script>
   <canvas class="caustics" id="caustics" aria-hidden="true"></canvas>
@@ -4106,7 +4215,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 </section>
 </div>
 <section class="slide s1 arc">
-  <div class="ph"><img src="media/sydney.webp" alt="Our installer fitting a whole house filtration system outside a Sydney home" width="1700" height="956" loading="lazy"></div>
+  <div class="ph"><picture><source media="(max-width:859px)" srcset="media/sydney-m.webp"><img src="media/sydney.webp" alt="Our installer fitting a whole house filtration system outside a Sydney home" width="1700" height="956" loading="lazy" decoding="async"></picture></div>
   <div class="veil"></div>
   <div class="in inwrap">
     <span class="num">01 <i></i> SYDNEY IS HOME</span>
@@ -4125,7 +4234,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   </div></div>
 </section>
 <section class="slide s3 arc">
-  <div class="ph"><img src="media/bleed-tap.webp" alt="A 3 way mixer tap running filtered water in a Sydney kitchen" width="1900" height="1068" loading="lazy"></div>
+  <div class="ph"><picture><source media="(max-width:859px)" srcset="media/bleed-tap-m.webp"><img src="media/bleed-tap.webp" alt="A 3 way mixer tap running filtered water in a Sydney kitchen" width="1900" height="1068" loading="lazy" decoding="async"></picture></div>
   <div class="veil"></div>
   <div class="in inwrap"><div class="box">
     <span class="num">03 <i></i> NOTHING RUSHED, NOTHING HIDDEN</span>
@@ -4329,7 +4438,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      Treatment copied from .xp, its nearest full-bleed sibling: real photo,
      directional ink veil, copy over it. No new pattern introduced. -->
 <section class="newdev arc" id="newbuilds">
-  <img class="ndbg" src="media/newdev.webp" alt="Our installer fitting a whole house filtration system at a new Sydney development" width="1500" height="2000" loading="lazy" decoding="async">
+  <picture><source media="(max-width:859px)" srcset="media/newdev-m.webp"><img class="ndbg" src="media/newdev.webp" alt="Our installer fitting a whole house filtration system at a new Sydney development" width="1500" height="2000" loading="lazy" decoding="async"></picture>
   <div class="veil"></div>
   <div class="in">
     <div class="ndcopy">
@@ -4409,7 +4518,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     </div>
     <div class="fwrap">
       <figure class="fpic rv">
-        <img src="media/detail.webp" alt="A Filters For You whole house filtration system installed on a Sydney brick wall, pressure gauges and copper pipework visible" width="1300" height="1733" loading="lazy" decoding="async">
+        <picture><source media="(max-width:859px)" srcset="media/detail-m.webp"><img src="media/detail.webp" alt="A Filters For You whole house filtration system installed on a Sydney brick wall, pressure gauges and copper pipework visible" width="1300" height="1733" loading="lazy" decoding="async">
+        </picture>
       </figure>
       <div class="fgrid rv">
         <details class="fq" open>
@@ -4858,6 +4968,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     if (!wrap || !panel) return;
     var inner = panel.querySelector('.in');
     var praf = null, prisen = false, wasOn = null;
+    var restTop = function(){ return parseFloat(getComputedStyle(panel).paddingTop) || 0; };
     function pframe(){
       praf = null;
       if (reduce){
@@ -4880,7 +4991,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          the band's centre sits at (1 − p/2) of the viewport, so the offset from
          centre is (0.5 − p/2). It lands dead centre exactly as the wipe
          completes, and the headline is legible from the first sliver. */
-      if (inner) inner.style.transform = 'translateY(' + Math.round((0.5 - p / 2) * innerHeight) + 'px)';
+      /* round 54: the lockup RESTS in the stage's top band now (.ppanel's
+         padding-top, --deck-pad), because the deck's cards lock at --deck-top
+         and would cover a centred heading. So it rides the curtain's leading
+         edge from the panel's bottom up to that band: y = (1 − p)(viewport −
+         rest). At p=0 its top sits on the edge; at p=1 it is home. */
+      if (inner) inner.style.transform = 'translateY(' + Math.round((1 - p) * (innerHeight - restTop())) + 'px)';
       /* the headline rides IN on the curtain instead of on its own trigger.
          ⛔ Its old ScrollTrigger ('#pillarLine', top 82%) fired the moment the
          sticky stage entered — a full viewport before the curtain revealed it —
@@ -5345,9 +5461,24 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        It is ~6.8MB of frames, which is the price of the mechanic. */
     var preloaded = {};
     var READY = {};   /* round 42b: set -> every frame fetched AND decoded */
-    var RETAIN = [];
+    /* ⭐ ROUND 54 — RETAINED PER SET, so a phone can let a far one go. Measured
+       2026-08-26 on the deployed page at 390: all four sets, 148 frames, were
+       fetched and decoded on load — ~240MB of retained bitmaps on an iPhone,
+       and the decodes land in the seconds the visitor is scrolling INTO the
+       range. C&C's phone page holds nothing like it. Desktop keeps round 47's
+       queue exactly; the phone fetches a set when its card is within 1.2
+       screens and releases it once it is 2.5 screens away (see startPreload).
+       ⛔ Releasing means dropping OUR reference: the bytes stay in the HTTP
+       cache, so coming back is a re-decode, not a re-download. */
+    var RETAIN = {};
+    function release(key){
+      if (!RETAIN[key]) return;
+      RETAIN[key] = null; preloaded[key] = null; READY[key] = false;
+    }
     function preload(key){
       if (preloaded[key]) return preloaded[key];
+      RETAIN[key] = [];
+      var keep = RETAIN[key];
       preloaded[key] = Promise.all(SETS[key].map(function(u){
         var im = new Image();
         im.decoding = 'async';
@@ -5364,11 +5495,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
            withheld to fix it. */
         im.fetchPriority = 'low';
         im.src = u;
-        RETAIN.push(im);
+        keep.push(im);
         return (im.decode ? im.decode() : Promise.resolve()).catch(function(){});
       }));
-      preloaded[key].then(function(){ READY[key] = true; });
-      return preloaded[key];
+      var mine = preloaded[key];
+      mine.then(function(){ if (preloaded[key] === mine) READY[key] = true; });
+      return mine;
     }
 
     /* ⛔ AND THEY LOAD IN SEQUENCE, NOT ALL AT ONCE. The old line fired all
@@ -5417,6 +5549,23 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       next();
     }
     (function startPreload(){
+      /* ⭐ ROUND 54 — THE PHONE FETCHES ON APPROACH, ONE SET AT A TIME, AND LETS
+         FAR SETS GO. Two observers on each product image: within 1.2 screens →
+         preload; further than 2.5 screens → release. The first system sits one
+         screen under the hero, so it still arrives warm; sets 2–4 come as you
+         scroll to them, which is ~2.5MB less on a phone load and no decode
+         storm while the range is on screen. The tap handlers' own preload()
+         still walks straight past this (round 42b's rule). */
+      if (matchMedia('(max-width:859px)').matches && 'IntersectionObserver' in window){
+        var near = new IntersectionObserver(function(es){
+          es.forEach(function(en){ if (en.isIntersecting) preload(en.target.getAttribute('data-set')); });
+        }, {rootMargin:'120% 0px'});
+        var far = new IntersectionObserver(function(es){
+          es.forEach(function(en){ if (!en.isIntersecting) release(en.target.getAttribute('data-set')); });
+        }, {rootMargin:'250% 0px'});
+        document.querySelectorAll('.mimg.xscrubm').forEach(function(m){ near.observe(m); far.observe(m); });
+        return;
+      }
       var v = document.getElementById('heroVideo'), started = false;
       var go = function(){ if (started) return; started = true; preloadQueue(); };
       if (v && v.readyState < 3){
@@ -6649,8 +6798,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          genuinely arriving, and `+=560` (from 900) tightens it so the expand
          completes as the frame locks rather than a screen after it. */
       gsap.timeline({scrollTrigger:{trigger:'.xp', start:'top 62%', end:'+=560', scrub:.4}})
-        .fromTo(xp, {clipPath:'inset(0% 7% round 48px)'}, {clipPath:'inset(0% 0% round 0px)', ease:'none', duration:.45})
-        .to(xp, {clipPath:'inset(0% 0% round 0px)', ease:'none', duration:.55});
+        /* round 54: from C&C's measured closed state, inset(80px 36px round 48px). */
+        .fromTo(xp, {clipPath:'inset(80px 36px round 48px)'}, {clipPath:'inset(0px 0px round 0px)', ease:'none', duration:.45})
+        .to(xp, {clipPath:'inset(0px 0px round 0px)', ease:'none', duration:.55});
     } else {
       xp.style.clipPath = 'none';
     }
@@ -6658,9 +6808,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        sticky room would have flattened to almost no movement at all. The end is
        viewport-relative so a phone's shorter screen keeps the round-9 pace —
        a fixed +=2200 is 2.4 screens on desktop but 3.3 on a 664px phone. */
-    gsap.fromTo('#xpPh', {yPercent:-6}, {yPercent:6, ease:'none',
-      scrollTrigger:{trigger:'.xp', start:'top bottom',
-        end:function(){ return '+=' + Math.round(innerHeight * 2.4); }, scrub:true}});
+    /* round 54: parallax is DESKTOP ONLY. On a phone this was a 1200px image
+       given a new transform on every scroll frame inside a sticky, locked
+       frame; C&C run no parallax at all under 1024 (measured: not one image
+       over 1200px on screen at 390). Count what moves. */
+    if (!matchMedia('(max-width:859px)').matches){
+      gsap.fromTo('#xpPh', {yPercent:-6}, {yPercent:6, ease:'none',
+        scrollTrigger:{trigger:'.xp', start:'top bottom',
+          end:function(){ return '+=' + Math.round(innerHeight * 2.4); }, scrub:true}});
+    }
     gsap.from('#xpBox > *', {y:34, opacity:0, duration:.8, ease:'power3.out', stagger:.09,
       scrollTrigger:{trigger:'.xp', start:'top 55%', once:true}});
   } else if (xp){
@@ -6674,22 +6830,41 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      01 photo settles from 1.12, 02's install card rises with a 3° tilt,
      03's copy box slides in from the right (it is the right-aligned slide).
      All scrubbed or once — nothing pinned, nothing that can trap scroll. */
+  /* ⭐⭐ ROUND 54 — THE DECK: ONE GESTURE PER CARD, AND IT IS THE CARD.
+     The round-21 "own gesture per slide" set (photo settle, parallax, copy
+     stagger, the tilted install shot, the box sliding in) is DELETED. Five
+     things moved inside each card while the card itself was trying to land,
+     which is why "it doesn't feel like the card sticks" — the card was still,
+     its contents were not. C&C's cards are rigid objects: ONE transform on the
+     card, static contents. So: the card rides in on its own flow position
+     (sticky does that) and tilts to rest as it arrives — their measured resting
+     tilt is −6°/+5° on 556px squares and ∓2° on the phone; on a 1296px-wide
+     card 1.5° is the same corner lift, so desktop is 0 / −1.5 / +1.2 and the
+     phone keeps their ∓2. Linear in position, like theirs (--progress → rotate
+     measured linear), written on rAF off scroll so a sticky card reads its OWN
+     rect — a ScrollTrigger measured while a card is stuck would be wrong. */
   if (!reduce){
-    gsap.utils.toArray('.slide .ph').forEach(function(ph){
-      gsap.fromTo(ph, {yPercent:-6}, {yPercent:6, ease:'none',
-        scrollTrigger:{trigger:ph.closest('.slide'), start:'top bottom', end:'bottom top', scrub:true}});
-      gsap.fromTo(ph.querySelector('img'), {scale:1.12}, {scale:1, ease:'none',
-        scrollTrigger:{trigger:ph.closest('.slide'), start:'top bottom', end:'top 12%', scrub:.3}});
-    });
-    gsap.utils.toArray('.slide .inwrap').forEach(function(w){
-      gsap.from(w.children.length === 1 ? w.children[0].children : w.children,
-        {y:34, opacity:0, duration:1, ease:'power4.out', stagger:.08,
-         scrollTrigger:{trigger:w, start:'top 70%', once:true}});
-    });
-    gsap.fromTo('.s2 .pic', {y:90, rotate:3, opacity:0}, {y:0, rotate:0, opacity:1, ease:'none',
-      scrollTrigger:{trigger:'.s2', start:'top 80%', end:'top 18%', scrub:.3}});
-    gsap.from('.s3 .inwrap .box', {x:70, opacity:0, duration:.9, ease:'power3.out',
-      scrollTrigger:{trigger:'.s3', start:'top 62%', once:true}});
+    var deckTopPx = function(){
+      var v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--deck-top')) || 24;
+      return v / 100 * innerHeight;
+    };
+    var TILT = matchMedia('(max-width:859px)').matches ? [0, -2, 2] : [0, -1.5, 1.2];
+    var deckCards = gsap.utils.toArray('.slide');
+    var draf = null;
+    function dframe(){
+      draf = null;
+      var top = deckTopPx(), ih = innerHeight;
+      deckCards.forEach(function(s, i){
+        if (!TILT[i]) return;
+        var r = s.getBoundingClientRect();
+        var t = (ih - r.top) / (ih - top);
+        if (t < 0) t = 0; if (t > 1) t = 1;
+        s.style.transform = 'rotate(' + (t * TILT[i]).toFixed(3) + 'deg)';
+      });
+    }
+    addEventListener('scroll', function(){ if (!draf) draf = requestAnimationFrame(dframe); }, {passive:true});
+    addEventListener('resize', function(){ if (!draf) draf = requestAnimationFrame(dframe); });
+    dframe();
     /* ROUND 33 — the switcher's three figures rise out of a mask on arrival,
        and again on every tab change. The gesture argues that the price is
        being LOOKED UP for you, not listed at you. Same .wm masked rise the
@@ -6849,7 +7024,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      Scrub, not a timed tween, so it tracks the drag of the finger exactly the
      way the rest of the page's imagery does. */
   var fpic = document.querySelector('.fpic img');
-  if (fpic){
+  if (fpic && !matchMedia('(max-width:859px)').matches){   /* round 54: desktop only, as above */
     gsap.fromTo(fpic, {yPercent:-5, scale:1.1}, {
       yPercent:5, scale:1, ease:'none',
       scrollTrigger:{trigger:'.fpic', start:'top bottom', end:'bottom top', scrub:.4}});
