@@ -763,8 +763,41 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      the card's left edge at 872 on a 1440 screen; the 13ch headline ends at
      836. That 36px is the clearance JP asked for and it only exists because
      the card cannot widen. Never re-introduce a width change here. */
-  .hdeck{position:absolute;right:36px;bottom:36px;z-index:12;width:min(532px,88vw)}
+  .hdeck{position:absolute;right:24px;bottom:28px;z-index:12;
+    /* ⭐ ROUND 47 — THE WIDTH IS FLUID, AND THE FORMULA IS THE CONSTRAINT
+       WRITTEN DOWN. JP, twice: "I want the card on the hero page to be a little
+       bit larger."
+       The ceiling is not taste, it is the headline. At 13ch the h1 measures a
+       FIXED 764px once the font caps at 5.4rem (above ~1394px wide it stops
+       growing while the viewport does not), and the copy column starts at
+       (100vw - 1368)/2 + 36. So the widest the card can be without touching it:
+           (100vw - 12 - 24) - ((100vw - 1368)/2 + 36 + 764 + clearance)
+         =  50vw - 176 - clearance
+       At 26px of clearance that is `50vw - 178`. MEASURED at eight viewports,
+       2026-08-26 — clearance 32 / 28 / 26 / 26 / 26 / 108 / 428px from 1280 up.
+       ⛔ NO FLOOR. A floor is what broke 1024: forcing 430px there pushed the
+       card 52px INTO the headline, and the old fixed 532px was overlapping by
+       154px on that screen the whole time — a bug that only ever measuring at
+       1440 hid. Below ~1280 the formula makes the card genuinely narrow, so the
+       compact block further down re-scales its insides to fit.
+       ⛔ Re-derive this if the headline's measure, its font cap, or the
+       container width ever move. */
+    width:min(calc(50vw - 178px), 700px)}
   @media(max-width:859px){.hdeck{display:none}}
+  /* ⛔ ROUND 47 — AND IT IS HIDDEN BELOW 1150 TOO, ON PURPOSE.
+     The card cannot coexist with a 13ch headline in that band and the numbers
+     say so: at 900px the fluid width lands at 272, the text column resolves to
+     58px, and "$3,850" alone has a min-content width of ~155 — so the grid
+     overflows its own padding box and the product ends up 130px UNDERNEATH the
+     chevron. Measured at 900 / 1024 / 1152, all three collide.
+     ⛔ Forcing a floor width does not fix it, it moves it: a 430px floor at
+     1024 pushes the card 52px INTO the headline instead. There is no width
+     that satisfies both constraints on that screen.
+     So the hero keeps its headline, lede and CTA and drops the card, exactly
+     as it already does below 860. Nothing that WORKED was removed — the old
+     fixed 532px card was overlapping the headline by 154px at 1024 the whole
+     time, which is a bug only ever measuring at 1440 hid. */
+  @media(min-width:860px) and (max-width:1149px){.hdeck{display:none}}
   .hdeck .under{position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(255,253,250,.5);border-radius:var(--r-card);
     transform:translateY(12px) scale(.955);z-index:0}
   .hdeck .under.u2{transform:translateY(23px) scale(.91);background:rgba(255,253,250,.3)}
@@ -1010,7 +1043,6 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        224 is the tallest card's natural height plus 2, so every card clears it
        and none of them stretches. ⛔ Re-measure if a name, the kicker or the
        price scale changes: `--faceh:0` on .hdeck lets the face size to content. */
-    .hdeck{--faceh:224px}
     .hdeck .chead{position:absolute;right:0;top:calc(var(--faceh)/2);transform:translateY(-50%);
       z-index:5;padding:0 14px 0 0;gap:0}
     .hdeck .chead .dtag{display:none}   /* .dt2 carries it instead */
@@ -1058,7 +1090,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      ⛔ Deck only. The phone's standalone .gcard.gm is untouched. */
     /* round 45: matches the product card's new 206px slab and 62px reserve,
        or the deck visibly resizes as it flips onto Google. */
-    .hdeck.isg .gcard{flex-direction:row-reverse;padding:16px 62px 16px 20px;gap:14px;min-height:206px}
+    /* ⛔ var(--faceh), never its own number. It shipped at a hardcoded 206
+       against the product cards' 224, so the deck visibly shrank every time it
+       flipped onto Google and grew again coming off it. */
+    .hdeck.isg .gcard{flex-direction:row-reverse;padding:16px 62px 16px 20px;gap:14px;min-height:var(--faceh)}
     .hdeck.isg .gcard .gt{align-items:flex-start}
     .hdeck.isg .gcard .g{width:104px;height:104px;flex:0 0 104px}
     .hdeck.isg .gcard .gt{gap:6px}
@@ -1066,6 +1101,57 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .hdeck.isg .gcard b{font-size:26px;line-height:1.15}
     .hdeck.isg .gcard .gsub{font-size:17px}
   }
+
+  /* ⛔ ROUND 47 — NARROW DESKTOPS GET THE CARD'S INSIDES SCALED DOWN.
+     Between 860 and ~1280 the fluid width lands between 340 and 460px, which
+     the 1440 proportions do not fit into: the price wrapped and the product
+     column ate the text. These are the same elements at a smaller scale, not a
+     different layout — the face still never changes between closed and open. */
+  @media(min-width:1150px) and (max-width:1365px){
+    /* ⛔ THE RESERVE IS 76, AND THE ARITHMETIC IS EXACT. The toggle is a 44px
+       circle (the tap-target floor, never shrink it) sitting 14px in from the
+       card's edge, so its left edge is 58px in. A 62px reserve leaves the
+       product 4px of air and it reads as touching; 52px put the chevron 13px
+       ON TOP of it. 76 gives the same 18-22px of air the wide card has. */
+    .hdeck .face{grid-template-columns:1fr 108px;gap:12px;padding:12px 76px 12px 16px}
+    .hdeck .face img{height:132px;max-width:108px}
+    .hdeck .t b{font-size:16px}
+    .hdeck .t .pure{font-size:13.5px}
+    .hdeck .t .p b{font-size:30px}
+    .hdeck .t .p i.pre{font-size:15px}
+    .hdeck .t .p i.suf{font-size:13px;margin-top:5px}
+    .hdeck .warr{font-size:12.5px;margin-top:7px}
+    .hdeck .warr svg{width:13px;height:13px;flex:0 0 13px}
+    .hdeck .who{font-size:13.5px}
+    .hdeck .more li{font-size:14.5px}
+    .hdeck .more .inner2{padding:13px 16px 16px}
+    .hdeck .nav{left:-50px}
+  }
+
+  /* ⭐ ROUND 47 — THE FACE HEIGHT LADDER, AND EVERY RUNG IS MEASURED.
+     The face's height is not a constant: it is whatever the TALLEST card's text
+     column needs, and that changes with the card's width because the system
+     names re-wrap. MEASURED across nine viewports with `--faceh:0` (which lets
+     the face size to its content), taking the max of all four cards:
+         1150 / 1280 (compact insides) → 185
+         1366 / 1440 / 1600 → 222        1728 / 1920 → 212
+     Below 1150 the deck is hidden, so it has no rung.
+     "7 Stage Hydrogen Rich Reverse Osmosis" is the tallest at every width — the
+     longest name AND the one surviving kicker.
+     ⛔ ONE NUMBER PER BAND, taking the band's WORST case, because a deck whose
+     slab resizes as it flips is not a deck (the round-28 rule). The slack at
+     the roomy end of a band is the price of that.
+     ⛔ AND IT MUST SIT AFTER the 860 and the compact blocks. First attempt put
+     the compact `--faceh` inside a `max-width:1279` block placed ABOVE
+     `min-width:860`, so the later rule won at every width and the value never
+     applied at all — the cards measured 275 / 222 / 212 against a 224 floor and
+     the slab jumped on every flip. Equal specificity, so source order decides.
+     ⛔ To re-measure: set `--faceh:0` on `.hdeck` and read the face's height. */
+  /* 304, not 276: at 900px the card is only 272 wide and it is the GOOGLE
+     card that governs there (301) — its rating line wraps before any product
+     name does. Measured with the deck cycled through all five faces. */
+  @media(min-width:1150px){ .hdeck{--faceh:188px} }
+  @media(min-width:1366px){ .hdeck{--faceh:224px} }
 
   /* ── ARC — the curved boundary every section flows in on ── */
   .arc{position:relative;border-radius:var(--arc) var(--arc) 0 0;margin-top:calc(var(--arc) * -1)}
@@ -1149,6 +1235,33 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .show .stage .tag::before{content:"";width:4px;height:22px;background:currentColor;border-radius:2px;flex:0 0 4px}
     .show .stage .tag.blue{--ac:var(--blue)}
     .show .stage .tag.purple{--ac:var(--purple)}
+  }
+  /* ⭐ ROUND 47 — THE LOCK-IN, AND IT IS THE BROWSER'S OWN SCROLL.
+     JP: "I wanted it to lock in for a second, then lock into the fifth stage,
+     then the seventh stage... I don't like how it AUTOMATICALLY SCROLLS to it."
+     Three rounds of GSAP ScrollTrigger snap answered the wrong question: that
+     waits for you to stop and then drives the page itself, which is the
+     "automatically scrolls" he rejected. Native scroll-snap captures the scroll
+     ON THE WAY PAST, on the compositor, with the real scroll physics. There is
+     no second animation to judder.
+     ⛔ `proximity`, never `mandatory`: this snap type sits on the ROOT scroller
+     and the root scrolls all 17,000px of this page. `mandatory` would make the
+     browser hunt for a snap target everywhere, including sections that have
+     none. `proximity` only engages when a snap point is actually near.
+     ⛔ `scroll-snap-stop: always` is what makes it "lock in, lock in, lock in" —
+     a fast flick cannot skip a system.
+     ⛔ NOTHING ELSE ON THIS PAGE MAY DECLARE A **VERTICAL** `scroll-snap-align`
+     on an element the ROOT scrolls. The align is what makes an element a
+     target; the type alone is inert, so a stray align anywhere in the document
+     silently joins this sequence. (`.swtab` also declares an align, and it is
+     safe: it lives inside its own `scroll-snap-type:x mandatory` scroller, a
+     different scroller AND a different axis. Grep before adding another.)
+     ⛔ Desktop only. The phone reads these as a normal stacked list and JP
+     approved that; capturing every card on a 390px screen would trap the
+     scroll. */
+  @media(min-width:960px) and (prefers-reduced-motion:no-preference){
+    html{scroll-snap-type:y proximity}
+    .show .sys{scroll-snap-align:center;scroll-snap-stop:always}
   }
   .show .sys{padding:56px 0;border-top:1px solid rgba(11,97,244,.14);position:relative}
   .show .sys:first-child{border-top:0;padding-top:0}
@@ -4693,17 +4806,20 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           else setTimeout(next, 120);
         });
       }
-      preload(KEYS[i++]);                       /* the first set, straight away */
-      var armed = false;
-      function arm(){
-        if (armed || scrollY < innerHeight * .4) return;
-        armed = true;
-        removeEventListener('scroll', arm);
-        if ('requestIdleCallback' in window) requestIdleCallback(next, {timeout:2000});
-        else setTimeout(next, 400);
-      }
-      addEventListener('scroll', arm, {passive:true});
-      arm();                                    /* deep-linked mid-page? go now */
+      /* ⛔ ROUND 47 — THE HEAD START IS BACK. Round 45 made this lazy (set 1
+         eager, sets 2 to 4 held until the visitor had scrolled 40% of a screen)
+         to pay for the 73-frame sets. It saved 3.3MB of eager transfer and it
+         cost the thing the frames exist for: a set that has not finished
+         arriving cannot be tweened, so the tap either glitches (before the gate
+         in makeScrub) or sits there doing nothing (after it). MEASURED at 2Mbps
+         on the LAST system: 43 of 47 painted frames had not decoded.
+         So the sets walk again as soon as the hero video is playable, one at a
+         time, at low fetch priority, on idle callbacks. That is round 42b's
+         shape and it was right. The range is several screens below the hero, so
+         this is the maximum head start available.
+         ⛔ It is still a QUEUE, never a gate: the interaction handlers call
+         preload(key) directly and walk straight past it. */
+      next();
     }
     (function startPreload(){
       var v = document.getElementById('heroVideo'), started = false;
@@ -4777,9 +4893,31 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         if (p < 1){ raf = requestAnimationFrame(tickTw); }
         else { target = pos = tw.to; tw = null; raf = null; lastT = 0; }
       }
+      /* ⛔ ROUND 47 — A TIMED TWEEN NEVER RACES THE NETWORK. This is round
+         42b's rule, and round 45 broke it on the desktop by making the preload
+         queue lazy: only set 1 is now eager, so the other three are commonly
+         still in flight when someone reaches the range and taps.
+         MEASURED, 2026-08-26, throttled to 2Mbps, tapping the LAST system (the
+         last set in the queue): 43 of 47 sampled frames were painted while
+         `img.complete` was false and `naturalWidth` was 0. The browser cannot
+         paint a bitmap that has not arrived, so it holds the previous one —
+         which is exactly the freeze-and-jump JP is calling a glitch.
+         ⛔ The SCROLL path is deliberately NOT gated: it chases a target that
+         keeps moving, so a late frame simply arrives and the next write picks
+         it up. Only the one-shot tween can outrun the bytes. */
+      var pend = null;
       return function(t, dur){
         preload(key);
         if (reduce){ pos = target = t; paint(t); return; }
+        if (dur && !READY[key]){
+          var first = pend === null;
+          pend = t;
+          if (first) preload(key).then(function(){ var v = pend; pend = null; go2(v, dur); });
+          return;
+        }
+        return go2(t, dur);
+      };
+      function go2(t, dur){
         if (dur){
           if (raf) cancelAnimationFrame(raf);
           tw = {from:pos, to:t, t0:(window.performance ? performance.now() : Date.now()), dur:dur};
@@ -4789,7 +4927,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         if (tw){ if (raf) cancelAnimationFrame(raf); tw = null; raf = null; lastT = 0; }
         target = t;
         if (!raf) raf = requestAnimationFrame(tick);
-      };
+      }
     }
     /* round 45: one number for every tap-driven open and close on the page.
        1300ms over 73 frames is ~56 distinct images a second — the point at
@@ -5608,84 +5746,37 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         return gsap.from(a.children, {y:34, opacity:0, duration:1, ease:'power4.out', stagger:.09,
           scrollTrigger:{trigger:a, start:'top 78%', once:true}});
       });
-      /* ⭐ THE MAGNETIC SETTLE — round 37, retuned 45, range fixed 46.
-         JP: "I wanted to catch on to the whole house one and then catch on to
-         the five-stage... lock in, lock in, lock in, but very nice and softly,
-         and I want it to leave nice and softly as well."
-         ⛔ NOT the round-36 pin coming back — no pin, no scrub, the page never
-         stops. You scroll freely; when you STOP, the page eases the nearest
-         system to centre, where the stage observer already picks it up.
+      /* ⭐ THE LOCK-IN — round 47, and it is NATIVE SCROLL SNAP now.
+         JP: "I don't like how it doesn't lock in when you scroll to it. I don't
+         like how it AUTOMATICALLY SCROLLS to it. I wanted it to lock in for a
+         second, then lock into the fifth stage, then the seventh stage, then
+         the smart five system."
 
-         ⛔ ROUND 46 — THE RANGE REACHES HALF A GAP PAST EACH END, AND THAT IS
-         WHAT MAKES THE FIRST SYSTEM CATCH. Measured on the deployed site: the
-         trigger ran from the FIRST article's centre to the LAST article's
-         centre, so a stop 90px short of Pure Home was outside the range
-         entirely and was left alone — the one catch JP named by name. The
-         range now opens half a gap early and closes half a gap late, so the
-         first and last systems are caught on approach like every other one.
-         Past that padding it still releases cleanly and the page scrolls on.
+         ⛔ ROUNDS 37 THROUGH 46 BUILT THE WRONG MECHANISM, THREE TIMES. GSAP's
+         ScrollTrigger `snap` waits until you have STOPPED and then drives the
+         page to the nearest system itself. However softly it is tuned, it is
+         still the page moving on its own after the user let go — which is the
+         thing he has now said outright he does not want. No amount of easing
+         fixes a mechanism that is answering a different question.
 
-         ⛔ AND THE POINTS ARE MAPPED AGAINST THE TRIGGER'S REAL SCROLL RANGE,
-         never against the first and last centres. The old normalisation
-         divided by (cN - c0), which only equalled the trigger's own span while
-         the range was exactly centre-to-centre. Widen one end without fixing
-         this and every snap point silently lands in the wrong place. */
-      function gap(){
-        var n = sysArts.length;
-        if (n < 2) return 600;
-        return (mid(sysArts[n-1]) - mid(sysArts[0])) / (n - 1);
-      }
-      function mid(a){ var r = a.getBoundingClientRect(); return scrollY + r.top + r.height/2 - innerHeight/2; }
-      var snapST = ScrollTrigger.create({
-        start: function(){ return mid(sysArts[0]) - gap()/2; },
-        end:   function(){ return mid(sysArts[sysArts.length-1]) + gap()/2; },
-        snap: {
-          /* WHAT WAS WRONG BEFORE ROUND 45, and it was one line: round 38 added
-             a .13 threshold, so a stop further than ~13% of the range's travel
-             from a centre was left alone. With four systems the gaps are ~.33
-             apart, so anything past 40% of a gap simply did not catch. Half the
-             stops caught and half did not, and an inconsistent catch reads as a
-             glitch rather than a mechanic. The threshold is gone.
+         What he is describing is CAPTURE DURING THE SCROLL: the scroll itself
+         is caught at each system on the way past. That is exactly what CSS
+         scroll-snap does, and the browser does it with the real scroll physics
+         on the compositor, so it cannot judder and there is never a second
+         animation. It lives in the stylesheet (search `scroll-snap-type`), not
+         here.
+           · `scroll-snap-type: y proximity` on the scroller
+           · `scroll-snap-align: center` on each `.show .sys`
+           · `scroll-snap-stop: always` so a fast flick cannot skip a system —
+             that is the "lock in, lock in, lock in"
+         Nothing else on the 545-page site declares a snap align, so no other
+         section can be captured by it.
 
-             SOFTLY is the other half, and round 45's numbers were wrong too.
-             JP: "not so jagged... everything is supposed to feel soft and
-             ambient." TRACED the scroll velocity through a real wheel burst:
-             the browser's own smooth-scroll tail crawls at 1px/frame for a full
-             second, then everything stopped DEAD for 337ms, then a separate
-             1.6s tween started. Two motions with a stall between them.
-               delay .12  — takes over near the end of the tail instead of long
-                            after it, so the stall is ~160ms, not 337ms. Still
-                            long enough that it never fights a scroll in
-                            progress.
-               duration   — .5 to .9s, down from .95 to 1.7. The long drag was
-                            reading as a second, separate movement.
-               power2.inOut — it must start soft as well as land soft.
-                            power2.OUT was tried first and opened with a 29px
-                            single-frame jump: an arrival still has to begin
-                            from rest, because by the time this fires the page
-                            has stopped.
-             TRACED AGAIN, per-frame: 7 3 4 6 8 10 13 16 15 13 10 7 5 3 1 —
-             one bell curve, no lurch, ~670ms.
-             ⛔ Still no pin and no scrub. Round 36 deleted the pin and this
-             must never quietly restore it. */
-          snapTo: function(v){
-            var s0 = snapST.start, s1 = snapST.end;
-            if (s1 <= s0) return v;
-            var best = v, bd = Infinity;
-            sysArts.forEach(function(a){
-              var t = (mid(a) - s0) / (s1 - s0);
-              var d = Math.abs(t - v);
-              if (d < bd){ bd = d; best = t; }
-            });
-            return best;
-          },
-          duration: {min:.5, max:.9}, delay:.12, ease:'power2.inOut'
-        }
-      });
+         ⛔ DO NOT RE-ADD A ScrollTrigger snap here. It fights the native one
+         and it is the behaviour he rejected. */
       return function(){
         if (obs) obs.disconnect();
         if (arriveIO) arriveIO.disconnect();
-        if (snapST) snapST.kill();
         tws.forEach(function(t){ if (t && t.scrollTrigger) t.scrollTrigger.kill(); if (t) t.kill(); });
         if (stageEl2) stageEl2.classList.remove('tapin','xopened');
         sysArts.forEach(function(a){ gsap.set(a.children, {clearProps:'opacity,transform'}); });
