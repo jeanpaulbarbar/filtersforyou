@@ -763,7 +763,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      the card's left edge at 872 on a 1440 screen; the 13ch headline ends at
      836. That 36px is the clearance JP asked for and it only exists because
      the card cannot widen. Never re-introduce a width change here. */
-  .hdeck{position:absolute;right:36px;bottom:36px;z-index:12;width:min(520px,88vw)}
+  .hdeck{position:absolute;right:36px;bottom:36px;z-index:12;width:min(532px,88vw)}
   @media(max-width:859px){.hdeck{display:none}}
   .hdeck .under{position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(255,253,250,.5);border-radius:var(--r-card);
     transform:translateY(12px) scale(.955);z-index:0}
@@ -872,9 +872,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      which is the re-flow JP read as chaotic and the reason the open card was
      735px tall and full of white. It now grows in ONE direction and the eye
      never has to re-find the name, the price or the product. */
-  .hdeck.open .face img{height:250px}
   .hdeck .t b{display:block;font-size:19px;font-weight:600;line-height:1.22;transition:font-size .8s var(--e-soft)}
-  .hdeck.open .t b{font-size:23px}
   .hdeck .t .pure{display:block;font-size:15px;font-weight:700;color:var(--blue);margin-top:2px}
   /* ⭐ ROUND 45 — THE PRICE IS THE BIGGEST THING ON THE CARD.
      JP: "I want to make the price a lot larger on the cards as well... I want
@@ -897,41 +895,49 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      "from" rides the BIG size (it is part of the number, not a caption), and
      "installed" drops to its own quiet line underneath. `from $3,850` measures
      ~207px at 46px, inside the column with room to spare. */
-  .hdeck .t .p{display:block;margin-top:8px;color:var(--ink);line-height:1;
-    font-size:46px;transition:font-size .8s var(--e-soft)}
-  .hdeck .t .p b{display:inline;font-size:1em;font-weight:800;letter-spacing:-.03em;line-height:1}
-  .hdeck .t .p i.pre{font-style:normal;font-size:.5em;font-weight:700;letter-spacing:-.015em;margin-right:2px}
-  .hdeck .t .p i.suf{display:block;font-style:normal;font-size:15px;font-weight:700;color:var(--muted);margin-top:6px}
-  .hdeck.open .t .pure{font-size:16px}
-  .hdeck.open .t .p{font-size:56px}
-  /* ⭐ ROUND 45 — THE LIFETIME WARRANTY RIDES ON THE CARD.
+  /* ⛔ EVERY SIZE IS ABSOLUTE, NEVER `em` OFF THE PARENT. First attempt set
+     46px on `.p` and sized `.pre` at `.5em`. On DESKTOP that read correctly.
+     On the PHONE the block below re-sizes `.p b` and knows nothing about `.p`,
+     so the number dropped to 18px while "from" stayed at 23px off the parent —
+     the qualifier ended up BIGGER than the price. Shipped, seen at 390, fixed.
+     ⛔ Any new size here needs its phone twin in the max-width:859 block. */
+  .hdeck .t .p{display:block;margin-top:9px;color:var(--ink);line-height:1}
+  .hdeck .t .p b{display:inline;font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1}
+  .hdeck .t .p i.pre{font-style:normal;font-size:23px;font-weight:700;letter-spacing:-.015em;margin-right:3px}
+  .hdeck .t .p i.suf{display:block;font-style:normal;font-size:15px;font-weight:600;color:var(--muted);margin-top:7px}
+  /* ⭐ THE LIFETIME WARRANTY RIDES ON THE CARD, QUIETLY.
      JP: "On the card, put 'Lifetime Warranty' on it as well. That way, people
      can see, 'Oh.'" It is the thing the business is not getting paid for
      (business-profile: "the lifetime warranty and locked-in servicing is a
-     goldmine customers never hear"), so it sits on the CLOSED card, under the
-     price, where the eye is already looking.
-     ⛔ Not yellow. Yellow only ever touches the thing you want clicked. It
-     takes the card's own accent, so it can never introduce a third colour. */
+     goldmine customers never hear"), so it sits under "installed", where the
+     eye already is.
+     ⛔ FIRST ATTEMPT USED THE BADGE FACE IN THE ACCENT COLOUR. JP: "I don't
+     like how you've done the lifetime warranty in a different font. It looks
+     like shit... I don't want it in a different colour." He is right and the
+     rule was already written down: --badge is THE PILL FACE ONLY, and there is
+     no pill here. It is the card's own typeface at the card's own quiet grey,
+     sentence case, no tracking. On the phone it was also wrapping to two lines
+     of blue capitals, which is what made it shout.
+     ⛔ Never restore --badge, uppercase, letter-spacing or an accent colour on
+     this element. It is a footnote, not a badge. */
   .hdeck .warr{display:inline-flex;align-items:center;gap:7px;margin-top:9px;
-    font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-    color:var(--ac,var(--blue))}
-  .hdeck .warr svg{width:14px;height:14px;flex:0 0 14px}
-  .hdeck.open .warr{font-size:12.5px}
-  /* ⭐ ROUND 45 — WHO IT IS FOR. JP: "Have us have a small little description
-     on it, like who this is for: families looking for pure, clean, filtered
-     water while getting hydrogen water on tap. Give them a little bit more of
-     a thing." One sentence per system, open state only — the closed card is a
-     560px banner and has no room for a sentence without losing the price. */
-  .hdeck .who{display:none;font-size:14.5px;line-height:1.45;color:var(--muted);font-weight:500;
-    margin-top:10px;padding-top:10px;border-top:1px solid var(--rule)}
-  .hdeck.open .who{display:block}
+    font-size:14px;font-weight:600;color:var(--muted)}
+  .hdeck .warr svg{width:15px;height:15px;flex:0 0 15px;opacity:.7}
+  /* ⭐ WHO IT IS FOR. JP: "Have us have a small little description on it, like
+     who this is for... Give them a little bit more of a thing."
+     ⛔ IT LIVES IN THE DRAWER, NOT IN THE FACE. It used to be `display:none`
+     in the face and `block` on open — an instant, un-animatable jump that shoved
+     the card taller in ONE frame before the drawer had moved at all. That was
+     step one of the double step. Inside `.more` it is simply revealed by the
+     one thing that animates. */
+  .hdeck .who{font-size:15px;line-height:1.5;color:var(--muted);font-weight:500;margin:0}
   .hdeck.open .more .btn{width:100%;justify-content:center}
   /* round 45: .5s --e-out → .8s --e-soft. Same mechanic, symmetric curve, and
      slow enough to read as an opening rather than a snap. */
   .hdeck .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .8s var(--e-soft)}
   .hdeck.open .more{grid-template-rows:1fr}
   .hdeck .more > div{overflow:hidden}
-  .hdeck .more .inner2{padding:2px 18px 18px;border-top:1px solid var(--rule)}
+  .hdeck .more .inner2{padding:16px 20px 20px;border-top:1px solid var(--rule)}
   .hdeck .more ul{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;padding:14px 0}
   .hdeck .more li{display:flex;gap:9px;font-size:17px;color:var(--ink);font-weight:500;align-items:flex-start;line-height:1.35}
   .hdeck .more li svg{width:17px;height:17px;flex:0 0 17px;margin-top:3px}
@@ -992,9 +998,22 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        how it is positioned. That cost one probe round; the 44px tap floor
        reads 0 and nothing else looks wrong. Same family as THE SCALE TRAP:
        this is a POSITION change, never a scale and never a hide. */
-    .hdeck:not(.open) .chead{position:absolute;right:0;top:50%;transform:translateY(-50%);
+    /* ⛔ The toggle is centred on the FACE, not on the card, so it does not
+       drift as the drawer grows — and --faceh is the single source for both
+       that centre and the face's own min-height. Two hardcoded numbers here
+       would silently disagree the first time the card is resized. */
+    /* ⛔ 224, NOT 212, AND IT IS MEASURED. With --faceh at 212 three cards sat
+       at 212 and Pure Premium sat at 222 — the longest name (three lines) plus
+       the one surviving kicker. A deck whose slab resizes on every flip is not
+       a deck, which is the round-28 rule; 10px is small but it is visible
+       because the card's foot is pinned and the resize happens at the TOP.
+       224 is the tallest card's natural height plus 2, so every card clears it
+       and none of them stretches. ⛔ Re-measure if a name, the kicker or the
+       price scale changes: `--faceh:0` on .hdeck lets the face size to content. */
+    .hdeck{--faceh:224px}
+    .hdeck .chead{position:absolute;right:0;top:calc(var(--faceh)/2);transform:translateY(-50%);
       z-index:5;padding:0 14px 0 0;gap:0}
-    .hdeck:not(.open) .chead .dtag{display:none}   /* .dt2 carries it instead */
+    .hdeck .chead .dtag{display:none}   /* .dt2 carries it instead */
     /* 66px right reserve so no text can run under the floating toggle.
        ⛔ min-height 180 is what makes it a DECK: measured without it the cards
        came out 148 / 158.8 / 180 and the slab visibly resized on every flip.
@@ -1014,29 +1033,21 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        the image produces, so nothing fights.
        ⛔ The product column is 176, not 220. The card lost 40px of width and
        the text column has to carry a 46px price without wrapping "$3,850". */
-    .hdeck:not(.open) .face{grid-template-columns:1fr 176px;gap:14px;padding:10px 62px 10px 18px;min-height:206px}
-    .hdeck:not(.open) .face img{height:186px;max-width:176px}
+    .hdeck .face{grid-template-columns:1fr 186px;gap:16px;padding:14px 62px 14px 20px;min-height:var(--faceh)}
+    .hdeck .face img{height:184px;max-width:186px}
     /* OPEN — same two columns, same edges. Only the vertical scale moves. */
-    /* `align-items:start` on open, not `center`. The text column runs ~330px
-       once the who-line is in and the product is 228 — centred, the unit
-       floated in the middle of the column with the name hanging above it and
-       the description beside empty space. Aligned to the top, the product's
-       head sits level with the system name, which is the closed card's
-       relationship held through the open state. */
-    .hdeck.open .face{grid-template-columns:1fr 200px;gap:16px;padding:6px 18px 14px;align-items:start}
-    .hdeck.open .face img{max-width:200px;margin-top:6px}
     /* ⛔ :not(.notag) is LOAD-BEARING — this rule sits later in the sheet than
        the base `.hdeck.notag .dtag{display:none}` and matches at the same
        specificity, so without it an empty kicker still reserved its 3px bar
        and 20px of height on the three cards that no longer carry one. */
-    .hdeck:not(.open):not(.notag) .dt2{display:inline-flex;margin-bottom:5px;font-size:12px}
+    .hdeck:not(.notag) .dt2{display:inline-flex;margin-bottom:5px;font-size:12px}
     /* ⛔ ROUND 45 — THE CLOSED TYPE SCALE IS SET IN THE BASE RULES NOW, NOT
        HERE. This block used to re-declare name 20 / pure 16 / price 28 at
        `:not(.open)` specificity, which silently beat any base change — the
        46px price landed at 28 on the first attempt and nothing in the source
        said why. The name and the kicker still need their desktop-closed
        trim; the PRICE does not, so it is gone from here on purpose. */
-    .hdeck:not(.open) .t .pure{margin-top:3px}
+    .hdeck .t .pure{margin-top:3px}
     /* ── the Google card's turn in the deck (HD[1]) ──
        Same slab, same 116px left column — the G takes the product's place so
        the card does not resize as the deck flips through it. */
@@ -1938,9 +1949,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .hdeck .face img{width:auto;height:74px;max-width:76px}
     .hdeck .t b{font-size:15.5px}
     .hdeck .t .pure{font-size:13px;margin-top:2px}
-    .hdeck .t .p{margin-top:2px}
-    .hdeck .t .p b{font-size:18px}
-    .hdeck .t .p i{font-size:12px}
+    /* ⛔ THE PHONE MUST NAME `.pre` AND `.suf` BY CLASS. A bare `.p i` rule
+       here is specificity (0,3,1) and the desktop's `.p i.pre` is (0,4,1), so
+       the qualifier kept its 23px while the number dropped to 18 — "from" came
+       out BIGGER than "$3,850". That shipped. Match the class, or lose. */
+    .hdeck .t .p{margin-top:5px}
+    .hdeck .t .p b{font-size:30px}
+    .hdeck .t .p i.pre{font-size:15px;margin-right:2px}
+    .hdeck .t .p i.suf{font-size:12.5px;margin-top:3px}
+    .hdeck .warr{font-size:12.5px;margin-top:6px;gap:5px}
+    .hdeck .warr svg{width:13px;height:13px;flex:0 0 13px}
     .hdeck .dtag{font-size:11.5px;letter-spacing:.08em}
     .hdeck .tgl{width:44px;height:44px;flex:0 0 44px}
     /* ⛔ Round 12, JP: "when I click on it to expand on the hero, it goes past
@@ -1962,7 +1980,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .hdeck.open .face{padding:12px 18px 6px;gap:5px}
     .hdeck.open .face img{width:min(218px,24svh);height:min(218px,24svh)}
     .hdeck.open .t b{font-size:20px}
-    .hdeck.open .t .p b{font-size:22px}
+    /* the phone twins of the desktop price sizes — see the ⛔ note there.
+       Same numbers as the closed card on purpose: a price that resizes as the
+       card opens is one more thing moving, and the whole point of round 46 is
+       that only ONE thing moves. */
+    .hdeck.open .t .p b{font-size:30px}
+    .hdeck.open .t .p i.pre{font-size:15px}
     .hdeck.open .more li{font-size:14.5px}
     .hdeck .more ul{grid-template-columns:1fr;gap:8px}
     .hdeck .more .inner2{padding:2px 15px 15px}
@@ -3142,9 +3165,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
              warranty sits directly under it, on the CLOSED card. Both are
              inside .t so they ride the text column and can never collide with
              the product photograph in column 2. -->
-        <span class="t"><span class="dtag dt2 js-hdtag"></span><b id="hdName">Whole House Filtration System</b><span class="pure" id="hdPure">Pure Home</span><span class="p" id="hdPrice"><i class="pre">from</i><b>$3,850</b><i class="suf">installed</i></span><span class="warr"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.8 4.5 6v6.1c0 4.4 3.1 7.6 7.5 9.1 4.4-1.5 7.5-4.7 7.5-9.1V6L12 2.8Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="m8.7 12.1 2.3 2.3 4.3-4.3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Lifetime warranty</span><span class="who" id="hdWho"></span></span>
+        <span class="t"><span class="dtag dt2 js-hdtag"></span><b id="hdName">Whole House Filtration System</b><span class="pure" id="hdPure">Pure Home</span><span class="p" id="hdPrice"><i class="pre">from</i><b>$3,850</b><i class="suf">installed</i></span><span class="warr"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.8 4.5 6v6.1c0 4.4 3.1 7.6 7.5 9.1 4.4-1.5 7.5-4.7 7.5-9.1V6L12 2.8Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="m8.7 12.1 2.3 2.3 4.3-4.3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Lifetime warranty</span></span>
       </button>
       <div class="more" id="hdMore"><div><div class="inner2">
+        <p class="who" id="hdWho"></p>
         <ul id="hdTicks"></ul>
         <button class="btn btn-sm js-open" type="button" id="hdGet" data-sys="Pure Home"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
       </div></div></div>
@@ -4465,11 +4489,30 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       if (HD[hdi].google && !matchMedia('(min-width:860px)').matches)
         hdi = (hdi + dir + HD.length) % HD.length;
       if (reduce || !hasGsap){ hdApply(); return; }
-      gsap.to(hdCard, {scale:.9, opacity:0, duration:.2, ease:'power2.in', onComplete:function(){
-        hdApply();
-        gsap.fromTo(hdCard, {scale:.6, opacity:0, transformOrigin:'100% 100%'},
-          {scale:1, opacity:1, duration:.55, ease:'back.out(1.4)'});
-      }});
+      /* ⛔ ROUND 46 — THE FLIP IS ONE CONTINUOUS MOTION. JP: "when we click the
+         top button... it's a lot more glitchy than before. It does a double
+         take, which is no good."
+         He is describing a real discontinuity, not a feeling. The old pair
+         tweened the card DOWN to scale .9, then restarted it from scale .6 —
+         a hard jump of .3 between the two halves — and the second half used
+         back.out(1.4), which overshoots past 1 and settles back. So the card
+         shrank a little, vanished, reappeared much smaller, sprang past full
+         size and then came back. Four direction changes for one card flip.
+         Now: it leaves downward and the next one arrives from above, and the
+         out-tween ENDS on exactly the values the in-tween STARTS from, so
+         there is nothing to jump. One ease, the card's own --e-soft, no
+         overshoot. It reads as a deck being dealt, which is what it is. */
+      var GONE = {scale:.965, opacity:0, y:16};
+      gsap.to(hdCard, {scale:GONE.scale, opacity:0, y:GONE.y, duration:.26, ease:'power2.in',
+        onComplete:function(){
+          hdApply();
+          gsap.fromTo(hdCard, {scale:GONE.scale, opacity:0, y:-GONE.y, transformOrigin:'50% 50%'},
+            /* power3.out, not the drawer's symmetric curve: a card ARRIVING
+               should land and settle, and that is what --e-out means on this
+               page. Symmetric easing belongs to the two things that open and
+               close under the user's finger. No back.out — no overshoot. */
+            {scale:1, opacity:1, y:0, duration:.58, ease:'power3.out'});
+        }});
     }
     hdApply();
     document.getElementById('hdNext').addEventListener('click', function(){ hdSet(hdi+1, 1); });
@@ -5621,7 +5664,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
             var b = 0; snapPts().forEach(function(x){ if (Math.abs(x-v) < Math.abs(b-v)) b = x; });
             return b;
           },
-          duration: {min:.95, max:1.7}, delay:.28, ease:'power1.inOut', inertia:false
+          duration: {min:.5, max:.9}, delay:.12, ease:'power2.inOut'
         }
       });
       return function(){
