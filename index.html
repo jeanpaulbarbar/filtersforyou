@@ -5608,61 +5608,76 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         return gsap.from(a.children, {y:34, opacity:0, duration:1, ease:'power4.out', stagger:.09,
           scrollTrigger:{trigger:a, start:'top 78%', once:true}});
       });
-      /* ⭐ ROUND 37 — THE MAGNETIC SETTLE. JP: "when you're scrolling through
-         the systems, they should lock into the system for a section."
+      /* ⭐ THE MAGNETIC SETTLE — round 37, retuned 45, range fixed 46.
+         JP: "I wanted to catch on to the whole house one and then catch on to
+         the five-stage... lock in, lock in, lock in, but very nice and softly,
+         and I want it to leave nice and softly as well."
          ⛔ NOT the round-36 pin coming back — no pin, no scrub, the page never
-         stops. You scroll freely; when you STOP inside the range, the page
-         eases the nearest system to centre, where the stage observer already
-         picks it up. Snap points are the articles' real centres, recomputed
-         per call, so unequal first-article padding cannot skew them. */
-      function snapPts(){
-        var l = sysArts[sysArts.length-1];
-        var c0 = sysArts[0].offsetTop + sysArts[0].offsetHeight/2;
-        var cN = l.offsetTop + l.offsetHeight/2;
-        return sysArts.map(function(a){
-          return (a.offsetTop + a.offsetHeight/2 - c0)/(cN - c0);
-        });
+         stops. You scroll freely; when you STOP, the page eases the nearest
+         system to centre, where the stage observer already picks it up.
+
+         ⛔ ROUND 46 — THE RANGE REACHES HALF A GAP PAST EACH END, AND THAT IS
+         WHAT MAKES THE FIRST SYSTEM CATCH. Measured on the deployed site: the
+         trigger ran from the FIRST article's centre to the LAST article's
+         centre, so a stop 90px short of Pure Home was outside the range
+         entirely and was left alone — the one catch JP named by name. The
+         range now opens half a gap early and closes half a gap late, so the
+         first and last systems are caught on approach like every other one.
+         Past that padding it still releases cleanly and the page scrolls on.
+
+         ⛔ AND THE POINTS ARE MAPPED AGAINST THE TRIGGER'S REAL SCROLL RANGE,
+         never against the first and last centres. The old normalisation
+         divided by (cN - c0), which only equalled the trigger's own span while
+         the range was exactly centre-to-centre. Widen one end without fixing
+         this and every snap point silently lands in the wrong place. */
+      function gap(){
+        var n = sysArts.length;
+        if (n < 2) return 600;
+        return (mid(sysArts[n-1]) - mid(sysArts[0])) / (n - 1);
       }
+      function mid(a){ var r = a.getBoundingClientRect(); return scrollY + r.top + r.height/2 - innerHeight/2; }
       var snapST = ScrollTrigger.create({
-        trigger: sysArts[0], start: 'center center',
-        endTrigger: sysArts[sysArts.length-1], end: 'center center',
+        start: function(){ return mid(sysArts[0]) - gap()/2; },
+        end:   function(){ return mid(sysArts[sysArts.length-1]) + gap()/2; },
         snap: {
-          /* ⭐ ROUND 45 — IT CATCHES EVERY SYSTEM, AND IT CATCHES THEM SOFTLY.
-             JP, 26 Aug: "as you scroll to it, it doesn't softly lock into the
-             whole house. It can just glide and scroll. I wanted to catch on to
-             the whole house one and then catch on to the five-stage... I'm
-             looking for it to scroll to the next section, lock in, lock in,
-             lock in, but very nice and softly, and I want it to leave nice and
-             softly as well."
+          /* WHAT WAS WRONG BEFORE ROUND 45, and it was one line: round 38 added
+             a .13 threshold, so a stop further than ~13% of the range's travel
+             from a centre was left alone. With four systems the gaps are ~.33
+             apart, so anything past 40% of a gap simply did not catch. Half the
+             stops caught and half did not, and an inconsistent catch reads as a
+             glitch rather than a mechanic. The threshold is gone.
 
-             WHAT WAS WRONG, and it was one line: round 38 added a .13
-             threshold so a stop further than ~13% of the range's travel from a
-             centre was left alone. With four systems the gaps are ~.33 apart,
-             so anything past 40% of a gap simply did not catch — which is
-             exactly "it moves back to it, but it's not really what I'm looking
-             for". Half the stops caught and half did not, and an inconsistent
-             catch reads as a glitch rather than a mechanic.
-             ⛔ The threshold is GONE. Every stop inside the range now finds
-             its nearest system.
-
-             SOFTLY is the other half, and it is three numbers:
-               delay .28  — it never fights a scroll still in progress. GSAP
-                            waits this long after the last scroll event, so a
-                            continuous scroll through the whole range is never
-                            interrupted. That is JP's "it can just glide".
-               duration   — .95 to 1.7s, up from .7 to 1.15. The long end is
-                            what a full gap costs, and at 1.7s a 700px glide
-                            reads as the page settling, not as being dragged.
-               power1.inOut — was power2.inOut. A quadratic starts and ends
-                            almost stationary, which is what made the catch
-                            feel like it grabbed you; power1 leaves and arrives
-                            with the gentler shoulder, so it "leaves nice and
-                            softly" too.
-             ⛔ Still no pin and no scrub. The page never stops moving — round
-             36 deleted the pin and this must never quietly restore it. */
+             SOFTLY is the other half, and round 45's numbers were wrong too.
+             JP: "not so jagged... everything is supposed to feel soft and
+             ambient." TRACED the scroll velocity through a real wheel burst:
+             the browser's own smooth-scroll tail crawls at 1px/frame for a full
+             second, then everything stopped DEAD for 337ms, then a separate
+             1.6s tween started. Two motions with a stall between them.
+               delay .12  — takes over near the end of the tail instead of long
+                            after it, so the stall is ~160ms, not 337ms. Still
+                            long enough that it never fights a scroll in
+                            progress.
+               duration   — .5 to .9s, down from .95 to 1.7. The long drag was
+                            reading as a second, separate movement.
+               power2.inOut — it must start soft as well as land soft.
+                            power2.OUT was tried first and opened with a 29px
+                            single-frame jump: an arrival still has to begin
+                            from rest, because by the time this fires the page
+                            has stopped.
+             TRACED AGAIN, per-frame: 7 3 4 6 8 10 13 16 15 13 10 7 5 3 1 —
+             one bell curve, no lurch, ~670ms.
+             ⛔ Still no pin and no scrub. Round 36 deleted the pin and this
+             must never quietly restore it. */
           snapTo: function(v){
-            var b = 0; snapPts().forEach(function(x){ if (Math.abs(x-v) < Math.abs(b-v)) b = x; });
-            return b;
+            var s0 = snapST.start, s1 = snapST.end;
+            if (s1 <= s0) return v;
+            var best = v, bd = Infinity;
+            sysArts.forEach(function(a){
+              var t = (mid(a) - s0) / (s1 - s0);
+              var d = Math.abs(t - v);
+              if (d < bd){ bd = d; best = t; }
+            });
+            return best;
           },
           duration: {min:.5, max:.9}, delay:.12, ease:'power2.inOut'
         }
