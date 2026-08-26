@@ -1248,8 +1248,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      and the root scrolls all 17,000px of this page. `mandatory` would make the
      browser hunt for a snap target everywhere, including sections that have
      none. `proximity` only engages when a snap point is actually near.
-     ⛔ `scroll-snap-stop: always` is what makes it "lock in, lock in, lock in" —
-     a fast flick cannot skip a system.
+     ⛔ NO `scroll-snap-stop: always`. It looked like the way to get "lock in,
+     lock in, lock in" and on the DEPLOYED site it trapped the scroll outright:
+     once the page settled on Pure Home, nineteen consecutive 300px wheel
+     bursts left it at 1220 and it never moved again. `always` forbids passing
+     a snap point within one gesture, so any gesture too small to clear the
+     next point just re-snaps to the current one. Without it the same walk
+     catches all four systems in both directions and still travels 5700px.
+     ⛔ Never re-add it. Locking in and being stuck are one line apart, and only
+     a real wheel test on the deployed page tells them apart.
      ⛔ NOTHING ELSE ON THIS PAGE MAY DECLARE A **VERTICAL** `scroll-snap-align`
      on an element the ROOT scrolls. The align is what makes an element a
      target; the type alone is inert, so a stray align anywhere in the document
@@ -1261,7 +1268,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      scroll. */
   @media(min-width:960px) and (prefers-reduced-motion:no-preference){
     html{scroll-snap-type:y proximity}
-    .show .sys{scroll-snap-align:center;scroll-snap-stop:always}
+    .show .sys{scroll-snap-align:center}
   }
   .show .sys{padding:56px 0;border-top:1px solid rgba(11,97,244,.14);position:relative}
   .show .sys:first-child{border-top:0;padding-top:0}
