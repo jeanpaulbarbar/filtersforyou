@@ -529,7 +529,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      Everything in the strip now sits on a 24px line: rating 12px (C&C's own
      strip runs 12), glyphs 15, stars 10. Desktop-only chrome — the strip is
      display:none under 1080, so no phone tap target changes. */
-  .util{background:var(--ink-blue);color:#fff;font-size:12px}   /* round 56: ink, over the film */
+  .util{background:var(--range-bg,#E4EBF3);color:var(--ink);font-size:12px}   /* round 57: the frame's blue */
   .util nav.ulinks a{min-height:24px}
   .util .soc svg{width:15px;height:15px}
   .util .ustars svg{width:10px;height:10px}
@@ -554,7 +554,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .util .soc svg{width:19px;height:19px}
   /* round 39: hover was yellow — invisible on the mist ground (≈1.5:1), and
      yellow belongs to the ask anyway. Blue, same as every other quiet hover. */
-  @media(hover:hover) and (pointer:fine){.util .soc a:hover i{color:var(--yellow)}}
+  @media(hover:hover) and (pointer:fine){.util .soc a:hover i{color:var(--blue)}}
   @media(max-width:1079px){.util{display:none}}
   .hdr.mini .util{display:none}
   /* systems dropdown */
@@ -627,15 +627,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      none and the corners are carried by border-radius + overflow:clip. */
   /* round 54: the frame around the hero card is PAPER, like theirs. The cool
      tint starts under the card and fades out (see .show). */
-  .hero{position:relative;background:var(--paper);
-    /* round 56, JP: "a thin white line at the top of the page… that white
-       thing needs to be blue." The paper frame ABOVE the card is gone at every
-       width: the film meets the top of the screen and the utility strip sits
-       on it in ink. Sides and bottom keep their gutter. */
-    padding:0 var(--hframe) var(--hframe)}
-  .hcard{position:relative;min-height:calc(100svh - var(--hframe));
+  /* ⭐ ROUND 57, JP: "the whole border around the 4K video is supposed to be
+     the same colour as the next section, that little light blue, so it all
+     looks continuous." The frame is back at every width and it is
+     --range-bg, the range's own ground (home #E4EBF3 at load), utility strip
+     included. Round 56's ink strip and the paper before it were both wrong. */
+  .hero{position:relative;background:var(--range-bg,#E4EBF3);
+    padding:calc(var(--utilh) + var(--hframe)) var(--hframe) var(--hframe)}
+  .hcard{position:relative;min-height:calc(100svh - var(--utilh) - 2*var(--hframe));
     display:flex;align-items:flex-end;background:var(--ink-blue);
-    border-radius:0 0 var(--r-hero) var(--r-hero);overflow:clip}
+    border-radius:var(--r-hero);overflow:clip}
   @media (prefers-reduced-motion: no-preference){
     .hcard{animation:hcardin 1.15s var(--e-out) .12s backwards}
     .hdr .row{animation:hdrin .8s var(--e-out) .85s backwards}
@@ -643,14 +644,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* the from-state is ~32% wide × 26% tall of the card, centred — C&C's small
      card measured ~400×240 at 1440. Both ends carry the same round() so the
      radius never pops when the animation hands off to border-radius. */
-  @keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round 0 0 var(--r-hero) var(--r-hero))}
-    to{clip-path:inset(0 round 0 0 var(--r-hero) var(--r-hero))}}
+  @keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round var(--r-hero))}
+    to{clip-path:inset(0 round var(--r-hero))}}
   @keyframes hdrin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
   /* ⛔ ROUND 41 — the main row steps fully INTO the card. Measured before:
      the Book now pill's top sat EXACTLY on the card's top seam (both y=56)
      — JP read it as the header being cut off. 10px of desktop padding puts
      the whole row inside the film, which is where C&C carry theirs too. */
-  @media(min-width:1080px){.hdr{padding-top:0}}   /* round 56: the ink utility strip sits flush at y=0 */
+  @media(min-width:1080px){.hdr{padding-top:10px}}
   /* under 1080 the utility strip is display:none, so its band collapses.
      ROUND 40 — the header clears the band: without the strip the fixed row
      started at y=0 and the white mark's top pixels sat ON the mist strip,
@@ -664,10 +665,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      load… that shouldn't be there." It was the 8px hero frame above the card.
      The card now meets the screen top; only its bottom corners stay round.
      The header keeps its 8px so the white mark sits over the film, not on it. */
-  @media(max-width:859px){
-    .hero{padding-top:0}
-    .hcard{min-height:calc(100svh - var(--hframe));border-radius:0 0 var(--r-hero) var(--r-hero)}
-  }
+  /* round 57: the phone keeps its 8px frame too, in the range's blue */
   /* round 40: on :root, not .hero — the header reads it too */
   @media(max-width:599px){:root{--hframe:8px}}
   /* ⛔ ROUND 40 — THE PHONE GETS ITS OWN OPENING. Two measured reasons:
@@ -1370,7 +1368,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      the CURRENT system's colour and the ground crossfades with the unit. The
      frame's box edge disappears into it on every system, not just an average.
      (The round-54 seam moved off this section; it is flat colour now.) */
-  .show{background:var(--range-bg,#E8EEF6);transition:background-color .5s ease-in-out;z-index:6;padding:100px 0 90px;position:relative;
+  .show{background:var(--range-bg,#E4EBF3);transition:background-color .5s ease-in-out;z-index:6;padding:100px 0 90px;position:relative;
     /* MEASURED: #0B61F4 on the luxe ground is 4.34:1 and 4.46:1 on the home
        ground, both under 4.5. Inside this section every blue reads deep. */
     --blue:var(--blue-deep)}
@@ -1778,7 +1776,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        opening out to full bleed, not two sides pinching in. JP: "supposed to be
        the same one… it just doesn't feel the same." The vertical inset was the
        difference. Phones still get no clip (round 27). */
-    clip-path:inset(80px 36px round 48px);will-change:clip-path;background:var(--ink-blue)}
+    /* round 57, JP: "start a lot more small, so when we scroll down we can see
+       it perform." From roughly half the width and a third of the height. */
+    clip-path:inset(22% 24% round 48px);will-change:clip-path;background:var(--ink-blue)}
   .xp .ph{position:absolute;inset:-8% 0;will-change:transform}
   .xp .ph img{width:100%;height:100%;object-fit:cover;object-position:66% 40%}
   .xp .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,16,46,.82) 0%,rgba(4,16,46,.44) 50%,rgba(4,16,46,.1) 100%)}
@@ -2155,7 +2155,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .revs{background:var(--paper);z-index:14;padding:96px 0 90px;position:relative;overflow:hidden}
   .revs .in{position:relative}
   .revs .rhead{text-align:center;max-width:680px;margin:0 auto}
-  .revs .rgoogle{display:block;width:72px;height:72px;margin:0 auto 14px}
+  .revs .rtop{display:inline-flex;align-items:center;gap:16px}
+  .revs .rgoogle{display:block;width:44px;height:44px}
   .revs .rstars{display:inline-flex;gap:4px}
   .revs .rstars svg{width:28px;height:28px}
   .revs .rhead h2{margin:18px auto 0;max-width:14ch}
@@ -2423,7 +2424,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      flashes. */
   @keyframes hsglow{
     0%  {box-shadow:0 0 0 4px rgba(255,217,0,.25), 0 3px 10px rgba(4,16,46,.34); scale:1}
-    40% {box-shadow:0 0 0 10px rgba(255,255,255,.32), 0 0 18px 6px rgba(255,217,0,.55), 0 3px 12px rgba(4,16,46,.22); scale:1.12}
+    45% {box-shadow:0 0 0 9px rgba(255,255,255,.26), 0 0 16px 5px rgba(255,217,0,.45), 0 3px 12px rgba(4,16,46,.22); scale:1.09}
     100%{box-shadow:0 0 0 4px rgba(255,217,0,.25), 0 3px 10px rgba(4,16,46,.34); scale:1}}
 
   @keyframes hspulse{
@@ -2496,7 +2497,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      three animations start on the SAME class change, so nothing inherits a
      clock from something already running. That is the distinction. */
   .timg.xopen .hs > button > i{
-    animation:hspop .7s var(--e-out) both, hspulse 2.4s ease-in-out infinite, hsglow .6s ease-out 1}
+    /* round 57, JP: "it feels very fast and rushed." Pops 1s apart 200ms, the
+       halo 900ms and gentler. The sweep still follows the last pop directly. */
+    animation:hspop 1s var(--e-out) both, hspulse 2.4s ease-in-out infinite, hsglow .9s ease-in-out 1}
   /* ⭐⭐ ROUND 54 — THE SWEEP STARTS THE MOMENT THE LAST MARKER HAS LANDED.
      JP: "right now it loads, waits like a second, and then it does the glow."
      MEASURED on the deployed page 2026-08-26, both viewports: the sweep was
@@ -2508,18 +2511,18 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* round 56, JP: "once the plus signs are done, it needs to respond a little
      bit quicker." Sweep starts .2s after the last pop begins (1.16s desktop,
      .68s phone), 90ms apart. */
-  .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,1.16s}
-  .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,1.25s}
-  .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,1.34s}
-  .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,1.43s}
-  .timg.xopen .hs:nth-child(5) > button > i{animation-delay:.64s,1.79s,1.52s}
-  .timg.xopen .hs:nth-child(6) > button > i{animation-delay:.8s,1.95s,1.61s}
-  .timg.xopen .hs:nth-child(7) > button > i{animation-delay:.96s,2.11s,1.7s}
+  .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,2.2s,1.5s}
+  .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.2s,2.4s,1.64s}
+  .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.4s,2.6s,1.78s}
+  .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.6s,2.8s,1.92s}
+  .timg.xopen .hs:nth-child(5) > button > i{animation-delay:.8s,3s,2.06s}
+  .timg.xopen .hs:nth-child(6) > button > i{animation-delay:1s,3.2s,2.2s}
+  .timg.xopen .hs:nth-child(7) > button > i{animation-delay:1.2s,3.4s,2.34s}
   @media(max-width:859px){
-    .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,.68s}
-    .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,.77s}
-    .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,.86s}
-    .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,.95s}
+    .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.6s,.9s}
+    .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.2s,1.8s,1.04s}
+    .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.4s,2s,1.18s}
+    .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.6s,2.2s,1.32s}
   }
   /* the wrapper fade keeps step with its dot */
   .timg.xopen .hs:nth-child(1){transition-delay:0s}
@@ -3036,9 +3039,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        dead hold to 40svh, which is enough to read as a lock without stalling.
        ⛔ `.xplock` AND `.tourwrap`'s margin ARE ONE NUMBER (round 28b). Change
        one alone and the gap between them IS a white strip across the page. */
-    .xplock{height:140svh}
+    /* ⭐ ROUND 57 — 140svh → 100svh, the two numbers together. JP, scrolling UP
+       from the Deluxe setup: "it stops it and catches it at Book a free
+       inspection… it should just pull the whole image up." The 40svh dead hold
+       was the catch: on the way up the curtain had fully dropped and the frame
+       was still pinned. The lock is now exactly the wipe — going down the
+       curtain starts the moment the frame lands, going up the frame moves the
+       moment the curtain has cleared it. */
+    .xplock{height:100svh}
     .xp .frame{position:sticky;top:0;height:100svh;min-height:0}
-    .tourwrap{margin-top:-140svh}
+    .tourwrap{margin-top:-100svh}
   }
   /* desktop framing of the locked copy — 96px clears the 62px solid header,
      which it always is by this point in the page. Centring instead tucked the
@@ -3335,41 +3345,55 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* round 56, JP: "the FAQ looks horrible the way it's been done." One centred
      column, 920px wide, under a centred heading. Roomier rows than round 55,
      still hairlines, no cards, no photo. */
-  .faq .fhead{max-width:none;text-align:center}
-  .faq .fhead .lab{justify-content:center}
-  .faq h2{margin:14px auto 0}
-  .fwrap{display:block;max-width:920px;margin:44px auto 0}
-  .fgrid{display:grid;grid-template-columns:1fr;gap:0 56px;min-width:0;border-top:1px solid var(--rule)}
-  .fcol{min-width:0}   /* each column is its own flow, so an open answer moves only its own column */
+  /* ⭐ ROUND 57 — THE CARDS ARE BACK, THE LAYOUT IS NEW. JP: "I like the ones we
+     had before, the original ones. You just needed to design the layout a lot
+     better… especially on mobile, get crafty." So: the round-30 card accordion
+     (bordered, rounded, the open one lifts), numbered 01–10 in the badge face,
+     under a heading column that stays put on desktop and carries the one ask
+     that fits a question page: the phone number. On a phone the heading sits
+     above and the cards run full width with the number as the handle. */
+  .faq .fside .lab{justify-content:flex-start}
+  .faq .fside h2{margin:14px 0 0;max-width:12ch}
+  .faq .fside .lede{margin-top:16px;max-width:30ch}
+  .faq .fside .go{margin-top:24px}
+  .fwrap{display:grid;gap:36px;margin-top:8px;align-items:start}
+  .fgrid{display:grid;grid-template-columns:1fr;gap:10px;min-width:0;counter-reset:faq}
+  .fcol{display:contents}
 
-  .fq{background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;overflow:hidden}
+  .fq{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-card);
+      overflow:hidden;transition:border-color .3s ease-in-out,box-shadow .3s ease-in-out,background-color .3s ease-in-out}
+  .fq[open]{border-color:#CBD9EE;background:#fff;box-shadow:0 1px 2px rgba(15,39,72,.04),0 14px 30px -18px rgba(15,39,72,.3)}
   .fq summary{
     display:flex;align-items:center;gap:14px;cursor:pointer;list-style:none;
-    padding:15px 0;min-height:44px;user-select:none}
+    padding:17px 18px;min-height:44px;user-select:none}
+  .fq summary::before{content:counter(faq,decimal-leading-zero);counter-increment:faq;
+    font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--blue);
+    flex:0 0 26px;line-height:1}
   .fq summary::-webkit-details-marker{display:none}
   .fq summary h3{
-    flex:1 1 auto;margin:0;font-size:16.5px;font-weight:650;line-height:1.35;
+    flex:1 1 auto;margin:0;font-size:16.5px;font-weight:700;line-height:1.35;
     letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
   /* the chevron is a control, never the ask — yellow stays reserved for the
      thing we want clicked (standing brand rule). */
   .fq .chev{flex:0 0 20px;width:20px;height:20px;color:var(--blue);
             transition:transform .3s var(--e-out)}
   .fq[open] .chev{transform:rotate(180deg)}
-  .fq .fa{padding:0 0 18px}
-  .fq .fa p{font-size:15.5px;line-height:1.58;color:var(--muted);margin:0;max-width:none}
+  .fq .fa{padding:0 18px 20px 58px}
+  .fq .fa p{font-size:15.5px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch}
   @media(hover:hover) and (pointer:fine){
-    .fq summary:hover h3{color:var(--blue)}
+    .fq:hover{border-color:#CBD9EE}
   }
-  .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:var(--r-sm)}
+  .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:var(--r-card)}
   @media(prefers-reduced-motion:reduce){
     .fq,.fq .chev{transition:none}
   }
   @media(min-width:900px){
-    .faq .fhead h2{max-width:19ch}
-    .fq summary{padding:20px 0}
-    .fq summary h3{font-size:18px}
-    .fq .fa{padding:0 0 22px}
-    .fq .fa p{font-size:16px;max-width:66ch}
+    .fwrap{grid-template-columns:.7fr 1.3fr;gap:64px}
+    .faq .fside{position:sticky;top:110px}
+    .fq summary{padding:19px 22px}
+    .fq summary h3{font-size:17.5px}
+    .fq .fa{padding:0 22px 22px 62px}
+    .fq .fa p{font-size:16px}
   }
   /* ── ROUND 33 · THE SERVICING SWITCHER ──
      Replaces the round-31 cost table. Same argument, a fifth of the reading:
@@ -3465,41 +3489,55 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* round 56, JP: "the FAQ looks horrible the way it's been done." One centred
      column, 920px wide, under a centred heading. Roomier rows than round 55,
      still hairlines, no cards, no photo. */
-  .faq .fhead{max-width:none;text-align:center}
-  .faq .fhead .lab{justify-content:center}
-  .faq h2{margin:14px auto 0}
-  .fwrap{display:block;max-width:920px;margin:44px auto 0}
-  .fgrid{display:grid;grid-template-columns:1fr;gap:0 56px;min-width:0;border-top:1px solid var(--rule)}
-  .fcol{min-width:0}   /* each column is its own flow, so an open answer moves only its own column */
+  /* ⭐ ROUND 57 — THE CARDS ARE BACK, THE LAYOUT IS NEW. JP: "I like the ones we
+     had before, the original ones. You just needed to design the layout a lot
+     better… especially on mobile, get crafty." So: the round-30 card accordion
+     (bordered, rounded, the open one lifts), numbered 01–10 in the badge face,
+     under a heading column that stays put on desktop and carries the one ask
+     that fits a question page: the phone number. On a phone the heading sits
+     above and the cards run full width with the number as the handle. */
+  .faq .fside .lab{justify-content:flex-start}
+  .faq .fside h2{margin:14px 0 0;max-width:12ch}
+  .faq .fside .lede{margin-top:16px;max-width:30ch}
+  .faq .fside .go{margin-top:24px}
+  .fwrap{display:grid;gap:36px;margin-top:8px;align-items:start}
+  .fgrid{display:grid;grid-template-columns:1fr;gap:10px;min-width:0;counter-reset:faq}
+  .fcol{display:contents}
 
-  .fq{background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;overflow:hidden}
+  .fq{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-card);
+      overflow:hidden;transition:border-color .3s ease-in-out,box-shadow .3s ease-in-out,background-color .3s ease-in-out}
+  .fq[open]{border-color:#CBD9EE;background:#fff;box-shadow:0 1px 2px rgba(15,39,72,.04),0 14px 30px -18px rgba(15,39,72,.3)}
   .fq summary{
     display:flex;align-items:center;gap:14px;cursor:pointer;list-style:none;
-    padding:15px 0;min-height:44px;user-select:none}
+    padding:17px 18px;min-height:44px;user-select:none}
+  .fq summary::before{content:counter(faq,decimal-leading-zero);counter-increment:faq;
+    font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--blue);
+    flex:0 0 26px;line-height:1}
   .fq summary::-webkit-details-marker{display:none}
   .fq summary h3{
-    flex:1 1 auto;margin:0;font-size:16.5px;font-weight:650;line-height:1.35;
+    flex:1 1 auto;margin:0;font-size:16.5px;font-weight:700;line-height:1.35;
     letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
   /* the chevron is a control, never the ask — yellow stays reserved for the
      thing we want clicked (standing brand rule). */
   .fq .chev{flex:0 0 20px;width:20px;height:20px;color:var(--blue);
             transition:transform .3s var(--e-out)}
   .fq[open] .chev{transform:rotate(180deg)}
-  .fq .fa{padding:0 0 18px}
-  .fq .fa p{font-size:15.5px;line-height:1.58;color:var(--muted);margin:0;max-width:none}
+  .fq .fa{padding:0 18px 20px 58px}
+  .fq .fa p{font-size:15.5px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch}
   @media(hover:hover) and (pointer:fine){
-    .fq summary:hover h3{color:var(--blue)}
+    .fq:hover{border-color:#CBD9EE}
   }
-  .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:var(--r-sm)}
+  .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:var(--r-card)}
   @media(prefers-reduced-motion:reduce){
     .fq,.fq .chev{transition:none}
   }
   @media(min-width:900px){
-    .faq .fhead h2{max-width:19ch}
-    .fq summary{padding:20px 0}
-    .fq summary h3{font-size:18px}
-    .fq .fa{padding:0 0 22px}
-    .fq .fa p{font-size:16px;max-width:66ch}
+    .fwrap{grid-template-columns:.7fr 1.3fr;gap:64px}
+    .faq .fside{position:sticky;top:110px}
+    .fq summary{padding:19px 22px}
+    .fq summary h3{font-size:17.5px}
+    .fq .fa{padding:0 22px 22px 62px}
+    .fq .fa p{font-size:16px}
   }
   /* The warranty link measured 187.7 x 21 and failed the 44px floor on phones
      — the same fault round 29 shipped on the footer regions, and the same fix.
@@ -4356,7 +4394,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          ⛔ .rv is GONE from this h2 — .rv is the generic 22px fade-up and both
          running at once would fight over the same opacity. -->
     <h2 class="d2" id="ledgerLine" aria-label="Your ongoing care plan."><span aria-hidden="true"><span class="hw"><span class="hch">Y</span><span class="hch">o</span><span class="hch">u</span><span class="hch">r</span></span> <span class="hw"><span class="hch">o</span><span class="hch">n</span><span class="hch">g</span><span class="hch">o</span><span class="hch">i</span><span class="hch">n</span><span class="hch">g</span></span> <span class="hw"><span class="hch">c</span><span class="hch">a</span><span class="hch">r</span><span class="hch">e</span></span> <span class="hw"><span class="hch">p</span><span class="hch">l</span><span class="hch">a</span><span class="hch">n</span><span class="hch">.</span></span></span></h2>
-    <p class="lede rv">Pick your system. One visit a year, every cartridge refreshed, your warranty kept alive and your water kept the way it should be. The price you see here is the price you pay.</p>
+    <p class="lede rv">Pick your system. One visit a year keeps every cartridge fresh and your warranty alive. The price you see is the price you pay.</p>
 
     <!-- ROUND 33 — THE SWITCHER. JP, 2026-08-18: "that servicing section is
          just way too large and designed poorly. Just too much going on for
@@ -4534,15 +4572,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     <!-- round 55: C&C's shape (stars, centred heading, a rail of flat cards),
          our words. The cards are built from REVIEWS in the script. -->
     <div class="rhead rv">
-      <!-- round 56, JP: "a large Google logo next to the heading, I like the five stars" -->
-      <svg class="rgoogle" viewBox="0 0 24 24" aria-label="Google"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.5 5.5 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3a7.2 7.2 0 0 1-10.7-3.8h-4v3.1A12 12 0 0 0 12 24Z"/><path fill="#FBBC04" d="M5.3 14.3a7.1 7.1 0 0 1 0-4.6v-3.1h-4a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1A7.2 7.2 0 0 1 12 4.8Z"/></svg>
-      <span class="rstars" aria-label="Five stars">
+      <!-- round 57, JP: "the G on the right side of the stars" -->
+      <span class="rtop"><span class="rstars" aria-label="Five stars">
         <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
         <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
         <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
         <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
         <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
-      </span>
+      </span><svg class="rgoogle" viewBox="0 0 24 24" aria-label="Google"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.5 5.5 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3a7.2 7.2 0 0 1-10.7-3.8h-4v3.1A12 12 0 0 0 12 24Z"/><path fill="#FBBC04" d="M5.3 14.3a7.1 7.1 0 0 1 0-4.6v-3.1h-4a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1A7.2 7.2 0 0 1 12 4.8Z"/></svg></span>
       <h2 class="d2">What Sydney homeowners say.</h2>
       <p class="rsub">5.0 on Google from 22 Google reviews. Every one of them five stars.</p>
     </div>
@@ -4585,11 +4622,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   ═══════════════════════════════════════════════════════════════ -->
 <section class="faq arc" id="faq">
   <div class="in">
-    <div class="fhead">
-      <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">Questions</span>
-      <h2 class="d2 rv">Water filter installation in Sydney, answered.</h2>
-    </div>
     <div class="fwrap">
+      <div class="fside rv">
+        <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">Questions</span>
+        <h2 class="d2">Water filter installation in Sydney, answered.</h2>
+        <p class="lede">The same answers we give on the phone, written down. If yours is not here, call and ask.</p>
+        <div class="go"><a class="btn" href="tel:0430546749"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Call 0430 546 749</a></div>
+      </div>
       <!-- round 55: the photo column is gone. JP: "the FAQ is very bloated, keep
            it for SEO, make it less bloated." Ten questions now run as two
            hairline columns; every question and answer is verbatim from the
@@ -6943,10 +6982,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          to a border already gone. `top 62%` starts it when the section is
          genuinely arriving, and `+=560` (from 900) tightens it so the expand
          completes as the frame locks rather than a screen after it. */
-      gsap.timeline({scrollTrigger:{trigger:'.xp', start:'top 62%', end:'+=560', scrub:.4}})
-        /* round 54: from C&C's measured closed state, inset(80px 36px round 48px). */
-        .fromTo(xp, {clipPath:'inset(80px 36px round 48px)'}, {clipPath:'inset(0px 0px round 0px)', ease:'none', duration:.45})
-        .to(xp, {clipPath:'inset(0px 0px round 0px)', ease:'none', duration:.55});
+      /* round 57: starts much smaller (22% / 24%) and opens over a longer run
+         (+=760) so the growth is on camera; still fully open as the frame locks. */
+      gsap.timeline({scrollTrigger:{trigger:'.xp', start:'top 70%', end:'+=760', scrub:.4}})
+        .fromTo(xp, {clipPath:'inset(22% 24% round 48px)'}, {clipPath:'inset(0% 0% round 0px)', ease:'none', duration:.6})
+        .to(xp, {clipPath:'inset(0% 0% round 0px)', ease:'none', duration:.4});
     } else {
       xp.style.clipPath = 'none';
     }
