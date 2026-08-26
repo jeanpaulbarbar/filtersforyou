@@ -9,6 +9,7 @@ screenshot.mjs
 
 # Internal docs - never push
 CLAUDE.md
+.claude/
 AGENCY/
 inspiration/
 "temporary screenshots"/
