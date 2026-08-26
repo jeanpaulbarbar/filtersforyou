@@ -718,7 +718,59 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* ⛔ TOP LEVEL ON PURPOSE. Round 36 gave the DESKTOP stage the same Tap me
      bubble, and a @keyframes declared inside a media query does not exist
      outside it — the desktop bubble would simply sit still. */
-  @keyframes tapbob{0%,68%,100%{transform:translateY(0)}34%{transform:translateY(-11px)}}
+  /* ⭐ ROUND 50 — THE BUBBLE LEVITATES, IT DOES NOT BOUNCE.
+     JP: "I hate how it just bounces every 1 ms. I wanted it to actually be
+     alive and bubble, and be like a nice little flow, not just up, down, up,
+     down. Have a flow up and down, like an actual bubble that's levitating."
+     ⛔ THE OLD ONE WAS A METRONOME AND THE KEYFRAMES SAY SO: `0%,68%,100%` at
+     rest with a single spike at 34%, over 1.9s. One axis, one beat, a 32% dead
+     hold, and the same 1.9 seconds forever — the eye locks onto the period
+     inside two cycles and after that it reads as a tic, not as life.
+     ⭐ WHAT MAKES IT ALIVE IS TWO MOTIONS ON PERIODS THAT DO NOT DIVIDE.
+     A 5.6s drift and a 7.3s tilt have a combined period of about 41 seconds, so
+     it never visibly repeats. Nothing here is faster than the old one — it is
+     three times SLOWER, which is what "levitating" means. Same trick as the two
+     springs behind C&C's cursor blobs (interaction-library.md §9): one lead, one
+     lagging, and the disagreement between them is the life.
+     ⛔ THEY MUST BE SEPARATE PROPERTIES, NOT TWO `transform` KEYFRAMES. Two
+     animations both writing `transform` do not compose — the last one declared
+     wins outright and the first silently does nothing. `translate` and `rotate`
+     are independent animatable properties, so they layer. (This card already
+     relies on that: `.tapin` animates `scale` on its own.)
+     ⛔ `ease-in-out` on both, which is the page's third locked curve and the
+     right one here — a designer curve is for things ARRIVING, and this is
+     ambient. No fourth curve. */
+  @keyframes tapfloat{
+    0%{translate:0 0}
+    22%{translate:1.5px -6px}
+    46%{translate:-.5px -10.5px}
+    68%{translate:-1.5px -6.5px}
+    86%{translate:.5px -2px}
+    100%{translate:0 0}}
+  @keyframes taptilt{
+    0%{rotate:0deg} 28%{rotate:-1.5deg} 55%{rotate:.6deg} 80%{rotate:1.4deg} 100%{rotate:0deg}}
+  /* ⭐⭐ ROUND 52 — THE ONE-SHOT ADVERTISEMENT, AND IT IS **NOT** A KEYFRAME.
+     JP: "only on the first slide when you first go into the whole house
+     system… I want that tap me to slowly expand after a second, like it's
+     popping out, and then slowly we'll track back in… I want that hover to be
+     a little bit more alive for the rest of them, but it doesn't need to do
+     that bop again."
+     ⛔⛔ THE OBVIOUS BUILD IS BROKEN AND IT TOOK `getAnimations()` TO SEE IT.
+     First attempt appended a third keyframe to the bubble's existing animation
+     list (`tapfloat, taptilt` → `+ tapadvert`) when the class went on.
+     `animationName` computed correctly — it read all three — and the swell
+     never happened. Inspecting the live animations showed only TWO objects on
+     the pseudo-element, `tapfloat` and `taptilt`, both at `currentTime` 4950ms.
+     **Adding an entry to a running `animation-name` list does not give the new
+     entry a fresh clock**; it inherited the elapsed time of the ones already
+     running, landed past its own 3.6s end, finished instantly and was removed.
+     A computed style said yes while nothing moved.
+     ⭐ SO THE SWELL RIDES A CUSTOM PROPERTY INSTEAD. The bubble's `scale` reads
+     `var(--tapadv, 1)`, and GSAP tweens that variable on the parent — no
+     keyframe, no shared list, no clock to inherit, and it works identically on
+     the phone. The levitation keeps `translate` and `rotate` and is untouched.
+     ⛔ It is fired ONCE per page load and only on the first system, so it stays
+     an advertisement rather than becoming the tic he asked me to remove. */
   /* ── THE GOOGLE CARD — round 19 ──────────────────────────
      JP: "add a card in, like a Google logo. Similar to how their one had a card
      that said proudly awarded. Let's have ours be five star rating, Google. Get
@@ -782,7 +834,28 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        compact block further down re-scales its insides to fit.
        ⛔ Re-derive this if the headline's measure, its font cap, or the
        container width ever move. */
-    width:min(calc(50vw - 178px), 700px)}
+    /* ⭐ ROUND 49 — THE CAP IS 520, AND THE FORMULA IS A CEILING, NOT A TARGET.
+       JP: "The card on the hero section, where he's got the all different
+       cards, five stages, seven stages of Google review, is too long
+       width-wise from left to right."
+       ⛔ THE ROUND-47 MISTAKE WAS TREATING A CONSTRAINT AS A GOAL. `50vw - 178`
+       is the widest the card MAY be before it touches the headline. Nothing
+       ever said it should BE that wide — so on a big monitor it just kept
+       growing, and at 1920 it reached 700px, 35% longer than the 520 he had
+       already approved in round 45.
+       ⭐ ROUND 50 — 520 OVERSHOT. JP: "the product card was made a little bit
+       too short. When I told you to shorten it, it's a little bit too short.
+       Make it a little bit wider on the hero." So the cap is 600, and the
+       clearance term relaxes from 26px to 18px so the widening is felt at
+       every desktop width rather than only on a big monitor:
+           1280 → 470   1366 → 513   1440 → 550
+           1600 → 600   1728 → 600   1920 → 600   (cap wins)
+       ⛔ 18px is a MEASURED floor against the headline's RENDERED TEXT, not its
+       element box — the box is wider than the longest line and reading the box
+       makes the gap look negative when it is not.
+       ⛔ Re-measure --faceh after any change here: the face's height is set by
+       the tallest system name, and the names re-wrap when the width moves. */
+    width:min(calc(50vw - 170px), 600px)}
   @media(max-width:859px){.hdeck{display:none}}
   /* ⛔ ROUND 47 — AND IT IS HIDDEN BELOW 1150 TOO, ON PURPOSE.
      The card cannot coexist with a 13ch headline in that band and the numbers
@@ -963,17 +1036,97 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      the card taller in ONE frame before the drawer had moved at all. That was
      step one of the double step. Inside `.more` it is simply revealed by the
      one thing that animates. */
-  .hdeck .who{font-size:15px;line-height:1.5;color:var(--muted);font-weight:500;margin:0}
-  .hdeck.open .more .btn{width:100%;justify-content:center}
+  .hdeck .who{font-size:16.5px;line-height:1.5;color:var(--muted);font-weight:500;margin:0}
+  /* ROUND 48: 16px of air under the assurance list. Without it the yellow CTA
+     butted straight onto "WaterMark and NSF certified" with a 3px gap. */
+  .hdeck.open .more .btn{width:100%;justify-content:center;margin-top:16px;flex:0 0 auto}
   /* round 45: .5s --e-out → .8s --e-soft. Same mechanic, symmetric curve, and
      slow enough to read as an opening rather than a snap. */
+  /* ⭐ ROUND 48 — THE OPEN CARD IS A LOT BIGGER, AND IT IS STILL ONE DIMENSION.
+     JP: "when you click it to expand, I want that to be a lot larger and
+     bigger, go a little higher, and have a little bit more information on it."
+     ⛔ HEIGHT ONLY. The card's WIDTH stays the round-45/47 formula
+     (`min(50vw - 178px, 700px)`) because that is what buys the 26px of
+     clearance beside the 13ch headline — widening the open card is the exact
+     bug that overlapped the headline by 154px at 1024. "Go a little higher"
+     IS the height: the card is pinned at the foot and only ever grows upward.
+     Three things bought the extra height, and none of them is a new mechanism:
+       · the tick list goes to ONE column, so each line is a full sentence
+       · the `.who` line and the ticks step up a size (15 → 16.5, 17 → 18)
+       · a new `.assure` block carries the information he asked for
+     Measured at 1440×900: 482 → 703px open, 45px of clear air under the header. */
   .hdeck .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .8s var(--e-soft)}
   .hdeck.open .more{grid-template-rows:1fr}
   .hdeck .more > div{overflow:hidden}
-  .hdeck .more .inner2{padding:16px 20px 20px;border-top:1px solid var(--rule)}
-  .hdeck .more ul{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;padding:14px 0}
-  .hdeck .more li{display:flex;gap:9px;font-size:17px;color:var(--ink);font-weight:500;align-items:flex-start;line-height:1.35}
-  .hdeck .more li svg{width:17px;height:17px;flex:0 0 17px;margin-top:3px}
+  /* ⛔ THE CEILING IS A FORMULA, NOT A NUMBER, AND IT IS INSURANCE ONLY.
+     The drawer sizes to its content, and content height does not care how tall
+     the browser window is. On a short laptop (1440×780) the un-capped card
+     would have run 60px UP INTO the header. `100svh` minus the card's foot
+     offset, the header, 24px of air and the face gives the drawer everything
+     that is actually free and not a pixel more. 178 = the 112px header, the
+     card's own 40px foot offset inside .hcard, and 26px of air — the same 26px
+     of clearance the card's WIDTH formula already reserves beside the headline.
+     ⛔ It goes on `.inner2`, NEVER on `.more > div` — that element's
+     `overflow:hidden` is what clips the 0fr→1fr collapse, and swapping it to
+     `auto` leaves the drawer un-collapsible and showing a scrollbar shut.
+     ⛔ Verified at 900 / 820 / 780 / 700 viewport heights: it only engages
+     below ~800, and the card never crosses the header at any of them. */
+  /* ⛔ THE CTA IS NEVER INSIDE THE SCROLLER. First build capped `.inner2`
+     itself, which put the yellow button below the fold of its own overflow at
+     780px of viewport height — the one element on this card that must always
+     be visible was the one that got scrolled away. `.inner2` is a flex column
+     that carries the ceiling; `.dscroll` (the copy) takes whatever is left and
+     scrolls; the button is `flex:0 0 auto` and always sits on the floor.
+     ⛔ ONE number, and the browser does the arithmetic — subtracting the
+     button and the paddings by hand would be a second number to keep in step. */
+  .hdeck .more .inner2{display:flex;flex-direction:column;padding:20px 24px 24px;
+    border-top:1px solid var(--rule);max-height:calc(100svh - 178px - var(--faceh))}
+  .hdeck .more .dscroll{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+  /* On a short window the copy scrolls, and a hard cut through the middle of a
+     line reads as a rendering glitch rather than "there is more below". The
+     22px fade is the same `mask-image` edge C&C put on their tall menu panel
+     (interaction-library.md §4.3) — existing vocabulary, not a new trick.
+     ⛔ Scoped by HEIGHT, not width, and the band is measured: the drawer
+     overflows at 820 and below and does not at 900. Applying it unconditionally
+     would fade the last line of copy on a screen that has room for it. */
+  @media(max-height:880px){
+    .hdeck .more .dscroll{mask-image:linear-gradient(#000 calc(100% - 22px),transparent)}
+  }
+  .hdeck .more ul{display:grid;grid-template-columns:1fr;gap:13px;padding:16px 0 2px}
+  .hdeck .more li{display:flex;gap:10px;font-size:18px;color:var(--ink);font-weight:500;align-items:flex-start;line-height:1.35}
+  .hdeck .more li svg{width:18px;height:18px;flex:0 0 18px;margin-top:3px}
+  /* ⭐ ROUND 48 — "A LITTLE BIT MORE INFORMATION ON IT", AND EVERY LINE IS
+     ALREADY APPROVED VERBATIM in `_frameworks/ffy-claims-record.md`:
+       · "Installed by a licensed plumber" (licence 461511C, published sitewide)
+       · "Covered for life while you stay serviced with us" (approved 2026-08-05)
+       · "WaterMark and NSF certified" (⛔ ALWAYS PAIRED, never tied to AU law)
+     ⭐ The warranty line is not decoration, it FIXES a rule the card was
+     breaking: the face says "Lifetime warranty" on its own, and the claims
+     record says the warranty must always be paired with the annual-service
+     mechanism that keeps it alive. Now it is.
+     ⛔ NOT the "first year's service free" line — that expires 31 Aug 2026.
+     ⛔ Nothing invented here: it spends the card's OWN existing grammar (the
+     `.warr` row on the face — 15px, muted, weight 600, icon then text), so it
+     reads as the same object continuing rather than a fourth idea. */
+  .hdeck .more .assure{display:grid;grid-template-columns:1fr;gap:11px;
+    margin-top:16px;padding:15px 0 3px;border-top:1px solid var(--rule)}
+  .hdeck .more .assure li{font-size:15px;font-weight:600;color:var(--muted);line-height:1.35;gap:9px}
+  .hdeck .more .assure li svg{width:16px;height:16px;flex:0 0 16px;margin-top:1px;opacity:.75;color:var(--blue)}
+  /* ⭐ ROUND 49 — THE SERVICE-AND-SUBURB LINE. JP: "maybe on that card you can
+     throw in some SEO keywords, like water filter installation Sydney, and for
+     the different ones reverse osmosis Sydney and whole house Sydney."
+     ⚠️ SAY THE HONEST PART OUT LOUD: this line is worth close to NOTHING for
+     rankings and it is in here because it earns its place as a LOCAL TRUST CUE,
+     not because it will move a keyword. The deck's copy is written by JS out of
+     the `HD` array and only ONE card exists in the DOM at a time, so a crawler
+     sees one of five. The four `<article class="sys">` blocks further down this
+     page are static HTML with real `<h3>`s — that is where a location keyword
+     would actually count, and that is `ffy-seo-geo`'s call, not this file's.
+     ⛔ ONE line, muted, at the very bottom of the drawer, and it is the quietest
+     thing on the card. The moment it competes with the price it is clutter, and
+     he warned about exactly that. Never stack a second keyword line under it. */
+  .hdeck .more .loc{display:block;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);
+    font-size:13px;font-weight:600;letter-spacing:.01em;color:var(--muted);opacity:.85;line-height:1.4}
   /* ⛔ ROUND 45 — THE ARROWS HANG OFF THE BOTTOM, NOT THE MIDDLE.
      They sat at top:50% of the deck. Closed that was harmless. Open, the deck
      is 548px tall starting at y=304, so its middle is y=578 at x=818 — which
@@ -1122,9 +1275,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .hdeck .t .p i.suf{font-size:13px;margin-top:5px}
     .hdeck .warr{font-size:12.5px;margin-top:7px}
     .hdeck .warr svg{width:13px;height:13px;flex:0 0 13px}
-    .hdeck .who{font-size:13.5px}
-    .hdeck .more li{font-size:14.5px}
-    .hdeck .more .inner2{padding:13px 16px 16px}
+    .hdeck .who{font-size:14.5px}
+    .hdeck .more li{font-size:15.5px}
+    /* ⛔ padding only. The round-48 `max-height` on .inner2 is NOT re-declared
+       here, so it stays inherited from the base rule — a second copy would be
+       a second number to keep in step and they would disagree the first time
+       the header height moves. */
+    .hdeck .more .inner2{padding:15px 17px 17px}
+    .hdeck .more ul{gap:11px;padding:13px 0 2px}
+    .hdeck .more .assure{margin-top:13px;padding:12px 0 2px;gap:9px}
+    .hdeck .more .assure li{font-size:13.5px}
     .hdeck .nav{left:-50px}
   }
 
@@ -1208,9 +1368,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       font-family:var(--badge);font-size:15px;font-weight:700;letter-spacing:.06em;
       text-transform:uppercase;pointer-events:none;
       opacity:0;scale:.8;
-      animation:tapbob 1.9s var(--e-out) infinite;
+      animation:tapfloat 5.6s ease-in-out infinite, taptilt 7.3s ease-in-out infinite;
       transition:opacity .3s ease-in-out,scale .42s var(--e-out)}
-    .show .stage.tapin:not(.xopened)::after{opacity:1;scale:1}
+    .show .stage.tapin:not(.xopened)::after{opacity:1;scale:var(--tapadv,1)}
     .show .stage.xopened::after{opacity:0;scale:.86;animation:none}
     /* THE ARRIVAL. JP: "make the top one really pop on the desktop when you get
        to us, so people can't miss it." The live layer lands from 0.86 with a
@@ -1266,9 +1426,228 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      ⛔ Desktop only. The phone reads these as a normal stacked list and JP
      approved that; capturing every card on a 390px screen would trap the
      scroll. */
-  @media(min-width:960px) and (prefers-reduced-motion:no-preference){
-    html{scroll-snap-type:y proximity}
-    .show .sys{scroll-snap-align:center}
+  /* ⛔⛔ ROUND 48 — THE SNAP IS GONE. ALL OF IT. AND IT NEVER COMES BACK.
+     JP, 26 Aug: "The scrolling section that's going from all the products is
+     completely fucked. It's too jittery. There's nothing smooth about it at
+     all, and it just jumps when it goes to lock into something, so I don't
+     like any of that. Just make it a smooth scrolling animation experience."
+
+     ⛔ THE MECHANISM, COUNTED, NOT FELT. **Two different engines were writing
+     the scroll position on the same frames.** Lenis (`smoothWheel:true`,
+     duration 1.2, live on every fine pointer — search `new Lenis`) tweens
+     `window.scrollTo` on its own rAF ticker. Native CSS scroll-snap then
+     re-targets the scroll after each of those programmatic writes, because a
+     snap point was near. Lenis keeps easing toward ITS target, the browser
+     keeps pulling back to the snap point, and the visible result is exactly
+     the two words he used: judder while they fight, then a jump when the
+     browser wins. **Smooth-scroll libraries and CSS scroll-snap are mutually
+     exclusive. Lenis's own README says so.** No `proximity`, no snap-align
+     tuning and no easing value was ever going to fix that, for the same
+     reason rounds 37/45/46 could not fix it by tuning GSAP's snap.
+
+     ⛔ AND ROUND 47'S TEST COULD NOT HAVE CAUGHT IT. It asserted "did it
+     catch" and "does the page still travel" by sampling scrollY. Both passed.
+     Judder is a PER-FRAME property; a position sample at rest cannot see it.
+
+     ⛔ FOUR ROUNDS OF LOCK-IN ARE OVER — HE HAS NOW REJECTED BOTH MECHANISMS.
+     37/45/46 = GSAP ScrollTrigger snap (the page drives itself after you stop).
+     47 = native CSS scroll-snap (the page fights Lenis on the way past).
+     "I don't like any of that" ends it: THERE IS NO CAPTURE OF ANY KIND HERE.
+     The systems are a plain column that Lenis glides through, and each one
+     still arrives in the middle of the screen on its own because `.show .sys`
+     is `min-height:78svh` and vertically centred — the sticky stage cross-fades
+     to it at the midline. That reads as landing on each system WITHOUT
+     anything ever taking the scroll off him.
+     ⛔ Never re-add `scroll-snap-type` or `scroll-snap-align` to a vertical
+     scroller on this page while Lenis is running. (`.swtab` keeps its align:
+     different scroller, different axis, and Lenis does not drive it.) */
+  /* ⭐⭐ ROUND 49 — THE LOCK IS A PIN, AND THE PIN IS WHY YOU CAN NEVER BE
+     HALFWAY BETWEEN TWO SYSTEMS AGAIN.
+     JP: "I still wanted it to lock into a section where it locks into the
+     five-stage, then locks into the seventh-stage, and then locks into the
+     smart one. I'm not sold on it because you can be halfway in between the
+     five-stage and the seventh-stage while looking at one image... I didn't
+     like before how it would scroll and then readjust about a second later. I
+     want you to be able to scroll onto the whole house, scroll onto the
+     five-stage... It locks onto it, and it's got different animations that
+     scroll onto the next one. That way, it feels premium."
+
+     ⛔ HIS REAL COMPLAINT WAS NEVER "IT DOESN'T SNAP". Read it again: the
+     defect he names is that **the copy and the photograph can disagree** — you
+     are between two systems and the stage is showing one of them. That is not
+     a snap problem, and no snap fixes it: a snap still lets you sit anywhere,
+     it just tugs you afterwards. He is describing a page whose four systems are
+     four STATES, not four positions in a column.
+
+     So: the section pins, and the scroll advances a STEP INDEX. Nothing is
+     between anything, because there are no in-between positions to be at.
+     · **"It locks onto it"** — while pinned the page holds still by
+       construction. That IS the lock, and it costs no second animation.
+     · **"scroll and then readjust a second later"** — cannot happen. Nothing
+       ever writes the scroll position. The user keeps the scroll the entire
+       time, which is the thing rounds 37/45/46/47 all took off him.
+     · **"halfway in between while looking at one image"** — impossible now.
+       The copy and the stage are painted by the same call.
+     · **"different animations that scroll onto the next one"** — each step
+       change is a real transition, and it is DIRECTIONAL: scrolling down, the
+       new system is dealt in from below; scrolling back up, from above.
+
+     ⛔ THIS SPENDS THE PAGE'S ONE PIN. `section-playbook.md` allows exactly one
+     and `interaction-library.md` §5.2 says the same. Verified before building:
+     **the page had ZERO pins** (`grep "pin:"` returned nothing), so the budget
+     was unspent and it is now spent HERE. Nothing else on this page may pin.
+     ⛔ NOT ROUND 36'S PIN. That one held `.show .wrap` for `+=1000%` — ten
+     screens where the page did not move — and drove a scrubbed explosion off
+     scroll progress, which is what killed the tap engine. This one is 4 × 0.9
+     of a screen, SCRUB stays false, and the tap engine is untouched.
+     ⛔ DESKTOP ONLY, and the class is added by JS. No JS, no GSAP or reduced
+     motion → `pinmode` is never set and the section stays the plain stacked
+     column it already is, which is the FINISHED state, never a blank one. */
+  @media(min-width:960px){
+    .show.pinmode .wrap{align-items:center}
+    /* the pin holds the wrap itself, so `sticky` inside it has no job left and
+       its 96px offset would push the stage down inside a fixed box */
+    .show.pinmode .stage{position:relative;top:0;height:calc(100svh - 210px)}
+    .show.pinmode .list{position:relative;height:calc(100svh - 210px)}
+    /* ⛔ THE FOUR ARTICLES BECOME FOUR LAYERS IN ONE CELL. Left as a flow
+       column they measure ~312svh, and a pinned box that tall hides three
+       quarters of itself off the bottom of the screen.
+       ⛔ `visibility` as well as `opacity`: an opacity-0 article still takes
+       tab focus, and a keyboard user would tab into three invisible systems. */
+    /* ⭐⭐ ROUND 50 — THE HAND-OVER. JP: "I'm not happy with the scrolling
+       animations. Now they're too bland, and I don't like how it just fades
+       into the next one… make it feel exciting, make it feel premium, make it
+       feel like something fucking different."
+       He is right and the diagnosis is in his words: round 49 shipped ONE
+       tween — the copy's children on y and opacity — and left the stage on the
+       CSS `stagepop`, which is a fade. Four systems handing over is the FIRST
+       thing you see on this page and it was doing less work than a hover.
+       **THE GESTURE, IN ONE SENTENCE:** the outgoing system is carried off in
+       the direction you are scrolling while the next one is handed forward into
+       its place, and its name rises out of a mask with the details cascading
+       after it.
+       ⛔ ONE gesture, not four. He asked for "different animations" and the
+       honest answer is that four unrelated animations is how a page stops
+       reading as one page (interaction-library.md Part 1). What varies instead,
+       and it varies every single time: the hand-over follows the TRAVEL
+       DIRECTION (down = the new one comes up from below, up = down from above,
+       so it truly reverses) and the lean ALTERNATES per system, so no two
+       consecutive hand-overs are the same shape.
+       ⛔ THE STAGE MUST CLIP, or the layers slide out over the section instead
+       of being carried off the edge of their own frame.
+       ⛔ AND THE CSS ON `.ly` HAS TO STAND DOWN. A 0.7s `transition` on opacity
+       and transform plus the `stagepop` keyframe would both be fighting GSAP
+       for the same properties on every frame — that is the same two-engines
+       defect as round 48's Lenis-versus-scroll-snap, just inside one element. */
+    /* ⛔⛔⛔ ROUND 51 — NOTHING FADES, BECAUSE NOTHING HAS AN OPACITY ANY MORE.
+       JP, third rejection: "I just don't like how it just fades in and fades
+       out. Not a fan of that."
+       ⭐ HE WAS DESCRIBING A DEFECT, NOT A TASTE. Instrumented the incoming
+       layer every frame through one hand-over at 1440×900. Its opacity went
+       0.046 → 0.313 → 0.517 → **0.56 → 0.549 → 0.515 → 0.443** and never
+       reached 1, while the outgoing layer snapped 0.694 → 0 in a single frame.
+       **The transitions never completed.** A 0.86s timeline against a step that
+       a trackpad crosses in ~300ms meant every hand-over was killed and
+       restarted from `opacity:0` by the next one, so all four layers spent
+       their whole life part-way up and part-way down. That is, literally and
+       exactly, "fades in and fades out". Rounds 49 and 50 were tuning a
+       mechanism that could not finish.
+       ⛔ A FIRED TIMELINE IS THE WRONG MECHANISM FOR SOMETHING SCROLL DRIVEN.
+       motion-system.md §4 says motion must be interruptible and reverse from
+       where it is rather than snap and replay — a `fromTo` cannot, because it
+       forces its start values every time it is re-fired.
+       ⭐⭐ SO THE POSITION IS NOW A PURE FUNCTION OF SCROLL, AND THERE IS NO
+       TWEEN TO INTERRUPT. Both columns become FILMSTRIPS: four cells on one
+       tall strip, and the pin's progress slides them. It cannot stack, cannot
+       half-finish, and reverses perfectly because it is the same function read
+       backwards. **The scroll physically moves the product**, which is the
+       thing he has been asking for since round 37.
+       ⛔ ZERO OPACITY ANYWHERE IN THIS TRANSITION. That is deliberate and it is
+       the point: if nothing fades, nothing can be called a fade. The layers are
+       separated in SPACE now, not by transparency — which also means the
+       round-50 stacking bug is structurally impossible rather than guarded.
+       ⛔ It holds 62% of each segment and travels the last 38% on an
+       ease-in-out — the arrive-hold-leave shape this file already uses for the
+       explosion scrub (`segT`), so the lock-in he asked for survives. */
+    /* ⭐⭐ ROUND 52 — THE TWO COLUMNS NOW DO DIFFERENT JOBS, AND THAT IS HIS
+       CALL, NOT A FLOURISH. JP: "I like how it locks into each system, that's
+       exactly what I want, but I don't want it to look like it's scrolling
+       down. I want the image on the left to STAY IN PLACE… I want the right
+       side to look like it's scrolling down… I want the images on the left to
+       FADE IN AND OUT as an animation."
+       ⛔ SO THE LEFT GETS AN OPACITY CROSSFADE BACK, AND THAT IS NOT A RETREAT
+       TO ROUND 50. Round 50's fade was broken because it was a TWEEN that got
+       re-fired before it could finish (the layer never reached opacity 1 —
+       measured 0.046 → 0.56 → 0.443). This one is a **pure function of scroll
+       position**, exactly like the strip: `opacity = 1 - |pos - k|`. It cannot
+       be interrupted, cannot half-finish, and reads the same backwards.
+       **The lesson from round 51 was never "opacity is bad" — it was "a fired
+       timeline is bad".** Keep that distinction or this comes back.
+       ⛔ The stage keeps `overflow:hidden` so the slight over-scale on the
+       incoming unit cannot bleed past the frame. */
+    .show.pinmode .stage{overflow:hidden}
+    /* ⛔ `.ly.on` LISTED EXPLICITLY. `.show .stage .ly.on` (which carries the
+       `stagepop` keyframe) matches at the same specificity as this rule, so
+       leaving it out would hand the decision to source order — the trap this
+       file has now hit three times. Name both and it cannot go wrong. */
+    .show.pinmode .stage .ly,
+    .show.pinmode .stage .ly.on{position:absolute;inset:0;height:auto;
+      transition:none;animation:none}
+    .show.pinmode .list{overflow:hidden}
+    .show.pinmode .list .fstrip{position:absolute;left:0;right:0;top:0;height:400%}
+    .show.pinmode .sys{position:relative;inset:auto;height:25%;min-height:0;
+      margin:0;padding:0;border-top:0;justify-content:center;
+      opacity:1;visibility:visible;pointer-events:auto}
+    .show.pinmode .sys:first-child{padding-top:0}
+  }
+  /* ⛔⛔ AND THE COPY MUST FIT THE COLUMN, BECAUSE A PINNED SECTION HAS NO
+     SECOND CHANCE. First build gave `.sys` `overflow-y:auto` so anything too
+     tall could scroll inside the layer. **That is a scroll trap and it was
+     caught in the render, not in a number**: at 1440×760 the wheel over the
+     copy column scrolled the column instead of advancing the pin, and
+     `overscroll-behavior:contain` — correct on a menu, wrong here — meant the
+     page never got the event at all. On top of that the layer was parked
+     mid-content, so the `<h3>` was cut off at the top and the yellow CTA at
+     the bottom. **No inner scrolling anywhere inside a pin. Make it fit.**
+     MEASURED, worst of the four systems against the column height:
+         1440×900 and up → fits exactly, 0px over
+         1440×820 → 26 over · 1280×800 → 36 · 1440×760 → 56
+         1440×700 → 86    · 1152×760 → 89  (the worst case)
+     So below 900 tall the copy steps down a size. It is the SAME elements at a
+     smaller scale, never a different layout and never a hidden one — dropping
+     the proof photographs would have been the easy 26px and it is the one
+     thing on this column that is evidence. */
+  @media(min-width:960px) and (max-height:899px){
+    .show.pinmode .sys h3{font-size:clamp(1.9rem,3.1vw,2.6rem)}
+    .show.pinmode .sys .pure{font-size:19px;margin-top:7px}
+    .show.pinmode .sys .rowp{margin-top:16px}
+    .show.pinmode .sys .incl{margin-top:16px;gap:10px 18px}
+    .show.pinmode .sys .incl li{font-size:17.5px}
+    .show.pinmode .sys .proof3{margin-top:18px;gap:9px}
+    .show.pinmode .sys .proof3 img{width:84px;height:84px}
+    .show.pinmode .sys .proof3 .pcap{font-size:15px}
+    .show.pinmode .sys .go{margin-top:16px}
+  }
+  /* ⛔ HEIGHT IS NOT THE ONLY AXIS. At 1000px WIDE the column is narrow enough
+     that the names and the tick lines re-wrap, and it ran 8px over on a 900px
+     screen that the height rung above never touches. Same trim, keyed to width. */
+  @media(min-width:960px) and (max-width:1149px){
+    .show.pinmode .sys h3{font-size:clamp(1.9rem,3.1vw,2.6rem)}
+    .show.pinmode .sys .rowp{margin-top:18px}
+    .show.pinmode .sys .incl{margin-top:18px;gap:11px 18px}
+    .show.pinmode .sys .proof3{margin-top:20px}
+    .show.pinmode .sys .proof3 img{width:88px;height:88px}
+    .show.pinmode .sys .go{margin-top:18px}
+  }
+  /* the second rung. A 700px-tall window is a 13" laptop with the dock showing
+     and it is real. Measured 24px over after the first rung; this clears it. */
+  @media(min-width:960px) and (max-height:739px){
+    .show.pinmode .sys h3{font-size:clamp(1.7rem,2.7vw,2.2rem)}
+    .show.pinmode .sys .pure{font-size:17px;margin-top:5px}
+    .show.pinmode .sys .incl li{font-size:16.5px}
+    .show.pinmode .sys .proof3 img{width:72px;height:72px}
+    .show.pinmode .sys .proof3{margin-top:14px}
+    .show.pinmode .sys .go{margin-top:14px}
   }
   .show .sys{padding:56px 0;border-top:1px solid rgba(11,97,244,.14);position:relative}
   .show .sys:first-child{border-top:0;padding-top:0}
@@ -1332,6 +1711,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .xp .lab{color:var(--yellow)}
   .xp .lab img{filter:brightness(0) invert(1)}
   .xp h2{color:#fff;margin-top:16px}
+  /* ⭐ ROUND 53 — "the kitchen" WAS FALLING TO A FOURTH LINE. JP: "I don't know
+     why the kitchen is on a fourth line. It should just be part of a third
+     line." MEASURED at four viewports: 4 lines at 1440 and 1728 (where `.d1`'s
+     clamp has capped at 86.4px), 3 at 1280 and 3 on a phone — so it is the CAP
+     that breaks it, not the copy.
+     ⛔ THE HEADING IS CAPPED, NOT THE WRAPPER WIDENED. Widening the 620px box
+     to 660 also gives 3 lines and was rejected: the box width is shared with
+     the lede and the facts row, and the locked frame's 100svh copy gate was
+     measured against it. Capping this ONE heading at 5.1rem (81.6px) is the
+     smaller blast radius. MEASURED: 86.4 → 4 lines, 82 → 3, 78 → 3. */
+  @media(min-width:860px){ .xp .copy h2{font-size:clamp(2.7rem,6.4vw,5.1rem)} }
   .xp .lede{color:rgba(255,255,255,.86);margin-top:20px}
   .xp .go{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
   .xp .facts{display:flex;gap:34px;flex-wrap:wrap;margin-top:52px;padding-top:28px;border-top:1px solid rgba(255,255,255,.22)}
@@ -1510,11 +1900,51 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   }
 
   /* ── PILLAR SLIDES — full-viewport, arcs, floating copy ─── */
-  .pillars-head{background:var(--paper);text-align:center;padding:120px 0 100px}
+  /* ⭐ ROUND 53 — the heading is the FIRST CARD of the deck (see the note on
+     `.ppanel`). z-index 8 sits it directly under `.s1`'s 9, so every card in
+     the ladder 8 < 9 < 10 < 11 < 12 paints over the one before it. */
+  .pillars-head{position:sticky;top:0;height:100svh;z-index:8;
+    background:var(--paper);text-align:center;padding:120px 0 100px}
   .pillars-head h2{max-width:17ch;margin:16px auto 0}
   /* ⛔ ROUND 28 — the exit curtain's rules are at the END of this sheet, with
      the lock. Search "ROUND 28b — THE LOCK". */
-  .slide{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;color:#fff;background:var(--ink-blue)}
+  /* ⭐⭐ ROUND 52 — THE THREE PILLARS ARE A DECK OF CARDS NOW, AND IT IS ONE
+     CSS LINE. JP: "when we get to the three things that a warranty on paper
+     can't do, I actually want that section to start sliding in like a deck of
+     cards… that card of 'Born and Based in Sydney' slides up, then the next one
+     slides up like a deck of cards. Make sure it transfers onto mobile."
+     `position:sticky; top:0` on all three. Each slide HOLDS at the top of the
+     screen while the next one scrolls up and covers it, then that one holds
+     while the third covers it. That is the deck, and it costs nothing: the
+     browser does it on the compositor, there is no JS, no scroll listener and
+     no second pin — which matters, because the page's ONE pin is already spent
+     on the range section and `section-playbook.md` allows exactly one.
+     ⛔ THE Z-INDEX LADDER IS WHAT MAKES IT A DECK RATHER THAN A MESS, and it
+     already existed: s1:9 < s2:10 < s3:11 < .zero:12. Each section paints over
+     the one before it, so the card that is arriving is always on top. Break
+     that order and the new card slides UNDER the old one.
+     ⛔ `.arc`'s negative top margin still applies — it is what tucks each card
+     under its neighbour's curve. Sticky changes where a box is PAINTED, never
+     where it sits in flow, so the arc arithmetic is untouched.
+     ⛔ AND IT MUST NOT BE CLIPPED. A sticky element dies silently inside any
+     ancestor with `overflow` other than visible — these three are direct
+     siblings in the body, which is exactly why this works here and would not
+     have worked inside `.pilwrap`. Verified in the render, not assumed.
+     ⭐ MOBILE GETS IT FOR FREE, which is what he asked for: the rule is not
+     inside a media query and sticky behaves identically on a phone. */
+  /* ⭐ ROUND 53 — 100svh → 128svh OF DWELL PER CARD. JP: "make sure they have
+     some sort of soft locking mechanism as well, so they don't just glide
+     everywhere into the Servicing and Prices section."
+     A sticky card is held until the NEXT one covers it, so the dwell is the
+     next card's height. At exactly 100svh each card was covered the instant it
+     landed and the three read as one continuous slide. 128svh gives each about
+     a quarter-screen of stillness after it arrives and before the next one
+     starts climbing — the lock he can feel, without anything taking the scroll
+     off him. `.zero` (Servicing and prices) then rises over the last card the
+     same way, so the deck hands over instead of being escaped. */
+  .slide{position:sticky;top:0;min-height:128svh;display:flex;align-items:center;overflow:hidden;color:#fff;background:var(--ink-blue)}
+  /* ⛔ reduced motion keeps the deck — sticky is not motion, it is layout, and
+     the FINISHED state of a card deck is the cards stacked. Nothing animates. */
   .slide .ph{position:absolute;inset:-7% 0;will-change:transform}
   .slide .ph img{width:100%;height:100%;object-fit:cover}
   .slide .veil{position:absolute;inset:0}
@@ -1852,6 +2282,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      keeps the static ring — gentler, not off. */
   .xopen .hs > button > i{animation:hspulse 2.4s ease-in-out infinite}
   .hs.on > button > i{animation:none}
+  @keyframes hsglow{
+    0%  {box-shadow:0 0 0 4px rgba(255,217,0,.25), 0 3px 10px rgba(4,16,46,.34); scale:1}
+    38% {box-shadow:0 0 0 15px rgba(255,255,255,.5), 0 0 24px 9px rgba(255,217,0,.72), 0 3px 12px rgba(4,16,46,.22); scale:1.2}
+    100%{box-shadow:0 0 0 4px rgba(255,217,0,.25), 0 3px 10px rgba(4,16,46,.34); scale:1}}
+
   @keyframes hspulse{
     0%,100%{box-shadow:0 0 0 4px rgba(255,217,0,.25), 0 3px 10px rgba(4,16,46,.34)}
     50%{box-shadow:0 0 0 12px rgba(255,217,0,.12), 0 3px 12px rgba(4,16,46,.26)}
@@ -1894,15 +2329,42 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .timg .hs > button > i::before{width:16px}
     .timg .hs > button > i::after{height:16px}
   }
+  /* ⭐⭐ ROUND 53 — THE ANGEL GLOW, AND IT GOES IN **THIS** RULE.
+     JP: "the plus signs spawn in one at a time. I like that. Right after that
+     happens, I would like them all to have a slightly lighter, quick little
+     glow that goes through one each at a time… they spawn, they're all there,
+     and then bang, 1, 2, 3, 4, 5, 6, 7 little glows afterwards. That way you
+     definitely can't miss it."
+     ⛔⛔ FIRST BUILD PUT IT ON `.xopen .hs:nth-child(n) > button > i` AND IT
+     NEVER RAN HERE. `getAnimations()` on a real marker showed only `hspop` and
+     `hspulse` — the tour's markers are matched by `.timg.xopen …`, one class
+     MORE specific, so the generic rule lost outright and the glow was landing
+     on the range section's morph markers instead. **Read the rule that actually
+     wins before adding a third animation to it.**
+     ⛔ THE TIMING IS DERIVED FROM THE SPAWN THAT IS REALLY THERE, not the one I
+     assumed. Measured off the live markers: `hspop` is 700ms with delays 0 →
+     .96s in 160ms steps, so the LAST marker lands at 1.66s. The sweep starts at
+     1.78s — his "right after that happens" — and steps 110ms, seven glows in
+     770ms.
+     ⛔ `hsglow` IS DECLARED LAST ON PURPOSE. It shares `box-shadow` with the
+     resting `hspulse`, and the last animation on a property wins outright, so
+     the glow completely masks the pulse while it runs and hands back with no
+     jump the instant it ends. Here overwriting is the feature.
+     ⛔ NO `both` ON THE GLOW — it was written with one on the first pass, and a
+     `both` fill holds the final keyframe forever, which would have masked the
+     resting pulse permanently after the sweep. The glow must release.
+     ⛔ Appending is safe in this rule, unlike the round-52 tap bubble: all
+     three animations start on the SAME class change, so nothing inherits a
+     clock from something already running. That is the distinction. */
   .timg.xopen .hs > button > i{
-    animation:hspop .7s var(--e-out) both, hspulse 2.4s ease-in-out infinite}
-  .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s}
-  .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s}
-  .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s}
-  .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s}
-  .timg.xopen .hs:nth-child(5) > button > i{animation-delay:.64s,1.79s}
-  .timg.xopen .hs:nth-child(6) > button > i{animation-delay:.8s,1.95s}
-  .timg.xopen .hs:nth-child(7) > button > i{animation-delay:.96s,2.11s}
+    animation:hspop .7s var(--e-out) both, hspulse 2.4s ease-in-out infinite, hsglow .52s ease-out 1}
+  .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,1.78s}
+  .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,1.89s}
+  .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,2s}
+  .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,2.11s}
+  .timg.xopen .hs:nth-child(5) > button > i{animation-delay:.64s,1.79s,2.22s}
+  .timg.xopen .hs:nth-child(6) > button > i{animation-delay:.8s,1.95s,2.33s}
+  .timg.xopen .hs:nth-child(7) > button > i{animation-delay:.96s,2.11s,2.44s}
   /* the wrapper fade keeps step with its dot */
   .timg.xopen .hs:nth-child(1){transition-delay:0s}
   .timg.xopen .hs:nth-child(2){transition-delay:.16s}
@@ -2192,7 +2654,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.06em;
       text-transform:uppercase;pointer-events:none;
       opacity:0;scale:.8;
-      animation:tapbob 1.9s var(--e-out) infinite;
+      animation:tapfloat 5.6s ease-in-out infinite, taptilt 7.3s ease-in-out infinite;
       transition:opacity .3s ease-in-out,scale .42s var(--e-out)}
     /* the shoulders, per frame set (right/top as % of the image box):
        home = stainless box, corner at ~90/23 · plus + prem = the top inline
@@ -2200,7 +2662,19 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .show .sys .mimg.tapmode[data-set="plus"]::after{right:2%;top:2.5%}
     .show .sys .mimg.tapmode[data-set="prem"]::after{right:3%;top:2.5%}
     .show .sys .mimg.tapmode[data-set="luxe"]::after{right:4%;top:8.5%}
-    .show .sys .mimg.tapmode.tapin:not(.opened)::after{opacity:1;scale:1}
+    /* ⭐ ROUND 52 — the phone's bubble reads the same `--tapadv` the desktop
+       one does, so the advertisement is ONE mechanic across both lanes.
+       ⛔⛔ AND IT IS PATCHED HERE, IN THE EXISTING RULE, NOT ADDED ABOVE IT.
+       First attempt wrote a new `…tapin:not(.xopened)::after{scale:var(…)}`
+       200 lines higher. Equal specificity, earlier in the sheet — so THIS rule
+       won, forced `scale:1`, and the swell ran perfectly while nothing on
+       screen moved. GSAP was writing the variable the whole time; a `style`
+       mutation trace proved it. **Fifth time this file has lost to source
+       order.** An override goes below its base rule, or it goes in the rule.
+       ⛔ Note the selector is `:not(.opened)`, NOT `.xopened` — the phone lane
+       uses a different class from the desktop stage. Copying the desktop
+       selector here would silently never match. */
+    .show .sys .mimg.tapmode.tapin:not(.opened)::after{opacity:1;scale:var(--tapadv,1)}
     .show .sys .mimg.tapmode.opened::after{opacity:0;scale:.86;animation:none}
     /* round 36, JP: "make the tap me bubble up and down so people recognise it."
        It already bobbed — 6px over 2.5s, which is a breath, not a signal. 11px
@@ -2259,7 +2733,18 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        width, and the head keeps clear air beneath the line. */
     :root{--arc:44px}
     .pillars-head{padding:78px 0 92px}
-    .slide{min-height:auto}
+    /* ⛔⛔ ROUND 53 — `min-height:auto` WAS SILENTLY KILLING THE DECK ON PHONES.
+       He asked for the card deck to transfer to mobile, and it did — the ORDER
+       was right, heading → s1 → s2 → s3 → zero. But MEASURED, each card was
+       held for only **340px on an 844px screen**, four tenths of a viewport,
+       because content-sized cards are only ~340px tall and a sticky card is
+       held exactly as long as the next one takes to arrive. That is precisely
+       the "just glide everywhere" he described, and it existed only on the
+       phone — desktop measured a healthy 1080px per card.
+       112svh gives the phone ~945px, about 1.1 screens each, matching the
+       desktop feel. The cards are full-bleed photographs, so the extra height
+       is more picture, not empty space. */
+    .slide{min-height:112svh}
     /* "03 — NOTHING RUSHED, NOTHING HIDDEN" wrapped into a hanging second line
        that no longer lined up with the number. Let it wrap as a block instead. */
     .slide .num{flex-wrap:wrap;align-items:baseline;gap:8px;line-height:1.45}
@@ -2385,9 +2870,19 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      20 shipped: the curtain still runs, it just wipes over a moving section. */
   @media (max-width:859px) and (min-height:600px),
          (min-width:860px) and (min-height:880px){
-    .xplock{height:200svh}
+    /* ⭐ ROUND 53 — 200svh → 140svh, AND THE TWO NUMBERS MOVE TOGETHER.
+       JP: "it takes too long to scroll to the next section. There's an extra
+       scroll there where there shouldn't be. It should lock in and then be able
+       to scroll to the next section."
+       The 200 was 100svh of DEAD HOLD plus 100svh for the tour curtain to wipe.
+       The hold was the extra scroll — the frame locked and then nothing
+       happened for a whole screen. 140 keeps the full 100svh wipe and trims the
+       dead hold to 40svh, which is enough to read as a lock without stalling.
+       ⛔ `.xplock` AND `.tourwrap`'s margin ARE ONE NUMBER (round 28b). Change
+       one alone and the gap between them IS a white strip across the page. */
+    .xplock{height:140svh}
     .xp .frame{position:sticky;top:0;height:100svh;min-height:0}
-    .tourwrap{margin-top:-200svh}
+    .tourwrap{margin-top:-140svh}
   }
   /* desktop framing of the locked copy — 96px clears the 62px solid header,
      which it always is by this point in the page. Centring instead tucked the
@@ -2417,8 +2912,53 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      pillar slide's curved top edge.
      ⛔ THE PAPER BELONGS TO .ppanel ALONE. A ground on the sticky stage paints
      over the tour for its whole approach — that IS the white strip. */
-  .pilwrap{position:relative;z-index:9;height:250svh;margin-top:-200svh;pointer-events:none}
+  /* ⭐ ROUND 53 — 250svh → 350svh, AND `.s1` IS PULLED UP BY THE SAME 100svh,
+     SO NOTHING DOWNSTREAM MOVES. This is what finally closes the gap.
+     A sticky box may only travel inside its containing block, so the heading
+     could hold for `pilwrap - 100svh` and then HAD to release — measured, its
+     top ran 0,0,0,0,0,0,0 then **-50,-250,-450,-650**, releasing ~890px before
+     `.s1` arrived. That 890 is structural: it is one viewport minus the arc,
+     and it does not shrink by making the wrap taller on its own, because `.s1`
+     starts where the wrap ends and moves with it.
+     Growing the wrap 100svh AND pulling `.s1` up 100svh moves the release point
+     without moving the card: heading now releases at 10689 while `.s1` covers
+     it at 10625, so it is covered 64px BEFORE it would ever let go. */
+  .pilwrap{position:relative;z-index:9;height:350svh;margin-top:-200svh;pointer-events:none}
+  /* ⛔ AFTER `.arc`, which also sets margin-top at equal specificity. Source
+     order decides, and this must win. */
+  .s1{margin-top:calc(var(--arc) * -1 - 100svh)}
   .pillars-head{position:sticky;top:0;height:100svh;padding:0;overflow:hidden;background:none}
+  /* ⭐⭐ ROUND 53 — THE HEADING IS THE FIRST CARD OF THE DECK.
+     JP: "It was supposed to have the card scroll upwards onto the three things
+     a warranty on paper can't do, but instead it scrolls down to it… I wanted
+     the card flip to START FROM the three things a warranty on paper can't do
+     INTO the Born, based and staying in Sydney."
+     It was `position:absolute; inset:0` inside a 250svh wrapper, so the heading
+     sat 125svh down and simply scrolled away before `.s1` ever stuck — you
+     arrived AT it rather than it being covered. Sticky at 100svh makes it hold
+     at the top of the screen exactly like the three cards below it, so `.s1`
+     rises over it and the deck begins one card earlier, which is what he
+     described.
+     ⛔ Z-INDEX 8, BELOW `.s1`'s 9. The whole deck reading depends on the ladder
+     8 < 9 < 10 < 11 < 12 (.zero): every card must paint over the one before.
+     ⛔ The clip-path curtain is untouched — it still wipes this panel up over
+     the tour. Sticky changes where a box PAINTS, never where it sits in flow,
+     so round 28b's arithmetic is unaffected. Verified in the render. */
+  /* ⛔⛔ THE STICKY GOES ON THE SECTION, NOT THE PANEL — AND THE HARNESS CAUGHT
+     THE FIRST ATTEMPT. Making `.ppanel` itself sticky LOOKED right (it held at
+     top 0, and a screenshot showed `.s1` rising over it) but
+     `sticky broken by overflow clip: 1 — div.ppanel clipped by section
+     overflow:hidden` flagged it, and the geometry agreed: `.pillars-head` is
+     `overflow:hidden` and only 100svh tall, so the panel's sticky was confined
+     to that one box. MEASURED, the panel's top ran 0, 0, 0, 0, 0, 0, 0, **-50,
+     -250, -450, -650** — it held for a while and then slid away on its own
+     before `.s1` ever covered it. A sticky element can only travel inside its
+     nearest clipping ancestor, and that ancestor was one screen tall.
+     So `.pillars-head` is the sticky card and `.ppanel` goes back to filling
+     it. The section sits directly in `.pilwrap` (overflow visible, 250svh), so
+     it now holds for the wrap's full remaining travel — right up until `.s1`
+     climbs over it. Same lesson as the standing one: **sticky dies on
+     overflow, and it dies quietly.** */
   .ppanel{position:absolute;inset:0;background:var(--paper);pointer-events:auto;
     display:flex;align-items:center;justify-content:center;clip-path:inset(100% 0 0)}
   /* "About us" targets #pillars, whose flow position is now the START of the
@@ -2435,6 +2975,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .pilwrap{height:auto;margin-top:0;pointer-events:auto}
     .pillars-head{position:static;height:auto;padding:120px 0 100px;background:var(--paper)}
     .ppanel{position:static;clip-path:none!important;display:block}
+    /* the deck's first card stands down with the rest of the curtain */
+    .pillars-head{position:static;height:auto}
     #pillars{scroll-margin-top:86px}
     .show .sys .mimg.tapmode::after{animation:none}
     html{scroll-behavior:auto}
@@ -2886,6 +3428,24 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .fpic img{aspect-ratio:4/3}
     .scope h2,.faq h2{margin-top:12px}
   }
+
+  /* ⛔⛔ THE BUBBLE'S REDUCED-MOTION OFF-SWITCH LIVES DOWN HERE ON PURPOSE, AND
+     IT COST A MEASUREMENT TO LEARN. It was first written next to the
+     `@keyframes` at the top of the sheet, which reads well and does NOTHING:
+     the rules that set the animation sit at ~1349 (desktop stage) and ~2472
+     (phone card), both LATER in the sheet at equal specificity, so they won and
+     the computed `animation-name` under `prefers-reduced-motion: reduce`
+     measured `tapfloat, taptilt` — still drifting.
+     **Media queries do not add specificity. Source order decides.** Exactly the
+     trap the `--faceh` ladder hit twice in round 47. Anything that has to beat
+     a rule in this sheet goes AFTER it, or it goes nowhere.
+     The bubble stays fully visible and legible; only the drifting stops. */
+  @media(prefers-reduced-motion:reduce){
+    /* the levitation stops; the swell is a GSAP tween on `--tapadv` and is
+       skipped in JS under reduced motion, so it needs no rule here. */
+    .show .stage::after,
+    .show .sys .mimg.tapmode::after{animation:none;translate:none;rotate:none}
+  }
 </style>
 <!-- ═══════════ ROUND 29 — THE STRUCTURED DATA GRAPH ══════════════
      Was one flat LocalBusiness node. Now a connected @graph: the business,
@@ -3288,8 +3848,20 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         <span class="t"><span class="dtag dt2 js-hdtag"></span><b id="hdName">Whole House Filtration System</b><span class="pure" id="hdPure">Pure Home</span><span class="p" id="hdPrice"><i class="pre">from</i><b>$3,850</b><i class="suf">installed</i></span><span class="warr"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.8 4.5 6v6.1c0 4.4 3.1 7.6 7.5 9.1 4.4-1.5 7.5-4.7 7.5-9.1V6L12 2.8Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="m8.7 12.1 2.3 2.3 4.3-4.3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Lifetime warranty</span></span>
       </button>
       <div class="more" id="hdMore"><div><div class="inner2">
+        <div class="dscroll">
         <p class="who" id="hdWho"></p>
         <ul id="hdTicks"></ul>
+        <!-- ROUND 48 — the three assurances that are true of every system, so
+             they are static markup and hdApply never touches them. Wording is
+             verbatim from the claims record; see the .assure CSS for which
+             entry each line comes from. -->
+        <ul class="assure">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="5.2" stroke="currentColor" stroke-width="1.9"/><path d="m8.4 13.4-1.6 7.2 5.2-2.6 5.2 2.6-1.6-7.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Installed by a licensed plumber, NSW Lic. 461511C</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.8 4.5 6v6.1c0 4.4 3.1 7.6 7.5 9.1 4.4-1.5 7.5-4.7 7.5-9.1V6L12 2.8Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="m8.7 12.1 2.3 2.3 4.3-4.3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Covered for life while you stay serviced with us</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.6" stroke="currentColor" stroke-width="1.9"/><path d="m8.4 12.2 2.4 2.4 4.6-4.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>WaterMark and NSF certified</li>
+        </ul>
+        <span class="loc" id="hdLoc"></span>
+        </div><!-- /.dscroll -->
         <button class="btn btn-sm js-open" type="button" id="hdGet" data-sys="Pure Home"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
       </div></div></div>
       <!-- ROUND 28 — THE GOOGLE CARD IS A CARD IN THE DECK. Shown only while
@@ -4529,19 +5101,23 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     {sys:'Pure Home', set:'home', img:'media/systems/pure-home.webp', tag:'', tagc:'var(--blue)',
      name:'Whole House Filtration System', pure:'Pure Home', pre:'from', amt:'$3,850', suf:'installed', cta:'Book a free inspection',
      who:'For families who want the chlorine taste and smell gone from every tap in the house, not just the kitchen one.',
+     loc:'Whole home water filtration, installed across Sydney',
      ticks:['Chlorine and chloramines out','Sediment, rust and microplastics','No pool water taste or smell','The good minerals stay in']},
     {google:true, tagc:'var(--blue)'},
     {sys:'Pure Plus', set:'plus', img:'media/systems/pure-plus.webp', tag:'', tagc:'var(--blue)',
      name:'5 Stage Alkaline Reverse Osmosis', pure:'Pure Plus', pre:'', amt:'$1,280', suf:'installed', cta:'Get a fixed price',
      who:'For families who want pure, clean drinking water on its own tap, without paying for bottled water again.',
+     loc:'Reverse osmosis water filter installation, Sydney wide',
      ticks:['Up to 99% of contaminants out','PFAS, fluoride and heavy metals','Alkaline, mineral rich water','Its own dedicated drinking tap']},
     {sys:'Pure Premium', set:'prem', img:'media/systems/pure-premium.webp', tag:'Best seller!', tagc:'var(--purple)',
      name:'7 Stage Hydrogen Rich Reverse Osmosis', pure:'Pure Premium', pre:'', amt:'$1,590', suf:'installed', cta:'Get a fixed price',
      who:'For families looking for pure, clean, filtered water while getting hydrogen water on tap.',
+     loc:'Reverse osmosis water filtration, installed in Sydney homes',
      ticks:['Up to 99% of contaminants out','PFAS, fluoride and heavy metals','Hydrogen rich and alkaline','Remineralised as it filters']},
     {sys:'Pure Luxe', set:'luxe', img:'media/systems/pure-luxe.webp', tag:'', tagc:'var(--purple)',
      name:'Smart 5 Stage Alkaline Reverse Osmosis', pure:'Pure Luxe', pre:'', amt:'$2,290', suf:'installed', cta:'Get a fixed price',
      who:'For families who want the same pure, alkaline water and a screen that shows them the purity as they pour it.',
+     loc:'Smart under sink water filtration, installed across Sydney',
      ticks:['Up to 99% of contaminants out','PFAS and microplastics gone','Alkaline, mineral rich water','Watch the purity live on screen']}
   ];
   var hdeck = document.getElementById('hdeck');
@@ -4581,6 +5157,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       document.getElementById('hdName').textContent = d.name;
       document.getElementById('hdPure').textContent = d.pure;
       document.getElementById('hdWho').textContent = d.who || '';
+      document.getElementById('hdLoc').textContent = d.loc || '';
       /* the number is its own <b> so it can be set big — round 19, "make the
          price stand out". The words around it stay quiet. */
       /* round 45: .pre rides the big size, .suf drops to its own quiet line.
@@ -4645,7 +5222,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       if (hdHover || hdeck.classList.contains('open') || document.body.classList.contains('dopen') || document.hidden) return;
       if (scrollY > innerHeight * .8) return;
       hdSet(hdi + 1, 1);
-    }, 4500);
+      /* ⭐ ROUND 48 — 4500 → 3200. JP: "the card that's got the actual products
+         on it just keeps swapping over. The length of it is a little bit too
+         long. I'd like to shorten it." That is the DWELL, not the card's width
+         — the width is load-bearing against the headline and does not move.
+         The flip itself costs .26 + .58 = 840ms, so 3200 leaves ~2.4s at rest
+         on each face: long enough to read a system name and a price, short
+         enough that the deck reads as alive rather than parked. It still rests
+         entirely while hovered, while open, while the form is up, on a hidden
+         tab, and once you are 80% of a screen past the hero. */
+    }, 3200);
     /* round 19: two doors into the same toggle — the card face, and the little
        chevron at the top of the card that replaced the "Tap to see what's
        included" line. Both keep aria-expanded honest on both controls. */
@@ -4671,7 +5257,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     if (!stage) return;
     stage.setAttribute('data-cur', i);
     var xh = stage.querySelector('.xhint');
-    if (xh) xh.textContent = 'Tap it \u2014 watch it open';
+    /* the em dash here was a standing brand veto sitting in code (no dashes in
+       copy). Fixed in passing, round 49, while this function was open anyway. */
+    if (xh) xh.textContent = 'Tap it to see inside';
     stageLys.forEach(function(l){ l.classList.toggle('on', +l.getAttribute('data-i') === i); });
     var a = sysArts[i]; if (!a) return;
     stageTag.textContent = a.getAttribute('data-tag');
@@ -5726,6 +6314,28 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       if (seg <= .88) return 1;                    /* held open through the middle */
       return 1 - (seg - .88) / .12;                /* closes on the way out */
     };
+    /* ⛔⛔ THE ONCE-FLAGS LIVE OUT HERE, ABOVE `matchMedia`, AND THAT IS THE
+       WHOLE BUG FROM THE FIRST BUILD. They were declared INSIDE the context
+       callback, which GSAP tears down and re-runs on any refresh — and images
+       finishing their decode triggers one. So the flag reset, `mark()` ran
+       again on the rebuild, and the advertisement class was added at load and
+       stripped off again before the section was ever on screen. Measured: the
+       stage read `class="stage tapadv"` at load and `class="stage tapin"` by
+       the time it arrived. A once-per-page-load flag must outlive anything
+       that can be rebuilt. */
+    var advSpent = false;   /* the desktop advertisement, once per page load */
+    var mAdvSpent = false;  /* the phone's, same rule */
+    /* ⭐ THE SWELL, ONE FUNCTION, BOTH LANES. It tweens a custom property the
+       bubble's `scale` reads, so it never joins the levitation's animation list
+       and cannot inherit its clock (see the CSS note on `--tapadv`).
+       Out over 1.15s after a 1s wait, back over 1.25s — "slowly expand… like
+       it's popping out, and then slowly track back in". */
+    function swell(el){
+      if (!el || reduce) return;
+      gsap.timeline({delay:1})
+        .fromTo(el, {'--tapadv':1}, {'--tapadv':1.34, duration:1.15, ease:'power2.out'})
+        .to(el, {'--tapadv':1, duration:1.25, ease:'power2.inOut'});
+    }
     var mmShow = gsap.matchMedia();
     /* ⭐ ROUND 36 — DESKTOP IS TAP MODE TOO. No pin, no scrub, no lock.
        What was here: ScrollTrigger pinned `.show .wrap` for `+=1000%` — ten
@@ -5737,10 +6347,164 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        (the same IntersectionObserver the phone has always used) and the unit
        opens because someone tapped it. */
     mmShow.add('(min-width:960px)', function(){
-      var obs = setupShowObs();
-      stageTo(0);
-      /* the bubble and the arrival pop fire when the range actually reaches you */
+      /* ⛔ NO IntersectionObserver IN PIN MODE. The observer's whole job was to
+         answer "which article is in the middle of the screen", and once the
+         wrap is pinned nothing is ever in a different place, so it would fire
+         once and then be permanently wrong. The pin's own progress is the only
+         source of truth for which system is showing. */
+      var showSec = document.querySelector('.show');
+      var wrapEl  = document.querySelector('.show .wrap');
+      showSec.classList.add('pinmode');
+      var STEPS = sysArts.length;   /* 4 */
+      var cur = -1;
+
+      /* ⛔ THE STRIPS ARE BUILT ONCE, AT SETUP, AND TORN DOWN ON THE WAY OUT.
+         The four `.sys` articles get lifted into one `.fstrip` that is 400% of
+         its frame, so cell `i` sits exactly `i` frames down. Moving ONE element
+         by a percentage is the whole right-hand transition.
+         ⛔ The STAGE is not a strip — round 52, he wants the left to stay put
+         and crossfade. Only the copy scrolls. */
+      function buildStrip(host, kids){
+        var st = host.querySelector(':scope > .fstrip');
+        if (st) return st;
+        st = document.createElement('div');
+        st.className = 'fstrip';
+        kids.forEach(function(k){ st.appendChild(k); });
+        host.appendChild(st);
+        return st;
+      }
+      function unbuildStrip(host){
+        var st = host.querySelector(':scope > .fstrip');
+        if (!st) return;
+        while (st.firstChild) host.insertBefore(st.firstChild, st);
+        host.removeChild(st);
+      }
       var stageEl2 = document.getElementById('stage');
+      var listEl   = document.getElementById('sysList');
+      /* ⛔ ONLY THE COPY IS A STRIP NOW. The stage stays put and crossfades —
+         round 52, his call. `.ly` layers go back to stacked and absolute. */
+      var txtStrip = buildStrip(listEl, sysArts);
+
+      /* ⭐ PROGRESS → STRIP POSITION. Hold, then travel. `f` is where we are
+         inside one system's segment: for the first 62% the strip does not move
+         at all — that is the lock — and the last 38% carries it to the next
+         cell on an ease-in-out so it leaves and lands soft. Both columns read
+         this same function, so they can never be on different systems.
+         ⛔ This is a PURE FUNCTION of scroll position. No state, no timeline,
+         nothing to interrupt, and reading it backwards is the reverse
+         animation for free. */
+      /* ⛔⛔ ONE HOLD, ONE CURVE, BOTH COLUMNS. TRIED AND REJECTED IN THE
+         RENDER: giving the copy its own timing (.68, then .80) so the two
+         columns would have "different character" put the product on Pure Plus
+         while the words were still on Pure Home — **the exact desync this whole
+         section was rebuilt to kill**, reintroduced as a styling flourish.
+         Seen in the screenshot at 42% of a travel, not in a number.
+         The panel slides as ONE board. Whatever the image is showing, the words
+         beside it are the same system, at every scroll position, by
+         construction — there is one function and both columns read it. */
+      /* ⭐ ROUND 53 — SOFTER. JP: "the scroll doesn't feel soft when it goes to
+         the next one… it needs to feel softer and glide a bit better."
+         Two changes, both in this one number and the curve below: the travel
+         window grows from 38% of a segment to 48%, and the curve goes from
+         easeInOutCubic to easeInOutSINE. Cubic leaves hard and lands hard —
+         its acceleration jumps at both ends. Sine is the gentlest symmetric
+         curve there is: it starts and finishes at zero velocity, which is
+         exactly what "glide" means. The lock is untouched — half a segment,
+         about 470px of scroll, still holds dead still on each system. */
+      var HOLD = .52;
+      function cellPos(p, hold){
+        var x = p * STEPS;
+        var i = Math.floor(x); if (i > STEPS - 1) i = STEPS - 1; if (i < 0) i = 0;
+        var f = x - i; if (f < 0) f = 0; if (f > 1) f = 1;
+        var t = f <= hold ? 0 : (f - hold) / (1 - hold);
+        var e = -(Math.cos(Math.PI * t) - 1) / 2;                   /* easeInOutSine */
+        var pos = i + e;
+        return pos > STEPS - 1 ? STEPS - 1 : pos;
+      }
+
+      /* the label and the accessibility state still swap discretely — a tag
+         sliding continuously is unreadable, and an off-screen article must not
+         take tab focus. */
+      /* ⛔ IT FIRES ON ARRIVAL, NOT ON SETUP. His words are "when you FIRST GO
+         INTO the whole house system" — so the trigger is the section reaching
+         the screen (the same 45% visibility that raises the bubble), not the
+         pin being constructed while the section is still 10,000px away. Setting
+         it at construction meant the 2.6s swell had already been and gone
+         before anyone could see it, even when the class survived.
+         ⛔ Once per page load: scrolling back up to the whole house system does
+         NOT replay it, because by then the user has been told. */
+      function mark(i){
+        if (i === cur) return;
+        cur = i;
+        /* leaving the first system takes the swell off, so the keyframe can
+           never still be running while another system is on screen */
+        stageTo(i);
+        sysArts.forEach(function(a, k){
+          a.classList.toggle('on', k === i);
+          if (k === i) a.removeAttribute('inert'); else a.setAttribute('inert', '');
+        });
+        if (stageTag) gsap.fromTo(stageTag, {x:-14, opacity:0},
+          {x:0, opacity:1, duration:.45, ease:'power3.out', overwrite:'auto'});
+      }
+
+      function place(p){
+        var pos = cellPos(p, HOLD);
+        /* RIGHT — the copy scrolls. 25% of a 400%-tall strip is one frame. */
+        gsap.set(txtStrip, {yPercent: -pos * 25});
+        /* LEFT — the stage holds its ground and the units crossfade through
+           each other. Both are functions of the SAME `pos` the strip uses, so
+           the picture and the words are still incapable of disagreeing.
+           The incoming unit settles out of a slight over-scale and the outgoing
+           one shrinks away, which is this page's grammar for arriving and
+           leaving — it stops the crossfade reading as a flat dissolve. */
+        stageLys.forEach(function(l, k){
+          var d = pos - k;                       /* <0 = still to come, >0 = gone past */
+          var o = 1 - Math.abs(d); if (o < 0) o = 0; if (o > 1) o = 1;
+          gsap.set(l, {opacity: o, scale: 1 - .06 * d});
+        });
+        mark(Math.round(pos));
+      }
+      place(0);
+      cur = 0; mark(0);
+
+      /* ⛔ THE RUNWAY IS 0.9 OF A SCREEN PER SYSTEM, NOT TEN SCREENS. Round 36
+         deleted a `+=1000%` pin for exactly that reason. Four systems × 1.05 of
+         the viewport is 4.2 screens of scroll for four states — a full screen
+         of scroll per system, which is what makes it read as "locked onto it
+         for a second" rather than flicking past. MEASURED at 0.9 first: each
+         system held for only three 260px bursts, which was a beat too short.
+         ⛔ `invalidateOnRefresh` so the end recomputes on a resize — a pin whose
+         end was measured against the old viewport height is how a section ends
+         up unreachable. */
+      var pinST = ScrollTrigger.create({
+        trigger: wrapEl,
+        start: 'top top+=88',
+        end: function(){ return '+=' + Math.round(innerHeight * 1.05 * STEPS); },
+        pin: true, pinSpacing: true, anticipatePin: 1, invalidateOnRefresh: true,
+        /* ⛔⛔ THE ADVERTISEMENT FIRES HERE, ON THE PIN ENGAGING, AND NOWHERE
+           ELSE. Two earlier attempts both fired far too early and the swell was
+           over before anyone could see it:
+             · at SETUP — the pin is built while the section is 10,000px away;
+             · on the bubble's own IntersectionObserver — measured firing at
+               **scrollY 743**, still inside the hero, because that observer
+               asks "is 45% of the stage box visible", which is true long before
+               the section locks.
+           `onEnter` is the literal translation of his words — "when I scroll
+           down and FIRST LOCK ONTO the whole house system". It is the frame the
+           pin takes hold. */
+        onEnter: function(){
+          if (advSpent || !stageEl2) return;
+          advSpent = true;
+          swell(stageEl2);
+        },
+        /* ⛔ NO HYSTERESIS NEEDED ANY MORE, AND THAT IS THE TELL THAT THE
+           MECHANISM IS RIGHT. Round 49 needed a 6% deadband because a step
+           change FIRED a timeline, so a trackpad resting on a boundary
+           restarted it every frame and strobed. A pure function of position has
+           nothing to fire: sitting on a boundary just sits there. */
+        onUpdate: function(self){ place(self.progress); }
+      });
+      /* the bubble and the arrival pop fire when the range actually reaches you */
       var arriveIO = null;
       if (stageEl2 && 'IntersectionObserver' in window){
         arriveIO = new IntersectionObserver(function(es){
@@ -5748,45 +6512,45 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         }, {threshold:[.45]});
         arriveIO.observe(stageEl2);
       } else if (stageEl2){ stageEl2.classList.add('tapin'); }
-      /* each article arrives on its own, the same soft entrance the phone uses */
-      var tws = sysArts.map(function(a){
-        return gsap.from(a.children, {y:34, opacity:0, duration:1, ease:'power4.out', stagger:.09,
-          scrollTrigger:{trigger:a, start:'top 78%', once:true}});
-      });
-      /* ⭐ THE LOCK-IN — round 47, and it is NATIVE SCROLL SNAP now.
-         JP: "I don't like how it doesn't lock in when you scroll to it. I don't
-         like how it AUTOMATICALLY SCROLLS to it. I wanted it to lock in for a
-         second, then lock into the fifth stage, then the seventh stage, then
-         the smart five system."
+      /* ⛔ THE PER-ARTICLE ARRIVAL TWEENS ARE GONE. They were `scrollTrigger`
+         on each article with `once:true`, which in pin mode means all four fire
+         within a frame of each other while three of them are off the top of the
+         strip — and then nothing has an entrance left when its turn comes.
+         `place()` above owns every position now, off scroll, with no tween. */
+      /* ⛔⛔ ROUND 48 — THERE IS NO LOCK-IN HERE, AND THAT IS THE DECISION.
+         Both mechanisms have now been built and both have been rejected by
+         name: GSAP ScrollTrigger `snap` in rounds 37/45/46 ("I don't like how
+         it AUTOMATICALLY SCROLLS to it") and native CSS scroll-snap in round
+         47 ("it just jumps when it goes to lock into something, so I don't
+         like any of that").
 
-         ⛔ ROUNDS 37 THROUGH 46 BUILT THE WRONG MECHANISM, THREE TIMES. GSAP's
-         ScrollTrigger `snap` waits until you have STOPPED and then drives the
-         page to the nearest system itself. However softly it is tuned, it is
-         still the page moving on its own after the user let go — which is the
-         thing he has now said outright he does not want. No amount of easing
-         fixes a mechanism that is answering a different question.
+         The CSS one failed for a mechanical reason worth keeping: **Lenis and
+         CSS scroll-snap both write the scroll position**, so they fought every
+         frame. Full write-up sits with the deleted rule in the stylesheet —
+         search `ROUND 48 — THE SNAP IS GONE`.
 
-         What he is describing is CAPTURE DURING THE SCROLL: the scroll itself
-         is caught at each system on the way past. That is exactly what CSS
-         scroll-snap does, and the browser does it with the real scroll physics
-         on the compositor, so it cannot judder and there is never a second
-         animation. It lives in the stylesheet (search `scroll-snap-type`), not
-         here.
-           · `scroll-snap-type: y proximity` on the scroller
-           · `scroll-snap-align: center` on each `.show .sys`
-           · `scroll-snap-stop: always` so a fast flick cannot skip a system —
-             that is the "lock in, lock in, lock in"
-         Nothing else on the 545-page site declares a snap align, so no other
-         section can be captured by it.
+         What holds the section together now is layout, not capture: each
+         `.show .sys` is `min-height:78svh`, vertically centred, and the sticky
+         stage cross-fades to whichever one crosses the midline (setupShowObs).
+         Lenis glides through it and nothing ever takes the scroll off the user.
 
-         ⛔ DO NOT RE-ADD A ScrollTrigger snap here. It fights the native one
-         and it is the behaviour he rejected. */
+         ⛔ DO NOT ADD A SNAP OF ANY KIND HERE. Not ScrollTrigger's, not the
+         browser's, not a hand-rolled one. Four rounds went into learning that. */
       return function(){
-        if (obs) obs.disconnect();
         if (arriveIO) arriveIO.disconnect();
-        tws.forEach(function(t){ if (t && t.scrollTrigger) t.scrollTrigger.kill(); if (t) t.kill(); });
+        if (pinST) pinST.kill(true);          /* true = revert the pin spacing too */
+        showSec.classList.remove('pinmode');
         if (stageEl2) stageEl2.classList.remove('tapin','xopened');
-        sysArts.forEach(function(a){ gsap.set(a.children, {clearProps:'opacity,transform'}); });
+        /* ⛔ UNWRAP BOTH STRIPS AND CLEAR EVERY INLINE TRANSFORM. Without the
+           unwrap, a resize down past 960 and back up nests a second `.fstrip`
+           inside the first and every cell ends up a quarter of a quarter tall.
+           Without the clearProps the strips stay parked at whatever percentage
+           the last scroll left them, on a viewport that no longer has a pin. */
+        unbuildStrip(listEl);
+        sysArts.forEach(function(a){ a.classList.remove('on'); a.removeAttribute('inert'); });
+        gsap.set(txtStrip, {clearProps:'transform'});
+        gsap.set(stageLys, {clearProps:'transform,opacity'});
+        if (stageTag) gsap.set(stageTag, {clearProps:'transform,opacity'});
       };
     });
     mmShow.add('(max-width:959px)', function(){
@@ -5799,8 +6563,18 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         document.querySelectorAll('.mimg.xscrubm').forEach(function(m){ m.classList.add('tapmode'); });
         /* round 25: the bubble pops when the system arrives, not before */
         if ('IntersectionObserver' in window){
+          /* ⭐ ROUND 52 — the phone's advertisement, same rule as the desktop's:
+             the FIRST system to arrive gets one slow swell, once per page load,
+             and nothing after it does. `mAdv` is the once-flag. */
           var tapIO = new IntersectionObserver(function(es){
-            es.forEach(function(en){ en.target.classList.toggle('tapin', en.intersectionRatio >= .55); });
+            es.forEach(function(en){
+              var inView = en.intersectionRatio >= .55;
+              en.target.classList.toggle('tapin', inView);
+              /* ⛔ `mAdvSpent` is hoisted above matchMedia for the same reason
+                 the desktop one is: a context rebuild would otherwise let the
+                 phone advertise a second time further down the page. */
+              if (inView && !mAdvSpent){ mAdvSpent = true; swell(en.target); }
+            });
           }, {threshold:[.55]});
           document.querySelectorAll('.mimg.xscrubm').forEach(function(m){ tapIO.observe(m); });
         } else {
@@ -5863,7 +6637,18 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          gesture across three extra viewports and the border took a whole
          screen of scrolling to close. `+=900` keeps the round-9/21 timing
          (entry gesture, then open and stay) whatever the section height is. */
-      gsap.timeline({scrollTrigger:{trigger:'.xp', start:'top 92%', end:'+=900', scrub:.4}})
+      /* ⭐ ROUND 53 — IT STARTED FAR TOO EARLY TO BE SEEN. JP: "there's a white
+         border that goes around the background, and then it expands when you
+         scroll. I feel like that starts too early, and you don't really get to
+         see that animation. I need it to start a little bit later and then lock
+         into the Whole Home section."
+         `top 92%` fired the moment the section's top edge cleared the bottom of
+         the screen — while he was still reading Pure Luxe, with the frame far
+         below the fold, so the whole gesture happened off-camera and he arrived
+         to a border already gone. `top 62%` starts it when the section is
+         genuinely arriving, and `+=560` (from 900) tightens it so the expand
+         completes as the frame locks rather than a screen after it. */
+      gsap.timeline({scrollTrigger:{trigger:'.xp', start:'top 62%', end:'+=560', scrub:.4}})
         .fromTo(xp, {clipPath:'inset(0% 7% round 48px)'}, {clipPath:'inset(0% 0% round 0px)', ease:'none', duration:.45})
         .to(xp, {clipPath:'inset(0% 0% round 0px)', ease:'none', duration:.55});
     } else {
