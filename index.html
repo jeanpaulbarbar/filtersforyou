@@ -655,6 +655,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(max-width:1079px){.hero{padding-top:var(--hframe)}
     .hcard{min-height:calc(100svh - 2*var(--hframe))}
     .hdr{padding-top:var(--hframe)}}
+  /* ⭐ ROUND 55 — NO PAPER STRIP ABOVE THE FILM ON A PHONE. JP: "there's a tiny
+     little white border all the way at the top of the page when you first
+     load… that shouldn't be there." It was the 8px hero frame above the card.
+     The card now meets the screen top; only its bottom corners stay round.
+     The header keeps its 8px so the white mark sits over the film, not on it. */
+  @media(max-width:859px){
+    .hero{padding-top:0}
+    .hcard{min-height:calc(100svh - var(--hframe));border-radius:0 0 var(--r-hero) var(--r-hero)}
+  }
   /* round 40: on :root, not .hero — the header reads it too */
   @media(max-width:599px){:root{--hframe:8px}}
   /* ⛔ ROUND 40 — THE PHONE GETS ITS OWN OPENING. Two measured reasons:
@@ -1349,7 +1358,18 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      it is what JP was pointing at. Ours goes on the section under the card.
      ⛔ The radial blue wash that was here is deleted — a tinted flat plane with
      a corner glow is the "canvas" he named. Theirs is flat. */
-  .show{background:linear-gradient(180deg,var(--mist) 0,var(--paper) 376px);z-index:6;padding:100px 0 90px;position:relative}
+  /* ⭐ ROUND 55 — THE RANGE SITS ON THE EXPLOSION'S OWN BLUE. JP: "keep that
+     section the same blue as the background blue of the explosions, that way
+     they match." The four frame sets do not share one ground — MEASURED off a
+     12px border ring of each f00: home #E4EBF3 · plus #ECF0F7 · prem #EDF1F9 ·
+     luxe #DCE6F1 — so the section reads `--range-bg`, which stageTo() sets to
+     the CURRENT system's colour and the ground crossfades with the unit. The
+     frame's box edge disappears into it on every system, not just an average.
+     (The round-54 seam moved off this section; it is flat colour now.) */
+  .show{background:var(--range-bg,#E8EEF6);transition:background-color .5s ease-in-out;z-index:6;padding:100px 0 90px;position:relative;
+    /* MEASURED: #0B61F4 on the luxe ground is 4.34:1 and 4.46:1 on the home
+       ground, both under 4.5. Inside this section every blue reads deep. */
+    --blue:var(--blue-deep)}
   .show .shead{max-width:900px;margin-bottom:60px;position:relative}
   .show .shead h2{margin-top:14px}
   /* real marks, not text pills (round 5; round 6: NSW + WaterMark + NSF only — no supplier logos) */
@@ -1620,7 +1640,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .show.pinmode .stage .ly,
     .show.pinmode .stage .ly.on{position:absolute;inset:0;height:auto;
       transition:none;animation:none}
-    .show.pinmode .list{overflow:hidden}
+    .show.pinmode .list{overflow:hidden;
+      /* ⭐ ROUND 55 — THE COPY DISSOLVES AT THE FRAME EDGES. JP: "the product
+         section scrolling is pretty rough, like into each other." MEASURED at
+         72% and 84% of a segment: the outgoing copy and the incoming copy were
+         BOTH fully opaque, one leaving off the top while the other rose from
+         the bottom, hard-cut at the frame edge. A feathered mask on the column
+         (13% each end) turns that into a fade: the leaving system dissolves
+         upward, the arriving one fades in from below, and the two never sit
+         side by side at full strength. Compositor-only, the strip is unchanged. */
+      -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 13%,#000 87%,transparent 100%);
+      mask-image:linear-gradient(180deg,transparent 0,#000 13%,#000 87%,transparent 100%)}
     .show.pinmode .list .fstrip{position:absolute;left:0;right:0;top:0;height:400%}
     .show.pinmode .sys{position:relative;inset:auto;height:25%;min-height:0;
       margin:0;padding:0;border-top:0;justify-content:center;
@@ -2094,30 +2124,61 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 
   /* ── REVIEWS — one spotlight quote at a time ────────────── */
   /* round 54: flat, on their review-card tint. The radial wash is gone. */
-  .revs{background:var(--mist-2);z-index:14;padding:130px 0 110px;position:relative;overflow:hidden}
+  /* ⭐⭐ ROUND 55 — THE REVIEWS ARE A RAIL OF FLAT CARDS. JP: "I kind of hate
+     the way it is… a complete redesign, maybe similar to theirs." C&C's
+     section, MEASURED 2026-08-26 at 1440: 80px padding, five stars over a
+     centred 60px heading, then a marquee of 532×240 cards on their review
+     tint (#F4F8F9 = our --mist-2), 24px radius, no border, no shadow, 8px
+     apart, author 26px/400, quote 16/24 muted, a 108px rounded photo with a
+     40px white badge, drifting at 30px/s, prev/next centred beneath.
+     Ours had one spotlight quote and a photo on a tinted plane. This is theirs
+     in our type and colour: paper ground, cards on --mist-2, the Google mark
+     as the badge, real install photos, and the rail runs on rAF with a
+     clamped dt (never a keyframe — the standing iOS law), pauses on hover,
+     and is a native swipe rail with scroll-snap on phones. */
+  .revs{background:var(--paper);z-index:14;padding:96px 0 90px;position:relative;overflow:hidden}
   .revs .in{position:relative}
-  .revs .qmark{font-size:clamp(6rem,12vw,10rem);font-weight:700;line-height:.6;color:var(--blue);opacity:.18;display:block}
-  .revs .stagewrap{display:grid;gap:40px;align-items:center;margin-top:10px}
-  @media(min-width:960px){.revs .stagewrap{grid-template-columns:1.25fr .75fr;gap:70px}}
-  .revs blockquote{margin:0;font-weight:500;letter-spacing:-.005em;line-height:1.2;font-size:clamp(1.6rem,3.1vw,2.7rem);min-height:4.9em}
-  .revs .who{margin-top:26px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-  .revs .who b{font-size:19px;font-weight:700}
-  .revs .who span{font-size:17px;color:var(--muted)}
-  .revs .st{display:inline-flex;gap:2px}
-  .revs .st svg{width:16px;height:16px}
-  .revs .pic{border-radius:var(--r-card);overflow:hidden;box-shadow:var(--shadow-sm);max-height:420px;background:var(--mist-2)}
-  .revs .pic img{width:100%;height:100%;object-fit:cover}
-  @media(max-width:959px){.revs .pic{max-height:300px}}
-  .revs .ctr{display:flex;align-items:center;gap:18px;margin-top:40px}
-  .revs .ctr .cnt{font-size:17px;font-weight:700;color:var(--muted);letter-spacing:.06em}
-  /* round 13, JP: the quote itself is NOT a link — "Read all 22 on Google"
-     already goes there and one door is enough. */
+  .revs .rhead{text-align:center;max-width:680px;margin:0 auto}
+  .revs .rstars{display:inline-flex;gap:4px}
+  .revs .rstars svg{width:28px;height:28px}
+  .revs .rhead h2{margin:18px auto 0;max-width:14ch}
+  .revs .rsub{margin:16px auto 0;font-size:17px;line-height:1.5;color:var(--muted);font-weight:600;max-width:36ch}
+  .rrail{margin-top:44px;overflow:hidden}
+  .rtrack{display:flex;gap:16px;list-style:none;margin:0;width:max-content;will-change:transform;
+    padding:0 max(var(--gutter),calc((100vw - var(--container)) / 2))}
+  .rcard{flex:0 0 532px;height:240px;background:var(--mist-2);border-radius:var(--r-hero);
+    display:grid;grid-template-columns:1fr 120px;gap:8px;overflow:hidden}
+  .rcard .rbody{padding:18px 8px 18px 24px;display:flex;flex-direction:column;gap:6px;min-width:0}
+  .rcard h3{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+  .rcard .rwhen{font-size:14px;color:var(--muted);font-weight:600}
+  .rcard p{margin:6px 0 0;font-size:15.5px;line-height:1.5;color:var(--muted);
+    display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .rcard .rimg{position:relative;padding:6px 6px 0 0}
+  .rcard .rimg img{width:108px;height:108px;object-fit:cover;border-radius:var(--r-hero);display:block}
+  .rcard .gbadge{position:absolute;right:0;top:0;width:40px;height:40px;border-radius:50%;background:#fff;
+    display:grid;place-items:center;box-shadow:0 2px 8px rgba(4,16,46,.14)}
+  .rcard .gbadge svg{width:20px;height:20px}
+  .rfoot{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:32px}
+  @media(max-width:859px){
+    .rrail{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .rrail::-webkit-scrollbar{display:none}
+    .rtrack{will-change:auto;padding:0 var(--gut);scroll-padding-inline:var(--gut)}
+    .rcard{flex:0 0 min(84vw,340px);height:auto;min-height:220px;scroll-snap-align:start;grid-template-columns:1fr 96px}
+    .rcard .rimg img{width:84px;height:84px}
+    .rcard .gbadge{width:34px;height:34px}
+    .rcard .gbadge svg{width:17px;height:17px}
+    .rcard h3{font-size:19px}
+    .rcard p{font-size:15px;-webkit-line-clamp:5}
+    .rcard .rbody{padding:16px 6px 16px 18px}
+    .rfoot{flex-wrap:wrap;justify-content:flex-start;row-gap:8px}
+  }
+  @media(prefers-reduced-motion:reduce){.rrail{overflow-x:auto}}
   .rnav{display:flex;gap:10px}
   .rnav button{width:48px;height:48px;border-radius:50%;border:1px solid rgba(11,97,244,.2);background:var(--paper);color:var(--ink);
     cursor:pointer;display:grid;place-items:center;transition:background .3s ease-in-out,color .3s ease-in-out}
   .rnav svg{width:16px;height:16px}
   @media(hover:hover) and (pointer:fine){.rnav button:hover{background:var(--ink);color:#fff}}
-  .revs .all{margin-left:auto;font-size:17px;font-weight:700;display:inline-flex;align-items:center;min-height:44px}
+  .revs .all{font-size:17px;font-weight:700;display:inline-flex;align-items:center;min-height:44px}
 
   /* ── NEW DEVELOPMENTS ───────────────────────────────────── */
   /* ROUND 33 — full bleed and dark, so the run stops going flat in the middle.
@@ -2854,18 +2915,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        JP round 10: the eyebrow now reads "What our customers are saying" and
        he wants it bigger. It stops being a quiet label and becomes the
        section's heading, so it is sized and coloured like one. */
-    .revs .lab{font-size:22px;font-weight:600;letter-spacing:-.01em;color:var(--ink);gap:11px;
-      align-items:flex-start;line-height:1.22;max-width:15ch}
-    .revs .lab img{width:26px;height:26px;flex:0 0 26px;margin-top:2px}
-    .revs .qmark{font-size:3.4rem;margin-top:14px;line-height:.5}
-    .revs .stagewrap{margin-top:18px}
-    .revs blockquote{font-size:clamp(1.34rem,5.6vw,1.7rem);line-height:1.32;min-height:8.4em}
-    .revs .stagewrap{gap:28px}
-    .revs .who{margin-top:20px;gap:10px}
-    /* arrows + counter on one line, the Google link directly beneath it */
-    .revs .ctr{margin-top:26px;gap:14px;flex-wrap:wrap;row-gap:6px}
-    .revs .all{margin-left:0;flex:1 0 100%;min-height:44px}
-    .revs .pic{max-height:230px}
+    /* round 55: the spotlight quote is gone; the phone rules for the rail live
+       beside the rail's own CSS. */
+    .revs .rhead{text-align:left;max-width:none}
+    .revs .rhead h2{margin-left:0}
+    .revs .rsub{margin-left:0}
+    .rrail{margin-top:30px}
 
     /* the form's hint was pulled up 8px to sit tight under a one-line
        question; on a phone the question wraps and they collided. */
@@ -3252,49 +3307,50 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      free, and the answers stay in the HTML so the FAQPage markup still matches
      them and answer engines can still read them. The first one ships open so
      the block shows its own shape rather than reading as eight dead bars. */
-  .faq{background:var(--paper);padding:96px 0 104px;color:var(--ink)}
+  /* ⭐ ROUND 55 — THE FAQ IS A LIST, NOT A STACK OF CARDS. JP: "very bloated…
+     keep it for SEO, make it less bloated." Ten bordered cards with 20px of
+     padding each and a 750px photo beside them ran 1388px at 1440 and 1671 at
+     390. Now: hairline rows, two columns on desktop, no photo, tighter type.
+     Every question and answer is untouched (verbatim from the JSON-LD). */
+  .faq{background:var(--paper);padding:88px 0 96px;color:var(--ink)}
   .faq .fhead{max-width:26ch}
   .faq h2{margin-top:14px}
-  .fwrap{display:grid;gap:36px;margin-top:52px;align-items:start}
-  .fpic{margin:0;border-radius:var(--r-card);overflow:hidden;background:var(--mist);
-        box-shadow:0 30px 60px -28px rgba(4,16,46,.42)}
-  .fpic img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:1300/1733}
-  .fgrid{display:flex;flex-direction:column;gap:12px;min-width:0}
+  .fwrap{display:block;margin-top:40px}
+  .fgrid{display:grid;grid-template-columns:1fr;gap:0 56px;min-width:0;border-top:1px solid var(--rule)}
+  .fcol{min-width:0}   /* each column is its own flow, so an open answer moves only its own column */
 
-  .fq{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-card);
-      overflow:hidden;transition:border-color .22s var(--e-out),box-shadow .22s var(--e-out)}
-  .fq[open]{border-color:#CBD9EE;box-shadow:0 1px 2px rgba(15,39,72,.04),0 10px 26px -18px rgba(15,39,72,.3)}
+  .fq{background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;overflow:hidden}
   .fq summary{
-    display:flex;align-items:center;gap:16px;cursor:pointer;list-style:none;
-    padding:19px 20px;min-height:44px;user-select:none}
+    display:flex;align-items:center;gap:14px;cursor:pointer;list-style:none;
+    padding:15px 0;min-height:44px;user-select:none}
   .fq summary::-webkit-details-marker{display:none}
   .fq summary h3{
-    flex:1 1 auto;margin:0;font-size:17.5px;font-weight:750;line-height:1.35;
+    flex:1 1 auto;margin:0;font-size:16.5px;font-weight:650;line-height:1.35;
     letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
   /* the chevron is a control, never the ask — yellow stays reserved for the
      thing we want clicked (standing brand rule). */
   .fq .chev{flex:0 0 20px;width:20px;height:20px;color:var(--blue);
             transition:transform .3s var(--e-out)}
   .fq[open] .chev{transform:rotate(180deg)}
-  .fq .fa{padding:0 20px 22px;border-top:1px solid transparent}
-  .fq .fa p{font-size:16.5px;line-height:1.62;color:var(--muted);margin:0;max-width:60ch}
+  .fq .fa{padding:0 0 18px}
+  .fq .fa p{font-size:15.5px;line-height:1.58;color:var(--muted);margin:0;max-width:none}
   @media(hover:hover) and (pointer:fine){
-    .fq:hover{border-color:#CBD9EE}
+    .fq summary:hover h3{color:var(--blue)}
   }
-  .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:var(--r-card)}
+  .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:var(--r-sm)}
   @media(prefers-reduced-motion:reduce){
     .fq,.fq .chev{transition:none}
   }
   @media(min-width:900px){
-    .fwrap{grid-template-columns:0.82fr 1fr;gap:54px}
+    .fgrid{grid-template-columns:1fr 1fr}
     /* 26ch wrapped this headline to FOUR lines at .d2 scale and ate the whole
        first screen before a single question. "Say less" is about the words,
        not about making six of them wrap forever. */
     .faq .fhead{max-width:none}
     .faq .fhead h2{max-width:19ch}
-    .fq summary{padding:21px 24px}
-    .fq summary h3{font-size:18.5px}
-    .fq .fa{padding:0 24px 24px}
+    .fq summary{padding:17px 0}
+    .fq summary h3{font-size:17px}
+    .fq .fa{padding:0 0 20px}
   }
   /* ── ROUND 33 · THE SERVICING SWITCHER ──
      Replaces the round-31 cost table. Same argument, a fifth of the reading:
@@ -3381,49 +3437,50 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      free, and the answers stay in the HTML so the FAQPage markup still matches
      them and answer engines can still read them. The first one ships open so
      the block shows its own shape rather than reading as eight dead bars. */
-  .faq{background:var(--paper);padding:96px 0 104px;color:var(--ink)}
+  /* ⭐ ROUND 55 — THE FAQ IS A LIST, NOT A STACK OF CARDS. JP: "very bloated…
+     keep it for SEO, make it less bloated." Ten bordered cards with 20px of
+     padding each and a 750px photo beside them ran 1388px at 1440 and 1671 at
+     390. Now: hairline rows, two columns on desktop, no photo, tighter type.
+     Every question and answer is untouched (verbatim from the JSON-LD). */
+  .faq{background:var(--paper);padding:88px 0 96px;color:var(--ink)}
   .faq .fhead{max-width:26ch}
   .faq h2{margin-top:14px}
-  .fwrap{display:grid;gap:36px;margin-top:52px;align-items:start}
-  .fpic{margin:0;border-radius:var(--r-card);overflow:hidden;background:var(--mist);
-        box-shadow:0 30px 60px -28px rgba(4,16,46,.42)}
-  .fpic img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:1300/1733}
-  .fgrid{display:flex;flex-direction:column;gap:12px;min-width:0}
+  .fwrap{display:block;margin-top:40px}
+  .fgrid{display:grid;grid-template-columns:1fr;gap:0 56px;min-width:0;border-top:1px solid var(--rule)}
+  .fcol{min-width:0}   /* each column is its own flow, so an open answer moves only its own column */
 
-  .fq{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-card);
-      overflow:hidden;transition:border-color .22s var(--e-out),box-shadow .22s var(--e-out)}
-  .fq[open]{border-color:#CBD9EE;box-shadow:0 1px 2px rgba(15,39,72,.04),0 10px 26px -18px rgba(15,39,72,.3)}
+  .fq{background:none;border:0;border-bottom:1px solid var(--rule);border-radius:0;overflow:hidden}
   .fq summary{
-    display:flex;align-items:center;gap:16px;cursor:pointer;list-style:none;
-    padding:19px 20px;min-height:44px;user-select:none}
+    display:flex;align-items:center;gap:14px;cursor:pointer;list-style:none;
+    padding:15px 0;min-height:44px;user-select:none}
   .fq summary::-webkit-details-marker{display:none}
   .fq summary h3{
-    flex:1 1 auto;margin:0;font-size:17.5px;font-weight:750;line-height:1.35;
+    flex:1 1 auto;margin:0;font-size:16.5px;font-weight:650;line-height:1.35;
     letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
   /* the chevron is a control, never the ask — yellow stays reserved for the
      thing we want clicked (standing brand rule). */
   .fq .chev{flex:0 0 20px;width:20px;height:20px;color:var(--blue);
             transition:transform .3s var(--e-out)}
   .fq[open] .chev{transform:rotate(180deg)}
-  .fq .fa{padding:0 20px 22px;border-top:1px solid transparent}
-  .fq .fa p{font-size:16.5px;line-height:1.62;color:var(--muted);margin:0;max-width:60ch}
+  .fq .fa{padding:0 0 18px}
+  .fq .fa p{font-size:15.5px;line-height:1.58;color:var(--muted);margin:0;max-width:none}
   @media(hover:hover) and (pointer:fine){
-    .fq:hover{border-color:#CBD9EE}
+    .fq summary:hover h3{color:var(--blue)}
   }
-  .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:var(--r-card)}
+  .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:var(--r-sm)}
   @media(prefers-reduced-motion:reduce){
     .fq,.fq .chev{transition:none}
   }
   @media(min-width:900px){
-    .fwrap{grid-template-columns:0.82fr 1fr;gap:54px}
+    .fgrid{grid-template-columns:1fr 1fr}
     /* 26ch wrapped this headline to FOUR lines at .d2 scale and ate the whole
        first screen before a single question. "Say less" is about the words,
        not about making six of them wrap forever. */
     .faq .fhead{max-width:none}
     .faq .fhead h2{max-width:19ch}
-    .fq summary{padding:21px 24px}
-    .fq summary h3{font-size:18.5px}
-    .fq .fa{padding:0 24px 24px}
+    .fq summary{padding:17px 0}
+    .fq summary h3{font-size:17px}
+    .fq .fa{padding:0 0 20px}
   }
   /* The warranty link measured 187.7 x 21 and failed the 44px floor on phones
      — the same fault round 29 shipped on the footer regions, and the same fix.
@@ -4455,34 +4512,29 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 <!-- ═════════ 9 · REVIEWS — the spotlight ═════════ -->
 <section class="revs arc" id="proof">
   <div class="in">
-    <h2 class="lab labh"><img src="media/mark.svg" alt="" width="48" height="48">What Sydney homeowners say</h2>
-    <span class="qmark" aria-hidden="true">&ldquo;</span>
-    <div class="stagewrap rv">
-      <div>
-        <blockquote><span id="rq">“OMG!!! Now that’s water! Thank you filters for you, I don’t have to buy bottled water anymore…”</span></blockquote>
-        <div class="who">
-          <span class="st" aria-label="Five stars">
-            <svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
-            <svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
-            <svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
-            <svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
-            <svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
-          </span>
-          <b id="rwho">Mandy Boustani</b>
-          <span id="rwhen">April 2026 · Google review</span>
-          <svg class="gm" viewBox="0 0 24 24" aria-hidden="true" style="width:24px;height:24px"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.5 5.5 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3a7.2 7.2 0 0 1-10.7-3.8h-4v3.1A12 12 0 0 0 12 24Z"/><path fill="#FBBC04" d="M5.3 14.3a7.1 7.1 0 0 1 0-4.6v-3.1h-4a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1A7.2 7.2 0 0 1 12 4.8Z"/></svg>
-        </div>
-        <div class="ctr">
-          <div class="rnav">
-            <button id="rprev" aria-label="Previous review" type="button"><svg viewBox="0 0 16 16" fill="none"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button id="rnext" aria-label="Next review" type="button"><svg viewBox="0 0 16 16" fill="none"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          </div>
-          <span class="cnt" id="rcnt">1 / 20</span>
-          <a class="all ul fine" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" target="_blank" rel="noopener">Read all 22 on Google</a>
-        </div>
-      </div>
-      <div class="pic"><img id="rimg" src="media/tap-4.webp" alt="A filtered water tap pouring a glass of water" width="760" height="760" loading="lazy"></div>
+    <!-- round 55: C&C's shape (stars, centred heading, a rail of flat cards),
+         our words. The cards are built from REVIEWS in the script. -->
+    <div class="rhead rv">
+      <span class="rstars" aria-label="Five stars">
+        <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
+      </span>
+      <h2 class="d2">What Sydney homeowners say.</h2>
+      <p class="rsub">5.0 on Google from 22 Google reviews. Every one of them five stars.</p>
     </div>
+  </div>
+  <div class="rrail" id="rrail">
+    <ul class="rtrack" id="rtrack" aria-label="Google reviews"></ul>
+  </div>
+  <div class="in rfoot">
+    <div class="rnav">
+      <button id="rprev" aria-label="Previous review" type="button"><svg viewBox="0 0 16 16" fill="none"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button id="rnext" aria-label="Next review" type="button"><svg viewBox="0 0 16 16" fill="none"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <a class="all ul fine" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" target="_blank" rel="noopener">Read all 22 on Google</a>
   </div>
 </section>
 
@@ -4517,11 +4569,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       <h2 class="d2 rv">Water filter installation in Sydney, answered.</h2>
     </div>
     <div class="fwrap">
-      <figure class="fpic rv">
-        <picture><source media="(max-width:859px)" srcset="media/detail-m.webp"><img src="media/detail.webp" alt="A Filters For You whole house filtration system installed on a Sydney brick wall, pressure gauges and copper pipework visible" width="1300" height="1733" loading="lazy" decoding="async">
-        </picture>
-      </figure>
+      <!-- round 55: the photo column is gone. JP: "the FAQ is very bloated, keep
+           it for SEO, make it less bloated." Ten questions now run as two
+           hairline columns; every question and answer is verbatim from the
+           JSON-LD, untouched. -->
       <div class="fgrid rv">
+        <div class="fcol">
         <details class="fq" open>
           <summary><h3>How much does water filter installation cost in Sydney?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="fa"><p>Every price is published. A 5 stage alkaline reverse osmosis system is $1,280 installed, the 7 stage hydrogen rich system is $1,590, the smart 5 stage is $2,290, and the <a href="whole-house-water-filter-sydney">whole house system</a> at the mains starts at $3,850. Each price includes supply and installation by a licensed plumber, quoted in writing before we start. Prices as at 1 July 2026.</p></div>
@@ -4542,6 +4595,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           <summary><h3>Are Filters For You systems WaterMark and NSF certified?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="fa"><p>Yes, and they are two separate certifications. WaterMark is the Australian plumbing certification and every system we install carries it. NSF is the international certification for water quality and safety performance, and our systems carry that as well.</p></div>
         </details>
+        </div>
+        <div class="fcol">
         <details class="fq">
           <summary><h3>Should I filter the whole house or just the kitchen?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="fa"><p>They do different jobs. One system at the mains filters every tap, shower, bath and appliance in the house. A <a href="under-sink-water-filter-sydney">reverse osmosis system under the kitchen sink</a> handles drinking water on its own dedicated tap. Plenty of Sydney homes run both, and that is the setup we quote most often.</p></div>
@@ -4562,6 +4617,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           <summary><h3>What is the difference between a water filter and a water purifier?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="fa"><p>Most people mean the same thing by both words. In the trade a water filter strains contaminants out through a cartridge, and a water purifier usually means <a href="reverse-osmosis-water-filter-sydney">reverse osmosis</a>, which pushes the water through a membrane fine enough to take out dissolved solids as well. Every system we install does one or the other, and the reverse osmosis systems do both.</p></div>
         </details>
+        </div>
       </div>
     </div>
   </div>
@@ -5369,7 +5425,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   var sysArts = [].slice.call(document.querySelectorAll('.show .sys'));
   var stageLys = stage ? [].slice.call(stage.querySelectorAll('.ly')) : [];
   var stageTag = document.getElementById('stageTag');
+  /* round 55: the section ground follows the unit (see `.show` CSS) */
+  var RANGE_BG = ['#E4EBF3', '#ECF0F7', '#EDF1F9', '#DCE6F1'];
+  var showSecEl = document.querySelector('.show');
   function stageTo(i){
+    if (showSecEl && RANGE_BG[i]) showSecEl.style.setProperty('--range-bg', RANGE_BG[i]);
     if (!stage) return;
     stage.setAttribute('data-cur', i);
     var xh = stage.querySelector('.xhint');
@@ -6004,50 +6064,82 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     {q:'Very pleased with Jean-Paul after installing our 5 stage reverse osmosis system. He explained how the smart system worked and guided us through…', w:'Skorin 98', d:'April 2026 \u00b7 Google review', img:'media/sys-home.webp', alt:'A whole house filtration unit installed outside a Sydney home'},
     {q:'We recently had Jean Paul from Filters for You come out to install a water filter for us and he was absolutely lovely to deal with. He arrived on…', w:'Elly Barbar', d:'March 2026 \u00b7 Google review', img:'media/sys-premium.webp', alt:'A 7 stage reverse osmosis install in a Sydney kitchen'}
   ];
-  var ri = 0;
-  var rq = document.getElementById('rq'), rwho = document.getElementById('rwho'),
-      rwhen = document.getElementById('rwhen'), rimg = document.getElementById('rimg'),
-      rcnt = document.getElementById('rcnt');
-  function rset(n){
-    ri = (n + REVIEWS.length) % REVIEWS.length;
-    var r = REVIEWS[ri];
-    var apply = function(){
-      rq.textContent = '\u201c' + r.q + '\u201d';
-      rwho.textContent = r.w; rwhen.textContent = r.d;
-      rimg.src = r.img; rimg.alt = r.alt;
-      rcnt.textContent = (ri + 1) + ' / ' + REVIEWS.length;
-    };
-    if (reduce || !hasGsap){ apply(); return; }
-    /* ROUND 34 — was a bare opacity crossfade, the plainest transition on the
-       page, on the one block that carries a real person's words. Now the
-       quote lifts away and the next one rises into its place, and the photo
-       cross-scales rather than blinking. Same "next one, please" gesture as
-       the price switcher, because it is the same job. */
-    var who = document.querySelector('.revs .who');
-    /* ROUND 38 — the exit was a .22s yank; the one block carrying a real
-       person's words now breathes out and the next breathes in. */
-    gsap.to(rq,   {opacity:0, y:-10, duration:.45, ease:'power1.in'});
-    gsap.to(who,  {opacity:0, y:-6,  duration:.45, ease:'power1.in'});
-    gsap.to(rimg, {opacity:0, scale:1.03, duration:.45, ease:'power1.in', onComplete:function(){
-      apply();
-      gsap.fromTo(rq,   {opacity:0, y:22}, {opacity:1, y:0, duration:.9, ease:'power4.out'});
-      gsap.fromTo(who,  {opacity:0, y:14}, {opacity:1, y:0, duration:.85, ease:'power4.out', delay:.08});
-      gsap.fromTo(rimg, {opacity:0, scale:1.05}, {opacity:1, scale:1, duration:.95, ease:'power4.out'});
-    }});
-  }
-  var rTouched = 0, rHover = false;
-  document.getElementById('rnext').addEventListener('click', function(){ rTouched = Date.now(); rset(ri+1); });
-  document.getElementById('rprev').addEventListener('click', function(){ rTouched = Date.now(); rset(ri-1); });
-  var revsWrap = document.querySelector('.revs .stagewrap');
-  if (revsWrap){
-    revsWrap.addEventListener('mouseenter', function(){ rHover = true; });
-    revsWrap.addEventListener('mouseleave', function(){ rHover = false; });
-  }
-  if (!reduce) setInterval(function(){
-    if (rHover || document.hidden || document.body.classList.contains('dopen')) return;
-    if (Date.now() - rTouched < 9000) return;
-    rset(ri+1);
-  }, 5500);
+  /* ── THE REVIEW RAIL — round 55 ──────────────────────────
+     Cards built from REVIEWS. Desktop: the list is doubled and drifts on rAF
+     at C&C's measured 30px/s — dt clamped to 50ms, modulo wrap on the real
+     measured span, paused offscreen, on a hidden tab and under the pointer
+     (a review has to be readable). Prev/next tween the offset one card. Phone
+     and reduced motion: one copy, a native swipe rail with scroll-snap; the
+     buttons scrollBy one card. Nothing on this rail is a CSS keyframe. */
+  (function(){
+    var track = document.getElementById('rtrack'), rail = document.getElementById('rrail');
+    var prev = document.getElementById('rprev'), next = document.getElementById('rnext');
+    if (!track || !rail || !prev || !next) return;
+    var GSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.5 5.5 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3a7.2 7.2 0 0 1-10.7-3.8h-4v3.1A12 12 0 0 0 12 24Z"/><path fill="#FBBC04" d="M5.3 14.3a7.1 7.1 0 0 1 0-4.6v-3.1h-4a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1A7.2 7.2 0 0 1 12 4.8Z"/></svg>';
+    var marquee = !reduce && !matchMedia('(max-width:859px)').matches;
+    function card(r, hidden){
+      var li = document.createElement('li'); li.className = 'rcard';
+      if (hidden) li.setAttribute('aria-hidden', 'true');
+      li.innerHTML = '<div class="rbody"><h3></h3><span class="rwhen"></span><p></p></div>' +
+        '<div class="rimg"><img loading="lazy" decoding="async" width="108" height="108"><span class="gbadge">' + GSVG + '</span></div>';
+      li.querySelector('h3').textContent = r.w;
+      li.querySelector('.rwhen').textContent = r.d;
+      li.querySelector('p').textContent = r.q;
+      var im = li.querySelector('img'); im.src = r.img; im.alt = r.alt;
+      return li;
+    }
+    REVIEWS.forEach(function(r){ track.appendChild(card(r, false)); });
+    var GAP = 16;
+    function stepW(){ var c = track.querySelector('.rcard'); return c ? c.getBoundingClientRect().width + GAP : 320; }
+    if (!marquee){
+      prev.addEventListener('click', function(){ rail.scrollBy({left:-stepW(), behavior:'smooth'}); });
+      next.addEventListener('click', function(){ rail.scrollBy({left:stepW(), behavior:'smooth'}); });
+      return;
+    }
+    REVIEWS.forEach(function(r){ track.appendChild(card(r, true)); });   /* the second copy, for the loop */
+    var x = 0, span = 0, last = 0, raf = null, on = false, vis = true, hover = false, tw = null;
+    var SPEED = 30;   /* px/s, C&C measured */
+    function measure(){
+      var cards = track.querySelectorAll('.rcard'), half = cards.length / 2, w = 0;
+      for (var i = 0; i < half; i++) w += cards[i].getBoundingClientRect().width + GAP;
+      span = w;
+    }
+    measure();
+    function wrap(){
+      var d = 0;
+      while (x <= -span){ x += span; d += span; }
+      while (x > 0){ x -= span; d -= span; }
+      if (tw && d){ tw.from += d; tw.to += d; }
+    }
+    function frame(now){
+      raf = null;
+      if (!on || !vis){ last = 0; return; }
+      var dt = last ? Math.min((now - last) / 1000, .05) : 0; last = now;
+      if (tw){
+        var p = Math.min(1, (now - tw.t0) / tw.dur), e = 1 - Math.pow(1 - p, 3);
+        x = tw.from + (tw.to - tw.from) * e;
+        if (p >= 1) tw = null;
+      } else if (!hover){ x -= SPEED * dt; }
+      wrap();
+      track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      raf = requestAnimationFrame(frame);
+    }
+    function run(){ if (!raf && on && vis){ last = 0; raf = requestAnimationFrame(frame); } }
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ on = es[0].isIntersecting; if (on) run(); else last = 0; }, {rootMargin:'150px 0px'}).observe(rail);
+    } else { on = true; run(); }
+    document.addEventListener('visibilitychange', function(){ vis = !document.hidden; if (vis) run(); else last = 0; });
+    rail.addEventListener('mouseenter', function(){ hover = true; });
+    rail.addEventListener('mouseleave', function(){ hover = false; });
+    function nudge(dir){ tw = {from:x, to:x - dir * stepW(), t0:performance.now(), dur:520}; run(); }
+    prev.addEventListener('click', function(){ nudge(-1); });
+    next.addEventListener('click', function(){ nudge(1); });
+    var rt;
+    addEventListener('resize', function(){
+      clearTimeout(rt);
+      rt = setTimeout(function(){ var b = span; measure(); if (b && span) x = x / b * span; }, 150);
+    });
+  })();
 
   /* ── THE TAPS RAIL — driven in JS, not by a CSS keyframe ────────────────
      ⛔ 2026-08-19, second report. JP: "3 way mixer infinite still glitches on
@@ -6896,27 +6988,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   if (!sec || typeof gsap === 'undefined') return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var qmark = sec.querySelector('.qmark');
-  var quote = sec.querySelector('blockquote');
-  var who   = sec.querySelector('.who');
-  var ctr   = sec.querySelector('.ctr');
-  var pic   = sec.querySelector('.pic img');
-
-  var tl = gsap.timeline({scrollTrigger:{trigger:sec, start:'top 74%', once:true}});
-  /* the mark leads, and it overshoots slightly — a quote mark is punctuation,
-     it is allowed a bit of character. */
-  if (qmark) tl.from(qmark, {scale:.7, opacity:0, duration:.7, ease:'back.out(1.7)'}, 0);
-  if (quote) tl.from(quote, {y:26, opacity:0, duration:.7, ease:'power3.out'}, .12);
-  if (who)   tl.from(who,   {y:18, opacity:0, duration:.6, ease:'power3.out'}, .24);
-  if (ctr)   tl.from(ctr,   {y:14, opacity:0, duration:.55, ease:'power3.out'}, .32);
-
-  /* the photo settles out of a slight over-scale, matching how the pillars
-     photos and the FAQ install shot behave. */
-  if (pic){
-    tl.from(pic, {scale:1.1, duration:1.1, ease:'power3.out'}, 0);
-    gsap.fromTo(pic, {yPercent:-3}, {yPercent:3, ease:'none',
-      scrollTrigger:{trigger:sec, start:'top bottom', end:'bottom top', scrub:.4}});
-  }
+  /* round 55: the rail FADES in (section-playbook: reviews = fade, evidence
+     should not perform). The heading lockup carries .rv like every other. */
+  var rail = sec.querySelector('.rrail');
+  if (rail) gsap.from(rail, {opacity:0, duration:.9, ease:'power2.out',
+    scrollTrigger:{trigger:sec, start:'top 70%', once:true}});
 })();
 
 /* ═══════════════════════════════════════════════════════════════
