@@ -529,7 +529,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      Everything in the strip now sits on a 24px line: rating 12px (C&C's own
      strip runs 12), glyphs 15, stars 10. Desktop-only chrome — the strip is
      display:none under 1080, so no phone tap target changes. */
-  .util{background:var(--mist);color:var(--ink);font-size:12px}
+  .util{background:var(--ink-blue);color:#fff;font-size:12px}   /* round 56: ink, over the film */
   .util nav.ulinks a{min-height:24px}
   .util .soc svg{width:15px;height:15px}
   .util .ustars svg{width:10px;height:10px}
@@ -554,7 +554,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .util .soc svg{width:19px;height:19px}
   /* round 39: hover was yellow — invisible on the mist ground (≈1.5:1), and
      yellow belongs to the ask anyway. Blue, same as every other quiet hover. */
-  @media(hover:hover) and (pointer:fine){.util .soc a:hover i{color:var(--blue)}}
+  @media(hover:hover) and (pointer:fine){.util .soc a:hover i{color:var(--yellow)}}
   @media(max-width:1079px){.util{display:none}}
   .hdr.mini .util{display:none}
   /* systems dropdown */
@@ -628,10 +628,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* round 54: the frame around the hero card is PAPER, like theirs. The cool
      tint starts under the card and fades out (see .show). */
   .hero{position:relative;background:var(--paper);
-    padding:calc(var(--utilh) + var(--hframe)) var(--hframe) var(--hframe)}
-  .hcard{position:relative;min-height:calc(100svh - var(--utilh) - 2*var(--hframe));
+    /* round 56, JP: "a thin white line at the top of the page… that white
+       thing needs to be blue." The paper frame ABOVE the card is gone at every
+       width: the film meets the top of the screen and the utility strip sits
+       on it in ink. Sides and bottom keep their gutter. */
+    padding:0 var(--hframe) var(--hframe)}
+  .hcard{position:relative;min-height:calc(100svh - var(--hframe));
     display:flex;align-items:flex-end;background:var(--ink-blue);
-    border-radius:var(--r-hero);overflow:clip}
+    border-radius:0 0 var(--r-hero) var(--r-hero);overflow:clip}
   @media (prefers-reduced-motion: no-preference){
     .hcard{animation:hcardin 1.15s var(--e-out) .12s backwards}
     .hdr .row{animation:hdrin .8s var(--e-out) .85s backwards}
@@ -639,14 +643,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* the from-state is ~32% wide × 26% tall of the card, centred — C&C's small
      card measured ~400×240 at 1440. Both ends carry the same round() so the
      radius never pops when the animation hands off to border-radius. */
-  @keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round var(--r-hero))}
-    to{clip-path:inset(0 round var(--r-hero))}}
+  @keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round 0 0 var(--r-hero) var(--r-hero))}
+    to{clip-path:inset(0 round 0 0 var(--r-hero) var(--r-hero))}}
   @keyframes hdrin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
   /* ⛔ ROUND 41 — the main row steps fully INTO the card. Measured before:
      the Book now pill's top sat EXACTLY on the card's top seam (both y=56)
      — JP read it as the header being cut off. 10px of desktop padding puts
      the whole row inside the film, which is where C&C carry theirs too. */
-  @media(min-width:1080px){.hdr{padding-top:10px}}
+  @media(min-width:1080px){.hdr{padding-top:0}}   /* round 56: the ink utility strip sits flush at y=0 */
   /* under 1080 the utility strip is display:none, so its band collapses.
      ROUND 40 — the header clears the band: without the strip the fixed row
      started at y=0 and the white mark's top pixels sat ON the mist strip,
@@ -1649,8 +1653,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          (13% each end) turns that into a fade: the leaving system dissolves
          upward, the arriving one fades in from below, and the two never sit
          side by side at full strength. Compositor-only, the strip is unchanged. */
-      -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 13%,#000 87%,transparent 100%);
-      mask-image:linear-gradient(180deg,transparent 0,#000 13%,#000 87%,transparent 100%)}
+      /* round 56, JP: "I'm sitting on the whole home and it's slightly fading
+         the button and the title." The feather was static, so it ate the top
+         and bottom of a RESTING cell. `--fm` is 0% at rest and place() raises
+         it to 14% only while the strip is travelling. */
+      --fm:0%;
+      -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 var(--fm),#000 calc(100% - var(--fm)),transparent 100%);
+      mask-image:linear-gradient(180deg,transparent 0,#000 var(--fm),#000 calc(100% - var(--fm)),transparent 100%)}
     .show.pinmode .list .fstrip{position:absolute;left:0;right:0;top:0;height:400%}
     .show.pinmode .sys{position:relative;inset:auto;height:25%;min-height:0;
       margin:0;padding:0;border-top:0;justify-content:center;
@@ -1757,7 +1766,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* ⛔ Round 22: NO bottom padding — the 40px paper strip under the photo was
      JP's "white thing glitching" as the tour wiped over the xp tail. The frame
      now ends flush at the section's bottom edge. Top padding stays for entry. */
-  .xp{position:relative;padding:40px 0 0;background:var(--paper);z-index:8}
+  /* round 56, JP: "a little white line between the whole home and the Pure Luxe
+     section." The paper ground showed between the range's blue and the photo,
+     40px + the closed inset on desktop and a sub-pixel line on phones. The
+     section's ground is the range's blue now, so the card opens out of the
+     same field it follows. */
+  .xp{position:relative;padding:40px 0 0;background:var(--range-bg,#DCE6F1);z-index:8}
   .xp .frame{position:relative;overflow:hidden;min-height:135svh;display:flex;align-items:center;
     /* round 54: the closed state is C&C's expander exactly — inset(80px 36px
        round 48px), measured 2026-08-26 — so it reads as a CARD in the paper
@@ -2067,7 +2081,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .zero .lab img{filter:brightness(0) invert(1)}
   .zero .big{font-weight:600;letter-spacing:-.03em;line-height:.9;font-size:clamp(7rem,22vw,19rem);color:#fff;margin-top:10px}
   .zero .big .wm{padding-bottom:.04em}
-  .zero h2{color:#fff;margin:26px auto 0;max-width:24ch;font-size:clamp(1.5rem,2.6vw,2.2rem);font-weight:500;line-height:1.3;letter-spacing:0}
+  /* round 56, JP: "make that say something else and make it a lot larger…
+     shaping it as a care plan." */
+  .zero h2{color:#fff;margin:22px auto 0;max-width:16ch;font-size:clamp(2.3rem,4.6vw,3.8rem);font-weight:600;line-height:1.08;letter-spacing:-.015em}
   .zero h2 b{font-weight:700}
   .zero .years{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:56px}
   .zero .y{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:var(--r-full);
@@ -2139,6 +2155,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .revs{background:var(--paper);z-index:14;padding:96px 0 90px;position:relative;overflow:hidden}
   .revs .in{position:relative}
   .revs .rhead{text-align:center;max-width:680px;margin:0 auto}
+  .revs .rgoogle{display:block;width:72px;height:72px;margin:0 auto 14px}
   .revs .rstars{display:inline-flex;gap:4px}
   .revs .rstars svg{width:28px;height:28px}
   .revs .rhead h2{margin:18px auto 0;max-width:14ch}
@@ -2160,10 +2177,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .rcard .gbadge svg{width:20px;height:20px}
   .rfoot{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:32px}
   @media(max-width:859px){
-    .rrail{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-    .rrail::-webkit-scrollbar{display:none}
-    .rtrack{will-change:auto;padding:0 var(--gut);scroll-padding-inline:var(--gut)}
-    .rcard{flex:0 0 min(84vw,340px);height:auto;min-height:220px;scroll-snap-align:start;grid-template-columns:1fr 96px}
+    /* round 56: the phone runs the same infinite rail (JP's call) */
+    .rtrack{padding:0 var(--gut)}
+    .rcard{flex:0 0 min(84vw,340px);height:220px;grid-template-columns:1fr 96px}
     .rcard .rimg img{width:84px;height:84px}
     .rcard .gbadge{width:34px;height:34px}
     .rcard .gbadge svg{width:17px;height:17px}
@@ -2172,7 +2188,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .rcard .rbody{padding:16px 6px 16px 18px}
     .rfoot{flex-wrap:wrap;justify-content:flex-start;row-gap:8px}
   }
-  @media(prefers-reduced-motion:reduce){.rrail{overflow-x:auto}}
+  @media(prefers-reduced-motion:reduce){.rrail{overflow-x:auto;scrollbar-width:none}.rtrack{will-change:auto}}
   .rnav{display:flex;gap:10px}
   .rnav button{width:48px;height:48px;border-radius:50%;border:1px solid rgba(11,97,244,.2);background:var(--paper);color:var(--ink);
     cursor:pointer;display:grid;place-items:center;transition:background .3s ease-in-out,color .3s ease-in-out}
@@ -2489,18 +2505,21 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      there are only FOUR markers (.hswrap.m), the last starts at .48s and is
      landed by ~.9s — the sweep then waited 0.85s. That is his "second".
      Desktop sweeps from 1.42s, the phone from .94s (below), 110ms apart. */
-  .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,1.42s}
-  .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,1.53s}
-  .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,1.64s}
-  .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,1.75s}
-  .timg.xopen .hs:nth-child(5) > button > i{animation-delay:.64s,1.79s,1.86s}
-  .timg.xopen .hs:nth-child(6) > button > i{animation-delay:.8s,1.95s,1.97s}
-  .timg.xopen .hs:nth-child(7) > button > i{animation-delay:.96s,2.11s,2.08s}
+  /* round 56, JP: "once the plus signs are done, it needs to respond a little
+     bit quicker." Sweep starts .2s after the last pop begins (1.16s desktop,
+     .68s phone), 90ms apart. */
+  .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,1.16s}
+  .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,1.25s}
+  .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,1.34s}
+  .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,1.43s}
+  .timg.xopen .hs:nth-child(5) > button > i{animation-delay:.64s,1.79s,1.52s}
+  .timg.xopen .hs:nth-child(6) > button > i{animation-delay:.8s,1.95s,1.61s}
+  .timg.xopen .hs:nth-child(7) > button > i{animation-delay:.96s,2.11s,1.7s}
   @media(max-width:859px){
-    .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,.94s}
-    .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,1.05s}
-    .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,1.16s}
-    .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,1.27s}
+    .timg.xopen .hs:nth-child(1) > button > i{animation-delay:0s,1.15s,.68s}
+    .timg.xopen .hs:nth-child(2) > button > i{animation-delay:.16s,1.31s,.77s}
+    .timg.xopen .hs:nth-child(3) > button > i{animation-delay:.32s,1.47s,.86s}
+    .timg.xopen .hs:nth-child(4) > button > i{animation-delay:.48s,1.63s,.95s}
   }
   /* the wrapper fade keeps step with its dot */
   .timg.xopen .hs:nth-child(1){transition-delay:0s}
@@ -2599,7 +2618,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .sline{font-size:clamp(2.15rem,9vw,2.7rem);line-height:1.04}
     /* round 19, "larger is better" — 2.5 → 3.1rem ceiling on the phone. */
     .money{font-size:clamp(2.5rem,9.6vw,3.1rem)}
-    .zero h2{font-size:clamp(1.28rem,5.2vw,1.6rem);max-width:22ch;margin-top:20px}
+    .zero h2{font-size:clamp(2rem,8.4vw,2.6rem);max-width:none;margin-top:16px}
     .zero .note{font-size:14.5px}
     .zero .years{margin-top:34px;gap:8px}
     .zero .y{padding:10px 16px}
@@ -3313,9 +3332,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      390. Now: hairline rows, two columns on desktop, no photo, tighter type.
      Every question and answer is untouched (verbatim from the JSON-LD). */
   .faq{background:var(--paper);padding:88px 0 96px;color:var(--ink)}
-  .faq .fhead{max-width:26ch}
-  .faq h2{margin-top:14px}
-  .fwrap{display:block;margin-top:40px}
+  /* round 56, JP: "the FAQ looks horrible the way it's been done." One centred
+     column, 920px wide, under a centred heading. Roomier rows than round 55,
+     still hairlines, no cards, no photo. */
+  .faq .fhead{max-width:none;text-align:center}
+  .faq .fhead .lab{justify-content:center}
+  .faq h2{margin:14px auto 0}
+  .fwrap{display:block;max-width:920px;margin:44px auto 0}
   .fgrid{display:grid;grid-template-columns:1fr;gap:0 56px;min-width:0;border-top:1px solid var(--rule)}
   .fcol{min-width:0}   /* each column is its own flow, so an open answer moves only its own column */
 
@@ -3342,15 +3365,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .fq,.fq .chev{transition:none}
   }
   @media(min-width:900px){
-    .fgrid{grid-template-columns:1fr 1fr}
-    /* 26ch wrapped this headline to FOUR lines at .d2 scale and ate the whole
-       first screen before a single question. "Say less" is about the words,
-       not about making six of them wrap forever. */
-    .faq .fhead{max-width:none}
     .faq .fhead h2{max-width:19ch}
-    .fq summary{padding:17px 0}
-    .fq summary h3{font-size:17px}
-    .fq .fa{padding:0 0 20px}
+    .fq summary{padding:20px 0}
+    .fq summary h3{font-size:18px}
+    .fq .fa{padding:0 0 22px}
+    .fq .fa p{font-size:16px;max-width:66ch}
   }
   /* ── ROUND 33 · THE SERVICING SWITCHER ──
      Replaces the round-31 cost table. Same argument, a fifth of the reading:
@@ -3443,9 +3462,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      390. Now: hairline rows, two columns on desktop, no photo, tighter type.
      Every question and answer is untouched (verbatim from the JSON-LD). */
   .faq{background:var(--paper);padding:88px 0 96px;color:var(--ink)}
-  .faq .fhead{max-width:26ch}
-  .faq h2{margin-top:14px}
-  .fwrap{display:block;margin-top:40px}
+  /* round 56, JP: "the FAQ looks horrible the way it's been done." One centred
+     column, 920px wide, under a centred heading. Roomier rows than round 55,
+     still hairlines, no cards, no photo. */
+  .faq .fhead{max-width:none;text-align:center}
+  .faq .fhead .lab{justify-content:center}
+  .faq h2{margin:14px auto 0}
+  .fwrap{display:block;max-width:920px;margin:44px auto 0}
   .fgrid{display:grid;grid-template-columns:1fr;gap:0 56px;min-width:0;border-top:1px solid var(--rule)}
   .fcol{min-width:0}   /* each column is its own flow, so an open answer moves only its own column */
 
@@ -3472,15 +3495,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .fq,.fq .chev{transition:none}
   }
   @media(min-width:900px){
-    .fgrid{grid-template-columns:1fr 1fr}
-    /* 26ch wrapped this headline to FOUR lines at .d2 scale and ate the whole
-       first screen before a single question. "Say less" is about the words,
-       not about making six of them wrap forever. */
-    .faq .fhead{max-width:none}
     .faq .fhead h2{max-width:19ch}
-    .fq summary{padding:17px 0}
-    .fq summary h3{font-size:17px}
-    .fq .fa{padding:0 0 20px}
+    .fq summary{padding:20px 0}
+    .fq summary h3{font-size:18px}
+    .fq .fa{padding:0 0 22px}
+    .fq .fa p{font-size:16px;max-width:66ch}
   }
   /* The warranty link measured 187.7 x 21 and failed the 44px floor on phones
      — the same fault round 29 shipped on the footer regions, and the same fix.
@@ -4336,8 +4355,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          and letters setting themselves down one at a time IS that argument.
          ⛔ .rv is GONE from this h2 — .rv is the generic 22px fade-up and both
          running at once would fight over the same opacity. -->
-    <h2 class="d2" id="ledgerLine" aria-label="Every cost, for every system. Published."><span aria-hidden="true"><span class="hw"><span class="hch">E</span><span class="hch">v</span><span class="hch">e</span><span class="hch">r</span><span class="hch">y</span></span> <span class="hw"><span class="hch">c</span><span class="hch">o</span><span class="hch">s</span><span class="hch">t</span><span class="hch">,</span></span> <span class="hw"><span class="hch">f</span><span class="hch">o</span><span class="hch">r</span></span> <span class="hw"><span class="hch">e</span><span class="hch">v</span><span class="hch">e</span><span class="hch">r</span><span class="hch">y</span></span> <span class="hw"><span class="hch">s</span><span class="hch">y</span><span class="hch">s</span><span class="hch">t</span><span class="hch">e</span><span class="hch">m</span><span class="hch">.</span></span> <span class="hw"><span class="hch">P</span><span class="hch">u</span><span class="hch">b</span><span class="hch">l</span><span class="hch">i</span><span class="hch">s</span><span class="hch">h</span><span class="hch">e</span><span class="hch">d</span><span class="hch">.</span></span></span></h2>
-    <p class="lede rv">Pick your system. Three numbers, and not one of them moves later.</p>
+    <h2 class="d2" id="ledgerLine" aria-label="Your ongoing care plan."><span aria-hidden="true"><span class="hw"><span class="hch">Y</span><span class="hch">o</span><span class="hch">u</span><span class="hch">r</span></span> <span class="hw"><span class="hch">o</span><span class="hch">n</span><span class="hch">g</span><span class="hch">o</span><span class="hch">i</span><span class="hch">n</span><span class="hch">g</span></span> <span class="hw"><span class="hch">c</span><span class="hch">a</span><span class="hch">r</span><span class="hch">e</span></span> <span class="hw"><span class="hch">p</span><span class="hch">l</span><span class="hch">a</span><span class="hch">n</span><span class="hch">.</span></span></span></h2>
+    <p class="lede rv">Pick your system. One visit a year, every cartridge refreshed, your warranty kept alive and your water kept the way it should be. The price you see here is the price you pay.</p>
 
     <!-- ROUND 33 — THE SWITCHER. JP, 2026-08-18: "that servicing section is
          just way too large and designed poorly. Just too much going on for
@@ -4515,6 +4534,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     <!-- round 55: C&C's shape (stars, centred heading, a rail of flat cards),
          our words. The cards are built from REVIEWS in the script. -->
     <div class="rhead rv">
+      <!-- round 56, JP: "a large Google logo next to the heading, I like the five stars" -->
+      <svg class="rgoogle" viewBox="0 0 24 24" aria-label="Google"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.5 5.5 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3a7.2 7.2 0 0 1-10.7-3.8h-4v3.1A12 12 0 0 0 12 24Z"/><path fill="#FBBC04" d="M5.3 14.3a7.1 7.1 0 0 1 0-4.6v-3.1h-4a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1A7.2 7.2 0 0 1 12 4.8Z"/></svg>
       <span class="rstars" aria-label="Five stars">
         <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
         <svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg>
@@ -5429,7 +5450,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   var RANGE_BG = ['#E4EBF3', '#ECF0F7', '#EDF1F9', '#DCE6F1'];
   var showSecEl = document.querySelector('.show');
   function stageTo(i){
-    if (showSecEl && RANGE_BG[i]) showSecEl.style.setProperty('--range-bg', RANGE_BG[i]);
+    /* round 56: on the root, so `.xp` reads it too and the seam into the whole
+       home section is the same blue, never a paper line */
+    if (RANGE_BG[i]) document.documentElement.style.setProperty('--range-bg', RANGE_BG[i]);
     if (!stage) return;
     stage.setAttribute('data-cur', i);
     var xh = stage.querySelector('.xhint');
@@ -6076,7 +6099,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     var prev = document.getElementById('rprev'), next = document.getElementById('rnext');
     if (!track || !rail || !prev || !next) return;
     var GSVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.5 5.5 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3a7.2 7.2 0 0 1-10.7-3.8h-4v3.1A12 12 0 0 0 12 24Z"/><path fill="#FBBC04" d="M5.3 14.3a7.1 7.1 0 0 1 0-4.6v-3.1h-4a12 12 0 0 0 0 10.8l4-3.1Z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1A7.2 7.2 0 0 1 12 4.8Z"/></svg>';
-    var marquee = !reduce && !matchMedia('(max-width:859px)').matches;
+    /* round 56, JP: an infinite loop on the phone as well, and no stop on hover */
+    var marquee = !reduce;
     function card(r, hidden){
       var li = document.createElement('li'); li.className = 'rcard';
       if (hidden) li.setAttribute('aria-hidden', 'true');
@@ -6129,8 +6153,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       new IntersectionObserver(function(es){ on = es[0].isIntersecting; if (on) run(); else last = 0; }, {rootMargin:'150px 0px'}).observe(rail);
     } else { on = true; run(); }
     document.addEventListener('visibilitychange', function(){ vis = !document.hidden; if (vis) run(); else last = 0; });
-    rail.addEventListener('mouseenter', function(){ hover = true; });
-    rail.addEventListener('mouseleave', function(){ hover = false; });
+    /* round 56: the hover pause is gone. JP: "I don't like how, when you hover
+       over the reviews, it stops." Same call he made on the taps rail. */
     function nudge(dir){ tw = {from:x, to:x - dir * stepW(), t0:performance.now(), dur:520}; run(); }
     prev.addEventListener('click', function(){ nudge(-1); });
     next.addEventListener('click', function(){ nudge(1); });
@@ -6688,10 +6712,31 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           {x:0, opacity:1, duration:.45, ease:'power3.out', overwrite:'auto'});
       }
 
+      /* ⭐ ROUND 56 — THE SOFT LOCK. JP: "when it locks into it, it feels like a
+         very, very hard lock." A pin is a dead stop: the panel moves at 1:1 and
+         then does not move at all. So the panel now DECELERATES into the lock:
+         over the last 252px before the pin (a pre-pin scrub, below) the stage
+         and the copy lag the scroll by up to 44px, and over the first 3% of the
+         pin that lag is released on an ease-out. The content keeps drifting up
+         and settles instead of slamming. Transform only, same `pos` for both
+         columns, nothing fired. */
+      var SETTLE = 44;
       function place(p){
         var pos = cellPos(p, HOLD);
         /* RIGHT — the copy scrolls. 25% of a 400%-tall strip is one frame. */
         gsap.set(txtStrip, {yPercent: -pos * 25});
+        /* round 56: the column's feather exists ONLY while the strip travels
+           (0% at rest, up to 14% mid-travel) — see the `--fm` note in the CSS. */
+        var f = pos - Math.floor(pos); if (pos >= STEPS - 1) f = 0;
+        listEl.style.setProperty('--fm', (Math.sin(Math.PI * f) * 14).toFixed(2) + '%');
+        /* ⛔ only while the pin holds: the pin's own refresh calls this with
+           progress 0 at page load, which would park the content 44px low and
+           hop it up when the approach scrub takes over (measured: a 42px jump
+           at −250px). Before the pin, the approach scrub owns `y`. */
+        if (pinST && pinST.isActive){
+          var s = p / .03; if (s > 1) s = 1;
+          gsap.set([stageEl2, listEl], {y: SETTLE * Math.pow(1 - s, 3)});
+        }
         /* LEFT — the stage holds its ground and the units crossfade through
            each other. Both are functions of the SAME `pos` the strip uses, so
            the picture and the words are still incapable of disagreeing.
@@ -6707,6 +6752,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       }
       place(0);
       cur = 0; mark(0);
+      /* the approach: the lag builds over the 252px before the pin engages */
+      var preST = ScrollTrigger.create({
+        trigger: wrapEl, start: 'top top+=340', end: 'top top+=88', scrub: true, invalidateOnRefresh: true,
+        onUpdate: function(self){ if (!pinST || !pinST.isActive) gsap.set([stageEl2, listEl], {y: SETTLE * self.progress}); },
+        onRefresh: function(self){ if (!pinST || !pinST.isActive) gsap.set([stageEl2, listEl], {y: SETTLE * self.progress}); }
+      });
 
       /* ⛔ THE RUNWAY IS 0.9 OF A SCREEN PER SYSTEM, NOT TEN SCREENS. Round 36
          deleted a `+=1000%` pin for exactly that reason. Four systems × 1.05 of
@@ -6780,6 +6831,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       return function(){
         if (arriveIO) arriveIO.disconnect();
         if (pinST) pinST.kill(true);          /* true = revert the pin spacing too */
+        if (preST) preST.kill();
+        gsap.set([stageEl2, listEl], {clearProps:'transform'});
+        if (listEl) listEl.style.removeProperty('--fm');
         showSec.classList.remove('pinmode');
         if (stageEl2) stageEl2.classList.remove('tapin','xopened');
         /* ⛔ UNWRAP BOTH STRIPS AND CLEAR EVERY INLINE TRANSFORM. Without the
