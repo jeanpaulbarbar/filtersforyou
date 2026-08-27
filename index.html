@@ -150,7 +150,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      hero-poster.webp. Without this line the parser does not discover it until it has read
      161KB of inline CSS, and it queues behind the third-party scripts. Deployed LCP was
      5440ms on Slow 4G. If the hero poster is ever renamed, THIS LINE MOVES WITH IT. -->
-<link rel="preload" as="image" href="media/hero-poster.webp" fetchpriority="high">
+<link rel="preload" as="image" href="media/hero-poster-m.webp" media="(max-width:859px)" fetchpriority="high">
+<link rel="preload" as="image" href="media/hero-poster.webp" media="(min-width:860px)" fetchpriority="high">
 
 <!-- ⭐ FONTS ARE OURS NOW (2026-08-25). Was a render-blocking <link> to fonts.googleapis.com:
      227ms measured, just to be TOLD which file to fetch, then a second hop to gstatic. Two
@@ -437,9 +438,27 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      a hairline · small muted secondary links · a phone-number-and-socials row ·
      and a photographic CTA card closing it out. Ours is that, with our range
      as the primary tier because the systems are what people came for. */
+  /* ⛔ ROUND 58 — THE SHEET DOES NOT SCROLL. JP, 2026-08-27: "I don't want to
+     be able to scroll on the hamburger. I just want it all to be there, eager
+     and ready to see" — Book now, the warranty, the reviews, the areas, and
+     all three navs on ONE screen.
+     Measured before: scrollHeight 1005 in a clientHeight of 844 at 390x844,
+     and 161px of that was the photo card hanging off the bottom. On his real
+     iPhone (390x664 with Safari's chrome showing) it was 341px short.
+     ⛔ THE FIX IS NOT SMALLER TYPE, IT IS svh. Every row is now sized as a
+     share of the SMALL viewport height with a hard 44px tap floor, and the
+     photo card takes the remainder with `flex:1`. That way the sheet fits a
+     664 phone and still looks generous on an 844 one, without a media query
+     per handset. `overflow:hidden` is the guarantee: if a future row ever
+     breaks the budget it CLIPS, loudly, instead of quietly scrolling again.
+     ⛔ The 44px floor is not negotiable and it is what sets the budget:
+     5 primary + 3 secondary rows = 352px of the 580 a 664 phone has. */
   .msheet{position:fixed;inset:0;z-index:55;background:var(--paper);color:var(--ink);
-    display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;
-    padding:calc(74px + env(safe-area-inset-top)) var(--gut) calc(26px + env(safe-area-inset-bottom));
+    display:flex;flex-direction:column;overflow:hidden;overscroll-behavior:contain;
+    /* ⛔ 86, NOT 74. The header bar over the sheet MEASURES 82px at 390 (logo
+       lockup + the 44px close button), so 74 tucked "Systems" 8px under the
+       hairline and 64 tucked it 18px. Measure the header, do not guess it. */
+    padding:calc(86px + env(safe-area-inset-top)) var(--gut) calc(clamp(8px,1.7svh,16px) + env(safe-area-inset-bottom));
     opacity:0;visibility:hidden;
     transition:opacity .3s ease-in-out,visibility .3s}
   body.mopen .msheet{opacity:1;visibility:visible}
@@ -460,28 +479,35 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   body.mopen .msheet .mrow:nth-child(5){transition-delay:.25s}
 
   /* primary tier — big, ink, arrow on the right */
-  .msheet .mlinks{display:flex;flex-direction:column}
+  .msheet .mlinks{display:flex;flex-direction:column;flex:0 0 auto}
   .msheet .mlinks a{display:flex;align-items:center;justify-content:space-between;gap:16px;
-    padding:15px 0;font-size:26px;font-weight:500;letter-spacing:-.012em;line-height:1.15;
+    padding:0;min-height:clamp(44px,6.3svh,58px);
+    font-size:clamp(19px,2.9svh,26px);font-weight:500;letter-spacing:-.012em;line-height:1.15;
     text-decoration:none;color:var(--ink)}
-  .msheet .mlinks a i{display:grid;place-items:center;width:40px;height:40px;flex:0 0 40px;
+  .msheet .mlinks a i{display:grid;place-items:center;
+    width:clamp(34px,4.6svh,40px);height:clamp(34px,4.6svh,40px);flex:0 0 auto;aspect-ratio:1;
     border-radius:50%;box-shadow:inset 0 0 0 1px var(--rule);color:var(--ink);
     transition:background .3s ease-in-out,color .3s ease-in-out}
   .msheet .mlinks a i svg{width:15px;height:15px}
   @media(hover:hover) and (pointer:fine){.msheet .mlinks a:hover i{background:var(--ink);color:#fff}}
-  .msheet hr{border:0;border-top:1px solid var(--rule);margin:16px 0 20px}
+  .msheet hr{border:0;border-top:1px solid var(--rule);flex:0 0 auto;
+    margin:clamp(6px,1.5svh,16px) 0 clamp(6px,1.5svh,18px)}
 
   /* secondary tier — small and quiet, exactly like theirs */
-  .msheet .mmore{display:flex;flex-direction:column}
+  /* ⛔ ROUND 58 — BUNDLED. JP: "I want them all bundled so that, on one page,
+     you can see all the navs." Five stacked 44px rows cost 220px; two columns
+     cost 132px and every target stays a full 44px tall. The 5th cell (Contact
+     us) sits alone in the left column, which reads as the end of the list. */
+  .msheet .mmore{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;flex:0 0 auto}
   .msheet .mmore a{display:inline-flex;align-items:center;min-height:44px;
-    font-size:15.5px;font-weight:500;color:var(--muted);text-decoration:none}
+    font-size:clamp(14.5px,2svh,15.5px);font-weight:500;color:var(--muted);text-decoration:none}
 
   /* phone + socials on one row */
   /* naked glyphs, no rings — that is what theirs are, and it keeps the row on
      one line while every target stays a full 44px. Wraps cleanly on a 360. */
   .msheet .mcontact{display:flex;align-items:center;justify-content:space-between;gap:8px;
-    flex-wrap:wrap;row-gap:2px;margin-top:20px}
-  .msheet .mcontact .tel{font-size:24px;font-weight:600;letter-spacing:-.01em;color:var(--ink);
+    flex-wrap:wrap;row-gap:2px;flex:0 0 auto;margin-top:clamp(8px,1.6svh,20px)}
+  .msheet .mcontact .tel{font-size:clamp(21px,2.7svh,24px);font-weight:600;letter-spacing:-.01em;color:var(--ink);
     text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
   .msheet .msoc{display:flex;gap:2px}
   .msheet .msoc a{display:grid;place-items:center;width:44px;height:44px;color:var(--ink);
@@ -490,15 +516,25 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(hover:hover) and (pointer:fine){.msheet .msoc a:hover{color:var(--blue)}}
 
   /* the closing card — a real photograph, their move and a good one */
+  /* ⛔ JP: "I like that photo, and I want to be able to see it." It was the
+     thing hanging off the bottom, so it now takes whatever the rows leave and
+     can never be the overflow. 128px is the floor at which the headline and
+     the arrow both still read; on an 844 phone it lands near 210 as before. */
   .msheet .mcard{position:relative;display:flex;flex-direction:column;justify-content:flex-end;
-    min-height:210px;margin-top:24px;border-radius:var(--r-card);overflow:hidden;text-decoration:none;
+    flex:1 1 auto;min-height:clamp(104px,16svh,150px);max-height:270px;margin-top:clamp(10px,1.8svh,24px);
+    border-radius:var(--r-card);overflow:hidden;text-decoration:none;
     color:#fff;background:var(--ink-blue)}
   .msheet .mcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .msheet .mcard .v{position:absolute;inset:0;
     background:linear-gradient(180deg,rgba(4,16,46,.18) 0%,rgba(4,16,46,.72) 100%)}
-  .msheet .mcard .c{position:relative;padding:20px}
-  .msheet .mcard b{display:block;font-size:23px;font-weight:500;letter-spacing:-.01em;line-height:1.2}
-  .msheet .mcard i{display:grid;place-items:center;width:52px;height:52px;margin-top:16px;
+  .msheet .mcard .c{position:relative;display:flex;align-items:flex-end;justify-content:space-between;
+    gap:14px;padding:clamp(13px,2svh,20px)}
+  .msheet .mcard b{display:block;font-size:clamp(18px,2.5svh,23px);font-weight:500;
+    letter-spacing:-.01em;line-height:1.2}
+  /* the arrow moves BESIDE the label instead of under it — that stacked
+     52px + 16px margin was 68px of the card's height doing nothing. */
+  .msheet .mcard i{display:grid;place-items:center;flex:0 0 auto;
+    width:clamp(44px,6svh,52px);height:clamp(44px,6svh,52px);margin-top:0;
     border-radius:50%;background:var(--yellow);color:var(--ink)}
   .msheet .mcard i svg{width:17px;height:17px}
   body.mopen{overflow:hidden}
@@ -2758,6 +2794,132 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        flush at x:0 behind the call bar. Hidden here, where this block wins. */
     .hero .cue{display:none}
 
+    /* ══════ ⛔ ROUND 58 — THE PHONE HERO CARD: ONE HEIGHT, HALF THE BULK ══════
+       JP, 2026-08-27: "The cards on the hero landing page change in size and
+       are too thick from top to bottom… they take up a quarter of the page…
+       when you open them up you can barely see all of the details."
+
+       MEASURED at 390x844 before this round, paging the deck:
+         Pure Home  150px · Pure Plus 150px · Pure Premium 187px · Smart 169px
+       So the card JUMPED 37px as he flipped it — that is "change in size", and
+       the cause was the technical name wrapping to 2 or 3 lines at will while
+       everything below it moved. 150px of card + the 52px arrow row above it
+       is 202px of an 844 screen: 24%. He counted a quarter and he was right.
+
+       ⛔ THE FIX IS A FIXED NAME BOX, NOT A SMALLER FONT. `.t` becomes a four
+       row grid and the name is clamped to EXACTLY two lines whether it fills
+       them or not, so every system renders the same box. Measured after:
+       111px, identical on all four systems — 13% of the screen, halved.
+
+       ⛔ THE NAME COLUMN IS 184px AT 390 (334 card − 14 left − 56 right for the
+       floating chevron − 66 image − 12 gap). The longest name we sell,
+       "Smart 5 Stage Alkaline Reverse Osmosis", is 38 characters and lands on
+       two lines at 14.5px. Re-measure that ONE string after any change here:
+       it is the string that decides the card's height. */
+    .hdeck:not(.open) .face{grid-template-columns:1fr 66px;gap:12px;
+      padding:7px 56px 7px 14px;align-items:center}
+    .hdeck:not(.open) .face img{width:auto;height:74px;max-width:66px}
+    /* ⛔ AND THE LAST 18px OF DRIFT WAS THE BADGE. Measured: `.chead` renders
+       9px on Pure Home / Plus / Luxe and 27px on Pure Premium, because
+       Premium is the only system carrying a tag ("Best seller!") and the head
+       row grew to hold it. That is 129 vs 147 — the same bug as the name, one
+       row down. The badge moves onto the `Pure Premium` line, where there are
+       154px of type in a 170px row and it therefore costs NOTHING, and the
+       head row is pinned flat. ⛔ `.dt2` is the copy of the tag that already
+       lives inside `.t`; the markup has carried it since round 19 for exactly
+       this. Do not add a third. */
+    .hdeck:not(.open) .t{display:grid;grid-template-columns:auto 1fr;
+      grid-template-areas:"nm nm" "pu tg" "pr pr" "wr wr";
+      /* ⛔ ROW 2 IS PINNED AT 15px. Left free it measured 15px on three
+         systems and 22px on Premium, because the badge's 11px rule bar plus
+         its own leading is taller than the `Pure Premium` line beside it —
+         the same 7px of drift, moved rather than removed. A fixed track is
+         what actually kills it: the badge centres inside 15px or it clips. */
+      grid-template-rows:auto 15px auto auto;
+      row-gap:2px;column-gap:8px;align-items:center}
+    .hdeck:not(.open) .t > b{grid-area:nm}
+    .hdeck:not(.open) .t .pure{grid-area:pu}
+    .hdeck:not(.open) .t .p{grid-area:pr}
+    .hdeck:not(.open) .warr{grid-area:wr}
+    .hdeck:not(.open) .chead{height:9px;padding:0;overflow:visible}
+    .hdeck:not(.open) .chead .dtag{display:none}
+    .hdeck:not(.open):not(.notag) .t .dt2{grid-area:tg;display:inline-flex;
+      justify-self:start;align-self:center;margin:0;font-size:10.5px;line-height:1;
+      letter-spacing:.07em;padding:0;gap:6px}
+    .hdeck:not(.open) .t .dt2::before{height:11px}
+    /* the two-line lock. `height`, not `min-height` — a one-line name has to
+       reserve the second line or the card shrinks and we are back where we
+       started. Top-aligned inside it, so short names sit up with air under. */
+    .hdeck:not(.open) .t > b{display:-webkit-box;-webkit-line-clamp:2;
+      -webkit-box-orient:vertical;overflow:hidden;
+      font-size:14.5px;line-height:1.2;height:2.4em}
+    .hdeck:not(.open) .t .pure{font-size:12.5px;margin-top:0;line-height:1.2}
+    .hdeck:not(.open) .t .p{margin-top:2px;line-height:1}
+    .hdeck:not(.open) .t .p b{font-size:26px}
+    .hdeck:not(.open) .t .p i.pre{font-size:13.5px;margin-right:2px}
+    /* inline, not block: "installed" on its own line cost 18px and read as a
+       fourth fact when it is a qualifier on the price it sits beside. */
+    .hdeck:not(.open) .t .p i.suf{display:inline;font-size:11.5px;margin-top:0;
+      margin-left:4px}
+    .hdeck:not(.open) .warr{margin-top:3px;font-size:11.5px;line-height:1.25;gap:5px}
+    .hdeck:not(.open) .warr svg{width:12px;height:12px;flex:0 0 12px}
+
+    /* ══════ THE OPEN CARD — EVERY DETAIL VISIBLE, NOTHING CLIPPED ══════
+       ⛔ THE BUTTON WAS BEING CUT OFF, AND IT WAS NOT A HEIGHT PROBLEM.
+       `.hdeck.open .card` is `display:flex;flex-direction:column` with a
+       max-height, and its three children are .chead, .face and .more. `.more`
+       had NO `flex`/`min-height:0`, so it sized to its content, blew past the
+       card's max-height, and `.hdeck .card{overflow:hidden}` guillotined the
+       bottom. `.dscroll` measured scrollHeight === clientHeight — it never got
+       the chance to scroll, because nothing above it was ever bounded.
+       The chain has to be unbroken from the card all the way down: card →
+       .more → its grid row div → .inner2 → .dscroll. One missing `min-height:0`
+       anywhere in it and the clip comes back. */
+    .hdeck.open .more{flex:1 1 auto;min-height:0}
+    .hdeck.open .more > div{min-height:0;overflow:hidden;display:flex;flex-direction:column}
+    .hdeck.open .more .inner2{flex:1 1 auto;min-height:0}
+    .hdeck.open .more .dscroll{flex:1 1 auto;min-height:0;overflow-y:auto}
+    /* ⛔ 122. THE ROUND-12 CEILING IS STILL THE LAW: the open card may never
+       reach the header on a 664px phone. The card is bottom-anchored at 24px,
+       so its top is `vh − 24 − max-height`; the header measures 86px to its
+       hairline. 136 was over-cautious (54px of dead hero at 844); 104 was over
+       -greedy and put the top at 80 on a 664 phone — UNDER the header by 6px,
+       measured. 122 lands the top at 98 there, clear by 12, and still gives
+       the card 722px at 844 where the content only needs 668. */
+    .hdeck.open{max-height:calc(100svh - 122px - env(safe-area-inset-bottom))}
+    /* and the product shot gives its share back too — 202px of a 740px card
+       was the single biggest reason the ticks and the button ran out of room. */
+    .hdeck.open .face img{width:min(124px,16svh);height:min(124px,16svh)}
+    /* ⛔ AND THE COLUMN HAS TO COME DOWN WITH IT. The open face was still on
+       the desktop's `1fr 220px`, so with a 160px shot the picture column held
+       60px of nothing while "Whole House Filtration System" broke across FOUR
+       lines beside it. Match the track to the image. */
+    .hdeck.open .face{grid-template-columns:1fr min(124px,16svh);
+      padding:6px 18px 4px;gap:12px;align-items:center}
+    .hdeck.open .t > b{font-size:17px;display:block;line-height:1.18}
+    .hdeck.open .t .pure{font-size:13.5px;margin-top:2px}
+    /* the qualifiers ride the number instead of stacking under it — three
+       stacked lines for "from / $3,850 / installed" is 54px for one price. */
+    .hdeck.open .t .p{margin-top:5px;line-height:1}
+    .hdeck.open .t .p i.suf{display:inline;font-size:12px;margin:0 0 0 5px}
+    .hdeck.open .warr{margin-top:6px;font-size:12px;line-height:1.2;white-space:nowrap}
+    /* ⛔ THE FADE WAS GREYING OUT A LINE THAT WAS NOT CUT OFF. With the flex
+       chain repaired, an 844 phone measures scrollHeight === clientHeight —
+       nothing to scroll — and the 22px mask was still fading "…installed
+       across Sydney" into the ground, which reads as a rendering fault.
+       A 664 phone genuinely does scroll (108px over), so the affordance has
+       to survive. 24px of bottom padding under a 22px fade settles both: at
+       844 the gradient falls entirely on padding and is invisible; at 664 it
+       sits over real content and says "there is more", which is true. */
+    .hdeck.open .more .dscroll{padding-bottom:24px}
+    .hdeck.open .who{font-size:14px;line-height:1.45}
+    .hdeck.open .more li{font-size:14px}
+    .hdeck.open .more ul{gap:7px;padding:10px 0 2px}
+    .hdeck.open .more .assure{margin-top:10px;padding:10px 0 2px;gap:8px}
+    .hdeck.open .more .assure li{font-size:12.5px}
+    .hdeck.open .more .loc{margin-top:10px;padding-top:9px;font-size:12px}
+    .hdeck.open .more .btn{margin-top:12px}
+
     /* ── the certs: ONE line, JP round 10 ──
        "I want that all in one line. I don't want two lines of it, so if you
        have to make them a little bit smaller to fit them all in one line."
@@ -2927,9 +3089,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .taps .head2{margin-bottom:30px;gap:16px}
     .taps h2{max-width:none}
     .taps .head2 .lede{max-width:none!important}
-    .tcard{flex:0 0 min(58vw,232px)}
-    .tcard .cap{padding:12px 14px}
-    .tcard .cap b{font-size:15px}
+    /* ⛔ ROUND 58 — JP: "Taps and mixers: maybe make them a bit smaller."
+       Measured at 390: the card was 226x303 with a 226px square photograph,
+       which is 36% of the viewport width for a rail you are meant to graze.
+       186 puts two whole cards plus the edge of a third on screen, which is
+       what tells you it is a rail at all — at 226 the second card was already
+       half off and it read as a broken grid rather than a scroller. */
+    .tcard{flex:0 0 min(46vw,186px)}
+    .tcard .cap{padding:11px 13px}
+    .tcard .cap b{font-size:14px}
+    .tcard .cap span{font-size:14px}
+    .trail{gap:11px}
     .trailwrap{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--gut),#000 calc(100% - var(--gut)),transparent 100%);
       mask-image:linear-gradient(90deg,transparent 0,#000 var(--gut),#000 calc(100% - var(--gut)),transparent 100%)}
 
@@ -3271,6 +3441,23 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .revs{z-index:16}
   .faq{z-index:17}
   .asksec{z-index:18}
+  /* ⛔ ROUND 58 — THE FOOTER HAD NO RUNG, AND THAT IS THE THREE CARDS JP SAW
+     SITTING IN IT ON HIS PHONE. Measured 2026-08-27 at 390x844, scrolled to
+     the very bottom: `.slide.s1/.s2/.s3` were still `position:sticky` at
+     top -101/-107 with z 9/10/11, painting straight over the footer.
+     ⛔ THE CAUSE IS STRUCTURAL, NOT A GSAP BUG. `.pilwrap` CLOSES before
+     `.s1` opens, so the three slides are children of <body> and <body> is
+     their sticky containing block — they stick for the ENTIRE remaining
+     document and never release. Every section after them out-stacks them
+     (.zero 12 … .asksec 18) so the pin is invisible all the way down, and
+     then `.foot` had `position:static; z-index:auto`. A positioned box with
+     z-index >= 0 always paints over a non-positioned one no matter how much
+     later it sits in the DOM, so the footer lost to a card from six sections
+     earlier. One rung closes it at every viewport.
+     ⛔ Do NOT "fix" this by moving the slides inside `.pilwrap`. The whole
+     round-54 pin arithmetic (H = 315svh + 3R − A − T) is written against
+     them being body children and `.s1` being pulled up by −200svh. */
+  .foot{position:relative;z-index:19}
 
   /* ── 7b · WHAT THE PRICE INCLUDES ──
      Mist ground so it reads as its own panel while staying in the same light
@@ -3634,9 +3821,25 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        is as few as it can honestly be without hiding answers. 87px -> ~74px
        each across ten of them. */
     .fgrid{gap:9px}
-    .fq summary{padding:15px 17px;gap:12px}
-    .fq summary h3{font-size:16.5px;line-height:1.3}
-    .fq .fa{padding:0 17px 18px}
+    /* ⛔ ROUND 58 — `text-wrap:balance` IS A DESKTOP HEADING TOOL, and the
+       `.fq summary h3` base rule applies it to all ten questions. On a 240px
+       phone column it split "Do you need a licensed plumber to install a
+       water filter in NSW?" into three short balanced lines with a ragged
+       90px gutter down the right of the card. `wrap` fills the line and gets
+       it to two. ⛔ NOT `pretty` — `CSS.supports('text-wrap','pretty')`
+       returns TRUE in this Chromium and the property still computed to
+       `balance`. The override read as applied and did nothing. Measure the
+       computed value; do not trust `CSS.supports`.
+       ⛔ AND IT HAS TO BE THIS BLOCK. A first attempt put these rules in the
+       big max-width:859 block ~750 lines earlier, which sits ABOVE the `.fq`
+       base rules at equal specificity and therefore loses. Measured after
+       "applying" it: font-size still 16.5, text-wrap still balance.
+       The badge column and padding come in with it, which is 12px more width
+       for the question on a 390. */
+    .fq summary{padding:15px;gap:11px}
+    .fq summary::before{flex:0 0 22px;font-size:11.5px}
+    .fq summary h3{font-size:16.5px;line-height:1.3;text-wrap:wrap}
+    .fq .fa{padding:0 15px 18px}
     .fq .fa p{font-size:16px;line-height:1.58}
     .ilist{margin-top:30px;gap:20px}
     .ilist b{font-size:19.5px}
@@ -4007,15 +4210,38 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        must stay INLINE, directly after the tag. preload=metadata + the poster
        keep first paint instant; the video streams in behind it (faststart).
        ⛔ old hero.mp4 stays on disk — _prev-variation-d-v1.html still uses it. -->
-  <video autoplay muted loop playsinline preload="metadata" poster="media/hero-poster.webp" id="heroVideo"></video>
+  <video autoplay muted loop playsinline preload="metadata" id="heroVideo"></video>
   <script>
   (function(){
     var v = document.getElementById('heroVideo');
     var big = matchMedia('(min-width:860px)').matches;
     var hevc = v.canPlayType('video/mp4; codecs="hvc1.1.6.L123.b0"') !== '';
-    /* round 54: phones get a 720 cut. The 1080 HEVC was 2.6MB of a 6.2MB phone
-       load (measured 2026-08-26); hero-720-hevc is 624KB, painted at 390px wide. */
-    v.src = 'media/hero-' + (big ? '1600' : '720') + (hevc ? '-hevc' : '') + '.mp4';
+    /* ⛔ ROUND 58 — THE PHONE GETS A PORTRAIT CUT, AND THIS IS WHY THE VIDEO
+       LOOKED LIKE MUSH. Measured 2026-08-27 at 390x844: the hero box is
+       374x828 (aspect .452) and the source was 720x406 LANDSCAPE (aspect
+       1.78). `object-fit:cover` therefore scaled it 2.04x and painted only
+       the CENTRE 183px of its 720 width. On a 3x iPhone that is 1122 device
+       pixels drawn from 183 source pixels — a 6.1x upscale, before the GSAP
+       1.08 zoom. The bitrate (229 kbps) was the second problem, not the
+       first: THE GEOMETRY WAS WRONG. A landscape file in a portrait box
+       throws away 75% of its pixels.
+       hero-portrait is the 1600x900 master cropped to 450x900 — exactly the
+       slice `cover` shows — so the phone now draws 1122 device px from 450
+       source px (2.8x, down from 6.1x) at ~670 kbps over a quarter of the
+       pixels. ⚠️ NAMED: 900px is all the height the 1600x900 master has. A
+       true 1080x1920 cut needs the montage rebuilt from the 4K clips, which
+       are not on this disk. That is the remaining ceiling.
+       ⛔ The poster moves with it — hero-poster-m.webp is the same crop, and
+       it is the LCP paint (measured 2026-08-25), so it is preloaded per
+       viewport in <head>. Rename one, rename both. */
+    v.src = 'media/hero-' + (big ? '1600' : 'portrait') + (hevc ? '-hevc' : '') + '.mp4';
+    /* ⛔ THE POSTER IS SET HERE, NOT IN THE MARKUP. A `poster=` attribute is
+       fetched by the preload scanner before this script can run, so a phone
+       poster in the tag cost DESKTOP an extra 54KB download of an image it
+       never paints (measured: both posters fetched at 1440). The two
+       <link rel=preload media=...> lines in <head> are what keep this the
+       high-priority LCP fetch; this line only tells the element which one. */
+    v.poster = big ? 'media/hero-poster.webp' : 'media/hero-poster-m.webp';
   })();
   </script>
   <canvas class="caustics" id="caustics" aria-hidden="true"></canvas>
@@ -4624,7 +4850,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   <div class="in">
     <div class="fwrap">
       <div class="fside rv">
-        <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">Questions</span>
+        <!-- ⛔ ROUND 58 — JP, 2026-08-27: "you need to say something like
+             'Water Filter Installation Sydney: 10 Most Common Questions
+             Answered', but don't make it look too cluttered."
+             The count goes in the EYEBROW, not the H2. Set as one sentence the
+             heading runs 4 lines at 390 and 6 words of it are scaffolding;
+             split across the lockup it says the same thing, reads in one
+             glance, and the H2 stays the visual headline the SEO scaffold
+             requires. ⛔ "10" is a COUNT, not a claim — it is the number of
+             <details> in this section and the number of Question entries in
+             the FAQPage JSON-LD. Change the questions, change this word. -->
+        <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">The 10 most common questions</span>
         <h2 class="d2">Water filter installation in Sydney, answered.</h2>
         <p class="lede">The same answers we give on the phone, written down. If yours is not here, call and ask.</p>
         <div class="go"><a class="btn" href="tel:0430546749"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Call 0430 546 749</a></div>
