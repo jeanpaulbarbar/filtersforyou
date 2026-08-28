@@ -1266,13 +1266,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      worked example on top, a white pill for the door. White on tangerine is
      3.2:1, so every line here is ≥19px/700 (WCAG large text). The product
      rows (who, ticks, assure, loc, the yellow CTA) are all off on .ish. */
-  .hdeck.ish .more .inner2{background:none;padding-top:4px}
-  .hdeck .more .hdkick,.hdeck .more .hdbig,.hdeck .more .hdsm,.hdeck .more .hdstats{display:none}
+  /* JP: "no padding, the words are too close to the top edge." 26px top,
+     22 sides, 24 bottom — declared at .ish specificity so the phone's
+     `2px 15px 15px` open-card rule cannot win. Measured after. */
+  .hdeck.ish .more .inner2{background:none;padding:26px 22px 24px}
+  .hdeck .more .hdkick,.hdeck .more .hdbig,.hdeck .more .hdstats{display:none}
   .hdeck.ish .more .who,.hdeck.ish #hdTicks{display:none}
   .hdeck.ish .more .hdbig{display:block;font-family:var(--hummf);font-weight:800;color:#fff;
     font-size:24px;line-height:1.08;letter-spacing:-.015em;margin:0}
-  .hdeck.ish .more .hdsm{display:block;font-family:var(--hummf);font-weight:700;color:#fff;
-    font-size:19px;line-height:1.3;margin:8px 0 0}
   .hdeck.ish .more .hdstats{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;margin-top:16px;
     padding-top:14px;border-top:2px solid rgba(255,255,255,.7)}
   .hdeck.ish .more .hdstats b{display:block;font-family:var(--hummf);font-weight:800;font-size:34px;
@@ -1284,9 +1285,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      whose slab resizes on every flip is not a deck — this card pins to it,
      and the phone gets its own SHORT offer line because the desktop sentence
      wraps five deep in the 176px text column (measured: card hit 151). */
-  .hdeck.ish .hmhd{display:flex;align-items:center;gap:16px;padding:16px 18px;
+  .hdeck.ish .hmhd{display:flex;align-items:center;gap:16px;padding:18px 18px;
     text-decoration:none;min-height:124px;width:100%;border:0;background:none;cursor:pointer;
-    text-align:left;font:inherit;color:#fff}
+    text-align:left;font:inherit;color:#fff;margin:0;border-radius:0;
+    -webkit-appearance:none;appearance:none}
+  /* JP saw a white line at the top of the orange card on his iPhone. It does
+     not reproduce in headless Chromium at 3x. The two things that CAN paint
+     white at that edge in Safari: a <button>'s native appearance (killed
+     above) and the two translucent WHITE under-cards behind the deck. On
+     humm's turn they go tangerine, so nothing white sits behind the card. */
+  .hdeck.ish .under{background:rgba(238,102,4,.55)}
+  .hdeck.ish .under.u2{background:rgba(238,102,4,.35)}
   .hdeck .hmhd img{width:92px;height:auto;flex:0 0 92px}
   .hdeck .hmhd .hmt{display:flex;flex-direction:column;gap:7px;flex:1;min-width:0;align-items:flex-start}
   .hdeck .hmhd b{display:none;font-family:var(--hummf);color:#fff;font-weight:800;
@@ -3609,9 +3618,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      copy (worked example, ticks, CTA, disclaimer) sits in a white panel so
      ink-on-paper does the small-print work tangerine cannot. Every white
      line on tangerine is ≥19px/700 — 3.2:1 passes only as large text.
-     ⛔ THE WORKED EXAMPLE IS ARITHMETIC, NOT A QUOTE: $3,850 / 52 fortnights
-     (24 months) = $74.04, rounded down out loud. The establishment fee is
-     named. Interest free applies up to $10,000 (our signed tiers).
+     ⛔ THE FORTNIGHTLY FIGURE IS JP'S, NOT ARITHMETIC OFF THE LIST PRICE.
+     "From only $83 a fortnight" — every humm job is custom quoted with humm's
+     merchant cost built into the total, so the base is above $3,850 and it
+     is his number. Never publish a "based on" line under it (JP, 28 Aug).
      ⛔ #EE6604 / #333333 are humm's — deliberate literals, not page tokens.
      Never recolour, stretch, rotate or crop their marks; the bird alone IS
      a sanctioned use. Toolkit: Workspace/Brand Assets/Partners/humm/. */
@@ -4474,8 +4484,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
              number lives in ONE place per surface and is arithmetic, not a quote:
              $3,850 / 52 fortnights = $74.04, rounded down. -->
         <span class="hmkick hdkick">Flexible payment plans</span>
-        <p class="hdbig">Whole house system from <b>$74</b> a fortnight.</p>
-        <p class="hdsm">Based on $3,850 over 24 months, interest free, plus humm's $80 establishment fee.</p>
+        <p class="hdbig">Whole house system from only <b>$83</b> a fortnight.</p>
         <div class="hdstats">
           <div><b>0%</b><span>interest</span></div>
           <div><b>24</b><span>months</span></div>
@@ -4962,8 +4971,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     <div class="hmgrid">
       <div class="hmpanel rv">
         <span class="hmkick">Worked example</span>
-        <p class="hmbig">Whole house system from <b>$74</b> a fortnight.</p>
-        <p class="hmsm">That is the from $3,850 install spread over 24 months, interest free, paid fortnightly. humm's $80 establishment fee applies.</p>
+        <p class="hmbig">Whole house system from only <b>$83</b> a fortnight.</p>
+        <p class="hmsm">Custom quoted for your home and the term you choose.</p>
         <ul class="hmlist">
           <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#EE6604" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Buy now, pay later through humm</li>
           <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#EE6604" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Fortnightly or monthly repayments</li>
