@@ -5948,7 +5948,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       if (hm) hm.setAttribute('aria-expanded', 'false');
       if (t){ t.setAttribute('aria-expanded', 'false'); t.setAttribute('aria-label', 'Show what is included'); }
     }
-    function hdApply(){
+    /* ⛔ ROUND 63b — `keepOpen`. THE ONLY REASON THIS ARGUMENT EXISTS is the
+       race below: when a tap beats an in-flight auto-flip, the flip is reverted
+       and hdApply is called to repaint the card the user is actually looking
+       at. In that one path the drawer must be left alone, so the two branches
+       that normally shut it are told not to. Every other call passes nothing
+       and behaves exactly as it always has. */
+    function hdApply(keepOpen){
       var d = HD[hdi];
       /* ── the Google card's turn. It has no product, no price and no drawer,
          so it returns BEFORE any of the product writes — feeding it through
@@ -5957,7 +5963,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          clicked through to it, close it first, or the drawer stays sprung with
          nothing in it. */
       if (d.google){
-        if (hdeck.classList.contains('open')) hdClose();
+        if (!keepOpen && hdeck.classList.contains('open')) hdClose();
         hdeck.classList.remove('ish');
         hdeck.classList.add('isg');
         hdeck.style.setProperty('--ac', d.tagc);
@@ -5966,7 +5972,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       /* humm's turn — it HAS a drawer (who + ticks), so those are written
          here; everything product-shaped (name, price, image, CTA) is skipped. */
       if (d.humm){
-        if (hdeck.classList.contains('open')) hdClose();
+        if (!keepOpen && hdeck.classList.contains('open')) hdClose();
         hdeck.classList.remove('isg');
         hdeck.classList.add('ish');
         hdeck.classList.add('notag');
@@ -6014,6 +6020,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        steps over it backwards instead of bouncing. */
     function hdSet(n, dir){
       dir = dir < 0 ? -1 : 1;
+      var was = hdi;
       hdi = (n + HD.length) % HD.length;
       if (HD[hdi].google && !matchMedia('(min-width:860px)').matches)
         hdi = (hdi + dir + HD.length) % HD.length;
@@ -6041,7 +6048,22 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       var flip = [hdCard].concat([].slice.call(hdeck.querySelectorAll('.stkr')));
       gsap.to(flip, {scale:GONE.scale, opacity:0, y:GONE.y, duration:.26, ease:'power2.in',
         onComplete:function(){
-          hdApply();
+          /* ⛔ ROUND 63b — THE TAP WINS A RACE IT USED TO LOSE, AND IT WAS NOT A
+             ROUND-63 BUG — round 46 has had it since the flip became a two-half
+             tween. The auto-flip's guard ("rest while open") is read when the
+             INTERVAL FIRES, not when the flip lands. So a tap inside the .26s
+             out-tween opened the drawer, and 260ms later this callback ran
+             hdApply on the NEXT card, which called hdClose and slammed it shut —
+             on the humm face it also swapped the card out from under the finger.
+             MEASURED on the deployed url, 390x844, 2026-08-28: t=0 `open` set,
+             face 92 · t=181 class `ish`, `open` gone, card back to 92.
+             The user's finger beats a timer, always. If the deck went open
+             during the tween, put the card that was there BACK and leave the
+             drawer alone — the tween's second half brings the same face in, so
+             nothing flickers and the deck simply misses one turn. */
+          var tapped = hdeck.classList.contains('open');
+          if (tapped) hdi = was;
+          hdApply(tapped);
           gsap.fromTo(flip, {scale:GONE.scale, opacity:0, y:-GONE.y, transformOrigin:'50% 50%'},
             /* power3.out, not the drawer's symmetric curve: a card ARRIVING
                should land and settle, and that is what --e-out means on this
