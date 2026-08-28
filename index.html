@@ -1260,23 +1260,26 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdeck.ish .more .assure,.hdeck.ish .more .loc,.hdeck.ish #hdGet{display:none}
   .hdeck .more .hmgo{display:none}
   .hdeck.ish .more .hmgo{display:inline-flex}
-  .hdeck.ish .more .inner2{background:#fff;border-radius:10px;margin:0 12px 12px}
-  .hdeck.ish .more li svg path{stroke:#EE6604}
-  /* JP, 28 Aug: "I'd prefer the card expansion looked more like the payment
-     plans section — their fonts and that sort of style." So the open humm
-     card borrows the section's panel grammar: grey kicker, Metropolis
-     Extrabold worked example with the tangerine figure, Metropolis Bold
-     rows. Product cards keep Plus Jakarta. */
-  .hdeck .more .hdkick,.hdeck .more .hdbig,.hdeck .more .hdsm{display:none}
-  .hdeck.ish .more .hdkick{display:inline-flex;font-size:11.5px;padding:6px 11px;margin-bottom:12px}
-  .hdeck.ish .more .hdbig{display:block;font-family:var(--hummf);font-weight:800;color:var(--ink);
-    font-size:22px;line-height:1.1;letter-spacing:-.015em;margin:0}
-  .hdeck.ish .more .hdbig b{color:#EE6604}
-  .hdeck.ish .more .hdsm{display:block;font-size:13px;line-height:1.45;color:var(--muted);margin:8px 0 0}
-  .hdeck.ish .more .who{font-family:var(--hummf);font-weight:700;color:#333333;font-size:15.5px;
-    line-height:1.4;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
-  .hdeck.ish .more li{font-family:var(--hummf);font-weight:700;color:var(--ink);font-size:16.5px}
-  .hdeck.ish .more .hmgo{font-family:var(--hummf);font-weight:700}
+  /* JP, 28 Aug, second note: "I don't like the white and the yellow on there.
+     Full orange, like the section's 0% · 24 · $10k · 10 min." So the open
+     card is the stat block: tangerine end to end, Metropolis in white, the
+     worked example on top, a white pill for the door. White on tangerine is
+     3.2:1, so every line here is ≥19px/700 (WCAG large text). The product
+     rows (who, ticks, assure, loc, the yellow CTA) are all off on .ish. */
+  .hdeck.ish .more .inner2{background:none;padding-top:4px}
+  .hdeck .more .hdkick,.hdeck .more .hdbig,.hdeck .more .hdsm,.hdeck .more .hdstats{display:none}
+  .hdeck.ish .more .who,.hdeck.ish #hdTicks{display:none}
+  .hdeck.ish .more .hdbig{display:block;font-family:var(--hummf);font-weight:800;color:#fff;
+    font-size:24px;line-height:1.08;letter-spacing:-.015em;margin:0}
+  .hdeck.ish .more .hdsm{display:block;font-family:var(--hummf);font-weight:700;color:#fff;
+    font-size:19px;line-height:1.3;margin:8px 0 0}
+  .hdeck.ish .more .hdstats{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;margin-top:16px;
+    padding-top:14px;border-top:2px solid rgba(255,255,255,.7)}
+  .hdeck.ish .more .hdstats b{display:block;font-family:var(--hummf);font-weight:800;font-size:34px;
+    line-height:1;letter-spacing:-.02em;color:#fff}
+  .hdeck.ish .more .hdstats span{display:block;font-family:var(--hummf);font-weight:700;font-size:19px;
+    line-height:1.25;color:#fff;margin-top:5px}
+  .hdeck.ish .more .hmgo{--bg:#fff;--fg:#333333;--bgh:var(--ink);--fgh:#fff;font-family:var(--hummf);font-weight:700}
   /* ⛔ 124 IS THE PRODUCT CARDS' MEASURED PHONE HEIGHT (round 58). A deck
      whose slab resizes on every flip is not a deck — this card pins to it,
      and the phone gets its own SHORT offer line because the desktop sentence
@@ -4472,7 +4475,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
              $3,850 / 52 fortnights = $74.04, rounded down. -->
         <span class="hmkick hdkick">Flexible payment plans</span>
         <p class="hdbig">Whole house system from <b>$74</b> a fortnight.</p>
-        <p class="hdsm">The from $3,850 install over 24 months, interest free. humm's $80 establishment fee applies.</p>
+        <p class="hdsm">Based on $3,850 over 24 months, interest free, plus humm's $80 establishment fee.</p>
+        <div class="hdstats">
+          <div><b>0%</b><span>interest</span></div>
+          <div><b>24</b><span>months</span></div>
+          <div><b>$10k</b><span>interest free</span></div>
+          <div><b>10 min</b><span>to apply</span></div>
+        </div>
         <p class="who" id="hdWho"></p>
         <ul id="hdTicks"></ul>
         <!-- ROUND 48 — the three assurances that are true of every system, so
