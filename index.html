@@ -693,6 +693,23 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round var(--r-hero))}
     to{clip-path:inset(0 round var(--r-hero))}}
   @keyframes hdrin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+  /* ── PAGE TO PAGE (JP, 28 Aug): "the existing page fades out and the new page
+     fades in... I don't want it to feel like it's just spawned in front of you."
+     Cross-document view transitions: a root fade, the header held in place by
+     name so it reads as the one header across pages. Paired with Speculation
+     Rules prerender (before </body>) so the next page is already there when
+     the fade lands — that speed is the substance, the fade is the flourish
+     (interaction-library.md Part 7). Same-origin, both pages must carry it;
+     site_shell.py lifts this block onto every stamped page. Old pages without
+     it just load as they always have. */
+  @view-transition{navigation:auto}
+  .hdr{view-transition-name:hdr}
+  ::view-transition-old(root){animation:vtout .3s ease-in-out both}
+  ::view-transition-new(root){animation:vtin .5s var(--e-out) both}
+  ::view-transition-group(hdr){animation-duration:.3s}
+  @keyframes vtout{to{opacity:0}}
+  @keyframes vtin{from{opacity:0}}
+  @media(prefers-reduced-motion:reduce){ ::view-transition-old(root),::view-transition-new(root){animation:none} }
   /* ⛔ ROUND 41 — the main row steps fully INTO the card. Measured before:
      the Book now pill's top sat EXACTLY on the card's top seam (both y=56)
      — JP read it as the header being cut off. 10px of desktop padding puts
@@ -7917,5 +7934,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   window.addEventListener('scroll', onScroll, {passive:true});
 })();
 </script>
+<!-- the next page is already rendered when you click: same-origin links prerender on
+     hover/pointerdown (Chrome, Edge). Pairs with the view-transition fade above. -->
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*\\?*"}},{"not":{"selector_matches":"[target=_blank]"}}]},"eagerness":"moderate"}]}</script>
 </body>
 </html>

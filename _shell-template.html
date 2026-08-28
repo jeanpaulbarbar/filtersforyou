@@ -54,10 +54,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"></n
 <!-- SHELL:CSS -->
 <!-- /SHELL:CSS -->
 <style>
-/* ═══ this page only ═══ */
-.page-hero{padding:52px 0 48px;border-bottom:1px solid var(--rule)}
+/* ═══ this page only ═══
+   The opener is the shell's (.pgtop > .pgcard, stamped CSS): the utility strip
+   on top, the header transparent over a framed card that grows open, solid on
+   the first scroll — the homepage's own opening, on every page (JP, 28 Aug).
+   This page only styles what sits INSIDE the card. */
+.page-hero{background:var(--ink-blue);color:#fff;padding:140px 0 56px}
+.page-hero .lab{color:#fff}
+.page-hero .lab img{background:#fff;border-radius:var(--r-full);padding:5px;width:38px;height:38px}
 .page-hero h1{font-weight:500;letter-spacing:-.005em;line-height:1.06;margin:14px 0 0;font-size:clamp(2.2rem,4.6vw,3.8rem);max-width:16ch}
-.page-hero .lede{margin-top:18px}
+.page-hero .lede{margin-top:18px;color:rgba(255,255,255,.84)}
+@media(max-width:767px){ .page-hero{padding:110px 0 40px} }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage",
@@ -71,13 +78,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"></n
 <!-- /SHELL:HEADER -->
 
 <main>
-  <section class="page-hero">
+  <!-- THE OPENER — keep <div class="pgtop"><section class="pgcard …"> as the
+       first thing in <main>. The shell's CSS and JS key off it. -->
+  <div class="pgtop">
+  <section class="pgcard page-hero">
     <div class="in">
       <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">Eyebrow</span>
       <h1>{{TITLE}}</h1>
       <p class="lede">{{DESCRIPTION}}</p>
     </div>
   </section>
+  </div>
 </main>
 
 <!-- SHELL:FOOTER -->

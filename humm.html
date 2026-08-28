@@ -307,6 +307,11 @@ body.mopen .hdr .mark{filter:none}
 .hdr.mini .row{min-height:62px}
 .hdr.mini .mark{height:36px}
 @media (prefers-reduced-motion: no-preference){.hdr .row{animation:hdrin .8s var(--e-out) .85s backwards}}
+.hdr{view-transition-name:hdr}
+::view-transition-old(root){animation:vtout .3s ease-in-out both}
+::view-transition-new(root){animation:vtin .5s var(--e-out) both}
+::view-transition-group(hdr){animation-duration:.3s}
+@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
 @media (min-width:1080px){.hdr{padding-top:10px}}
 @media (max-width:1079px){.hdr{padding-top:var(--hframe)}}
 @media (max-width:599px){:root{--hframe:8px}}
@@ -372,10 +377,35 @@ body.fabon .fab{opacity:1;transform:none}
 @media (max-width:767px){.humm .lab img{display:none}}
 .faq .fside .lab{justify-content:flex-start}
 .faq .fside .lab{justify-content:flex-start}
-/* the shell header is fixed and solid on every page but the homepage */
+@keyframes hdrin{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+@keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round var(--r-hero))}
+    to{clip-path:inset(0 round var(--r-hero))}}
+@keyframes hcardin-m{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes vtout{to{opacity:0}}
+@keyframes vtin{from{opacity:0}}
+/* ── the opener: the homepage's frame on every page that carries one ── */
 main{padding-top:72px}
 @media(max-width:1079px){ main{padding-top:70px} }
+main:has(> .pgtop){padding-top:0}
+.pgtop{background:var(--range-bg,#E4EBF3);padding:calc(var(--utilh) + var(--hframe)) var(--hframe) var(--hframe)}
+@media(max-width:1079px){ .pgtop{padding-top:var(--hframe)} }
+.pgcard{position:relative;border-radius:var(--r-hero);overflow:clip;min-height:min(78svh,820px);display:flex;flex-direction:column;justify-content:flex-end}
+.pgcard::before{content:"";position:absolute;inset:0 0 auto;height:220px;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(4,16,46,.58) 0%,rgba(4,16,46,.22) 55%,rgba(4,16,46,0) 100%)}
+.pgcard > *{position:relative;z-index:2}
+@media(prefers-reduced-motion:no-preference){
+  .pgcard{animation:hcardin 1.15s var(--e-out) .12s backwards}
+  .hdr .row{animation:hdrin .8s var(--e-out) .85s backwards}
+}
+@media(max-width:859px){ .pgcard{animation-name:hcardin-m;transform-origin:50% 46%} }
 .foot{position:relative;z-index:19}
+/* ── page to page: the old page fades out, the new one fades in, the header holds ── */
+@view-transition{navigation:auto}
+.hdr{view-transition-name:hdr}
+::view-transition-old(root){animation:vtout .3s ease-in-out both}
+::view-transition-new(root){animation:vtin .5s var(--e-out) both}
+::view-transition-group(hdr){animation-duration:.3s}
+@media(prefers-reduced-motion:reduce){ ::view-transition-old(root),::view-transition-new(root){animation:none} }
 </style>
 <!-- /SHELL:CSS -->
 <style>
@@ -385,7 +415,11 @@ main{padding-top:72px}
    (3.2:1 passes only as large text), a WHITE pill for the door. The humm widget
    between them is the legitimacy and the T&Cs; the two blocks do the selling. */
 .humm{background:#EE6604;color:#fff;position:relative;overflow:hidden}
-.hmtop{padding:88px 0 72px}
+/* inside the opener card: the header row sits over the top ~80px, so the copy
+   starts below it; the calculator continues the tangerine straight after */
+.hmtop{padding:136px 0 64px}
+.hmtop .in{width:100%}
+.rc{padding-top:8px}
 .hmbottom{padding:84px 0 88px}
 .humm .in{position:relative}
 .hmbird{position:absolute;right:-150px;top:-30px;width:min(760px,60vw);height:auto;opacity:.13;
@@ -423,7 +457,7 @@ main{padding-top:72px}
 .fine{font-size:13px;line-height:1.55;color:var(--muted);max-width:70ch;margin:34px auto 44px}
 @media(max-width:1100px){ .hmstats{grid-template-columns:repeat(2,1fr)} }
 @media(max-width:767px){
-  .hmtop{padding:56px 0 56px}
+  .hmtop{padding:104px 0 48px}   /* the header row sits over the top 78px of the card */
   .hmbottom{padding:60px 0 64px}
   .hmbird{width:320px;right:-100px;top:-10px;opacity:.14}
   .hmbottom .hmbird{left:-120px;bottom:-80px}
@@ -559,6 +593,8 @@ main{padding-top:72px}
 .rcask input::placeholder{color:var(--muted)}
 .rcask input:focus{border-color:var(--ink-blue);box-shadow:0 0 0 3px rgba(4,16,46,.12)}
 .rcask input.bad{border:2px solid #EE6604}
+.rcerr{margin:-2px 0 0;font-size:13px;font-weight:700;color:#C24F00;line-height:1.35}
+@media(max-width:999px){ .rcask input{min-height:48px} .rcask .btn{min-height:50px} }
 .rcback{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:14px;font-weight:700;
   cursor:pointer;min-height:44px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
 .rcres.asking .rcterms,.rcres.asking .rchint,.rcres.asking .rclist,.rcres.asking .rcgo,.rcres.asking .rcfine{display:none}
@@ -763,7 +799,11 @@ main{padding-top:72px}
 <main>
   <!-- THE INTRO — humm × Filters For You, the homepage's humm block as a page opener.
        Big lines, four numbers, one door. The widget below is their proof. -->
-  <section class="humm hmtop">
+  <!-- THE OPENER (JP, 28 Aug): the homepage's frame on this page too — the utility
+       strip on top, the header transparent over the card, solid on the first
+       scroll. .pgtop/.pgcard are the shell's; this page styles what is inside. -->
+  <div class="pgtop">
+  <section class="humm hmtop pgcard">
     <img class="hmbird" src="media/humm/humm-bird-white.webp" alt="" width="900" height="751" aria-hidden="true">
     <div class="in">
       <div class="hmhead">
@@ -784,6 +824,7 @@ main{padding-top:72px}
       </div>
     </div>
   </section>
+  </div>
 
   <!-- THE REPAYMENTS CALCULATOR — right under the intro (JP, 28 Aug: "on /humm,
        underneath the first section"). Tap systems, every humm term at once, a
@@ -860,8 +901,12 @@ main{padding-top:72px}
              income or credit. The customer applies with humm themselves. -->
         <form class="rcask" novalidate action="https://formspree.io/f/mbdqdlve" method="POST" data-callback>
           <p class="rcasksum" id="rcAskSum"></p>
-          <input type="text" name="name" autocomplete="name" placeholder="Your name" aria-label="Your name" required>
-          <input type="tel" name="phone" autocomplete="tel" placeholder="Your mobile" aria-label="Your mobile number" required>
+          <!-- three required fields (JP): name, an Australian mobile, an email.
+               Checked per field on send, the first wrong one named and focused. -->
+          <input type="text" name="name" autocomplete="name" placeholder="Your name" aria-label="Your name" required minlength="2">
+          <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Your mobile" aria-label="Your mobile number" required pattern="^(\+?61|0)4\d{8}$">
+          <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="Your email" aria-label="Your email address" required>
+          <p class="rcerr" id="rcErr" hidden role="alert"></p>
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
           <button class="btn" type="submit" id="rcSend"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span id="rcSendLabel">Send my request</span></button>
           <button class="rcback" type="button" id="rcBack">Back to the calculator</button>
@@ -960,16 +1005,24 @@ main{padding-top:72px}
 <!-- /SHELL:FOOTER -->
 
 <!-- SHELL:JS -->
+<script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*\\?*"}},{"not":{"selector_matches":"[target=_blank]"}}]},"eagerness":"moderate"}]}</script>
 <script>
 /* THE SITE SHELL JS — generated by site_shell.py from index.html. NEVER hand-edit. */
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var lenis = null;
   var hdr = document.getElementById('hdr');
-  hdr.classList.add('solid','mini');
   var lastHdrY = 0;
+  /* the homepage's header, everywhere: transparent over the opener, solid + mini
+     after 64px (JP: 'as soon as you scroll away... flip straight away'), stepping
+     aside on the way down past the opener and back on the way up. A page with no
+     opener (the old build) is solid from the first pixel, as before. */
+  var top = document.querySelector('.pgtop');
+  var topH = function(){ return top ? top.offsetHeight : 0; };
   function onHdr(y){
-    if (y <= 80 || document.body.classList.contains('mopen')) hdr.classList.remove('hide');
+    if (!top){ hdr.classList.add('solid','mini'); }
+    else { hdr.classList.toggle('solid', y > 64); hdr.classList.toggle('mini', y > 64); }
+    if (y <= Math.max(topH(), 80) || document.body.classList.contains('mopen')) hdr.classList.remove('hide');
     else if (Math.abs(y - lastHdrY) > 6) hdr.classList.toggle('hide', y > lastHdrY);
     lastHdrY = y;
   }
@@ -1561,9 +1614,23 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
   form.addEventListener('submit', function(e){
     e.preventDefault();
     if (sending) return;
-    var nm = form.querySelector('input[name="name"]'), ph = form.querySelector('input[name="phone"]'), bad = null;
-    [nm, ph].forEach(function(i){ var empty = !i.value.trim(); i.classList.toggle('bad', empty); if (empty && !bad) bad = i; });
-    if (bad){ bad.focus(); return; }
+    /* three required fields, each checked for shape, the first wrong one named */
+    var err = document.getElementById('rcErr');
+    var checks = [
+      ['name',  function(v){ return v.length >= 2; },                                   'Your name, please.'],
+      ['phone', function(v){ return /^(\+?61|0)4\d{8}$/.test(v.replace(/[\s()-]/g, '')); }, 'A mobile number, like 04XX XXX XXX.'],
+      ['email', function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); },         'An email address, like you@example.com.']
+    ];
+    var bad = null;
+    checks.forEach(function(c){
+      var i = form.querySelector('input[name="' + c[0] + '"]'), ok = c[1](i.value.trim());
+      i.classList.toggle('bad', !ok); i.setAttribute('aria-invalid', ok ? 'false' : 'true');
+      if (!ok && !bad) bad = [i, c[2]];
+    });
+    if (bad){ err.textContent = bad[1]; err.hidden = false; bad[0].focus(); return; }
+    err.hidden = true;
+    /* the phone goes through clean: digits only, so the CRM matches it */
+    var phEl = form.querySelector('input[name="phone"]'); phEl.value = phEl.value.replace(/[\s()-]/g, '');
     /* the field names form_watcher.py reads: name, phone, subject, system, message */
     hid('subject', 'Payment plan request');
     hid('_subject', 'Payment plan request: ' + (names().join(' + ') || 'extras only'));
