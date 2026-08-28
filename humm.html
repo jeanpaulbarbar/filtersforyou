@@ -51,7 +51,7 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"></noscript>
 
 <title>humm – Big Buys Made Easy | Flexible Payment Plans | Filters For You</title>
-<meta name="description" content="Filters For You offers finance through humm. Interest free terms up to 24 months on water filtration systems installed across Sydney, with fortnightly or monthly repayments. Apply online in under 10 minutes.">
+<meta name="description" content="Filters For You offers finance through humm. Interest free terms up to 24 months on water filtration systems installed across Sydney, with fortnightly repayments. Apply online in under 10 minutes.">
 <link rel="canonical" href="https://filtersforyou.com.au/humm">
 <link rel="icon" href="media/mark.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -434,6 +434,229 @@ main{padding-top:72px}
   .hmcta{margin-top:30px;gap:14px}
   .humm .btn{width:100%;justify-content:center}
 }
+
+/* ═══ THE REPAYMENTS CALCULATOR — round 61, 2026-08-28 ═══
+   JP: "as soon as it lands... 'Big buys made easy.' The next section is a really
+   nice humm finance calculator... photos of the systems... mobile-optimised, the
+   whole page, fit onto one thing, really big buttons... request a payment plan,
+   doesn't look like a form... call it the Repayments Calculator." Then, on the
+   first build: "the background of the calculator, make that white... a list:
+   system cost, merchant fee, establishment fee, separate monthly fee, the total,
+   prices in bold... not on the homepage, on /humm, right under the first section."
+   THE GESTURE: tap a system and the panel LOOKS UP every humm term at once, the
+   figures rising in behind their mask (a keyframe on --e-out; this page carries
+   no GSAP). Not a counter. Not a form to the eye: the request swaps INTO the
+   panel. The ground is the intro's tangerine, continued: one humm opener, the
+   story then the sum. The panel is paper, so the bridge from the price to the
+   total reads as a bill, four rows that add up.
+   ⛔ THE NUMBERS ARE NOT IN THIS FILE. HummCalc (Engine/humm/humm_calc.js) is
+   stamped between HUMM:CALC and reads the fee table + products stamped between
+   HUMM:DATA. price / (1 - fee), never x (1 + fee). Every term shows with equal
+   weight and none is preselected: the unsolicited agreement bars us recommending
+   one. White on #EE6604 is 3.2:1: every white line on tangerine is ≥19px/700,
+   everything smaller sits on paper. Inputs are 17px so iOS never zooms. */
+.rc{background:#EE6604;color:#fff;position:relative;overflow:hidden;
+  min-height:calc(100svh - 72px);display:grid;align-content:center;padding:28px 0 60px}
+.rc .rcbird{position:absolute;right:-120px;bottom:-70px;width:min(560px,50vw);height:auto;opacity:.12;
+  transform:rotate(-10deg);pointer-events:none;user-select:none}
+.rcgrid{position:relative;display:grid;gap:22px}
+.rchead{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.rc .lab{color:#fff;font-size:19px;font-weight:700}
+.rclogo{width:min(140px,34vw);height:auto;display:block}
+.rcttl{font-family:var(--hummf);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:.96;
+  font-size:clamp(2.35rem,4.6vw,4.4rem);margin:16px 0 0}
+.rclede{font-family:var(--hummf);font-weight:700;color:#fff;font-size:19px;line-height:1.35;
+  margin:10px 0 0;max-width:34ch}
+/* the picker: white tent cards on their tangerine, the photos on the white they
+   were cut for. Chosen = an ink ring and a tick; the photo never tints. */
+.rcpick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.rcopt{appearance:none;-webkit-appearance:none;border:0;cursor:pointer;font:inherit;text-align:left;
+  display:grid;grid-template-columns:64px 1fr;align-items:center;gap:10px;min-height:76px;
+  padding:8px 30px 8px 8px;border-radius:var(--r-card);background:#fff;color:var(--ink);
+  box-shadow:inset 0 0 0 0 var(--ink-blue);position:relative;
+  transition:box-shadow .3s ease-in-out,background .3s ease-in-out}
+.rcopt .rcimg{height:60px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rcopt .rcimg img{height:60px;width:auto;max-width:64px;object-fit:contain;display:block;
+  transition:transform .3s ease-in-out}
+.rcopt .rcimg img+img{margin-left:-26px}
+/* the package shows its three parts: whole house, seven stage, the gold mixer in front */
+.rcopt.rcdx{grid-template-columns:100px 1fr}
+.rcopt.rcdx .rcimg{justify-content:flex-start}
+.rcopt.rcdx .rcimg img:last-child{height:56px;margin-left:-14px;position:relative;z-index:1}
+.rcopt b{display:block;font-size:15px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+.rcopt span span{display:block;font-size:13.5px;font-weight:600;color:var(--muted);margin-top:3px}
+.rcopt i{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--ink-blue);
+  display:grid;place-items:center;opacity:0;transform:scale(.6);
+  transition:opacity .3s ease-in-out,transform .3s ease-in-out}
+.rcopt i svg{width:12px;height:12px}
+.rcopt[aria-pressed="true"]{box-shadow:inset 0 0 0 3px var(--ink-blue)}
+.rcopt[aria-pressed="true"] i{opacity:1;transform:none}
+.rcopt:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.rcextra{display:grid;align-content:center;gap:2px;min-height:76px;padding:8px 12px;
+  border-radius:var(--r-card);background:#fff;color:var(--ink)}
+.rcextra b{font-size:15px;font-weight:800;line-height:1.15;letter-spacing:-.01em}
+.rcextra b small{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-top:2px}
+.rcextra label{display:flex;align-items:center;gap:3px;font-size:17px;font-weight:800;color:var(--ink);margin-top:2px}
+.rcextra input{width:100%;min-width:0;min-height:44px;font:inherit;font-size:17px;font-weight:800;color:var(--ink);
+  border:0;border-bottom:2px solid var(--rule);background:transparent;padding:0;outline:0;
+  -moz-appearance:textfield;transition:border-color .3s ease-in-out}
+.rcextra input::-webkit-outer-spin-button,.rcextra input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.rcextra input:focus{border-color:var(--ink-blue)}
+/* the panel: paper and ink. Every humm term at once, equal weight, none chosen for them. */
+.rcres{background:#fff;color:var(--ink);border-radius:var(--r-card);padding:18px 16px 16px;
+  box-shadow:var(--shadow-lg);display:grid;gap:12px;align-content:start}
+.rcsum{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.rcsum .k{font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.rcsum .v{font-weight:800;letter-spacing:-.02em;font-size:clamp(1.5rem,2.4vw,2rem);line-height:1;
+  font-variant-numeric:tabular-nums;color:var(--ink)}
+/* the masked rise, CSS only: the new figure rises in behind its mask */
+.rc .wm{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.14em;margin-bottom:-.1em}
+.rc .wm > span{display:inline-block}
+.rc .wm > span.up{animation:rcup .62s var(--e-out) both}
+@keyframes rcup{from{transform:translateY(108%)}to{transform:none}}
+@media(prefers-reduced-motion:reduce){ .rc .wm > span.up{animation:none} }
+.rcterms{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rcterm{appearance:none;-webkit-appearance:none;border:0;cursor:pointer;font:inherit;color:var(--ink);
+  background:var(--mist);border-radius:var(--r-sm);padding:12px 4px 10px;text-align:center;
+  display:grid;gap:4px;min-height:84px;align-content:center;box-shadow:inset 0 0 0 1px var(--rule);
+  transition:background .3s ease-in-out,color .3s ease-in-out,box-shadow .3s ease-in-out}
+.rcterm .rcmo{font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rcterm .rcnum{display:block;font-family:var(--hummf);font-weight:800;font-size:clamp(1.45rem,2vw,1.9rem);
+  line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.rcterm .rcper{font-size:11px;font-weight:700;color:var(--muted);line-height:1.2}
+.rcterm[aria-pressed="true"]{background:var(--ink-blue);color:#fff;box-shadow:inset 0 0 0 1px var(--ink-blue)}
+.rcterm[aria-pressed="true"] .rcmo,.rcterm[aria-pressed="true"] .rcper{color:rgba(255,255,255,.82)}
+.rcterm[disabled]{cursor:not-allowed;color:var(--muted);background:var(--mist-2)}
+.rcterm[disabled] .rcnum{opacity:.55}
+.rcterm:focus-visible{outline:2px solid var(--ink-blue);outline-offset:2px}
+/* the bridge from the price to the total: four rows that add up, prices in bold */
+.rchint{font-size:14px;line-height:1.45;color:var(--muted);margin:0}
+.rclist{display:none;margin:0;padding:0}
+.rclist > div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7px 0;
+  border-bottom:1px solid var(--rule)}
+.rclist dt{font-size:14px;font-weight:600;color:var(--ink);margin:0}
+.rclist dt small{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-top:1px}
+.rclist dd{margin:0;font-weight:800;font-size:15.5px;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rclist .tot{border-bottom:0;padding-top:10px}
+.rclist .tot dt{font-weight:800;font-size:15px}
+.rclist .tot dt small{color:var(--ink);font-weight:800;font-size:14px;margin-top:3px}
+.rclist .tot dd{font-size:clamp(1.3rem,2vw,1.6rem);color:var(--ink-blue)}
+.rcres.term .rchint{display:none}
+.rcres.term .rclist{display:block}
+.rcgo{display:grid;gap:8px}
+/* on paper the door is INK. The white pill belongs on tangerine, not on white. */
+.rcgo .btn,.rcask .btn{--bg:var(--ink-blue);--fg:#fff;--bgh:#EE6604;--fgh:#fff;--ringh:transparent;width:100%;
+  justify-content:center;font-family:var(--hummf);font-weight:700;font-size:17px;min-height:56px}
+.rcgo .btn i,.rcask .btn i{background:rgba(255,255,255,.16)}
+.rcgo .btn:disabled{opacity:.4;cursor:not-allowed}
+.rcnote{font-size:12.5px;line-height:1.4;color:var(--muted);margin:0;text-align:center}
+/* the request swaps INTO the panel. Not a form to the eye: two fields, one pill. */
+.rcask{display:none;gap:10px}
+.rcasksum{font-size:14px;line-height:1.4;color:var(--ink);font-weight:800;margin:0}
+.rcask input{width:100%;min-height:54px;border-radius:var(--r-sm);border:1px solid var(--rule);background:var(--mist);
+  color:var(--ink);font:inherit;font-size:17px;font-weight:600;padding:0 16px;outline:0;
+  transition:border-color .3s ease-in-out,box-shadow .3s ease-in-out}
+.rcask input::placeholder{color:var(--muted)}
+.rcask input:focus{border-color:var(--ink-blue);box-shadow:0 0 0 3px rgba(4,16,46,.12)}
+.rcask input.bad{border:2px solid #EE6604}
+.rcback{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:14px;font-weight:700;
+  cursor:pointer;min-height:44px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.rcres.asking .rcterms,.rcres.asking .rchint,.rcres.asking .rclist,.rcres.asking .rcgo,.rcres.asking .rcfine{display:none}
+.rcres.asking .rcask{display:grid}
+.rcdone{display:none;text-align:center;padding:10px 0 6px}
+.rcdone svg{width:44px;height:44px;margin:0 auto 10px;display:block}
+.rcdone b{display:block;font-family:var(--hummf);font-weight:800;font-size:22px;color:var(--ink)}
+.rcdone p{margin:8px 0 0;font-size:14px;line-height:1.45;color:var(--muted)}
+.rcres.finished .rcterms,.rcres.finished .rchint,.rcres.finished .rclist,.rcres.finished .rcgo,.rcres.finished .rcask{display:none}
+.rcres.finished .rcdone{display:block}
+.rcfine{font-size:12px;line-height:1.45;color:var(--muted);margin:0;font-weight:600}
+/* a 12px link with a 44px hit area: the padding is the target, the negative margin keeps the line */
+.rcfine a{color:var(--ink);display:inline-block;padding:15px 0;margin:-15px 0}
+@media(hover:hover) and (pointer:fine){
+  .rcopt:hover{box-shadow:inset 0 0 0 3px rgba(4,16,46,.32)}
+  .rcopt[aria-pressed="true"]:hover{box-shadow:inset 0 0 0 3px var(--ink-blue)}
+  .rcterm:not([disabled]):not([aria-pressed="true"]):hover{background:var(--mist-2);box-shadow:inset 0 0 0 1px var(--ink-blue)}
+  .rcback:hover{color:var(--ink)}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .rcopt:hover .rcimg img{transform:scale(1.05)}
+}
+@media(min-width:1000px){
+  .rcgrid{grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+  .rcttl{margin-top:22px}
+  .rclede{margin-top:14px}
+  .rcpick{gap:12px;margin-top:28px}
+  .rcopt{grid-template-columns:96px 1fr;min-height:108px;padding:10px 34px 10px 12px;gap:12px}
+  .rcopt .rcimg,.rcopt .rcimg img{height:90px}
+  .rcopt .rcimg img{max-width:96px}
+  .rcopt .rcimg img+img{margin-left:-38px}
+  .rcopt.rcdx{grid-template-columns:150px 1fr}
+  .rcopt.rcdx .rcimg img:last-child{height:84px;margin-left:-20px}
+  .rcopt b{font-size:17.5px}
+  .rcopt span span{font-size:15px}
+  .rcextra{min-height:108px;padding:10px 16px}
+  .rcextra b{font-size:17.5px}
+  .rcres{padding:28px 26px 24px;gap:16px}
+  .rcterm{min-height:108px;padding:14px 8px 12px;gap:6px}
+  .rclist dt{font-size:15px}
+  .rclist dd{font-size:17px}
+  .rcfine{font-size:12.5px}
+}
+/* ── phones: one screen, measured. The lede goes (the heading and the kicker say
+   it), the note under the pill goes, the tick sits over the photo so the text
+   column keeps its width, and copy with a short twin uses it (.rcs for .rcl). */
+.rcs{display:none}
+@media(max-width:999px){
+  .rcl{display:none}
+  .rcs{display:inline}
+  .rc{padding:22px 0 30px;min-height:calc(100svh - 72px)}
+  .rcgrid{gap:16px}
+  .rclogo{width:120px}   /* humm's minimum for the horizontal lockup, digital */
+  .rc .lab{white-space:nowrap}
+  .rcttl{font-size:clamp(2rem,8.8vw,2.2rem);margin-top:10px}
+  .rclede{display:none}
+  .rcpick{margin-top:16px}
+  .rcopt{grid-template-columns:48px 1fr;gap:8px;padding:8px 10px 8px 8px}
+  .rcopt .rcimg,.rcopt .rcimg img{height:52px}
+  .rcopt .rcimg img{max-width:48px}
+  .rcopt .rcimg img+img{margin-left:-20px}
+  .rcopt.rcdx{grid-template-columns:78px 1fr}
+  .rcopt.rcdx .rcimg img:last-child{height:48px;margin-left:-12px}
+  .rcopt b{font-size:14px;letter-spacing:-.02em}
+  .rcopt span span{font-size:13px}
+  .rcopt i{top:6px;left:6px;right:auto;width:20px;height:20px}
+  .rcextra{padding:8px 12px}
+  .rcextra b{font-size:14px}
+  .rcextra b small{display:none}
+  .rc{padding:12px 0 18px}
+  /* the intro directly above carries the humm lockup and the kicker already;
+     on a phone this row would say it twice, one screen apart */
+  .rchead{display:none}
+  .rcttl{margin-top:0}
+  .rcres{padding:14px 14px 12px;gap:8px}
+  .rcterm{min-height:72px;padding:10px 4px 8px}
+  .rchint{font-size:13px}
+  /* the bill on a phone: the big header row steps aside (its first line IS
+     "System cost"), the chips tighten, the rows never wrap. Measured to land
+     the chosen-term state inside 844. */
+  .rcres.term .rcsum{display:none}
+  .rcres.term .rcterm{min-height:52px;padding:7px 4px 5px;gap:2px}
+  .rcres.term .rcterm .rcper{display:none}
+  .rclist > div{padding:4px 0;flex-wrap:nowrap}
+  .rclist dt{font-size:13px;line-height:1.25}
+  .rclist dt small{font-size:11px;margin-top:0;line-height:1.2}
+  .rclist dd{font-size:14.5px}
+  .rclist .tot{padding-top:6px}
+  .rclist .tot dt small{font-size:13px}
+  .rcgo .btn,.rcask .btn{min-height:52px}
+  .rcgo .btn,.rcask .btn{min-height:54px}
+  .rcnote{display:none}
+  .rcask{gap:8px}
+  .rcasksum{font-size:13px}
+}
+@media(max-width:360px){
+  .rcopt b{font-size:13.5px}
+}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage",
@@ -442,6 +665,10 @@ main{padding-top:72px}
  "description":"Filters For You offers finance through humm. Interest free terms up to 24 months on water filtration systems installed across Sydney.",
  "isPartOf":{"@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au"}}
 </script>
+<!-- HUMM:DATA -->
+<script type="application/json" id="humm-fee-table">{"agreement":{"name":"NEW unsolicited humm Retailer Agreement","type":"unsolicited","signed":"2026-08-26","only_agreement_held":true,"solicited_signed":false,"brighte_signed":false,"product_name":"humm - Hybrid","source_pdf":"humm-retailer-agreement-UNSOLICITED-SIGNED-2026-08-26.pdf","fee_table_page":1},"currency":"AUD","pricing_rule":{"we_wear_the_merchant_fee":false,"formula":"F = P / (1 - f)","formula_plain":"financed = list_price / (1 - merchant_fee_rate)","wrong_formula":"P * (1 + f)","wrong_formula_note":"Multiplying undercharges. humm takes its fee off the GROSSED amount, not the original. On Whole House $3,850 at 24mo the multiply leaves FFY $34.75 short of list.","charged_on":"gst_inclusive_financed_amount","charged_on_verified":true,"verification_note":"$404.14 / $4,254.14 = 9.500000% exactly \u2014 Whole House $3,850 at 24mo reproduces JP's published fortnightly figure."},"establishment_fee":{"amount":80.0,"paid_by":"customer","financed":true,"previous_amount":90.0},"account_keeping_fee":{"amount":9.95,"frequency":"monthly","paid_by":"customer","collected_with_repayment":false,"source":"Product Selection and Fee Table, page 1 of the signed agreement","verified":true},"interest_free":{"min_purchase":80.0,"min_purchase_verified":true,"customer_interest_rate":0.0,"cap_applies_to":"purchase_price_excluding_establishment_fee","cap_basis_verified":true,"terms":[{"months":6,"merchant_service_fee_pct":4.5,"max_financed":2000.0,"max_verified":true,"repayment_frequency":"fortnightly"},{"months":12,"merchant_service_fee_pct":6.7,"max_financed":5000.0,"max_verified":true,"repayment_frequency":"fortnightly"},{"months":18,"merchant_service_fee_pct":7.5,"max_financed":7000.0,"max_verified":true,"repayment_frequency":"fortnightly"},{"months":24,"merchant_service_fee_pct":9.5,"max_financed":10000.0,"max_verified":true,"repayment_frequency":"fortnightly"}]},"large_purchase":{"offered_in_calculator":false,"customer_interest_rate_pa":11.99,"merchant_service_fee_pct":0.0,"repayment_frequency":"fortnightly","bands":[{"min_purchase":10000.01,"max_purchase":15000.0,"term_months":40},{"min_purchase":15000.01,"max_purchase":20000.0,"term_months":50},{"min_purchase":20000.01,"max_purchase":30000.0,"term_months":60}],"min_purchase":10000.01,"max_purchase":30000.0,"interest_compounding":null,"repayment_computable":false},"display_rounding":{"fortnightly":"ceil_whole_dollar","monthly":"half_up_2dp","financed_total":"exact_2dp"},"fortnights_per_year":26,"worked_example":{"system":"Whole House","list_price":3850.0,"term_months":24,"financed":4254.14,"merchant_fee":404.14,"establishment_fee":80.0,"total_financed":4334.14,"fortnightly_exact":83.35,"fortnightly_displayed":84,"monthly_repayment":180.59,"we_net":3850.0,"account_fee_monthly":9.95,"total_amount_payable":4572.94},"unverified":["The interest compounding basis above $10,000.01 \u2014 the schedule gives 11.99% p.a. and the term but not how it is applied, so no repayment is computed in that mode. We are not quoting past 24 months for now anyway (JP, 28 Aug)."],"repayment_frequencies":["fortnightly","monthly"],"display_rules":{"repayment_is_indicative_only":true,"indicative_note":"Repayment shown is indicative only and depends on the amount financed, the term and applicable fees.","disclaimer":"Payment plan to approved applicants only; fees, terms, minimum amounts and conditions apply. Payment plan provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of humm group.","never_say":["a blanket 'zero interest' without the $10,000 cap","humm's public $50,000 / 72-month numbers","'four instalments' \u2014 not our product","any recommendation of a term or opinion on suitability","any comparison to another financier","a repayment figure for a purchase above $10,000 \u2014 humm shows the customer that themselves"],"no_recommended_term":true}}</script>
+<script type="application/json" id="humm-products">{"source":"Website/index.html:4855-4905 (the .swt system switcher), cross-checked against Workspace/Analytics & Reporting/costing/service-plans/FINAL-LADDER-2026-07-01.md","as_at":"2026-07-01","combo_rule":{"extra_system_discount":200.0,"taps_discounted":false},"products":[{"key":"pure-plus","name":"Pure Plus","blurb":"5 stage alkaline reverse osmosis","price":1280.0,"atomic":false,"site_price_string":"$1,280"},{"key":"pure-premium","name":"Pure Premium","blurb":"7 stage hydrogen rich reverse osmosis","price":1590.0,"atomic":false,"site_price_string":"$1,590"},{"key":"pure-luxe","name":"Pure Luxe","blurb":"Smart 5 stage alkaline reverse osmosis","price":2290.0,"atomic":false,"site_price_string":"$2,290"},{"key":"whole-house","name":"Whole House","blurb":"Pure Home, fitted at the mains","price":3850.0,"atomic":false,"site_price_string":"from $3,850"},{"key":"deluxe-home","name":"Deluxe Home Package","blurb":"Whole house + 7 stage RO + a premium mixer","price":6290.0,"atomic":true,"excludes":["whole-house","pure-premium"],"site_price_string":"from $6,290"}],"extras":{"free_entry_field":true,"free_entry_label":"Anything else"}}</script>
+<!-- /HUMM:DATA -->
 </head>
 <body>
 
@@ -558,6 +785,97 @@ main{padding-top:72px}
     </div>
   </section>
 
+  <!-- THE REPAYMENTS CALCULATOR — right under the intro (JP, 28 Aug: "on /humm,
+       underneath the first section"). Tap systems, every humm term at once, a
+       bill that adds up, one pill to request the plan. ⛔ No price or rate in
+       this markup is load-bearing: HummCalc (stamped from Engine/humm/) computes
+       every figure from the fee table it is stamped with and rewrites the tile
+       prices from #humm-products at runtime. A reprice is one JSON edit plus
+       `python3 Engine/humm/stamp_calculator.py apply`. -->
+  <section class="rc" id="repayments" aria-labelledby="rcTitle">
+    <img class="rcbird" src="media/humm/humm-bird-white.webp" alt="" width="900" height="751" loading="lazy" aria-hidden="true">
+    <div class="in rcgrid">
+      <div class="rcleft">
+        <div class="rchead">
+          <span class="lab"><span class="rcl">Flexible payment plans</span><span class="rcs">Payment plans</span></span>
+          <img class="rclogo" src="media/humm/humm-tag-white-300.webp" alt="humm. Made for living." width="300" height="101" loading="lazy">
+        </div>
+        <h2 class="rcttl" id="rcTitle">Repayments<br>Calculator</h2>
+        <p class="rclede">Tap what you are after. Every humm term appears side by side, interest free up to $10,000.</p>
+        <div class="rcpick" role="group" aria-label="Choose your systems">
+          <button class="rcopt" type="button" aria-pressed="false" data-key="whole-house">
+            <span class="rcimg"><img src="media/systems/thumb/pure-home-300.webp" alt="" width="244" height="300" loading="lazy" decoding="async"></span>
+            <span><b>Whole house</b><span data-price>from $3,850</span></span>
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+          </button>
+          <button class="rcopt" type="button" aria-pressed="false" data-key="pure-plus">
+            <span class="rcimg"><img src="media/systems/thumb/pure-plus-300.webp" alt="" width="202" height="300" loading="lazy" decoding="async"></span>
+            <span><b>Pure Plus</b><span data-price>$1,280</span></span>
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+          </button>
+          <button class="rcopt" type="button" aria-pressed="false" data-key="pure-premium">
+            <span class="rcimg"><img src="media/systems/thumb/pure-premium-300.webp" alt="" width="200" height="300" loading="lazy" decoding="async"></span>
+            <span><b>Pure Premium</b><span data-price>$1,590</span></span>
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+          </button>
+          <button class="rcopt" type="button" aria-pressed="false" data-key="pure-luxe">
+            <span class="rcimg"><img src="media/systems/thumb/pure-luxe-300.webp" alt="" width="192" height="300" loading="lazy" decoding="async"></span>
+            <span><b>Pure Luxe</b><span data-price>$2,290</span></span>
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+          </button>
+          <button class="rcopt rcdx" type="button" aria-pressed="false" data-key="deluxe-home">
+            <span class="rcimg"><img src="media/systems/thumb/pure-home-300.webp" alt="" width="244" height="300" loading="lazy" decoding="async"><img src="media/systems/thumb/pure-premium-300.webp" alt="" width="200" height="300" loading="lazy" decoding="async"><img src="media/systems/thumb/mixer-gold-300.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></span>
+            <span><b>Deluxe package</b><span data-price>from $6,290</span></span>
+            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+          </button>
+          <div class="rcextra">
+            <b>Anything else<small>A tap or an extra, in dollars</small></b>
+            <label><span>$</span><input type="number" id="rcExtra" inputmode="decimal" min="0" step="1" placeholder="0" aria-label="Anything else, in dollars"></label>
+          </div>
+        </div>
+      </div>
+      <div class="rcres" id="rcRes">
+        <div class="rcsum"><span class="k">System cost</span><span class="v"><span class="wm"><span id="rcPrice">Pick a system</span></span></span></div>
+        <div class="rcterms" role="group" aria-label="humm terms. All shown, none chosen for you">
+          <button class="rcterm" type="button" aria-pressed="false" data-months="6" disabled><span class="rcmo">6 mo</span><span class="rcnum"><span class="wm"><span>&mdash;</span></span></span><span class="rcper">a fortnight</span></button>
+          <button class="rcterm" type="button" aria-pressed="false" data-months="12" disabled><span class="rcmo">12 mo</span><span class="rcnum"><span class="wm"><span>&mdash;</span></span></span><span class="rcper">a fortnight</span></button>
+          <button class="rcterm" type="button" aria-pressed="false" data-months="18" disabled><span class="rcmo">18 mo</span><span class="rcnum"><span class="wm"><span>&mdash;</span></span></span><span class="rcper">a fortnight</span></button>
+          <button class="rcterm" type="button" aria-pressed="false" data-months="24" disabled><span class="rcmo">24 mo</span><span class="rcnum"><span class="wm"><span>&mdash;</span></span></span><span class="rcper">a fortnight</span></button>
+        </div>
+        <p class="rchint" id="rcHint" aria-live="polite">Pick a system, then a term. Every humm term shows side by side and none is chosen for you.</p>
+        <!-- the bill: four rows that add up to the total, so nobody has to bridge
+             from the price to the total in their head -->
+        <dl class="rclist" id="rcList" aria-live="polite">
+          <div><dt>System cost</dt><dd id="rcRowSys">&mdash;</dd></div>
+          <div><dt>Merchant fee<small>the cost of having this plan available to you</small></dt><dd id="rcRowMf">&mdash;</dd></div>
+          <div><dt>Establishment fee</dt><dd id="rcRowEst">&mdash;</dd></div>
+          <div><dt>Monthly fee, separate<small id="rcRowAcctSub"></small></dt><dd id="rcRowAcct">&mdash;</dd></div>
+          <div class="tot"><dt>Total amount payable<small id="rcRowPer"></small></dt><dd id="rcRowTot">&mdash;</dd></div>
+        </dl>
+        <div class="rcgo">
+          <button class="btn" type="button" id="rcGo" disabled><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Request this payment plan</button>
+          <p class="rcnote">We call you, confirm the price in writing, and send you humm&rsquo;s link to apply.</p>
+        </div>
+        <!-- a callback, never a humm application: name and mobile, nothing about
+             income or credit. The customer applies with humm themselves. -->
+        <form class="rcask" novalidate action="https://formspree.io/f/mbdqdlve" method="POST" data-callback>
+          <p class="rcasksum" id="rcAskSum"></p>
+          <input type="text" name="name" autocomplete="name" placeholder="Your name" aria-label="Your name" required>
+          <input type="tel" name="phone" autocomplete="tel" placeholder="Your mobile" aria-label="Your mobile number" required>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <button class="btn" type="submit" id="rcSend"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span id="rcSendLabel">Send my request</span></button>
+          <button class="rcback" type="button" id="rcBack">Back to the calculator</button>
+        </form>
+        <div class="rcdone" role="status">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="#EE6604" stroke-width="1.6"/><path d="m7.5 12.5 3 3 6-6.5" stroke="#EE6604" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <b>Done. We will call you.</b>
+          <p>Your plan request is with us. A person confirms the exact figures in writing, then sends you humm&rsquo;s link to apply.</p>
+        </div>
+        <p class="rcfine"><span class="rcl">*An estimate, rounded up to the dollar. Every figure is confirmed in writing before anything goes ahead. Payment plans to approved applicants only. Fees, terms and conditions apply, </span><span class="rcs">*An estimate. Confirmed in writing before anything goes ahead. Approved applicants only, </span><a href="#terms">full terms below</a>.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- THE PROOF — humm's own hosted landing page. Their script, their content,
        their T&Cs, per their Landing Page Instructions. Never restyled. -->
   <section class="widget" id="terms">
@@ -565,7 +883,7 @@ main{padding-top:72px}
       <div class="hummwrap">
       <script id="humm-landing-page-big-online" src="https://widgets.shophumm.com.au/content/scripts/landing-page-big-online.js"></script>
       </div>
-      <p class="fine">Interest free terms apply to purchases up to $10,000. Payment plans to approved applicants only. Fees, terms, minimum amounts and conditions apply. Payment plans provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of the humm group. Filters For You can tell you that humm is available and answer factual questions. The application is yours, made directly with humm.</p>
+      <p class="fine">Interest free terms apply to purchases up to $10,000. Repayment shown is indicative only and depends on the amount financed, the term and applicable fees. Payment plan to approved applicants only; fees, terms, minimum amounts and conditions apply. Payment plan provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of humm group. Filters For You can tell you that humm is available and answer factual questions. The application is yours, made directly with humm.</p>
     </div>
   </section>
 
@@ -574,11 +892,11 @@ main{padding-top:72px}
     <img class="hmbird" src="media/humm/humm-bird-white.webp" alt="" width="900" height="751" aria-hidden="true" loading="lazy">
     <div class="in">
       <span class="hmkick">Whole house system</span>
-      <h2 class="hmh2">From only<br>$83 a fortnight.</h2>
+      <h2 class="hmh2">From only<br>$84 a fortnight.</h2>
       <p class="hmlede">Custom quoted for your home and the term you choose. Installed across Sydney by licensed plumbers.</p>
       <ul class="hmticks">
         <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Interest free on purchases up to $10,000</li>
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Fortnightly or monthly repayments, your call</li>
+        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Fortnightly repayments, spread across the term</li>
         <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Covered for life while you stay serviced with us</li>
       </ul>
       <div class="hmcta">
@@ -751,6 +1069,535 @@ main{padding-top:72px}
       }));
     }
   }catch(e){}
+})();
+</script>
+<!-- HUMM:CALC -->
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   humm finance engine — browser twin of Engine/humm/humm_calc.py
+
+   ⛔ DO NOT EDIT THIS INSIDE A PAGE. It is stamped into the HTML by
+      Engine/humm/stamp_calculator.py, and test_parity.mjs asserts the shipped
+      bytes match this file and reproduce the Python engine field for field.
+      Edit here, re-stamp, re-test.
+
+   THE RULE (JP, 2026-08-28): FFY never wears humm's merchant service fee.
+      financed = list_price / (1 - merchant_fee_rate)
+   Divide, never multiply — humm takes its cut off the GROSSED amount.
+
+   Reads the fee table from <script type="application/json" id="humm-fee-table">
+   and the products from #humm-products. No number is written in this file.
+
+   Money is handled in integer CENTS with half-up rounding, which is how the
+   Python side works, so the two cannot drift on a half-cent.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+var HummCalc = (function () {
+  'use strict';
+
+  /* ── money ──────────────────────────────────────────────────────────────
+     Floats cannot hold $0.10 exactly. Everything internal is integer cents,
+     and every division rounds half-up the way Decimal(ROUND_HALF_UP) does. */
+
+  function toCents(value) {
+    // Round through a string to dodge the float representation of e.g. 1234.565
+    return Math.round(parseFloat(Number(value).toFixed(6)) * 100);
+  }
+
+  function roundHalfUp(x) {
+    // Math.round() rounds -0.5 up to -0; we never see negatives, but be explicit.
+    return x < 0 ? -Math.floor(-x + 0.5) : Math.floor(x + 0.5);
+  }
+
+  function fromCents(cents) {
+    return cents / 100;
+  }
+
+  function fmt(cents) {
+    return '$' + fromCents(cents).toLocaleString('en-AU', {
+      minimumFractionDigits: 2, maximumFractionDigits: 2
+    });
+  }
+
+  function fmtWhole(dollars) {
+    return '$' + Number(dollars).toLocaleString('en-AU', { maximumFractionDigits: 0 });
+  }
+
+  /* ── the one formula ────────────────────────────────────────────────────
+     F = P / (1 - f). NOT P * (1 + f) — that undercharges, because humm's fee
+     comes off the grossed figure. On Whole House at 24mo the multiply leaves
+     FFY $34.75 short of list. */
+
+  function grossUpCents(listCents, feeRate) {
+    if (!(feeRate >= 0 && feeRate < 1)) throw new Error('fee rate out of range: ' + feeRate);
+    return roundHalfUp(listCents / (1 - feeRate));
+  }
+
+  /* ── loading ────────────────────────────────────────────────────────────── */
+
+  function readJSON(id) {
+    var el = document.getElementById(id);
+    if (!el) throw new Error('missing data block #' + id);
+    return JSON.parse(el.textContent);
+  }
+
+  function loadFees(fees) {
+    fees = fees || readJSON('humm-fee-table');
+    ['interest_free', 'establishment_fee', 'large_purchase', 'display_rounding'].forEach(function (k) {
+      if (!(k in fees)) throw new Error("fee table is missing '" + k + "' — refusing to guess");
+    });
+    if (!fees.interest_free.terms || !fees.interest_free.terms.length) {
+      throw new Error('fee table has no interest-free terms');
+    }
+    return fees;
+  }
+
+  function loadProducts(products) {
+    return products || readJSON('humm-products');
+  }
+
+  /* ── quoting one term ───────────────────────────────────────────────────── */
+
+  function quoteTerm(listPrice, months, fees) {
+    fees = loadFees(fees);
+    var spec = null;
+    fees.interest_free.terms.forEach(function (t) { if (t.months === months) spec = t; });
+    if (!spec) return null;
+
+    var listCents = toCents(listPrice);
+    var rate = spec.merchant_service_fee_pct / 100;
+    var estCents = toCents(fees.establishment_fee.amount);
+    var capCents = toCents(spec.max_financed);
+
+    var financed = grossUpCents(listCents, rate);
+    var merchantFee = financed - listCents;
+    var total = financed + estCents;
+
+    // The cap is tested on the GROSSED purchase price, not the sticker. "Purchase
+    // Price means the total price of the goods and/or services supplied by you to
+    // the Customer" — the grossed figure we invoice. humm's $80 sits outside it.
+    var capIncludesEst = String(fees.interest_free.cap_applies_to || '').indexOf('including_establishment') !== -1;
+    var tested = capIncludesEst ? total : financed;
+    var eligible = tested <= capCents;
+    var reason = eligible ? null : 'not available above ' + fmtWhole(spec.max_financed) + ' financed';
+
+    var minCents = toCents(fees.interest_free.min_purchase);
+    if (listCents < minCents) {
+      eligible = false;
+      reason = 'humm plans start at ' + fmtWhole(fees.interest_free.min_purchase);
+    }
+
+    var fortnights = months / 12 * (fees.fortnights_per_year || 26);
+    var acct = fees.account_keeping_fee && fees.account_keeping_fee.amount != null
+      ? toCents(fees.account_keeping_fee.amount) : null;
+
+    return {
+      months: months,
+      merchant_fee_pct: spec.merchant_service_fee_pct,
+      financed: fromCents(financed),
+      merchant_fee: fromCents(merchantFee),
+      establishment_fee: fromCents(estCents),
+      total_financed: fromCents(total),
+      fortnightly_exact: fromCents(roundHalfUp(total / fortnights)),
+      // Rounds UP: a quote never understates what they will pay.
+      fortnightly_displayed: Math.ceil(total / fortnights / 100),
+      monthly_repayment: fromCents(roundHalfUp(total / months)),
+      max_financed: fromCents(capCents),
+      eligible: eligible,
+      ineligible_reason: reason,
+      account_fee_monthly: acct === null ? null : fromCents(acct),
+      total_amount_payable: acct === null ? null : fromCents(total + acct * months)
+    };
+  }
+
+  /* ── quoting a price ──────────────────────────────────────────────────────
+     Above the interest-free ceiling humm runs 40 / 50 / 60-month plans at 11.99%
+     to the customer and 0% to us. We do not quote them (JP, 28 Aug) — naming the
+     band lets the page hand over accurately instead of guessing. */
+
+  function largeBand(purchasePrice, fees) {
+    fees = loadFees(fees);
+    var price = toCents(purchasePrice), found = null;
+    (fees.large_purchase.bands || []).forEach(function (b) {
+      if (toCents(b.min_purchase) <= price && price <= toCents(b.max_purchase)) found = b;
+    });
+    return found;
+  }
+
+  function quote(listPrice, fees) {
+    fees = loadFees(fees);
+    var listCents = toCents(listPrice);
+    var notes = [];
+
+    var terms = [];
+    fees.interest_free.terms.forEach(function (spec) {
+      var t = quoteTerm(listPrice, spec.months, fees);
+      if (t) terms.push(t);
+    });
+
+    var minCents = toCents(fees.interest_free.min_purchase);
+    var largeCents = toCents(fees.large_purchase.min_purchase);
+
+    if (listCents < minCents) {
+      return { list_price: fromCents(listCents), mode: 'below_minimum', terms: terms,
+               notes: ['humm plans start at ' + fmtWhole(fees.interest_free.min_purchase) + '.'],
+               customer_interest_rate_pa: null, band: null, any_eligible: false };
+    }
+
+    if (listCents >= largeCents) {
+      // Above the interest-free ceiling humm charges the CUSTOMER interest and
+      // charges us nothing — so there is no gross-up and the price stays at list.
+      var lp = fees.large_purchase;
+      var band = largeBand(listPrice, fees);
+      if (band) {
+        notes.push(fmt(listCents) + ' sits in humm’s ' + fmt(toCents(band.min_purchase)) + ' to '
+          + fmt(toCents(band.max_purchase)) + ' band: ' + band.term_months + ' months, '
+          + lp.customer_interest_rate_pa + '% p.a. paid by the customer. Our merchant fee is 0%, '
+          + 'so the price stays at our list price.');
+      } else {
+        notes.push('Above ' + fmtWhole(lp.max_purchase) + ' humm has no plan.');
+      }
+      if (lp.offered_in_calculator === false) {
+        notes.push('We are not quoting past 24 months for now — humm will show them the exact '
+          + 'repayment when they apply.');
+      }
+      return { list_price: fromCents(listCents), mode: 'large_purchase', terms: [], notes: notes,
+               customer_interest_rate_pa: lp.customer_interest_rate_pa, band: band,
+               any_eligible: false };
+    }
+
+    var anyEligible = terms.some(function (t) { return t.eligible; });
+    if (anyEligible) {
+      return { list_price: fromCents(listCents), mode: 'interest_free', terms: terms,
+               notes: notes, customer_interest_rate_pa: null, band: null, any_eligible: true };
+    }
+
+    // The dead zone: too big for the longest interest-free term once grossed up,
+    // too small for the interest-bearing plan.
+    var biggest = fees.interest_free.terms.reduce(function (a, b) {
+      return b.max_financed > a.max_financed ? b : a;
+    });
+    var ceiling = roundHalfUp(toCents(biggest.max_financed)
+                              * (1 - biggest.merchant_service_fee_pct / 100));
+    notes.push('Between ' + fmt(ceiling) + ' and ' + fmt(largeCents) + ' the interest-free plan '
+      + 'does not reach: grossed up, the price passes humm’s ' + fmtWhole(biggest.max_financed)
+      + ' ceiling for ' + biggest.months + ' months. humm’s interest-bearing bands start at '
+      + fmt(largeCents) + '. Price the job at or under ' + fmt(ceiling) + ', or at '
+      + fmt(largeCents) + ' or above.');
+
+    return { list_price: fromCents(listCents), mode: 'no_plan_available', terms: terms,
+             notes: notes, customer_interest_rate_pa: null, band: null, any_eligible: false };
+  }
+
+  /* ── the combo rule ─────────────────────────────────────────────────────
+     Dearest system at full price, every EXTRA system minus $200. The free-entry
+     amount is never discounted — taps are the closing lever, not part of the rule. */
+
+  function comboPrice(systemKeys, extra, products) {
+    products = loadProducts(products);
+    var byKey = {};
+    products.products.forEach(function (p) { byKey[p.key] = p; });
+    var discountCents = toCents(products.combo_rule.extra_system_discount);
+
+    systemKeys.forEach(function (k) {
+      if (!byKey[k]) throw new Error('unknown system: ' + k);
+    });
+
+    // An atomic package already contains its parts — selecting both double-counts.
+    systemKeys.forEach(function (k) {
+      (byKey[k].excludes || []).forEach(function (banned) {
+        if (systemKeys.indexOf(banned) !== -1) {
+          throw new Error(byKey[k].name + ' already includes ' + byKey[banned].name
+                          + ' — select one or the other');
+        }
+      });
+    });
+
+    var chosen = systemKeys.map(function (k) { return byKey[k]; })
+      .sort(function (a, b) { return toCents(b.price) - toCents(a.price); });
+
+    var lines = [], totalCents = 0, discountTotal = 0;
+    chosen.forEach(function (p, i) {
+      var price = toCents(p.price);
+      var off = i === 0 ? 0 : discountCents;
+      lines.push({ key: p.key, name: p.name, list_price: fromCents(price),
+                   discount: fromCents(off), charged: fromCents(price - off) });
+      totalCents += price - off;
+      discountTotal += off;
+    });
+
+    var extraCents = toCents(extra || 0);
+    if (extraCents > 0) {
+      lines.push({ key: 'extra', name: products.extras.free_entry_label,
+                   list_price: fromCents(extraCents), discount: 0,
+                   charged: fromCents(extraCents) });
+      totalCents += extraCents;
+    }
+
+    return { lines: lines, total: fromCents(totalCents), discount_total: fromCents(discountTotal) };
+  }
+
+  /* ── the publish gate ────────────────────────────────────────────────────
+     The page must not show a "total amount payable" that understates what they
+     pay, so it stays blocked while humm's monthly account fee is unknown. */
+
+  function publishReady(fees) {
+    fees = loadFees(fees);
+    var blockers = [];
+    var acct = fees.account_keeping_fee || {};
+    if (acct.amount == null) {
+      blockers.push('humm’s monthly account-keeping fee amount is unknown (source: '
+                    + (acct.source || 'the signed PDF') + ')');
+    }
+    if (acct.collected_with_repayment == null) {
+      blockers.push('unknown whether humm collects the account fee inside the repayment or bills '
+                    + 'it separately — it changes the fortnightly figure');
+    }
+    return { ready: blockers.length === 0, blockers: blockers };
+  }
+
+  return {
+    grossUpCents: grossUpCents,
+    quoteTerm: quoteTerm,
+    quote: quote,
+    comboPrice: comboPrice,
+    largeBand: largeBand,
+    publishReady: publishReady,
+    loadFees: loadFees,
+    loadProducts: loadProducts,
+    fmt: fmt,
+    fmtWhole: fmtWhole,
+    toCents: toCents
+  };
+})();
+
+if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc; }
+</script>
+<!-- /HUMM:CALC -->
+<script>
+/* ═══ THE REPAYMENTS CALCULATOR — behaviour (round 61, 2026-08-28) ═══
+   THE GESTURE, NAMED: tap a system and the panel LOOKS UP every humm term at
+   once, the figures rising in behind their mask. Not a counter. Then a bill:
+   system cost, merchant fee, establishment fee, the monthly fee times the term,
+   and the total they add up to. Prices in bold. Nothing to bridge in your head.
+   ⛔ Nothing here knows a price or a rate. HummCalc is stamped between the
+   HUMM:CALC markers from Engine/humm/humm_calc.js and reads the fee table and
+   the products stamped between HUMM:DATA. Edit the JSON, re-stamp, never this.
+   ⛔ Every term renders with equal weight and none is picked for the customer:
+   the unsolicited agreement bars us recommending one. The request is a
+   callback (name + mobile), never a humm application. */
+(function(){
+  var root = document.getElementById('repayments');
+  if (!root || typeof HummCalc === 'undefined') return;
+  var fees, products;
+  try { fees = HummCalc.loadFees(); products = HummCalc.loadProducts(); } catch (e) { return; }
+
+  var opts    = [].slice.call(root.querySelectorAll('.rcopt'));
+  var extraIn = document.getElementById('rcExtra');
+  var terms   = [].slice.call(root.querySelectorAll('.rcterm'));
+  var priceEl = document.getElementById('rcPrice');
+  var hint    = document.getElementById('rcHint');
+  var goBtn   = document.getElementById('rcGo');
+  var res     = document.getElementById('rcRes');
+  var form    = res.querySelector('form');
+  var askSum  = document.getElementById('rcAskSum');
+  var sendBtn = document.getElementById('rcSend');
+  var sendLbl = document.getElementById('rcSendLabel');
+  var row = {
+    sys: document.getElementById('rcRowSys'), mf: document.getElementById('rcRowMf'),
+    est: document.getElementById('rcRowEst'), acct: document.getElementById('rcRowAcct'),
+    acctSub: document.getElementById('rcRowAcctSub'), tot: document.getElementById('rcRowTot'),
+    per: document.getElementById('rcRowPer')
+  };
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var byKey = {}; products.products.forEach(function(p){ byKey[p.key] = p; });
+  var chosen = [], term = null, combo = null, quote = null;
+
+  /* the tiles' prices come from the same JSON the engine prices from */
+  opts.forEach(function(o){
+    var p = byKey[o.getAttribute('data-key')], el = o.querySelector('[data-price]');
+    if (p && el) el.textContent = p.site_price_string;
+  });
+
+  function money(n){ return '$' + Number(n).toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+  function whole(n){ return '$' + Number(n).toLocaleString('en-AU', {maximumFractionDigits:0}); }
+  function sess(k, fallback){ try { return sessionStorage.getItem(k) || fallback; } catch (e) { return fallback; } }
+  function hid(name, value){
+    var el = form.querySelector('input[type="hidden"][name="' + name + '"]');
+    if (!el){ el = document.createElement('input'); el.type = 'hidden'; el.name = name; form.appendChild(el); }
+    el.value = value;
+  }
+  function termQuote(m){ var q = null; if (quote) quote.terms.forEach(function(x){ if (x.months === m) q = x; }); return q; }
+  function names(){ return chosen.map(function(k){ return byKey[k].name; }); }
+  function extraAmt(){ return Math.max(0, parseFloat(extraIn.value) || 0); }
+
+  /* the masked rise, CSS only: swap the figure, replay the keyframe */
+  function rise(span, text){
+    if (span.textContent === text) return;
+    span.textContent = text;
+    if (reduce) return;
+    span.classList.remove('up'); void span.offsetWidth; span.classList.add('up');
+  }
+
+  function render(){
+    var extra = extraAmt();
+    res.classList.remove('term');
+    if (!chosen.length && !extra){
+      combo = quote = null; term = null;
+      rise(priceEl, 'Pick a system');
+      terms.forEach(function(t){
+        t.disabled = true; t.setAttribute('aria-pressed', 'false');
+        rise(t.querySelector('.wm > span'), '—');
+        t.querySelector('.rcper').textContent = 'a fortnight';
+      });
+      hint.textContent = 'Pick a system, then a term. Every humm term shows side by side and none is chosen for you.';
+      goBtn.disabled = true;
+      return;
+    }
+    combo = HummCalc.comboPrice(chosen, extra, products);
+    quote = HummCalc.quote(combo.total, fees);
+    rise(priceEl, whole(combo.total));
+
+    var ok = quote.mode === 'interest_free';
+    terms.forEach(function(t){
+      var m = +t.getAttribute('data-months'), q = termQuote(m);
+      var live = ok && q && q.eligible;
+      t.disabled = !live;
+      rise(t.querySelector('.wm > span'), q ? whole(q.fortnightly_displayed) : '—');
+      t.querySelector('.rcper').textContent = live ? 'a fortnight'
+        : (q && q.ineligible_reason ? q.ineligible_reason.replace('not available ', '') : 'a fortnight');
+      if (!live && term === m) term = null;
+      t.setAttribute('aria-pressed', term === m ? 'true' : 'false');
+    });
+    goBtn.disabled = false;
+
+    var tiers = fees.interest_free.terms, top = tiers[tiers.length - 1];
+    if (quote.mode === 'below_minimum'){
+      hint.textContent = 'humm plans start at ' + whole(fees.interest_free.min_purchase) + '.';
+    } else if (quote.mode === 'large_purchase'){
+      var b = quote.band;
+      hint.textContent = 'Over ' + whole(top.max_financed) + ' humm runs a different plan: interest at '
+        + fees.large_purchase.customer_interest_rate_pa + '% p.a. paid by you'
+        + (b ? ', ' + b.term_months + ' months to repay' : '') + ', and our price stays as it is. Request it and we walk you through it.';
+    } else if (quote.mode === 'no_plan_available'){
+      hint.textContent = 'At this price the interest free plan does not quite reach. Request it and we price the job to fit.';
+    } else if (term === null){
+      hint.textContent = 'Tap a term to see the bill: what it costs and what it adds up to.';
+    } else {
+      /* the bill. Four rows that add up to the total, the monthly fee shown
+         for the whole term so the arithmetic is on the page, not in their head. */
+      var q = termQuote(term);
+      row.sys.textContent = money(combo.total);
+      row.mf.textContent  = money(q.merchant_fee);
+      row.est.textContent = money(q.establishment_fee);
+      if (q.account_fee_monthly != null){
+        row.acct.textContent = money(q.account_fee_monthly * q.months);
+        row.acctSub.textContent = money(q.account_fee_monthly) + ' a month for ' + q.months + ' months';
+        row.tot.textContent = money(q.total_amount_payable);
+      } else {
+        row.acct.textContent = 'humm’s monthly fee';
+        row.acctSub.textContent = 'for ' + q.months + ' months';
+        row.tot.textContent = money(q.total_financed) + ' plus the monthly fee';
+      }
+      row.per.textContent = whole(q.fortnightly_displayed) + ' a fortnight for ' + q.months + ' months';
+      res.classList.add('term');
+    }
+  }
+
+  opts.forEach(function(o){
+    o.addEventListener('click', function(){
+      var k = o.getAttribute('data-key');
+      var on = o.getAttribute('aria-pressed') === 'true';
+      if (on){ chosen = chosen.filter(function(x){ return x !== k; }); }
+      else {
+        /* a package already holds its parts: choosing one drops the other */
+        var ex = byKey[k].excludes || [];
+        chosen = chosen.filter(function(x){ return ex.indexOf(x) === -1 && (byKey[x].excludes || []).indexOf(k) === -1; });
+        chosen.push(k);
+      }
+      opts.forEach(function(x){ x.setAttribute('aria-pressed', chosen.indexOf(x.getAttribute('data-key')) !== -1 ? 'true' : 'false'); });
+      render();
+      window.ffyTrack && window.ffyTrack('repay_pick', {system: k, on: !on});
+    });
+  });
+  extraIn.addEventListener('input', render);
+
+  terms.forEach(function(t){
+    t.addEventListener('click', function(){
+      if (t.disabled) return;
+      var m = +t.getAttribute('data-months');
+      term = term === m ? null : m;
+      render();
+      window.ffyTrack && window.ffyTrack('repay_term', {months: term});
+    });
+  });
+
+  /* ── the request: a callback, into the same panel ─────────────────── */
+  function planText(){
+    var parts = names(), extra = extraAmt();
+    if (extra) parts.push('extras ' + whole(extra));
+    var s = parts.join(' + ') + ' at ' + whole(combo.total) + ' installed';
+    if (quote && quote.mode === 'interest_free'){
+      if (term !== null){
+        var q = termQuote(term);
+        s += '. ' + term + ' months, ' + whole(q.fortnightly_displayed) + ' a fortnight, financed ' + money(q.total_financed)
+          + (q.total_amount_payable != null ? ', total ' + money(q.total_amount_payable) : '');
+      } else s += '. Term not chosen yet';
+    } else if (quote) s += '. ' + quote.mode.replace(/_/g, ' ');
+    return s;
+  }
+  goBtn.addEventListener('click', function(){
+    if (!combo) return;
+    askSum.textContent = planText();
+    res.classList.add('asking');
+    var inp = form.querySelector('input[name="name"]');
+    if (inp) setTimeout(function(){ inp.focus({preventScroll:true}); }, 60);
+    window.ffyTrack && window.ffyTrack('repay_request_open', {plan: planText()});
+  });
+  document.getElementById('rcBack').addEventListener('click', function(){ res.classList.remove('asking'); });
+
+  var sending = false;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (sending) return;
+    var nm = form.querySelector('input[name="name"]'), ph = form.querySelector('input[name="phone"]'), bad = null;
+    [nm, ph].forEach(function(i){ var empty = !i.value.trim(); i.classList.toggle('bad', empty); if (empty && !bad) bad = i; });
+    if (bad){ bad.focus(); return; }
+    /* the field names form_watcher.py reads: name, phone, subject, system, message */
+    hid('subject', 'Payment plan request');
+    hid('_subject', 'Payment plan request: ' + (names().join(' + ') || 'extras only'));
+    hid('system', names().join(' + ') || 'Extras only');
+    hid('message', 'PAYMENT PLAN REQUEST (humm). ' + planText() + '. Figures indicative. Confirm in writing before anything goes ahead.');
+    hid('landing_page', sess('ffy_landing', location.pathname));
+    hid('submitted_page', location.pathname);
+    hid('referrer', sess('ffy_referrer', document.referrer || ''));
+    sending = true; sendBtn.disabled = true; sendLbl.textContent = 'Sending…';
+    var done = function(){
+      res.classList.remove('asking'); res.classList.add('finished');
+      window.ffyTrack && window.ffyTrack('form_submit', {form:'repayments', system: names().join(' + ')});
+      /* the pixel Lead fires HERE, on a send that actually succeeded */
+      if (typeof fbq === 'function'){
+        try {
+          fbq('track', 'Lead', {content_name:'humm_repayments', content_category:'website_form', source_page:location.pathname},
+              {eventID:'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8)});
+        } catch (err) {}
+      }
+    };
+    fetch(form.action, {method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}})
+      .then(function(r){ if (!r.ok) throw new Error('formspree ' + r.status); done(); })
+      .catch(function(){
+        /* ⛔ never a fake success: if the AJAX call fails the browser posts the
+           form the ordinary way and the same request lands in the same inbox. */
+        try { form.submit(); }
+        catch (err){
+          sending = false; sendBtn.disabled = false; sendLbl.textContent = 'Send my request';
+          alert('Sorry, that did not send. Please call us on 0430 546 749.');
+        }
+      });
+  });
+
+  render();
 })();
 </script>
 </body>
