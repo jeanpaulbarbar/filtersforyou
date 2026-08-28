@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ═════════ NEW PAGE — starts from the shell template ═════════
+     Made by: Console/venv/bin/python3 .claude/skills/web-designer/scripts/site_shell.py new <slug> --title … --description …
+     The header, mobile sheet, footer, their CSS and their JS are stamped between
+     the SHELL markers from index.html. ⛔ Never hand-edit inside a marker pair.
+     When the homepage shell changes, run `site_shell.py apply <page>`. -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TK2P95MELV');
+</script>
+<script>
+!function(f,b,e,n){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[]}(window,document,'script');
+fbq('init', '1519453236218387');
+fbq('track', 'PageView');
+</script>
+<script>
+(function(){
+  var fired = false;
+  function load(){
+    if (fired) return;
+    fired = true;
+    ['https://www.googletagmanager.com/gtag/js?id=G-TK2P95MELV',
+     'https://connect.facebook.net/en_US/fbevents.js'].forEach(function(src){
+      var t = document.createElement('script');
+      t.async = true; t.src = src;
+      document.head.appendChild(t);
+    });
+  }
+  ['scroll','pointerdown','keydown','touchstart','mousemove'].forEach(function(ev){
+    window.addEventListener(ev, load, { once: true, passive: true });
+  });
+  setTimeout(load, 3000);
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'visible') load();
+  }, { once: true });
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"></noscript>
+
+<title>{{TITLE}} | Filters For You</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="canonical" href="https://filtersforyou.com.au/{{SLUG}}">
+<link rel="icon" href="media/mark.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<!-- SHELL:CSS -->
+<!-- /SHELL:CSS -->
+<style>
+/* ═══ this page only ═══ */
+.page-hero{padding:52px 0 48px;border-bottom:1px solid var(--rule)}
+.page-hero h1{font-weight:500;letter-spacing:-.005em;line-height:1.06;margin:14px 0 0;font-size:clamp(2.2rem,4.6vw,3.8rem);max-width:16ch}
+.page-hero .lede{margin-top:18px}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage",
+ "name":"{{TITLE}}","url":"https://filtersforyou.com.au/{{SLUG}}","description":"{{DESCRIPTION}}",
+ "isPartOf":{"@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au"}}
+</script>
+</head>
+<body>
+
+<!-- SHELL:HEADER -->
+<!-- /SHELL:HEADER -->
+
+<main>
+  <section class="page-hero">
+    <div class="in">
+      <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">Eyebrow</span>
+      <h1>{{TITLE}}</h1>
+      <p class="lede">{{DESCRIPTION}}</p>
+    </div>
+  </section>
+</main>
+
+<!-- SHELL:FOOTER -->
+<!-- /SHELL:FOOTER -->
+
+<!-- SHELL:JS -->
+<!-- /SHELL:JS -->
+<!-- FFY ATTRIBUTION -->
+<script>
+(function(){
+  try{
+    var KEY='ffy_attr';
+    if(!sessionStorage.getItem(KEY)){
+      sessionStorage.setItem(KEY, JSON.stringify({
+        landing_page: location.pathname + location.search,
+        referrer: document.referrer || ''
+      }));
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
