@@ -211,6 +211,7 @@ body.mopen .msheet .mrow:nth-child(2){transition-delay:.10s}
 body.mopen .msheet .mrow:nth-child(3){transition-delay:.15s}
 body.mopen .msheet .mrow:nth-child(4){transition-delay:.20s}
 body.mopen .msheet .mrow:nth-child(5){transition-delay:.25s}
+body.mopen .msheet .mrow:nth-child(6){transition-delay:.30s}
 .msheet .mlinks{display:flex;flex-direction:column;flex:0 0 auto}
 .msheet .mlinks a{display:flex;align-items:center;justify-content:space-between;gap:16px;
     padding:0;min-height:clamp(44px,6.3svh,58px);
@@ -236,6 +237,19 @@ body.mopen .msheet .mrow:nth-child(5){transition-delay:.25s}
     transition:color .3s ease-in-out}
 .msheet .msoc svg{width:19px;height:19px}
 @media (hover:hover) and (pointer:fine){.msheet .msoc a:hover{color:var(--blue)}}
+.msheet .mhumm{display:flex;align-items:center;gap:14px;flex:0 0 auto;
+    min-height:clamp(52px,7.4svh,64px);margin-top:clamp(8px,1.4svh,16px);
+    padding:0 14px 0 16px;border-radius:var(--r-card);
+    background:#EE6604;color:#fff;text-decoration:none}
+.msheet .mhumm img{width:clamp(76px,11svh,96px);height:auto;flex:0 0 auto}
+.msheet .mhumm b{flex:1;min-width:0;font-family:var(--hummf);font-weight:700;
+    font-size:19px;line-height:1.15;letter-spacing:-.01em}
+.msheet .mhumm i{display:grid;place-items:center;flex:0 0 auto;
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.9);color:#EE6604}
+.msheet .mhumm i svg{width:15px;height:15px}
+@media (hover:hover) and (pointer:fine){.msheet .mhumm:hover i{background:#fff;color:var(--ink)}}
+.msheet .mhumm:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .msheet .mcard{position:relative;display:flex;flex-direction:column;justify-content:flex-end;
     flex:1 1 auto;min-height:clamp(104px,16svh,150px);max-height:270px;margin-top:clamp(10px,1.8svh,24px);
     border-radius:var(--r-card);overflow:hidden;text-decoration:none;
@@ -251,6 +265,8 @@ body.mopen .msheet .mrow:nth-child(5){transition-delay:.25s}
     width:clamp(44px,6svh,52px);height:clamp(44px,6svh,52px);margin-top:0;
     border-radius:50%;background:var(--yellow);color:var(--ink)}
 .msheet .mcard i svg{width:17px;height:17px}
+@media (max-height:720px){.msheet .mhumm{min-height:48px;margin-top:6px}
+.msheet .mcard{min-height:76px;margin-top:8px}}
 body.mopen{overflow:hidden}
 body.mopen .hdr{background:var(--paper);box-shadow:0 1px 0 var(--rule);color:var(--ink)}
 body.mopen .hdr .row{min-height:74px}
@@ -315,7 +331,7 @@ body.mopen .hdr .mark{filter:none}
 @media (min-width:1080px){.hdr{padding-top:10px}}
 @media (max-width:1079px){.hdr{padding-top:var(--hframe)}}
 @media (max-width:599px){:root{--hframe:8px}}
-.hdeck.open .more .btn{width:100%;justify-content:center;margin-top:16px;flex:0 0 auto}
+.hdeck .more .btn{width:100%;justify-content:center;margin-top:16px;flex:0 0 auto}
 .show .foot{margin-top:40px;text-align:left}
 .xp .ph{position:absolute;inset:-8% 0;will-change:transform}
 .xp .ph img{width:100%;height:100%;object-fit:cover;object-position:66% 40%}
@@ -354,7 +370,7 @@ body.fabon .fab{opacity:1;transform:none}
 .hs.r .tip{left:auto;right:0;transform:translateX(0) translateY(5px)}
 .hs.r.on .tip{transform:translateX(0)}
 .hs.r .tip::after{left:auto;right:16px}
-@media (max-width:859px){.hdeck.open .more .btn{margin-top:12px}
+@media (max-width:859px){.hdeck .more .btn{margin-top:12px}
 .xp .ph{inset:0;will-change:auto}
 .xp .go .btn{width:100%;justify-content:center}
 :root{--arc:44px}
@@ -488,8 +504,36 @@ main:has(> .pgtop){padding-top:0}
    weight and none is preselected: the unsolicited agreement bars us recommending
    one. White on #EE6604 is 3.2:1: every white line on tangerine is ≥19px/700,
    everything smaller sits on paper. Inputs are 17px so iOS never zooms. */
+/* ⭐ ROUND 63c — THE STORY AND THE SUM ARE ONE CARD. JP, 28 Aug: "I don't like
+   how it flows from the intro section into the repayment calculator. It's a very
+   hard connection there, and there's no padding between the repayments section."
+   He is describing two faults at one join, and both were real. MEASURED at 390
+   before this: the opener is a `pgcard` — inset 8px, radius 24, tangerine — and
+   the calculator was FULL BLEED at 390 wide, square, THE SAME TANGERINE, with
+   12px of top padding. So a rounded card ended, an 8px band of pale page ground
+   ran across the full width, and an identical-coloured square slab started with
+   its heading almost touching the top edge. Two tangerine masses with an
+   accidental light line through them, which is not a section change and does not
+   read as one either.
+   ⛔ THE FIX IS NOT A NEW COLOUR. Round 60/61 already settled that the section
+   continues the intro's tangerine ("one humm opener: the story, then the sum")
+   and the white belongs to the panel inside it. So the join goes instead: the
+   calculator takes the SAME frame as the opener and is pulled up by exactly one
+   corner radius, so it covers the opener's rounded bottom and the two become one
+   continuous tangerine card. Its own bottom corners round off against the white
+   terms section below, which IS a real ground change.
+   ⛔ `--r-hero` in three places and they must stay equal: the overlap, the bottom
+   radius, and the top padding's first term (content has to clear the overlap).
+   ⛔ min-height loses the overlap it gained, or the card grows by 24px. */
 .rc{background:#EE6604;color:#fff;position:relative;overflow:hidden;
-  min-height:calc(100svh - 72px);display:grid;align-content:center;padding:28px 0 60px}
+  /* ⛔ THE OVERLAP IS r-hero PLUS THE FRAME, NOT r-hero. The opener sits in a
+     `pgtop` wrapper that already puts one frame of page ground under it, so a
+     bare -24px left 16px of overlap against a 24px radius — measured at 390 —
+     and 8px of the corner notch still showed. -(24 + 8) covers it exactly. */
+  margin:calc((var(--r-hero) + var(--hframe)) * -1) var(--hframe) 0;
+  border-radius:0 0 var(--r-hero) var(--r-hero);
+  min-height:calc(100svh - 72px - var(--r-hero) - var(--hframe));display:grid;align-content:center;
+  padding:calc(var(--r-hero) + var(--hframe) + 40px) 0 60px}
 .rc .rcbird{position:absolute;right:-120px;bottom:-70px;width:min(560px,50vw);height:auto;opacity:.12;
   transform:rotate(-10deg);pointer-events:none;user-select:none}
 .rcgrid{position:relative;display:grid;gap:22px}
@@ -513,9 +557,28 @@ main:has(> .pgtop){padding-top:0}
   transition:transform .3s ease-in-out}
 .rcopt .rcimg img+img{margin-left:-26px}
 /* the package shows its three parts: whole house, seven stage, the gold mixer in front */
+/* ⭐ ROUND 63c — THE DELUXE IS A BUNDLE, NOT A ROW THAT RAN OUT OF ROOM.
+   JP: "the mixer is cut off in the deluxe package… I actually thought that you
+   were going to put the mixer on top of the whole house system. Maybe you can
+   make the mixer just a little bit smaller… and have it sitting on top of the
+   whole house system. That way, it looks like a little bundle."
+   It WAS being cut off, and the cause is exact: three shots laid side by side in
+   a 100px cell that `overflow:hidden` clips, so the third one — the tap — lost
+   its right-hand edge at every width. Widening the cell is not the answer; the
+   card is one of six in a grid and the other five are two-up.
+   THE SHAPE NOW: the two systems keep their overlapping row, and the tap comes
+   OUT of that row — smaller, absolutely placed, standing on the whole house
+   unit's shoulder. Three objects in a stack read as a package; three objects in
+   a line read as a list that did not fit.
+   ⛔ `overflow:visible` on this cell ONLY (`.rcdx`), never on `.rcopt .rcimg` —
+   the plain cards rely on that clip. */
 .rcopt.rcdx{grid-template-columns:100px 1fr}
-.rcopt.rcdx .rcimg{justify-content:flex-start}
-.rcopt.rcdx .rcimg img:last-child{height:56px;margin-left:-14px;position:relative;z-index:1}
+.rcopt.rcdx .rcimg{justify-content:flex-start;overflow:visible;position:relative;padding-top:12px}
+.rcopt.rcdx .rcimg img:first-child{margin-left:6px}
+.rcopt.rcdx .rcimg img:nth-child(2){height:52px}
+.rcopt.rcdx .rcimg img:last-child{position:absolute;left:0;top:-6px;height:34px;
+  width:auto;max-width:none;margin:0;z-index:2;
+  filter:drop-shadow(0 3px 5px rgba(4,16,46,.22))}
 .rcopt b{display:block;font-size:15px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
 .rcopt span span{display:block;font-size:13.5px;font-weight:600;color:var(--muted);margin-top:3px}
 .rcopt i{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--ink-blue);
@@ -626,7 +689,10 @@ main:has(> .pgtop){padding-top:0}
   .rcopt .rcimg img{max-width:96px}
   .rcopt .rcimg img+img{margin-left:-38px}
   .rcopt.rcdx{grid-template-columns:150px 1fr}
-  .rcopt.rcdx .rcimg img:last-child{height:84px;margin-left:-20px}
+  .rcopt.rcdx .rcimg{padding-top:16px}
+  .rcopt.rcdx .rcimg img:first-child{margin-left:10px}
+  .rcopt.rcdx .rcimg img:nth-child(2){height:78px}
+  .rcopt.rcdx .rcimg img:last-child{height:48px;left:4px;top:-10px}
   .rcopt b{font-size:17.5px}
   .rcopt span span{font-size:15px}
   .rcextra{min-height:108px;padding:10px 16px}
@@ -644,7 +710,7 @@ main:has(> .pgtop){padding-top:0}
 @media(max-width:999px){
   .rcl{display:none}
   .rcs{display:inline}
-  .rc{padding:22px 0 30px;min-height:calc(100svh - 72px)}
+  .rc{padding:calc(var(--r-hero) + var(--hframe) + 30px) 0 34px;min-height:calc(100svh - 72px - var(--r-hero) - var(--hframe))}
   .rcgrid{gap:16px}
   .rclogo{width:120px}   /* humm's minimum for the horizontal lockup, digital */
   .rc .lab{white-space:nowrap}
@@ -656,14 +722,19 @@ main:has(> .pgtop){padding-top:0}
   .rcopt .rcimg img{max-width:48px}
   .rcopt .rcimg img+img{margin-left:-20px}
   .rcopt.rcdx{grid-template-columns:78px 1fr}
-  .rcopt.rcdx .rcimg img:last-child{height:48px;margin-left:-12px}
+  .rcopt.rcdx .rcimg{padding-top:10px}
+  .rcopt.rcdx .rcimg img:first-child{margin-left:4px}
+  .rcopt.rcdx .rcimg img:nth-child(2){height:44px}
+  .rcopt.rcdx .rcimg img:last-child{height:28px;left:-2px;top:-5px}
   .rcopt b{font-size:14px;letter-spacing:-.02em}
   .rcopt span span{font-size:13px}
   .rcopt i{top:6px;left:6px;right:auto;width:20px;height:20px}
   .rcextra{padding:8px 12px}
   .rcextra b{font-size:14px}
   .rcextra b small{display:none}
-  .rc{padding:12px 0 18px}
+  /* ⛔ 26px of real air under the overlap on a phone, where the complaint was.
+     Before this the heading sat 12px off a hard edge. */
+  .rc{padding:calc(var(--r-hero) + var(--hframe) + 26px) 0 26px}
   /* the intro directly above carries the humm lockup and the kicker already;
      on a phone this row would say it twice, one screen apart */
   .rchead{display:none}
@@ -776,6 +847,13 @@ main:has(> .pgtop){padding-top:0}
     <a href="/#pillars">About us</a>
     <a href="/#ask">Contact us</a>
   </div>
+  <!-- round 63c: humm's row. One tap to the payment-plans page, in humm's own
+       colour so it reads as a partner offer and not another nav link. -->
+  <a class="mrow mhumm" href="humm">
+    <img src="media/humm/humm-tag-white-300.webp" alt="humm. Made for living." width="300" height="101" loading="lazy">
+    <b>Payment plans</b>
+    <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+  </a>
   <div class="mrow mcontact">
     <a class="tel" href="tel:0430546749">0430 546 749</a>
     <span class="msoc">

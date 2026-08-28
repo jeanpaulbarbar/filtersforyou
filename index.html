@@ -487,6 +487,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   body.mopen .msheet .mrow:nth-child(3){transition-delay:.15s}
   body.mopen .msheet .mrow:nth-child(4){transition-delay:.20s}
   body.mopen .msheet .mrow:nth-child(5){transition-delay:.25s}
+  body.mopen .msheet .mrow:nth-child(6){transition-delay:.30s}
 
   /* primary tier — big, ink, arrow on the right */
   .msheet .mlinks{display:flex;flex-direction:column;flex:0 0 auto}
@@ -525,6 +526,37 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .msheet .msoc svg{width:19px;height:19px}
   @media(hover:hover) and (pointer:fine){.msheet .msoc a:hover{color:var(--blue)}}
 
+  /* ⭐ ROUND 63c — humm IN THE SHEET, PHONE ONLY. JP, 28 Aug: "in the hamburger
+     menu, can we have a payment plans section, or maybe a little orange humm
+     payment plan section for the mobile layout? Don't worry about the desktop
+     for now." The sheet IS the phone nav (`display:none` at ≥1080), so this is
+     phone-only by construction — nothing on the desktop bar moves.
+     ⛔ IT SPENDS FROM THE ROUND-58 BUDGET, IT DOES NOT BREAK IT. The sheet does
+     not scroll and clips loudly if a row overruns, so this row is sized in svh
+     with a 52px floor like every other row, and `.mcard` (flex:1) gives up the
+     difference — which is exactly what that flex:1 is for. MEASURED after, at
+     390x844 AND 390x664: no clipping at either.
+     ⛔ WHITE ON TANGERINE IS 3.2:1, so the label is 19px/700 — the same WCAG
+     large-text gate the deck's humm face runs under. Never shrink it below that
+     here; if it will not fit, the row goes, not the size.
+     ⛔ humm's own lockup law: white logo on tangerine, and we advertise and link
+     only. The offer wording is the page's existing approved line. */
+  .msheet .mhumm{display:flex;align-items:center;gap:14px;flex:0 0 auto;
+    min-height:clamp(52px,7.4svh,64px);margin-top:clamp(8px,1.4svh,16px);
+    padding:0 14px 0 16px;border-radius:var(--r-card);
+    background:#EE6604;color:#fff;text-decoration:none}
+  .msheet .mhumm img{width:clamp(76px,11svh,96px);height:auto;flex:0 0 auto}
+  .msheet .mhumm b{flex:1;min-width:0;font-family:var(--hummf);font-weight:700;
+    font-size:19px;line-height:1.15;letter-spacing:-.01em}
+  .msheet .mhumm i{display:grid;place-items:center;flex:0 0 auto;
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.9);color:#EE6604}
+  .msheet .mhumm i svg{width:15px;height:15px}
+  @media(hover:hover) and (pointer:fine){
+    .msheet .mhumm:hover i{background:#fff;color:var(--ink)}
+  }
+  .msheet .mhumm:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
   /* the closing card — a real photograph, their move and a good one */
   /* ⛔ JP: "I like that photo, and I want to be able to see it." It was the
      thing hanging off the bottom, so it now takes whatever the rows leave and
@@ -547,6 +579,24 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     width:clamp(44px,6svh,52px);height:clamp(44px,6svh,52px);margin-top:0;
     border-radius:50%;background:var(--yellow);color:var(--ink)}
   .msheet .mcard i svg{width:17px;height:17px}
+  /* ⛔ ROUND 63c — THE SHORT-PHONE BUDGET, AND IT IS WHY THIS BLOCK EXISTS.
+     Adding humm's row put the sheet 40px over on a 390x664 phone — MEASURED,
+     scrollHeight 704 in a clientHeight of 664 — and round 58's `overflow:hidden`
+     did exactly what it was built to do: it clipped, loudly, instead of quietly
+     scrolling. That is the guard working, not a surprise.
+     ⛔ THE 40px DOES NOT COME OUT OF THE NAV. Dropping a secondary link is a
+     nav decision wearing a design costume and it is not this file's to make; the
+     tap floors (44px) are not negotiable either. It comes out of the ONE element
+     whose whole job is to absorb the remainder — the photo card — plus the two
+     margins around it, and only on screens short enough to need it. An 844 phone
+     never sees this block and keeps the generous card.
+     ⛔ 78px is the floor at which the card still reads: its 44px arrow plus 13px
+     of padding top and bottom is 70, so the label still has room beside it.
+     Re-measure at 664 after ANY new row here. */
+  @media(max-height:720px){
+    .msheet .mhumm{min-height:48px;margin-top:6px}
+    .msheet .mcard{min-height:76px;margin-top:8px}   /* 78 left the sheet 1px over at 664, measured */
+  }
   body.mopen{overflow:hidden}
   /* the sticky call bar sat on top of the open sheet (z-70 over z-55) and
      covered the last system in the list. The sheet carries its own ask. */
@@ -1185,7 +1235,19 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdeck .who{font-size:16.5px;line-height:1.5;color:var(--muted);font-weight:500;margin:0}
   /* ROUND 48: 16px of air under the assurance list. Without it the yellow CTA
      butted straight onto "WaterMark and NSF certified" with a 3px gap. */
-  .hdeck.open .more .btn{width:100%;justify-content:center;margin-top:16px;flex:0 0 auto}
+  /* ⛔ ROUND 63c — `.open` IS GONE FROM EVERY RULE THAT IS NOT THE TWEEN ITSELF.
+     JP: "when we click it to close it, it does a little jitter and then closes.
+     It doesn't close softly." OPENING hid the fault, because the content that
+     jumps is content you have not seen yet. CLOSING shows it: 21 declarations
+     reverted in ONE frame while the drawer's .8s 0fr collapse was still running.
+     It is round 45's law again — "the internal grammar never changes, closed and
+     open" — and round 63 only applied it to the FACE. It now covers the drawer
+     too: the flex chain, the ceiling, the paddings and every type size below are
+     declared once and never swap. ⛔ Exactly THREE things may still key off
+     `.open`, because all three ARE the state: the drawer's grid-template-rows,
+     the chevron's rotation, and the humm face's label. Adding a fourth is the
+     jitter coming back. */
+  .hdeck .more .btn{width:100%;justify-content:center;margin-top:16px;flex:0 0 auto}
   /* round 45: .5s --e-out → .8s --e-soft. Same mechanic, symmetric curve, and
      slow enough to read as an opening rather than a snap. */
   /* ⭐ ROUND 48 — THE OPEN CARD IS A LOT BIGGER, AND IT IS STILL ONE DIMENSION.
@@ -1318,7 +1380,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      some key features"). The drawer's inner panel goes white inside the
      orange card, ticks in humm orange, the product-only rows hidden and the
      CTA swapped for a real link to /humm. */
-  .hdeck.open.ish .hmhd{flex:0 0 auto}
+  .hdeck.ish .hmhd{flex:0 0 auto}
   .hdeck .hmhd .hbtn .o2{display:none}
   .hdeck.open .hmhd .hbtn .o1{display:none}
   .hdeck.open .hmhd .hbtn .o2{display:inline}
@@ -2839,7 +2901,6 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        the way C&C's does, and everything above it slides down. */
     .hdeck{display:block;width:auto;
       bottom:calc(24px + env(safe-area-inset-bottom))}
-    .hdeck.open{width:auto}
     .hdeck .card{background:rgba(255,253,250,.97);backdrop-filter:blur(8px);border-radius:var(--r-card)}
     .hdeck .under{border-radius:var(--r-card);background:rgba(255,253,250,.42)}
     .hdeck .under.u2{background:rgba(255,253,250,.22)}
@@ -2941,9 +3002,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        the space between the header and the hero's bottom on a real phone
        (664px of viewport, not 844). The open card is bounded by the viewport
        and the ticks scroll inside it if a short screen needs it. */
-    .hdeck.open .card{max-height:inherit;display:flex;flex-direction:column}
-    .hdeck.open .more > div{overflow-y:auto}
-    .hdeck.open .more li{font-size:14.5px}
+    .hdeck .card{max-height:inherit;display:flex;flex-direction:column}
     .hdeck .more ul{grid-template-columns:1fr;gap:8px}
     .hdeck .more .inner2{padding:2px 15px 15px}
 
@@ -2983,10 +3042,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        anywhere in it and the clip comes back.
        ⛔ `.chead` is a zero-height flex item in that column now (round 63) and
        that is fine — it carries no layout, only the absolutely-placed chevron. */
-    .hdeck.open .more{flex:1 1 auto;min-height:0}
-    .hdeck.open .more > div{min-height:0;overflow:hidden;display:flex;flex-direction:column}
-    .hdeck.open .more .inner2{flex:1 1 auto;min-height:0}
-    .hdeck.open .more .dscroll{flex:1 1 auto;min-height:0;overflow-y:auto}
+    .hdeck .more{flex:1 1 auto;min-height:0}
+    .hdeck .more > div{min-height:0;overflow:hidden;display:flex;flex-direction:column}
+    .hdeck .more .inner2{flex:1 1 auto;min-height:0}
+    .hdeck .more .dscroll{flex:1 1 auto;min-height:0;overflow-y:auto}
     /* ⛔ 122. THE ROUND-12 CEILING IS STILL THE LAW: the open card may never
        reach the header on a 664px phone. The card is bottom-anchored at 24px,
        so its top is `vh − 24 − max-height`; the header measures 86px to its
@@ -2996,7 +3055,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        the card 722px at 844 where the content only needs 668.
        ⭐ Round 63 gives it MORE room, not less: the face is now a constant 92px
        instead of growing to ~200 on open, so the drawer inherits that back. */
-    .hdeck.open{max-height:calc(100svh - 122px - env(safe-area-inset-bottom))}
+    .hdeck{max-height:calc(100svh - 122px - env(safe-area-inset-bottom))}
     /* ⛔ THE FADE WAS GREYING OUT A LINE THAT WAS NOT CUT OFF. With the flex
        chain repaired, an 844 phone measures scrollHeight === clientHeight —
        nothing to scroll — and the 22px mask was still fading the last line into
@@ -3005,14 +3064,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        22px fade settles both: at 844 the gradient falls entirely on padding and
        is invisible; at 664 it sits over real content and says "there is more",
        which is true. */
-    .hdeck.open .more .dscroll{padding-bottom:24px}
-    .hdeck.open .who{font-size:14px;line-height:1.45}
-    .hdeck.open .more li{font-size:14px}
-    .hdeck.open .more ul{gap:7px;padding:10px 0 2px}
-    .hdeck.open .more .assure{margin-top:10px;padding:10px 0 2px;gap:8px}
-    .hdeck.open .more .assure li{font-size:12.5px}
-    .hdeck.open .more .loc{margin-top:10px;padding-top:9px;font-size:12px}
-    .hdeck.open .more .btn{margin-top:12px}
+    .hdeck .more .dscroll{padding-bottom:24px}
+    .hdeck .who{font-size:14px;line-height:1.45}
+    .hdeck .more li{font-size:14px}
+    .hdeck .more ul{gap:7px;padding:10px 0 2px}
+    .hdeck .more .assure{margin-top:10px;padding:10px 0 2px;gap:8px}
+    .hdeck .more .assure li{font-size:12.5px}
+    .hdeck .more .loc{margin-top:10px;padding-top:9px;font-size:12px}
+    .hdeck .more .btn{margin-top:12px}
 
     /* ── the certs: ONE line, JP round 10 ──
        "I want that all in one line. I don't want two lines of it, so if you
@@ -4357,6 +4416,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     <a href="#pillars">About us</a>
     <a href="#ask">Contact us</a>
   </div>
+  <!-- round 63c: humm's row. One tap to the payment-plans page, in humm's own
+       colour so it reads as a partner offer and not another nav link. -->
+  <a class="mrow mhumm" href="humm">
+    <img src="media/humm/humm-tag-white-300.webp" alt="humm. Made for living." width="300" height="101" loading="lazy">
+    <b>Payment plans</b>
+    <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+  </a>
   <div class="mrow mcontact">
     <a class="tel" href="tel:0430546749">0430 546 749</a>
     <span class="msoc">
@@ -4427,27 +4493,19 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        <link rel=preload media=...> lines in <head> are what keep this the
        high-priority LCP fetch; this line only tells the element which one. */
     v.poster = big ? 'media/hero-poster.webp' : 'media/hero-poster-m.webp';
-    /* ⭐ ROUND 63 — THE FILM IS HELD UNTIL THE CARD HAS FINISHED OPENING.
-       The phone now opens with the same centred clip-path reveal the desktop
-       has (see @keyframes hcardin), and the one measured objection to that on
-       a phone was clip-path re-rasterising a rounded mask over a DECODING
-       video. Holding playback for the length of the opener means the mask runs
-       over the poster — a static bitmap — which is the cheap case. It also
-       means the first frame you see is the frame the poster promised, instead
-       of the film cutting in halfway through the reveal.
-       ⛔ THREE WAYS OUT, so a stalled animation can never strand the film:
-       animationend, a 1.6s ceiling, and reduced-motion skipping the hold
-       entirely. `autoplay` stays in the markup — if this script never runs at
-       all (the case the markup exists for), the video plays as it always did. */
-    if (!big && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-      v.autoplay = false;
-      var play = function(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); };
-      var card = document.querySelector('.hcard');
-      /* ⛔ animationend BUBBLES. Guard on the target, or any descendant of the
-         card that happens to finish a CSS animation first starts the film. */
-      if (card) card.addEventListener('animationend', function(e){ if (e.target === card) play(); });
-      setTimeout(play, 1600);
-    }
+    /* ⛔ ROUND 63c — THE FILM IS NOT HELD. IT PLAYS THE MOMENT IT CAN.
+       Round 63 paused the video until the opener finished (~1.5s), so the
+       clip-path mask ran over a static poster instead of a decoding video —
+       round 40's one stated fear, bought off. JP, 28 Aug, on the live page:
+       "when I reload the home page on mobile, the video doesn't start
+       instantly, and I would much prefer if it could start instantly."
+       ⛔ His call, and it is the right one: the hold traded a REAL, felt 1.5s
+       delay on every single load against a jank risk that has never once been
+       measured. Nothing replaces it — `autoplay` in the markup is the whole
+       behaviour again, exactly as it was before round 63.
+       ⚠️ SO ROUND 40's QUESTION IS BACK OPEN, and it can only be answered on his
+       actual phone: CRM task 824. If the reveal stutters on the iPhone, the
+       lever is this hold, not the animation. */
   })();
   </script>
   <canvas class="caustics" id="caustics" aria-hidden="true"></canvas>
