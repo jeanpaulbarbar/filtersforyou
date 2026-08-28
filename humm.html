@@ -1762,7 +1762,38 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
     hid('subject', 'Payment plan request');
     hid('_subject', 'Payment plan request: ' + (names().join(' + ') || 'extras only'));
     hid('system', names().join(' + ') || 'Extras only');
-    hid('message', 'PAYMENT PLAN REQUEST (humm). ' + planText() + '. Figures indicative. Confirm in writing before anything goes ahead.');
+    /* ⛔⛔ ROUND 63e — THE NUMBERS GO AS PLAIN NUMERIC FIELDS, NEVER AS PROSE.
+       THIS IS WHY, AND IT COST A REAL ENQUIRY (JP, 28 Aug: "I submitted a form
+       on the new repayments calculator and nothing came through on email").
+       This line used to send `planText()` inside a sentence:
+         "PAYMENT PLAN REQUEST (humm). Pure Plus at $1,280 installed. 24 months,
+          $53 a fortnight, financed $1,280, total $1,380. Figures indicative…"
+       An all-caps opener, four dollar amounts and the words "financed" and
+       "total" is a textbook finance-spam signature, and Formspree's content
+       filter quarantines it. ⛔ IT STILL ANSWERS 200 {"ok":true} AND THE PAGE
+       STILL SAYS "Done." — accepted, then silently discarded. Nothing errors,
+       on either side, which is exactly what formspree.md warns about.
+       MEASURED 2026-08-28, six submissions through the LIVE page and endpoint:
+         no money text  → A, B, D and a real customer (Tina) ALL delivered
+         money text     → the real form's own payload, C and E: NONE delivered
+       The only variable was the dollar/finance prose.
+       ⛔ So every figure now travels as its own bare numeric field — no dollar
+       sign, no currency formatting, no finance verb anywhere in a sentence. The
+       email still carries every number, one per line, and JP can read it.
+       ⛔ NEVER put a formatted price back into `message`, here or on any other
+       form. The homepage form was checked the same day and sends no money at
+       all, which is why it has never been hit. */
+    var q = (term !== null) ? termQuote(term) : null;
+    hid('plan_total', combo ? String(Math.round(combo.total)) : '');
+    hid('plan_term_months', term === null ? '' : String(term));
+    hid('plan_fortnightly', q ? String(Math.round(q.fortnightly_displayed)) : '');
+    hid('plan_financed', q && q.total_financed != null ? String(Math.round(q.total_financed)) : '');
+    hid('plan_payable', q && q.total_amount_payable != null ? String(Math.round(q.total_amount_payable)) : '');
+    hid('message', 'Payment plan request from the repayments calculator. Chosen: '
+      + (names().join(' + ') || 'extras only')
+      + (term === null ? '. No term picked yet.' : '. Term picked: ' + term + ' months.')
+      + ' The amounts are in the plan fields on this submission, in whole dollars. '
+      + 'They are indicative and get confirmed in writing before anything goes ahead.');
     hid('landing_page', sess('ffy_landing', location.pathname));
     hid('submitted_page', location.pathname);
     hid('referrer', sess('ffy_referrer', document.referrer || ''));
