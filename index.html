@@ -731,18 +731,43 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* round 57: the phone keeps its 8px frame too, in the range's blue */
   /* round 40: on :root, not .hero — the header reads it too */
   @media(max-width:599px){:root{--hframe:8px}}
-  /* ⛔ ROUND 40 — THE PHONE GETS ITS OWN OPENING. Two measured reasons:
-     ① a centred mini-rectangle of a PORTRAIT card is a skinny sliver — the
-     desktop gesture doesn't translate ("the card looks off on mobile", JP,
-     20 Aug); ② clip-path animation re-rasterises the rounded mask every
-     frame over a decoding video — jank on iPhone that headless Chromium
-     cannot show (standing law). transform+opacity are compositor-only, so
-     the phone gets a soft settle-and-fade instead: same duration, same
-     ease, same queue behind it, no shape morph. */
-  @media(max-width:859px){
-    .hcard{animation-name:hcardin-m;transform-origin:50% 46%}
-  }
-  @keyframes hcardin-m{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+  /* ⭐ ROUND 63 — THE PHONE OPENS FROM THE MIDDLE, THE SAME WAY THE DESKTOP DOES.
+     JP, 28 Aug: "our mobile version doesn't actually load the video like it does
+     on the Clean and Clear Waters mobile version… it loads in like our desktop
+     does, and it goes in from the middle and moves in very smoothly."
+
+     ⛔ THIS REVERSES ROUND 40, AND BOTH OF ROUND 40's REASONS WERE CHECKED
+     BEFORE IT WAS REVERSED — the old rule is kept here so it is not re-argued:
+       "① a centred mini-rectangle of a PORTRAIT card is a skinny sliver;
+        ② clip-path re-rasterises the rounded mask every frame over a decoding
+        video — jank on iPhone that headless Chromium cannot show."
+     ① IS ARITHMETIC AND IT IS WRONG. inset(37% 34%) of the phone's 374x828 card
+        is 120 x 215 — a small portrait CARD (.56), not a sliver. MEASURED off
+        C&C's own live phone load, 2026-08-28 (screencast, 254 frames): their
+        reveal starts at ~60x130, is ~175x375 halfway, and is full bleed by
+        ~1.0s. Same family, same shape. The 2026-08-20 "looks off on mobile" was
+        a different from-state, never this one.
+     ② WAS A PRECAUTION, NOT A MEASUREMENT — and it is now paid for anyway: the
+        film is HELD PAUSED until this animation ends (see the inline script by
+        the <video>), so the clip runs over a STATIC poster bitmap, which is the
+        cheap case. ⚠️ Still unproven on a real iPhone; headless cannot show it.
+     ⭐ AND IT HELPS THE LCP RATHER THAN HURTING IT — MEASURED, BOTH FILES, SAME
+        HARNESS (390x844, 3x, 1.6Mbps/150ms, 4x CPU, 2026-08-28). hcardin-m
+        animated OPACITY from 0, and Chromium will not record an LCP candidate
+        while the element is transparent, so our own LCP element sat waiting for
+        the fade. clip-path does not defer it. The clean number is LCP MINUS FCP,
+        because raw FCP moves with the network run to run:
+              cold   BEFORE  FCP 2172 → LCP 3212  (+1040ms)
+                     AFTER   FCP 1664 → LCP 1688  (+24ms)
+              warm   BEFORE  FCP  336 → LCP  652  (+316ms)
+                     AFTER   FCP  168 → LCP  168  (+0ms)
+        Same element both ways (video#heroVideo, ~309k px), CLS 0, no console
+        errors. ⚠️ Lab, not field: this is Chromium on a throttled desktop, not
+        an iPhone on real Sydney 4G.
+     ⛔ ONE keyframe now, both viewports. `hcardin-m` is deleted: a second
+        entrance for the same object is exactly the "each section moves its own
+        way" defect (interaction-library.md §1, the four things a page spends
+        from). The phone simply inherits the house gesture. */
   .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 46%;
     filter:saturate(.94) contrast(1.05) brightness(.92);transform-origin:50% 50%}
   .hero .caustics{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen;opacity:.55}
@@ -1008,10 +1033,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdeck .chead{display:flex;align-items:center;gap:12px;
     padding:15px 16px 0 18px}
   .hdeck .chead .tgl{margin-left:auto}
-  .hdeck .dtag{display:inline-flex;align-items:center;gap:9px;
-    font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
-    color:var(--ac,var(--blue));pointer-events:none}
-  .hdeck .dtag::before{content:"";width:3px;height:15px;background:currentColor;border-radius:2px;flex:0 0 3px}
+  /* ⛔ ROUND 63 — THE KICKER IS DELETED, BOTH COPIES, EVERY WIDTH. JP, 28 Aug:
+     "get rid of the best seller on the hydrogen-rich… all we're gonna have is
+     price and the name of the system." `.dtag` (the phone's head-row badge) and
+     `.dt2` (its desktop twin inside `.t`) are gone from the markup and their
+     rules with them. The head row above survives as the CHEVRON'S HOME and
+     nothing else — which is why `margin-left:auto` still matters there. */
   /* 44px tap floor. ⚠️ Do NOT scale this wrapper — see THE SCALE TRAP. */
   .hdeck .tgl{width:44px;height:44px;flex:0 0 44px;border-radius:50%;border:1px solid var(--rule);
     background:var(--paper);color:var(--ink);cursor:pointer;display:grid;place-items:center;
@@ -1077,7 +1104,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      735px tall and full of white. It now grows in ONE direction and the eye
      never has to re-find the name, the price or the product. */
   .hdeck .t b{display:block;font-size:19px;font-weight:600;line-height:1.22;transition:font-size .8s var(--e-soft)}
-  .hdeck .t .pure{display:block;font-size:15px;font-weight:700;color:var(--blue);margin-top:2px}
+  /* ⛔ ROUND 63 — `.pure` (Pure Home / Pure Plus / Pure Premium / Pure Luxe) is
+     off the card face at every width. JP: "get rid of the name of it, like the
+     Pure Plus or Pure Prima." The range name is still on the range section's
+     own `.show .sys .pure`, which has separate rules and is untouched. */
   /* ⭐ ROUND 45 — THE PRICE IS THE BIGGEST THING ON THE CARD.
      JP: "I want to make the price a lot larger on the cards as well... I want
      the price to be the biggest one, and then everything else falls out and is
@@ -1108,25 +1138,43 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdeck .t .p{display:block;margin-top:9px;color:var(--ink);line-height:1}
   .hdeck .t .p b{display:inline;font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1}
   .hdeck .t .p i.pre{font-style:normal;font-size:23px;font-weight:700;letter-spacing:-.015em;margin-right:3px}
-  .hdeck .t .p i.suf{display:block;font-style:normal;font-size:15px;font-weight:600;color:var(--muted);margin-top:7px}
-  /* ⭐ THE LIFETIME WARRANTY RIDES ON THE CARD, QUIETLY.
-     JP: "On the card, put 'Lifetime Warranty' on it as well. That way, people
-     can see, 'Oh.'" It is the thing the business is not getting paid for
-     (business-profile: "the lifetime warranty and locked-in servicing is a
-     goldmine customers never hear"), so it sits under "installed", where the
-     eye already is.
-     ⛔ FIRST ATTEMPT USED THE BADGE FACE IN THE ACCENT COLOUR. JP: "I don't
-     like how you've done the lifetime warranty in a different font. It looks
-     like shit... I don't want it in a different colour." He is right and the
-     rule was already written down: --badge is THE PILL FACE ONLY, and there is
-     no pill here. It is the card's own typeface at the card's own quiet grey,
-     sentence case, no tracking. On the phone it was also wrapping to two lines
-     of blue capitals, which is what made it shout.
-     ⛔ Never restore --badge, uppercase, letter-spacing or an accent colour on
-     this element. It is a footnote, not a badge. */
-  .hdeck .warr{display:inline-flex;align-items:center;gap:7px;margin-top:9px;
-    font-size:14px;font-weight:600;color:var(--muted)}
-  .hdeck .warr svg{width:15px;height:15px;flex:0 0 15px;opacity:.7}
+  /* ⛔ ROUND 63 — "installed" (`i.suf`) is off the face. JP: "get rid of the
+     installed." What is left is the round-45 shape minus its quiet second
+     line: `from` riding the big size, then the number. */
+  /* ⭐ ROUND 63 — THE LIFETIME WARRANTY IS A STICKER ON THE CORNER, NOT A LINE
+     IN THE TEXT. JP, 28 Aug: "it has free install as a little pop-up on the
+     banner, a nice little cool design pop-up. Ours can be lifetime warranty,
+     and that can be a different colour as well."
+     ⛔ THE OLD `.warr` ROW IS DELETED — the muted grey line that sat under
+     "installed" since round 45. It is not a demotion: the same fact is now the
+     loudest small thing on the card, which is what he asked for and what the
+     business profile has been saying ("the lifetime warranty and locked-in
+     servicing is a goldmine customers never hear").
+     MEASURED off C&C's live product card at 390x844, 2026-08-28: 80x56,
+     `position:absolute; top:-24px; right:-8px` on the card, badge face, 700,
+     uppercase, two lines, solid #F25800, a torn-ribbon SVG behind it. We take
+     the MECHANIC, not the paint: our badge face, our blue, a flat block, and a
+     4-degree tip so it reads as something stuck on rather than a tab drawn in.
+     ⛔ ROUND 45's RULE IS NOT BROKEN — "--badge is THE PILL FACE ONLY, and
+     there is no pill here." There IS a pill here now. That rule was written
+     about a footnote in the middle of a text column; this is a badge.
+     ⛔ NOT YELLOW: yellow only ever touches the thing we want clicked, and this
+     is not a button. ⛔ NOT tangerine: that is humm's colour on this page.
+     ⛔ IT HANGS OFF `.hdeck`, NEVER `.card` — the card is `overflow:hidden`
+     (round 45) and would guillotine it at the corner.
+     ⛔ `pointer-events:none` so it can never eat a tap meant for the face. */
+  .hdeck .stkr{position:absolute;z-index:6;pointer-events:none;
+    top:-16px;right:-8px;
+    display:block;text-align:center;
+    padding:7px 12px 8px;border-radius:var(--r-sm);
+    background:var(--blue);color:#fff;
+    font-family:var(--badge);font-size:12px;font-weight:700;line-height:1.15;
+    letter-spacing:.07em;text-transform:uppercase;
+    transform:rotate(-4deg);box-shadow:var(--shadow-sm)}
+  /* the Google face and humm's turn are not product cards, so the promise on
+     them would be a claim about the wrong thing */
+  .hdeck.isg .stkr,.hdeck.ish .stkr{display:none}
+  @media(prefers-reduced-motion:reduce){.hdeck .stkr{transform:none}}
   /* ⭐ WHO IT IS FOR. JP: "Have us have a small little description on it, like
      who this is for... Give them a little bit more of a thing."
      ⛔ IT LIVES IN THE DRAWER, NOT IN THE FACE. It used to be `display:none`
@@ -1242,11 +1290,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     transition:background .3s ease-in-out,color .3s ease-in-out,border-color .3s ease-in-out}
   .hdeck .nav svg{width:15px;height:15px}
   @media(hover:hover) and (pointer:fine){.hdeck .nav button:hover{background:#fff;color:var(--ink)}}
-  /* the second kicker and the Google face are both off unless a rule below
-     turns them on — so a phone can never render either by accident */
-  .hdeck .dt2{display:none}
+  /* the Google face is off unless a rule below turns it on — so a phone can
+     never render it by accident. (round 63: the `.dt2` kicker twin and the
+     `.notag` hide that used to be parked here with it are deleted; the class
+     is still written by hdApply and costs nothing if a kicker ever returns.) */
   .hdeck .gcard{display:none}
-  .hdeck.notag .dtag{display:none}
   /* ⛔ THE .isg SWAP IS GLOBAL, NOT DESKTOP-ONLY. Only its SIZING is scoped
      below. Phones skip the Google card in the rotation (see hdSet), but a
      desktop→phone resize can still leave the deck sitting on it — and with
@@ -1302,12 +1350,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdeck.ish .more .hdstats span{display:block;font-family:var(--hummf);font-weight:700;font-size:19px;
     line-height:1.25;color:#fff;margin-top:5px}
   .hdeck.ish .more .hmgo{--bg:#fff;--fg:#333333;--bgh:var(--ink);--fgh:#fff;font-family:var(--hummf);font-weight:700}
-  /* ⛔ 124 IS THE PRODUCT CARDS' MEASURED PHONE HEIGHT (round 58). A deck
-     whose slab resizes on every flip is not a deck — this card pins to it,
+  /* ⛔ 92 IS THE PRODUCT CARDS' MEASURED PHONE HEIGHT (round 63 — it was 124
+     at round 58, and the three rows this round took off the face are the
+     difference). A deck whose slab resizes on every flip is not a deck — this
+     card pins to it, and it has to be re-pinned every time that number moves,
      and the phone gets its own SHORT offer line because the desktop sentence
      wraps five deep in the 176px text column (measured: card hit 151). */
   .hdeck.ish .hmhd{display:flex;align-items:center;gap:16px;padding:18px 18px;
-    text-decoration:none;min-height:124px;width:100%;border:0;background:none;cursor:pointer;
+    text-decoration:none;min-height:92px;width:100%;border:0;background:none;cursor:pointer;
     text-align:left;font:inherit;color:#fff;margin:0;border-radius:0;
     -webkit-appearance:none;appearance:none}
   /* JP saw a white line at the top of the orange card on his iPhone. It does
@@ -1373,7 +1423,6 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        price scale changes: `--faceh:0` on .hdeck lets the face size to content. */
     .hdeck .chead{position:absolute;right:0;top:calc(var(--faceh)/2);transform:translateY(-50%);
       z-index:5;padding:0 14px 0 0;gap:0}
-    .hdeck .chead .dtag{display:none}   /* .dt2 carries it instead */
     /* 66px right reserve so no text can run under the floating toggle.
        ⛔ min-height 180 is what makes it a DECK: measured without it the cards
        came out 148 / 158.8 / 180 and the slab visibly resized on every flip.
@@ -1396,18 +1445,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .hdeck .face{grid-template-columns:1fr 186px;gap:16px;padding:14px 62px 14px 20px;min-height:var(--faceh)}
     .hdeck .face img{height:184px;max-width:186px}
     /* OPEN — same two columns, same edges. Only the vertical scale moves. */
-    /* ⛔ :not(.notag) is LOAD-BEARING — this rule sits later in the sheet than
-       the base `.hdeck.notag .dtag{display:none}` and matches at the same
-       specificity, so without it an empty kicker still reserved its 3px bar
-       and 20px of height on the three cards that no longer carry one. */
-    .hdeck:not(.notag) .dt2{display:inline-flex;margin-bottom:5px;font-size:12px}
     /* ⛔ ROUND 45 — THE CLOSED TYPE SCALE IS SET IN THE BASE RULES NOW, NOT
        HERE. This block used to re-declare name 20 / pure 16 / price 28 at
        `:not(.open)` specificity, which silently beat any base change — the
        46px price landed at 28 on the first attempt and nothing in the source
-       said why. The name and the kicker still need their desktop-closed
-       trim; the PRICE does not, so it is gone from here on purpose. */
-    .hdeck .t .pure{margin-top:3px}
+       said why. ⛔ ROUND 63 emptied what was left of it: the kicker and the
+       range name are off the card, so the desktop-closed trim they needed went
+       with them. The desktop face is now the name and the number, nothing else. */
     /* ── the Google card's turn in the deck (HD[1]) ──
        Same slab, same 116px left column — the G takes the product's place so
        the card does not resize as the deck flips through it. */
@@ -1452,12 +1496,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .hdeck .face{grid-template-columns:1fr 108px;gap:12px;padding:12px 76px 12px 16px}
     .hdeck .face img{height:132px;max-width:108px}
     .hdeck .t b{font-size:16px}
-    .hdeck .t .pure{font-size:13.5px}
     .hdeck .t .p b{font-size:30px}
     .hdeck .t .p i.pre{font-size:15px}
-    .hdeck .t .p i.suf{font-size:13px;margin-top:5px}
-    .hdeck .warr{font-size:12.5px;margin-top:7px}
-    .hdeck .warr svg{width:13px;height:13px;flex:0 0 13px}
     .hdeck .who{font-size:14.5px}
     .hdeck .more li{font-size:15.5px}
     /* ⛔ padding only. The round-48 `max-height` on .inner2 is NOT re-declared
@@ -2797,98 +2837,122 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        switched off below 860 before this. */
     /* the sticky call bar is gone, so the card sits on the hero's own edge
        the way C&C's does, and everything above it slides down. */
-    .hdeck{display:block;left:var(--gut);right:var(--gut);width:auto;
+    .hdeck{display:block;width:auto;
       bottom:calc(24px + env(safe-area-inset-bottom))}
     .hdeck.open{width:auto}
     .hdeck .card{background:rgba(255,253,250,.97);backdrop-filter:blur(8px);border-radius:var(--r-card)}
     .hdeck .under{border-radius:var(--r-card);background:rgba(255,253,250,.42)}
     .hdeck .under.u2{background:rgba(255,253,250,.22)}
-    /* ⛔ ROUND 19b — THE PHONE CARD GOES BACK TO ITS OLD SIZE. JP: "it's too big,
-       the card on hero for mobile — that should revert to the size it was but
-       with the new updates." Every number in this block is the pre-round-19
-       value. The round-19 CHANGES all stay (kicker not pill, chevron at the top,
-       no hint line, navy ink, the price as its own element) — only the SCALE
-       reverts. ⛔ Desktop keeps the bigger scale; do not unify them.
-       ⚠️ Named honestly: the card is still ~20px taller than it was, because the
-       44px chevron row replaced a 13.5px hint line. That 20px is the arrow he
-       asked for, and it cannot come back without breaking the 44px tap floor. */
-    /* round 23, JP: "thinner — not the long way, the width from top to
-       bottom." The 44px chevron row no longer stacks ABOVE the face: closed,
-       the toggle floats at the card's right edge (still 44px — the tap floor
-       is untouched) and the head row is only as tall as the kicker. The face
-       reserves 60px on the right so no text runs under the floating button.
-       Card measured 149 → ~115px. Open state keeps the toggle in its row. */
-    .hdeck{left:calc(var(--gut) + 6px);right:calc(var(--gut) + 6px)}
-    .hdeck .chead{padding:9px 60px 0 14px}
-    .hdeck:not(.open) .tgl{position:absolute;right:9px;top:50%;transform:translateY(-50%);z-index:5}
-    .hdeck.open .chead{padding:8px 10px 0 15px}
-    /* ⛔ ROUND 41 — the closed phone face gets its OWN columns. It was still
-       on the desktop's `1fr 220px`, so at ~318px of card the 64px image sat
-       in a 220px column and the TITLE got the remainder — measured 67px,
-       "Whole House Filtration System" wrapping down a sliver and the card
-       ballooning to 185px tall (round 23 had it at ~115). The open state
-       keeps the desktop columns for its 218px image. */
-    .hdeck:not(.open) .face{grid-template-columns:1fr 76px}
-    .hdeck .face{padding:2px 60px 9px 14px;gap:12px}
-    /* ⛔ ROUND 42b — sized by HEIGHT, like every product shot on the site
-       (the asset convention: own aspect, never squared). The forced 64x64
-       square letterboxed the shots small and squat — JP: "the system on the
-       card in hero is disproportionate". 74px tall fills the card's face;
-       width follows each system's own aspect. */
-    .hdeck .face img{width:auto;height:74px;max-width:76px}
-    .hdeck .t b{font-size:15.5px}
-    .hdeck .t .pure{font-size:13px;margin-top:2px}
-    /* ⛔ THE PHONE MUST NAME `.pre` AND `.suf` BY CLASS. A bare `.p i` rule
-       here is specificity (0,3,1) and the desktop's `.p i.pre` is (0,4,1), so
-       the qualifier kept its 23px while the number dropped to 18 — "from" came
-       out BIGGER than "$3,850". That shipped. Match the class, or lose. */
-    .hdeck .t .p{margin-top:5px}
+
+    /* ══════ ⭐ ROUND 63 — WIDER, THINNER, AND ONE FACE IN BOTH STATES ══════
+       JP, 28 Aug: "make it thinner, from top to bottom of the arm of the card.
+       I wanted to extend it from left to right a little bit more, so the width
+       is a little bit more… when you click on the card, there's a little jitter
+       before it expands. I want that to be seamless, just like it is on the
+       desktop."
+
+       ⛔ WIDER. It sat at `--gut + 6` = 28px inside the hero card: 318 of 390,
+       82% of the screen. MEASURED off C&C's own phone card the same day: 366 of
+       390, 94%, on 12px gutters. 6px inside the hero card's own 8px frame lands
+       ours at 14px from the screen edge — 362 of 390, 93%. Their family.
+       ⛔ NOT flush. The 6px is what keeps the hero frame reading as a frame.
+
+       ⛔ THINNER, AND IT IS PAID FOR IN CONTENT, NOT IN FONT SIZE. Round 58 got
+       the card from 150 to 111 by pinning a two-line name box. Round 63 takes
+       three whole rows OFF the face — the range name, "installed", and the
+       warranty line — so `.t` is now two rows: the name, then the number. The
+       product shot (74px) becomes the tallest thing in the face, and
+       `--facehm` is that plus its padding.
+
+       ⛔⛔ THE JITTER WAS THE FACE RE-FLOWING IN ONE FRAME. Tapping the card
+       used to swap, instantly and un-animatably: the grid columns (1fr 66px →
+       1fr min(124px,16svh)), the product shot (74 → up to 124), the face
+       padding, `.t` from a fixed 4-row grid to normal flow, the 2-line clamp
+       off, the name 14.5 → 17, and the chevron out of its absolute corner and
+       back into the head row. NINE things jumping, then the drawer began its
+       .8s tween. That gap between the jump and the tween IS the jitter.
+       ⭐ THE FIX IS ROUND 45's LAW, APPLIED TO THE PHONE: "THE CARD ONLY EVER
+       CHANGES HEIGHT… the internal grammar never changes, closed and open."
+       Every rule below is stateless — no `:not(.open)`, no `.open` twin — so
+       the ONLY thing that moves on tap is `.more`'s 0fr→1fr, exactly as on the
+       desktop. ⛔ Never re-introduce a `.hdeck.open .face` / `.open .t` rule
+       here. That is the jitter, and it will come back the moment one lands. */
+    .hdeck{left:6px;right:6px;--facehm:92px}
+
+    /* the head row is now a zero-height anchor and the chevron floats at the
+       card's right edge, vertically centred on the FACE — the desktop's own
+       shape (`top:calc(var(--faceh)/2)`), so the button cannot drift as the
+       drawer grows. ⛔ `--facehm`, not `50%`: 50% of an OPEN card is halfway
+       down the drawer, which is where the chevron used to end up. */
+    .hdeck .chead{height:0;padding:0;overflow:visible}
+    .hdeck .tgl{position:absolute;right:10px;top:calc(var(--facehm)/2);
+      transform:translateY(-50%);z-index:5;width:44px;height:44px;flex:0 0 44px}
+
+    /* ⛔ ROUND 41 — the face gets its OWN columns on a phone. On the desktop's
+       `1fr 220px` the 66px image sat in a 220px column and the title got the
+       remainder — measured 67px, the name wrapping down a sliver and the card
+       ballooning to 185px. ⛔ 56px right reserve so no text runs under the
+       floating chevron. ⛔ ROUND 42b — the shot is sized by HEIGHT, like every
+       product photograph on the site (the asset convention: own aspect, never
+       squared). A forced 64x64 square letterboxed them small and squat. */
+    .hdeck .face{grid-template-columns:1fr 66px;gap:12px;
+      padding:7px 56px 7px 14px;align-items:center;min-height:var(--facehm)}
+    .hdeck .face img{width:auto;height:74px;max-width:66px}
+
+    /* ⛔ THE NAME BOX IS STILL LOCKED TO TWO LINES (round 58). It is what stops
+       the card resizing as the deck flips — JP: "the cards on the hero landing
+       page change in size". `height`, not `min-height`: a one-line name has to
+       reserve the second line or the slab shrinks under it. The widest string
+       we sell, "Smart 5 Stage Alkaline Reverse Osmosis" (38 chars), is what
+       decides this — re-measure THAT ONE after any change here. */
+    .hdeck .t{display:grid;grid-template-columns:1fr;row-gap:2px;align-items:center}
+    /* ⭐ 15.5 AND 30, NOT 14.5 AND 26 — THE ROOM THE THREE DELETED ROWS BOUGHT.
+       Round 58 shrank both to fit FOUR rows in the face. There are two now, and
+       JP's complaint this round was legibility first ("too much jargon going on
+       in the cards and it's making it hard to read on the mobile version"), so
+       the space goes back into the two things that are left rather than into
+       white. MEASURED at 390: name 37.2 + 2 + price 30 + 14 padding = 83.2,
+       inside the 92px face the 74px product already sets. The card does not
+       grow. ⛔ Re-measure if the product shot's height changes — the IMAGE is
+       what governs this face, not the type. */
+    .hdeck .t > b{display:-webkit-box;-webkit-line-clamp:2;
+      -webkit-box-orient:vertical;overflow:hidden;
+      font-size:15.5px;line-height:1.2;height:2.4em}
+    /* ⛔ THE PHONE MUST NAME `.pre` BY CLASS. A bare `.p i` rule here is
+       specificity (0,3,1) and the desktop's `.p i.pre` is (0,4,1), so the
+       qualifier kept its 23px while the number dropped to 18 — "from" came out
+       BIGGER than "$3,850". That shipped. Match the class, or lose. */
+    .hdeck .t .p{margin-top:2px;line-height:1}
     .hdeck .t .p b{font-size:30px}
     .hdeck .t .p i.pre{font-size:15px;margin-right:2px}
-    .hdeck .t .p i.suf{font-size:12.5px;margin-top:3px}
-    .hdeck .warr{font-size:12.5px;margin-top:6px;gap:5px}
-    .hdeck .warr svg{width:13px;height:13px;flex:0 0 13px}
-    .hdeck .dtag{font-size:11.5px;letter-spacing:.08em}
-    .hdeck .tgl{width:44px;height:44px;flex:0 0 44px}
+
+    /* the sticker comes down with the card: 10.5px reads at two lines inside a
+       80px block, and it tucks 4px further in so it cannot touch the screen
+       edge on a 390 phone (deck right edge 376, sticker right edge 380). */
+    /* ⛔ -24, NOT -13, AND IT IS MEASURED. At -13 the sticker's foot landed at
+       y=747 and the floating chevron's head is at y=744 — 3px of overlap, on the
+       one control on this card. -24 puts the foot at 738, clear by 6, and it is
+       C&C's own offset. The cycle arrows are fine either way: they sit at
+       left:8 and the sticker starts at x=292. */
+    .hdeck .stkr{top:-24px;right:-4px;font-size:10.5px;padding:6px 10px 7px;letter-spacing:.06em}
+
     /* ⛔ Round 12, JP: "when I click on it to expand on the hero, it goes past
-       the header." It did — a fixed 236px image made the open card taller
-       than the space between the header and the hero's bottom on a real
-       phone (664px of viewport, not 844). The open card is now bounded by the
-       viewport and the image is sized in svh, so it can never reach the
-       header. The ticks scroll inside the card if a short screen needs it. */
-    /* round 22: the open card floats 32px lower off the header than round 12's
-       bound — "the card is still all the way back at the top of the hero". */
-    .hdeck.open{max-height:calc(100svh - 136px - env(safe-area-inset-bottom))}
+       the header." It did — a fixed 236px image made the open card taller than
+       the space between the header and the hero's bottom on a real phone
+       (664px of viewport, not 844). The open card is bounded by the viewport
+       and the ticks scroll inside it if a short screen needs it. */
     .hdeck.open .card{max-height:inherit;display:flex;flex-direction:column}
     .hdeck.open .more > div{overflow-y:auto}
-    /* ⛔ THE ROUND-12 CEILING STILL RULES: the open card may never reach the
-       header on a 664px phone. Round 19b puts these back to their round-12/16
-       values as well — same call as the closed card, JP: "revert to the size it
-       was." The chevron row is the only thing that grew, so the open image gives
-       that ~20px back (236 → 218). Re-measure at 390x664 after ANY change here. */
-    .hdeck.open .face{padding:12px 18px 6px;gap:5px}
-    .hdeck.open .face img{width:min(218px,24svh);height:min(218px,24svh)}
-    .hdeck.open .t b{font-size:20px}
-    /* the phone twins of the desktop price sizes — see the ⛔ note there.
-       Same numbers as the closed card on purpose: a price that resizes as the
-       card opens is one more thing moving, and the whole point of round 46 is
-       that only ONE thing moves. */
-    .hdeck.open .t .p b{font-size:30px}
-    .hdeck.open .t .p i.pre{font-size:15px}
     .hdeck.open .more li{font-size:14.5px}
     .hdeck .more ul{grid-template-columns:1fr;gap:8px}
     .hdeck .more .inner2{padding:2px 15px 15px}
-    /* the arrows sit at left:-54px on desktop, which is off-screen at 390.
-       Floating them above the card put them straight through the hero lede, so
-       they straddle the card's top edge instead, balancing the pill on the
-       left. They must stay ABSOLUTE: the `.under` stack is inset:0 of the
-       deck, so putting the arrows in flow would drag the depth cards up. */
-    /* ⛔ The card's own chevron now lives at the head's RIGHT, so the cycle
-       arrows move LEFT. Stacking two sets of round buttons in the same column
-       read as clutter. They must stay ABSOLUTE: `.under` is inset:0 of the
-       deck, so putting them in flow would drag the depth cards up. */
-    /* round 23: the thin card put the straddling arrows ON the kicker text —
-       they float fully above the card now, clear of everything. */
+
+    /* ⛔ The card's own chevron lives at the head's RIGHT, so the cycle arrows
+       go LEFT. Stacking two sets of round buttons in one column read as
+       clutter. They must stay ABSOLUTE: `.under` is inset:0 of the deck, so
+       putting them in flow would drag the depth cards up. Round 23: the thin
+       card put straddling arrows ON the kicker text, so they float fully above
+       it. Round 63: the sticker now balances them on the right. */
     .hdeck .nav{left:8px;right:auto;top:-52px;bottom:auto;transform:none;
       flex-direction:row;gap:7px}
     /* ⛔ THE GOOGLE CARD IS NOT IN THE MOBILE HERO. Measured at 390x664: it took
@@ -2906,76 +2970,6 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        flush at x:0 behind the call bar. Hidden here, where this block wins. */
     .hero .cue{display:none}
 
-    /* ══════ ⛔ ROUND 58 — THE PHONE HERO CARD: ONE HEIGHT, HALF THE BULK ══════
-       JP, 2026-08-27: "The cards on the hero landing page change in size and
-       are too thick from top to bottom… they take up a quarter of the page…
-       when you open them up you can barely see all of the details."
-
-       MEASURED at 390x844 before this round, paging the deck:
-         Pure Home  150px · Pure Plus 150px · Pure Premium 187px · Smart 169px
-       So the card JUMPED 37px as he flipped it — that is "change in size", and
-       the cause was the technical name wrapping to 2 or 3 lines at will while
-       everything below it moved. 150px of card + the 52px arrow row above it
-       is 202px of an 844 screen: 24%. He counted a quarter and he was right.
-
-       ⛔ THE FIX IS A FIXED NAME BOX, NOT A SMALLER FONT. `.t` becomes a four
-       row grid and the name is clamped to EXACTLY two lines whether it fills
-       them or not, so every system renders the same box. Measured after:
-       111px, identical on all four systems — 13% of the screen, halved.
-
-       ⛔ THE NAME COLUMN IS 184px AT 390 (334 card − 14 left − 56 right for the
-       floating chevron − 66 image − 12 gap). The longest name we sell,
-       "Smart 5 Stage Alkaline Reverse Osmosis", is 38 characters and lands on
-       two lines at 14.5px. Re-measure that ONE string after any change here:
-       it is the string that decides the card's height. */
-    .hdeck:not(.open) .face{grid-template-columns:1fr 66px;gap:12px;
-      padding:7px 56px 7px 14px;align-items:center}
-    .hdeck:not(.open) .face img{width:auto;height:74px;max-width:66px}
-    /* ⛔ AND THE LAST 18px OF DRIFT WAS THE BADGE. Measured: `.chead` renders
-       9px on Pure Home / Plus / Luxe and 27px on Pure Premium, because
-       Premium is the only system carrying a tag ("Best seller!") and the head
-       row grew to hold it. That is 129 vs 147 — the same bug as the name, one
-       row down. The badge moves onto the `Pure Premium` line, where there are
-       154px of type in a 170px row and it therefore costs NOTHING, and the
-       head row is pinned flat. ⛔ `.dt2` is the copy of the tag that already
-       lives inside `.t`; the markup has carried it since round 19 for exactly
-       this. Do not add a third. */
-    .hdeck:not(.open) .t{display:grid;grid-template-columns:auto 1fr;
-      grid-template-areas:"nm nm" "pu tg" "pr pr" "wr wr";
-      /* ⛔ ROW 2 IS PINNED AT 15px. Left free it measured 15px on three
-         systems and 22px on Premium, because the badge's 11px rule bar plus
-         its own leading is taller than the `Pure Premium` line beside it —
-         the same 7px of drift, moved rather than removed. A fixed track is
-         what actually kills it: the badge centres inside 15px or it clips. */
-      grid-template-rows:auto 15px auto auto;
-      row-gap:2px;column-gap:8px;align-items:center}
-    .hdeck:not(.open) .t > b{grid-area:nm}
-    .hdeck:not(.open) .t .pure{grid-area:pu}
-    .hdeck:not(.open) .t .p{grid-area:pr}
-    .hdeck:not(.open) .warr{grid-area:wr}
-    .hdeck:not(.open) .chead{height:9px;padding:0;overflow:visible}
-    .hdeck:not(.open) .chead .dtag{display:none}
-    .hdeck:not(.open):not(.notag) .t .dt2{grid-area:tg;display:inline-flex;
-      justify-self:start;align-self:center;margin:0;font-size:10.5px;line-height:1;
-      letter-spacing:.07em;padding:0;gap:6px}
-    .hdeck:not(.open) .t .dt2::before{height:11px}
-    /* the two-line lock. `height`, not `min-height` — a one-line name has to
-       reserve the second line or the card shrinks and we are back where we
-       started. Top-aligned inside it, so short names sit up with air under. */
-    .hdeck:not(.open) .t > b{display:-webkit-box;-webkit-line-clamp:2;
-      -webkit-box-orient:vertical;overflow:hidden;
-      font-size:14.5px;line-height:1.2;height:2.4em}
-    .hdeck:not(.open) .t .pure{font-size:12.5px;margin-top:0;line-height:1.2}
-    .hdeck:not(.open) .t .p{margin-top:2px;line-height:1}
-    .hdeck:not(.open) .t .p b{font-size:26px}
-    .hdeck:not(.open) .t .p i.pre{font-size:13.5px;margin-right:2px}
-    /* inline, not block: "installed" on its own line cost 18px and read as a
-       fourth fact when it is a qualifier on the price it sits beside. */
-    .hdeck:not(.open) .t .p i.suf{display:inline;font-size:11.5px;margin-top:0;
-      margin-left:4px}
-    .hdeck:not(.open) .warr{margin-top:3px;font-size:11.5px;line-height:1.25;gap:5px}
-    .hdeck:not(.open) .warr svg{width:12px;height:12px;flex:0 0 12px}
-
     /* ══════ THE OPEN CARD — EVERY DETAIL VISIBLE, NOTHING CLIPPED ══════
        ⛔ THE BUTTON WAS BEING CUT OFF, AND IT WAS NOT A HEIGHT PROBLEM.
        `.hdeck.open .card` is `display:flex;flex-direction:column` with a
@@ -2986,7 +2980,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        the chance to scroll, because nothing above it was ever bounded.
        The chain has to be unbroken from the card all the way down: card →
        .more → its grid row div → .inner2 → .dscroll. One missing `min-height:0`
-       anywhere in it and the clip comes back. */
+       anywhere in it and the clip comes back.
+       ⛔ `.chead` is a zero-height flex item in that column now (round 63) and
+       that is fine — it carries no layout, only the absolutely-placed chevron. */
     .hdeck.open .more{flex:1 1 auto;min-height:0}
     .hdeck.open .more > div{min-height:0;overflow:hidden;display:flex;flex-direction:column}
     .hdeck.open .more .inner2{flex:1 1 auto;min-height:0}
@@ -2997,32 +2993,18 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        hairline. 136 was over-cautious (54px of dead hero at 844); 104 was over
        -greedy and put the top at 80 on a 664 phone — UNDER the header by 6px,
        measured. 122 lands the top at 98 there, clear by 12, and still gives
-       the card 722px at 844 where the content only needs 668. */
+       the card 722px at 844 where the content only needs 668.
+       ⭐ Round 63 gives it MORE room, not less: the face is now a constant 92px
+       instead of growing to ~200 on open, so the drawer inherits that back. */
     .hdeck.open{max-height:calc(100svh - 122px - env(safe-area-inset-bottom))}
-    /* and the product shot gives its share back too — 202px of a 740px card
-       was the single biggest reason the ticks and the button ran out of room. */
-    .hdeck.open .face img{width:min(124px,16svh);height:min(124px,16svh)}
-    /* ⛔ AND THE COLUMN HAS TO COME DOWN WITH IT. The open face was still on
-       the desktop's `1fr 220px`, so with a 160px shot the picture column held
-       60px of nothing while "Whole House Filtration System" broke across FOUR
-       lines beside it. Match the track to the image. */
-    .hdeck.open .face{grid-template-columns:1fr min(124px,16svh);
-      padding:6px 18px 4px;gap:12px;align-items:center}
-    .hdeck.open .t > b{font-size:17px;display:block;line-height:1.18}
-    .hdeck.open .t .pure{font-size:13.5px;margin-top:2px}
-    /* the qualifiers ride the number instead of stacking under it — three
-       stacked lines for "from / $3,850 / installed" is 54px for one price. */
-    .hdeck.open .t .p{margin-top:5px;line-height:1}
-    .hdeck.open .t .p i.suf{display:inline;font-size:12px;margin:0 0 0 5px}
-    .hdeck.open .warr{margin-top:6px;font-size:12px;line-height:1.2;white-space:nowrap}
     /* ⛔ THE FADE WAS GREYING OUT A LINE THAT WAS NOT CUT OFF. With the flex
        chain repaired, an 844 phone measures scrollHeight === clientHeight —
-       nothing to scroll — and the 22px mask was still fading "…installed
-       across Sydney" into the ground, which reads as a rendering fault.
-       A 664 phone genuinely does scroll (108px over), so the affordance has
-       to survive. 24px of bottom padding under a 22px fade settles both: at
-       844 the gradient falls entirely on padding and is invisible; at 664 it
-       sits over real content and says "there is more", which is true. */
+       nothing to scroll — and the 22px mask was still fading the last line into
+       the ground, which reads as a rendering fault. A 664 phone genuinely does
+       scroll, so the affordance has to survive. 24px of bottom padding under a
+       22px fade settles both: at 844 the gradient falls entirely on padding and
+       is invisible; at 664 it sits over real content and says "there is more",
+       which is true. */
     .hdeck.open .more .dscroll{padding-bottom:24px}
     .hdeck.open .who{font-size:14px;line-height:1.45}
     .hdeck.open .more li{font-size:14px}
@@ -4445,6 +4427,27 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        <link rel=preload media=...> lines in <head> are what keep this the
        high-priority LCP fetch; this line only tells the element which one. */
     v.poster = big ? 'media/hero-poster.webp' : 'media/hero-poster-m.webp';
+    /* ⭐ ROUND 63 — THE FILM IS HELD UNTIL THE CARD HAS FINISHED OPENING.
+       The phone now opens with the same centred clip-path reveal the desktop
+       has (see @keyframes hcardin), and the one measured objection to that on
+       a phone was clip-path re-rasterising a rounded mask over a DECODING
+       video. Holding playback for the length of the opener means the mask runs
+       over the poster — a static bitmap — which is the cheap case. It also
+       means the first frame you see is the frame the poster promised, instead
+       of the film cutting in halfway through the reveal.
+       ⛔ THREE WAYS OUT, so a stalled animation can never strand the film:
+       animationend, a 1.6s ceiling, and reduced-motion skipping the hold
+       entirely. `autoplay` stays in the markup — if this script never runs at
+       all (the case the markup exists for), the video plays as it always did. */
+    if (!big && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+      v.autoplay = false;
+      var play = function(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); };
+      var card = document.querySelector('.hcard');
+      /* ⛔ animationend BUBBLES. Guard on the target, or any descendant of the
+         card that happens to finish a CSS animation first starts the film. */
+      if (card) card.addEventListener('animationend', function(e){ if (e.target === card) play(); });
+      setTimeout(play, 1600);
+    }
   })();
   </script>
   <canvas class="caustics" id="caustics" aria-hidden="true"></canvas>
@@ -4481,23 +4484,38 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     </div>
     <div class="under u2"></div><div class="under u1"></div>
     <div class="card" id="hdCard">
+      <!-- ⛔ ROUND 63 — THE HEAD ROW IS NOW ONLY THE CHEVRON'S HOME. The kicker
+           ("Best seller!") is gone from the card at every width, JP: "get rid of
+           the best seller on the hydrogen-rich… all we're gonna have is price
+           and the name of the system." Both copies of it went — this one and the
+           `.dt2` twin that rode inside `.t` on the desktop closed card. The
+           `--ac` accent and the `.notag` class are still written by hdApply and
+           still cost nothing; they are the hook if a kicker ever comes back. -->
       <div class="chead">
-        <span class="dtag js-hdtag" id="hdTag"></span>
         <button class="tgl" type="button" id="hdTgl" aria-label="Show what is included" aria-expanded="false" aria-controls="hdMore"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
       <button class="face" type="button" id="hdFace" aria-expanded="false" aria-controls="hdMore">
         <img id="hdImg" src="media/systems/pure-home.webp" alt="" width="734" height="900">
-        <!-- round 28: the SECOND kicker. The desktop closed card has no head row
-             any more (the toggle floats at the card's right edge), so the kicker
-             rides in the text column instead. Two elements, never both visible —
-             .dt2 is desktop-closed only, #hdTag is the phone's head row, exactly
-             as round 23 left it. Both are written by the same .js-hdtag write,
-             so they can never disagree. -->
-        <!-- round 45: the price is the biggest thing here and the lifetime
-             warranty sits directly under it, on the CLOSED card. Both are
-             inside .t so they ride the text column and can never collide with
-             the product photograph in column 2. -->
-        <span class="t"><span class="dtag dt2 js-hdtag"></span><b id="hdName">Whole House Filtration System</b><span class="pure" id="hdPure">Pure Home</span><span class="p" id="hdPrice"><i class="pre">from</i><b>$3,850</b><i class="suf">installed</i></span><span class="warr"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.8 4.5 6v6.1c0 4.4 3.1 7.6 7.5 9.1 4.4-1.5 7.5-4.7 7.5-9.1V6L12 2.8Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="m8.7 12.1 2.3 2.3 4.3-4.3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Lifetime warranty</span></span>
+        <!-- ⭐ ROUND 63 — TWO FACTS ON THE FACE. NOTHING ELSE.
+             JP, 28 Aug: "there's too much jargon going on in the cards and it's
+             making it hard to read on the mobile version… I want ours to be
+             price, name of the system, and lifetime warranty… get rid of the
+             name of it, like the Pure Plus. Get rid of the installed, the
+             lifetime warranty [line]… get rid of the best seller. That way all
+             we're gonna have is price and the name of the system."
+             ⛔ FOUR ELEMENTS LEFT THIS FACE and each one is recorded here so it
+             is not quietly rebuilt: `.dt2` (the kicker, round 19/28), `.pure`
+             (the range name — Pure Home / Pure Plus, round 19), `i.suf`
+             ("installed", round 45) and `.warr` (the lifetime-warranty line,
+             round 45). The warranty is not dropped, it is PROMOTED — it is the
+             corner sticker below, which is what he asked to simulate off C&C's
+             "FREE INSTALL". ⭐ AND THE CLAIM STAYS PAIRED: the claims record
+             requires "lifetime warranty" to travel with the annual-service
+             mechanism, and the drawer's `.assure` line ("Covered for life while
+             you stay serviced with us") is untouched and one tap away.
+             ⛔ `from` stays. It is part of the number, not a caption, and the
+             "from" qualifier is a standing pricing rule. -->
+        <span class="t"><b id="hdName">Whole House Filtration System</b><span class="p" id="hdPrice"><i class="pre">from</i><b>$3,850</b></span></span>
       </button>
       <div class="more" id="hdMore"><div><div class="inner2">
         <div class="dscroll">
@@ -4564,6 +4582,26 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         <img src="media/humm/humm-tag-white-300.webp" alt="humm. Made for living." width="300" height="101">
       </button>
     </div>
+    <!-- ⭐ ROUND 63 — THE STICKER. JP: "it has free install as a little pop-up
+         on the banner, a nice little cool design pop-up. Ours can be lifetime
+         warranty, and that can be a different colour as well."
+         MEASURED off C&C's own product card at 390x844, 2026-08-28: 80x56,
+         `position:absolute; top:-24px; right:-8px` on the card, Akshar 700
+         uppercase, two lines, solid #F25800. Ours is the same MECHANIC in our
+         own paint: `--badge` (the pill face, which is what this is), 700,
+         uppercase, two lines, solid `--blue`, tipped 4 degrees so it reads as
+         something stuck on rather than a tab drawn in.
+         ⛔ NOT YELLOW. Yellow only ever touches the thing we want clicked, and
+         this is not a button. ⛔ NOT tangerine either — that is humm's.
+         ⛔ IT LIVES ON `.hdeck`, NOT ON `.card`. `.card` is `overflow:hidden`
+         (round 45, "I don't like how it's popping out of the card anymore") and
+         a sticker inside it would be guillotined at the corner. The deck has no
+         clip, so the overhang works and round 45's rule is untouched — that
+         rule was about the PRODUCT SHOT bleeding onto the film, and JP has
+         asked for this one by name.
+         ⛔ Last in the DOM so a screen reader gets name → price → drawer →
+         warranty, and it is NOT aria-hidden: it is a real claim, not decoration. -->
+    <span class="stkr">Lifetime<br>warranty</span>
   </div>
   </div><!-- /.hcard -->
 </section>
@@ -5943,15 +5981,21 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       hdTags.forEach(function(el){ el.textContent = d.tag; });
       document.getElementById('hdImg').src = d.img;
       document.getElementById('hdName').textContent = d.name;
-      document.getElementById('hdPure').textContent = d.pure;
+      /* round 63: `#hdPure` is gone from the face (the Pure Home / Pure Plus
+         line). `d.pure` stays in the HD array — it is the range name and the
+         drawer, the CTA and the quote form all key off `d.sys`, so nothing is
+         lost by not painting it here. */
       document.getElementById('hdWho').textContent = d.who || '';
       document.getElementById('hdLoc').textContent = d.loc || '';
       /* the number is its own <b> so it can be set big — round 19, "make the
          price stand out". The words around it stay quiet. */
       /* round 45: .pre rides the big size, .suf drops to its own quiet line.
          The classes are load-bearing — a bare <i> here has no size rule now. */
+      /* round 63: `installed` (`i.suf`) is off the face — JP, "get rid of the
+         installed". `d.suf` stays in the array so the drawer/quote copy can
+         still reach it; only the face stopped printing it. */
       document.getElementById('hdPrice').innerHTML =
-        (d.pre ? '<i class="pre">' + d.pre + '</i>' : '') + '<b>' + d.amt + '</b><i class="suf">' + d.suf + '</i>';
+        (d.pre ? '<i class="pre">' + d.pre + '</i>' : '') + '<b>' + d.amt + '</b>';
       /* ONE place sets the accent. The kicker bar, its text and anything else on
          the card read `--ac` off the deck. Only two values exist: blue, purple. */
       hdeck.style.setProperty('--ac', d.tagc);
@@ -5988,10 +6032,17 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          there is nothing to jump. One ease, the card's own --e-soft, no
          overshoot. It reads as a deck being dealt, which is what it is. */
       var GONE = {scale:.965, opacity:0, y:16};
-      gsap.to(hdCard, {scale:GONE.scale, opacity:0, y:GONE.y, duration:.26, ease:'power2.in',
+      /* ⛔ ROUND 63 — THE STICKER DEALS WITH THE CARD. It lives on `.hdeck`, not
+         inside `.card` (the card is `overflow:hidden` and would clip it), so
+         tweening the card alone left a blue tag hanging in mid-air over the film
+         for the 260ms the card was gone. Seen at 1440, 2026-08-28. Both elements
+         now carry the same tween. GSAP reads the sticker's existing
+         `rotate(-4deg)` off its computed transform, so the tip survives. */
+      var flip = [hdCard].concat([].slice.call(hdeck.querySelectorAll('.stkr')));
+      gsap.to(flip, {scale:GONE.scale, opacity:0, y:GONE.y, duration:.26, ease:'power2.in',
         onComplete:function(){
           hdApply();
-          gsap.fromTo(hdCard, {scale:GONE.scale, opacity:0, y:-GONE.y, transformOrigin:'50% 50%'},
+          gsap.fromTo(flip, {scale:GONE.scale, opacity:0, y:-GONE.y, transformOrigin:'50% 50%'},
             /* power3.out, not the drawer's symmetric curve: a card ARRIVING
                should land and settle, and that is what --e-out means on this
                page. Symmetric easing belongs to the two things that open and
