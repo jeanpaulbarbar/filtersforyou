@@ -398,6 +398,8 @@ body.fabon .fab{opacity:1;transform:none}
 @media(hover:hover){  }
 @media(prefers-reduced-motion:reduce){  }
 .hummwrap{min-height:120vh}
+/* JP: on phones the widget looked cut off inside the gutters. Full bleed. */
+@media(max-width:767px){ .widget .in{padding:0;max-width:none} .widget .fine{padding:0 22px} }
 @media(max-width:700px){
       .hero{padding:44px 0 40px}
   .widget{padding:28px 0 48px}

@@ -3667,18 +3667,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      deck's own vocabulary. Static — they arrive on .rv and hold. */
   .hmcards{position:relative;display:grid;place-items:center;min-height:430px}
   .hmcard{border-radius:var(--r-card);box-shadow:var(--shadow-lg)}
-  .hmcard-b{position:absolute;width:min(300px,66%);aspect-ratio:4/5;background:#fff;
-    transform:rotate(4.5deg) translate(23%,-4%);display:grid;place-items:center}
-  .hmcard-b img{width:60%;height:auto}
-  .hmcard-a{position:relative;width:min(340px,78%);aspect-ratio:4/5;background:#fff;
-    transform:rotate(-3deg);display:grid}
-  .hmface{grid-area:1/1;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between;
-    opacity:0;visibility:hidden}
-  .hmface.on{opacity:1;visibility:visible}
-  .hmface img{display:block;width:min(150px,46%);height:auto;margin-top:18px}
-  .hmcard-a .hmline{font-family:var(--hummf);font-weight:800;color:#EE6604;
+  /* the three dealt cards share one footprint; GSAP places them in slots
+     (front · behind · back) and deals them. No CSS transform here on purpose:
+     two owners of one transform is how a deal starts to jitter. */
+  .hmdeal{position:absolute;width:min(340px,78%);aspect-ratio:4/5;background:#fff;
+    padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between;
+    will-change:transform}
+  .hmdeal img{display:block;width:min(150px,46%);height:auto;margin-top:18px}
+  .hmdeal .hmline{font-family:var(--hummf);font-weight:800;color:#EE6604;
     font-size:clamp(1.8rem,2.5vw,2.3rem);line-height:1.02;letter-spacing:-.015em;margin:0}
-  .hmcard-a .hmsub{font-family:var(--hummf);color:#333;font-size:17px;
+  .hmdeal .hmsub{font-family:var(--hummf);color:#333;font-size:17px;
     font-weight:700;line-height:1.35;margin:14px 0 0}
   @media(max-width:1100px){ .hmstats{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:900px){
@@ -3687,6 +3685,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   }
   @media(max-width:767px){
     .humm{padding:64px 0 64px}
+    .humm .lab img{display:none}   /* JP: "it just looks odd there" on phones */
     .hmbird{width:320px;right:-100px;top:-10px;opacity:.14}
     .hmh2{font-size:clamp(3rem,15.5vw,3.8rem);margin-top:22px}
     .hmlede{font-size:19px}
@@ -4988,21 +4987,24 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
            inside the front card; hmDeal() deals them with the hero deck's own
            out/in tween (GONE → arrive from above), every 4.2s, resting while
            hovered, static on reduced motion. The back card is the one hiding. -->
+      <!-- JP, 28 Aug, second note: "I want it to actually look like a card
+           animation... too much dead space." So: THREE real cards in a stack,
+           and a deal — the front card flicks off to the left and the card
+           hiding behind slides up into its place, the third steps forward,
+           the dealt card returns to the back. GSAP owns the transforms (x, y,
+           rotation, scale); the CSS only sizes them. Every 2.6s. -->
       <div class="hmcards rv" id="hmcards" aria-hidden="true">
-        <div class="hmcard hmcard-b"><img src="media/humm/humm-bird-tang.webp" alt="" width="900" height="751" loading="lazy"></div>
-        <div class="hmcard hmcard-a" id="hmfront">
-          <div class="hmface on">
-            <p class="hmline">Big buys<br>made easy.</p>
-            <div><p class="hmsub">Up to 24 months interest free on your new system.</p><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
-          </div>
-          <div class="hmface">
-            <p class="hmline">From only<br>$83 a fortnight.</p>
-            <div><p class="hmsub">Whole house system, custom quoted for your home.</p><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
-          </div>
-          <div class="hmface">
-            <p class="hmline">Apply in<br>10 minutes.</p>
-            <div><p class="hmsub">Online, on your phone. humm handles the rest.</p><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
-          </div>
+        <div class="hmcard hmdeal" data-slot="0">
+          <p class="hmline">Big buys<br>made easy.</p>
+          <div><p class="hmsub">Up to 24 months interest free on your new system.</p><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
+        </div>
+        <div class="hmcard hmdeal" data-slot="1">
+          <p class="hmline">From only<br>$83 a fortnight.</p>
+          <div><p class="hmsub">Whole house system, custom quoted for your home.</p><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
+        </div>
+        <div class="hmcard hmdeal" data-slot="2">
+          <p class="hmline">Apply in<br>10 minutes.</p>
+          <div><p class="hmsub">Online, on your phone. humm handles the rest.</p><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
         </div>
       </div>
     </div>
@@ -6014,28 +6016,40 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     hdTgl.addEventListener('click', hdToggle);
     hdHumm.addEventListener('click', hdToggle);
   }
-  /* ── the payment section's three tent-card faces, dealt like the hero deck ── */
+  /* ── the payment section's three cards, dealt like a deck ── */
   (function(){
-    var front = document.getElementById('hmfront'); if (!front) return;
-    var faces = [].slice.call(front.querySelectorAll('.hmface')); if (faces.length < 2) return;
-    var i = 0, hover = false, seen = false;
-    var wrap = document.getElementById('hmcards');
+    var wrap = document.getElementById('hmcards'); if (!wrap) return;
+    var cards = [].slice.call(wrap.querySelectorAll('.hmdeal')); if (cards.length < 2) return;
+    /* the three slots: front, the one hiding behind, and the back of the pile */
+    var SLOT = [
+      {x:0,    y:0,   rotation:-3,  scale:1,   opacity:1, zIndex:3},
+      {x:'23%',y:'-4%',rotation:4.5,scale:.94, opacity:1, zIndex:2},
+      {x:'40%',y:'-9%',rotation:10, scale:.88, opacity:1, zIndex:1}
+    ];
+    var order = [0,1,2], hover = false, seen = false, busy = false;
+    function place(){ order.forEach(function(ci, si){ if (hasGsap) gsap.set(cards[ci], SLOT[si]); }); }
+    if (hasGsap) place(); else cards.forEach(function(c,i){ c.style.zIndex = 3 - i; });
     wrap.addEventListener('mouseenter', function(){ hover = true; });
     wrap.addEventListener('mouseleave', function(){ hover = false; });
-    function show(n){ faces.forEach(function(f, k){ f.classList.toggle('on', k === n); }); }
     function deal(){
-      if (hover || !seen || !matchMedia('(min-width:901px)').matches) return;
-      var next = (i + 1) % faces.length;
-      if (reduce || !hasGsap){ i = next; show(i); return; }
-      gsap.to(front, {scale:.965, opacity:0, y:16, duration:.26, ease:'power2.in', onComplete:function(){
-        i = next; show(i);
-        gsap.fromTo(front, {scale:.965, opacity:0, y:-16}, {scale:1, opacity:1, y:0, duration:.58, ease:'power3.out'});
+      if (busy || hover || !seen || !hasGsap || !matchMedia('(min-width:901px)').matches) return;
+      busy = true;
+      var front = cards[order[0]];
+      /* the front card flicks off to the left, the way a card leaves a deck */
+      gsap.to(front, {x:'-130%', y:-40, rotation:-16, opacity:0, duration:.42, ease:'power2.in', onComplete:function(){
+        order.push(order.shift());
+        /* the next two step forward together; the dealt card lands at the back */
+        gsap.to(cards[order[0]], {x:SLOT[0].x, y:SLOT[0].y, rotation:SLOT[0].rotation, scale:1, zIndex:3, duration:.55, ease:'power3.out'});
+        gsap.to(cards[order[1]], {x:SLOT[1].x, y:SLOT[1].y, rotation:SLOT[1].rotation, scale:SLOT[1].scale, zIndex:2, duration:.55, ease:'power3.out'});
+        gsap.set(front, {x:'55%', y:'-14%', rotation:14, scale:.86, opacity:0, zIndex:1});
+        gsap.to(front, {x:SLOT[2].x, y:SLOT[2].y, rotation:SLOT[2].rotation, scale:SLOT[2].scale, opacity:1, duration:.5, ease:'power3.out', delay:.08,
+          onComplete:function(){ busy = false; }});
       }});
     }
     if ('IntersectionObserver' in window){
       new IntersectionObserver(function(es){ seen = es.some(function(e){ return e.isIntersecting; }); }, {threshold:.2}).observe(wrap);
     } else seen = true;
-    setInterval(deal, 4200);
+    if (!reduce) setInterval(deal, 2600);
   })();
 
   /* ── SHOWCASE — stage layer follows the active system ──── */
