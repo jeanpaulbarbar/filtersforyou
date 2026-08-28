@@ -379,37 +379,61 @@ main{padding-top:72px}
 </style>
 <!-- /SHELL:CSS -->
 <style>
-/* ═══ this page only ═══ */
-@font-face{font-family:'Metropolis';font-style:normal;font-weight:800;font-display:swap;src:url('/fonts/Metropolis-ExtraBold.woff2') format('woff2')}
-
-@media(hover:hover){  }
-/* white, not mist: humm orange on the mist tint measured 2.87:1, under the 3:1 large-text line */
-.hero{background:#fff;padding:64px 0 56px;border-bottom:1px solid var(--rule)}
-.hero h1{font-family:"Metropolis",Arial,Helvetica,sans-serif;font-weight:800;letter-spacing:-.015em;line-height:1.02;margin:14px 0 0;
-  font-size:clamp(2.2rem,5vw,3.6rem);max-width:16ch;color:#EE6604}
-.lab{display:inline-flex;align-items:center;gap:10px;font-size:17px;font-weight:700;color:var(--blue)}
-.lab img{width:44px;height:44px}
-.hero .lede{font-size:clamp(1.1rem,1.5vw,1.3rem);color:var(--muted);max-width:56ch;margin:18px 0 0;font-weight:500}
-.hero .hummlogo{margin-top:26px}
-.hero .hummlogo img{width:180px;height:auto;display:block}
-.widget{padding:40px 0 64px}
-.fine{font-size:13px;line-height:1.55;color:var(--muted);max-width:70ch;margin:34px 0 0}
-.ask{background:var(--mist);padding:56px 0 60px}
-.ask h2{font-weight:500;font-size:clamp(1.6rem,3vw,2.2rem);margin:0;letter-spacing:-.005em}
-.ask p{color:var(--muted);max-width:52ch;margin:12px 0 22px}
-@media(hover:hover){  }
-@media(prefers-reduced-motion:reduce){  }
+/* ═══ this page only — the homepage's humm block, top and bottom ═══
+   Same grammar as #payments on the homepage: tangerine ground, the bird as a
+   graphic device, Metropolis Extrabold headlines, white lines ≥19px/700
+   (3.2:1 passes only as large text), a WHITE pill for the door. The humm widget
+   between them is the legitimacy and the T&Cs; the two blocks do the selling. */
+.humm{background:#EE6604;color:#fff;position:relative;overflow:hidden}
+.hmtop{padding:88px 0 72px}
+.hmbottom{padding:84px 0 88px}
+.humm .in{position:relative}
+.hmbird{position:absolute;right:-150px;top:-30px;width:min(760px,60vw);height:auto;opacity:.13;
+  transform:rotate(-10deg);pointer-events:none;user-select:none}
+.hmbottom .hmbird{right:auto;left:-180px;top:auto;bottom:-120px;transform:rotate(12deg) scaleX(-1)}
+.hmhead{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.humm .lab{color:#fff;font-size:19px;font-weight:700}
+.hmlogo{width:min(210px,44vw);height:auto;display:block}
+.hmh2{font-family:var(--hummf);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:.96;
+  font-size:clamp(3.2rem,8.6vw,7.2rem);margin:26px 0 0}
+.hmlede{font-family:var(--sans);font-weight:700;color:#fff;font-size:clamp(1.25rem,1.9vw,1.7rem);line-height:1.4;
+  max-width:44ch;margin:22px 0 0}
+.hmstats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:44px}
+.hmstat{border-top:2px solid rgba(255,255,255,.75);padding-top:16px}
+.hmstat b{display:block;font-family:var(--hummf);font-weight:800;font-size:clamp(2.4rem,4vw,3.8rem);
+  line-height:1;letter-spacing:-.02em;color:#fff}
+.hmstat span{display:block;font-family:var(--hummf);font-weight:700;font-size:19px;line-height:1.3;
+  margin-top:9px;color:#fff;max-width:20ch}
+.hmcta{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:40px}
+.humm .btn{--bg:#fff;--fg:#333333;--bgh:var(--ink);--fgh:#fff;font-family:var(--hummf);font-weight:700}
+.hmlink{color:#fff;font-family:var(--hummf);font-weight:700;font-size:19px;text-decoration:underline transparent;
+  text-decoration-thickness:1px;text-underline-offset:6px;transition:text-decoration-color .3s ease-in-out;
+  display:inline-flex;align-items:center;min-height:44px}
+@media(hover:hover){ .hmlink:hover{text-decoration-color:#fff} }
+.hmkick{display:inline-flex;background:#333333;color:#fff;font-family:var(--hummf);font-weight:700;
+  font-size:13px;letter-spacing:.06em;text-transform:uppercase;border-radius:var(--r-full);padding:7px 13px}
+.hmticks{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:14px;max-width:52ch}
+.hmticks li{display:flex;gap:12px;align-items:flex-start;font-family:var(--hummf);font-weight:700;font-size:19px;
+  line-height:1.3;color:#fff}
+.hmticks li svg{width:22px;height:22px;flex:0 0 22px;margin-top:1px}
+/* the widget: flush against the block above, no rule, no gap */
+.widget{padding:0 0 8px}
 .hummwrap{min-height:120vh}
-/* JP, 28 Aug: the humm widget runs full width on DESKTOP (it holds up), keeps
-   the gutters on phones (full bleed clipped their words). */
 @media(min-width:768px){ .widget .in{max-width:none;padding:0} .widget .fine{max-width:1100px;margin-left:auto;margin-right:auto;padding:0 22px} }
-@media(max-width:700px){
-      .hero{padding:44px 0 40px}
-  .widget{padding:28px 0 48px}
+.fine{font-size:13px;line-height:1.55;color:var(--muted);max-width:70ch;margin:34px auto 44px}
+@media(max-width:1100px){ .hmstats{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:767px){
+  .hmtop{padding:56px 0 56px}
+  .hmbottom{padding:60px 0 64px}
+  .hmbird{width:320px;right:-100px;top:-10px;opacity:.14}
+  .hmbottom .hmbird{left:-120px;bottom:-80px}
+  .hmh2{font-size:clamp(3rem,15.5vw,3.8rem);margin-top:22px}
+  .hmlede{font-size:19px}
+  .hmstats{gap:20px 18px;margin-top:34px}
+  .hmstat b{font-size:2.4rem}
+  .hmcta{margin-top:30px;gap:14px}
+  .humm .btn{width:100%;justify-content:center}
 }
-
-/* the header is fixed and always solid.mini here: 72px desktop / 70px phone, measured */
-.hero{padding-top:52px}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage",
@@ -510,20 +534,34 @@ main{padding-top:72px}
 <!-- /SHELL:HEADER -->
 
 <main>
-  <section class="hero">
+  <!-- THE INTRO — humm × Filters For You, the homepage's humm block as a page opener.
+       Big lines, four numbers, one door. The widget below is their proof. -->
+  <section class="humm hmtop">
+    <img class="hmbird" src="media/humm/humm-bird-white.webp" alt="" width="900" height="751" aria-hidden="true">
     <div class="in">
-      <span class="lab"><img src="media/mark.svg" alt="" width="44" height="44">Flexible payment plans</span>
-      <h1>humm – Big Buys Made Easy</h1>
-      <p class="lede">We offer finance through humm on every system we install. Interest free terms up to 24 months, fortnightly or monthly repayments, and you apply online in under 10 minutes. Everything humm offers, how it works and how to get started is below.</p>
-      <div class="hummlogo"><img src="media/humm/humm-tag-tang.webp" alt="humm. Made for living." width="480" height="161"></div>
+      <div class="hmhead">
+        <span class="lab">humm and Filters For You</span>
+        <img class="hmlogo" src="media/humm/humm-tag-white.webp" alt="humm. Made for living." width="480" height="161">
+      </div>
+      <h1 class="hmh2">Big buys<br>made easy.</h1>
+      <p class="hmlede">Filtered water now. Pay it off over time. Interest free through humm, on every system we install.</p>
+      <div class="hmstats">
+        <div class="hmstat"><b>0%</b><span>interest on your new system</span></div>
+        <div class="hmstat"><b>24</b><span>months interest free, on 12, 18 or 24 month terms</span></div>
+        <div class="hmstat"><b>$10k</b><span>of interest free finance</span></div>
+        <div class="hmstat"><b>10 min</b><span>to apply online</span></div>
+      </div>
+      <div class="hmcta">
+        <a class="btn" href="/#ask"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</a>
+        <a class="hmlink" href="#terms">How humm works, and the terms</a>
+      </div>
     </div>
   </section>
 
-  <section class="widget">
+  <!-- THE PROOF — humm's own hosted landing page. Their script, their content,
+       their T&Cs, per their Landing Page Instructions. Never restyled. -->
+  <section class="widget" id="terms">
     <div class="in">
-      <!-- humm's hosted landing page renders here — their script, their content,
-           per their Landing Page Instructions. Do not wrap, restyle or edit
-           what it injects. -->
       <div class="hummwrap">
       <script id="humm-landing-page-big-online" src="https://widgets.shophumm.com.au/content/scripts/landing-page-big-online.js"></script>
       </div>
@@ -531,11 +569,22 @@ main{padding-top:72px}
     </div>
   </section>
 
-  <section class="ask">
+  <!-- THE OUTRO — the number, the three facts, the door. -->
+  <section class="humm hmbottom">
+    <img class="hmbird" src="media/humm/humm-bird-white.webp" alt="" width="900" height="751" aria-hidden="true" loading="lazy">
     <div class="in">
-      <h2>Ready when you are.</h2>
-      <p>Pick your system, get the fixed price in writing, and pay it your way. Installed across Sydney by licensed plumbers, covered for life while you stay serviced with us.</p>
-      <a class="btn" href="/#ask">Get a fixed price</a>
+      <span class="hmkick">Whole house system</span>
+      <h2 class="hmh2">From only<br>$83 a fortnight.</h2>
+      <p class="hmlede">Custom quoted for your home and the term you choose. Installed across Sydney by licensed plumbers.</p>
+      <ul class="hmticks">
+        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Interest free on purchases up to $10,000</li>
+        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Fortnightly or monthly repayments, your call</li>
+        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Covered for life while you stay serviced with us</li>
+      </ul>
+      <div class="hmcta">
+        <a class="btn" href="/#ask"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</a>
+        <a class="hmlink" href="tel:0430546749">or call 0430 546 749</a>
+      </div>
     </div>
   </section>
 </main>
