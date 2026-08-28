@@ -597,7 +597,26 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .msheet .mhumm{min-height:48px;margin-top:6px}
     .msheet .mcard{min-height:76px;margin-top:8px}   /* 78 left the sheet 1px over at 664, measured */
   }
+  /* ⭐ ROUND 63d — THE SHEET LOCKS THE PAGE. JP, 28 Aug: "I don't like how you
+     can click on it and it can move around. I can scroll, and the stuff will
+     move with different sizing… it shouldn't be scrolling the actual page
+     either, right, because I can see it scrolling in the back."
+     ⛔ `overflow:hidden` ON THE BODY DOES NOT STOP TOUCH SCROLLING ON iOS. It
+     never has. And `lenis.stop()` — which this already did — only ever stopped
+     the WHEEL, because we run `syncTouch:false` on purpose (interaction-library
+     Part 8: on a phone the scrolling is 100% the operating system's). So on his
+     actual phone NOTHING was holding the document.
+     ⭐ AND THAT IS ALSO THE "different sizing" HE SAW, which is the better clue:
+     the page scrolling behind collapses and expands Safari's URL bar, the small
+     viewport changes under it, and every row in this sheet is sized in `svh`
+     (round 58). So the menu visibly re-scaled while he scrolled behind it. One
+     cause, two symptoms, and the second one is the tell that it was the DOCUMENT
+     moving rather than the sheet.
+     ⛔ THE ONLY RELIABLE LOCK IS position:fixed ON THE BODY with the scroll
+     offset held in `top`, restored exactly on close. `overflow:hidden` stays for
+     the desktop wheel case; `overscroll-behavior:none` kills the rubber band. */
   body.mopen{overflow:hidden}
+  body.mlock{position:fixed;left:0;right:0;width:100%;overflow:hidden;overscroll-behavior:none}
   /* the sticky call bar sat on top of the open sheet (z-70 over z-55) and
      covered the last system in the list. The sheet carries its own ask. */
   /* ⛔ JP, round 10: open the menu ON THE HERO and the scrolling list ran
@@ -5765,7 +5784,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     var burger = document.getElementById('burger');
     var sheet  = document.getElementById('msheet');
     if (!burger || !sheet) return;
-    var open = false, lastFocus = null;
+    var open = false, lastFocus = null, lockY = 0;
 
     function setOpen(v){
       if (v === open) return;
@@ -5776,12 +5795,41 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       if (v){
         lastFocus = document.activeElement;
         sheet.hidden = false;
+        /* ⛔ ROUND 63d — LOCK BEFORE ANYTHING ELSE, AND HOLD THE POSITION IN
+           `top`. `body{position:fixed}` on its own snaps the page to 0 and would
+           land him somewhere else entirely on close. Read the scroll, fix the
+           body at minus that, then stop lenis. */
+        lockY = window.scrollY || document.documentElement.scrollTop || 0;
+        document.body.style.top = (-lockY) + 'px';
+        document.body.classList.add('mlock');
         if (lenis) lenis.stop();
         sheet.scrollTop = 0;
         var first = sheet.querySelector('a,button');
         if (first) setTimeout(function(){ first.focus({preventScroll:true}); }, 60);
       } else {
-        if (lenis) lenis.start();
+        /* ⛔ UNLOCK, RESTORE, THEN START LENIS — and tell lenis where we landed.
+           It caches its own scroll value and would otherwise glide back to the
+           stale one the first time the wheel is touched. */
+        document.body.classList.remove('mlock');
+        document.body.style.top = '';
+        /* ⛔ `behavior:'instant'`, NOT the two-argument form. <html> carries
+           `scroll-behavior:smooth` for in-page anchors, and a bare
+           `scrollTo(0, y)` inherits it — so the restore ANIMATED, raced lenis
+           re-syncing, and landed 6-9px out. Measured at 390x844. */
+        window.scrollTo({top: lockY, left: 0, behavior: 'instant'});
+        /* ⛔ ONE FRAME BEFORE LENIS IS TOLD, OR IT LANDS 9px OUT. Measured at
+           390x844: restoring and re-syncing in the same tick put him back at
+           3351 instead of 3360, because lenis re-read the scroll before the
+           browser had applied `scrollTo`. Unlock and restore synchronously so
+           there is no visible jump, THEN hand lenis the number on the next
+           frame. He complained about things moving; 9px is still moving. */
+        if (lenis){
+          requestAnimationFrame(function(){
+            window.scrollTo({top: lockY, left: 0, behavior: 'instant'});
+            lenis.start();
+            if (lenis.scrollTo) lenis.scrollTo(lockY, {immediate:true, force:true});
+          });
+        }
         /* wait out the transition before pulling it from the a11y tree */
         setTimeout(function(){ if (!open) sheet.hidden = true; }, 340);
         if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});

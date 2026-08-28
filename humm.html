@@ -405,8 +405,29 @@ main:has(> .pgtop){padding-top:0}
 .pgtop{background:var(--range-bg,#E4EBF3);padding:calc(var(--utilh) + var(--hframe)) var(--hframe) var(--hframe)}
 @media(max-width:1079px){ .pgtop{padding-top:var(--hframe)} }
 .pgcard{position:relative;border-radius:var(--r-hero);overflow:clip;min-height:min(78svh,820px);display:flex;flex-direction:column;justify-content:flex-end}
-.pgcard::before{content:"";position:absolute;inset:0 0 auto;height:220px;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(4,16,46,.58) 0%,rgba(4,16,46,.22) 55%,rgba(4,16,46,0) 100%)}
+/* ⛔ ROUND 63d — THE VEIL IS OFF, ON JP'S WORD, AND HERE IS WHAT IT WAS DOING.
+   "Can we get rid of the gradient where the transparency is? I still want it to
+   be transparent and clear, but I don't want it to be white. I just want to see
+   what it would look like if there was no gradient." (28 Aug)
+   It was never decoration. Every page opens with a TRANSPARENT header over the
+   opening card (round 62) and the header's mark and type are WHITE. On the
+   homepage the card underneath is dark film, so white reads. On a LIGHT card it
+   does not: MEASURED, white on humm tangerine #EE6604 is 3.21:1, under the 4.5:1
+   a normal-size label needs. The rule below took the top 220px to 10.1:1 at the
+   very top and 4.8:1 at 55%, fading out before it reached any content:
+     .pgcard::before{content:"";position:absolute;inset:0 0 auto;height:220px;
+       z-index:1;pointer-events:none;
+       background:linear-gradient(180deg,rgba(4,16,46,.58) 0%,
+                                         rgba(4,16,46,.22) 55%,
+                                         rgba(4,16,46,0) 100%)}
+   ⚠️ REMOVING IT IS A TRADE, NOT A CLEAN-UP: on /humm the white nav links and the
+   Book now pill now sit at 3.21:1 over tangerine.
+   ⭐ IF HE KEEPS THE CLEANER LOOK, THE FIX IS NOT TO BRING THE WASH BACK — it is
+   to let a light-card page declare a DARK header ink, which is exactly what C&C
+   do with `data-page-header-theme` (interaction-library.md Part 6). MEASURED:
+   navy #04102E on tangerine is 5.84:1, which passes. Say that before restoring
+   a gradient. ⛔ Keep this note even while the rule is deleted — the next page
+   built on a light card walks into the same wall. */
 .pgcard > *{position:relative;z-index:2}
 @media(prefers-reduced-motion:no-preference){
   .pgcard{animation:hcardin 1.15s var(--e-out) .12s backwards}
@@ -1108,7 +1129,7 @@ main:has(> .pgtop){padding-top:0}
     var burger = document.getElementById('burger');
     var sheet  = document.getElementById('msheet');
     if (!burger || !sheet) return;
-    var open = false, lastFocus = null;
+    var open = false, lastFocus = null, lockY = 0;
 
     function setOpen(v){
       if (v === open) return;
@@ -1119,12 +1140,41 @@ main:has(> .pgtop){padding-top:0}
       if (v){
         lastFocus = document.activeElement;
         sheet.hidden = false;
+        /* ⛔ ROUND 63d — LOCK BEFORE ANYTHING ELSE, AND HOLD THE POSITION IN
+           `top`. `body{position:fixed}` on its own snaps the page to 0 and would
+           land him somewhere else entirely on close. Read the scroll, fix the
+           body at minus that, then stop lenis. */
+        lockY = window.scrollY || document.documentElement.scrollTop || 0;
+        document.body.style.top = (-lockY) + 'px';
+        document.body.classList.add('mlock');
         if (lenis) lenis.stop();
         sheet.scrollTop = 0;
         var first = sheet.querySelector('a,button');
         if (first) setTimeout(function(){ first.focus({preventScroll:true}); }, 60);
       } else {
-        if (lenis) lenis.start();
+        /* ⛔ UNLOCK, RESTORE, THEN START LENIS — and tell lenis where we landed.
+           It caches its own scroll value and would otherwise glide back to the
+           stale one the first time the wheel is touched. */
+        document.body.classList.remove('mlock');
+        document.body.style.top = '';
+        /* ⛔ `behavior:'instant'`, NOT the two-argument form. <html> carries
+           `scroll-behavior:smooth` for in-page anchors, and a bare
+           `scrollTo(0, y)` inherits it — so the restore ANIMATED, raced lenis
+           re-syncing, and landed 6-9px out. Measured at 390x844. */
+        window.scrollTo({top: lockY, left: 0, behavior: 'instant'});
+        /* ⛔ ONE FRAME BEFORE LENIS IS TOLD, OR IT LANDS 9px OUT. Measured at
+           390x844: restoring and re-syncing in the same tick put him back at
+           3351 instead of 3360, because lenis re-read the scroll before the
+           browser had applied `scrollTo`. Unlock and restore synchronously so
+           there is no visible jump, THEN hand lenis the number on the next
+           frame. He complained about things moving; 9px is still moving. */
+        if (lenis){
+          requestAnimationFrame(function(){
+            window.scrollTo({top: lockY, left: 0, behavior: 'instant'});
+            lenis.start();
+            if (lenis.scrollTo) lenis.scrollTo(lockY, {immediate:true, force:true});
+          });
+        }
         /* wait out the transition before pulling it from the a11y tree */
         setTimeout(function(){ if (!open) sheet.hidden = true; }, 340);
         if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
