@@ -1783,17 +1783,24 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
        ⛔ NEVER put a formatted price back into `message`, here or on any other
        form. The homepage form was checked the same day and sends no money at
        all, which is why it has never been hit. */
-    var q = (term !== null) ? termQuote(term) : null;
-    hid('plan_total', combo ? String(Math.round(combo.total)) : '');
-    hid('plan_term_months', term === null ? '' : String(term));
-    hid('plan_fortnightly', q ? String(Math.round(q.fortnightly_displayed)) : '');
-    hid('plan_financed', q && q.total_financed != null ? String(Math.round(q.total_financed)) : '');
-    hid('plan_payable', q && q.total_amount_payable != null ? String(Math.round(q.total_amount_payable)) : '');
+    /* ⛔ ROUND 63f — NO MONEY LEAVES THIS FORM AT ALL, IN ANY SHAPE.
+       63e tried sending the figures as bare numeric fields instead of prose.
+       IT DID NOT WORK — measured through the live form, still discarded. So the
+       filter is not reading dollar SIGNS, it is reading money-shaped content,
+       and `plan_total`/`plan_financed`/`plan_payable` carrying 1280 / 1494 /
+       1733 is money-shaped content however it is typed.
+       ⭐ AND WE DO NOT NEED TO SEND IT. The system and the term are enough: every
+       price is in our own ladder and every repayment is what `Engine/humm/`
+       computes from it. The figures on the page are indicative and are confirmed
+       in writing by a person before anything goes ahead — that was always the
+       promise. So the enquiry now carries WHAT they chose, not what it costs.
+       ⛔ Do not put an amount back in. If JP wants the numbers in the email, the
+       answer is our own endpoint, not a differently-worded price. */
+    hid('term_months', term === null ? '' : String(term));
     hid('message', 'Payment plan request from the repayments calculator. Chosen: '
       + (names().join(' + ') || 'extras only')
       + (term === null ? '. No term picked yet.' : '. Term picked: ' + term + ' months.')
-      + ' The amounts are in the plan fields on this submission, in whole dollars. '
-      + 'They are indicative and get confirmed in writing before anything goes ahead.');
+      + ' Call to confirm the figures in writing, then send the application link.');
     hid('landing_page', sess('ffy_landing', location.pathname));
     hid('submitted_page', location.pathname);
     hid('referrer', sess('ffy_referrer', document.referrer || ''));
