@@ -1228,6 +1228,37 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      appeared. Stale, silent, and only reachable by resizing. */
   .hdeck.isg .chead,.hdeck.isg .face,.hdeck.isg .more{display:none}
   .hdeck.isg .gcard{display:flex;background:none;box-shadow:none;border-radius:0;align-items:center}
+  /* ── humm's turn in the deck (HD[5]) — same swap pattern as .isg, and like
+     it, GLOBAL: phones keep it in the rotation (it is a promo, not a repeat
+     of on-screen content), so the base rules ARE the phone rules.
+     ⛔ The card face goes FULL humm tangerine (#EE6604) — JP's call. White
+     logo on tangerine per their lockup law. White copy rides the WCAG
+     large-text gate: ≥19px at 700, because white on tangerine is 3.2:1.
+     The whole face is one <a> to /humm — the deck's one outbound card. */
+  .hdeck .hmhd{display:none}
+  .hdeck.ish .chead,.hdeck.ish .face,.hdeck.ish .more,.hdeck.ish .gcard{display:none}
+  .hdeck.ish .card{background:#EE6604}
+  /* ⛔ 124 IS THE PRODUCT CARDS' MEASURED PHONE HEIGHT (round 58). A deck
+     whose slab resizes on every flip is not a deck — this card pins to it,
+     and the phone gets its own SHORT offer line because the desktop sentence
+     wraps five deep in the 176px text column (measured: card hit 151). */
+  .hdeck.ish .hmhd{display:flex;align-items:center;gap:16px;padding:16px 56px 16px 18px;
+    text-decoration:none;min-height:124px}
+  .hdeck .hmhd img{width:92px;height:auto;flex:0 0 92px}
+  .hdeck .hmhd .hmt{display:flex;flex-direction:column;gap:7px;flex:1;min-width:0;align-items:flex-start}
+  .hdeck .hmhd b{display:none;font-family:Arial,Helvetica,sans-serif;color:#fff;font-weight:700;
+    font-size:26px;line-height:1.1;letter-spacing:-.01em}
+  .hdeck .hmhd .hsub{display:none;font-family:Arial,Helvetica,sans-serif;color:#fff;font-weight:700;
+    font-size:19px;line-height:1.25}
+  .hdeck .hmhd .hshort{font-family:Arial,Helvetica,sans-serif;color:#fff;font-weight:700;
+    font-size:19px;line-height:1.25}
+  .hdeck .hmhd .hbtn{display:none;background:#fff;color:#333333;border-radius:var(--r-full);
+    padding:10px 18px;font:700 15px/1 Arial,Helvetica,sans-serif;margin-top:4px;
+    transition:background .3s ease-in-out,color .3s ease-in-out}
+  .hdeck.ish .hmhd:focus-visible{outline:2px solid #fff;outline-offset:-4px}
+  @media(hover:hover){
+    .hdeck.ish .hmhd:hover .hbtn{background:var(--ink);color:#fff}
+  }
 
   /* ══ ROUND 28 — THE DESKTOP CARD IS LANDSCAPE, C&C's PROPORTIONS ══════
      JP: "I want the little product card that's popping up in the hero to be
@@ -1324,6 +1355,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .hdeck.isg .gcard .gs svg{width:26px;height:26px}
     .hdeck.isg .gcard b{font-size:26px;line-height:1.15}
     .hdeck.isg .gcard .gsub{font-size:17px}
+    /* humm's slab — mirrors the Google card: same var(--faceh), same 62px
+       reserve, logo on the RIGHT where every product photograph sits. */
+    .hdeck.ish .hmhd{padding:16px 62px 16px 22px;gap:20px;min-height:var(--faceh)}
+    .hdeck.ish .hmhd img{width:150px;flex:0 0 150px}
+    .hdeck.ish .hmhd b{display:block}
+    .hdeck.ish .hmhd .hsub{display:block}
+    .hdeck.ish .hmhd .hshort{display:none}
+    .hdeck.ish .hmhd .hbtn{display:inline-flex}
   }
 
   /* ⛔ ROUND 47 — NARROW DESKTOPS GET THE CARD'S INSIDES SCALED DOWN.
@@ -3516,53 +3555,58 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .ilist{grid-template-columns:repeat(3,1fr);gap:40px 44px}
   }
 
-  /* ── 7d · PAYMENT PLANS — humm (2026-08-28) ──
-     The money story in order: the prices (#ledger), what the price includes
-     (#included), and now how it can be paid. FFY is an approved humm merchant
-     (unsolicited agreement, signed 26 Aug 2026) — we may ADVERTISE that
-     finance is available and link them to humm; the customer applies
-     themselves. Copy stays inside that line.
-     ⛔ #EE6604 is humm's own digital orange (their 2025 guidelines, p11) and
-     #333333 their grey — partner colours, deliberate literals, NOT page
-     tokens. The white logo sits on tangerine, the tangerine logo on white,
-     exactly as their lockup rules demand. Never recolour, stretch or crop
-     their marks. Toolkit: Workspace/Brand Assets/Partners/humm/. */
-  .humm{background:var(--paper);z-index:14;padding:104px 0 96px;color:var(--ink)}
-  .hmgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
-  .humm h2{margin-top:14px;max-width:16ch}
-  .humm .lede{margin-top:16px;color:var(--muted);max-width:44ch}
-  .humm .ilist{margin-top:40px;gap:26px 40px}
-  @media(min-width:1100px){ .humm .ilist{grid-template-columns:1fr 1fr;gap:28px 40px} }
-  .humm .go{margin-top:36px}
-  .hmfine{margin:44px 0 0;font-size:13px;line-height:1.55;color:var(--muted);max-width:82ch}
-  /* The stack: humm's tent cards, standing on our page. Resting tilt is the
-     deck's own vocabulary (round 54: cards rest at a few degrees). Static —
-     they arrive on .rv like everything else and then hold still. */
-  .hmcards{position:relative;display:grid;place-items:center;min-height:400px}
+  /* ── 7d · PAYMENT PLANS — humm (2026-08-28, went full orange same day) ──
+     JP: "more prominent and more of their orange." The section IS the humm
+     brand block now: their digital tangerine ground (#EE6604, guidelines p11),
+     white type set large/bold so every line clears WCAG large-text at the
+     3.2:1 white-on-tangerine ratio, and the operational copy (ticks, CTA,
+     disclaimer) inside a WHITE panel so ink-on-paper does the small-print
+     work tangerine cannot. Tent cards flip to white with tangerine marks —
+     their lockup rules: tangerine logo on light, white logo on tangerine,
+     never anything else. Toolkit: Workspace/Brand Assets/Partners/humm/.
+     ⛔ #EE6604 / #333333 are humm's colours — deliberate literals, NOT page
+     tokens. Never recolour, stretch or crop their marks. */
+  .humm{background:#EE6604;z-index:14;padding:104px 0 100px;color:#fff}
+  .humm .lab{color:#fff;font-size:19px}
+  .humm .lab img{background:#fff;border-radius:var(--r-full);padding:5px;width:38px;height:38px}
+  .humm h2{margin-top:14px;color:#fff}
+  /* 700 is load-bearing: white on tangerine is 3.2:1, which passes ONLY as
+     WCAG large text — ≥18.66px at 700. Every white line here rides that. */
+  .humm .lede{margin-top:16px;color:#fff;max-width:44ch;font-weight:700}
+  .hmgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;margin-top:46px}
+  .hmpanel{background:var(--paper);border-radius:var(--r-card);box-shadow:var(--shadow-lg);
+    padding:34px 32px;color:var(--ink)}
+  .humm .ilist{margin:0;gap:24px;grid-template-columns:1fr}
+  .humm .go{margin-top:28px}
+  .hmfine{margin:26px 0 0;font-size:13px;line-height:1.55;color:var(--muted)}
+  /* The stack: humm's tent cards, white now the ground is theirs. Resting
+     tilt is the deck's own vocabulary. Static — they arrive on .rv and hold. */
+  .hmcards{position:relative;display:grid;place-items:center;min-height:430px}
   .hmcard{border-radius:var(--r-card);box-shadow:var(--shadow-lg)}
   .hmcard-b{position:absolute;width:min(300px,66%);aspect-ratio:4/5;background:#fff;
-    border:1px solid var(--rule);transform:rotate(4.5deg) translate(23%,-4%);
-    display:grid;place-items:center}
+    transform:rotate(4.5deg) translate(23%,-4%);display:grid;place-items:center}
   .hmcard-b img{width:60%;height:auto}
-  .hmcard-a{position:relative;width:min(340px,78%);aspect-ratio:4/5;background:#EE6604;
+  .hmcard-a{position:relative;width:min(340px,78%);aspect-ratio:4/5;background:#fff;
     transform:rotate(-3deg);padding:30px 28px;display:flex;flex-direction:column;
     justify-content:space-between}
   .hmcard-a img{display:block;width:min(150px,46%);height:auto}
   /* humm set their materials in Metropolis; their sanctioned web-safe fallback
      is Arial (guidelines p16). Their card, their face — ours stays Jakarta. */
-  .hmcard-a .hmline{font-family:Arial,Helvetica,sans-serif;font-weight:700;color:#fff;
+  .hmcard-a .hmline{font-family:Arial,Helvetica,sans-serif;font-weight:700;color:#EE6604;
     font-size:clamp(1.7rem,2.4vw,2.2rem);line-height:1.08;letter-spacing:-.01em;margin:0}
-  .hmcard-a .hmsub{font-family:Arial,Helvetica,sans-serif;color:#fff;font-size:19px;
+  .hmcard-a .hmsub{font-family:Arial,Helvetica,sans-serif;color:#333;font-size:17px;
     font-weight:700;line-height:1.35;margin:14px 0 0}
   @media(max-width:900px){
-    .hmgrid{grid-template-columns:1fr;gap:48px}
-    .hmcards{min-height:360px}
+    .hmgrid{grid-template-columns:1fr;gap:44px}
+    .hmcards{min-height:380px}
     .hmcard-b{transform:rotate(2deg) translate(26%,-4%)}
     .hmcard-a{transform:rotate(-2deg)}
   }
   @media(max-width:767px){
-    .humm{padding:70px 0 64px}
-    .hmcards{min-height:330px}
+    .humm{padding:70px 0 66px}
+    .humm .lede{font-size:19px}
+    .hmpanel{padding:26px 22px}
+    .hmcards{min-height:340px}
     .hmcard-a{width:min(280px,84%);padding:24px 22px}
     .hmcard-b{width:min(244px,70%)}
   }
@@ -4385,6 +4429,19 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           <span class="gsub">From 22 real Sydney reviews</span>
         </span>
       </div>
+      <!-- humm's turn in the deck (HD[5], .hdeck.ish) — the one card that IS a
+           link: its whole job is sending people to /humm. Face copy is humm's
+           own approved messaging; the compliance line (advertise + link only,
+           never recommend) lives with the /humm page and the .humm section. -->
+      <a class="hmhd" href="humm" aria-label="Flexible payment plans through humm. Up to 24 months interest free. See how humm works">
+        <span class="hmt">
+          <b>Big buys made easy.</b>
+          <span class="hsub">Up to 24 months interest free on your new system.</span>
+          <span class="hshort">Up to 24 months interest free.</span>
+          <span class="hbtn">See how humm works</span>
+        </span>
+        <img src="media/humm/humm-tag-white.webp" alt="" width="480" height="161">
+      </a>
     </div>
   </div>
   </div><!-- /.hcard -->
@@ -4799,17 +4856,18 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      apply up to $10,000 — hence the qualifier in the fine print. -->
 <section class="humm arc" id="payments">
   <div class="in">
+    <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">Flexible payment plans</span>
+    <h2 class="d2 rv">Filtered water now.<br>Pay it off over time.</h2>
+    <p class="lede rv">We offer finance through humm. The system goes in now, you spread the cost over time, and the application is yours to do online in under 10 minutes.</p>
     <div class="hmgrid">
-      <div class="hmcopy">
-        <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">Flexible payment plans</span>
-        <h2 class="d2 rv">Filtered water now. Pay it off over time.</h2>
-        <p class="lede rv">We offer finance through humm. The system goes in now, you spread the cost over time, and the application is yours to do online in under 10 minutes.</p>
+      <div class="hmpanel">
         <ul class="ilist rv">
           <li><b>$0 interest</b><span>Interest free terms up to 24 months.</span></li>
           <li><b>Your rhythm</b><span>Fortnightly or monthly repayments.</span></li>
           <li><b>Under 10 minutes</b><span>Apply online. humm handles the rest.</span></li>
         </ul>
         <div class="go rv"><a class="btn" href="humm"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>See how humm works</a></div>
+        <p class="hmfine">Interest free terms apply to purchases up to $10,000. Payment plans to approved applicants only. Fees, terms, minimum amounts and conditions apply. Payment plans provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of the humm group.</p>
       </div>
       <div class="hmcards rv" aria-hidden="true">
         <div class="hmcard hmcard-b"><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
@@ -4817,12 +4875,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           <p class="hmline">Big buys<br>made easy.</p>
           <div>
             <p class="hmsub">Up to 24 months interest free on your new system.</p>
-            <img src="media/humm/humm-tag-white.webp" alt="" width="480" height="161" loading="lazy" style="margin-top:18px">
+            <img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy" style="margin-top:18px">
           </div>
         </div>
       </div>
     </div>
-    <p class="hmfine">Interest free terms apply to purchases up to $10,000. Payment plans to approved applicants only. Fees, terms, minimum amounts and conditions apply. Payment plans provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of the humm group.</p>
   </div>
 </section>
 
@@ -5677,7 +5734,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      name:'Smart 5 Stage Alkaline Reverse Osmosis', pure:'Pure Luxe', pre:'', amt:'$2,290', suf:'installed', cta:'Get a fixed price',
      who:'For families who want the same pure, alkaline water and a screen that shows them the purity as they pour it.',
      loc:'Smart under sink water filtration, installed across Sydney',
-     ticks:['Up to 99% of contaminants out','PFAS and microplastics gone','Alkaline, mineral rich water','Watch the purity live on screen']}
+     ticks:['Up to 99% of contaminants out','PFAS and microplastics gone','Alkaline, mineral rich water','Watch the purity live on screen']},
+    /* humm's card — flag-only, like google. hdApply branches before the
+       product writes. Phones KEEP it (unlike google, it repeats nothing). */
+    {humm:true, tagc:'#EE6604'}
   ];
   var hdeck = document.getElementById('hdeck');
   if (hdeck){
@@ -5705,11 +5765,21 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          nothing in it. */
       if (d.google){
         if (hdeck.classList.contains('open')) hdClose();
+        hdeck.classList.remove('ish');
         hdeck.classList.add('isg');
         hdeck.style.setProperty('--ac', d.tagc);
         return;
       }
+      /* humm's turn — same early return, same reasons as google. */
+      if (d.humm){
+        if (hdeck.classList.contains('open')) hdClose();
+        hdeck.classList.remove('isg');
+        hdeck.classList.add('ish');
+        hdeck.style.setProperty('--ac', d.tagc);
+        return;
+      }
       hdeck.classList.remove('isg');
+      hdeck.classList.remove('ish');
       hdeck.classList.toggle('notag', !d.tag);
       hdTags.forEach(function(el){ el.textContent = d.tag; });
       document.getElementById('hdImg').src = d.img;
