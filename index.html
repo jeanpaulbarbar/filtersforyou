@@ -1262,6 +1262,21 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hdeck.ish .more .hmgo{display:inline-flex}
   .hdeck.ish .more .inner2{background:#fff;border-radius:10px;margin:0 12px 12px}
   .hdeck.ish .more li svg path{stroke:#EE6604}
+  /* JP, 28 Aug: "I'd prefer the card expansion looked more like the payment
+     plans section — their fonts and that sort of style." So the open humm
+     card borrows the section's panel grammar: grey kicker, Metropolis
+     Extrabold worked example with the tangerine figure, Metropolis Bold
+     rows. Product cards keep Plus Jakarta. */
+  .hdeck .more .hdkick,.hdeck .more .hdbig,.hdeck .more .hdsm{display:none}
+  .hdeck.ish .more .hdkick{display:inline-flex;font-size:11.5px;padding:6px 11px;margin-bottom:12px}
+  .hdeck.ish .more .hdbig{display:block;font-family:var(--hummf);font-weight:800;color:var(--ink);
+    font-size:22px;line-height:1.1;letter-spacing:-.015em;margin:0}
+  .hdeck.ish .more .hdbig b{color:#EE6604}
+  .hdeck.ish .more .hdsm{display:block;font-size:13px;line-height:1.45;color:var(--muted);margin:8px 0 0}
+  .hdeck.ish .more .who{font-family:var(--hummf);font-weight:700;color:#333333;font-size:15.5px;
+    line-height:1.4;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+  .hdeck.ish .more li{font-family:var(--hummf);font-weight:700;color:var(--ink);font-size:16.5px}
+  .hdeck.ish .more .hmgo{font-family:var(--hummf);font-weight:700}
   /* ⛔ 124 IS THE PRODUCT CARDS' MEASURED PHONE HEIGHT (round 58). A deck
      whose slab resizes on every flip is not a deck — this card pins to it,
      and the phone gets its own SHORT offer line because the desktop sentence
@@ -4451,6 +4466,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       </button>
       <div class="more" id="hdMore"><div><div class="inner2">
         <div class="dscroll">
+        <!-- humm's turn only (.ish): the section's own grammar in the drawer —
+             the grey kicker, the worked example, the qualifier. Static, so the
+             number lives in ONE place per surface and is arithmetic, not a quote:
+             $3,850 / 52 fortnights = $74.04, rounded down. -->
+        <span class="hmkick hdkick">Flexible payment plans</span>
+        <p class="hdbig">Whole house system from <b>$74</b> a fortnight.</p>
+        <p class="hdsm">The from $3,850 install over 24 months, interest free. humm's $80 establishment fee applies.</p>
         <p class="who" id="hdWho"></p>
         <ul id="hdTicks"></ul>
         <!-- ROUND 48 — the three assurances that are true of every system, so
