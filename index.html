@@ -2132,7 +2132,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .zero .go{margin-top:40px}
 
   /* ── TAPS — tight rail, arc in ──────────────────────────── */
-  .taps{background:var(--paper);z-index:13;padding:110px 0 90px}
+  .taps{background:var(--paper);z-index:15;padding:110px 0 90px}
   .taps .head2{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;flex-wrap:wrap;margin-bottom:44px}
   .taps h2{max-width:16ch;margin-top:14px}
   .trailwrap{overflow:hidden;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut)}
@@ -2188,7 +2188,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      as the badge, real install photos, and the rail runs on rAF with a
      clamped dt (never a keyframe — the standing iOS law), pauses on hover,
      and is a native swipe rail with scroll-snap on phones. */
-  .revs{background:var(--paper);z-index:14;padding:96px 0 90px;position:relative;overflow:hidden}
+  .revs{background:var(--paper);z-index:17;padding:96px 0 90px;position:relative;overflow:hidden}
   .revs .in{position:relative}
   .revs .rhead{text-align:center;max-width:680px;margin:0 auto}
   .revs .rtop{display:inline-flex;align-items:center;gap:16px}
@@ -2259,7 +2259,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(max-width:959px){.newdev .pic{max-height:380px}}
 
   /* ── THE ASK ────────────────────────────────────────────── */
-  .asksec{background:var(--g-field);color:#fff;z-index:15;padding:120px 0 100px;position:relative;overflow:hidden}
+  .asksec{background:var(--g-field);color:#fff;z-index:19;padding:120px 0 100px;position:relative;overflow:hidden}
   .asksec::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
     background:radial-gradient(46% 56% at 90% 2%,rgba(255,255,255,.16),transparent 60%),
                radial-gradient(38% 48% at 4% 100%,rgba(4,16,46,.28),transparent 65%)}
@@ -2605,7 +2605,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 
   /* every in-page jump has to clear the fixed header, or the thing you tapped
      for lands underneath it. */
-  #range,#wholehome,#pillars,#ledger,#taps,#newbuilds,#proof,#ask,#areas,#contact{scroll-margin-top:86px}
+  #range,#wholehome,#pillars,#ledger,#payments,#taps,#newbuilds,#proof,#ask,#areas,#contact{scroll-margin-top:86px}
 
   /* ═══════════════════════════════════════════════════════════
      PHONE PASS — round 9, 15 Aug. JP: "it's all out of proportion,
@@ -3432,15 +3432,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      both `--paper`, so a mis-stacked seam between two identical grounds
      cannot be seen. It will surface the moment either ground changes. */
   .scope{z-index:13}
-  .taps{z-index:14}
+  .humm{z-index:14}
+  .taps{z-index:15}
   /* ROUND 33 — .newdev finally gets its rung. Round 30 recorded it as FOUND,
      NOT FIXED with the exact prediction: "invisible today only because it and
      .taps are both --paper. It will surface the moment either ground changes."
      Round 33 changed its ground to ink, so it surfaced. Fixed before render. */
-  .newdev{z-index:15}
-  .revs{z-index:16}
-  .faq{z-index:17}
-  .asksec{z-index:18}
+  .newdev{z-index:16}
+  .revs{z-index:17}
+  .faq{z-index:18}
+  .asksec{z-index:19}
   /* ⛔ ROUND 58 — THE FOOTER HAD NO RUNG, AND THAT IS THE THREE CARDS JP SAW
      SITTING IN IT ON HIS PHONE. Measured 2026-08-27 at 390x844, scrolled to
      the very bottom: `.slide.s1/.s2/.s3` were still `position:sticky` at
@@ -3457,7 +3458,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      ⛔ Do NOT "fix" this by moving the slides inside `.pilwrap`. The whole
      round-54 pin arithmetic (H = 315svh + 3R − A − T) is written against
      them being body children and `.s1` being pulled up by −200svh. */
-  .foot{position:relative;z-index:19}
+  .foot{position:relative;z-index:20}
 
   /* ── 7b · WHAT THE PRICE INCLUDES ──
      Mist ground so it reads as its own panel while staying in the same light
@@ -3513,6 +3514,57 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(min-width:720px){ .ilist{grid-template-columns:1fr 1fr} }
   @media(min-width:1100px){
     .ilist{grid-template-columns:repeat(3,1fr);gap:40px 44px}
+  }
+
+  /* ── 7d · PAYMENT PLANS — humm (2026-08-28) ──
+     The money story in order: the prices (#ledger), what the price includes
+     (#included), and now how it can be paid. FFY is an approved humm merchant
+     (unsolicited agreement, signed 26 Aug 2026) — we may ADVERTISE that
+     finance is available and link them to humm; the customer applies
+     themselves. Copy stays inside that line.
+     ⛔ #EE6604 is humm's own digital orange (their 2025 guidelines, p11) and
+     #333333 their grey — partner colours, deliberate literals, NOT page
+     tokens. The white logo sits on tangerine, the tangerine logo on white,
+     exactly as their lockup rules demand. Never recolour, stretch or crop
+     their marks. Toolkit: Workspace/Brand Assets/Partners/humm/. */
+  .humm{background:var(--paper);z-index:14;padding:104px 0 96px;color:var(--ink)}
+  .hmgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+  .humm h2{margin-top:14px;max-width:16ch}
+  .humm .lede{margin-top:16px;color:var(--muted);max-width:44ch}
+  .humm .ilist{margin-top:40px;gap:26px 40px}
+  @media(min-width:1100px){ .humm .ilist{grid-template-columns:1fr 1fr;gap:28px 40px} }
+  .humm .go{margin-top:36px}
+  .hmfine{margin:44px 0 0;font-size:13px;line-height:1.55;color:var(--muted);max-width:82ch}
+  /* The stack: humm's tent cards, standing on our page. Resting tilt is the
+     deck's own vocabulary (round 54: cards rest at a few degrees). Static —
+     they arrive on .rv like everything else and then hold still. */
+  .hmcards{position:relative;display:grid;place-items:center;min-height:400px}
+  .hmcard{border-radius:var(--r-card);box-shadow:var(--shadow-lg)}
+  .hmcard-b{position:absolute;width:min(300px,66%);aspect-ratio:4/5;background:#fff;
+    border:1px solid var(--rule);transform:rotate(4.5deg) translate(23%,-4%);
+    display:grid;place-items:center}
+  .hmcard-b img{width:60%;height:auto}
+  .hmcard-a{position:relative;width:min(340px,78%);aspect-ratio:4/5;background:#EE6604;
+    transform:rotate(-3deg);padding:30px 28px;display:flex;flex-direction:column;
+    justify-content:space-between}
+  .hmcard-a img{display:block;width:min(150px,46%);height:auto}
+  /* humm set their materials in Metropolis; their sanctioned web-safe fallback
+     is Arial (guidelines p16). Their card, their face — ours stays Jakarta. */
+  .hmcard-a .hmline{font-family:Arial,Helvetica,sans-serif;font-weight:700;color:#fff;
+    font-size:clamp(1.7rem,2.4vw,2.2rem);line-height:1.08;letter-spacing:-.01em;margin:0}
+  .hmcard-a .hmsub{font-family:Arial,Helvetica,sans-serif;color:#fff;font-size:19px;
+    font-weight:700;line-height:1.35;margin:14px 0 0}
+  @media(max-width:900px){
+    .hmgrid{grid-template-columns:1fr;gap:48px}
+    .hmcards{min-height:360px}
+    .hmcard-b{transform:rotate(2deg) translate(26%,-4%)}
+    .hmcard-a{transform:rotate(-2deg)}
+  }
+  @media(max-width:767px){
+    .humm{padding:70px 0 64px}
+    .hmcards{min-height:330px}
+    .hmcard-a{width:min(280px,84%);padding:24px 22px}
+    .hmcard-b{width:min(244px,70%)}
   }
 
   /* ── 9b · THE FAQ — round 31, rebuilt collapsible ──
@@ -4736,6 +4788,44 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   </div>
 </section>
 
+<!-- ═════════ 7d · PAYMENT PLANS — humm ═════════
+     FFY is an approved humm merchant (26 Aug 2026). This section ADVERTISES
+     that finance exists and hands the detail to /humm, which runs humm's own
+     hosted landing widget — their content, compliant by construction.
+     ⛔ THE LINE (unsolicited agreement): we may say finance is available,
+     link the page, answer if asked. We never recommend a term, never assess
+     suitability, never fill in the application. Copy that crosses that line
+     does not ship. Fee memory: interest free tiers run 6/12/18/24 months and
+     apply up to $10,000 — hence the qualifier in the fine print. -->
+<section class="humm arc" id="payments">
+  <div class="in">
+    <div class="hmgrid">
+      <div class="hmcopy">
+        <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">Flexible payment plans</span>
+        <h2 class="d2 rv">Filtered water now. Pay it off over time.</h2>
+        <p class="lede rv">We offer finance through humm. The system goes in now, you spread the cost over time, and the application is yours to do online in under 10 minutes.</p>
+        <ul class="ilist rv">
+          <li><b>$0 interest</b><span>Interest free terms up to 24 months.</span></li>
+          <li><b>Your rhythm</b><span>Fortnightly or monthly repayments.</span></li>
+          <li><b>Under 10 minutes</b><span>Apply online. humm handles the rest.</span></li>
+        </ul>
+        <div class="go rv"><a class="btn" href="humm"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>See how humm works</a></div>
+      </div>
+      <div class="hmcards rv" aria-hidden="true">
+        <div class="hmcard hmcard-b"><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
+        <div class="hmcard hmcard-a">
+          <p class="hmline">Big buys<br>made easy.</p>
+          <div>
+            <p class="hmsub">Up to 24 months interest free on your new system.</p>
+            <img src="media/humm/humm-tag-white.webp" alt="" width="480" height="161" loading="lazy" style="margin-top:18px">
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="hmfine">Interest free terms apply to purchases up to $10,000. Payment plans to approved applicants only. Fees, terms, minimum amounts and conditions apply. Payment plans provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of the humm group.</p>
+  </div>
+</section>
+
 <!-- ═════════ 8 · TAPS ═════════ -->
 <section class="taps arc" id="taps">
   <div class="in">
@@ -5002,6 +5092,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
            not in the nav, so linking them breaks nothing. -->
       <nav class="flinks" aria-label="Footer">
         <a class="ul" href="lifetime-warranty">Lifetime warranty</a>
+        <a class="ul" href="humm">Payment plans</a>
         <a class="ul" href="#proof">Reviews</a>
         <a class="ul" href="#pillars">About us</a>
         <a class="ul" href="#ask">Contact</a>
