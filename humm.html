@@ -66,6 +66,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"></n
 }
 @font-face{font-family:"PJS Fallback";src:local("Arial");
   size-adjust:104.5%;ascent-override:101%;descent-override:26%;line-gap-override:0%}
+@font-face{font-family:'Metropolis';font-style:normal;font-weight:800;font-display:swap;
+  src:url('/fonts/Metropolis-ExtraBold.woff2') format('woff2')}
 :root{
   --blue:#0B61F4; --ink:#0F2748; --muted:#4E5B75; --paper:#FFFEFC; --mist:#EDF3F7;
   --rule:#E3E9F3; --yellow:#FFD900;
@@ -88,8 +90,8 @@ body{margin:0;font-family:var(--sans);background:var(--paper);color:var(--ink);
 .btn:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 @media(hover:hover){ .btn:hover{background:var(--ink);color:#fff} }
 .hero{background:var(--mist);padding:64px 0 56px}
-.hero h1{font-weight:500;letter-spacing:-.005em;line-height:1.08;margin:14px 0 0;
-  font-size:clamp(2rem,4.6vw,3.2rem);max-width:18ch}
+.hero h1{font-family:"Metropolis",Arial,Helvetica,sans-serif;font-weight:800;letter-spacing:-.015em;line-height:1.02;margin:14px 0 0;
+  font-size:clamp(2.2rem,5vw,3.6rem);max-width:16ch;color:#EE6604}
 .lab{display:inline-flex;align-items:center;gap:10px;font-size:17px;font-weight:700;color:var(--blue)}
 .lab img{width:44px;height:44px}
 .hero .lede{font-size:clamp(1.1rem,1.5vw,1.3rem);color:var(--muted);max-width:56ch;margin:18px 0 0;font-weight:500}
