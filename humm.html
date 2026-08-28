@@ -400,8 +400,9 @@ main{padding-top:72px}
 @media(hover:hover){  }
 @media(prefers-reduced-motion:reduce){  }
 .hummwrap{min-height:120vh}
-/* JP: on phones the widget looked cut off inside the gutters. Full bleed. */
-@media(max-width:767px){ .widget .in{padding:0;max-width:none} .widget .fine{padding:0 22px} }
+/* JP, 28 Aug: the humm widget runs full width on DESKTOP (it holds up), keeps
+   the gutters on phones (full bleed clipped their words). */
+@media(min-width:768px){ .widget .in{max-width:none;padding:0} .widget .fine{max-width:1100px;margin-left:auto;margin-right:auto;padding:0 22px} }
 @media(max-width:700px){
       .hero{padding:44px 0 40px}
   .widget{padding:28px 0 48px}
