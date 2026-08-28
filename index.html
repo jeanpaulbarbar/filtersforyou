@@ -1269,7 +1269,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   /* JP: "no padding, the words are too close to the top edge." 26px top,
      22 sides, 24 bottom — declared at .ish specificity so the phone's
      `2px 15px 15px` open-card rule cannot win. Measured after. */
-  .hdeck.ish .more .inner2{background:none;padding:26px 22px 24px}
+  /* ⛔ THE WHITE LINE, FOUND BY PIXEL: .inner2 carries `border-top:1px solid
+     var(--rule)` — the divider under a product FACE. The humm drawer is first
+     in the DOM, so that divider sat on the card's TOP edge: one CSS px of
+     #E3E9F3 over the video, measured at 4x on 2026-08-28. Off on .ish. */
+  .hdeck.ish .more .inner2{background:none;padding:26px 22px 24px;border-top:0}
   .hdeck .more .hdkick,.hdeck .more .hdbig,.hdeck .more .hdstats{display:none}
   .hdeck.ish .more .who,.hdeck.ish #hdTicks{display:none}
   .hdeck.ish .more .hdbig{display:block;font-family:var(--hummf);font-weight:800;color:#fff;
@@ -3667,9 +3671,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     transform:rotate(4.5deg) translate(23%,-4%);display:grid;place-items:center}
   .hmcard-b img{width:60%;height:auto}
   .hmcard-a{position:relative;width:min(340px,78%);aspect-ratio:4/5;background:#fff;
-    transform:rotate(-3deg);padding:30px 28px;display:flex;flex-direction:column;
-    justify-content:space-between}
-  .hmcard-a img{display:block;width:min(150px,46%);height:auto}
+    transform:rotate(-3deg);display:grid}
+  .hmface{grid-area:1/1;padding:30px 28px;display:flex;flex-direction:column;justify-content:space-between;
+    opacity:0;visibility:hidden}
+  .hmface.on{opacity:1;visibility:visible}
+  .hmface img{display:block;width:min(150px,46%);height:auto;margin-top:18px}
   .hmcard-a .hmline{font-family:var(--hummf);font-weight:800;color:#EE6604;
     font-size:clamp(1.8rem,2.5vw,2.3rem);line-height:1.02;letter-spacing:-.015em;margin:0}
   .hmcard-a .hmsub{font-family:var(--hummf);color:#333;font-size:17px;
@@ -3677,9 +3683,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(max-width:1100px){ .hmstats{grid-template-columns:repeat(2,1fr)} }
   @media(max-width:900px){
     .hmgrid{grid-template-columns:1fr;gap:44px}
-    .hmcards{min-height:380px}
-    .hmcard-b{transform:rotate(2deg) translate(26%,-4%)}
-    .hmcard-a{transform:rotate(-2deg)}
+    .hmcards{display:none}   /* JP: gone on phones, kept on desktop */
   }
   @media(max-width:767px){
     .humm{padding:64px 0 64px}
@@ -3691,9 +3695,6 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .hmgrid{margin-top:40px}
     .hmpanel{padding:26px 22px}
     .hmbig{font-size:1.75rem}
-    .hmcards{min-height:340px}
-    .hmcard-a{width:min(280px,84%);padding:24px 22px}
-    .hmcard-b{width:min(244px,70%)}
   }
 
   /* ── 9b · THE FAQ — round 31, rebuilt collapsible ──
@@ -4981,13 +4982,26 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         <div class="go"><a class="btn" href="humm"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>See how humm works</a></div>
         <p class="hmfine">Interest free terms apply to purchases up to $10,000. Payment plans to approved applicants only. Fees, terms, minimum amounts and conditions apply. Payment plans provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of the humm group.</p>
       </div>
-      <div class="hmcards rv" aria-hidden="true">
+      <!-- JP, 28 Aug: desktop only ("keep it on the desktop version"), and
+           "three cards that fold after one another, an infinite loop, like a
+           deck of cards, the card hiding behind the other one." Three faces
+           inside the front card; hmDeal() deals them with the hero deck's own
+           out/in tween (GONE → arrive from above), every 4.2s, resting while
+           hovered, static on reduced motion. The back card is the one hiding. -->
+      <div class="hmcards rv" id="hmcards" aria-hidden="true">
         <div class="hmcard hmcard-b"><img src="media/humm/humm-bird-tang.webp" alt="" width="900" height="751" loading="lazy"></div>
-        <div class="hmcard hmcard-a">
-          <p class="hmline">Big buys<br>made easy.</p>
-          <div>
-            <p class="hmsub">Up to 24 months interest free on your new system.</p>
-            <img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy" style="margin-top:18px">
+        <div class="hmcard hmcard-a" id="hmfront">
+          <div class="hmface on">
+            <p class="hmline">Big buys<br>made easy.</p>
+            <div><p class="hmsub">Up to 24 months interest free on your new system.</p><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
+          </div>
+          <div class="hmface">
+            <p class="hmline">From only<br>$83 a fortnight.</p>
+            <div><p class="hmsub">Whole house system, custom quoted for your home.</p><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
+          </div>
+          <div class="hmface">
+            <p class="hmline">Apply in<br>10 minutes.</p>
+            <div><p class="hmsub">Online, on your phone. humm handles the rest.</p><img src="media/humm/humm-tag-tang.webp" alt="" width="480" height="161" loading="lazy"></div>
           </div>
         </div>
       </div>
@@ -6000,6 +6014,29 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     hdTgl.addEventListener('click', hdToggle);
     hdHumm.addEventListener('click', hdToggle);
   }
+  /* ── the payment section's three tent-card faces, dealt like the hero deck ── */
+  (function(){
+    var front = document.getElementById('hmfront'); if (!front) return;
+    var faces = [].slice.call(front.querySelectorAll('.hmface')); if (faces.length < 2) return;
+    var i = 0, hover = false, seen = false;
+    var wrap = document.getElementById('hmcards');
+    wrap.addEventListener('mouseenter', function(){ hover = true; });
+    wrap.addEventListener('mouseleave', function(){ hover = false; });
+    function show(n){ faces.forEach(function(f, k){ f.classList.toggle('on', k === n); }); }
+    function deal(){
+      if (hover || !seen || !matchMedia('(min-width:901px)').matches) return;
+      var next = (i + 1) % faces.length;
+      if (reduce || !hasGsap){ i = next; show(i); return; }
+      gsap.to(front, {scale:.965, opacity:0, y:16, duration:.26, ease:'power2.in', onComplete:function(){
+        i = next; show(i);
+        gsap.fromTo(front, {scale:.965, opacity:0, y:-16}, {scale:1, opacity:1, y:0, duration:.58, ease:'power3.out'});
+      }});
+    }
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){ seen = es.some(function(e){ return e.isIntersecting; }); }, {threshold:.2}).observe(wrap);
+    } else seen = true;
+    setInterval(deal, 4200);
+  })();
 
   /* ── SHOWCASE — stage layer follows the active system ──── */
   var stage = document.getElementById('stage');
