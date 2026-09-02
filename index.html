@@ -1950,17 +1950,36 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      smaller scale, never a different layout and never a hidden one — dropping
      the proof photographs would have been the easy 26px and it is the one
      thing on this column that is evidence. */
-  @media(min-width:960px) and (max-height:899px){
-    .show.pinmode .sys h3{font-size:clamp(1.9rem,3.1vw,2.6rem)}
-    .show.pinmode .sys .pure{font-size:19px;margin-top:7px}
-    .show.pinmode .sys .rowp{margin-top:16px}
-    .show.pinmode .sys .incl{margin-top:16px;gap:10px 18px}
-    .show.pinmode .sys .incl li{font-size:17.5px}
-    .show.pinmode .sys .proof3{margin-top:18px;gap:9px}
-    .show.pinmode .sys .proof3 img{width:84px;height:84px}
-    .show.pinmode .sys .proof3 .pcap{font-size:15px}
-    .show.pinmode .sys .go{margin-top:16px}
+  /* ⭐⭐ ROUND 83 — THE FOURTH TRIM PASS, AND IT IS THE SAME TRADE THE THREE
+     RUNGS BELOW ALREADY MADE. The servicing line costs a MEASURED 32px in
+     every cell (23px of text + 9px of gap) and the pinned column is a fixed
+     height with no second chance, so that 32px has to come from somewhere.
+     It comes out of the vertical RHYTHM, not out of the content: the gaps
+     between the price, the ticks, the photographs and the CTA close up in pin
+     mode only. Nobody perceives a 26px gap as different from an 18px gap in
+     isolation; everybody perceives a CTA cut off at the bottom of the frame.
+     ⛔ THE PLAIN-FLOW LANE KEEPS THE AIR. Below 960 the section scrolls like
+     any other and has all the room it wants — this block is scoped to pinmode
+     for exactly that reason. MEASURED after: 1440x900 29px spare.
+     ⛔ Placed BEFORE the three rungs on purpose. Same specificity, so source
+     order decides, and the rungs must still be able to trim further. */
+  @media(min-width:960px){
+    .show.pinmode .sys .rowp{margin-top:18px}
+    .show.pinmode .sys .svcline{margin-top:6px}
+    .show.pinmode .sys .incl{margin-top:18px}
+    .show.pinmode .sys .proof3{margin-top:20px}
+    .show.pinmode .sys .go{margin-top:18px}
   }
+  /* ⛔⛔ ROUND 83 — THE WIDTH RUNG MOVED ABOVE THE HEIGHT RUNGS, AND THAT IS A
+     BUG FIX, NOT HOUSEKEEPING. These blocks have equal specificity, so source
+     order decided them, and the width rung was LAST — which meant a narrow AND
+     short window (a 1024x768 laptop, a 960-wide half-screen at 700 tall) had
+     its tight height-rung margins reset to the loose width-rung ones. MEASURED
+     on the page as it stood before this round: 960x700 was 10px over,
+     1100x760 was 12px over, 1149x700 was 2px over — the copy was already
+     running past the bottom of the pinned frame on those three, and adding the
+     servicing line would have taken it to 36. Narrow-and-short must get the
+     TIGHTER of the two, so the height rungs now come last and win. */
   /* ⛔ HEIGHT IS NOT THE ONLY AXIS. At 1000px WIDE the column is narrow enough
      that the names and the tick lines re-wrap, and it ran 8px over on a 900px
      screen that the height rung above never touches. Same trim, keyed to width. */
@@ -1971,16 +1990,52 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .show.pinmode .sys .proof3{margin-top:20px}
     .show.pinmode .sys .proof3 img{width:88px;height:88px}
     .show.pinmode .sys .go{margin-top:18px}
+    /* ⭐ ROUND 83 — THE TWO BUTTONS STAY ON ONE ROW HERE, AND THAT IS WORTH
+       MORE THAN FOUR PIXELS OF PADDING. MEASURED at 1000x900: the pair wrapped
+       and the `.go` row went 46px → 104px, which is nearly twice what the
+       servicing line costs. The buttons compact instead — same two buttons,
+       same order, same colours, just tighter. */
+    /* ⛔ `.go > *` AND NOT `.go .btn`, AND THAT IS NOT A STYLE PREFERENCE.
+       `btn` is a SHELL TOKEN: site_shell.py lifts every rule naming it out of
+       this stylesheet and stamps it into all 544 other pages, so writing
+       `.go .btn` here would have shrunk the header and footer buttons on the
+       whole site from one homepage tweak. Caught by the shell check, which
+       failed on humm.html the first time this block was written. */
+    .show.pinmode .sys .go{gap:10px;flex-wrap:nowrap}
+    .show.pinmode .sys .go > *{padding:0 14px 0 5px;font-size:14.5px;gap:8px;white-space:nowrap}
+    .show.pinmode .sys .go > * > i{width:30px;height:30px;flex:0 0 30px}
+  }
+  @media(min-width:960px) and (max-height:899px){
+    .show.pinmode .sys h3{font-size:clamp(1.9rem,3.1vw,2.6rem)}
+    .show.pinmode .sys .pure{font-size:19px;margin-top:7px}
+    .show.pinmode .sys .rowp{margin-top:10px}
+    /* round 83: the servicing line comes down a step too, and its gap closes */
+    .show.pinmode .sys .svcline{margin-top:4px;font-size:15.5px;line-height:1.3}
+    .show.pinmode .sys .incl{margin-top:10px;gap:8px 18px}
+    .show.pinmode .sys .incl li{font-size:17.5px}
+    .show.pinmode .sys .proof3{margin-top:14px;gap:9px}
+    .show.pinmode .sys .proof3 img{width:78px;height:78px}
+    .show.pinmode .sys .proof3 .pcap{font-size:15px}
+    /* ⛔ THE CTA ROW KEEPS ITS AIR. Trimmed to 10 with everything else and the
+       render showed the buttons sitting on top of the proof photographs —
+       caught by eye at 1024x768, not by the overflow number, which was 27px
+       CLEAR. A budget that fits is not the same as a block that reads. */
+    .show.pinmode .sys .go{margin-top:16px}
   }
   /* the second rung. A 700px-tall window is a 13" laptop with the dock showing
      and it is real. Measured 24px over after the first rung; this clears it. */
   @media(min-width:960px) and (max-height:739px){
-    .show.pinmode .sys h3{font-size:clamp(1.7rem,2.7vw,2.2rem)}
-    .show.pinmode .sys .pure{font-size:17px;margin-top:5px}
+    .show.pinmode .sys h3{font-size:clamp(1.7rem,2.6vw,2.05rem)}
+    .show.pinmode .sys .pure{font-size:17px;margin-top:3px}
     .show.pinmode .sys .incl li{font-size:16.5px}
-    .show.pinmode .sys .proof3 img{width:72px;height:72px}
-    .show.pinmode .sys .proof3{margin-top:14px}
-    .show.pinmode .sys .go{margin-top:14px}
+    .show.pinmode .sys .proof3 img{width:60px;height:60px}
+    .show.pinmode .sys .proof3{margin-top:10px}
+    .show.pinmode .sys .incl{gap:6px 18px}
+    .show.pinmode .sys .go{margin-top:10px}
+    /* round 83: a 700px-tall window is a 13" laptop with the dock showing and
+       it is the worst case on this page. The servicing line goes to its floor
+       (15px, the site's minimum) rather than the photographs coming out. */
+    .show.pinmode .sys .svcline{font-size:15px;margin-top:3px}
   }
   .show .sys{padding:56px 0;border-top:1px solid rgba(11,97,244,.14);position:relative}
   .show .sys:first-child{border-top:0;padding-top:0}
@@ -2011,6 +2066,40 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      in the source. Same family as the round-10 wrapper-span trap: never write a
      bare `span` rule beside a classed sibling. */
   .show .sys .rowp span:not(.money){font-size:19px;font-weight:700;color:var(--muted)}
+  /* ⭐ ROUND 83 — THE YEARLY NUMBER SITS UNDER THE INSTALL PRICE, QUIET.
+     JP: "a very soft servicing cost near the price... serviced every year,
+     $0 if it ever fails". It is the `#ledger` section's own three-number ladder
+     (installed · every year after · if it ever fails) collapsed onto ONE line
+     and brought up beside the price, in the Pure Home V7 spec-line form.
+     ⛔ MUTED AT 16.5px AND IT STAYS THERE. `.money` is 4.2rem at weight 800 and
+     round 19's rule is that the install price is the loudest thing in the
+     block — a servicing figure that competes with it re-prices the system in
+     the reader's head. Only the two NUMBERS come back to ink at weight 800,
+     which is the typography law for numbers, and that is the whole contrast.
+     ⛔ `max-width:44ch` IS THE PIN'S HEIGHT BUDGET DEFENDING ITSELF. The copy
+     column has a MEASURED ceiling (1152x760 ran 89px over before the step-down
+     rungs). At two lines this costs 32px; at three it would cost 55 and push
+     the yellow CTA off the bottom of a 760px-tall laptop. 44ch cannot wrap to
+     three at any width this column reaches. */
+  .show .sys .svcline{margin-top:9px;font-size:16.5px;line-height:1.4;font-weight:600;
+    color:var(--muted);max-width:44ch;letter-spacing:.002em}
+  .show .sys .svcline b{font-weight:800;color:var(--ink);letter-spacing:-.012em}
+  /* ⛔ THE LINE BREAKS BETWEEN THE TWO SENTENCES OR NOT AT ALL. At 360 wide it
+     wraps, and left to itself it broke as "...if it ever / fails." — one word
+     stranded on its own line under a price. Each sentence is a nowrap unit, so
+     the only break available is the one between them. Measured: the longer
+     sentence is 190px, the column is 324px at 360 — neither can overflow. */
+  .show .sys .svcline span{white-space:nowrap}
+  /* ⛔ THE SYSTEM NAME IS A LINK NOW, AND AT REST IT LOOKS IDENTICAL.
+     "Learn more" was the homepage BODY's only link to the three system pages,
+     and round 29's lesson was exactly that: 550 pages in the site and the
+     homepage passed authority to none of them. The booking CTA replaced that
+     link, so the name carries it instead — the page's own `.ul`
+     underline-on-hover grammar, inherited colour, zero pixels. */
+  .show .sys .pure a{color:inherit;text-decoration:none}
+  /* A deep link (/#PurePlus) in the PLAIN-FLOW lane — phone, reduced motion, no
+     GSAP — is a native fragment jump, and the header is fixed at 70px. */
+  .show .sys{scroll-margin-top:96px}
   /* three real installs under every system (JP round 5; round 6 sized up) */
   .proof3{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:28px}
   .proof3 img{width:110px;height:110px;border-radius:var(--r-sm);object-fit:cover;box-shadow:var(--shadow-sm)}
@@ -4362,6 +4451,31 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 
 ]}
 </script>
+<!-- ═══ DEEP LINKS INTO THE RANGE — /#PureHome /#PurePlus /#PurePremium /#PureLuxe ═══
+     ⛔ THIS SCRIPT EXISTS TO STOP THE BROWSER SCROLLING, AND THAT IS THE WHOLE TRICK.
+     The four systems now carry real ids, so a fragment in the URL makes the browser
+     jump to the article the moment it is parsed. On desktop that article does not
+     live where it appears to: GSAP lifts all four into one `.fstrip` that is 400% of
+     a PINNED frame, and none of that exists yet while the parser is still reading.
+     So the native jump lands nowhere useful and the pin then engages on top of it.
+     Strip the hash before the parser can act on it, remember what was asked for, and
+     the router at the bottom of the page lands it properly once the pin is measured.
+     The hash is written back with replaceState afterwards, so the address bar still
+     reads /#PurePlus — the browser just never scrolled to it.
+     ⛔ `scrollRestoration` goes to manual ONLY on a deep link and goes back to auto
+     the moment we have landed. Leaving it manual would break the back button's scroll
+     position for every ordinary visit. ═══════════════════════════════════════════ -->
+<script>
+(function(){
+  var MAP = {PureHome:0, PurePlus:1, PurePremium:2, PureLuxe:3};
+  window.__ffyDeepMap = MAP;
+  var h = (location.hash || '').slice(1);
+  if (!Object.prototype.hasOwnProperty.call(MAP, h)) return;
+  window.__ffyDeep = h;
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch(e){}
+  try { history.replaceState(null, '', location.pathname + location.search); } catch(e){}
+})();
+</script>
 </head>
 <body>
 
@@ -4720,12 +4834,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         <span class="xhint" aria-hidden="true">Tap it to see inside</span>
       </div>
       <div class="list" id="sysList">
-        <article class="sys" data-i="0" data-tag="Every tap covered" data-btag="blue" style="--ac:var(--blue)">
+        <article class="sys" id="PureHome" data-i="0" data-tag="Every tap covered" data-btag="blue" style="--ac:var(--blue)">
           <span class="mtag">Every tap covered</span>
           <h3>Whole House Filtration System</h3>
-          <span class="pure">Pure Home</span>
+          <span class="pure"><a class="ul" href="pure-home-water-filter-sydney">Pure Home</a></span>
           <div class="mimg xscrubm" data-set="home"><img src="media/xf-home/f00.webp" alt="The Pure Home stainless whole house filtration unit, opening into its parts" width="1100" height="1472" loading="lazy" style="-webkit-mask-image:radial-gradient(ellipse 74% 70% at 50% 48%, #000 52%, transparent 76%);mask-image:radial-gradient(ellipse 74% 70% at 50% 48%, #000 52%, transparent 76%)"></div>
           <div class="rowp"><span class="money">from $3,850</span><span>installed</span></div>
+          <p class="svcline"><span><b>$770</b> serviced every year.</span> <span><b>$0</b> if it ever fails.</span></p>
           <ul class="incl">
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#0B61F4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Chlorine and chloramines out of every tap</li>
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#0B61F4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Sediment, rust and microplastics caught at the mains</li>
@@ -4738,14 +4853,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
             <img src="media/th-home-3.webp" alt="A whole house unit installed against a Colorbond fence" width="480" height="480" loading="lazy">
             <span class="pcap">Real installs, real Sydney homes</span>
           </div>
-          <div class="go"><button class="btn btn-sm js-open" type="button" data-sys="Pure Home"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book a free inspection</button></div>
+          <div class="go"><button class="btn btn-sm js-open" type="button" data-sys="Pure Home"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book a free inspection</button><a class="btn btn-sm btn-line" href="tel:0430546749"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.6 2.5 3.6 3.2c-.55.2-.87.77-.75 1.35a12.2 12.2 0 0 0 8.6 8.6c.58.12 1.15-.2 1.35-.75l.7-2-2.7-1.1-1 1.25a9.3 9.3 0 0 1-4.35-4.35L6.7 5.2 5.6 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Call 0430 546 749</a></div>
         </article>
-        <article class="sys" data-i="1" data-tag="The starting point" data-btag="blue" style="--ac:var(--blue)">
+        <article class="sys" id="PurePlus" data-i="1" data-tag="The starting point" data-btag="blue" style="--ac:var(--blue)">
           <span class="mtag">The starting point</span>
           <h3>5 Stage Alkaline Reverse Osmosis</h3>
-          <span class="pure">Pure Plus</span>
+          <span class="pure"><a class="ul" href="pure-plus-water-filter-sydney">Pure Plus</a></span>
           <div class="mimg xscrubm" data-set="plus"><img src="media/xf-plus/f00.webp" alt="The Pure Plus five stage alkaline reverse osmosis system, opening into its parts" width="1100" height="1472" loading="lazy" style="-webkit-mask-image:radial-gradient(ellipse 74% 70% at 50% 48%, #000 52%, transparent 76%);mask-image:radial-gradient(ellipse 74% 70% at 50% 48%, #000 52%, transparent 76%)"></div>
           <div class="rowp"><span class="money">$1,280</span><span>installed</span></div>
+          <p class="svcline"><span><b>$600</b> serviced every year.</span> <span><b>$0</b> if it ever fails.</span></p>
           <ul class="incl">
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#0B61F4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Removes up to 99% of dissolved contaminants</li>
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#0B61F4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>PFAS, fluoride, chloramines and heavy metals out</li>
@@ -4758,14 +4874,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
             <img src="media/th-plus-3.webp" alt="A finished under sink install with the cabinet open" width="480" height="480" loading="lazy">
             <span class="pcap">Real installs, real Sydney homes</span>
           </div>
-          <div class="go"><a class="btn btn-sm" href="pure-plus-water-filter-sydney"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Learn more</a></div>
+          <div class="go"><button class="btn btn-sm js-open" type="button" data-sys="Pure Plus"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book installation</button><a class="btn btn-sm btn-line" href="tel:0430546749"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.6 2.5 3.6 3.2c-.55.2-.87.77-.75 1.35a12.2 12.2 0 0 0 8.6 8.6c.58.12 1.15-.2 1.35-.75l.7-2-2.7-1.1-1 1.25a9.3 9.3 0 0 1-4.35-4.35L6.7 5.2 5.6 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Call 0430 546 749</a></div>
         </article>
-        <article class="sys" data-i="2" data-tag="Best seller!" data-btag="purple" style="--ac:var(--purple)">
+        <article class="sys" id="PurePremium" data-i="2" data-tag="Best seller!" data-btag="purple" style="--ac:var(--purple)">
           <span class="mtag">Best seller!</span>
           <h3>7 Stage Hydrogen Rich Reverse Osmosis</h3>
-          <span class="pure">Pure Premium</span>
+          <span class="pure"><a class="ul" href="pure-premium-water-filter-sydney">Pure Premium</a></span>
           <div class="mimg xscrubm" data-set="prem"><img src="media/xf-prem/f00.webp" alt="The Pure Premium seven stage hydrogen rich alkaline reverse osmosis system, opening into its parts" width="1100" height="1472" loading="lazy" style="-webkit-mask-image:radial-gradient(ellipse 74% 70% at 50% 48%, #000 52%, transparent 76%);mask-image:radial-gradient(ellipse 74% 70% at 50% 48%, #000 52%, transparent 76%)"></div>
           <div class="rowp"><span class="money">$1,590</span><span>installed</span></div>
+          <p class="svcline"><span><b>$650</b> serviced every year.</span> <span><b>$0</b> if it ever fails.</span></p>
           <ul class="incl">
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#0B61F4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Removes up to 99% of dissolved contaminants</li>
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#0B61F4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>PFAS, fluoride, chloramines and heavy metals out</li>
@@ -4778,14 +4895,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
             <img src="media/th-prem-3.webp" alt="A finished under sink reverse osmosis install with branded cartridges" width="480" height="480" loading="lazy">
             <span class="pcap">Real installs, real Sydney homes</span>
           </div>
-          <div class="go"><a class="btn btn-sm" href="pure-premium-water-filter-sydney"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Learn more</a></div>
+          <div class="go"><button class="btn btn-sm js-open" type="button" data-sys="Pure Premium"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book installation</button><a class="btn btn-sm btn-line" href="tel:0430546749"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.6 2.5 3.6 3.2c-.55.2-.87.77-.75 1.35a12.2 12.2 0 0 0 8.6 8.6c.58.12 1.15-.2 1.35-.75l.7-2-2.7-1.1-1 1.25a9.3 9.3 0 0 1-4.35-4.35L6.7 5.2 5.6 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Call 0430 546 749</a></div>
         </article>
-        <article class="sys" data-i="3" data-tag="Smart tracking" data-btag="purple" style="--ac:var(--purple)">
+        <article class="sys" id="PureLuxe" data-i="3" data-tag="Smart tracking" data-btag="purple" style="--ac:var(--purple)">
           <span class="mtag">Smart tracking</span>
           <h3>Smart 5 Stage Alkaline Reverse Osmosis</h3>
-          <span class="pure">Pure Luxe</span>
+          <span class="pure"><a class="ul" href="pure-luxe-water-filter-sydney">Pure Luxe</a></span>
           <div class="mimg xscrubm" data-set="luxe"><img src="media/xf-luxe/f00.webp" alt="The Pure Luxe smart five stage alkaline reverse osmosis system, opening into its parts" width="1100" height="1472" loading="lazy" style="-webkit-mask-image:radial-gradient(ellipse 74% 70% at 50% 48%, #000 52%, transparent 76%);mask-image:radial-gradient(ellipse 74% 70% at 50% 48%, #000 52%, transparent 76%)"></div>
           <div class="rowp"><span class="money">$2,290</span><span>installed</span></div>
+          <p class="svcline"><span><b>$680</b> serviced every year.</span> <span><b>$0</b> if it ever fails.</span></p>
           <ul class="incl">
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#0B61F4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Removes up to 99% of dissolved contaminants</li>
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#0B61F4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>PFAS, chloramines and microplastics out</li>
@@ -4798,7 +4916,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
             <img src="media/th-luxe-3.webp" alt="The filtered water tap in a timber kitchen" width="480" height="480" loading="lazy">
             <span class="pcap">Real installs, real Sydney homes</span>
           </div>
-          <div class="go"><a class="btn btn-sm" href="pure-luxe-water-filter-sydney"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Learn more</a></div>
+          <div class="go"><button class="btn btn-sm js-open" type="button" data-sys="Pure Luxe"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book installation</button><a class="btn btn-sm btn-line" href="tel:0430546749"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.6 2.5 3.6 3.2c-.55.2-.87.77-.75 1.35a12.2 12.2 0 0 0 8.6 8.6c.58.12 1.15-.2 1.35-.75l.7-2-2.7-1.1-1 1.25a9.3 9.3 0 0 1-4.35-4.35L6.7 5.2 5.6 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Call 0430 546 749</a></div>
         </article>
       </div>
     </div>
@@ -7293,11 +7411,103 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click', function(e){
       if (a.classList.contains('js-open')) return;
+      /* the four system deep links have their own router — they land INSIDE the
+         pin, at a scroll progress, not on an element. Let it own them. */
+      if (window.__ffyDeepMap &&
+          Object.prototype.hasOwnProperty.call(window.__ffyDeepMap, a.getAttribute('href').slice(1))) return;
       var t = document.querySelector(a.getAttribute('href'));
       if (!t) return;
       if (lenis){ e.preventDefault(); lenis.scrollTo(t, {offset:-70}); }
     });
   });
+
+  /* ── THE RANGE DEEP LINKS ───────────────────────────────
+     /#PureHome · /#PurePlus · /#PurePremium · /#PureLuxe
+
+     ⛔ A DEEP LINK INTO A PINNED SECTION IS NOT A SCROLL TO AN ELEMENT.
+     Above 960 the four articles are lifted into one `.fstrip` and the whole
+     `.wrap` is pinned for 4.2 screens; the article you want never moves, and
+     scrolling "to" it lands on whatever the strip happened to be showing. What
+     the URL actually names is a PROGRESS inside that pin, so that is what this
+     computes — and it reads the pin's own numbers rather than carrying a copy
+     of them, which is how the two would drift apart on the next round.
+
+     ⭐ WHERE IN THE SEGMENT. `cellPos()` holds each system dead still for the
+     first 52% of its segment and travels for the rest. Landing at f = .26 is
+     the dead centre of that lock: the system is fully arrived, fully opaque,
+     not mid-crossfade, and there is half a hold left in both directions so a
+     single wheel click does not knock it off. Landing at f = 0 would put you
+     on the boundary frame — arrived, but one pixel from leaving.
+
+     ⛔ NO SNAP IS ADDED ANYWHERE HERE, and round 48 is the reason. This fires
+     once, on a URL or a click, and never listens to the wheel. */
+  (function(){
+    var MAP = window.__ffyDeepMap || {PureHome:0,PurePlus:1,PurePremium:2,PureLuxe:3};
+    var IDS = ['PureHome','PurePlus','PurePremium','PureLuxe'];
+    var REST = .26, STEPS = 4;
+
+    function targetY(i){
+      var pin = window.__ffyPin;
+      if (pin && pin.pin && isFinite(pin.start) && pin.end > pin.start){
+        return pin.start + ((i + REST) / STEPS) * (pin.end - pin.start);
+      }
+      /* the plain-flow lane: phone, reduced motion, no GSAP. The article is
+         where it looks like it is, and 88 clears the fixed header. */
+      var el = document.getElementById(IDS[i]);
+      if (!el) return null;
+      return el.getBoundingClientRect().top + (window.scrollY || window.pageYOffset) - 88;
+    }
+
+    function go(name, instant){
+      if (!Object.prototype.hasOwnProperty.call(MAP, name)) return false;
+      var y = targetY(MAP[name]);
+      if (y === null || !isFinite(y)) return false;
+      y = Math.max(0, Math.round(y));
+      if (lenis) lenis.scrollTo(y, instant ? {immediate:true, force:true} : {duration:1.1, force:true});
+      else window.scrollTo({top:y, behavior: instant ? 'auto' : 'smooth'});
+      try { history.replaceState(null, '', '#' + name); } catch(e){}
+      return true;
+    }
+    window.ffyGoSystem = go;
+
+    /* a link anywhere on the page pointing at one of the four. Capture phase,
+       so it runs before the generic anchor handler above (which now stands
+       aside for these four by name). */
+    document.addEventListener('click', function(e){
+      var a = e.target && e.target.closest && e.target.closest('a[href*="#"]');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      var hash = href.slice(href.indexOf('#') + 1);
+      if (!Object.prototype.hasOwnProperty.call(MAP, hash)) return;
+      if (a.pathname && a.pathname !== location.pathname) return;   /* off-page link, let it navigate */
+      e.preventDefault();
+      go(hash, false);
+    }, true);
+
+    addEventListener('hashchange', function(){
+      var h = (location.hash || '').slice(1);
+      if (Object.prototype.hasOwnProperty.call(MAP, h)) go(h, false);
+    });
+
+    /* ⛔ ON LOAD IT LANDS TWICE, ON PURPOSE. The first landing happens as soon
+       as the pin has been measured; the second, 450ms later, absorbs the layout
+       the lazy images and the webfont were still settling into. Without it a
+       cold load lands a few hundred pixels off on a slow connection — measured
+       on the first build of this router. */
+    if (window.__ffyDeep){
+      var want = window.__ffyDeep, landings = 0;
+      var fire = function(){
+        if (window.ScrollTrigger) ScrollTrigger.refresh();
+        requestAnimationFrame(function(){ requestAnimationFrame(function(){
+          go(want, true);
+          if (++landings < 2) setTimeout(fire, 450);
+          else { try { if ('scrollRestoration' in history) history.scrollRestoration = 'auto'; } catch(e){} }
+        }); });
+      };
+      if (document.readyState === 'complete') fire();
+      else addEventListener('load', fire);
+    }
+  })();
 
   /* ── no GSAP: show everything, lose nothing ────────────── */
   if (!hasGsap){
@@ -7608,6 +7818,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
            nothing to fire: sitting on a boundary just sits there. */
         onUpdate: function(self){ place(self.progress); }
       });
+      /* ⛔ THE ROUTER NEEDS THE PIN'S MEASUREMENTS AND CANNOT REACH INTO THIS
+         CLOSURE. A deep link into a pinned section is not a scroll to an element:
+         the element never moves. It is a scroll to a PROGRESS inside the pin, so
+         the router has to read `start` and `end` off the live trigger. Published
+         here and nulled in the teardown below, so a resize down past 960 (which
+         kills the pin) can never leave the router aiming at a dead range. */
+      window.__ffyPin = pinST;
       /* the bubble and the arrival pop fire when the range actually reaches you */
       var arriveIO = null;
       if (stageEl2 && 'IntersectionObserver' in window){
@@ -7641,6 +7858,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
          ⛔ DO NOT ADD A SNAP OF ANY KIND HERE. Not ScrollTrigger's, not the
          browser's, not a hand-rolled one. Four rounds went into learning that. */
       return function(){
+        window.__ffyPin = null;
         if (arriveIO) arriveIO.disconnect();
         if (pinST) pinST.kill(true);          /* true = revert the pin spacing too */
         if (preST) preST.kill();
