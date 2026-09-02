@@ -10,7 +10,7 @@ import re
 import os
 import glob
 
-HTML_DIR = '/Users/xtc/Desktop/FFY Agency Hub/Website'
+HTML_DIR = '/Users/xtc/Nucleus/Website'
 
 # Correct CSS blocks
 CSS_ONLINE_DOT_WRAP = '.online-dot-wrap{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#16a34a}'

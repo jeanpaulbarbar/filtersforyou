@@ -1,0 +1,11 @@
+import puppeteer from 'puppeteer';
+const b = await puppeteer.launch({ headless: true });
+const p = await b.newPage();
+await p.setViewport({width:1440,height:900});
+await p.goto('http://localhost:3000', {waitUntil:'networkidle2'});
+const el = await p.$('.rc-section');
+await el.evaluate(e=>e.scrollIntoView());
+await new Promise(r=>setTimeout(r,700));
+await el.screenshot({path:'temporary screenshots/brickwork-crop.png'});
+await b.close();
+console.log('done');

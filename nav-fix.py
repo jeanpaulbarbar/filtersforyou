@@ -8,7 +8,7 @@ Nav fix: restore Online dot, match button sizes, correct order.
 """
 import re, os, glob
 
-WEBSITE_DIR = '/Users/xtc/Desktop/FFY Agency Hub/Website'
+WEBSITE_DIR = '/Users/xtc/Nucleus/Website'
 HTML_FILES = sorted(glob.glob(os.path.join(WEBSITE_DIR, '*.html')))
 
 ONLINE_DOT_HTML = '    <div class="online-dot-wrap"><div class="dot"></div>Online</div>\n'

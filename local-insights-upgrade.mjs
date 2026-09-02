@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 
-const dir = '/Users/xtc/Desktop/FFY Agency Hub/Website';
+const dir = '/Users/xtc/Nucleus/Website';
 
 const CSS = `<style>
 .local-insights-section{background:linear-gradient(135deg,#0b61f4 0%,#0848c0 100%);border-radius:16px;padding:28px 24px;margin:32px 0;}

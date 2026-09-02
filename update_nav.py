@@ -6,7 +6,7 @@ Handles 4 nav template variants across all pages.
 import os
 import glob
 
-WEBSITE_DIR = '/Users/xtc/Desktop/FFY Agency Hub/Website'
+WEBSITE_DIR = '/Users/xtc/Nucleus/Website'
 SKIP_FILES = {'shower-filter-installation-sydney.html', 'update_nav.py'}
 
 

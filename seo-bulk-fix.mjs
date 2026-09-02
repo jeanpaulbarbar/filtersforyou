@@ -5,7 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const DIR = '/Users/xtc/Desktop/FFY Agency Hub/Website';
+const DIR = '/Users/xtc/Nucleus/Website';
 
 const SAME_AS = [
   "https://www.facebook.com/filtersforyouau",

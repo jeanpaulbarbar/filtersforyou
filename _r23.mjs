@@ -1,0 +1,34 @@
+import puppeteer from 'puppeteer';
+const file='file://'+process.argv[2], out=process.argv[3];
+const b=await puppeteer.launch({headless:'new',protocolTimeout:120000,args:['--no-sandbox','--font-render-hinting=none']});
+let p=await b.newPage();
+await p.setViewport({width:390,height:664,deviceScaleFactor:2,isMobile:true,hasTouch:true});
+await p.goto(file,{waitUntil:'networkidle2',timeout:90000});
+await new Promise(r=>setTimeout(r,2500));
+const m=await p.evaluate(()=>{
+  const c=document.getElementById('hdCard').getBoundingClientRect();
+  const t=document.getElementById('hdTgl').getBoundingClientRect();
+  const price=document.getElementById('hdPrice').getBoundingClientRect();
+  return {cardH:Math.round(c.height),tgl:[Math.round(t.width),Math.round(t.height)],
+    priceRight:Math.round(price.right),tglLeft:Math.round(t.left)};
+});
+console.log('closed:',JSON.stringify(m));
+await p.screenshot({path:`${out}/r23-m-hero.png`});
+await p.click('#hdTgl');await new Promise(r=>setTimeout(r,1400));
+const o=await p.evaluate(()=>{const c=document.getElementById('hdCard').getBoundingClientRect();
+  const t=document.getElementById('hdTgl').getBoundingClientRect();
+  return {top:Math.round(c.top),tglTop:Math.round(t.top)};});
+console.log('open:',JSON.stringify(o));
+await p.screenshot({path:`${out}/r23-m-open.png`});
+const wy=await p.evaluate(()=>{const r=document.getElementById('tourwrap').getBoundingClientRect();return r.top+scrollY;});
+await p.evaluate(v=>window.scrollTo(0,v),Math.round(wy+1.3*664));
+await new Promise(r=>setTimeout(r,1700));
+await p.screenshot({path:`${out}/r23-m-tour.png`});
+await p.close();
+p=await b.newPage();
+await p.setViewport({width:1440,height:900,deviceScaleFactor:2});
+await p.goto(file,{waitUntil:'networkidle2',timeout:90000});
+await new Promise(r=>setTimeout(r,2800));
+await p.screenshot({path:`${out}/r23-d-hero.png`});
+await p.close();
+await b.close();
