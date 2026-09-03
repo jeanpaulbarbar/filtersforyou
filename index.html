@@ -1661,6 +1661,32 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .show .stage{display:block;position:sticky;top:96px;height:calc(100svh - 170px);min-height:480px}
     .show .stage .ly{position:absolute;inset:0;display:grid;place-items:center;padding:2%;opacity:0;
       transform:scale(.97);transition:opacity .7s var(--e-out),transform .7s var(--e-out)}
+    /* ⛔⛔ ROUND 84 — THE FOUR LAYERS ARE STACKED, SO THREE OF THEM ARE AN
+       INVISIBLE LID OVER THE ONE YOU ARE LOOKING AT.
+       JP: "if I click on the tap me for Pure Luxe, all of the little plus signs
+       work when you hover. On Pure Home, Pure Plus or Pure Premium, nothing
+       happens." Every layer is `position:absolute;inset:0` in source order, and
+       opacity 0 does NOT take an element out of hit testing. So `.ly[data-i=3]`
+       — Pure Luxe, LAST in the DOM and therefore on top — was swallowing every
+       mouseenter aimed at the three layers underneath it. MEASURED with
+       elementsFromPoint on a Pure Home marker: IMG[data-i=3 op=0], DIV[data-i=3
+       op=0], IMG[data-i=2 op=0]... the marker was the fifth thing down.
+       ⭐ AND THAT IS WHY ONLY LUXE WORKED. It was never a Luxe feature. It was
+       the top of the stack, and nothing on this page can sit above it.
+       ⛔ THE CLICK NEVER BROKE, WHICH IS WHY THIS SURVIVED SO LONG. Tap to
+       explode is bound to `#stage`, so a click on the invisible lid still
+       bubbles to the right handler and `data-cur` still names the right system.
+       Only the per-marker mouseenter — which needs the pointer to actually
+       REACH the marker — was lost. A working tap hid a dead hover.
+       The layers stop taking the pointer; the visible markers take it back
+       through the existing `.xopen .hs{pointer-events:auto}`, which still
+       applies to a descendant of a `pointer-events:none` ancestor. */
+    .show .stage .ly{pointer-events:none}
+    /* ⛔ AND ONLY THE CURRENT LAYER'S MARKERS ARE LIVE. Without this, a layer
+       that kept `.xopen` after the deck moved on would hand its markers back
+       through that same rule and hover an invisible system. `.on` is set by
+       stageTo() on exactly one layer, in both the pinned and the stacked lane. */
+    .show .stage .ly:not(.on) .hs{pointer-events:none}
     .show .stage .ly img{max-width:100%;max-height:94%;object-fit:contain;
       filter:drop-shadow(0 34px 44px rgba(4,16,46,.16))}
     .show .stage .ly.xscrub img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
@@ -2909,6 +2935,18 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hs.r .tip::after{left:auto;right:16px}
   .hs.dn .tip{bottom:auto;top:calc(100% + 11px)}
   .hs.dn .tip::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:var(--ink-blue)}
+  /* ⛔ ROUND 84 — AND WHEN FLIPPING IS NOT ENOUGH, THE CARD SLIDES.
+     `.l` and `.r` are authored per spot against ONE frame width, and the stage
+     is `calc(100svh - 210px)` tall by half the container wide — so the same
+     `.l` that clears the frame at 1440 runs 26px off the right edge at 960.
+     MEASURED on Pure Luxe's carbon block marker: 13px over at 1024, 18px at
+     1000, 26px at 960. The card is nudged back inside on measurement.
+     ⛔ AND THE ARROW GOES THE OTHER WAY BY THE SAME AMOUNT, so it still points
+     at its own dot. Sliding the card alone would leave the arrow pointing at a
+     cartridge two along, which is worse than the clipping was. Clamped in JS so
+     the arrow can never leave the card it belongs to. */
+  .hs .tip{translate:var(--tipdx,0px) 0}
+  .hs .tip::after{translate:var(--arrdx,0px) 0}
   @media(max-width:519px){
     .hs > button > i{width:27px;height:27px}
     .hs .tip{width:min(190px,52vw);padding:10px 12px}
@@ -6949,6 +6987,53 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         tip.querySelector('b').textContent = s.t;
         tip.querySelector('span').textContent = s.d;
         el.appendChild(btn); el.appendChild(tip);
+        /* ⛔⛔ ROUND 84 — THE TIP FLIPS ON A MEASUREMENT, NOT ON A GUESS.
+           `dn` was hand-authored per spot, and four of them were wrong: Pure
+           Plus's alkaline and polish markers and Pure Premium's polish and
+           magnetic conditioner all sit high in the frame, so their cards opened
+           UPWARD straight through the top of the stage, which is `overflow:
+           hidden` in pin mode. MEASURED at 1440x900: 22px, 56px, 42px and 36px
+           of the card cut off. Nobody had ever seen it, because the hover on
+           those three systems never fired at all (see the pointer-events note
+           in the stylesheet) — a dead hover was hiding a clipped tip.
+           ⛔ A HAND-AUTHORED FLAG CANNOT BE RIGHT HERE. The marker's y is a
+           PERCENTAGE of a box whose height is `calc(100svh - 210px)`, so the
+           same 11% is 76px down a 700px stage and 96px down an 870px one, and
+           the card's own height depends on how long its sentence is. It has to
+           be measured at the moment it opens.
+           ⭐ AN AUTHORED `dn` IS NEVER REMOVED. Pure Luxe is the one system JP
+           says is right, and its TDS marker is authored `dn`. This only ever
+           ADDS the flip, so nothing that works today can change. */
+        function fit(){
+          /* the box that actually clips: the stage (overflow:hidden in pin
+             mode) on desktop, the image box on a phone */
+          var clip = (el.closest && el.closest('.stage')) || wrap.parentNode;
+          if (!clip) return;
+          el.style.removeProperty('--tipdx'); el.style.removeProperty('--arrdx');
+          if (!s.dn) el.classList.remove('dn');   /* measure the natural position */
+          var c = clip.getBoundingClientRect(), t = tip.getBoundingClientRect();
+          if (!t.height) return;                  /* not laid out yet — leave as authored */
+          /* VERTICAL. Flip below if the card would leave the top, then check
+             the flip did not make it worse. An authored `dn` is never removed:
+             Pure Luxe is the one system JP says is right and its TDS marker
+             carries one. */
+          if (!s.dn && t.top < c.top + 2){
+            el.classList.add('dn');
+            var t2 = tip.getBoundingClientRect();
+            if (t2.bottom - c.bottom > c.top - t.top) el.classList.remove('dn');
+          }
+          /* HORIZONTAL. Slide the card in, slide the arrow out by the same
+             amount, clamped so the arrow stays on the card. */
+          t = tip.getBoundingClientRect();
+          var dx = 0;
+          if (t.left < c.left + 6) dx = (c.left + 6) - t.left;
+          else if (t.right > c.right - 6) dx = (c.right - 6) - t.right;
+          if (dx){
+            var lim = Math.max(0, t.width / 2 - 18);
+            el.style.setProperty('--tipdx', Math.round(dx) + 'px');
+            el.style.setProperty('--arrdx', Math.round(Math.max(-lim, Math.min(lim, -dx))) + 'px');
+          }
+        }
         /* round 21: same click-after-hover fix as the tour — hover pointers
            pin open on click, touch keeps the toggle. Found on the tour spots,
            fixed here too (same rule, Rule 6). */
@@ -6956,10 +7041,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           e.stopPropagation();
           var was = el.classList.contains('on');
           wrap.querySelectorAll('.hs.on').forEach(function(o){ o.classList.remove('on'); });
-          el.classList.toggle('on', matchMedia('(hover:hover) and (pointer:fine)').matches ? true : !was);
+          var open = matchMedia('(hover:hover) and (pointer:fine)').matches ? true : !was;
+          if (open) fit();
+          el.classList.toggle('on', open);
         });
         if (matchMedia('(hover:hover) and (pointer:fine)').matches){
-          el.addEventListener('mouseenter', function(){ el.classList.add('on'); });
+          el.addEventListener('mouseenter', function(){ fit(); el.classList.add('on'); });
           el.addEventListener('mouseleave', function(){ el.classList.remove('on'); });
         }
         wrap.appendChild(el);
