@@ -190,6 +190,7 @@ a{color:inherit}
 @media (hover:hover) and (pointer:fine){.ul:hover{background-size:100% 1px}}
 .btn{--bg:var(--yellow); --bgh:var(--ink); --fg:var(--ink); --fgh:#fff; --ring:transparent; --ringh:transparent;
     display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 24px 0 8px;
+    line-height:normal;text-align:center;
     border:0;cursor:pointer;font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:.0025em;
     border-radius:var(--r-full);background:var(--bg);color:var(--fg);text-decoration:none;
     box-shadow:inset 0 0 0 1px var(--ring);
@@ -364,6 +365,7 @@ body.mopen .hdr .mark{filter:none}
 .ddpanel b + span{display:block;font-size:15px;color:var(--blue);font-weight:700;margin-top:2px}
 .ddpanel .all{justify-content:center;font-weight:700;color:var(--blue);margin-top:6px;border-top:1px solid var(--rule);border-radius:0 0 12px 12px}
 .hdr.solid{background:rgba(255,254,252,.92);color:var(--ink);box-shadow:0 1px 0 var(--rule)}
+.hdr.hide{box-shadow:none}
 .hdr.solid .mark{filter:none}
 .hdr.solid .burger{background:rgba(10,16,32,.07)}
 .hdr.mini .row{min-height:62px}
@@ -845,22 +847,28 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
   background-repeat:no-repeat;background-size:0 1px;text-decoration:none;
   transition:background-size .3s ease-in-out,color .3s ease-in-out;padding-bottom:2px}
 @media(hover:hover) and (pointer:fine){.ul:hover{background-size:100% 1px}}
-.btn-line{--bg:transparent; --bgh:var(--ink); --fg:var(--ink); --fgh:#fff; --ring:rgba(10,16,32,.16); --ringh:var(--ink)}
-.btn-line i{background:rgba(10,16,32,.07)}
+/* ⛔ .btn-line is the shell's. A page never redeclares a shell class. */
 
 /* ══ THE HEADER — Clean and Clear's, measured live 3 Sep 2026 (round 84): transparent over the
    opener; past 64px it goes WHITE in one 0.3s ease-in-out (background, colour, height together);
    a little further down it slides away in the same 0.3s; any upward scroll brings it back. The
    shell's bytes are untouched: these are page overrides of its transitions, and the page script
    drives the classes. On phones the utility strip scrolls away with the page instead of vanishing. */
-.hdr{transition:background .3s ease-in-out,color .3s ease-in-out,box-shadow .3s ease-in-out,transform .3s ease-in-out}
-.hdr.solid{background:var(--paper)}
-.hdr.hide{box-shadow:none}   /* round 91: hidden, its 1px rule shadow lands on row 0 of the screen — the thin white line */
-.hdr .row{transition:min-height .3s ease-in-out}
-.hdr .mark{transition:filter .3s ease-in-out,height .3s ease-in-out,transform .3s ease-in-out}
-.hdr .util{margin-top:calc(-1 * var(--uoff,0px))}
-.hdr.mini .util,.hdr.solid .util{display:block}   /* it scrolls away under --uoff instead of vanishing (the shell hides it at 64px) */
-body.mopen .hdr .util{display:none}
+/* ⛔ FIVE .hdr RULES DELETED 6 Sep. Every one of them already exists in index.html, and every
+   one of them differed: .3s against the shell's .35s, an opaque --paper against the shell's
+   rgba(255,254,252,.92). Same header, different fade. .hdr.hide{box-shadow:none} was the one
+   real fix in the set and it now lives in index.html, where a shell fix belongs. */
+/* ⛔ THE HEADER IS THE HOMEPAGE'S. NOTHING HERE MAY TOUCH IT.
+   JP, 6 Sep 2026: "the header area, the whole border around it, and the way that the
+   homepage hero looks need to be a spitting image on every single page... It needs to
+   be a direct copy and paste, not a recreation."
+   Rounds 91-101 grew this page a private header: the utility strip re-shown and slid
+   away under --uoff instead of hidden, a navy 40px bar on the phone the homepage does
+   not have, and a SECOND scroll driver running after the shell's own with its own
+   thresholds (HIDE_FROM 200 vs the hero, a 28px phone deadband vs 6). The bytes inside
+   the SHELL: markers still matched, so site_shell.py check passed — and the header
+   still moved between pages, which is what he could see.
+   The rules and the driver are deleted. Verify with:  node Website/shell-probe.mjs  */
 
 /* ══ HERO — round 70, kept byte for byte at desktop. Round 83: it STAYS (sticky) while the water
    plate rises over it, and recedes under it like every other plate. ══ */
@@ -1274,12 +1282,7 @@ body.mopen .hdr .util{display:none}
    carries one idea that fits the screen, the deck runs, the film scrubs. Clean and Clear's phone
    discipline (one idea per full screen, big type, a sticky product bar), the desktop's motion. */
 @media(max-width:1079px){
-  .hdr{padding-top:0}
-  .hdr .util{display:block;background:var(--ink-blue);color:#fff;font-size:13px}
-  .hdr .util .rowu{min-height:40px;justify-content:space-between;padding-inline:var(--gut)}
-  .hdr .util .ustars{font-size:13px;color:#fff}
-  .hdr .util .ustars svg{width:13px;height:13px}
-  .hdr .util nav.ulinks,.hdr .util .soc{display:none}
+  /* ⛔ the phone header is the homepage's too — it hides .util under 1080px. No navy bar here. */
 }
 @media(max-width:859px){
   /* the hero: Clean and Clear's (round 82) */
@@ -2160,7 +2163,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     </nav>
     <div class="r">
       <a class="ph ul" href="tel:0430546749">0430 546 749</a>
-      <a class="btn btn-sm" href="/#ask"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book now</a>
+      <button class="btn btn-sm js-open" type="button" data-sys=""><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book now</button>
       <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="msheet"><span class="bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
     </div>
   </div></div>
@@ -2200,7 +2203,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
       <a href="https://www.tiktok.com/@filtersforyouau" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"/></svg></a>
     </span>
   </div>
-  <a class="mrow mcard" href="/#ask">
+  <a class="mrow mcard js-open" href="/#ask" data-sys="">
     <img src="media/tap-pour.webp" alt="" width="1600" height="1062" loading="lazy">
     <span class="v"></span>
     <span class="c">
@@ -3596,6 +3599,20 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     lastHdrY = y;
   }
   addEventListener('scroll', function(){ onHdr(scrollY); }, {passive:true}); onHdr(scrollY);
+
+  /* THE BOOK NOW PILL, carried from the homepage as the very same <button
+     class="btn btn-sm js-open">. On a page that owns a booking drawer, that page's
+     own script binds it and calls preventDefault, so this delegate sees
+     defaultPrevented and keeps its hands off. On a page with no drawer, it goes to
+     the homepage's ask. An <a class="js-open"> already has a real href and is left
+     alone entirely. ⛔ Never solve this by changing the element — see _offsite(). */
+  document.addEventListener('click', function(e){
+    var b = e.target && e.target.closest && e.target.closest('.js-open');
+    if (!b || e.defaultPrevented) return;
+    if (b.tagName === 'A' && b.getAttribute('href')) return;
+    e.preventDefault();
+    location.href = '/#ask';
+  });
   (function menu(){
     var burger = document.getElementById('burger');
     var sheet  = document.getElementById('msheet');
@@ -4076,8 +4093,12 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   /* the stamped shell's Book now is a plain /#ask link (byte-for-byte with every
      other page). On THIS page the drawer is better than a trip to the homepage,
      so the click is intercepted — behaviour only, the shell's bytes untouched. */
-  document.querySelectorAll('.hdr a[href="/#ask"], .msheet a[href="/#ask"]').forEach(function(b){
-    b.addEventListener('click', function(e){ e.preventDefault(); openDrawer('Pure Home'); });
+  /* The shell's Book now pill is the homepage's own <button class="btn btn-sm js-open">
+     (6 Sep: the shell stopped swapping it for an <a>, which is what made the lettering
+     sit 0.28px off). The .js-open binder above already owns it — this page only says
+     WHICH system the drawer should open on, which is a data attribute and not a pixel. */
+  document.querySelectorAll('.hdr .js-open, .msheet .js-open').forEach(function(b){
+    if (!b.getAttribute('data-sys')) b.setAttribute('data-sys', 'Pure Home');
   });
   document.getElementById('dclose').addEventListener('click', closeDrawer);
   dveil.addEventListener('click', closeDrawer);
@@ -4119,24 +4140,9 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     });
   });
 
-  /* ── THE HEADER (round 84): Clean and Clear's, measured 3 Sep 2026. White the moment the opener
-     scrolls (64px), gone a little further down on the way down (their header has left by 300px),
-     back on any upward scroll. The shell's own listener still runs first; this one runs after it
-     on the same event and decides the classes, so the shell's bytes stay untouched. On phones the
-     utility strip scrolls away with the page (--uoff) instead of vanishing. ── */
-  (function(){
-    var h = document.getElementById('hdr'); if (!h) return;
-    var util = h.querySelector('.util'), lastY = scrollY, HIDE_FROM = 200;
-    function drive(){
-      var y = scrollY, solid = y > 64;
-      h.classList.toggle('solid', solid); h.classList.toggle('mini', solid);
-      if (util) h.style.setProperty('--uoff', Math.min(y, util.offsetHeight + (parseFloat(getComputedStyle(h).paddingTop) || 0)) + 'px');   /* its height plus the header's padding (never its offsetTop: that reads the margin back) */
-      if (y <= HIDE_FROM || document.body.classList.contains('mopen')) h.classList.remove('hide');
-      else if (Math.abs(y - lastY) > (mph ? 28 : 4)) h.classList.toggle('hide', y > lastY);   /* round 101: a snap's last few pixels can run backwards as it settles; on a phone the header changes its mind only for a real reversal */
-      lastY = y;
-    }
-    addEventListener('scroll', drive, {passive:true}); drive();
-  })();
+  /* ⛔ THE SECOND HEADER DRIVER IS GONE (6 Sep). The shell's own listener, stamped from
+     index.html, is the only thing that decides .solid / .mini / .hide on this page —
+     the same code, with the same thresholds, as the homepage. Do not add another. */
 
   /* ── the kept hero: GSAP for the letters and the scrubbed push-in, round 70 verbatim ── */
   if (hasGsap){

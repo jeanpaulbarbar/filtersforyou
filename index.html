@@ -357,8 +357,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(hover:hover) and (pointer:fine){.ul:hover{background-size:100% 1px}}
 
   /* ── BUTTONS ────────────────────────────────────────────── */
+  /* ⛔ line-height + text-align ARE NOT COSMETIC (JP, 6 Sep 2026: "I can see the Book now
+     lettering moving ever so slightly between the pages"). MEASURED: a <button> gets the UA's
+     line-height:normal and text-align:center; an <a> inherits the body's 1.55 and start. Same
+     class, same pill, glyphs 0.28px apart — which lands on a different device pixel and reads
+     as a shimmer when you flick between pages. Declaring both here makes .btn render identically
+     whichever element wears it. Verify with: node shell-probe.mjs */
   .btn{--bg:var(--yellow); --bgh:var(--ink); --fg:var(--ink); --fgh:#fff; --ring:transparent; --ringh:transparent;
     display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 24px 0 8px;
+    line-height:normal;text-align:center;
     border:0;cursor:pointer;font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:.0025em;
     border-radius:var(--r-full);background:var(--bg);color:var(--fg);text-decoration:none;
     box-shadow:inset 0 0 0 1px var(--ring);
@@ -720,6 +727,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      re-blurs everything under it on every scroll frame, and on iOS Safari that
      is a standing scroll-jank source that headless Chromium cannot show. */
   .hdr.solid{background:rgba(255,254,252,.92);color:var(--ink);box-shadow:0 1px 0 var(--rule)}
+  /* V7 round 91, promoted to the shell 6 Sep: stepped aside, the header's 1px rule
+     lands on row 0 of the screen and reads as a thin white line. Must sit AFTER
+     .hdr.solid — same specificity, source order decides. */
+  .hdr.hide{box-shadow:none}
   .hdr.solid .mark{filter:none}
   .hdr.solid .burger{background:rgba(10,16,32,.07)}
   .hdr.mini .row{min-height:62px}

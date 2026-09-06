@@ -144,6 +144,7 @@ a{color:inherit}
 @media (hover:hover) and (pointer:fine){.ul:hover{background-size:100% 1px}}
 .btn{--bg:var(--yellow); --bgh:var(--ink); --fg:var(--ink); --fgh:#fff; --ring:transparent; --ringh:transparent;
     display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 24px 0 8px;
+    line-height:normal;text-align:center;
     border:0;cursor:pointer;font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:.0025em;
     border-radius:var(--r-full);background:var(--bg);color:var(--fg);text-decoration:none;
     box-shadow:inset 0 0 0 1px var(--ring);
@@ -318,6 +319,7 @@ body.mopen .hdr .mark{filter:none}
 .ddpanel b + span{display:block;font-size:15px;color:var(--blue);font-weight:700;margin-top:2px}
 .ddpanel .all{justify-content:center;font-weight:700;color:var(--blue);margin-top:6px;border-top:1px solid var(--rule);border-radius:0 0 12px 12px}
 .hdr.solid{background:rgba(255,254,252,.92);color:var(--ink);box-shadow:0 1px 0 var(--rule)}
+.hdr.hide{box-shadow:none}
 .hdr.solid .mark{filter:none}
 .hdr.solid .burger{background:rgba(10,16,32,.07)}
 .hdr.mini .row{min-height:62px}
@@ -862,7 +864,7 @@ main:has(> .pgtop){padding-top:0}
     </nav>
     <div class="r">
       <a class="ph ul" href="tel:0430546749">0430 546 749</a>
-      <a class="btn btn-sm" href="/#ask"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book now</a>
+      <button class="btn btn-sm js-open" type="button" data-sys=""><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book now</button>
       <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="msheet"><span class="bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
     </div>
   </div></div>
@@ -902,7 +904,7 @@ main:has(> .pgtop){padding-top:0}
       <a href="https://www.tiktok.com/@filtersforyouau" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"/></svg></a>
     </span>
   </div>
-  <a class="mrow mcard" href="/#ask">
+  <a class="mrow mcard js-open" href="/#ask" data-sys="">
     <img src="media/tap-pour.webp" alt="" width="1600" height="1062" loading="lazy">
     <span class="v"></span>
     <span class="c">
@@ -1679,6 +1681,20 @@ main:has(> .pgtop){padding-top:0}
     lastHdrY = y;
   }
   addEventListener('scroll', function(){ onHdr(scrollY); }, {passive:true}); onHdr(scrollY);
+
+  /* THE BOOK NOW PILL, carried from the homepage as the very same <button
+     class="btn btn-sm js-open">. On a page that owns a booking drawer, that page's
+     own script binds it and calls preventDefault, so this delegate sees
+     defaultPrevented and keeps its hands off. On a page with no drawer, it goes to
+     the homepage's ask. An <a class="js-open"> already has a real href and is left
+     alone entirely. ⛔ Never solve this by changing the element — see _offsite(). */
+  document.addEventListener('click', function(e){
+    var b = e.target && e.target.closest && e.target.closest('.js-open');
+    if (!b || e.defaultPrevented) return;
+    if (b.tagName === 'A' && b.getAttribute('href')) return;
+    e.preventDefault();
+    location.href = '/#ask';
+  });
   (function menu(){
     var burger = document.getElementById('burger');
     var sheet  = document.getElementById('msheet');
