@@ -67,7 +67,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      typed), the JSON-LD is 04-BLUEPRINTS/03-reverse-osmosis-SCHEMA.json verbatim, the copy follows
      03-reverse-osmosis.md, voice.md and the claims record. Scroll engine: scroll-craft (untouched).
      GENERATED imagery (Higgsfield Nano Banana Pro, our own references): media/ro/*.webp, labelled
-     in the section comments below. CUT OVER TO /reverse-osmosis-water-filter-sydney 2026-09-06: GA4 + Meta pixel and the
+     in the section comments below. CUT OVER TO /reverse-osmosis-water-filter-sydney 2026-09-07: GA4 + Meta pixel and the
      ROUND 30 instrumentation carried from index.html, vendor JS off the CDN, the engine a real file.
      Rebuild with build-ro.py then cutover-ro.py, never by hand. -->
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
@@ -795,7 +795,12 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
   /* THE SAFE ZONE: words live in a centred 1180px column on any screen */
   --safe:max(48px, calc((100vw - 1180px) / 2)); --top:calc(var(--utilh) + 72px);
 }
-@media(max-width:859px){:root{--safe:22px; --top:104px}}
+@media(max-width:859px){:root{--safe:22px; --top:104px;
+  /* ⭐ ROUND 4 · THE FLOATING CHROME'S ROOM. The "Get a fixed price" pill and "Back to the top" sit at
+     bottom:16 and stand ~52px tall, so the last 76px of every phone screen belongs to them. Any act
+     that puts content at the foot of its own stage pads by this, or the QC's COVERED rule fires and a
+     real thumb finds the words underneath a button. */
+  --fabclear:calc(76px + env(safe-area-inset-bottom))}}
 /* the homepage's own phone frame: 8px under 600px. The shell declares this; redeclaring --hframe above
    without it made the header 4px taller on a phone (shell-probe, 6 Sep). */
 @media(max-width:599px){:root{--hframe:8px}}
@@ -836,7 +841,7 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 @media(hover:hover) and (pointer:fine){.arrow:hover svg{transform:translateX(4px)}}
 .frame{position:relative;border-radius:var(--r-hero);overflow:clip;background:var(--mist);isolation:isolate}
 .frame > img,.frame > picture > img{width:100%;height:100%;object-fit:cover;max-width:none}
-.frame figcaption{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:var(--r-full);font-size:13px;font-weight:600;color:var(--ink);
+.frame figcaption{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:var(--r-full);font-size:15px;font-weight:600;color:var(--ink);
   background:rgba(255,254,252,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 22px -12px rgba(4,16,46,.5),inset 0 0 0 1px rgba(255,255,255,.6)}
 .sc-stage{background:var(--paper)}
 
@@ -862,6 +867,12 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
    deck's mechanic on it: it deals Pure Plus, Pure Premium and Pure Luxe every 3.2s and rests while
    hovered, tapped, open, or the drawer is up. */
 .ocardwrap{display:contents}
+/* the swap: one soft fade with a small rise, no scale. The picture and the words change together at
+   the bottom of it, so the card is at opacity 0 for the one frame anything changes. */
+.ocard{transition:opacity .42s ease-in-out,transform .64s var(--e-out)}
+.ocard.swapping{opacity:0;transform:translateY(10px)}
+.ocard.swapped{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.ocard{transition:none}}
 .ocard{position:absolute;right:36px;bottom:36px;z-index:12;width:min(580px,94vw);
   background:#F6F7F7;color:var(--ink);border-radius:36px 36px 24px 24px;overflow:hidden;box-shadow:var(--shadow-cc)}
 .ocdots{position:absolute;right:16px;top:14px;z-index:3;display:flex;gap:5px;padding:5px;border-radius:var(--r-full);background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px rgba(4,16,46,.06)}
@@ -916,27 +927,75 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .why__names li::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:2px;background:var(--yellow);transform:scaleX(var(--u,0));transform-origin:0 50%}
 .why__line{font-size:clamp(1.15rem,1.6vw,1.45rem);font-weight:500;line-height:1.45;color:rgba(255,255,255,.9);max-width:36ch;will-change:opacity,transform}
 
-/* ══ 2 · HOW IT WORKS (#how) — navy: five stages, big, lighting one after another ══ */
-.how .sc-stage{background:var(--ink-blue);color:#fff;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(18px,3vh,32px);padding:calc(var(--top) - 6px) var(--safe) clamp(28px,4vh,44px)}
-.how__head{display:grid;gap:10px;max-width:820px;will-change:opacity,transform}
-.how__head .kick{color:#8FB8FF}
+/* ══ 2 · HOW IT WORKS (#how) — navy. ⭐ REBUILT ROUND 4 (JP, 7 Sep: "the images of the cartridge section
+   that's interactive to be a bit bigger and feel premium, it looks very standard right now, think of a
+   different approach"). MEASURED before the rebuild: five 62×62 tiles = 1.2% of a phone screen each, a
+   9.5px label and a 13.6px line, and 40% of the screen empty under them. A list of five small things is
+   the standard approach.
+   THE APPROACH NOW: ONE cartridge at a time, standing as tall as the stage will let it, lit from behind,
+   and the reader moves through the five with the scroll or the rail. 21st.dev's Spatial Product Showcase
+   (id 9679) is the lineage: one subject on a lit stage, a spring swap, and a dock of peers under it —
+   rebuilt in vanilla, compositor only (opacity + transform), no framer-motion. ══ */
+.how .sc-stage{background:var(--ink-blue);color:#fff;display:grid;
+  grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+  grid-template-rows:auto minmax(0,1fr) auto;
+  gap:clamp(14px,2.2vh,26px) clamp(30px,4.4vw,84px);
+  padding:calc(var(--top) - 6px) var(--safe) clamp(26px,4vh,44px)}
+.how__head{grid-column:1/-1;display:grid;gap:10px;max-width:900px;will-change:opacity,transform}
+.how__head .kick{color:#8FB8FF;font-size:14px}
 .how__head h2{color:#fff}
-.stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);align-self:center;min-height:0}
-.stg{display:grid;grid-template-rows:auto auto auto 1fr;gap:6px;min-width:0;opacity:.66;transform:translateY(10px);transition:opacity .7s var(--e-out),transform .7s var(--e-out);will-change:opacity,transform}
-.stg.on{opacity:1;transform:none}
-.stg__pic{aspect-ratio:1;border-radius:18px;overflow:hidden;background:#0A1D4D;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);margin-bottom:10px;transition:box-shadow .7s ease-in-out}
-.stg.on .stg__pic{box-shadow:inset 0 0 0 1px rgba(143,184,255,.5),0 40px 60px -36px rgba(11,97,244,.6)}
-.stg__pic img{width:100%;height:100%;object-fit:cover;max-width:none;filter:saturate(.8) brightness(.75);transition:filter .7s ease-in-out}
-.stg.on .stg__pic img{filter:none}
-.stg__n{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#8FB8FF}
-.stg > b{font-size:clamp(1.15rem,1.5vw,1.45rem);font-weight:600;line-height:1.2;color:#fff;letter-spacing:-.008em}
-.stg > p{font-size:clamp(.95rem,1.05vw,1.05rem);line-height:1.45;color:rgba(255,255,255,.84);text-wrap:pretty}
-.how__foot{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px}
-.how__track{position:relative;height:3px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden}
-.how__track i{position:absolute;inset:0;background:linear-gradient(90deg,#5B9AE2,#8FB8FF);transform:scaleX(var(--f,0));transform-origin:0 50%;will-change:transform}
-.how__stat{display:flex;align-items:baseline;gap:10px;opacity:var(--k,0);transform:translateY(calc((1 - var(--k,0)) * 12px));will-change:opacity,transform}
-.how__stat b{font-size:clamp(1.9rem,2.8vw,2.8rem);font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--yellow)}
-.how__stat span{font-size:15px;font-weight:600;color:rgba(255,255,255,.82)}
+
+/* the lit stage: the glow, then the five cartridges stacked in one box, one visible */
+.stax{grid-column:1;grid-row:2;position:relative;min-height:0;display:grid;place-items:center;isolation:isolate}
+.stax::before{content:"";position:absolute;z-index:0;left:50%;top:50%;width:min(112%,560px);aspect-ratio:1;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(91,154,226,.34) 0%,rgba(11,97,244,.16) 42%,transparent 68%);
+  transition:opacity .8s ease-in-out;opacity:var(--glow,1);pointer-events:none}
+.stax::after{content:"";position:absolute;z-index:0;left:50%;top:50%;width:min(78%,392px);aspect-ratio:1;transform:translate(-50%,-50%);
+  border-radius:50%;border:1px solid rgba(143,184,255,.22);pointer-events:none}
+.stax__pic{position:absolute;z-index:1;inset:0;
+  opacity:0;transform:translateY(26px) scale(.94);
+  transition:opacity .62s var(--e-out),transform .78s var(--e-out);will-change:opacity,transform;pointer-events:none}
+.stax__pic.on{opacity:1;transform:none}
+.stax__pic.was{opacity:0;transform:translateY(-22px) scale(.96)}
+/* ⛔ THE IMAGE GETS A DEFINITE BOX, NOT height:100% ON A GRID ITEM. Measured 7 Sep: inside a
+   `display:grid; place-items:center` parent the track is sized BY the item, so a percentage height is
+   cyclic and resolves to auto — the 400×1400 cartridge rendered at 1400px, overflowed its row and the
+   copy sat on top of it. Absolute + inset:0 + object-fit:contain is a box the image cannot argue with. */
+.stax__pic img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain;
+  filter:drop-shadow(0 42px 46px rgba(0,0,0,.55));
+  /* the still is shot on its own navy backdrop, so without this you see the photograph's rectangle
+     sitting on the page's navy. Feathering the four edges lets the cartridge float on the glow. */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%);
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+
+/* the words beside it */
+.stax__copy{grid-column:2;grid-row:2;align-self:center;display:grid;gap:clamp(10px,1.6vh,18px);max-width:34ch}
+.stax__step{display:grid;gap:inherit;grid-area:1/1;opacity:0;transform:translateY(16px);
+  transition:opacity .5s ease-in-out,transform .66s var(--e-out);will-change:opacity,transform;pointer-events:none}
+.stax__step.on{opacity:1;transform:none;pointer-events:auto}
+.stax__n{display:inline-flex;align-items:center;gap:12px;font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#8FB8FF}
+.stax__n::before{content:"";width:26px;height:2px;border-radius:2px;background:currentColor}
+.stax__step h3{font-size:clamp(2.1rem,3.6vw,3.4rem);font-weight:500;letter-spacing:-.014em;line-height:1.02;color:#fff;text-wrap:balance}
+.stax__step p{font-size:clamp(1.05rem,1.35vw,1.32rem);line-height:1.5;color:rgba(255,255,255,.86);text-wrap:pretty;max-width:32ch}
+.stax__step em{font-style:normal;font-weight:700;color:var(--yellow)}
+
+/* the rail: five peers, the water running through them */
+.crail{grid-column:1/-1;grid-row:3;position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1vw,16px);padding-top:20px;padding-right:190px}
+.crail::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;border-radius:2px;background:rgba(255,255,255,.16)}
+.crail::after{content:"";position:absolute;left:0;top:0;height:2px;width:100%;border-radius:2px;
+  background:linear-gradient(90deg,#5B9AE2,#8FB8FF);transform:scaleX(var(--f,0));transform-origin:0 50%;will-change:transform;transition:transform .5s var(--e-out)}
+.crail button{position:relative;display:grid;gap:5px;justify-items:start;text-align:left;padding:14px 4px 4px;margin:0;border:0;background:none;cursor:pointer;
+  font-family:var(--sans);color:rgba(255,255,255,.5);min-height:56px;transition:color .5s ease-in-out;-webkit-tap-highlight-color:transparent}
+.crail button::before{content:"";position:absolute;left:0;top:-1px;width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.24);transform:translateY(-50%);transition:background .5s ease-in-out,box-shadow .5s ease-in-out}
+.crail button.on{color:#fff}
+.crail button.on::before{background:#fff;box-shadow:0 0 0 5px rgba(143,184,255,.22)}
+.crail button i{font-style:normal;font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.08em}
+.crail button b{font-size:15px;font-weight:600;line-height:1.2;letter-spacing:-.005em}
+.crail button:focus-visible{outline:2px solid #8FB8FF;outline-offset:3px;border-radius:8px}
+@media(hover:hover) and (pointer:fine){.crail button:hover{color:rgba(255,255,255,.85)}}
+.how__stat{grid-column:2;grid-row:3;align-self:center;justify-self:end;display:none}
+@media(prefers-reduced-motion:reduce){.stax__pic,.stax__step{transition-duration:.001s}}
 
 /* ══ 3 · THE MONEY (#money) — a split: the photograph edge to edge on the left, the year beside it ══ */
 .money-act .sc-stage{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:0;padding:0}
@@ -957,65 +1016,97 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .money__pay{font-size:clamp(1.05rem,1.3vw,1.2rem);font-weight:600;line-height:1.45;color:var(--ink);max-width:44ch;will-change:opacity,transform}
 .money__frame{font-size:14px;color:var(--muted);line-height:1.5;max-width:52ch;will-change:opacity,transform}
 
-/* ══ 4 · THE THREE SYSTEMS (#systems) — pin: the deck. One card at a time, three quarters of the screen,
-   centred; the next rises from below and the last sinks a step back under it (21st.dev "Stacking Cards",
-   id 25275, off --sc-p). Light throughout (JP, iteration one: the dark plate was too dark). ══ */
-.range .sc-stage{background:var(--mist);display:grid;grid-template-rows:auto minmax(0,1fr);gap:clamp(10px,1.8vh,22px);padding:calc(var(--top) - 8px) var(--safe) max(6vh,56px);overflow:clip}
-.range__head{display:grid;gap:8px;width:min(76vw,1280px);margin-inline:auto;will-change:opacity,transform}
-.range__head h2{margin-top:10px;color:var(--ink);font-size:clamp(1.8rem,3.2vw,2.8rem)}
-.range__head .lede{font-size:clamp(.98rem,1.15vw,1.15rem);padding-bottom:6px}
-.deck{position:relative;width:min(76vw,1280px);height:min(60vh,640px);min-height:0;margin:auto}
-.scard{--k:0;--d:0;--fr:#EDEDF4;position:absolute;inset:0;border-radius:var(--r-hero);overflow:clip;isolation:isolate;background:var(--bg,#fff);color:var(--ink);
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);
-  box-shadow:0 44px 90px -44px rgba(4,16,46,.42),inset 0 0 0 1px rgba(15,39,72,.06);
-  transform:translateY(calc((1 - var(--k)) * 118%)) translateY(calc(var(--d) * -22px)) scale(calc(1 - .06 * var(--d)));transform-origin:50% 0;
-  opacity:calc(1 - .55 * var(--d));will-change:transform,opacity;pointer-events:none}
-.scard.front{pointer-events:auto}
-.scard.plus{--bg:linear-gradient(160deg,#F7FAFD 0%,#E4EEFD 100%);--fr:#EDEDF4}
-.scard.prem{--bg:linear-gradient(160deg,#F8F4FE 0%,#E6DCF8 100%);--fr:#ECF1F6}
-/* the flagship: a hinge of blue (JP, iteration two), the name in the brand blue, a blue ring */
-.scard.luxe{--bg:linear-gradient(160deg,#F5F9FF 0%,#DCE9FF 100%);--fr:#DDE7F0;box-shadow:0 44px 90px -44px rgba(11,97,244,.5),inset 0 0 0 1px rgba(11,97,244,.3),inset 0 1px 0 #fff}
-.scard.luxe .scard__t h3{background:linear-gradient(120deg,#0B61F4 0%,#063A9E 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.scard.luxe .scard__price .money{color:var(--blue)}
-.scard.more{--bg:linear-gradient(160deg,#EEF3FA 0%,#DCE6F4 100%)}
-.scard__t{position:relative;z-index:1;display:grid;align-content:start;gap:clamp(18px,2.6vh,30px);padding:clamp(24px,3vw,48px)}
-.scard__go{margin-top:auto}
-.scard__n{font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
-.scard.prem .scard__n{color:var(--purple)}
-.scard.luxe .scard__n{color:var(--blue)}
-.scard__t h3{font-size:clamp(2.3rem,4vw,3.9rem);font-weight:500;letter-spacing:-.012em;line-height:1.02;color:var(--ink);margin-top:10px;text-wrap:balance}
-.scard__spec{font-size:clamp(1rem,1.25vw,1.2rem);font-weight:600;color:var(--muted);margin-top:8px;text-wrap:balance;max-width:34ch}
-.scard__price{display:flex;align-items:baseline;gap:10px;margin-top:8px}
-.scard__price .money{font-size:clamp(2.5rem,3.9vw,3.8rem)}
-.scard__price span{font-size:15px;font-weight:600;color:var(--muted)}
-.scard__pts{display:grid;gap:10px}
-.scard__pts li{display:flex;align-items:flex-start;gap:10px;font-size:clamp(1rem,1.15vw,1.12rem);font-weight:500;line-height:1.4;color:var(--ink)}
-.scard__pts li svg{width:20px;height:20px;flex:none;margin-top:3px;color:var(--blue)}
-.scard.prem .scard__pts li svg{color:var(--purple)}
-.scard.luxe .scard__pts li svg{color:var(--blue)}
-.scard__go{display:grid;gap:10px;justify-items:start;margin-top:auto}
-.scard__svc{font-size:14.5px;color:var(--muted);font-weight:500;max-width:40ch}
-.scard.more .scard__t{align-content:center;gap:18px}
-.scard.more h3{font-size:clamp(1.9rem,3vw,2.9rem)}
-.scard.more .scard__spec{font-weight:500;max-width:40ch}
-.scard.more .scard__go{grid-auto-flow:column;align-items:center;gap:18px}
-.scard.more .scard__go .ul{color:var(--ink);font-weight:700}
-.scard__ph{position:relative;z-index:1;margin:clamp(14px,1.8vw,22px);margin-left:0;border-radius:18px;overflow:clip;background:var(--mist)}
-.scard__ph img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;max-width:none}
-.scard__ph figcaption{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:var(--r-full);font-size:13px;font-weight:600;color:var(--ink);background:rgba(255,254,252,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 22px -12px rgba(4,16,46,.5),inset 0 0 0 1px rgba(255,255,255,.6)}
-/* the explosion: the homepage's product frames on the card, a tap opens it, a tap closes it */
-/* the frame's own mist ground fills the column, so the unit is never cut or faded: contain, the sides feathered into it */
-.scard__img{position:relative;z-index:1;height:100%;min-width:0;padding:0;background:var(--fr);cursor:pointer;-webkit-tap-highlight-color:transparent;display:grid;place-items:center}
-.scard__img:focus-visible{outline:2px solid var(--blue);outline-offset:-6px;border-radius:18px}
-.scard__img img{width:100%;height:100%;max-height:100%;object-fit:contain;max-width:none;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+/* ══ 4 · THE THREE SYSTEMS (#systems) — ⭐ REBUILT ROUND 4. JP, 7 Sep: "the product cards are still
+   fucked on iphone, the image takes up the whole card and you cant see anything, that needs a redesign"
+   and "i dont like the hierarchy of systems making the pure plus look so puny and the pure luxe all
+   grand, thats not what i meant by make it look premium".
+   ⛔ WHAT WAS WRONG, MEASURED: the deck stacked four whole cards absolutely and let the product render
+   fill each one, so at 390 the name, price and ticks were crushed into a 40px column beside a 420px
+   image. And the cards were not equals: Luxe carried a blue glow and a gradient wordmark, Plus a flat
+   white, so the entry system read as the cheap one.
+   THE APPROACH NOW (21st.dev Spatial Product Showcase, id 9679): ONE system on screen at a time on a
+   lit stage, its words in their own column, and a DOCK of three peers under it. Every system gets the
+   SAME frame, the same type sizes, the same room. Only the tint moves. Nobody is puny. ══ */
+.range .sc-stage{background:var(--mist);display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+  gap:clamp(12px,2vh,24px);padding:calc(var(--top) - 8px) var(--safe) clamp(24px,3.6vh,44px);overflow:clip}
+.range__head{display:grid;gap:8px;width:min(100%,1180px);margin-inline:auto;will-change:opacity,transform}
+.range__head h2{margin-top:8px;color:var(--ink);font-size:clamp(1.8rem,3.2vw,2.8rem)}
+.range__head .lede{font-size:clamp(.98rem,1.15vw,1.15rem)}
+
+.sysx{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(24px,3.4vw,72px);align-items:center;width:min(100%,1180px);margin-inline:auto;min-height:0}
+
+/* the lit stage — identical for all three, only --tint changes */
+.sysx__stage{position:relative;height:100%;min-height:0;display:grid;isolation:isolate}
+.sysx__pic{position:absolute;inset:0;opacity:0;transform:translateY(22px) scale(.95);
+  transition:opacity .6s var(--e-out),transform .76s var(--e-out);will-change:opacity,transform;pointer-events:none;
+  cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sysx__pic.on{opacity:1;transform:none;pointer-events:auto}
+.sysx__pic.was{opacity:0;transform:translateY(-18px) scale(.97)}
+.sysx__pic::before{content:"";position:absolute;z-index:0;left:50%;top:50%;width:min(104%,540px);aspect-ratio:1;transform:translate(-50%,-50%);
+  border-radius:50%;background:radial-gradient(circle,var(--tint,rgba(11,97,244,.15)) 0%,transparent 66%);pointer-events:none}
+.sysx__pic img{position:absolute;z-index:1;inset:0;width:100%;height:100%;max-width:none;object-fit:contain;
+  filter:drop-shadow(0 34px 34px rgba(4,16,46,.22));
+  /* the render carries its own pale backdrop, so without this you see the photograph's rectangle on
+     the page's mist. Feathered, the unit floats on its own tint. */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 4%,#000 96%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 4%,#000 96%,transparent 100%);
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+.sysx__pic:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:var(--r-hero)}
+.sysx__pic.plus{--tint:rgba(11,97,244,.16)}
+.sysx__pic.prem{--tint:rgba(109,40,217,.16)}
+.sysx__pic.luxe{--tint:rgba(8,70,190,.18)}
+
+/* the words — one panel per system, stacked, one visible. Same sizes for all three. */
+.sysx__copy{display:grid;min-width:0;align-self:center}
+.sysx__panel{grid-area:1/1;display:grid;align-content:center;gap:clamp(12px,1.8vh,20px);max-width:36ch;
+  opacity:0;transform:translateY(14px);transition:opacity .5s ease-in-out,transform .62s var(--e-out);
+  will-change:opacity,transform;pointer-events:none}
+.sysx__panel.on{opacity:1;transform:none;pointer-events:auto}
+.sysx__tag{justify-self:start;display:inline-flex;align-items:center;padding:6px 13px;border-radius:var(--r-full);
+  background:var(--tag,var(--blue-pale));color:var(--tagi,var(--blue-deep));
+  font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.sysx__panel.prem{--tag:#EEE6FB;--tagi:#5B21B6}
+.sysx__panel h3{font-size:clamp(2.2rem,3.6vw,3.4rem);font-weight:500;letter-spacing:-.014em;line-height:1.02;color:var(--ink);text-wrap:balance}
+.sysx__spec{font-size:clamp(1rem,1.2vw,1.16rem);font-weight:600;color:var(--muted);margin-top:-6px;text-wrap:balance}
+.sysx__price{display:flex;align-items:baseline;gap:10px}
+.sysx__price .money{font-size:clamp(2.3rem,3.5vw,3.2rem)}
+.sysx__price span{font-size:15px;font-weight:600;color:var(--muted)}
+.sysx__pts{display:grid;gap:9px}
+.sysx__pts li{display:flex;align-items:flex-start;gap:10px;font-size:clamp(1rem,1.1vw,1.1rem);font-weight:500;line-height:1.4;color:var(--ink)}
+.sysx__pts li svg{width:20px;height:20px;flex:none;margin-top:3px;color:var(--blue)}
+.sysx__panel.prem .sysx__pts li svg{color:var(--purple)}
+.sysx__go{display:grid;gap:9px;justify-items:start}
+.sysx__svc{font-size:15px;color:var(--muted);font-weight:500;max-width:40ch}
+.sysx__help{grid-column:1/-1;justify-self:center;font-size:15px;color:var(--muted);text-align:center}
+.sysx__help .ul{color:var(--ink);font-weight:600}
+
+/* the dock — three peers. Same pill, same size, the active one filled. */
+.dock{display:flex;justify-content:center;gap:8px;padding:7px;border-radius:var(--r-full);
+  background:rgba(255,255,255,.7);box-shadow:0 18px 40px -22px rgba(4,16,46,.4),inset 0 0 0 1px rgba(15,39,72,.08);
+  -webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);
+  justify-self:center;width:auto}
+.dock button{position:relative;display:grid;gap:1px;justify-items:center;min-width:clamp(104px,13vw,176px);min-height:52px;padding:8px 18px;
+  border:0;border-radius:var(--r-full);background:transparent;cursor:pointer;font-family:var(--sans);color:var(--muted);
+  transition:background .42s var(--e-out),color .42s var(--e-out);-webkit-tap-highlight-color:transparent}
+.dock button b{font-size:16px;font-weight:700;letter-spacing:-.005em;line-height:1.15;white-space:nowrap}
+.dock button span{font-size:14px;font-weight:600;line-height:1.15;font-variant-numeric:tabular-nums;color:#414E66}   /* ⛔ opacity .8 on --muted measured 4.1:1 (Lighthouse, 7 Sep). A solid ink that clears 4.5:1 instead. */
+.dock button.on{background:var(--ink);color:#fff}
+.dock button.on span{color:rgba(255,255,255,.88)}   /* ⛔ the price span carries its own ink for the resting state; on the filled pill that is dark on dark (1.78:1, Lighthouse 7 Sep) */
+.dock button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+@media(hover:hover) and (pointer:fine){.dock button:not(.on):hover{background:rgba(15,39,72,.06);color:var(--ink)}}
+@media(prefers-reduced-motion:reduce){.sysx__pic,.sysx__panel,.dock button{transition-duration:.001s}}
+
+/* the explosion, carried over unchanged: each system's still IS an .xcard, so explode() still binds */
 .xtap{position:absolute;right:9%;top:11%;z-index:6;display:inline-flex;align-items:center;white-space:nowrap;padding:9px 16px;border-radius:16px 16px 16px 3px;
   background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(11,97,244,.35),0 2px 5px rgba(4,16,46,.16);
   font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;pointer-events:none;
   opacity:0;scale:.8;animation:tapfloat 5.6s ease-in-out infinite,taptilt 7.3s ease-in-out infinite;transition:opacity .3s ease-in-out,scale .42s var(--e-out)}
-.scard.front .xcard.tapin:not(.opened) .xtap{opacity:1;scale:1}
 .xcard.opened .xtap{opacity:0;scale:.86;animation:none}
-/* the plus markers at the end frame: the homepage's hotspots, one per cartridge, a tip naming it */
+@keyframes tapfloat{0%{translate:0 0}22%{translate:1.5px -6px}46%{translate:-.5px -10.5px}68%{translate:-1.5px -6.5px}86%{translate:.5px -2px}100%{translate:0 0}}
+@keyframes taptilt{0%{rotate:0deg}28%{rotate:-1.5deg}55%{rotate:.6deg}80%{rotate:1.4deg}100%{rotate:0deg}}
+.sysx__pic.on.xcard.tapin:not(.opened) .xtap{opacity:1;scale:1}
+.xcard.opened .xtap{opacity:0;scale:.86;animation:none}
 .hswrap{position:absolute;pointer-events:none;z-index:5}
 .hs{position:absolute;transform:translate(-50%,-50%);pointer-events:none;z-index:1;opacity:0;transition:opacity .3s var(--e-out)}
 .hs.on{z-index:12}
@@ -1041,32 +1132,7 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .hs.r .tip{left:auto;right:0;transform:translateX(0) translateY(5px)} .hs.r.on .tip{transform:translateX(0)} .hs.r .tip::after{left:auto;right:16px}
 .hs.dn .tip{bottom:auto;top:calc(100% + 11px)}
 .hs.dn .tip::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:var(--ink-blue)}
-@media(prefers-reduced-motion:reduce){.xopen .hs > button > i{animation:none}}
-@keyframes tapfloat{0%{translate:0 0}22%{translate:1.5px -6px}46%{translate:-.5px -10.5px}68%{translate:-1.5px -6.5px}86%{translate:.5px -2px}100%{translate:0 0}}
-@keyframes taptilt{0%{rotate:0deg}28%{rotate:-1.5deg}55%{rotate:.6deg}80%{rotate:1.4deg}100%{rotate:0deg}}
 @media(prefers-reduced-motion:reduce){.xtap{animation:none}}
-/* the step up: three steps, the systems standing on them, one line each (JP, iteration two: ten times clearer) */
-.stepup{background:var(--mist);padding:clamp(56px,7vw,100px) 0 clamp(72px,9vw,130px)}
-.stepup__head{display:grid;gap:12px;max-width:62ch;margin-bottom:clamp(28px,4vw,52px)}
-.stepup__head h2{color:var(--ink)}
-.stairs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);align-items:end}
-.step{--ph:clamp(170px,21vw,290px);--th:clamp(150px,16vw,210px);display:grid;justify-items:center;position:relative}
-.step.s2{--ph:clamp(200px,24vw,330px);--th:clamp(190px,20vw,260px)}
-.step.s3{--ph:clamp(220px,26vw,360px);--th:clamp(230px,24vw,310px)}
-.step > img{width:auto;height:var(--ph);max-width:88%;object-fit:contain;position:relative;z-index:2;margin-bottom:-14px;filter:drop-shadow(0 30px 26px rgba(4,16,46,.24))}
-.tread{position:relative;width:100%;min-height:var(--th);border-radius:var(--r-hero);padding:34px 24px 24px;display:grid;align-content:start;gap:4px;background:#fff;box-shadow:var(--shadow-sm)}
-.step.s1 .tread{background:linear-gradient(160deg,#F7FAFD,#E4EEFD)}
-.step.s2 .tread{background:linear-gradient(160deg,#F8F4FE,#E6DCF8);box-shadow:inset 0 0 0 1px rgba(109,40,217,.2),var(--shadow-sm)}
-.step.s3 .tread{background:linear-gradient(160deg,#EAF2FF,#CFE0FF);box-shadow:inset 0 0 0 1px rgba(11,97,244,.28),var(--shadow-sm)}
-.step__k{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
-.step.s2 .step__k{color:var(--purple)}
-.step.s3 .step__k{color:var(--blue-deep)}
-.tread .money{font-size:clamp(1.8rem,2.6vw,2.5rem);color:var(--ink);margin-top:2px}
-.step.s3 .tread .money{color:var(--blue)}
-.tread p{font-size:clamp(1rem,1.2vw,1.12rem);font-weight:600;color:var(--ink);line-height:1.35;margin-top:4px;text-wrap:balance}
-.tread .tag{position:absolute;top:-12px;right:18px;display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--r-full);background:var(--purple);color:#fff;font-family:var(--badge);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.stepup__base{margin-top:22px;font-size:15px;color:var(--muted);max-width:76ch;line-height:1.55}
-.stepup__base b{color:var(--ink)}
 
 /* ══ 6 · UNDER THE SINK (#install) — one photograph the width of the page, three short steps ══ */
 .install{background:var(--paper);padding:clamp(72px,9vw,130px) 0}
@@ -1074,7 +1140,7 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .install__head h2{margin-top:14px;color:var(--ink)}
 .install__big{position:relative;border-radius:var(--r-hero);overflow:clip;background:var(--mist);aspect-ratio:21/9;margin-top:clamp(28px,3.6vw,48px);isolation:isolate}
 .install__big img{width:100%;height:100%;object-fit:cover;object-position:56% 50%;max-width:none}
-.install__big figcaption{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:var(--r-full);font-size:13px;font-weight:600;color:var(--ink);background:rgba(255,254,252,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 22px -12px rgba(4,16,46,.5),inset 0 0 0 1px rgba(255,255,255,.6)}
+.install__big figcaption{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:var(--r-full);font-size:15px;font-weight:600;color:var(--ink);background:rgba(255,254,252,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 22px -12px rgba(4,16,46,.5),inset 0 0 0 1px rgba(255,255,255,.6)}
 .install__row{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start;margin-top:clamp(28px,3.6vw,48px)}
 .install__row h2{color:var(--ink);font-size:clamp(1.5rem,2.2vw,2rem);font-weight:500;line-height:1.14;letter-spacing:0;text-wrap:balance;max-width:16ch}
 .steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:st}
@@ -1283,14 +1349,16 @@ body.dopen .drawer{transform:none}
 .ch__a p a,.est .fq .fa a,.est__head a,.ch__a li a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(11,97,244,.4);transition:text-decoration-color .3s ease-in-out}
 .est__fig{margin:22px 0 0;border-radius:var(--r-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-sm)}
 .est__fig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:56% 45%}
-.est__fig figcaption{padding:12px 16px 13px;font-size:14px;line-height:1.45;color:var(--muted)}
+.est__fig figcaption{padding:12px 16px 13px;font-size:15px;line-height:1.45;color:var(--muted)}
 .est__areas{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
 .est__areas li{padding:0}
 .est__areas li::before{display:none}
 .est__areas a{display:inline-flex;align-items:center;min-height:40px;padding:0 15px;border-radius:var(--r-full);border:1px solid var(--rule);background:#fff;font-size:14.5px;font-weight:600;color:var(--ink);text-decoration:none;transition:border-color .3s ease-in-out,color .3s ease-in-out}
 .est__faq{margin-top:clamp(48px,6vw,80px);padding-top:clamp(40px,5vw,64px);border-top:1px solid var(--rule)}
 .est .fwrap{display:grid;gap:36px;align-items:start}
-.est .fside h2{margin:14px 0 0;max-width:12ch;color:var(--ink)}
+/* ⛔ a .d2 (up to 3.8rem) inside a 12ch measure in a .7fr column wrapped to FOUR lines and ran off the
+   fold at 1440 (qc.mjs, 7 Sep). The side of a two column block gets a heading sized for that column. */
+.est .fside h2{margin:14px 0 0;max-width:14ch;color:var(--ink);font-size:clamp(1.7rem,2.6vw,2.4rem)}
 .est .fside .lede{margin-top:16px;max-width:30ch}
 .est .fside .go{margin-top:24px}
 .est .fgrid{display:grid;grid-template-columns:1fr;gap:10px;min-width:0;counter-reset:faq}
@@ -1341,15 +1409,14 @@ body.dopen .drawer{transform:none}
 
 /* ═══════════════════════════ THE TABLET (860–1079) ═══════════════════════════ */
 @media(min-width:860px) and (max-width:1079px){
-  .stages{gap:10px}
-  .stg > b{font-size:1.05rem}
-  .stg > p{font-size:.9rem}
+  .stax__step h3{font-size:clamp(1.8rem,3.4vw,2.4rem)}
+  .crail button b{font-size:15px}   /* the reading floor holds in the tablet band too */
   .step > img{max-width:94%}
   .tread{padding:30px 16px 18px}
-  .range__head,.deck{width:min(86vw,1280px)}
-  .scard{grid-template-columns:minmax(0,1fr) minmax(0,.8fr)}
-  .scard__t h3{font-size:2.2rem}
-  .scard__price .money{font-size:2.4rem}
+  .sysx{gap:28px}
+  .sysx__panel h3{font-size:2.2rem}
+  .sysx__price .money{font-size:2.3rem}
+  .dock button{min-width:120px}
 }
 
 /* ═══════════════════════════ THE PHONE (≤859px) — the same page, fitted ═══════════════════════════
@@ -1388,22 +1455,38 @@ body.dopen .drawer{transform:none}
   .why__fr{inset:var(--hframe)}
   .why__fr img{object-position:50% 38%}
   .why__veil{background:linear-gradient(180deg,rgba(4,16,46,.12) 0%,rgba(4,16,46,.16) 34%,rgba(4,16,46,.86) 66%,rgba(4,16,46,.94) 100%)}
-  .why__copy{align-content:end;padding:var(--top) calc(var(--safe) + 22px) calc(26px + env(safe-area-inset-bottom)) var(--safe);gap:12px;max-width:none}
+  .why__copy{align-content:end;padding:var(--top) calc(var(--safe) + 22px) var(--fabclear) var(--safe);gap:12px;max-width:none}
   .why__copy h2{font-size:clamp(1.7rem,7.4vw,2.15rem);max-width:none}
   .why__names{gap:2px 14px}
   .why__names li{font-size:clamp(1.05rem,4.8vw,1.35rem);padding-bottom:4px}
   .why__line{font-size:.98rem;max-width:none}
   /* 2 · the stages: five rows, each lighting in turn */
-  .how .sc-stage{grid-template-rows:auto minmax(0,1fr) auto;gap:10px;padding:calc(var(--top) - 30px) var(--safe) 16px}
   .how__head{gap:6px}
   .how__head h2{font-size:clamp(1.5rem,6.4vw,1.9rem)}
   .stages{grid-template-columns:1fr;gap:7px;align-self:start;margin-right:22px}
-  .stg{grid-template-columns:62px minmax(0,1fr);grid-template-rows:auto auto auto;gap:0 12px;align-items:center;transform:translateX(-8px)}
-  .stg.on{transform:none}
-  .stg__pic{grid-row:1/4;width:62px;height:62px;aspect-ratio:auto;border-radius:12px;margin:0}
-  .stg__n{font-size:9.5px;letter-spacing:.06em}
-  .stg > b{font-size:1rem}
-  .stg > p{font-size:.85rem;line-height:1.3}
+  /* ⭐ ROUND 4 · the stage on a phone: the cartridge is the biggest thing on the screen, the words
+     under it at reading size, and the rail is five numbers. Nothing is a postage stamp and nothing
+     is under 15px. Budget at 390×844: 66 header + 110 head + 36svh picture + ~150 copy + 60 rail
+     + 76 bottom safe = 766 of 844. */
+  .how .sc-stage{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr) auto auto;
+    gap:10px 0;padding:calc(var(--top) - 30px) var(--safe) var(--fabclear)}
+  .how__head{grid-column:1;grid-row:1;gap:4px}
+  .how__head .kick{font-size:13px}
+  .how__head h2{font-size:clamp(1.45rem,6.2vw,1.8rem);max-width:16ch}
+  .stax{grid-column:1;grid-row:2;min-height:38svh}
+  .stax::before{width:min(150%,420px)}
+  .stax::after{display:none}
+  .stax__pic{padding:0}
+  .stax__copy{grid-column:1;grid-row:3;align-self:start;max-width:none;gap:8px}
+  .stax__n{font-size:12.5px;gap:9px}
+  .stax__n::before{width:20px}
+  .stax__step h3{font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  .stax__step p{font-size:1rem;line-height:1.45;max-width:none}
+  .crail{grid-column:1;grid-row:4;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding-top:16px;padding-right:0}
+  .crail button{justify-items:center;min-height:46px;padding:12px 0 0}
+  .crail button::before{left:50%;transform:translate(-50%,-50%);width:8px;height:8px}
+  .crail button i{font-size:15px;letter-spacing:.04em}
+  .crail button b{display:none}
   .how__foot{grid-template-columns:1fr;gap:8px}
   .how__stat b{font-size:1.5rem}
   .how__stat span{font-size:13px}
@@ -1423,34 +1506,34 @@ body.dopen .drawer{transform:none}
   .money__frame{font-size:12px}
   /* 4 · the systems: the same deck, the image on top of each card, the text under it */
   /* the stage ends above the phone's pills (the way back and the fixed price ride the bottom 68px) */
-  .range .sc-stage{grid-template-rows:auto minmax(0,1fr);gap:10px;padding:calc(var(--top) - 28px) var(--safe) calc(76px + env(safe-area-inset-bottom))}
-  .range__head{grid-template-columns:1fr;width:auto;gap:4px}
-  .range__head h2{font-size:clamp(1.4rem,6vw,1.75rem);margin-top:6px}
+  /* ⭐ ROUND 4 · the systems on a phone: the product on its own stage at the top, the words under it at
+     reading size, the dock of three at the foot clear of the floating chrome. Nothing overlaps anything.
+     Budget at 390×844: 74 top + 78 head + 27svh stage + ~280 words + 50 dock + 76 fabclear. */
+  .range .sc-stage{grid-template-rows:auto minmax(0,1fr) auto;gap:9px;padding:calc(var(--top) - 30px) var(--safe) var(--fabclear)}
+  .range__head{grid-template-columns:1fr;width:auto;gap:3px}
+  .range__head h2{font-size:clamp(1.4rem,5.8vw,1.7rem);margin-top:4px;max-width:18ch}
   .range__head .lede{display:none}
-  .deck{width:100%;height:min(64svh,600px);margin:auto 0}   /* auto width shrinks to the absolute cards' nothing: 0px wide on the first phone shot */
-  .scard{grid-template-columns:1fr;grid-template-rows:minmax(0,.95fr) auto;border-radius:22px;transform:translateY(calc((1 - var(--k)) * 116%)) translateY(calc(var(--d) * -14px)) scale(calc(1 - .05 * var(--d)))}
-  .scard__img{grid-row:1;height:100%;padding:0}
-  .scard__img img{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%)}
-  .hs > button{width:44px;height:44px}
-  .hs > button > i{width:24px;height:24px}
-  .hs .tip{width:min(200px,60vw);padding:9px 11px}
-  .scard__t{padding:10px 16px 16px;gap:9px;align-content:end}
-  .scard__t h3{font-size:clamp(1.55rem,6.6vw,1.9rem);margin-top:4px}
-  .scard__spec{font-size:.9rem;margin-top:3px}
-  .scard__price{margin-top:4px;gap:8px}
-  .scard__price .money{font-size:1.65rem}
-  .scard__price span{font-size:13px}
-  .scard__pts{gap:5px}
-  .scard__pts li{font-size:13.5px;line-height:1.3;gap:8px}
-  .scard__pts li svg{width:17px;height:17px;margin-top:1px}
-  .scard__go{grid-auto-flow:column;align-items:center;gap:12px}
-  .scard__go .btn{min-height:46px}
-  .scard__svc{font-size:11.5px;line-height:1.3}
-  .scard.more{grid-template-rows:minmax(0,1fr) auto}
-  .scard.more .scard__t{align-content:end;gap:10px}
-  .scard.more h3{font-size:1.5rem}
-  .scard.more .scard__spec{font-size:.92rem}
-  .scard__ph{grid-row:1;margin:10px 12px 0;border-radius:16px}
+  .sysx{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:10px;align-items:stretch}
+  .sysx__stage{min-height:31svh}
+  .sysx__pic::before{width:min(150%,340px)}
+  .sysx__copy{align-self:start}
+  .sysx__panel{max-width:none;gap:7px;align-content:start}
+  .sysx__tag{padding:5px 11px;font-size:11.5px}
+  .sysx__panel h3{font-size:clamp(1.5rem,6.4vw,1.85rem)}
+  .sysx__spec{font-size:15px;margin-top:-2px}
+  .sysx__price{gap:8px;align-items:baseline}
+  .sysx__price .money{font-size:1.7rem}
+  .sysx__price span{font-size:14px}
+  .sysx__pts{gap:5px}
+  .sysx__pts li{font-size:15px;line-height:1.32;gap:9px}
+  .sysx__pts li svg{width:18px;height:18px;margin-top:2px}
+  .sysx__go{gap:6px}
+  .sysx__go .btn{min-height:46px}
+  .sysx__svc{font-size:15px;line-height:1.35}
+  .dock{gap:5px;padding:5px;width:100%;justify-content:space-between}
+  .dock button{min-width:0;flex:1 1 0;min-height:46px;padding:6px 4px}
+  .dock button b{font-size:14px}
+  .dock button span{font-size:13px}
   .xtap{right:6%;top:6%;font-size:11.5px;padding:7px 12px}
   .stepup{padding:44px 0 64px}
   .stepup__head{margin-bottom:18px}
@@ -1466,7 +1549,7 @@ body.dopen .drawer{transform:none}
   .tread .tag{position:static;width:max-content;margin-bottom:4px}
   .stepup__base{font-size:13.5px;margin-top:16px}
   /* 6 · under the sink */
-  .install{padding:56px 0}
+  .install{padding:56px 0 var(--fabclear)}
   .install__big{aspect-ratio:4/3;margin-top:20px}
   .install__row{grid-template-columns:1fr;gap:16px;margin-top:22px}
   .install__row h2{max-width:none}
@@ -1476,7 +1559,7 @@ body.dopen .drawer{transform:none}
   .steps3 span{font-size:14px}
   .install__lic{font-size:13.5px;margin-top:18px}
   /* 5 · the taps: the finishes ride the photograph, so a thumb sees the tap change */
-  .taps{padding:56px 0}
+  .taps{padding:56px 0 var(--fabclear)}
   .taps__grid{grid-template-columns:1fr;gap:18px}
   .taps__fr{order:-1;aspect-ratio:4/4.4;max-height:none}
   .taps__fr figcaption{top:12px;bottom:auto;right:12px}
@@ -1487,10 +1570,10 @@ body.dopen .drawer{transform:none}
   .taps__copy .swatches{display:none}
   .sw{min-height:46px;font-size:13.5px}
   /* 7 · the servicing: the photograph on top, the ledger under it */
-  .care .sc-stage{grid-template-columns:1fr;grid-template-rows:30svh minmax(0,1fr)}
+  .care .sc-stage{grid-template-columns:1fr;grid-template-rows:23svh minmax(0,1fr)}
   .care__ph{height:auto}
   .care__ph img{object-position:50% 40%}
-  .care__panel{padding:14px calc(var(--safe) + 22px) 16px var(--safe);gap:8px;align-content:start;max-width:none}
+  .care__panel{padding:14px calc(var(--safe) + 22px) var(--fabclear) var(--safe);gap:8px;align-content:start;max-width:none}
   .care__panel h2{font-size:clamp(1.5rem,6.6vw,1.9rem)}
   .care__panel .lede{font-size:.95rem}
   .care__panel .fine{display:none}
@@ -1559,23 +1642,76 @@ body.dopen .drawer{transform:none}
   .mpick button.on{background:var(--blue-pale)}
   .mpick button.on i{background:var(--blue)}
   /* the estate on a phone */
-  .est{padding:56px 0 48px}
+  .est{padding:56px 0 var(--fabclear)}
   .est__grid{margin-top:26px}
 }
 @media(max-width:859px) and (max-height:700px){
   .hero .copy{bottom:232px}
   .hero h1{font-size:clamp(1.5rem,6.4vw,1.8rem)}
-  .stg__pic{width:54px;height:54px}
-  .stg > p{display:none}
-  .scard__pts li:nth-child(3){display:none}
-  .scard__svc{display:none}
+  .stax{min-height:30svh}
+  .stax__step p{font-size:.95rem}
+  .sysx__pts li:nth-child(3){display:none}
+  .sysx__svc{display:none}
   .money-act .sc-stage,.care .sc-stage{grid-template-rows:26svh minmax(0,1fr)}
 }
 
 
 /* every inline link that is a target on its own is 44px tall */
-.scard__go .ul,.taps__go .ul,.ask__call .ul,.est__go .ul,.est__call .ul,.care__panel .fine a{display:inline-flex;align-items:center;min-height:44px}
+.sysx__go .ul,.taps__go .ul,.ask__call .ul,.est__go .ul,.est__call .ul,.care__panel .fine a{display:inline-flex;align-items:center;min-height:44px}
 .care__panel .fine a{min-height:0;padding:11px 0;margin:-11px 0}
+
+/* ⭐ ROUND 4 · THE 15px READING FLOOR ON A PHONE (JP, 7 Sep: "hard to read"). Measured with qc.mjs:
+   21 elements of reading text sat between 12 and 14px. Archivo labels keep the brand book's own
+   11–19px label scale; everything a person READS is 15px or more. */
+@media(max-width:859px){
+  .money__frame{font-size:15px}
+  .ochead .ot > span{font-size:15px}
+  .frame figcaption,.taps__fr figcaption{font-size:15px}
+  .rvc .rwho,.rvc .rwho span{font-size:15px}
+  .dock button b{font-size:15px}
+  .dock button span{font-size:15px}
+  .steps3 span,.steps3 b{font-size:15px}
+  .install__lic,.install__lic span{font-size:15px}
+  .lrow .std,.lrow .ours,.lrow b small{font-size:15px}
+  .taps__price span{font-size:15px}
+  .ask__lic,.ask__call{font-size:15px}
+  .qform .hint{font-size:15px}
+  .est .fq .fa p,.ch__a ul li{font-size:16px}
+  /* ⭐ the hero card's product: 71px was 1.5% of the screen for the thing being sold */
+  .ochead{grid-template-columns:96px 1fr}
+  .ochead .oth{width:96px;height:96px;border-radius:18px}
+}
+
+/* ⭐ ROUND 4 · the reading floor holds at every width, not only on a phone (qc.mjs, 1440: eight
+   elements between 13 and 14px). Archivo labels keep the brand book's 11–19px label scale. */
+
+.money__frame{font-size:15px}
+.dock button span{font-size:15px}
+.ocproof .ocp{font-size:15px}
+.rvc .rwho,.rvc .rwho span{font-size:15px}
+
+/* ⭐ ROUND 4 · the servicing ledger on a phone: five rows AND the price row have to be on the screen
+   at once, because the price row is the point of the section. Measured 7 Sep: the last row sat 36px
+   below the fold behind the floating pill. The photograph gives up the height. */
+@media(max-width:859px){
+  .care__panel .lede{font-size:15px;max-width:34ch}
+  .lrow{padding:9px 14px;gap:4px 12px}
+  .lrow.head{padding:8px 14px}
+  .lrow b{font-size:15px;line-height:1.25}
+  .lrow b small{font-size:14px;margin-top:1px}
+  .lrow .ours svg{width:20px;height:20px;padding:4px}
+  .lrow .std i{padding:3px 8px;font-size:12px}
+  .sysx__price span{font-size:15px}
+}
+
+@media(max-width:859px){
+  /* the service line is one line on a phone: the words that were on the second line ("covered for
+     life while you stay serviced with us") are already the third tick, so the height went to the
+     product instead. */
+  .sysx__svc{font-size:15px;line-height:1.3;max-width:32ch}
+  .sysx__panel{gap:6px}
+  .sysx__go{gap:5px}
+}
 
 </style>
 <script type="application/ld+json">
@@ -2101,27 +2237,42 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ 2 · HOW IT WORKS — the five stages, big, in a row, lighting one after another as the water
-     runs along the track under them; one short line each; the number lands at the end. Nothing else
-     (JP, iteration two: less reading, bigger cartridges, no pills). The stills are our supplier
-     cartridges shot on navy (Nano Banana Pro, 6 Sep 2026): the five stage tiles in media/ro. ═════════ -->
-<section class="how" id="how" data-sc-act="pin" data-sc-span="3.6" data-sc-span-m="3.2" aria-label="How reverse osmosis works">
+<!-- ═════════ 2 · HOW IT WORKS — ⭐ REBUILT ROUND 4 (JP, 7 Sep: "a bit bigger and feel premium… think of a
+     different approach"). ONE cartridge at a time, standing as tall as the stage allows, lit from behind,
+     with the five as a rail of peers under it. Scroll moves through them; the rail is also a control.
+     Mechanism: 21st.dev Spatial Product Showcase (id 9679) — one subject on a lit stage, a spring swap,
+     a dock of peers — rebuilt in vanilla off --sc-p. The stills are our own supplier cartridges shot on
+     navy (Nano Banana Pro, 6 Sep 2026), re-exported at 1100px so they can be shown this big. ═════════ -->
+<section class="how" id="how" data-sc-act="pin" data-sc-span="4.6" data-sc-span-m="4.4" aria-label="How reverse osmosis works">
   <div class="sc-stage" data-sc-stage>
     <header class="how__head" data-sc-cue="0 1 0 0">
       <span class="kick">How reverse osmosis works</span>
       <h2 class="d2">Small enough to separate what taste cannot.</h2>
     </header>
-    <ol class="stages" id="stages">
-      <li class="stg" data-i="0"><figure class="stg__pic"><img src="media/ro/stage-1.webp" alt="The five micron sediment cartridge" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 01</span><b>Sediment</b><p>Grit, rust and sand out first.</p></li>
-      <li class="stg" data-i="1"><figure class="stg__pic"><img src="media/ro/stage-2.webp" alt="The coconut carbon block cartridge" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 02</span><b>Carbon block</b><p>Chlorine, and the taste and smell with it.</p></li>
-      <li class="stg" data-i="2"><figure class="stg__pic"><img src="media/ro/stage-3.webp" alt="The reverse osmosis membrane" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 03</span><b>The membrane</b><p>Fluoride, PFAS, microplastics, metals and salts, rejected and flushed away.</p></li>
-      <li class="stg" data-i="3"><figure class="stg__pic"><img src="media/ro/stage-4.webp" alt="The alkaline remineralising cartridge" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 04</span><b>Alkaline</b><p>The good minerals go back in.</p></li>
-      <li class="stg" data-i="4"><figure class="stg__pic"><img src="media/ro/stage-5.webp" alt="The coconut carbon polish cartridge" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 05</span><b>Carbon polish</b><p>One last pass before the tap.</p></li>
-    </ol>
-    <div class="how__foot">
-      <div class="how__track" aria-hidden="true"><i id="trainFill"></i></div>
-      <div class="how__stat" id="howStat"><b>Up to 99%</b><span>of dissolved contaminants out</span></div>
+
+    <div class="stax" id="stax">
+      <figure class="stax__pic on" data-i="0"><img src="media/ro/stage-1.webp" alt="The five micron sediment cartridge" width="393" height="1200" fetchpriority="low"></figure>
+      <figure class="stax__pic" data-i="1"><img src="media/ro/stage-2.webp" alt="The coconut carbon block cartridge" width="564" height="1200" loading="lazy"></figure>
+      <figure class="stax__pic" data-i="2"><img src="media/ro/stage-3.webp" alt="The reverse osmosis membrane" width="343" height="1200" loading="lazy"></figure>
+      <figure class="stax__pic" data-i="3"><img src="media/ro/stage-4.webp" alt="The alkaline remineralising cartridge" width="361" height="1200" loading="lazy"></figure>
+      <figure class="stax__pic" data-i="4"><img src="media/ro/stage-5.webp" alt="The coconut carbon polish cartridge" width="360" height="1200" loading="lazy"></figure>
     </div>
+
+    <div class="stax__copy" id="staxCopy">
+      <div class="stax__step on" data-i="0"><span class="stax__n">Stage 01</span><h3>Sediment</h3><p>A five micron cartridge takes the grit, rust and sand out first, so nothing downstream has to.</p></div>
+      <div class="stax__step" data-i="1"><span class="stax__n">Stage 02</span><h3>Carbon block</h3><p>Coconut carbon takes the chlorine, and the taste and the smell go with it.</p></div>
+      <div class="stax__step" data-i="2"><span class="stax__n">Stage 03</span><h3>The membrane</h3><p>Openings around 0.0001 micron. Fluoride, PFAS, microplastics, metals and dissolved salts are rejected and flushed away. <em>Up to 99% out.</em></p></div>
+      <div class="stax__step" data-i="3"><span class="stax__n">Stage 04</span><h3>Alkaline</h3><p>Then the good minerals go back in. Minerals are good water, and they are where the taste comes from.</p></div>
+      <div class="stax__step" data-i="4"><span class="stax__n">Stage 05</span><h3>Carbon polish</h3><p>One last pass before the tap, so the glass tastes of nothing at all.</p></div>
+    </div>
+
+    <nav class="crail" id="crail" aria-label="The five stages">
+      <button type="button" class="on" data-i="0"><i>01</i><b>Sediment</b></button>
+      <button type="button" data-i="1"><i>02</i><b>Carbon block</b></button>
+      <button type="button" data-i="2"><i>03</i><b>The membrane</b></button>
+      <button type="button" data-i="3"><i>04</i><b>Alkaline</b></button>
+      <button type="button" data-i="4"><i>05</i><b>Carbon polish</b></button>
+    </nav>
   </div>
 </section>
 
@@ -2148,84 +2299,90 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ 4 · THE THREE SYSTEMS — pin: one card at a time, three quarters of the screen, centred, the
-     next card rising from below over the last (21st.dev "Stacking Cards", danielpetho, id 25275, rebuilt
-     off --sc-p). Every card carries the homepage's product explosion: tap the unit and it opens into its
-     parts on the same xf-* frames, the homepage's makeScrub, RETAIN and decode rules carried over.
-     The cards are the anchors the old product URLs 301 into. ═════════ -->
-<section class="range" id="systems" data-sc-act="pin" data-sc-span="6" data-sc-span-m="5.2" aria-label="The three systems">
+<!-- ═════════ 4 · THE THREE SYSTEMS — ⭐ REBUILT ROUND 4 (JP, 7 Sep: the cards were fucked on the phone,
+     and the hierarchy made Pure Plus look puny beside Pure Luxe). ONE system at a time on a lit stage,
+     its words in their own column, and a DOCK of three peers under it: same frame, same type, same room
+     for each, only the tint moves. Scroll moves through them; the dock picks one. Every still is still
+     an .xcard, so the homepage's explosion (media/xf-*) opens inside the stage exactly as before.
+     Mechanism: 21st.dev Spatial Product Showcase (id 9679), rebuilt in vanilla off --sc-p. ═════════ -->
+<section class="range" id="systems" data-sc-act="pin" data-sc-span="6" data-sc-span-m="5.4" aria-label="The three systems">
   <div class="sc-stage" data-sc-stage>
     <header class="range__head" data-sc-cue="0 1 0 0">
-      <span class="kick">Three systems</span><h2 class="d2">Three ways to finish the same serious filtration.</h2>
+      <span class="kick">Three systems</span>
+      <h2 class="d2">Three ways to finish the same serious filtration.</h2>
+      <p class="lede">All three are reverse osmosis, under the sink, on their own tap. The difference is the finish, not whether the water is purified.</p>
     </header>
-    <div class="deck" id="sysDeck">
-      <article class="scard plus" id="pure-plus" data-i="0">
-        <div class="scard__t">
-          <div><span class="scard__n">01 &middot; The starting point</span><h3>Pure Plus</h3><p class="scard__spec">5 Stage Alkaline Reverse Osmosis</p><p class="scard__price"><span class="money">$1,280</span><span>installed</span></p></div>
-          <ul class="scard__pts"><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 99% of dissolved contaminants out</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Alkaline, mineral rich water on tap</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>An under sink reverse osmosis filter with its own drinking tap</li></ul>
-          <div class="scard__go"><button class="btn js-open" type="button" data-sys="Pure Plus"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button><span class="scard__svc">$600 a year, serviced by us. Covered for life while you stay serviced with us.</span></div>
-        </div>
-        <div class="scard__img xcard" data-set="plus" role="button" tabindex="0" aria-label="See inside the Pure Plus">
-          <img src="media/xf-plus/f00.webp" alt="The Pure Plus five stage alkaline reverse osmosis system, opening into its parts" width="1100" height="1472" loading="lazy">
-          <span class="xtap" aria-hidden="true">Tap me!</span>
-        </div>
-      </article>
-      <article class="scard prem" id="pure-premium" data-i="1">
-        <div class="scard__t">
-          <div><span class="scard__n">02 &middot; Most kitchens choose this</span><h3>Pure Premium</h3><p class="scard__spec">7 Stage Hydrogen Rich Alkaline Reverse Osmosis</p><p class="scard__price"><span class="money">$1,590</span><span>installed</span></p></div>
-          <ul class="scard__pts"><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Hydrogen rich and alkaline, every glass</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Remineralised, so the good minerals go back in</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>PFAS, fluoride, heavy metals and dissolved salts out</li></ul>
-          <div class="scard__go"><button class="btn js-open" type="button" data-sys="Pure Premium"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button><span class="scard__svc">$650 a year, serviced by us. Covered for life while you stay serviced with us.</span></div>
-        </div>
-        <div class="scard__img xcard" data-set="prem" role="button" tabindex="0" aria-label="See inside the Pure Premium">
-          <img src="media/xf-prem/f00.webp" alt="The Pure Premium seven stage hydrogen rich alkaline reverse osmosis system, opening into its parts" width="1100" height="1472" loading="lazy">
-          <span class="xtap" aria-hidden="true">Tap me!</span>
-        </div>
-      </article>
-      <article class="scard luxe" id="pure-luxe" data-i="2">
-        <div class="scard__t">
-          <div><span class="scard__n">03 &middot; The flagship</span><h3>Pure Luxe</h3><p class="scard__spec">Smart 5 Stage Alkaline Reverse Osmosis</p><p class="scard__price"><span class="money">$2,290</span><span>installed</span></p></div>
-          <ul class="scard__pts"><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Watch the purity live on its own screen</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Quick change cartridges in a compact sealed case</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>A leak sensor and a booster pump built in</li></ul>
-          <div class="scard__go"><button class="btn js-open" type="button" data-sys="Pure Luxe"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button><span class="scard__svc">$680 a year, serviced by us. Covered for life while you stay serviced with us.</span></div>
-        </div>
-        <div class="scard__img xcard" data-set="luxe" role="button" tabindex="0" aria-label="See inside the Pure Luxe">
-          <img src="media/xf-luxe/f00.webp" alt="The Pure Luxe smart five stage alkaline reverse osmosis system, opening into its parts" width="1100" height="1472" loading="lazy">
-          <span class="xtap" aria-hidden="true">Tap me!</span>
-        </div>
-      </article>
-      <article class="scard more" data-i="3">
-        <div class="scard__t">
-          <div><span class="scard__n">Not sure which is yours?</span><h3>Send a photo of the cabinet under your sink.</h3><p class="scard__spec">We confirm the fit, the tap and the price in writing, and nothing changes on the day.</p></div>
-          <div class="scard__go"><button class="btn js-open" type="button" data-sys="Not sure yet"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Help me choose</button><a class="ul" href="tel:0430546749">or call 0430 546 749</a></div>
-        </div>
-        <figure class="scard__ph">
-          <picture><source media="(max-width:859px)" srcset="media/ro/undersink-m.webp"><img src="media/ro/undersink.webp" alt="A reverse osmosis system and its white tank fitted neatly inside an open kitchen cabinet" width="1600" height="893" loading="lazy"></picture>
-          <figcaption>Where it goes</figcaption>
+
+    <div class="sysx" id="sysx">
+      <div class="sysx__stage">
+        <figure class="sysx__pic plus on xcard" id="pure-plus" data-set="plus" data-i="0" role="button" tabindex="0" aria-label="See inside the Pure Plus">
+          <img src="media/xf-plus/f00.webp" alt="The Pure Plus five stage alkaline reverse osmosis system" width="1100" height="1472" loading="lazy">
+          <span class="xtap" aria-hidden="true">See inside</span>
         </figure>
-      </article>
+        <figure class="sysx__pic prem xcard" id="pure-premium" data-set="prem" data-i="1" role="button" tabindex="0" aria-label="See inside the Pure Premium">
+          <img src="media/xf-prem/f00.webp" alt="The Pure Premium seven stage hydrogen rich alkaline reverse osmosis system" width="1100" height="1472" loading="lazy">
+          <span class="xtap" aria-hidden="true">See inside</span>
+        </figure>
+        <figure class="sysx__pic luxe xcard" id="pure-luxe" data-set="luxe" data-i="2" role="button" tabindex="0" aria-label="See inside the Pure Luxe">
+          <img src="media/xf-luxe/f00.webp" alt="The Pure Luxe smart five stage alkaline reverse osmosis system" width="1100" height="1472" loading="lazy">
+          <span class="xtap" aria-hidden="true">See inside</span>
+        </figure>
+      </div>
+
+      <div class="sysx__copy" id="sysCopy">
+        <article class="sysx__panel plus on" data-i="0">
+          <span class="sysx__tag">The starting point</span>
+          <h3>Pure Plus</h3>
+          <p class="sysx__spec">5 Stage Alkaline Reverse Osmosis</p>
+          <p class="sysx__price"><span class="money">$1,280</span><span>installed</span></p>
+          <ul class="sysx__pts">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 99% of dissolved contaminants out</li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Alkaline, mineral rich water on tap</li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Its own dedicated drinking tap</li>
+          </ul>
+          <div class="sysx__go">
+            <button class="btn js-open" type="button" data-sys="Pure Plus"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
+            <span class="sysx__svc">$600 a year, serviced by us. Covered for life while you stay serviced with us.</span>
+          </div>
+        </article>
+        <article class="sysx__panel prem" data-i="1">
+          <span class="sysx__tag">Most kitchens choose this</span>
+          <h3>Pure Premium</h3>
+          <p class="sysx__spec">7 Stage Hydrogen Rich Alkaline Reverse Osmosis</p>
+          <p class="sysx__price"><span class="money">$1,590</span><span>installed</span></p>
+          <ul class="sysx__pts">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Hydrogen rich and alkaline, every glass</li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Remineralised, so the good minerals go back in</li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>PFAS, fluoride, heavy metals and dissolved salts out</li>
+          </ul>
+          <div class="sysx__go">
+            <button class="btn js-open" type="button" data-sys="Pure Premium"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
+            <span class="sysx__svc">$650 a year, serviced by us. Covered for life while you stay serviced with us.</span>
+          </div>
+        </article>
+        <article class="sysx__panel luxe" data-i="2">
+          <span class="sysx__tag">The flagship</span>
+          <h3>Pure Luxe</h3>
+          <p class="sysx__spec">Smart 5 Stage Alkaline Reverse Osmosis</p>
+          <p class="sysx__price"><span class="money">$2,290</span><span>installed</span></p>
+          <ul class="sysx__pts">
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Watch the purity live on its own screen</li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Quick change cartridges in a compact sealed case</li>
+            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>A leak sensor and a booster pump built in</li>
+          </ul>
+          <div class="sysx__go">
+            <button class="btn js-open" type="button" data-sys="Pure Luxe"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
+            <span class="sysx__svc">$680 a year, serviced by us. Covered for life while you stay serviced with us.</span>
+          </div>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
-<section class="stepup" id="stepup" aria-label="The step up">
-  <div class="zone">
-    <div class="stepup__head" data-sc-in data-sc-stagger="80">
-      <span class="kick">The step up</span>
-      <h2 class="d2">Same water. Each step adds more on top.</h2>
-    </div>
-    <div class="stairs" data-sc-in data-sc-stagger="130">
-      <article class="step s1">
-        <img src="media/systems/pure-plus.webp" alt="The Pure Plus five stage reverse osmosis system" width="607" height="900" loading="lazy">
-        <div class="tread"><span class="step__k">01 &middot; Pure Plus</span><span class="money">$1,280</span><p>Purified, and alkaline.</p></div>
-      </article>
-      <article class="step s2">
-        <img src="media/systems/pure-premium.webp" alt="The Pure Premium seven stage reverse osmosis system" width="602" height="900" loading="lazy">
-        <div class="tread"><span class="tag">Most kitchens choose this</span><span class="step__k">02 &middot; Pure Premium</span><span class="money">$1,590</span><p>Adds hydrogen rich water.</p></div>
-      </article>
-      <article class="step s3">
-        <img src="media/systems/pure-luxe.webp" alt="The Pure Luxe smart reverse osmosis unit" width="573" height="900" loading="lazy">
-        <div class="tread"><span class="step__k">03 &middot; Pure Luxe</span><span class="money">$2,290</span><p>Adds the smart screen, in a sealed case.</p></div>
-      </article>
-    </div>
-    <p class="stepup__base" data-sc-in><b>Every one of them:</b> up to 99% of dissolved contaminants out, alkaline, its own tap, WaterMark and NSF certified, installed at a price fixed in writing, covered for life while you stay serviced with us.</p>
+
+    <nav class="dock" id="sysDock" aria-label="Choose a system">
+      <button type="button" class="on" data-i="0"><b>Pure Plus</b><span>$1,280</span></button>
+      <button type="button" data-i="1"><b>Pure Premium</b><span>$1,590</span></button>
+      <button type="button" data-i="2"><b>Pure Luxe</b><span>$2,290</span></button>
+    </nav>
   </div>
 </section>
 
@@ -3737,44 +3894,78 @@ body.dopen .drawer{transform:none}
      ticks:[['screen','<b>Watch the purity live</b> on its own screen.'],['layers','<b>Quick change cartridges</b> in a compact sealed case.'],['shield','<b>Covered for life</b> while you stay serviced with us.']]}
   ];
   (function deck(){
+    /* ⭐ ROUND 4 (JP, 7 Sep: "the product cards on the hero change too frequently, have them change every
+       6 seconds and make the image in the product card change with it at perfect timing, i can see a
+       faint glitch, i want that product card to have a soft animation").
+       ⛔ THE GLITCH WAS THE src SWAP. The old flip wrote img.src at the midpoint and the browser then
+       decoded on the main thread, so the thumb went blank for a frame or two INSIDE a card that was
+       already fading back in. Now: every card image is decoded and RETAINED up front, and the swap only
+       happens once the next one is decoded AND the card is at opacity 0 — so there is nothing to see.
+       The motion is one soft fade with a small rise, no scale, on the page's own --e-out. */
     var card = document.getElementById('ocard'); if (!card) return;
     var img = document.getElementById('ocImg'), name = document.getElementById('ocName'), sub = document.getElementById('ocSub'),
         amt = document.getElementById('ocAmt'), ticks = document.getElementById('ocTicks'), btn = document.getElementById('ocBtn');
     var dots = [].slice.call(card.querySelectorAll('.ocdots button'));
     var i = 0, hover = false, held = false, busy = false, heldT = 0;
-    function apply(){
-      var d = HD[i];
+    var DWELL = 6000, OUT = 420, IN = 640;          /* six seconds on a card, and the two halves of the swap */
+
+    /* decode every card image once and hold a reference, or the decoded bitmap is collected and the
+       next write decodes again (the homepage's RETAIN law: 46.4ms against 0.1ms, measured) */
+    var RETAIN = [], DECODED = HD.map(function(d){
+      var im = new Image(); im.decoding = 'async'; im.src = d.img; RETAIN.push(im);
+      return (im.decode ? im.decode() : Promise.resolve()).catch(function(){});
+    });
+
+    function apply(n){
+      var d = HD[n];
       img.src = d.img; img.alt = d.alt;
       name.textContent = d.name;
       sub.innerHTML = '<span class="pure">' + d.pure + '</span>. ' + d.sub;
       amt.innerHTML = d.amt + '<i>installed</i>';
       ticks.innerHTML = d.ticks.map(function(t){ return '<li><i>' + TICK[t[0]] + '</i><span>' + t[1] + '</span></li>'; }).join('');
       btn.setAttribute('data-sys', d.sys);
-      dots.forEach(function(b, n){ b.classList.toggle('on', n === i); b.setAttribute('aria-selected', n === i ? 'true' : 'false'); });
+      dots.forEach(function(b, k){ b.classList.toggle('on', k === n); b.setAttribute('aria-selected', k === n ? 'true' : 'false'); });
     }
     function set(n){
-      i = (n + HD.length) % HD.length;
-      if (reduce || !hasGsap){ apply(); return; }
-      if (busy) return; busy = true;
-      var GONE = {scale:.965, opacity:0, y:16};
-      gsap.to(card, {scale:GONE.scale, opacity:0, y:GONE.y, duration:.26, ease:'power2.in', onComplete:function(){
-        apply();
-        gsap.fromTo(card, {scale:GONE.scale, opacity:0, y:-GONE.y, transformOrigin:'50% 50%'}, {scale:1, opacity:1, y:0, duration:.58, ease:'power3.out', onComplete:function(){ busy = false; }});
-      }});
+      n = (n + HD.length) % HD.length;
+      if (n === i && !busy) return;
+      if (busy) return;
+      i = n;
+      if (reduce){ apply(i); return; }
+      busy = true;
+      card.classList.add('swapping');                     /* fade out: opacity 0, +10px */
+      /* the words and the picture change together, at the bottom of the fade, and only once the next
+         picture is decoded — a dead man's timer so a slow decode can never leave the card blank */
+      var done = false;
+      var swap = function(){
+        if (done) return; done = true;
+        apply(i);
+        card.classList.remove('swapping');
+        card.classList.add('swapped');                    /* comes back from -10px */
+        setTimeout(function(){ card.classList.remove('swapped'); busy = false; }, IN);
+      };
+      /* ⛔ BOTH, NOT EITHER. Promise.race fired the swap 20ms in, while the card was still at opacity
+         1 — measured 7 Sep, which is exactly the glitch. The swap waits for the fade to FINISH and for
+         the picture to be decoded; the dead man's timer only guards a decode that never resolves. */
+      Promise.all([
+        DECODED[i],
+        new Promise(function(r){ setTimeout(r, OUT + 30); })
+      ]).then(swap);
+      setTimeout(swap, OUT + 400);
     }
-    apply();
+    apply(0);
     dots.forEach(function(b){ b.addEventListener('click', function(){ held = true; heldT = Date.now(); set(parseInt(b.getAttribute('data-i'), 10)); }); });
     card.addEventListener('mouseenter', function(){ hover = true; });
     card.addEventListener('mouseleave', function(){ hover = false; });
-    /* a tap on the card face rests the deck (JP: "pauses on hover or tap"); a second tap lets it go */
+    /* a tap on the card face rests the deck (JP: "pauses on hover or tap"); it lets go after twelve seconds */
     card.addEventListener('pointerdown', function(e){ if (e.pointerType === 'mouse') return; if (e.target.closest('button')) return; held = !held; heldT = Date.now(); }, {passive:true});
     if (!reduce) setInterval(function(){
-      if (hover || document.body.classList.contains('dopen') || document.hidden) return;
-      if (held && Date.now() - heldT < 12000) return;   /* a tap holds it for twelve seconds, then the deck goes on */
+      if (hover || busy || document.body.classList.contains('dopen') || document.hidden) return;
+      if (held && Date.now() - heldT < 12000) return;
       held = false;
       if (scrollY > innerHeight * .8) return;
       set(i + 1);
-    }, 3200);
+    }, DWELL);
   })();
 
   /* ── the bespoke drivers, off --sc-p ── */
@@ -3793,51 +3984,104 @@ body.dopen .drawer{transform:none}
     for (var i = 0; i < whyNames.length; i++) whyNames[i].el.style.setProperty('--u', q(eo(win(p, whyNames[i].at + .03, whyNames[i].at + .12))));
   }
 
-  /* 2 · HOW IT WORKS — the five stages light one after another as the water runs the track; the number lands last */
+  /* 2 · HOW IT WORKS — ⭐ ROUND 4: ONE cartridge at a time on a lit stage, the five as a rail of peers.
+     The scroll picks the stage; the rail picks it too. The swap is a spring in CSS (opacity + transform
+     only, compositor); the outgoing frame gets .was so it leaves upward while the next rises. */
   var howAct = document.getElementById('how');
-  var stages = [].slice.call(document.querySelectorAll('#stages .stg'));
-  var trainFill = document.getElementById('trainFill');
-  var howStat = document.getElementById('howStat');
-  var STAGE_AT = [.08, .26, .44, .62, .78];
+  var staxPics = [].slice.call(document.querySelectorAll('#stax .stax__pic'));
+  var staxSteps = [].slice.call(document.querySelectorAll('#staxCopy .stax__step'));
+  var crail = document.getElementById('crail');
+  var crailBtns = crail ? [].slice.call(crail.querySelectorAll('button')) : [];
+  /* five equal windows inside the act, with a lead-in so the first stage is already up when the act lands
+     and a tail so the last one holds while the act scrolls away (devices.md: a pinned act is on screen a
+     viewport before its progress leaves 0) */
+  var STAGE_AT = [0, .20, .40, .60, .80];
+  var staxCur = -1;
+  function setStage(i){
+    if (i === staxCur) return;
+    var was = staxCur; staxCur = i;
+    for (var n = 0; n < staxPics.length; n++){
+      staxPics[n].classList.toggle('on', n === i);
+      staxPics[n].classList.toggle('was', n === was);
+    }
+    for (var m = 0; m < staxSteps.length; m++) staxSteps[m].classList.toggle('on', m === i);
+    for (var c = 0; c < crailBtns.length; c++) crailBtns[c].classList.toggle('on', c === i);
+  }
   function driveHow(){
     if (!howAct) return;
     var p = P(howAct);
-    for (var i = 0; i < stages.length; i++) stages[i].classList.toggle('on', p >= STAGE_AT[i]);
-    if (trainFill) trainFill.style.setProperty('--f', q(clamp((p - .06) / .78, 0, 1)));
-    if (howStat) howStat.style.setProperty('--k', q(eo(win(p, .84, .93))));
+    var i = 0;
+    for (var n = 0; n < STAGE_AT.length; n++) if (p >= STAGE_AT[n]) i = n;
+    setStage(i);
+    if (crail) crail.style.setProperty('--f', q(clamp((p + .04) / .84, 0, 1)));
   }
+  /* the rail is a control: it glides to the middle of that stage's window (law 10: fire on contact) */
+  crailBtns.forEach(function(b, i){
+    var go = function(e){
+      if (e && e.cancelable) e.preventDefault();
+      if (!howAct) return;
+      var top = howAct.getBoundingClientRect().top + scrollY;
+      var travel = Math.max(howAct.offsetHeight - innerHeight, 1);
+      var mid = STAGE_AT[i] + (i < 4 ? (STAGE_AT[i + 1] - STAGE_AT[i]) / 2 : .1);
+      glide(top + travel * mid, 1.0);
+    };
+    b.addEventListener('click', go);
+    if (window.PointerEvent) b.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') go(e); });
+  });
 
-  /* 4 · THE THREE SYSTEMS — the deck: one card at a time, the next rising from below over the last
-     (21st.dev "Stacking Cards", id 25275, rebuilt off --sc-p). A card that is covered closes itself. */
+  /* 4 · THE THREE SYSTEMS — ⭐ ROUND 4: the DOCK. One system on a lit stage at a time, its words beside
+     it, and three peer pills under them. Scroll picks one; the dock picks one. Nothing stacks on top of
+     anything, so nothing can crush anything (which is what the old deck did to the phone). */
   var rangeAct = document.getElementById('systems');
-  var scards = [].slice.call(document.querySelectorAll('#sysDeck .scard'));
-  var SIN = [[0,0],[.18,.34],[.44,.60],[.70,.86]];   /* when each card rises */
-  function driveRange(){
-    if (!rangeAct) return;
-    var p = P(rangeAct);
-    for (var i = 0; i < scards.length; i++){
-      var k = i === 0 ? 1 : eio(win(p, SIN[i][0], SIN[i][1]));
-      var d = i < scards.length - 1 ? eio(win(p, SIN[i+1][0], SIN[i+1][1])) : 0;
-      var c = scards[i];
-      c.style.setProperty('--k', q(k)); c.style.setProperty('--d', q(d));
-      var front = k > .5 && d < .5;
-      if (front !== c.classList.contains('front')){
-        c.classList.toggle('front', front);
-        var x = c.querySelector('.xcard'); if (x && !front && x._close) x._close();
-      }
+  var sysPics = [].slice.call(document.querySelectorAll('#sysx .sysx__pic'));
+  var sysPanels = [].slice.call(document.querySelectorAll('#sysCopy .sysx__panel'));
+  var sysDock = document.getElementById('sysDock');
+  var dockBtns = sysDock ? [].slice.call(sysDock.querySelectorAll('button')) : [];
+  var SYS_AT = [0, .34, .67];                     /* three equal thirds of the act */
+  var sysCur = -1;
+  function setSys(i){
+    if (i === sysCur) return;
+    var was = sysCur; sysCur = i;
+    for (var n = 0; n < sysPics.length; n++){
+      sysPics[n].classList.toggle('on', n === i);
+      sysPics[n].classList.toggle('was', n === was);
+      /* a still that is no longer the one on stage puts itself away */
+      if (n !== i && sysPics[n]._close) sysPics[n]._close();
+    }
+    for (var m = 0; m < sysPanels.length; m++) sysPanels[m].classList.toggle('on', m === i);
+    for (var c = 0; c < dockBtns.length; c++){
+      dockBtns[c].classList.toggle('on', c === i);
+      dockBtns[c].setAttribute('aria-current', c === i ? 'true' : 'false');
     }
   }
-  /* an old product URL lands on its card: /pure-premium-… 301s into #pure-premium */
-  (function landOnCard(){
+  function driveRange(){
+    if (!rangeAct) return;
+    var p = P(rangeAct), i = 0;
+    for (var n = 0; n < SYS_AT.length; n++) if (p >= SYS_AT[n]) i = n;
+    setSys(i);
+  }
+  function sysGlide(i){
+    if (!rangeAct) return;
+    var top = rangeAct.getBoundingClientRect().top + scrollY;
+    var travel = Math.max(rangeAct.offsetHeight - innerHeight, 1);
+    var mid = SYS_AT[i] + (i < 2 ? (SYS_AT[i + 1] - SYS_AT[i]) / 2 : .16);
+    glide(top + travel * mid, 1.0);
+  }
+  dockBtns.forEach(function(b, i){
+    var go = function(e){ if (e && e.cancelable) e.preventDefault(); sysGlide(i); };
+    b.addEventListener('click', go);
+    if (window.PointerEvent) b.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') go(e); });
+  });
+  /* an old product URL lands on its system: /pure-premium-… 301s into #pure-premium */
+  (function landOnSystem(){
     if (!rangeAct || !location.hash) return;
-    var i = -1; scards.forEach(function(c, n){ if ('#' + c.id === location.hash) i = n; });
+    var i = -1; sysPics.forEach(function(c, n){ if ('#' + c.id === location.hash) i = n; });
     if (i < 1) return;
-    var go = function(){
-      var top = rangeAct.getBoundingClientRect().top + scrollY, span = rangeAct.offsetHeight - innerHeight;
-      if (span <= 0) return;
-      jump(top + (SIN[i][1] + .05) * span); ask();
-    };
-    addEventListener('load', function(){ setTimeout(go, 60); });
+    addEventListener('load', function(){ setTimeout(function(){
+      var top = rangeAct.getBoundingClientRect().top + scrollY, travel = rangeAct.offsetHeight - innerHeight;
+      if (travel <= 0) return;
+      jump(top + (SYS_AT[i] + .1) * travel); ask();
+    }, 60); });
   })();
 
   /* THE EXPLOSION — the homepage's product frames on every card. Tap and the unit opens into its parts
@@ -3998,11 +4242,10 @@ body.dopen .drawer{transform:none}
   addEventListener('scroll', function(){ requestAnimationFrame(ask); }, {passive:true});
   if (reduce){
     /* reduced motion lands on the FINISHED state, never a blank one */
-    stages.forEach(function(t){ t.classList.add('on'); });
-    if (howStat) howStat.style.setProperty('--k', '1');
+    setStage(0);                                   /* the stage the reader lands on, finished, not blank */
+    if (crail) crail.style.setProperty('--f', '0.1');
     whyNames.forEach(function(n){ n.el.style.setProperty('--u', '1'); });
     lrows.forEach(function(r){ r.el.style.setProperty('--s', '1'); });
-    if (trainFill) trainFill.style.setProperty('--f', '1');
     driveRange();
   }
 
