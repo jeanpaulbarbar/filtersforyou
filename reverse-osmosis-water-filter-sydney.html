@@ -869,8 +869,8 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .ocdots button.on i{transform:scale(1.15)}
 .ocdots button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .ochead{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center;padding:14px 128px 8px 14px}
-.ochead .oth{width:150px;height:150px;border-radius:22px;overflow:hidden;background:#E9E5E0;box-shadow:inset 0 0 0 1px rgba(4,16,46,.06);display:grid;place-items:center}
-.ochead .oth img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 40%;transition:opacity .3s ease-in-out}
+.ochead .oth{width:150px;height:150px;border-radius:22px;overflow:hidden;background:#ECEAE7;box-shadow:inset 0 0 0 1px rgba(4,16,46,.06);display:grid;place-items:center}
+.ochead .oth img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 50%;transition:opacity .3s ease-in-out}
 .ochead .ot b{display:block;font-size:24px;font-weight:600;letter-spacing:-.005em;line-height:1.22}
 .ochead .ot > span{display:block;font-size:16px;font-weight:500;color:var(--muted);margin-top:8px;line-height:1.3}
 .ochead .ot .pure{color:var(--blue);font-weight:700}
@@ -917,9 +917,9 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .glass .sc-stage{display:grid;grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);gap:clamp(36px,4.5vw,72px);align-items:center;padding:calc(var(--top) + 8px) var(--safe) 40px}
 .glass__ph{height:min(76vh,760px);width:100%}
 .glass__ph img{object-position:44% 50%}
-.glass__copy{display:grid;gap:22px;align-content:center;max-width:560px}
+.glass__copy{display:grid;gap:22px;align-content:center;align-self:center;max-width:560px;min-height:min(76vh,760px)}
 .glass__copy .pl{grid-area:auto;color:var(--ink);font-weight:500;line-height:1.1;letter-spacing:-.012em;text-wrap:balance;font-size:clamp(2rem,3.9vw,3.6rem);margin:0;will-change:opacity,transform}
-.glass__copy .pl small{display:block;margin-top:14px;font-size:clamp(1.05rem,1.35vw,1.28rem);line-height:1.45;font-weight:500;color:var(--muted);letter-spacing:0}
+.glass__copy .pl small{display:block;margin-top:14px;font-size:clamp(1.02rem,1.3vw,1.22rem);line-height:1.45;font-weight:500;color:var(--muted);letter-spacing:0;max-width:40ch}
 .glass__lines{display:grid}
 .glass__lines > *{grid-area:1/1;align-self:center}
 
@@ -936,9 +936,9 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
   background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);
   opacity:.5;transform:translateY(8px);transition:opacity .7s var(--e-out),transform .7s var(--e-out),background .7s ease-in-out,box-shadow .7s ease-in-out;will-change:opacity,transform}
 .tile.on{opacity:1;transform:none;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(143,184,255,.55),0 30px 50px -30px rgba(11,97,244,.6)}
-.tile__pic{height:clamp(84px,11vh,120px);display:grid;place-items:center;border-radius:12px;background:rgba(255,255,255,.06);overflow:hidden}
-.tile__pic img{max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.35)) saturate(.9);transition:filter .7s ease-in-out}
-.tile.on .tile__pic img{filter:drop-shadow(0 12px 16px rgba(0,0,0,.4)) saturate(1)}
+.tile__pic{height:clamp(88px,12vh,128px);border-radius:12px;background:#0A1D4D;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.tile__pic img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 50%;filter:saturate(.8) brightness(.78);transition:filter .7s ease-in-out}
+.tile.on .tile__pic img{filter:none}
 .tile__n{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#8FB8FF}
 .tile__t{font-size:15.5px;font-weight:700;line-height:1.25;color:#fff;letter-spacing:-.005em}
 .tile__catch{display:flex;flex-wrap:wrap;gap:5px;min-height:34px;align-content:flex-start}
@@ -989,67 +989,90 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .yrow.ours .money{font-size:clamp(2.2rem,3.8vw,3.6rem)}
 .money__frame{font-size:15px;color:var(--muted);line-height:1.5;max-width:52ch;will-change:opacity,transform}
 
-/* ══ 4 · THE THREE SYSTEMS (#systems) — flow intro, a pan rail of plates, the step up ══ */
-.range{background:var(--mist);padding:clamp(72px,9vw,130px) 0 0}
-.range__intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,4vw,64px);align-items:end}
-.range__intro h2{margin-top:14px;color:var(--ink)}
-.range__intro .lede{padding-bottom:6px}
-.rail{background:var(--mist)}
-.rail .sc-stage{background:var(--mist);display:flex;align-items:center}
-.rail__track{display:flex;gap:clamp(18px,2vw,28px);padding-inline:var(--safe);align-items:stretch;will-change:transform}
-.plate{--k:clamp(0,calc((var(--sc-p,0) - var(--at,0)) * 5.5),1);position:relative;flex:0 0 auto;width:min(640px,70vw);height:min(74vh,720px);border-radius:var(--r-hero);overflow:clip;isolation:isolate;
-  background:var(--bg,#fff);color:var(--ink);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);box-shadow:0 30px 60px -36px rgba(4,16,46,.35);
-  opacity:calc(.55 + .45 * var(--k));transform:translateY(calc((1 - var(--k)) * 26px))}
-.plate.first{--k:1}
-.plate.plus{--bg:linear-gradient(160deg,#F7FAFD 0%,#E8F0FE 100%)}
-.plate.prem{--bg:linear-gradient(160deg,#F5F1FC 0%,#E9E1F8 100%)}
-.plate.luxe{--bg:linear-gradient(160deg,#EEF1F5 0%,#DDE3EC 100%)}
-.plate.more{--bg:var(--ink-blue);color:#fff;grid-template-columns:1fr;width:min(460px,70vw)}
-.plate__t{display:grid;align-content:space-between;gap:16px;padding:clamp(24px,2.6vw,40px)}
-.plate__n{font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
-.plate.prem .plate__n{color:var(--purple)}
-.plate.luxe .plate__n{color:var(--ink)}
-.plate__t h3{font-size:clamp(2.2rem,3.6vw,3.4rem);font-weight:500;letter-spacing:-.01em;line-height:1.02;color:var(--ink);margin-top:10px}
-.plate__spec{font-size:clamp(1rem,1.2vw,1.15rem);font-weight:600;color:var(--muted);margin-top:8px;text-wrap:balance}
-.plate__price{display:flex;align-items:baseline;gap:10px;margin-top:6px}
-.plate__price .money{font-size:clamp(2.4rem,3.6vw,3.4rem)}
-.plate__price span{font-size:14.5px;font-weight:600;color:var(--muted)}
-.plate__pts{display:grid;gap:9px}
-.plate__pts li{display:flex;align-items:flex-start;gap:10px;font-size:15.5px;font-weight:500;line-height:1.4;color:var(--ink)}
-.plate__pts li svg{width:20px;height:20px;flex:none;margin-top:2px;color:var(--blue)}
-.plate.prem .plate__pts li svg{color:var(--purple)}
-.plate__go{display:grid;gap:10px;justify-items:start}
-.plate__svc{font-size:14px;color:var(--muted);font-weight:500}
-.plate__img{position:relative;display:grid;place-items:end center;padding:24px 18px 0 0;min-width:0}
-.plate__img img{width:auto;height:min(64vh,620px);max-height:calc(100% - 20px);max-width:100%;object-fit:contain;filter:drop-shadow(0 34px 30px rgba(4,16,46,.22))}
-.plate.more .plate__t{align-content:center;text-align:left;gap:14px}
-.plate.more h3{color:#fff;font-size:clamp(1.8rem,2.8vw,2.6rem)}
-.plate.more p{color:rgba(255,255,255,.8);font-size:16px;line-height:1.5}
-.plate.more .plate__n{color:#8FB8FF}
-.stepup{padding:clamp(48px,6vw,88px) 0 clamp(72px,9vw,130px)}
+/* ══ 4 · THE THREE SYSTEMS (#systems) — pin: the deck. One card at a time, three quarters of the screen,
+   centred; the next rises from below and the last sinks a step back under it (21st.dev "Stacking Cards",
+   id 25275, off --sc-p). Light throughout (JP, iteration one: the dark plate was too dark). ══ */
+.range .sc-stage{background:var(--mist);display:grid;grid-template-rows:auto minmax(0,1fr);gap:clamp(14px,2.2vh,26px);padding:calc(var(--top) - 8px) var(--safe) clamp(20px,3.2vh,34px);overflow:clip}
+.range__head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:10px clamp(28px,4vw,64px);align-items:end;width:min(76vw,1280px);margin-inline:auto;will-change:opacity,transform}
+.range__head h2{margin-top:10px;color:var(--ink);font-size:clamp(1.8rem,3.2vw,2.8rem)}
+.range__head .lede{font-size:clamp(.98rem,1.15vw,1.15rem);padding-bottom:6px}
+.deck{position:relative;width:min(76vw,1280px);height:100%;min-height:0;margin-inline:auto}
+.scard{--k:0;--d:0;position:absolute;inset:0;border-radius:var(--r-hero);overflow:clip;isolation:isolate;background:var(--bg,#fff);color:var(--ink);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
+  box-shadow:0 44px 90px -44px rgba(4,16,46,.42),inset 0 0 0 1px rgba(15,39,72,.06);
+  transform:translateY(calc((1 - var(--k)) * 118%)) translateY(calc(var(--d) * -22px)) scale(calc(1 - .06 * var(--d)));transform-origin:50% 0;
+  opacity:calc(1 - .55 * var(--d));will-change:transform,opacity;pointer-events:none}
+.scard.front{pointer-events:auto}
+.scard.plus{--bg:linear-gradient(160deg,#F7FAFD 0%,#E4EEFD 100%)}
+.scard.prem{--bg:linear-gradient(160deg,#F8F4FE 0%,#E6DCF8 100%)}
+/* the flagship, pristine: the whitest card on the page, a platinum ring and one sheen across it */
+.scard.luxe{--bg:linear-gradient(150deg,#FFFFFF 0%,#F4F7FA 56%,#E6ECF3 100%);box-shadow:0 44px 90px -44px rgba(4,16,46,.5),inset 0 0 0 1px rgba(15,39,72,.16),inset 0 1px 0 #fff}
+.scard.luxe::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(112deg,rgba(255,255,255,0) 34%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 60%)}
+.scard.more{--bg:linear-gradient(160deg,#EEF3FA 0%,#DCE6F4 100%)}
+.scard__t{position:relative;z-index:1;display:grid;align-content:start;gap:clamp(18px,2.6vh,30px);padding:clamp(24px,3vw,48px)}
+.scard__go{margin-top:auto}
+.scard__n{font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+.scard.prem .scard__n{color:var(--purple)}
+.scard.luxe .scard__n{color:var(--ink)}
+.scard__t h3{font-size:clamp(2.3rem,4vw,3.9rem);font-weight:500;letter-spacing:-.012em;line-height:1.02;color:var(--ink);margin-top:10px;text-wrap:balance}
+.scard__spec{font-size:clamp(1rem,1.25vw,1.2rem);font-weight:600;color:var(--muted);margin-top:8px;text-wrap:balance;max-width:34ch}
+.scard__price{display:flex;align-items:baseline;gap:10px;margin-top:8px}
+.scard__price .money{font-size:clamp(2.5rem,3.9vw,3.8rem)}
+.scard__price span{font-size:15px;font-weight:600;color:var(--muted)}
+.scard__pts{display:grid;gap:10px}
+.scard__pts li{display:flex;align-items:flex-start;gap:10px;font-size:clamp(1rem,1.15vw,1.12rem);font-weight:500;line-height:1.4;color:var(--ink)}
+.scard__pts li svg{width:20px;height:20px;flex:none;margin-top:3px;color:var(--blue)}
+.scard.prem .scard__pts li svg{color:var(--purple)}
+.scard.luxe .scard__pts li svg{color:var(--ink)}
+.scard__go{display:grid;gap:10px;justify-items:start;margin-top:auto}
+.scard__svc{font-size:14.5px;color:var(--muted);font-weight:500;max-width:40ch}
+.scard.more .scard__t{align-content:center;gap:18px}
+.scard.more h3{font-size:clamp(1.9rem,3vw,2.9rem)}
+.scard.more .scard__spec{font-weight:500;max-width:40ch}
+.scard.more .scard__go{grid-auto-flow:column;align-items:center;gap:18px}
+.scard.more .scard__go .ul{color:var(--ink);font-weight:700}
+.scard__ph{position:relative;z-index:1;margin:clamp(14px,1.8vw,22px);margin-left:0;border-radius:18px;overflow:clip;background:var(--mist)}
+.scard__ph img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;max-width:none}
+.scard__ph figcaption{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:var(--r-full);font-size:13px;font-weight:600;color:var(--ink);background:rgba(255,254,252,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 22px -12px rgba(4,16,46,.5),inset 0 0 0 1px rgba(255,255,255,.6)}
+/* the explosion: the homepage's product frames on the card, a tap opens it, a tap closes it */
+.scard__img{position:relative;z-index:1;height:100%;min-width:0;padding:clamp(14px,1.8vw,24px) clamp(14px,1.8vw,24px) clamp(14px,1.8vw,24px) 0;cursor:pointer;-webkit-tap-highlight-color:transparent;display:grid;place-items:center}
+.scard__img:focus-visible{outline:2px solid var(--blue);outline-offset:-6px;border-radius:18px}
+.scard__img img{width:100%;height:100%;max-height:100%;object-fit:contain;max-width:none;
+  -webkit-mask-image:radial-gradient(ellipse 74% 70% at 50% 48%,#000 52%,transparent 76%);mask-image:radial-gradient(ellipse 74% 70% at 50% 48%,#000 52%,transparent 76%)}
+.xtap{position:absolute;right:9%;top:11%;z-index:6;display:inline-flex;align-items:center;white-space:nowrap;padding:9px 16px;border-radius:16px 16px 16px 3px;
+  background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(11,97,244,.35),0 2px 5px rgba(4,16,46,.16);
+  font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;pointer-events:none;
+  opacity:0;scale:.8;animation:tapfloat 5.6s ease-in-out infinite,taptilt 7.3s ease-in-out infinite;transition:opacity .3s ease-in-out,scale .42s var(--e-out)}
+.scard.front .xcard.tapin:not(.opened) .xtap{opacity:1;scale:1}
+.xcard.opened .xtap{opacity:0;scale:.86;animation:none}
+@keyframes tapfloat{0%{translate:0 0}22%{translate:1.5px -6px}46%{translate:-.5px -10.5px}68%{translate:-1.5px -6.5px}86%{translate:.5px -2px}100%{translate:0 0}}
+@keyframes taptilt{0%{rotate:0deg}28%{rotate:-1.5deg}55%{rotate:.6deg}80%{rotate:1.4deg}100%{rotate:0deg}}
+@media(prefers-reduced-motion:reduce){.xtap{animation:none}}
+/* the step up, in one look: the base every system shares, then what each step adds */
+.stepup{background:var(--mist);padding:clamp(56px,7vw,100px) 0 clamp(72px,9vw,130px)}
 .stepup__head{display:grid;gap:12px;max-width:62ch;margin-bottom:28px}
-.cmp{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));border-radius:var(--r-hero);overflow:hidden;background:#fff;box-shadow:var(--shadow-sm)}
-.cmp > div{padding:16px 18px;border-top:1px solid var(--rule);font-size:15.5px;font-weight:500;color:var(--ink);display:flex;align-items:center;gap:8px;min-height:56px}
-.cmp > div:nth-child(-n+4){border-top:0;background:var(--mist-2)}
-/* the recommended column (21st.dev "Feature Comparison Table", id 21218, pulled 6 Sep): every cell of the
-   Premium column tinted, its header carrying the tag, so the sensible middle reads as the sensible middle */
-.cmp > div:nth-child(4n+3){background:rgba(109,40,217,.055)}
-.cmp > div:nth-child(3){background:#F3EEFC}
-.cmp .h .tag{display:inline-flex;align-items:center;width:max-content;padding:3px 9px;border-radius:var(--r-full);background:var(--purple);color:#fff;font-family:var(--badge);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
-.cmp .h{display:grid;align-content:center;gap:2px}
-.cmp .h b{font-size:18px;font-weight:700;letter-spacing:-.005em}
-.cmp .h span{font-size:13.5px;color:var(--muted)}
-.cmp .h.prem b{color:var(--purple)}
-.cmp .lbl{color:var(--muted);font-weight:600}
-.cmp .yes{color:var(--blue);font-weight:700}
-.cmp .yes svg{width:20px;height:20px}
-.cmp .no{color:#B8C2D3}
-.cmp .no svg{width:16px;height:16px}
-.cmp .p{font-weight:800;font-size:17px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-.cmp .add{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 6px;border-radius:var(--r-full);background:var(--blue-pale);color:var(--blue-deep);font-size:12.5px;font-weight:700;letter-spacing:.01em}
-.cmp .add svg{width:16px;height:16px;flex:none}
-.cmp .add.pv{background:#EEE6FB;color:var(--purple)}
-.cmp .go{padding:18px}
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.lad{position:relative;display:grid;gap:8px;align-content:start;padding:24px 26px 22px;border-radius:var(--r-hero);background:#fff;box-shadow:var(--shadow-sm)}
+.lad.base{grid-column:1/-1;grid-template-columns:auto minmax(0,1fr);gap:10px 32px;align-items:center;background:var(--g-field);color:#fff;padding:22px 26px}
+.lad.base .lad__k{color:#fff}
+.lad.base ul{display:flex;flex-wrap:wrap;gap:8px 24px}
+.lad.base li{display:inline-flex;align-items:center;gap:9px;font-size:15.5px;font-weight:600}
+.lad.base li::before{content:"";width:18px;height:18px;flex:none;border-radius:50%;background:var(--yellow) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='m6 12.5 4 4L18 8' stroke='%230F2748' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/12px no-repeat}
+.lad__k{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+.lad.prem .lad__k{color:var(--purple)}
+.lad.luxe .lad__k{color:var(--ink)}
+.lad > b{font-size:clamp(1.25rem,1.6vw,1.5rem);font-weight:600;line-height:1.22;letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+.lad__p{font-size:15px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.lad > p{font-size:15px;line-height:1.5;color:var(--muted);margin-top:4px}
+.lad.c ul{display:grid;gap:8px;margin-top:4px}
+.lad.c li{display:flex;align-items:center;gap:10px;font-size:15.5px;font-weight:600;color:var(--ink)}
+.lad.c li::before{content:"+";display:grid;place-items:center;width:22px;height:22px;flex:none;border-radius:50%;background:var(--blue-pale);color:var(--blue-deep);font-weight:800;font-size:15px;line-height:1}
+.lad.prem li::before{background:#EEE6FB;color:var(--purple)}
+.lad.luxe li::before{background:#E7ECF3;color:var(--ink)}
+.lad.prem{background:#F8F4FE;box-shadow:inset 0 0 0 1px rgba(109,40,217,.22),var(--shadow-sm)}
+.lad.luxe{background:linear-gradient(150deg,#fff 0%,#F2F5F9 100%);box-shadow:inset 0 0 0 1px rgba(15,39,72,.16),var(--shadow-sm)}
+.lad .tag{position:absolute;top:-12px;left:22px;display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--r-full);background:var(--purple);color:#fff;font-family:var(--badge);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.lad__svc{margin-top:auto;padding-top:12px;border-top:1px solid var(--rule);font-size:14px;color:var(--muted);font-weight:500}
 .stepup__note{margin-top:18px;font-size:15px;color:var(--muted);max-width:66ch;line-height:1.55}
 
 /* ══ 5 · UNDER THE SINK (#install) — flow, real photographs ══ */
@@ -1119,21 +1142,30 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .lrow.price .ours{font-size:clamp(1.05rem,1.3vw,1.2rem);font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
 .lrow.price .ours svg{display:none}
 
-/* ══ 8 · REVIEWS (#reviews) — flow, evidence does not perform ══ */
-.proof{background:var(--paper);padding:clamp(72px,9vw,130px) 0}
-.proof__head{display:grid;gap:14px;max-width:60ch}
-.proof__badge{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:600;color:var(--ink)}
-.proof__badge .stars5 svg{width:16px;height:16px}
-.proof__badge b{font-size:22px;font-weight:600;letter-spacing:-.01em}
-.proof__badge span{color:var(--muted)}
-.rvgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(28px,4vw,48px)}
-.rv{display:grid;gap:14px;padding:22px 24px 20px;border-radius:var(--r-hero);background:#fff;box-shadow:var(--shadow-sm);border:1px solid var(--rule)}
-.rv .stars5 svg{width:15px;height:15px}
-.rv p{font-size:16.5px;line-height:1.55;color:var(--ink);text-wrap:pretty}
-.rv .who{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);padding-top:12px;border-top:1px solid var(--rule)}
-.rv .who b{color:var(--ink);font-weight:700}
-.rv .who .gicon{margin-left:auto}
-.proof__all{margin-top:22px;display:inline-flex}
+/* ══ 8 · REVIEWS (#reviews) — the brick lane, the whole house page's round 70 lifted as behaviour ══ */
+.lane{background:var(--paper);padding:clamp(64px,7.6vw,106px) 0 clamp(44px,5.4vw,74px);position:relative;z-index:2;overflow:clip}
+.lane__head{display:grid;gap:14px;max-width:60ch}
+.lane__badge{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 14px 8px 12px;border-radius:var(--r-full);background:#fff;box-shadow:var(--shadow-sm),inset 0 0 0 1px var(--rule);font-size:15px;font-weight:600;color:var(--ink)}
+.lane__badge .stars5 svg{width:15px;height:15px}
+.lane__badge .gicon{width:18px;height:18px}
+.lane__badge > span:last-child{color:var(--muted);font-weight:600}
+.lane__head h2{max-width:none;color:var(--ink)}
+.lane__head .lede{margin-top:0}
+.rmq{position:relative;margin:36px calc(var(--gut) * -1) 0;overflow:hidden;display:flex;flex-direction:column;gap:14px}
+.rmq .rrow{display:flex;gap:14px;width:max-content;align-items:stretch;will-change:transform}
+@media (prefers-reduced-motion:reduce){.rmq{overflow-x:auto}}
+.rvc{background:#fff;border:1px solid var(--rule);border-radius:var(--r-card);padding:17px 18px 15px;display:grid;grid-template-columns:1fr auto;grid-template-rows:1fr auto;gap:13px 10px;flex:0 0 min(300px,76vw)}
+.rvc > p{grid-area:1/1/2/3;align-self:start;font-size:14.5px;line-height:1.55;color:var(--ink)}
+.rvc .rwho{grid-area:2/1/3/2;align-self:end;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.rvc > .stars5{grid-area:2/2/3/3;align-self:end;justify-self:end;gap:2px}
+.rvc .stars5 svg{width:13px;height:13px}
+.rvc .rwho b{font-size:14.5px;font-weight:700}
+.rvc .rwho span{font-size:13px;color:var(--muted);font-weight:600}
+.rvc .rwho .gicon{width:16px;height:16px;align-self:center}
+.rvp{position:relative;flex:0 0 min(238px,58vw);border-radius:var(--r-card);overflow:clip;background:var(--ink-blue);min-height:100%}
+.rvp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;filter:saturate(1.02)}
+.rvp span{position:absolute;left:12px;bottom:10px;right:12px;color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.01em;text-shadow:0 1px 10px rgba(4,16,46,.6)}
+.lane__all{display:inline-flex;align-items:center;min-height:44px;margin-top:22px;font-weight:700;color:var(--ink)}
 
 /* ══ 9 · THE ASK (#ask) — the glass full on paper, the form beside it ══ */
 .ask{background:var(--paper);padding:0 0 clamp(72px,9vw,130px)}
@@ -1323,6 +1355,12 @@ body.dopen .drawer{transform:none}
   .tile{padding:10px 9px 12px}
   .tile__t{font-size:13.5px}
   .how .sc-stage{grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr)}
+  .range__head,.deck{width:min(86vw,1280px)}
+  .scard{grid-template-columns:minmax(0,1fr) minmax(0,.8fr)}
+  .scard__t h3{font-size:2.2rem}
+  .scard__price .money{font-size:2.4rem}
+  .ladder{gap:10px}
+  .lad{padding:20px 18px 18px}
 }
 
 /* ═══════════════════════════ THE PHONE (≤859px) — the same page, fitted ═══════════════════════════
@@ -1402,31 +1440,42 @@ body.dopen .drawer{transform:none}
   .yrow.ours .money{font-size:1.75rem}
   .yrow.ours{padding-top:12px}
   .money__frame{font-size:13.5px}
-  /* 4 · the systems: the rail is a native swipe, snapping plate to plate */
-  .range{padding-top:56px}
-  .range__intro{grid-template-columns:1fr;gap:14px}
-  .rail .sc-stage{height:auto;min-height:0;display:block;padding:24px 0 8px}
-  .rail__track{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:12px;padding-inline:var(--safe);padding-bottom:14px;will-change:auto}
-  .rail__track::-webkit-scrollbar{display:none}
-  .plate{--k:1;width:84vw;height:auto;min-height:0;grid-template-columns:1fr;grid-template-rows:auto 1fr;scroll-snap-align:center;opacity:1;transform:none}
-  .plate.more{width:84vw}
-  .plate__img{order:-1;padding:18px 18px 0;place-items:center}
-  .plate__img img{height:220px}
-  .plate__t{padding:18px 20px 22px;gap:12px}
-  .plate__t h3{font-size:1.9rem}
-  .plate__price .money{font-size:2rem}
-  .plate__pts li{font-size:14.5px}
-  .stepup{padding:36px 0 64px}
-  .cmp{grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));border-radius:18px}
-  .cmp > div{padding:11px 10px;font-size:13px;min-height:46px}
-  .cmp .h b{font-size:14px}
-  .cmp .h span{font-size:11.5px}
-  .cmp .p{font-size:14px}
-  .cmp .add{font-size:0;padding:0;background:transparent}
-  .cmp .h .tag{font-size:8.5px;padding:2px 6px;letter-spacing:.04em}
-  .cmp .add svg{width:18px;height:18px}
-  .cmp .add.pv svg{color:var(--purple)}
-  .cmp .yes svg{width:18px;height:18px}
+  /* 4 · the systems: the same deck, the image on top of each card, the text under it */
+  /* the stage ends above the phone's pills (the way back and the fixed price ride the bottom 68px) */
+  .range .sc-stage{grid-template-rows:auto minmax(0,1fr);gap:10px;padding:calc(var(--top) - 28px) var(--safe) calc(76px + env(safe-area-inset-bottom))}
+  .range__head{grid-template-columns:1fr;width:auto;gap:4px}
+  .range__head h2{font-size:clamp(1.4rem,6vw,1.75rem);margin-top:6px}
+  .range__head .lede{display:none}
+  .deck{width:100%;margin-inline:0}   /* auto width shrinks to the absolute cards' nothing: 0px wide on the first phone shot */
+  .scard{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;border-radius:22px;transform:translateY(calc((1 - var(--k)) * 116%)) translateY(calc(var(--d) * -14px)) scale(calc(1 - .05 * var(--d)))}
+  .scard__img{grid-row:1;height:100%;padding:10px 12px 4px}
+  .scard__t{padding:10px 16px 16px;gap:9px;align-content:end}
+  .scard__t h3{font-size:clamp(1.55rem,6.6vw,1.9rem);margin-top:4px}
+  .scard__spec{font-size:.9rem;margin-top:3px}
+  .scard__price{margin-top:4px;gap:8px}
+  .scard__price .money{font-size:1.65rem}
+  .scard__price span{font-size:13px}
+  .scard__pts{gap:5px}
+  .scard__pts li{font-size:13.5px;line-height:1.3;gap:8px}
+  .scard__pts li svg{width:17px;height:17px;margin-top:1px}
+  .scard__go{grid-auto-flow:column;align-items:center;gap:12px}
+  .scard__go .btn{min-height:46px}
+  .scard__svc{font-size:11.5px;line-height:1.3}
+  .scard.more{grid-template-rows:minmax(0,1fr) auto}
+  .scard.more .scard__t{align-content:end;gap:10px}
+  .scard.more h3{font-size:1.5rem}
+  .scard.more .scard__spec{font-size:.92rem}
+  .scard__ph{grid-row:1;margin:10px 12px 0;border-radius:16px}
+  .xtap{right:6%;top:6%;font-size:11.5px;padding:7px 12px}
+  .stepup{padding:40px 0 64px}
+  .stepup__head{margin-bottom:18px}
+  .ladder{grid-template-columns:1fr;gap:10px}
+  .lad{padding:18px 18px 16px;border-radius:18px}
+  .lad.base{grid-template-columns:1fr;gap:8px;padding:16px 18px}
+  .lad.base ul{gap:6px 16px}
+  .lad.base li{font-size:14px}
+  .lad > b{font-size:1.15rem}
+  .lad .tag{top:-10px}
   /* 5 · under the sink */
   .install{padding:64px 0}
   .install__grid{grid-template-columns:1fr;gap:22px;margin-top:26px}
@@ -1453,9 +1502,16 @@ body.dopen .drawer{transform:none}
   .lrow.price .ours{font-size:14px;white-space:nowrap}
   .lrow .ours svg{width:22px;height:22px;padding:4px}
   .lrow.price .ours{font-size:1.05rem}
-  /* 8 · reviews */
-  .proof{padding:64px 0}
-  .rvgrid{grid-template-columns:1fr;gap:12px}
+  /* 8 · reviews: two rows on a phone, the third stands down */
+  .lane{padding:56px 0 40px}
+  .lane__head h2{font-size:clamp(1.6rem,7.4vw,1.95rem)}
+  .rmq{margin-top:22px;gap:10px}
+  .rmq .rrow:nth-child(3){display:none}
+  .rrow{gap:10px}
+  .rvc{padding:13px 14px;gap:7px;flex-basis:270px}
+  .rvc > p{font-size:13.5px;line-height:1.45}
+  .rvc .rwho b,.rvc .rwho span{font-size:13px}
+  .lane__all{margin-top:14px}
   /* 9 · the ask */
   .ask__grid{grid-template-columns:1fr;gap:18px}
   .ask__fr{min-height:0;aspect-ratio:4/3}
@@ -1508,6 +1564,8 @@ body.dopen .drawer{transform:none}
   .hero .copy{bottom:232px}
   .hero h1{font-size:clamp(1.5rem,6.4vw,1.8rem)}
   .hglass{height:28svh}
+  .scard__pts li:nth-child(3){display:none}
+  .scard__svc{display:none}
   .how__caps .cap b{font-size:1.05rem}
   .how__caps .cap p{font-size:.9rem}
 }
@@ -1517,12 +1575,10 @@ body.dopen .drawer{transform:none}
 .how .flyers{position:absolute;inset:0;z-index:9;pointer-events:none}
 .tile__catch em{font-style:normal;font-size:11.5px;font-weight:700;line-height:1.2;padding:4px 8px;border-radius:var(--r-full);color:rgba(255,255,255,.42);background:rgba(255,255,255,.06);transition:color .5s ease-in-out,background .5s ease-in-out}
 .tile__catch em.lit{color:var(--ink);background:rgba(232,240,254,.96)}
-.cmp .add em{font-style:normal}
-@media(max-width:859px){.cmp .add em{display:none}}
 
 /* every inline link that is a target on its own is 44px tall */
-.plate__go .ul,.taps__go .ul,.ask__call .ul,.est__go .ul,.est__call .ul,.care__copy .fine a,.how__caps .cap p a{display:inline-flex;align-items:center;min-height:44px}
-.how__caps .cap p a,.care__copy .fine a{min-height:0;padding:10px 0;margin:-10px 0}
+.scard__go .ul,.taps__go .ul,.ask__call .ul,.est__go .ul,.est__call .ul,.care__copy .fine a,.how__caps .cap p a{display:inline-flex;align-items:center;min-height:44px}
+.how__caps .cap p a,.care__copy .fine a{min-height:0;padding:11px 0;margin:-11px 0}
 
 </style>
 <script type="application/ld+json">
@@ -1993,7 +2049,7 @@ body.dopen .drawer{transform:none}
       <button type="button" role="tab" aria-selected="false" aria-label="Pure Luxe" data-i="2"><i></i></button>
     </div>
     <div class="ochead">
-      <span class="oth"><img id="ocImg" src="media/systems/pure-plus.webp" alt="Pure Plus 5 stage alkaline reverse osmosis system" width="607" height="900"></span>
+      <span class="oth"><img id="ocImg" src="media/ro/card-plus.webp" alt="The Pure Plus five stage reverse osmosis system, studio shot" width="600" height="600"></span>
       <span class="ot">
         <b id="ocName">5 Stage Alkaline Reverse Osmosis</b>
         <span id="ocSub"><span class="pure">Pure Plus</span>. The starting point</span>
@@ -2013,29 +2069,30 @@ body.dopen .drawer{transform:none}
 </section>
 </div>
 
-<!-- ═════════ 1 · THE GLASS — pin, the silence before the peak: one photograph, one line at a time,
-     and the names of what reverse osmosis is built to take out arriving in the glass.
-     GENERATED (Nano Banana Pro, 6 Sep 2026): media/ro/glass.webp. ═════════ -->
-<section class="glass" id="water" data-sc-act="pin" data-sc-span="4.4" data-sc-span-m="4.2" aria-label="What is in the glass">
+<!-- ═════════ 1 · THE GLASS — pin, the silence before the peak: one photograph, one line at a time. It
+     opens on why the reader came (JP, iteration one: never lead with "safe, not pure" again, the whole
+     house page owns that line), and each name arrives in the glass as the line says it, in the order
+     the copy names it. GENERATED (Nano Banana Pro, 6 Sep 2026): media/ro/glass.webp. ═════════ -->
+<section class="glass" id="water" data-sc-act="pin" data-sc-span="4.6" data-sc-span-m="4.4" aria-label="Why you are here">
   <div class="sc-stage" data-sc-stage>
     <figure class="frame glass__ph">
       <picture><source media="(max-width:859px)" srcset="media/ro/glass-m.webp"><img src="media/ro/glass.webp" alt="A plain glass of Sydney tap water on a white stone kitchen bench, lit from the window behind it" width="1600" height="893" loading="lazy"></picture>
       <div class="chips" id="waterChips" aria-hidden="true">
-        <span class="chip" style="--x:38%;--y:44%;--c:#2E7DFF;--d:0s"><span>chlorine</span></span>
-        <span class="chip" style="--x:60%;--y:36%;--c:#6D28D9;--d:.7s"><span>fluoride</span></span>
-        <span class="chip" style="--x:34%;--y:62%;--c:#0B61F4;--d:1.3s"><span>PFAS</span></span>
-        <span class="chip" style="--x:63%;--y:58%;--c:#0F2748;--d:.4s"><span>microplastics</span></span>
-        <span class="chip" style="--x:46%;--y:74%;--c:#5B9AE2;--d:1.9s"><span>dissolved metals</span></span>
-        <span class="chip" style="--x:58%;--y:80%;--c:#4E5B75;--d:1s"><span>salts</span></span>
+        <span class="chip" style="--x:48%;--y:40%;--c:#0F2748;--d:0s"><span>microplastics</span></span>
+        <span class="chip" style="--x:35%;--y:54%;--c:#0B61F4;--d:.6s"><span>PFAS</span></span>
+        <span class="chip" style="--x:61%;--y:53%;--c:#6D28D9;--d:1.1s"><span>fluoride</span></span>
+        <span class="chip" style="--x:45%;--y:66%;--c:#2E7DFF;--d:.3s"><span>chlorine</span></span>
+        <span class="chip" style="--x:62%;--y:71%;--c:#5B9AE2;--d:1.6s"><span>dissolved metals</span></span>
+        <span class="chip" style="--x:49%;--y:81%;--c:#4E5B75;--d:.9s"><span>salts</span></span>
       </div>
     </figure>
     <div class="glass__copy">
-      <span class="kick" data-sc-cue="0 1 0 0">Sydney's water</span>
+      <span class="kick" data-sc-cue="0 1 0 0">Why you're here</span>
       <div class="glass__lines">
-        <h2 class="pl" data-sc-cue="0 0.22 0 0.3" data-sc-cue-m="0 0.22 0 0.3">Sydney's water is safe.</h2>
-        <p class="pl" data-sc-cue="0.16 0.46 0.18 0.18">It's just not pure.</p>
-        <p class="pl" data-sc-cue="0.4 0.68 0.16 0.22">What's left dissolved in the glass is what reverse osmosis is built for.<small>Sydney Water treats for the city. We purify for the tap you drink from.</small></p>
-        <p class="pl" data-sc-cue="0.66 1 0.22 0" data-sc-cue-m="0.66 1 0.22 0">The deepest clean is saved for the water you drink.<small>A reverse osmosis system in Sydney sits under the kitchen sink, on its own tap. Here's what it does.</small></p>
+        <h2 class="pl" data-sc-cue="0 0.24 0 0.26" data-sc-cue-m="0 0.24 0 0.26">You came here to get the microplastics out.</h2>
+        <p class="pl" data-sc-cue="0.2 0.5 0.16 0.18">Or the PFAS. Or the fluoride. Or the chlorine you can taste.</p>
+        <p class="pl" data-sc-cue="0.44 0.72 0.16 0.2">All of it is in the glass. Taking it out is exactly what reverse osmosis is built for.</p>
+        <p class="pl" data-sc-cue="0.68 1 0.22 0" data-sc-cue-m="0.68 1 0.22 0">This is what our systems do for you.<small>Under the kitchen sink, on its own tap. Up to 99% of dissolved contaminants out, and the good minerals back in. Here's how.</small></p>
       </div>
     </div>
   </div>
@@ -2044,7 +2101,8 @@ body.dopen .drawer{transform:none}
 <!-- ═════════ 2 · HOW IT WORKS — THE PEAK and THE SIGNATURE. Five stages in a train, the glass at the
      right; as the water reaches each stage the tile lights and the chips it catches lift out of the
      glass and land on it; the haze clears at the membrane; the minerals drop back in at the alkaline
-     stage. Page JS off --sc-p. The tile pictures are crops of our own Pure Plus render. ═════════ -->
+     stage. Page JS off --sc-p. The tile pictures are studio stills of the five cartridges, generated from
+     our supplier photographs (assets/supplier, Nano Banana Pro, 6 Sep 2026): the five stage tiles in media/ro. ═════════ -->
 <section class="how" id="how" data-sc-act="pin" data-sc-span="8.2" data-sc-span-m="7.4" aria-label="How reverse osmosis works">
   <div class="sc-stage" data-sc-stage>
     <header class="how__head" data-sc-cue="0 1 0 0">
@@ -2055,11 +2113,11 @@ body.dopen .drawer{transform:none}
     <div class="how__left">
       <div>
         <ol class="train" id="train">
-          <li class="tile" data-i="0"><span class="tile__pic"><img src="media/ro/stage-1.webp" alt="" width="240" height="240" loading="lazy"></span><span class="tile__n">Stage 01</span><span class="tile__t">Sediment</span><span class="tile__catch"><em data-chip="sediment">sediment</em></span></li>
-          <li class="tile" data-i="1"><span class="tile__pic"><img src="media/ro/stage-2.webp" alt="" width="240" height="240" loading="lazy"></span><span class="tile__n">Stage 02</span><span class="tile__t">Carbon block</span><span class="tile__catch"><em data-chip="chlorine">chlorine</em><em data-chip="taste">taste and smell</em></span></li>
-          <li class="tile" data-i="2"><span class="tile__pic"><img src="media/ro/stage-3.webp" alt="" width="240" height="240" loading="lazy"></span><span class="tile__n">Stage 03</span><span class="tile__t">The membrane</span><span class="tile__catch"><em data-chip="fluoride">fluoride</em><em data-chip="pfas">PFAS</em><em data-chip="micro">microplastics</em><em data-chip="metals">dissolved metals</em><em data-chip="salts">salts</em></span></li>
-          <li class="tile" data-i="3"><span class="tile__pic"><img src="media/ro/stage-4.webp" alt="" width="240" height="240" loading="lazy"></span><span class="tile__n">Stage 04</span><span class="tile__t">Alkaline</span><span class="tile__catch"><em data-chip="minerals">minerals back in</em></span></li>
-          <li class="tile" data-i="4"><span class="tile__pic"><img src="media/ro/stage-5.webp" alt="" width="240" height="240" loading="lazy"></span><span class="tile__n">Stage 05</span><span class="tile__t">Carbon polish</span><span class="tile__catch"><em data-chip="polish">the last taste</em></span></li>
+          <li class="tile" data-i="0"><span class="tile__pic"><img src="media/ro/stage-1.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 01</span><span class="tile__t">Sediment</span><span class="tile__catch"><em data-chip="sediment">sediment</em></span></li>
+          <li class="tile" data-i="1"><span class="tile__pic"><img src="media/ro/stage-2.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 02</span><span class="tile__t">Carbon block</span><span class="tile__catch"><em data-chip="chlorine">chlorine</em><em data-chip="taste">taste and smell</em></span></li>
+          <li class="tile" data-i="2"><span class="tile__pic"><img src="media/ro/stage-3.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 03</span><span class="tile__t">The membrane</span><span class="tile__catch"><em data-chip="fluoride">fluoride</em><em data-chip="pfas">PFAS</em><em data-chip="micro">microplastics</em><em data-chip="metals">dissolved metals</em><em data-chip="salts">salts</em></span></li>
+          <li class="tile" data-i="3"><span class="tile__pic"><img src="media/ro/stage-4.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 04</span><span class="tile__t">Alkaline</span><span class="tile__catch"><em data-chip="minerals">minerals back in</em></span></li>
+          <li class="tile" data-i="4"><span class="tile__pic"><img src="media/ro/stage-5.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 05</span><span class="tile__t">Carbon polish</span><span class="tile__catch"><em data-chip="polish">the last taste</em></span></li>
         </ol>
         <div class="train__track" aria-hidden="true"><i id="trainFill"></i></div>
       </div>
@@ -2117,89 +2175,99 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ 4 · THE THREE SYSTEMS — flow intro, a pan rail of three plates (lateral = range), then
-     the step up in one look. The plates are the anchors the old product URLs 301 into. ═════════ -->
-<section class="range" id="systems" aria-label="The three systems">
-  <div class="zone">
-    <div class="range__intro" data-sc-in data-sc-stagger="90">
-      <div><span class="kick">Three systems</span><h2 class="d2">Three ways to finish the same serious filtration.</h2></div>
-      <p class="lede">All three are reverse osmosis systems that sit under the kitchen sink on their own tap. Pure Plus is where it starts. Pure Premium is the one most Sydney kitchens choose. Pure Luxe puts a screen on it. The difference is the finish, not whether the water is purified.</p>
-    </div>
-  </div>
-</section>
-<section class="rail" data-sc-act="pan" data-sc-span="4.4" aria-label="Pure Plus, Pure Premium and Pure Luxe">
+<!-- ═════════ 4 · THE THREE SYSTEMS — pin: one card at a time, three quarters of the screen, centred, the
+     next card rising from below over the last (21st.dev "Stacking Cards", danielpetho, id 25275, rebuilt
+     off --sc-p). Every card carries the homepage's product explosion: tap the unit and it opens into its
+     parts on the same xf-* frames, the homepage's makeScrub, RETAIN and decode rules carried over.
+     The cards are the anchors the old product URLs 301 into. ═════════ -->
+<section class="range" id="systems" data-sc-act="pin" data-sc-span="6" data-sc-span-m="5.2" aria-label="The three systems">
   <div class="sc-stage" data-sc-stage>
-    <div class="rail__track" data-sc-pan="0.06" id="railTrack">
-      <article class="plate plus first" id="pure-plus" style="--at:0">
-        <div class="plate__t">
-          <div><span class="plate__n">01 &middot; The starting point</span><h3>Pure Plus</h3><p class="plate__spec">5 Stage Alkaline Reverse Osmosis</p><p class="plate__price"><span class="money">$1,280</span><span>installed</span></p></div>
-          <ul class="plate__pts">
-            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 99% of dissolved contaminants out</li>
-            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Alkaline, mineral rich water on tap</li>
-            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>An under sink reverse osmosis filter with its own drinking tap</li>
-          </ul>
-          <div class="plate__go"><button class="btn js-open" type="button" data-sys="Pure Plus"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button><span class="plate__svc">$600 a year, serviced by us. Covered for life while you stay serviced with us.</span></div>
+    <header class="range__head" data-sc-cue="0 1 0 0">
+      <div><span class="kick">Three systems</span><h2 class="d2">Three ways to finish the same serious filtration.</h2></div>
+      <p class="lede">All three purify the water the same way, under the sink, on their own tap. The difference is the finish. Tap a system to see inside it.</p>
+    </header>
+    <div class="deck" id="sysDeck">
+      <article class="scard plus" id="pure-plus" data-i="0">
+        <div class="scard__t">
+          <div><span class="scard__n">01 &middot; The starting point</span><h3>Pure Plus</h3><p class="scard__spec">5 Stage Alkaline Reverse Osmosis</p><p class="scard__price"><span class="money">$1,280</span><span>installed</span></p></div>
+          <ul class="scard__pts"><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 99% of dissolved contaminants out</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Alkaline, mineral rich water on tap</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>An under sink reverse osmosis filter with its own drinking tap</li></ul>
+          <div class="scard__go"><button class="btn js-open" type="button" data-sys="Pure Plus"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button><span class="scard__svc">$600 a year, serviced by us. Covered for life while you stay serviced with us.</span></div>
         </div>
-        <div class="plate__img"><img src="media/systems/pure-plus.webp" srcset="media/ro/sys-pure-plus-m.webp 320w, media/systems/pure-plus.webp 607w" sizes="(max-width:859px) 160px, 34vw" alt="Pure Plus 5 stage alkaline reverse osmosis system, two housings below and the inline alkaline and carbon stages above" width="607" height="900" loading="lazy"></div>
+        <div class="scard__img xcard" data-set="plus" role="button" tabindex="0" aria-label="See inside the Pure Plus">
+          <img src="media/xf-plus/f00.webp" alt="The Pure Plus five stage alkaline reverse osmosis system, opening into its parts" width="1100" height="1472" loading="lazy">
+          <span class="xtap" aria-hidden="true">Tap me!</span>
+        </div>
       </article>
-      <article class="plate prem" id="pure-premium" style="--at:.12">
-        <div class="plate__t">
-          <div><span class="plate__n">02 &middot; Most kitchens choose this</span><h3>Pure Premium</h3><p class="plate__spec">7 Stage Hydrogen Rich Alkaline Reverse Osmosis</p><p class="plate__price"><span class="money">$1,590</span><span>installed</span></p></div>
-          <ul class="plate__pts">
-            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Hydrogen rich and alkaline, every glass</li>
-            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Remineralised, so the good minerals go back in</li>
-            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>PFAS, fluoride, heavy metals and dissolved salts out</li>
-          </ul>
-          <div class="plate__go"><button class="btn js-open" type="button" data-sys="Pure Premium"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button><span class="plate__svc">$650 a year, serviced by us. Covered for life while you stay serviced with us.</span></div>
+      <article class="scard prem" id="pure-premium" data-i="1">
+        <div class="scard__t">
+          <div><span class="scard__n">02 &middot; Most kitchens choose this</span><h3>Pure Premium</h3><p class="scard__spec">7 Stage Hydrogen Rich Alkaline Reverse Osmosis</p><p class="scard__price"><span class="money">$1,590</span><span>installed</span></p></div>
+          <ul class="scard__pts"><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Hydrogen rich and alkaline, every glass</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Remineralised, so the good minerals go back in</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>PFAS, fluoride, heavy metals and dissolved salts out</li></ul>
+          <div class="scard__go"><button class="btn js-open" type="button" data-sys="Pure Premium"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button><span class="scard__svc">$650 a year, serviced by us. Covered for life while you stay serviced with us.</span></div>
         </div>
-        <div class="plate__img"><img src="media/systems/pure-premium.webp" srcset="media/ro/sys-pure-premium-m.webp 320w, media/systems/pure-premium.webp 607w" sizes="(max-width:859px) 160px, 34vw" alt="Pure Premium 7 stage hydrogen rich alkaline reverse osmosis system" width="602" height="900" loading="lazy"></div>
+        <div class="scard__img xcard" data-set="prem" role="button" tabindex="0" aria-label="See inside the Pure Premium">
+          <img src="media/xf-prem/f00.webp" alt="The Pure Premium seven stage hydrogen rich alkaline reverse osmosis system, opening into its parts" width="1100" height="1472" loading="lazy">
+          <span class="xtap" aria-hidden="true">Tap me!</span>
+        </div>
       </article>
-      <article class="plate luxe" id="pure-luxe" style="--at:.26">
-        <div class="plate__t">
-          <div><span class="plate__n">03 &middot; The flagship</span><h3>Pure Luxe</h3><p class="plate__spec">Smart 5 Stage Alkaline Reverse Osmosis</p><p class="plate__price"><span class="money">$2,290</span><span>installed</span></p></div>
-          <ul class="plate__pts">
-            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Watch the purity live on its own screen</li>
-            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Quick change cartridges in a compact sealed case</li>
-            <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Alkaline, mineral rich water on tap</li>
-          </ul>
-          <div class="plate__go"><button class="btn js-open" type="button" data-sys="Pure Luxe"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button><span class="plate__svc">$680 a year, serviced by us. Covered for life while you stay serviced with us.</span></div>
+      <article class="scard luxe" id="pure-luxe" data-i="2">
+        <div class="scard__t">
+          <div><span class="scard__n">03 &middot; The flagship</span><h3>Pure Luxe</h3><p class="scard__spec">Smart 5 Stage Alkaline Reverse Osmosis</p><p class="scard__price"><span class="money">$2,290</span><span>installed</span></p></div>
+          <ul class="scard__pts"><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Watch the purity live on its own screen</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Quick change cartridges in a compact sealed case</li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>A leak sensor and a booster pump built in</li></ul>
+          <div class="scard__go"><button class="btn js-open" type="button" data-sys="Pure Luxe"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button><span class="scard__svc">$680 a year, serviced by us. Covered for life while you stay serviced with us.</span></div>
         </div>
-        <div class="plate__img"><img src="media/systems/pure-luxe.webp" srcset="media/ro/sys-pure-luxe-m.webp 320w, media/systems/pure-luxe.webp 607w" sizes="(max-width:859px) 160px, 34vw" alt="Pure Luxe smart 5 stage alkaline reverse osmosis system with its live purity screen" width="573" height="900" loading="lazy"></div>
+        <div class="scard__img xcard" data-set="luxe" role="button" tabindex="0" aria-label="See inside the Pure Luxe">
+          <img src="media/xf-luxe/f00.webp" alt="The Pure Luxe smart five stage alkaline reverse osmosis system, opening into its parts" width="1100" height="1472" loading="lazy">
+          <span class="xtap" aria-hidden="true">Tap me!</span>
+        </div>
       </article>
-      <article class="plate more" style="--at:.4">
-        <div class="plate__t">
-          <span class="plate__n">Not sure which is yours?</span>
-          <h3>Send a photo of the cabinet under your sink.</h3>
-          <p>We confirm the fit, the tap and the price in writing, and nothing changes on the day.</p>
-          <div class="plate__go"><button class="btn js-open" type="button" data-sys="Not sure yet"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Help me choose</button><a class="ul" href="tel:0430546749" style="color:#fff">or call 0430 546 749</a></div>
+      <article class="scard more" data-i="3">
+        <div class="scard__t">
+          <div><span class="scard__n">Not sure which is yours?</span><h3>Send a photo of the cabinet under your sink.</h3><p class="scard__spec">We confirm the fit, the tap and the price in writing, and nothing changes on the day.</p></div>
+          <div class="scard__go"><button class="btn js-open" type="button" data-sys="Not sure yet"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Help me choose</button><a class="ul" href="tel:0430546749">or call 0430 546 749</a></div>
         </div>
+        <figure class="scard__ph">
+          <picture><source media="(max-width:859px)" srcset="media/ro/undersink-m.webp"><img src="media/ro/undersink.webp" alt="A reverse osmosis system and its white tank fitted neatly inside an open kitchen cabinet" width="1600" height="893" loading="lazy"></picture>
+          <figcaption>Where it goes</figcaption>
+        </figure>
       </article>
     </div>
   </div>
 </section>
-<section class="range stepup" aria-label="The step up">
+<section class="stepup" aria-label="The step up">
   <div class="zone">
     <div class="stepup__head" data-sc-in data-sc-stagger="80">
       <h3 class="d3">The step up, in one look.</h3>
-      <p class="lede">Every system purifies the water the same way. Each step up adds a finish to it.</p>
+      <p class="lede">Every system starts from the same base. Each step up adds a finish to it.</p>
     </div>
-    <div class="cmp" data-sc-in>
-      <div class="lbl" aria-hidden="true"></div>
-      <div class="h"><b>Pure Plus</b><span>$1,280 installed</span></div>
-      <div class="h prem"><span class="tag">Most kitchens choose this</span><b>Pure Premium</b><span>$1,590 installed</span></div>
-      <div class="h"><b>Pure Luxe</b><span>$2,290 installed</span></div>
-      <div class="lbl">Stages</div><div class="p">5</div><div class="p">7</div><div class="p">5</div>
-      <div class="lbl">Up to 99% of dissolved contaminants out</div><div class="yes"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="yes"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="yes"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="lbl">Alkaline, the good minerals back in</div><div class="yes"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="yes"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="yes"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="lbl">Hydrogen rich</div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="yes"><span class="add pv"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><em>Premium adds this</em></span></div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-      <div class="lbl">Ceramic far infrared stage</div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="yes"><span class="add pv"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><em>Premium adds this</em></span></div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-      <div class="lbl">Live purity readout on its own screen</div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="yes"><span class="add"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><em>Luxe adds this</em></span></div>
-      <div class="lbl">Quick change cartridges, compact sealed case</div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="yes"><span class="add"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><em>Luxe adds this</em></span></div>
-      <div class="lbl">Leak sensor and booster pump</div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="no"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="yes"><span class="add"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><em>Luxe adds this</em></span></div>
-      <div class="lbl">Installed, in writing first</div><div class="p">$1,280</div><div class="p">$1,590</div><div class="p">$2,290</div>
-      <div class="lbl">A year of servicing, by us</div><div class="p">$600</div><div class="p">$650</div><div class="p">$680</div>
+    <div class="ladder" data-sc-in>
+      <div class="lad base">
+        <span class="lad__k">Every system</span>
+        <ul>
+          <li>Up to 99% of dissolved contaminants out</li>
+          <li>Alkaline, the good minerals back in</li>
+          <li>Its own drinking tap, fitted in about two hours</li>
+          <li>WaterMark and NSF certified</li>
+          <li>Covered for life while you stay serviced with us</li>
+        </ul>
+      </div>
+      <div class="lad c plus">
+        <span class="lad__k">01 &middot; Pure Plus</span><b>The base, finished alkaline.</b><span class="lad__p">$1,280 installed</span>
+        <p>Everything in the row above. For most people that is the whole answer.</p>
+        <span class="lad__svc">$600 a year, serviced by us</span>
+      </div>
+      <div class="lad c prem">
+        <span class="tag">Most kitchens choose this</span>
+        <span class="lad__k">02 &middot; Pure Premium</span><b>Everything in Plus, plus two stages.</b><span class="lad__p">$1,590 installed</span>
+        <ul><li>Hydrogen rich water</li><li>A ceramic far infrared stage</li></ul>
+        <span class="lad__svc">$650 a year, serviced by us</span>
+      </div>
+      <div class="lad c luxe">
+        <span class="lad__k">03 &middot; Pure Luxe</span><b>Everything in Plus, in a smart sealed case.</b><span class="lad__p">$2,290 installed</span>
+        <ul><li>Live purity on its own screen</li><li>Quick change cartridges</li><li>A leak sensor and a booster pump</li></ul>
+        <span class="lad__svc">$680 a year, serviced by us</span>
+      </div>
     </div>
-    <p class="stepup__note" data-sc-in>Every system is WaterMark and NSF certified, installed by a licensed plumber, and covered for life while you stay serviced with us. Every price includes supply, installation and GST, quoted in writing before we start. The price hasn't moved.</p>
+    <p class="stepup__note" data-sc-in>Every price includes supply, installation and GST, quoted in writing before we start. The price hasn't moved.</p>
   </div>
 </section>
 
@@ -2242,9 +2310,9 @@ body.dopen .drawer{transform:none}
 <section class="taps" id="taps" aria-label="Three way mixer taps">
   <div class="zone taps__grid">
     <div class="taps__copy" data-sc-in data-sc-stagger="80">
-      <span class="kick">Three way mixers</span>
+      <span class="kick">Premium three way mixers</span>
       <h2 class="d2">The tap is the part you see every day.</h2>
-      <p class="lede">Every system comes with its own filtered water tap in chrome. If you'd rather one tap did it all, a premium three way pull out mixer puts the purified water on its own lever, in the finish your kitchen wants, fitted with the system in the same visit.</p>
+      <p class="lede">Every system comes with its own filtered water tap in chrome. If you'd rather one tap did it all, a premium pull out three way mixer puts the purified water on its own lever, in the finish your kitchen wants, fitted with the system in the same visit.</p>
       <div class="swatches" id="swatches" role="tablist" aria-label="Finish">
         <button class="sw on" type="button" role="tab" aria-selected="true" data-f="brass" style="--f:linear-gradient(145deg,#E2C27A,#B8923F)"><i></i>Brushed gold</button>
         <button class="sw" type="button" role="tab" aria-selected="false" data-f="black" style="--f:linear-gradient(145deg,#3A3D44,#15171B)"><i></i>Matte black</button>
@@ -2252,7 +2320,7 @@ body.dopen .drawer{transform:none}
         <button class="sw" type="button" role="tab" aria-selected="false" data-f="gunmetal" style="--f:linear-gradient(145deg,#7D838C,#464B53)"><i></i>Gunmetal</button>
         <button class="sw" type="button" role="tab" aria-selected="false" data-f="copper" style="--f:linear-gradient(145deg,#D99A73,#9E5A38)"><i></i>Brushed copper</button>
       </div>
-      <p class="taps__price"><b>From $850, fitted with your system</b><span>Twenty one filter taps and mixers, five finishes, every price fixed and quoted with the system.</span></p>
+      <p class="taps__price"><b>Premium pull out three way mixers, from $1,050 installed</b><span>Five finishes. Fixed in writing with the system and fitted in the same visit.</span></p>
       <div class="taps__go"><a class="btn" href="faucets-and-mixers-sydney"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>See the taps and mixers</a><a class="ul" href="faucets-and-mixers-sydney">every filtered water tap we fit</a></div>
     </div>
     <figure class="frame taps__fr" id="tapFrame" data-sc-tilt="4" data-sc-in>
@@ -2289,23 +2357,97 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ 8 · REVIEWS — flow. Real Google reviews, the reverse osmosis ones, excerpted. ═════════ -->
-<section class="proof" id="reviews" aria-label="Reviews">
+<!-- ═════════ 8 · REVIEWS — the brick lane (whole house round 70, JP: "five stars every single time"):
+     three rows of real Google reviews and real photographs, opposite directions, no fades, no hover
+     stop, the pace leaning on the scroll. Lifted as behaviour from pure-home-v7.html. ═════════ -->
+<section class="lane" id="reviews" data-sc-act="flow" aria-label="Reviews">
   <div class="zone">
-    <header class="proof__head" data-sc-in data-sc-stagger="80">
-      <span class="proof__badge"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><b>5.0</b><span>30 Google reviews</span></span>
-      <h2 class="d2">Sydney kitchens. In their words.</h2>
-      <p class="lede">Every review on Google five stars, and not a single complaint on file.</p>
-    </header>
-    <div class="rvgrid" data-sc-in data-sc-stagger="70">
-      <article class="rv"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>&ldquo;Wow what difference! We got the 5 stage reverse osmosis system and you can never go back to drinking normal tap water after having this system installed.&rdquo;</p><div class="who"><b>Jade Danielle</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div></article>
-      <article class="rv"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>&ldquo;He installed our five stage reverse osmosis system and walked us through everything. The setup is super neat and the tap looks beautiful. Our water tastes exceptionally clean and fresh.&rdquo;</p><div class="who"><b>Kayla Kagaras</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div></article>
-      <article class="rv"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>&ldquo;We had Jean-Paul install our smart reverse osmosis system and he has done a wonderful job. Our water quality is absolutely great!&rdquo;</p><div class="who"><b>Irene Evans</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div></article>
-      <article class="rv"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>&ldquo;Now that&rsquo;s water! I don&rsquo;t have to buy bottled water anymore. It&rsquo;s hard to control what is in the foods we eat these days, but at least I can control the water I drink.&rdquo;</p><div class="who"><b>Mandy Boustani</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div></article>
-      <article class="rv"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>&ldquo;Very pleased with Jean-Paul after installing our 5 stage reverse osmosis system. He explained how the smart system worked and guided us through everything. Our water tastes significantly better now.&rdquo;</p><div class="who"><b>Jere Skorin</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div></article>
-      <article class="rv"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>&ldquo;Great job from Jean-Paul installing our 7 stage reverse osmosis. Very happy with the install.&rdquo;</p><div class="who"><b>Yous</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div></article>
+    <div class="lane__head" data-sc-in data-sc-stagger="80">
+      <span class="lane__badge"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg><b>5.0</b><span>30 Google reviews</span></span>
+      <h2 class="d2">Five stars, every single time.</h2>
+      <p class="lede">Every review on Google, and not a single complaint on file.</p>
     </div>
-    <a class="proof__all arrow" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" target="_blank" rel="noopener">Read all 30 on Google. Every one five stars.<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="rmq" id="rmq">
+      <div class="rrow" data-dir="-1">
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;Wow what difference! We got the 5 stage reverse osmosis system and you can never go back to drinking normal tap water after having this system installed.&rdquo;</p>
+          <div class="rwho"><b>Jade Danielle</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;He installed our five stage reverse osmosis system and walked us through everything. The setup is super neat and the tap looks beautiful. Our water tastes exceptionally clean and fresh.&rdquo;</p>
+          <div class="rwho"><b>Kayla Kagaras</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvp" aria-hidden="true"><img src="media/install.webp" alt="" width="1700" height="956" loading="lazy"><span>Under the sink, Strathfield</span></div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;Great job from Jean-Paul installing our 7 stage reverse osmosis. Very happy with the install.&rdquo;</p>
+          <div class="rwho"><b>Yous</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;Very pleased with Jean-Paul after installing our 5 stage reverse osmosis system. He explained how the smart system worked. Our water tastes significantly better now.&rdquo;</p>
+          <div class="rwho"><b>Jere Skorin</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvp" aria-hidden="true"><img src="media/tap-1.webp" alt="" width="760" height="760" loading="lazy"><span>The tap, after</span></div>
+      </div>
+      <div class="rrow" data-dir="1">
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;Now that&rsquo;s water! I don&rsquo;t have to buy bottled water anymore. We upgraded our filtration system and what a difference.&rdquo;</p>
+          <div class="rwho"><b>Mandy Boustani</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;We had Jean-Paul install our smart reverse osmosis system and he has done a wonderful job. Our water quality is absolutely great!&rdquo;</p>
+          <div class="rwho"><b>Irene Evans</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvp" aria-hidden="true"><picture><source media="(max-width:859px)" srcset="media/ro/undersink-m.webp"><img src="media/ro/undersink.webp" alt="" width="1600" height="893" loading="lazy"></picture><span>Where it goes</span></div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;He arrived on time, worked neatly and made the whole process very simple. The water tastes much cleaner now and we are very pleased with the result.&rdquo;</p>
+          <div class="rwho"><b>Elly Barbar</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;Absolutely fantastic experience! They were professional, extremely knowledgeable, friendly, and made the whole process seamless.&rdquo;</p>
+          <div class="rwho"><b>Georgia</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvp" aria-hidden="true"><img src="media/care.webp" alt="" width="1700" height="956" loading="lazy"><span>The yearly service</span></div>
+      </div>
+      <div class="rrow" data-dir="-1">
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;From start to finish the interaction, communication and experience was positive, fast and comprehensive.&rdquo;</p>
+          <div class="rwho"><b>Scott Pursey</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;Extremely knowledgeable and professional service. With an easy installation and complete satisfaction with the product supplied.&rdquo;</p>
+          <div class="rwho"><b>Brendan Tink</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvp" aria-hidden="true"><img src="media/bleed-team.webp" alt="" width="1900" height="1068" loading="lazy"><span>New cartridges going in</span></div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;Fantastic home filters. Clean and easy to deal with. Highly recommend.&rdquo;</p>
+          <div class="rwho"><b>Oliver Alameri</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;Great to deal with, quality work. Highly recommend.&rdquo;</p>
+          <div class="rwho"><b>Jye O&rsquo;Neil</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+        <div class="rvc">
+          <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
+          <p>&ldquo;Jean-Paul came for a free inspection and provided everything I needed to make the right decision.&rdquo;</p>
+          <div class="rwho"><b>Sergio Zambrano</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
+        </div>
+      </div>
+  </div>
+  <div class="zone">
+    <a class="lane__all arrow" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" target="_blank" rel="noopener">Read them all on Google<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
 </section>
 
@@ -2447,7 +2589,7 @@ body.dopen .drawer{transform:none}
         <details class="ch" id="det-taps" data-sc-in>
           <summary><h2>Filtered water taps and three way mixers</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="ch__a">
-            <p>Every system comes with a <a href="faucets-and-mixers-sydney">filtered water tap</a> in chrome. Other finishes are $150. A three way mixer replaces the kitchen mixer with one tap that does hot, cold and purified on its own lever, from $500, and the premium pull out mixers in brushed stainless, matte black, gunmetal, brushed gold and brushed copper are from $850. All twenty one are fitted with the system in the same visit at a fixed price.</p>
+            <p>Every system comes with a <a href="faucets-and-mixers-sydney">filtered water tap</a> in chrome. Other finishes are $150. A three way mixer replaces the kitchen mixer with one tap that does hot, cold and purified on its own lever, from $500, and the premium pull out three way mixers in brushed stainless, matte black, gunmetal, brushed gold and brushed copper are from $1,050 installed. Every tap and mixer is fitted with the system in the same visit at a fixed price.</p>
           </div>
         </details>
         <details class="ch" id="det-where" data-sc-in>
@@ -2516,7 +2658,7 @@ body.dopen .drawer{transform:none}
 <nav class="srail" id="srail" aria-label="Jump to a section">
   <ul>
     <li><a href="#top"><i></i><span>The systems</span></a></li>
-    <li><a href="#water"><i></i><span>The glass</span></a></li>
+    <li><a href="#water"><i></i><span>Why you're here</span></a></li>
     <li><a href="#how"><i></i><span>How it works</span></a></li>
     <li><a href="#money"><i></i><span>By the year</span></a></li>
     <li><a href="#systems"><i></i><span>Three systems</span></a></li>
@@ -3604,11 +3746,11 @@ body.dopen .drawer{transform:none}
     screen:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
   };
   var HD = [
-    {sys:'Pure Plus', img:'media/systems/pure-plus.webp', alt:'Pure Plus 5 stage alkaline reverse osmosis system', name:'5 Stage Alkaline Reverse Osmosis', pure:'Pure Plus', sub:'The starting point', amt:'$1,280',
+    {sys:'Pure Plus', img:'media/ro/card-plus.webp', alt:'The Pure Plus five stage reverse osmosis system, studio shot', name:'5 Stage Alkaline Reverse Osmosis', pure:'Pure Plus', sub:'The starting point', amt:'$1,280',
      ticks:[['drop','<b>Up to 99% of dissolved contaminants out.</b> Purified water on tap.'],['layers','<b>Alkaline, mineral rich water.</b> The good minerals go back in.'],['shield','<b>Covered for life</b> while you stay serviced with us.']]},
-    {sys:'Pure Premium', img:'media/systems/pure-premium.webp', alt:'Pure Premium 7 stage hydrogen rich alkaline reverse osmosis system', name:'7 Stage Hydrogen Rich Alkaline Reverse Osmosis', pure:'Pure Premium', sub:'Most kitchens choose this', amt:'$1,590',
+    {sys:'Pure Premium', img:'media/ro/card-prem.webp', alt:'The Pure Premium seven stage reverse osmosis system, studio shot', name:'7 Stage Hydrogen Rich Alkaline Reverse Osmosis', pure:'Pure Premium', sub:'Most kitchens choose this', amt:'$1,590',
      ticks:[['spark','<b>Hydrogen rich and alkaline,</b> every glass.'],['layers','<b>Remineralised,</b> so the good minerals go back in.'],['shield','<b>Covered for life</b> while you stay serviced with us.']]},
-    {sys:'Pure Luxe', img:'media/systems/pure-luxe.webp', alt:'Pure Luxe smart 5 stage alkaline reverse osmosis system', name:'Smart 5 Stage Alkaline Reverse Osmosis', pure:'Pure Luxe', sub:'The flagship, with a screen', amt:'$2,290',
+    {sys:'Pure Luxe', img:'media/ro/card-luxe.webp', alt:'The Pure Luxe smart reverse osmosis unit, studio shot', name:'Smart 5 Stage Alkaline Reverse Osmosis', pure:'Pure Luxe', sub:'The flagship, with a screen', amt:'$2,290',
      ticks:[['screen','<b>Watch the purity live</b> on its own screen.'],['layers','<b>Quick change cartridges</b> in a compact sealed case.'],['shield','<b>Covered for life</b> while you stay serviced with us.']]}
   ];
   (function deck(){
@@ -3662,14 +3804,15 @@ body.dopen .drawer{transform:none}
   /* 1 · THE GLASS — the six names arrive in the photograph one by one */
   var waterAct = document.getElementById('water');
   var waterChips = [].slice.call(document.querySelectorAll('#waterChips .chip'));
-  var WCH = [[.42,.47],[.45,.50],[.48,.53],[.51,.56],[.54,.59],[.57,.62]];
+  /* microplastics with the first line; PFAS, fluoride, chlorine with the second; metals and salts with the third */
+  var WCH = [[.05,.11],[.24,.29],[.28,.33],[.32,.37],[.48,.53],[.52,.57]];
   function driveWater(){
     if (!waterAct) return;
     var p = P(waterAct);
     for (var i = 0; i < waterChips.length; i++){
       var w = WCH[i] || WCH[WCH.length-1];
       var k = eo(win(p, w[0], w[1]));
-      if (p > .66) k *= 1 - win(p, .66, .72);   /* they leave with the line that named them */   /* they leave with the line that named them */
+      if (p > .70) k *= 1 - win(p, .70, .76);   /* they leave as the last line lands */
       waterChips[i].style.setProperty('--k', q(k));
     }
   }
@@ -3737,6 +3880,100 @@ body.dopen .drawer{transform:none}
     }
   }
 
+
+  /* 4 · THE THREE SYSTEMS — the deck: one card at a time, the next rising from below over the last
+     (21st.dev "Stacking Cards", id 25275, rebuilt off --sc-p). A card that is covered closes itself. */
+  var rangeAct = document.getElementById('systems');
+  var scards = [].slice.call(document.querySelectorAll('#sysDeck .scard'));
+  var SIN = [[0,0],[.18,.34],[.44,.60],[.70,.86]];   /* when each card rises */
+  function driveRange(){
+    if (!rangeAct) return;
+    var p = P(rangeAct);
+    for (var i = 0; i < scards.length; i++){
+      var k = i === 0 ? 1 : eio(win(p, SIN[i][0], SIN[i][1]));
+      var d = i < scards.length - 1 ? eio(win(p, SIN[i+1][0], SIN[i+1][1])) : 0;
+      var c = scards[i];
+      c.style.setProperty('--k', q(k)); c.style.setProperty('--d', q(d));
+      var front = k > .5 && d < .5;
+      if (front !== c.classList.contains('front')){
+        c.classList.toggle('front', front);
+        var x = c.querySelector('.xcard'); if (x && !front && x._close) x._close();
+      }
+    }
+  }
+  /* an old product URL lands on its card: /pure-premium-… 301s into #pure-premium */
+  (function landOnCard(){
+    if (!rangeAct || !location.hash) return;
+    var i = -1; scards.forEach(function(c, n){ if ('#' + c.id === location.hash) i = n; });
+    if (i < 1) return;
+    var go = function(){
+      var top = rangeAct.getBoundingClientRect().top + scrollY, span = rangeAct.offsetHeight - innerHeight;
+      if (span <= 0) return;
+      jump(top + (SIN[i][1] + .05) * span); ask();
+    };
+    addEventListener('load', function(){ setTimeout(go, 60); });
+  })();
+
+  /* THE EXPLOSION — the homepage's product frames on every card. Tap and the unit opens into its parts
+     over 1.3s on a soft ease, tap again and it closes. The homepage's rules, carried over: RETAIN every
+     decoded frame (a thrown-away preload re-decodes on every write, 46ms a frame measured on the live
+     site), decode up front, never let a timed tween race the network, phones on 37 half-size frames. */
+  (function explode(){
+    var cards = [].slice.call(document.querySelectorAll('.xcard'));
+    if (!cards.length) return;
+    var N = mph ? 37 : 73, FRX = mph ? '-m' : '', XDUR = 1300;
+    function frames(dir){ var a = []; for (var i = 0; i < N; i++) a.push(dir + '/f' + (i < 10 ? '0' + i : i) + FRX + '.webp'); return a; }
+    var SETS = { plus: frames('media/xf-plus'), prem: frames('media/xf-prem'), luxe: frames('media/xf-luxe') };
+    var RETAIN = {}, READY = {}, preloaded = {};
+    function preload(key){
+      if (preloaded[key]) return preloaded[key];
+      RETAIN[key] = [];
+      var keep = RETAIN[key];
+      preloaded[key] = Promise.all(SETS[key].map(function(u){
+        var im = new Image(); im.decoding = 'async'; im.fetchPriority = 'low'; im.src = u; keep.push(im);
+        return (im.decode ? im.decode() : Promise.resolve()).catch(function(){});
+      }));
+      var mine = preloaded[key];
+      mine.then(function(){ if (preloaded[key] === mine) READY[key] = true; });
+      return mine;
+    }
+    function release(key){ if (!RETAIN[key]) return; RETAIN[key] = null; preloaded[key] = null; READY[key] = false; }
+    function softEase(x){ return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2; }
+    cards.forEach(function(c){
+      var key = c.getAttribute('data-set'), img = c.querySelector('img'), SRC = SETS[key];
+      if (!SRC || !img) return;
+      if (mph) img.src = SRC[0];
+      var pos = 0, shown = -1, raf = null, tw = null, open = false, pend = null;
+      function paint(v){ var i = Math.round(v * (N - 1)); if (i === shown) return; shown = i; img.src = SRC[i]; }
+      function tick(now){
+        if (!tw){ raf = null; return; }
+        var k = Math.min(1, (now - tw.t0) / tw.dur);
+        pos = tw.from + (tw.to - tw.from) * softEase(k); paint(pos);
+        if (k < 1) raf = requestAnimationFrame(tick); else { pos = tw.to; tw = null; raf = null; }
+      }
+      function go2(t, dur){ if (raf) cancelAnimationFrame(raf); tw = {from:pos, to:t, t0:performance.now(), dur:dur}; raf = requestAnimationFrame(tick); }
+      function go(t, dur){
+        preload(key);
+        if (reduce){ pos = t; paint(t); return; }
+        if (!READY[key]){ var first = pend === null; pend = t; if (first) preload(key).then(function(){ var v = pend; pend = null; go2(v, dur); }); return; }
+        go2(t, dur);
+      }
+      function toggle(){ open = !open; c.classList.toggle('opened', open); go(open ? 1 : 0, XDUR); window.ffyTrack && window.ffyTrack('explode', {system:key, open:open}); }
+      c.addEventListener('click', toggle);
+      c.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
+      c._close = function(){ if (open) toggle(); };
+      if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ c.classList.toggle('tapin', es[0].isIntersecting); }, {threshold:.5}).observe(c);
+    });
+    /* the frames come on approach: within a screen and a half of the act, the three sets in order, one at a
+       time on idle; a phone lets them go again two and a half screens away */
+    if (rangeAct && 'IntersectionObserver' in window){
+      var KEYS = ['plus', 'prem', 'luxe'];
+      function walk(){ var i = 0; (function next(){ if (i >= KEYS.length) return; preload(KEYS[i++]).then(function(){ if ('requestIdleCallback' in window) requestIdleCallback(next, {timeout:1200}); else setTimeout(next, 120); }); })(); }
+      new IntersectionObserver(function(es){ if (es[0].isIntersecting) walk(); }, {rootMargin:'150% 0px'}).observe(rangeAct);
+      if (mph) new IntersectionObserver(function(es){ if (!es[0].isIntersecting) KEYS.forEach(release); }, {rootMargin:'250% 0px'}).observe(rangeAct);
+    } else { preload('plus'); }
+  })();
+
   /* 7 · THE LEDGER — each row's tick draws once its row has landed */
   var careAct = document.getElementById('servicing');
   var lrows = [].slice.call(document.querySelectorAll('#ledger .lrow[data-sc-cue]')).map(function(r){
@@ -3752,7 +3989,7 @@ body.dopen .drawer{transform:none}
   var running = false;
   function driveAll(){
     running = false;
-    driveWater(); driveHow(); driveCare();
+    driveWater(); driveHow(); driveRange(); driveCare();
   }
   function ask(){ if (!running){ running = true; requestAnimationFrame(driveAll); } }
   addEventListener('scroll', ask, {passive:true});
@@ -3774,6 +4011,7 @@ body.dopen .drawer{transform:none}
     waterChips.forEach(function(c){ c.style.setProperty('--k', '1'); });
     lrows.forEach(function(r){ r.el.style.setProperty('--s', '1'); });
     if (trainFill) trainFill.style.setProperty('--f', '1');
+    driveRange();
   }
 
   /* 6 · THE TAPS — a finish under a fingertip */
@@ -3792,6 +4030,53 @@ body.dopen .drawer{transform:none}
       b.addEventListener('click', go);
       if (matchMedia('(hover:hover) and (pointer:fine)').matches) b.addEventListener('mouseenter', go);
     });
+  })();
+
+
+  /* 8 · THE LANE — the reviews marquee: 30px/s, three rows in alternate directions, the pace leaning on
+     the scroll through a spring on a desktop (never on a phone), doubled until one period covers the screen */
+  (function rmq(){
+    var wrap = document.getElementById('rmq');
+    if (!wrap) return;
+    var rows = [].slice.call(wrap.querySelectorAll('.rrow')).filter(function(r){ return r.offsetParent !== null; });
+    if (!rows.length) return;
+    var SPEED = 30;
+    var lanes = rows.map(function(row){
+      row.innerHTML += row.innerHTML;
+      var guard = 0;
+      while (row.scrollWidth / 2 < innerWidth * 1.15 && guard++ < 3) row.innerHTML += row.innerHTML;
+      return {el:row, dir:parseInt(row.getAttribute('data-dir') || '-1', 10), pos:0, half:0};
+    });
+    function measure(){ lanes.forEach(function(l){ l.half = l.el.scrollWidth / 2; }); }
+    measure(); addEventListener('resize', measure);
+    lanes.forEach(function(l){ if (l.dir > 0) l.pos = -l.half; });
+    if (reduce) return;
+    var run = false, last = null, vel = 0, lastY = scrollY;
+    function step(t){
+      if (!run){ last = null; return; }
+      if (last !== null){
+        var dt = Math.min((t - last) / 1000, .05);
+        var y = scrollY, dy = y - lastY; lastY = y;
+        var target = mph ? 0 : clamp(dy / Math.max(dt, .001) / 900, -1, 1);
+        vel += (target - vel) * Math.min(1, dt * 6);
+        var push = Math.abs(vel) * 260, lean = -vel * 4;
+        lanes.forEach(function(l){
+          l.pos += l.dir * (SPEED + push) * dt;
+          if (l.pos <= -l.half) l.pos += l.half;
+          if (l.pos > 0) l.pos -= l.half;
+          l.el.style.transform = 'translateX(' + l.pos.toFixed(2) + 'px) skewX(' + lean.toFixed(2) + 'deg)';
+        });
+      }
+      last = t;
+      requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        var vis = es[0].isIntersecting;
+        if (vis && !run){ run = true; lastY = scrollY; requestAnimationFrame(step); }
+        if (!vis) run = false;
+      }, {rootMargin:'80px 0px'}).observe(wrap);
+    } else { run = true; requestAnimationFrame(step); }
   })();
 
   /* ── THE RAIL and THE WAY BACK — the whole house page's, carried over. ── */
