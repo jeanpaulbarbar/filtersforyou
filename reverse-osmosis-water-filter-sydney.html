@@ -842,8 +842,10 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 
 /* ══ HERO — the shell's opener with the homepage deck mechanic on the card ══ */
 .hero{min-height:calc(100svh - var(--utilh) - 2*var(--hframe));background:var(--ink-blue);color:#fff;display:flex;align-items:flex-end}
-.hero > picture{position:absolute;inset:0;z-index:0}
-.hero img.hph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:34% 56%;filter:saturate(.98) contrast(1.02) brightness(.97)}
+.hero .hbg{position:absolute;inset:0;z-index:0;overflow:clip}
+.hero .hbg picture{position:absolute;inset:0;opacity:0;transition:opacity 1.9s ease-in-out}
+.hero .hbg picture.on{opacity:1}
+.hero img.hph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,34% 56%);max-width:none;filter:saturate(.98) contrast(1.02) brightness(.97)}
 .hero .veil{position:absolute;inset:0;z-index:1;
   background:linear-gradient(90deg,rgba(4,16,46,.78) 0%,rgba(4,16,46,.5) 38%,rgba(4,16,46,.14) 66%,rgba(4,16,46,.32) 100%)}
 .hero .copy{position:relative;z-index:3;color:#fff;width:100%;padding-block:150px 150px}
@@ -901,119 +903,86 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
   .ocfoot .btn{flex:1 1 100%;justify-content:center}
 }
 
-/* ══ chips — the named things in the glass, frosted pills that bob ══ */
-.chip{position:absolute;z-index:4;left:var(--x);top:var(--y);opacity:var(--k,0);pointer-events:none;
-  transform:translate(-50%,-50%) translateY(calc((1 - var(--k,0)) * 22px)) scale(calc(.92 + .08 * var(--k,0)));will-change:opacity,transform}
-.chip > span{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:var(--r-full);white-space:nowrap;
-  font-size:13.5px;font-weight:700;letter-spacing:.005em;color:var(--ink);
-  background:rgba(255,254,252,.88);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);
-  box-shadow:0 14px 30px -14px rgba(4,16,46,.55),inset 0 0 0 1px rgba(255,255,255,.7);
-  animation:bob 5.4s ease-in-out infinite;animation-delay:var(--d,0s)}
-.chip > span::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c,var(--blue));flex:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--c,var(--blue)) 18%,transparent)}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@media(prefers-reduced-motion:reduce){.chip > span{animation:none}}
+/* ══ 1 · WHY YOU'RE HERE (#water) — a plate: the photograph fills the frame, the words sit on it ══ */
+.why .sc-stage{background:var(--paper)}   /* ⛔ never position:relative here: it overrides the engine's sticky and the plate scrolls away blank */
+.why__fr{position:absolute;inset:var(--hframe);border-radius:var(--r-hero);overflow:clip;background:var(--mist)}
+.why__fr img{width:100%;height:100%;object-fit:cover;object-position:58% 50%;max-width:none}
+.why__veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,16,46,.84) 0%,rgba(4,16,46,.66) 32%,rgba(4,16,46,.22) 60%,rgba(4,16,46,.08) 100%)}
+.why__copy{position:absolute;inset:0;display:grid;align-content:center;gap:22px;padding:calc(var(--top) + 8px) var(--safe) 60px;color:#fff;max-width:min(100%,calc(820px + 2 * var(--safe)))}
+.why__copy .kick{color:var(--yellow)}
+.why__copy h2{color:#fff;font-weight:600;max-width:13ch;font-size:clamp(2.4rem,5vw,4.4rem);will-change:opacity,transform}
+.why__names{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:2px}
+.why__names li{position:relative;font-size:clamp(1.5rem,2.6vw,2.4rem);font-weight:600;letter-spacing:-.01em;line-height:1.2;color:#fff;padding-bottom:7px;will-change:opacity,transform}
+.why__names li::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:2px;background:var(--yellow);transform:scaleX(var(--u,0));transform-origin:0 50%}
+.why__line{font-size:clamp(1.15rem,1.6vw,1.45rem);font-weight:500;line-height:1.45;color:rgba(255,255,255,.9);max-width:36ch;will-change:opacity,transform}
 
-/* ══ 1 · THE GLASS (#water) — pin: one photograph, one line at a time, the names arriving in it ══ */
-.glass .sc-stage{display:grid;grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);gap:clamp(36px,4.5vw,72px);align-items:center;padding:calc(var(--top) + 8px) var(--safe) 40px}
-.glass__ph{height:min(76vh,760px);width:100%}
-.glass__ph img{object-position:44% 50%}
-.glass__copy{display:grid;gap:22px;align-content:center;align-self:center;max-width:560px;min-height:min(76vh,760px)}
-.glass__copy .pl{grid-area:auto;color:var(--ink);font-weight:500;line-height:1.1;letter-spacing:-.012em;text-wrap:balance;font-size:clamp(2rem,3.9vw,3.6rem);margin:0;will-change:opacity,transform}
-.glass__copy .pl small{display:block;margin-top:14px;font-size:clamp(1.02rem,1.3vw,1.22rem);line-height:1.45;font-weight:500;color:var(--muted);letter-spacing:0;max-width:40ch}
-.glass__lines{display:grid}
-.glass__lines > *{grid-area:1/1;align-self:center}
-
-/* ══ 2 · HOW IT WORKS (#how) — THE PEAK. Navy. The train of five stages, the glass, the chips
-   leaving it one stage at a time, the haze clearing, the minerals going back in. ══ */
-.how .sc-stage{background:var(--ink-blue);color:#fff;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);grid-template-rows:auto 1fr auto;gap:22px clamp(28px,3.4vw,56px);padding:calc(var(--top) - 10px) var(--safe) 34px}
-.how__head{grid-column:1/-1;display:grid;gap:12px;max-width:820px;will-change:opacity,transform}
+/* ══ 2 · HOW IT WORKS (#how) — navy: five stages, big, lighting one after another ══ */
+.how .sc-stage{background:var(--ink-blue);color:#fff;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(18px,3vh,32px);padding:calc(var(--top) - 6px) var(--safe) clamp(28px,4vh,44px)}
+.how__head{display:grid;gap:10px;max-width:820px;will-change:opacity,transform}
 .how__head .kick{color:#8FB8FF}
 .how__head h2{color:#fff}
-.how__head .lede{color:rgba(255,255,255,.78);max-width:60ch;font-size:clamp(1.05rem,1.35vw,1.25rem)}
-.how__left{grid-column:1;grid-row:2/4;display:grid;grid-template-rows:1fr auto;gap:18px;min-width:0;align-content:end;padding-bottom:6px}
-.train{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-self:end}
-.tile{position:relative;display:grid;grid-template-rows:auto auto 1fr;gap:8px;padding:12px 12px 14px;border-radius:18px;
-  background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);
-  opacity:.5;transform:translateY(8px);transition:opacity .7s var(--e-out),transform .7s var(--e-out),background .7s ease-in-out,box-shadow .7s ease-in-out;will-change:opacity,transform}
-.tile.on{opacity:1;transform:none;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(143,184,255,.55),0 30px 50px -30px rgba(11,97,244,.6)}
-.tile__pic{height:clamp(88px,12vh,128px);border-radius:12px;background:#0A1D4D;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-.tile__pic img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 50%;filter:saturate(.8) brightness(.78);transition:filter .7s ease-in-out}
-.tile.on .tile__pic img{filter:none}
-.tile__n{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#8FB8FF}
-.tile__t{font-size:15.5px;font-weight:700;line-height:1.25;color:#fff;letter-spacing:-.005em}
-.tile__catch{display:flex;flex-wrap:wrap;gap:5px;min-height:34px;align-content:flex-start}
-.tile__catch .slot{width:34px;height:30px;border-radius:var(--r-full);position:relative}
-.train__track{position:relative;height:3px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden;margin-top:14px}
-.train__track i{position:absolute;inset:0;background:linear-gradient(90deg,#5B9AE2,#8FB8FF);transform:scaleX(var(--f,0));transform-origin:0 50%;will-change:transform}
-.how__caps{position:relative;display:grid;min-height:118px;align-self:end}
-.how__caps .cap{grid-area:1/1;align-self:end;opacity:0;transform:translateY(12px);transition:opacity .5s ease-in-out,transform .6s var(--e-out);will-change:opacity,transform;max-width:56ch}
-.how__caps .cap.on{opacity:1;transform:none}
-.how__caps .cap b{display:block;font-size:clamp(1.3rem,1.9vw,1.7rem);font-weight:600;line-height:1.2;letter-spacing:-.01em;color:#fff}
-.how__caps .cap p{margin-top:8px;font-size:clamp(1rem,1.2vw,1.15rem);line-height:1.5;color:rgba(255,255,255,.82);text-wrap:pretty}
-.how__caps .cap p a{color:#fff;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.5)}
-.how__caps .cap em.st{font-style:normal;font-weight:800;color:var(--yellow)}
-.hglass{grid-column:2;grid-row:2/4;position:relative;align-self:stretch;min-height:0}
-.hglass__fr{position:absolute;inset:0;border-radius:var(--r-hero);overflow:clip;background:#0A1D4D;box-shadow:0 60px 90px -50px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.08)}
-.hglass__fr img{width:100%;height:100%;object-fit:cover;object-position:46% 52%;max-width:none;filter:saturate(calc(.86 + .18 * var(--cl,0))) brightness(calc(.9 + .12 * var(--cl,0)));transition:filter .25s linear}
-.hglass__haze{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:var(--hz,1);
-  background:radial-gradient(ellipse 42% 46% at 48% 56%,rgba(214,226,240,.62) 0%,rgba(214,226,240,.36) 46%,rgba(214,226,240,0) 74%)}
-.hglass__mins{position:absolute;inset:0;z-index:3;pointer-events:none}
-.hglass__mins i{position:absolute;left:var(--x);top:var(--y);width:var(--s,7px);height:var(--s,7px);border-radius:50%;background:#fff;opacity:calc(var(--k,0) * .92);
-  transform:translateY(calc((1 - var(--k,0)) * -70px)) scale(calc(.4 + .6 * var(--k,0)));box-shadow:0 0 0 2px rgba(255,255,255,.25),0 0 12px rgba(255,255,255,.6);will-change:transform,opacity}
-.hglass__stat{position:absolute;left:18px;right:18px;bottom:18px;z-index:4;display:grid;gap:4px;padding:14px 16px;border-radius:18px;
-  background:rgba(4,16,46,.62);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);
-  opacity:var(--k,0);transform:translateY(calc((1 - var(--k,0)) * 16px));will-change:opacity,transform}
-.hglass__stat b{font-size:clamp(1.9rem,2.6vw,2.6rem);font-weight:800;letter-spacing:-.02em;line-height:1;color:#fff}
-.hglass__stat span{font-size:14px;font-weight:600;color:rgba(255,255,255,.8)}
-/* the chips in flight live on the STAGE so they can cross from the glass to a tile */
-.how .fly{position:absolute;z-index:9;left:0;top:0;opacity:var(--k,0);pointer-events:none;transform:translate(var(--tx,0px),var(--ty,0px)) translate(-50%,-50%);will-change:transform,opacity}
-.how .fly > span{display:inline-flex;align-items:center;gap:7px;padding:7px 12px 7px 9px;border-radius:var(--r-full);white-space:nowrap;font-size:13px;font-weight:700;color:var(--ink);
-  background:rgba(255,254,252,.92);box-shadow:0 14px 30px -14px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.7)}
-.how .fly > span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--blue));flex:none}
-.how .fly.parked > span{background:rgba(232,240,254,.96)}
+.stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);align-self:center;min-height:0}
+.stg{display:grid;grid-template-rows:auto auto auto 1fr;gap:6px;min-width:0;opacity:.66;transform:translateY(10px);transition:opacity .7s var(--e-out),transform .7s var(--e-out);will-change:opacity,transform}
+.stg.on{opacity:1;transform:none}
+.stg__pic{aspect-ratio:1;border-radius:18px;overflow:hidden;background:#0A1D4D;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);margin-bottom:10px;transition:box-shadow .7s ease-in-out}
+.stg.on .stg__pic{box-shadow:inset 0 0 0 1px rgba(143,184,255,.5),0 40px 60px -36px rgba(11,97,244,.6)}
+.stg__pic img{width:100%;height:100%;object-fit:cover;max-width:none;filter:saturate(.8) brightness(.75);transition:filter .7s ease-in-out}
+.stg.on .stg__pic img{filter:none}
+.stg__n{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#8FB8FF}
+.stg > b{font-size:clamp(1.15rem,1.5vw,1.45rem);font-weight:600;line-height:1.2;color:#fff;letter-spacing:-.008em}
+.stg > p{font-size:clamp(.95rem,1.05vw,1.05rem);line-height:1.45;color:rgba(255,255,255,.84);text-wrap:pretty}
+.how__foot{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px}
+.how__track{position:relative;height:3px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden}
+.how__track i{position:absolute;inset:0;background:linear-gradient(90deg,#5B9AE2,#8FB8FF);transform:scaleX(var(--f,0));transform-origin:0 50%;will-change:transform}
+.how__stat{display:flex;align-items:baseline;gap:10px;opacity:var(--k,0);transform:translateY(calc((1 - var(--k,0)) * 12px));will-change:opacity,transform}
+.how__stat b{font-size:clamp(1.9rem,2.8vw,2.8rem);font-weight:800;letter-spacing:-.02em;line-height:1;color:var(--yellow)}
+.how__stat span{font-size:15px;font-weight:600;color:rgba(255,255,255,.82)}
 
-/* ══ 3 · THE MONEY (#money) — pin: what a year of bottles costs, ours last ══ */
-.money-act .sc-stage{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(36px,4.5vw,72px);align-items:center;padding:calc(var(--top) + 8px) var(--safe) 40px}
-.money__ph{height:min(74vh,740px)}
-.money__ph img{object-position:48% 60%}
-.money__copy{display:grid;gap:18px;align-content:center}
+/* ══ 3 · THE MONEY (#money) — a split: the photograph edge to edge on the left, the year beside it ══ */
+.money-act .sc-stage{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:0;padding:0}
+.money__ph{position:relative;height:100%;min-height:0;overflow:clip;background:var(--mist)}
+.money__ph img{width:100%;height:100%;object-fit:cover;object-position:46% 60%;max-width:none}
+.money__copy{display:grid;gap:18px;align-content:center;padding:calc(var(--top) + 8px) var(--safe) 40px clamp(40px,4.5vw,80px);max-width:calc(700px + var(--safe) + 80px)}
 .money__copy .kick{will-change:opacity,transform}
 .money__copy h2{color:var(--ink);will-change:opacity,transform;max-width:14ch}
-.yrows{display:grid;margin-top:10px}
-.yrow{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:8px 22px;padding:16px 0;border-top:1px solid var(--rule);will-change:opacity,transform}
+.yrows{display:grid;margin-top:8px}
+.yrow{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 22px;padding:15px 0;border-top:1px solid var(--rule);will-change:opacity,transform}
 .yrow b{font-size:clamp(1.1rem,1.5vw,1.35rem);font-weight:600;color:var(--ink);letter-spacing:-.005em}
-.yrow span{display:block;font-size:14.5px;color:var(--muted);margin-top:2px}
+.yrow b small{display:block;font-size:14px;color:var(--muted);font-weight:500;margin-top:3px}
 .yrow .money{font-size:clamp(1.9rem,3.2vw,3rem);color:var(--ink)}
-.yrow.ours{border-top:2px solid var(--blue);margin-top:6px;padding-top:20px}
-.yrow.ours b,.yrow.ours .money{color:var(--blue)}
-.yrow.ours .money{font-size:clamp(2.2rem,3.8vw,3.6rem)}
-.money__frame{font-size:15px;color:var(--muted);line-height:1.5;max-width:52ch;will-change:opacity,transform}
+.yrow.ours{margin-top:10px;padding:18px 22px;border-top:0;border-radius:var(--r-card);background:var(--g-field);color:#fff;box-shadow:0 30px 50px -30px rgba(11,97,244,.55)}
+.yrow.ours b{color:#fff}
+.yrow.ours b small{color:rgba(255,255,255,.82)}
+.yrow.ours .money{font-size:clamp(2.2rem,3.8vw,3.6rem);color:var(--yellow)}
+.money__pay{font-size:clamp(1.05rem,1.3vw,1.2rem);font-weight:600;line-height:1.45;color:var(--ink);max-width:44ch;will-change:opacity,transform}
+.money__frame{font-size:14px;color:var(--muted);line-height:1.5;max-width:52ch;will-change:opacity,transform}
 
 /* ══ 4 · THE THREE SYSTEMS (#systems) — pin: the deck. One card at a time, three quarters of the screen,
    centred; the next rises from below and the last sinks a step back under it (21st.dev "Stacking Cards",
    id 25275, off --sc-p). Light throughout (JP, iteration one: the dark plate was too dark). ══ */
-.range .sc-stage{background:var(--mist);display:grid;grid-template-rows:auto minmax(0,1fr);gap:clamp(14px,2.2vh,26px);padding:calc(var(--top) - 8px) var(--safe) clamp(20px,3.2vh,34px);overflow:clip}
-.range__head{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:10px clamp(28px,4vw,64px);align-items:end;width:min(76vw,1280px);margin-inline:auto;will-change:opacity,transform}
+.range .sc-stage{background:var(--mist);display:grid;grid-template-rows:auto minmax(0,1fr);gap:clamp(10px,1.8vh,22px);padding:calc(var(--top) - 8px) var(--safe) max(6vh,56px);overflow:clip}
+.range__head{display:grid;gap:8px;width:min(76vw,1280px);margin-inline:auto;will-change:opacity,transform}
 .range__head h2{margin-top:10px;color:var(--ink);font-size:clamp(1.8rem,3.2vw,2.8rem)}
 .range__head .lede{font-size:clamp(.98rem,1.15vw,1.15rem);padding-bottom:6px}
-.deck{position:relative;width:min(76vw,1280px);height:100%;min-height:0;margin-inline:auto}
-.scard{--k:0;--d:0;position:absolute;inset:0;border-radius:var(--r-hero);overflow:clip;isolation:isolate;background:var(--bg,#fff);color:var(--ink);
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);
+.deck{position:relative;width:min(76vw,1280px);height:min(60vh,640px);min-height:0;margin:auto}
+.scard{--k:0;--d:0;--fr:#EDEDF4;position:absolute;inset:0;border-radius:var(--r-hero);overflow:clip;isolation:isolate;background:var(--bg,#fff);color:var(--ink);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);
   box-shadow:0 44px 90px -44px rgba(4,16,46,.42),inset 0 0 0 1px rgba(15,39,72,.06);
   transform:translateY(calc((1 - var(--k)) * 118%)) translateY(calc(var(--d) * -22px)) scale(calc(1 - .06 * var(--d)));transform-origin:50% 0;
   opacity:calc(1 - .55 * var(--d));will-change:transform,opacity;pointer-events:none}
 .scard.front{pointer-events:auto}
-.scard.plus{--bg:linear-gradient(160deg,#F7FAFD 0%,#E4EEFD 100%)}
-.scard.prem{--bg:linear-gradient(160deg,#F8F4FE 0%,#E6DCF8 100%)}
-/* the flagship, pristine: the whitest card on the page, a platinum ring and one sheen across it */
-.scard.luxe{--bg:linear-gradient(150deg,#FFFFFF 0%,#F4F7FA 56%,#E6ECF3 100%);box-shadow:0 44px 90px -44px rgba(4,16,46,.5),inset 0 0 0 1px rgba(15,39,72,.16),inset 0 1px 0 #fff}
-.scard.luxe::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(112deg,rgba(255,255,255,0) 34%,rgba(255,255,255,.85) 50%,rgba(255,255,255,0) 60%)}
+.scard.plus{--bg:linear-gradient(160deg,#F7FAFD 0%,#E4EEFD 100%);--fr:#EDEDF4}
+.scard.prem{--bg:linear-gradient(160deg,#F8F4FE 0%,#E6DCF8 100%);--fr:#ECF1F6}
+/* the flagship: a hinge of blue (JP, iteration two), the name in the brand blue, a blue ring */
+.scard.luxe{--bg:linear-gradient(160deg,#F5F9FF 0%,#DCE9FF 100%);--fr:#DDE7F0;box-shadow:0 44px 90px -44px rgba(11,97,244,.5),inset 0 0 0 1px rgba(11,97,244,.3),inset 0 1px 0 #fff}
+.scard.luxe .scard__t h3{background:linear-gradient(120deg,#0B61F4 0%,#063A9E 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.scard.luxe .scard__price .money{color:var(--blue)}
 .scard.more{--bg:linear-gradient(160deg,#EEF3FA 0%,#DCE6F4 100%)}
 .scard__t{position:relative;z-index:1;display:grid;align-content:start;gap:clamp(18px,2.6vh,30px);padding:clamp(24px,3vw,48px)}
 .scard__go{margin-top:auto}
 .scard__n{font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
 .scard.prem .scard__n{color:var(--purple)}
-.scard.luxe .scard__n{color:var(--ink)}
+.scard.luxe .scard__n{color:var(--blue)}
 .scard__t h3{font-size:clamp(2.3rem,4vw,3.9rem);font-weight:500;letter-spacing:-.012em;line-height:1.02;color:var(--ink);margin-top:10px;text-wrap:balance}
 .scard__spec{font-size:clamp(1rem,1.25vw,1.2rem);font-weight:600;color:var(--muted);margin-top:8px;text-wrap:balance;max-width:34ch}
 .scard__price{display:flex;align-items:baseline;gap:10px;margin-top:8px}
@@ -1023,7 +992,7 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .scard__pts li{display:flex;align-items:flex-start;gap:10px;font-size:clamp(1rem,1.15vw,1.12rem);font-weight:500;line-height:1.4;color:var(--ink)}
 .scard__pts li svg{width:20px;height:20px;flex:none;margin-top:3px;color:var(--blue)}
 .scard.prem .scard__pts li svg{color:var(--purple)}
-.scard.luxe .scard__pts li svg{color:var(--ink)}
+.scard.luxe .scard__pts li svg{color:var(--blue)}
 .scard__go{display:grid;gap:10px;justify-items:start;margin-top:auto}
 .scard__svc{font-size:14.5px;color:var(--muted);font-weight:500;max-width:40ch}
 .scard.more .scard__t{align-content:center;gap:18px}
@@ -1035,67 +1004,88 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .scard__ph img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;max-width:none}
 .scard__ph figcaption{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:var(--r-full);font-size:13px;font-weight:600;color:var(--ink);background:rgba(255,254,252,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 22px -12px rgba(4,16,46,.5),inset 0 0 0 1px rgba(255,255,255,.6)}
 /* the explosion: the homepage's product frames on the card, a tap opens it, a tap closes it */
-.scard__img{position:relative;z-index:1;height:100%;min-width:0;padding:clamp(14px,1.8vw,24px) clamp(14px,1.8vw,24px) clamp(14px,1.8vw,24px) 0;cursor:pointer;-webkit-tap-highlight-color:transparent;display:grid;place-items:center}
+/* the frame's own mist ground fills the column, so the unit is never cut or faded: contain, the sides feathered into it */
+.scard__img{position:relative;z-index:1;height:100%;min-width:0;padding:0;background:var(--fr);cursor:pointer;-webkit-tap-highlight-color:transparent;display:grid;place-items:center}
 .scard__img:focus-visible{outline:2px solid var(--blue);outline-offset:-6px;border-radius:18px}
 .scard__img img{width:100%;height:100%;max-height:100%;object-fit:contain;max-width:none;
-  -webkit-mask-image:radial-gradient(ellipse 74% 70% at 50% 48%,#000 52%,transparent 76%);mask-image:radial-gradient(ellipse 74% 70% at 50% 48%,#000 52%,transparent 76%)}
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
 .xtap{position:absolute;right:9%;top:11%;z-index:6;display:inline-flex;align-items:center;white-space:nowrap;padding:9px 16px;border-radius:16px 16px 16px 3px;
   background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(11,97,244,.35),0 2px 5px rgba(4,16,46,.16);
   font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;pointer-events:none;
   opacity:0;scale:.8;animation:tapfloat 5.6s ease-in-out infinite,taptilt 7.3s ease-in-out infinite;transition:opacity .3s ease-in-out,scale .42s var(--e-out)}
 .scard.front .xcard.tapin:not(.opened) .xtap{opacity:1;scale:1}
 .xcard.opened .xtap{opacity:0;scale:.86;animation:none}
+/* the plus markers at the end frame: the homepage's hotspots, one per cartridge, a tip naming it */
+.hswrap{position:absolute;pointer-events:none;z-index:5}
+.hs{position:absolute;transform:translate(-50%,-50%);pointer-events:none;z-index:1;opacity:0;transition:opacity .3s var(--e-out)}
+.hs.on{z-index:12}
+.xopen .hs{opacity:1;pointer-events:auto}
+.hs > button > i{scale:.6;transition:scale .34s var(--e-out)}
+.xopen .hs > button > i{scale:1}
+.xopen .hs:nth-child(1){transition-delay:.05s}.xopen .hs:nth-child(2){transition-delay:.1s}.xopen .hs:nth-child(3){transition-delay:.15s}.xopen .hs:nth-child(4){transition-delay:.2s}.xopen .hs:nth-child(5){transition-delay:.25s}.xopen .hs:nth-child(6){transition-delay:.3s}.xopen .hs:nth-child(7){transition-delay:.35s}
+.hs > button{display:grid;place-items:center;width:46px;height:46px;border:0;padding:0;background:none;cursor:pointer;color:var(--ink);font-family:var(--sans)}
+.hs > button > i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px rgba(255,217,0,.25),0 3px 10px rgba(4,16,46,.34)}
+.hs > button > i::before,.hs > button > i::after{content:"";position:absolute;background:var(--ink);border-radius:1px}
+.hs > button > i::before{width:12px;height:2px}
+.hs > button > i::after{width:2px;height:12px;transition:transform .3s var(--e-out)}
+.hs.on > button > i::after{transform:rotate(90deg)}
+.xopen .hs > button > i{animation:hspulse 2.4s ease-in-out infinite}
+.hs.on > button > i{animation:none}
+@keyframes hspulse{0%,100%{box-shadow:0 0 0 4px rgba(255,217,0,.25),0 3px 10px rgba(4,16,46,.34)}50%{box-shadow:0 0 0 9px rgba(255,255,255,.22),0 0 16px 5px rgba(255,217,0,.4),0 3px 12px rgba(4,16,46,.22)}}
+.hs .tip{position:absolute;left:50%;bottom:calc(100% + 11px);transform:translateX(-50%) translateY(5px);width:min(214px,42vw);background:var(--ink-blue);color:#fff;border-radius:var(--r-sm);padding:11px 13px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .24s ease-in-out,transform .3s var(--e-out);z-index:3}
+.hs.on .tip{opacity:1;transform:translateX(-50%)}
+.hs .tip b{display:block;font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--yellow);margin-bottom:4px}
+.hs .tip span{display:block;font-size:13px;line-height:1.4;color:rgba(255,255,255,.9)}
+.hs .tip::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--ink-blue)}
+.hs.l .tip{left:0;transform:translateX(0) translateY(5px)} .hs.l.on .tip{transform:translateX(0)} .hs.l .tip::after{left:22px}
+.hs.r .tip{left:auto;right:0;transform:translateX(0) translateY(5px)} .hs.r.on .tip{transform:translateX(0)} .hs.r .tip::after{left:auto;right:16px}
+.hs.dn .tip{bottom:auto;top:calc(100% + 11px)}
+.hs.dn .tip::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:var(--ink-blue)}
+@media(prefers-reduced-motion:reduce){.xopen .hs > button > i{animation:none}}
 @keyframes tapfloat{0%{translate:0 0}22%{translate:1.5px -6px}46%{translate:-.5px -10.5px}68%{translate:-1.5px -6.5px}86%{translate:.5px -2px}100%{translate:0 0}}
 @keyframes taptilt{0%{rotate:0deg}28%{rotate:-1.5deg}55%{rotate:.6deg}80%{rotate:1.4deg}100%{rotate:0deg}}
 @media(prefers-reduced-motion:reduce){.xtap{animation:none}}
-/* the step up, in one look: the base every system shares, then what each step adds */
+/* the step up: three steps, the systems standing on them, one line each (JP, iteration two: ten times clearer) */
 .stepup{background:var(--mist);padding:clamp(56px,7vw,100px) 0 clamp(72px,9vw,130px)}
-.stepup__head{display:grid;gap:12px;max-width:62ch;margin-bottom:28px}
-.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.lad{position:relative;display:grid;gap:8px;align-content:start;padding:24px 26px 22px;border-radius:var(--r-hero);background:#fff;box-shadow:var(--shadow-sm)}
-.lad.base{grid-column:1/-1;grid-template-columns:auto minmax(0,1fr);gap:10px 32px;align-items:center;background:var(--g-field);color:#fff;padding:22px 26px}
-.lad.base .lad__k{color:#fff}
-.lad.base ul{display:flex;flex-wrap:wrap;gap:8px 24px}
-.lad.base li{display:inline-flex;align-items:center;gap:9px;font-size:15.5px;font-weight:600}
-.lad.base li::before{content:"";width:18px;height:18px;flex:none;border-radius:50%;background:var(--yellow) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='m6 12.5 4 4L18 8' stroke='%230F2748' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/12px no-repeat}
-.lad__k{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
-.lad.prem .lad__k{color:var(--purple)}
-.lad.luxe .lad__k{color:var(--ink)}
-.lad > b{font-size:clamp(1.25rem,1.6vw,1.5rem);font-weight:600;line-height:1.22;letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
-.lad__p{font-size:15px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
-.lad > p{font-size:15px;line-height:1.5;color:var(--muted);margin-top:4px}
-.lad.c ul{display:grid;gap:8px;margin-top:4px}
-.lad.c li{display:flex;align-items:center;gap:10px;font-size:15.5px;font-weight:600;color:var(--ink)}
-.lad.c li::before{content:"+";display:grid;place-items:center;width:22px;height:22px;flex:none;border-radius:50%;background:var(--blue-pale);color:var(--blue-deep);font-weight:800;font-size:15px;line-height:1}
-.lad.prem li::before{background:#EEE6FB;color:var(--purple)}
-.lad.luxe li::before{background:#E7ECF3;color:var(--ink)}
-.lad.prem{background:#F8F4FE;box-shadow:inset 0 0 0 1px rgba(109,40,217,.22),var(--shadow-sm)}
-.lad.luxe{background:linear-gradient(150deg,#fff 0%,#F2F5F9 100%);box-shadow:inset 0 0 0 1px rgba(15,39,72,.16),var(--shadow-sm)}
-.lad .tag{position:absolute;top:-12px;left:22px;display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--r-full);background:var(--purple);color:#fff;font-family:var(--badge);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-.lad__svc{margin-top:auto;padding-top:12px;border-top:1px solid var(--rule);font-size:14px;color:var(--muted);font-weight:500}
-.stepup__note{margin-top:18px;font-size:15px;color:var(--muted);max-width:66ch;line-height:1.55}
+.stepup__head{display:grid;gap:12px;max-width:62ch;margin-bottom:clamp(28px,4vw,52px)}
+.stepup__head h2{color:var(--ink)}
+.stairs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);align-items:end}
+.step{--ph:clamp(170px,21vw,290px);--th:clamp(150px,16vw,210px);display:grid;justify-items:center;position:relative}
+.step.s2{--ph:clamp(200px,24vw,330px);--th:clamp(190px,20vw,260px)}
+.step.s3{--ph:clamp(220px,26vw,360px);--th:clamp(230px,24vw,310px)}
+.step > img{width:auto;height:var(--ph);max-width:88%;object-fit:contain;position:relative;z-index:2;margin-bottom:-14px;filter:drop-shadow(0 30px 26px rgba(4,16,46,.24))}
+.tread{position:relative;width:100%;min-height:var(--th);border-radius:var(--r-hero);padding:34px 24px 24px;display:grid;align-content:start;gap:4px;background:#fff;box-shadow:var(--shadow-sm)}
+.step.s1 .tread{background:linear-gradient(160deg,#F7FAFD,#E4EEFD)}
+.step.s2 .tread{background:linear-gradient(160deg,#F8F4FE,#E6DCF8);box-shadow:inset 0 0 0 1px rgba(109,40,217,.2),var(--shadow-sm)}
+.step.s3 .tread{background:linear-gradient(160deg,#EAF2FF,#CFE0FF);box-shadow:inset 0 0 0 1px rgba(11,97,244,.28),var(--shadow-sm)}
+.step__k{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+.step.s2 .step__k{color:var(--purple)}
+.step.s3 .step__k{color:var(--blue-deep)}
+.tread .money{font-size:clamp(1.8rem,2.6vw,2.5rem);color:var(--ink);margin-top:2px}
+.step.s3 .tread .money{color:var(--blue)}
+.tread p{font-size:clamp(1rem,1.2vw,1.12rem);font-weight:600;color:var(--ink);line-height:1.35;margin-top:4px;text-wrap:balance}
+.tread .tag{position:absolute;top:-12px;right:18px;display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--r-full);background:var(--purple);color:#fff;font-family:var(--badge);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.stepup__base{margin-top:22px;font-size:15px;color:var(--muted);max-width:76ch;line-height:1.55}
+.stepup__base b{color:var(--ink)}
 
-/* ══ 5 · UNDER THE SINK (#install) — flow, real photographs ══ */
+/* ══ 6 · UNDER THE SINK (#install) — one photograph the width of the page, three short steps ══ */
 .install{background:var(--paper);padding:clamp(72px,9vw,130px) 0}
 .install__head{max-width:60ch}
 .install__head h2{margin-top:14px;color:var(--ink)}
-.install__head .lede{margin-top:16px}
-.install__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,4vw,64px);margin-top:clamp(36px,4.5vw,64px);align-items:start}
-.install__big{aspect-ratio:16/10}
-.install__big img{object-position:56% 50%}
-.install__side{display:grid;gap:22px}
-.install__side h2{color:var(--ink);font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:500;line-height:1.14;letter-spacing:0;text-wrap:balance}
-.install__side .lede{font-size:clamp(1.05rem,1.3vw,1.22rem)}
-.steps3{display:grid;gap:14px;counter-reset:st}
-.steps3 li{position:relative;padding-left:54px;counter-increment:st}
+.install__big{position:relative;border-radius:var(--r-hero);overflow:clip;background:var(--mist);aspect-ratio:21/9;margin-top:clamp(28px,3.6vw,48px);isolation:isolate}
+.install__big img{width:100%;height:100%;object-fit:cover;object-position:56% 50%;max-width:none}
+.install__big figcaption{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:var(--r-full);font-size:13px;font-weight:600;color:var(--ink);background:rgba(255,254,252,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 22px -12px rgba(4,16,46,.5),inset 0 0 0 1px rgba(255,255,255,.6)}
+.install__row{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start;margin-top:clamp(28px,3.6vw,48px)}
+.install__row h2{color:var(--ink);font-size:clamp(1.5rem,2.2vw,2rem);font-weight:500;line-height:1.14;letter-spacing:0;text-wrap:balance;max-width:16ch}
+.steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;counter-reset:st}
+.steps3 li{position:relative;padding-top:52px;counter-increment:st}
 .steps3 li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:0;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--blue-pale);color:var(--blue-deep);font-family:var(--badge);font-size:12.5px;font-weight:700;letter-spacing:.06em}
-.steps3 b{display:block;font-size:17px;font-weight:700;line-height:1.3;padding-top:7px;color:var(--ink)}
-.steps3 span{display:block;margin-top:4px;font-size:15.5px;line-height:1.5;color:var(--muted)}
-.install__small{aspect-ratio:16/10}
-.install__lic{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:var(--r-card);background:var(--mist-2);font-size:15px;color:var(--ink);font-weight:500}
-.install__lic svg{width:26px;height:26px;color:var(--blue);flex:none}
+.steps3 b{display:block;font-size:17px;font-weight:700;line-height:1.3;color:var(--ink)}
+.steps3 span{display:block;margin-top:4px;font-size:15px;line-height:1.5;color:var(--muted)}
+.install__lic{display:inline-flex;align-items:center;gap:12px;margin-top:clamp(24px,3vw,36px);padding:12px 16px;border-radius:var(--r-card);background:var(--mist-2);font-size:14.5px;color:var(--ink);font-weight:500}
+.install__lic svg{width:24px;height:24px;color:var(--blue);flex:none}
 
-/* ══ 6 · THE TAPS (#taps) — half section: five finishes under a fingertip, one link through ══ */
+/* ══ 5 · THE TAPS (#taps) — half section: five finishes under a fingertip, one link through ══ */
 .taps{background:var(--mist-2);padding:clamp(64px,8vw,110px) 0}
 .taps__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
 .taps__copy h2{margin-top:14px;color:var(--ink)}
@@ -1116,23 +1106,24 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .taps__fr picture img{width:100%;height:100%;object-fit:cover;object-position:50% 46%}
 .taps__fr picture.on{opacity:1}
 .taps__fr figcaption{left:auto;right:14px}
+.taps__fr .swatches{display:none}
 
-/* ══ 7 · THE SERVICING (#servicing) — pin on the blue field: the ledger ══ */
-.care .sc-stage{background:var(--g-field);color:#fff;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(28px,4vw,64px);align-items:center;padding:calc(var(--top) + 8px) var(--safe) 44px}
-.care__copy{display:grid;gap:18px;align-content:center;max-width:520px}
-.care__copy .kick{color:#fff}
-.care__copy h2{color:#fff}
-.care__copy .lede{color:rgba(255,255,255,.84)}
-.care__copy .fine{color:rgba(255,255,255,.72)}
-.care__copy .fine a{color:#fff;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.5)}
+/* ══ 7 · THE SERVICING (#servicing) — a split: the work on the left, the blue field and a short ledger on the right ══ */
+.care .sc-stage{background:var(--g-field);color:#fff;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:0;padding:0}
+.care__ph{position:relative;height:100%;min-height:0;overflow:clip;background:var(--ink-blue)}
+.care__ph img{width:100%;height:100%;object-fit:cover;object-position:42% 50%;max-width:none}
+.care__panel{display:grid;gap:16px;align-content:center;padding:calc(var(--top) + 8px) var(--safe) 40px clamp(36px,4vw,64px);max-width:calc(740px + var(--safe) + 64px)}
+.care__panel .kick{color:#fff}
+.care__panel h2{color:#fff}
+.care__panel .lede{color:rgba(255,255,255,.86);max-width:40ch}
+.care__panel .fine{color:rgba(255,255,255,.74)}
+.care__panel .fine a{color:#fff;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.5)}
 .ledger{display:grid;gap:0;border-radius:var(--r-hero);overflow:hidden;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
-.lrow{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr) minmax(0,.9fr);gap:12px 16px;align-items:center;padding:15px 22px;border-top:1px solid rgba(255,255,255,.14);will-change:opacity,transform}
-.lrow .pair{display:contents}
-.lrow.head{border-top:0;background:rgba(4,16,46,.22);padding:14px 22px}
+.lrow{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.8fr) minmax(0,1.05fr);gap:12px 16px;align-items:center;padding:14px 20px;border-top:1px solid rgba(255,255,255,.14);will-change:opacity,transform}
+.lrow.head{border-top:0;background:rgba(4,16,46,.22);padding:12px 20px}
 .lrow.head span{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 .lrow.head span:last-child{color:var(--yellow)}
 .lrow b{font-size:clamp(1rem,1.2vw,1.12rem);font-weight:600;line-height:1.3;color:#fff}
-.lrow b small{display:block;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.8);margin-top:2px}
 .lrow .std{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.72)}
 .lrow .std i{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--r-full);background:rgba(4,16,46,.3);font-style:normal;font-size:12.5px;font-weight:700;color:rgba(255,255,255,.86)}
 .lrow .ours{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:#fff}
@@ -1140,7 +1131,6 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .lrow .ours svg path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--s,0));transition:stroke-dashoffset .55s var(--e-out)}
 .lrow.price{background:rgba(4,16,46,.22);border-top:1px solid rgba(255,255,255,.2)}
 .lrow.price .ours{font-size:clamp(1.05rem,1.3vw,1.2rem);font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
-.lrow.price .ours svg{display:none}
 
 /* ══ 8 · REVIEWS (#reviews) — the brick lane, the whole house page's round 70 lifted as behaviour ══ */
 .lane{background:var(--paper);padding:clamp(64px,7.6vw,106px) 0 clamp(44px,5.4vw,74px);position:relative;z-index:2;overflow:clip}
@@ -1351,16 +1341,15 @@ body.dopen .drawer{transform:none}
 
 /* ═══════════════════════════ THE TABLET (860–1079) ═══════════════════════════ */
 @media(min-width:860px) and (max-width:1079px){
-  .train{gap:8px}
-  .tile{padding:10px 9px 12px}
-  .tile__t{font-size:13.5px}
-  .how .sc-stage{grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr)}
+  .stages{gap:10px}
+  .stg > b{font-size:1.05rem}
+  .stg > p{font-size:.9rem}
+  .step > img{max-width:94%}
+  .tread{padding:30px 16px 18px}
   .range__head,.deck{width:min(86vw,1280px)}
   .scard{grid-template-columns:minmax(0,1fr) minmax(0,.8fr)}
   .scard__t h3{font-size:2.2rem}
   .scard__price .money{font-size:2.4rem}
-  .ladder{gap:10px}
-  .lad{padding:20px 18px 18px}
 }
 
 /* ═══════════════════════════ THE PHONE (≤859px) — the same page, fitted ═══════════════════════════
@@ -1372,10 +1361,9 @@ body.dopen .drawer{transform:none}
   /* the hero: Clean and Clear's (whole house round 82/98): the photograph fills the top 56%,
      fades into the navy, the headline and the card sit on the navy below it */
   .hero{min-height:calc(100svh - 2*var(--hframe));display:block}
-  .hero > picture{position:absolute;left:0;right:0;top:0;bottom:auto;height:56svh;overflow:clip}
-  .hero > picture::after{content:"";position:absolute;inset:0;pointer-events:none;
+  .hero .hbg{position:absolute;left:0;right:0;top:0;bottom:auto;height:56svh;overflow:clip}
+  .hero .hbg::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,rgba(4,16,46,.44) 0%,rgba(4,16,46,0) 24%,rgba(4,16,46,0) 50%,rgba(4,16,46,.6) 76%,var(--ink-blue) 100%)}
-  .hero img.hph{object-position:34% 50%}
   .hero .veil{display:none}
   .hero .copy{position:absolute;left:0;right:0;bottom:248px;height:auto;padding:0 var(--gut);display:block}
   .hero .kick,.hero .lede{display:none}
@@ -1396,59 +1384,56 @@ body.dopen .drawer{transform:none}
   .ocproof > b{font-size:15px;font-weight:800}
   .ocfoot .btn{width:100%;justify-content:center;min-height:50px}
   .ocspec{display:none}
-  /* 1 · the glass */
-  .glass .sc-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:18px;padding:calc(var(--top) - 24px) var(--safe) 24px;align-items:start}
-  .glass__ph{height:36svh}
-  .glass__copy{align-content:start;gap:10px}
-  .glass__lines > *{align-self:start}
-  .glass__copy .pl{font-size:clamp(1.4rem,6.2vw,1.72rem)}
-  .glass__copy .pl small{font-size:.95rem;margin-top:8px}
-  .chip{left:clamp(24%,var(--x),62%)}
-  .chip > span{font-size:12.5px;padding:7px 12px 7px 9px}
-  /* 2 · the peak: the glass on top, the train of five under it, the caption below */
-  .how .sc-stage{grid-template-columns:1fr;grid-template-rows:auto auto auto 1fr;gap:12px 0;padding:calc(var(--top) - 30px) var(--safe) 20px}
-  .how__head{grid-column:1;grid-row:1;gap:6px}
+  /* 1 · why you're here: the photograph up top, the words at the foot of the plate */
+  .why__fr{inset:var(--hframe)}
+  .why__fr img{object-position:50% 38%}
+  .why__veil{background:linear-gradient(180deg,rgba(4,16,46,.12) 0%,rgba(4,16,46,.16) 34%,rgba(4,16,46,.86) 66%,rgba(4,16,46,.94) 100%)}
+  .why__copy{align-content:end;padding:var(--top) calc(var(--safe) + 22px) calc(26px + env(safe-area-inset-bottom)) var(--safe);gap:12px;max-width:none}
+  .why__copy h2{font-size:clamp(1.7rem,7.4vw,2.15rem);max-width:none}
+  .why__names{gap:2px 14px}
+  .why__names li{font-size:clamp(1.05rem,4.8vw,1.35rem);padding-bottom:4px}
+  .why__line{font-size:.98rem;max-width:none}
+  /* 2 · the stages: five rows, each lighting in turn */
+  .how .sc-stage{grid-template-rows:auto minmax(0,1fr) auto;gap:10px;padding:calc(var(--top) - 30px) var(--safe) 16px}
+  .how__head{gap:6px}
   .how__head h2{font-size:clamp(1.5rem,6.4vw,1.9rem)}
-  .how__head .lede{display:none}
-  .hglass{grid-column:1;grid-row:2;height:34svh;min-height:200px}
-  .hglass__stat{left:10px;right:auto;bottom:10px;padding:10px 12px;border-radius:14px}
-  .hglass__stat b{font-size:1.4rem}
-  .hglass__stat span{font-size:12px}
-  .how__left{grid-column:1;grid-row:3/5;grid-template-rows:auto 1fr;gap:10px;align-content:start;padding-bottom:0}
-  .train{gap:6px;align-self:start;margin-right:22px}
-  .train__track{margin-right:22px}
-  .tile{grid-template-rows:auto auto;gap:5px;padding:7px 6px 8px;border-radius:12px}
-  .tile__pic{height:46px;border-radius:8px}
-  .tile__n{font-size:9.5px;letter-spacing:.06em}
-  .tile__t{display:none}
-  .tile__catch{display:none}
-  .train__track{margin-top:8px}
-  .how__caps{min-height:0;align-self:start}
-  .how__caps .cap{align-self:start;max-width:none}
-  .how__caps .cap b{font-size:1.2rem}
-  .how__caps .cap p{font-size:.98rem;margin-top:6px}
-  .how .fly > span{font-size:12px;padding:6px 10px 6px 8px}
-  /* 3 · the money */
-  .money-act .sc-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:14px;padding:calc(var(--top) - 24px) var(--safe) 20px;align-items:start}
-  .money__ph{height:30svh}
-  .money__copy{gap:8px;align-content:start}
+  .stages{grid-template-columns:1fr;gap:7px;align-self:start;margin-right:22px}
+  .stg{grid-template-columns:62px minmax(0,1fr);grid-template-rows:auto auto auto;gap:0 12px;align-items:center;transform:translateX(-8px)}
+  .stg.on{transform:none}
+  .stg__pic{grid-row:1/4;width:62px;height:62px;aspect-ratio:auto;border-radius:12px;margin:0}
+  .stg__n{font-size:9.5px;letter-spacing:.06em}
+  .stg > b{font-size:1rem}
+  .stg > p{font-size:.85rem;line-height:1.3}
+  .how__foot{grid-template-columns:1fr;gap:8px}
+  .how__stat b{font-size:1.5rem}
+  .how__stat span{font-size:13px}
+  /* 3 · the money: the photograph on top */
+  .money-act .sc-stage{grid-template-columns:1fr;grid-template-rows:30svh minmax(0,1fr)}
+  .money__ph{height:auto}
+  /* the jump tab rides the right edge at mid height: the numbers and the ledger keep 22px clear of it */
+  .money__copy{padding:14px calc(var(--safe) + 22px) 16px var(--safe);gap:8px;align-content:start;max-width:none}
   .money__copy h2{font-size:clamp(1.6rem,7vw,2rem)}
-  .yrow{padding:10px 0;gap:4px 12px}
-  .yrow b{font-size:1rem}
-  .yrow span{font-size:13px}
-  .yrow .money{font-size:1.5rem}
-  .yrow.ours .money{font-size:1.75rem}
-  .yrow.ours{padding-top:12px}
-  .money__frame{font-size:13.5px}
+  .yrow{padding:9px 0;gap:4px 12px}
+  .yrow b{font-size:.98rem}
+  .yrow b small{font-size:12px;margin-top:1px}
+  .yrow .money{font-size:1.4rem}
+  .yrow.ours{padding:12px 14px;margin-top:6px}
+  .yrow.ours .money{font-size:1.6rem}
+  .money__pay{font-size:.92rem}
+  .money__frame{font-size:12px}
   /* 4 · the systems: the same deck, the image on top of each card, the text under it */
   /* the stage ends above the phone's pills (the way back and the fixed price ride the bottom 68px) */
   .range .sc-stage{grid-template-rows:auto minmax(0,1fr);gap:10px;padding:calc(var(--top) - 28px) var(--safe) calc(76px + env(safe-area-inset-bottom))}
   .range__head{grid-template-columns:1fr;width:auto;gap:4px}
   .range__head h2{font-size:clamp(1.4rem,6vw,1.75rem);margin-top:6px}
   .range__head .lede{display:none}
-  .deck{width:100%;margin-inline:0}   /* auto width shrinks to the absolute cards' nothing: 0px wide on the first phone shot */
-  .scard{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;border-radius:22px;transform:translateY(calc((1 - var(--k)) * 116%)) translateY(calc(var(--d) * -14px)) scale(calc(1 - .05 * var(--d)))}
-  .scard__img{grid-row:1;height:100%;padding:10px 12px 4px}
+  .deck{width:100%;height:min(64svh,600px);margin:auto 0}   /* auto width shrinks to the absolute cards' nothing: 0px wide on the first phone shot */
+  .scard{grid-template-columns:1fr;grid-template-rows:minmax(0,.95fr) auto;border-radius:22px;transform:translateY(calc((1 - var(--k)) * 116%)) translateY(calc(var(--d) * -14px)) scale(calc(1 - .05 * var(--d)))}
+  .scard__img{grid-row:1;height:100%;padding:0}
+  .scard__img img{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 90%,transparent 100%)}
+  .hs > button{width:44px;height:44px}
+  .hs > button > i{width:24px;height:24px}
+  .hs .tip{width:min(200px,60vw);padding:9px 11px}
   .scard__t{padding:10px 16px 16px;gap:9px;align-content:end}
   .scard__t h3{font-size:clamp(1.55rem,6.6vw,1.9rem);margin-top:4px}
   .scard__spec{font-size:.9rem;margin-top:3px}
@@ -1467,49 +1452,66 @@ body.dopen .drawer{transform:none}
   .scard.more .scard__spec{font-size:.92rem}
   .scard__ph{grid-row:1;margin:10px 12px 0;border-radius:16px}
   .xtap{right:6%;top:6%;font-size:11.5px;padding:7px 12px}
-  .stepup{padding:40px 0 64px}
+  .stepup{padding:44px 0 64px}
   .stepup__head{margin-bottom:18px}
-  .ladder{grid-template-columns:1fr;gap:10px}
-  .lad{padding:18px 18px 16px;border-radius:18px}
-  .lad.base{grid-template-columns:1fr;gap:8px;padding:16px 18px}
-  .lad.base ul{gap:6px 16px}
-  .lad.base li{font-size:14px}
-  .lad > b{font-size:1.15rem}
-  .lad .tag{top:-10px}
-  /* 5 · under the sink */
-  .install{padding:64px 0}
-  .install__grid{grid-template-columns:1fr;gap:22px;margin-top:26px}
-  .install__big{aspect-ratio:4/3}
-  /* 6 · the taps */
+  .stairs{grid-template-columns:1fr;gap:10px;align-items:stretch}
+  .step{--ph:96px;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:14px;padding:12px 16px 12px 12px;border-radius:18px;background:#fff;box-shadow:var(--shadow-sm)}
+  .step.s1{background:linear-gradient(160deg,#F7FAFD,#E4EEFD)}
+  .step.s2{background:linear-gradient(160deg,#F8F4FE,#E6DCF8);box-shadow:inset 0 0 0 1px rgba(109,40,217,.2),var(--shadow-sm)}
+  .step.s3{background:linear-gradient(160deg,#EAF2FF,#CFE0FF);box-shadow:inset 0 0 0 1px rgba(11,97,244,.28),var(--shadow-sm)}
+  .step > img{height:var(--ph);max-width:100%;margin:0;justify-self:center;filter:drop-shadow(0 14px 12px rgba(4,16,46,.2))}
+  .tread{min-height:0;padding:0;background:transparent !important;box-shadow:none !important;border-radius:0;gap:2px}
+  .tread .money{font-size:1.5rem}
+  .tread p{font-size:.92rem}
+  .tread .tag{position:static;width:max-content;margin-bottom:4px}
+  .stepup__base{font-size:13.5px;margin-top:16px}
+  /* 6 · under the sink */
+  .install{padding:56px 0}
+  .install__big{aspect-ratio:4/3;margin-top:20px}
+  .install__row{grid-template-columns:1fr;gap:16px;margin-top:22px}
+  .install__row h2{max-width:none}
+  .steps3{grid-template-columns:1fr;gap:12px}
+  .steps3 li{padding:0 0 0 50px}
+  .steps3 b{font-size:15.5px;padding-top:6px}
+  .steps3 span{font-size:14px}
+  .install__lic{font-size:13.5px;margin-top:18px}
+  /* 5 · the taps: the finishes ride the photograph, so a thumb sees the tap change */
   .taps{padding:56px 0}
-  .taps__grid{grid-template-columns:1fr;gap:22px}
-  .taps__fr{order:-1;aspect-ratio:4/4.6;max-height:none}
+  .taps__grid{grid-template-columns:1fr;gap:18px}
+  .taps__fr{order:-1;aspect-ratio:4/4.4;max-height:none}
+  .taps__fr figcaption{top:12px;bottom:auto;right:12px}
+  .taps__fr .swatches{display:flex;position:absolute;left:12px;right:12px;bottom:12px;z-index:3;margin:0;justify-content:center;gap:10px;padding:8px;border-radius:var(--r-full);background:rgba(255,254,252,.84);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);box-shadow:0 14px 30px -14px rgba(4,16,46,.55),inset 0 0 0 1px rgba(255,255,255,.6)}
+  .taps__fr .sw{min-height:44px;width:44px;padding:0;justify-content:center;border-radius:50%;font-size:0;gap:0;border-color:transparent;background:transparent;box-shadow:none}
+  .taps__fr .sw i{width:28px;height:28px}
+  .taps__fr .sw.on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+  .taps__copy .swatches{display:none}
   .sw{min-height:46px;font-size:13.5px}
-  /* 7 · the servicing */
-  .care .sc-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:14px;padding:calc(var(--top) - 26px) var(--safe) 18px;align-items:start}
-  .care__copy{gap:8px}
-  .care__copy h2{font-size:clamp(1.6rem,7vw,2rem)}
-  .care__copy .lede{font-size:1rem}
-  .care__copy .fine{display:none}
+  /* 7 · the servicing: the photograph on top, the ledger under it */
+  .care .sc-stage{grid-template-columns:1fr;grid-template-rows:30svh minmax(0,1fr)}
+  .care__ph{height:auto}
+  .care__ph img{object-position:50% 40%}
+  .care__panel{padding:14px calc(var(--safe) + 22px) 16px var(--safe);gap:8px;align-content:start;max-width:none}
+  .care__panel h2{font-size:clamp(1.5rem,6.6vw,1.9rem)}
+  .care__panel .lede{font-size:.95rem}
+  .care__panel .fine{display:none}
   .ledger{border-radius:18px}
-  .lrow{grid-template-columns:1fr;gap:6px;padding:10px 14px}
-  .lrow.head{display:grid;grid-template-columns:1fr 1fr;padding:9px 14px}
+  .lrow{grid-template-columns:1fr 1fr;gap:3px 8px;padding:9px 12px}
+  .lrow b{grid-column:1/-1;font-size:.92rem}
+  .lrow.head{grid-template-columns:1fr 1fr;padding:8px 12px}
   .lrow.head span:first-child{display:none}
-  .lrow b{font-size:.95rem}
-  .lrow b small{font-size:12.5px}
-  .lrow .std,.lrow .ours{font-size:13.5px}
-  .lrow .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center}
-  .lrow.price .ours{font-size:14px;white-space:nowrap}
-  .lrow .ours svg{width:22px;height:22px;padding:4px}
-  .lrow.price .ours{font-size:1.05rem}
+  .lrow .std,.lrow .ours{font-size:13px;gap:7px}
+  .lrow .std i{padding:3px 8px;font-size:11.5px}
+  .lrow .ours svg{width:20px;height:20px;padding:4px}
+  .lrow.price .ours{font-size:1rem;white-space:nowrap}
   /* 8 · reviews: two rows on a phone, the third stands down */
   .lane{padding:56px 0 40px}
   .lane__head h2{font-size:clamp(1.6rem,7.4vw,1.95rem)}
   .rmq{margin-top:22px;gap:10px}
   .rmq .rrow:nth-child(3){display:none}
   .rrow{gap:10px}
-  .rvc{padding:13px 14px;gap:7px;flex-basis:270px}
-  .rvc > p{font-size:13.5px;line-height:1.45}
+  .rvc{padding:12px 13px;gap:6px;flex-basis:236px}
+  .rvc > p{font-size:13px;line-height:1.42}
+  .rvp{flex-basis:170px}
   .rvc .rwho b,.rvc .rwho span{font-size:13px}
   .lane__all{margin-top:14px}
   /* 9 · the ask */
@@ -1563,22 +1565,17 @@ body.dopen .drawer{transform:none}
 @media(max-width:859px) and (max-height:700px){
   .hero .copy{bottom:232px}
   .hero h1{font-size:clamp(1.5rem,6.4vw,1.8rem)}
-  .hglass{height:28svh}
+  .stg__pic{width:54px;height:54px}
+  .stg > p{display:none}
   .scard__pts li:nth-child(3){display:none}
   .scard__svc{display:none}
-  .how__caps .cap b{font-size:1.05rem}
-  .how__caps .cap p{font-size:.9rem}
+  .money-act .sc-stage,.care .sc-stage{grid-template-rows:26svh minmax(0,1fr)}
 }
 
-/* ── containers for the chips (the glass act) and the flyers (the peak) ── */
-.chips{position:absolute;inset:0;z-index:3;pointer-events:none}
-.how .flyers{position:absolute;inset:0;z-index:9;pointer-events:none}
-.tile__catch em{font-style:normal;font-size:11.5px;font-weight:700;line-height:1.2;padding:4px 8px;border-radius:var(--r-full);color:rgba(255,255,255,.42);background:rgba(255,255,255,.06);transition:color .5s ease-in-out,background .5s ease-in-out}
-.tile__catch em.lit{color:var(--ink);background:rgba(232,240,254,.96)}
 
 /* every inline link that is a target on its own is 44px tall */
-.scard__go .ul,.taps__go .ul,.ask__call .ul,.est__go .ul,.est__call .ul,.care__copy .fine a,.how__caps .cap p a{display:inline-flex;align-items:center;min-height:44px}
-.how__caps .cap p a,.care__copy .fine a{min-height:0;padding:11px 0;margin:-11px 0}
+.scard__go .ul,.taps__go .ul,.ask__call .ul,.est__go .ul,.est__call .ul,.care__panel .fine a{display:inline-flex;align-items:center;min-height:44px}
+.care__panel .fine a{min-height:0;padding:11px 0;margin:-11px 0}
 
 </style>
 <script type="application/ld+json">
@@ -2028,14 +2025,22 @@ body.dopen .drawer{transform:none}
 <main>
 <!-- ═════════ THE OPENER — the shell's frame (JP, 28 Aug), the homepage deck's mechanic on the card.
      GENERATED (Higgsfield Nano Banana Pro, 6 Sep 2026, our own tap and kitchen references):
-     media/ro/hero.webp, hero-m.webp. The card deals Pure Plus, Pure Premium and Pure Luxe every
-     3.2 seconds and rests while hovered, tapped, open, or the drawer is up. ═════════ -->
+     media/ro/hero.webp, hero-2, hero-3, hero-4 and close, with phone twins: five stills of the one kitchen
+     crossfading every six seconds (JP, iteration two), the first the LCP, the rest fetched after load.
+     The card deals Pure Plus, Pure Premium and Pure Luxe every 3.2 seconds and rests while hovered,
+     tapped, open, or the drawer is up. ═════════ -->
 <div class="pgtop">
 <section class="pgcard hero" id="top">
-  <picture>
-    <source media="(max-width:859px)" srcset="media/ro/hero-m.webp">
-    <img class="hph" src="media/ro/hero.webp" alt="A glass being filled from a brushed brass three way mixer tap on a white stone bench in a Sydney kitchen" width="2400" height="1340" fetchpriority="high">
-  </picture>
+  <div class="hbg" id="hbg">
+    <picture class="on" style="--pos:34% 56%">
+      <source media="(max-width:859px)" srcset="media/ro/hero-m.webp">
+      <img class="hph" src="media/ro/hero.webp" alt="A glass being filled from a brushed brass three way mixer tap on a white stone bench in a Sydney kitchen" width="2400" height="1340" fetchpriority="high">
+    </picture>
+    <picture style="--pos:58% 52%" data-src="media/ro/hero-3.webp" data-srcm="media/ro/hero-3-m.webp"></picture>
+    <picture style="--pos:56% 55%" data-src="media/ro/hero-2.webp" data-srcm="media/ro/hero-2-m.webp"></picture>
+    <picture style="--pos:44% 55%" data-src="media/ro/hero-4.webp" data-srcm="media/ro/hero-4-m.webp"></picture>
+    <picture style="--pos:40% 55%" data-src="media/ro/close.webp" data-srcm="media/ro/close-m.webp"></picture>
+  </div>
   <div class="veil" aria-hidden="true"></div>
   <div class="in copy">
     <span class="kick">Reverse osmosis &middot; Sydney</span>
@@ -2069,108 +2074,76 @@ body.dopen .drawer{transform:none}
 </section>
 </div>
 
-<!-- ═════════ 1 · THE GLASS — pin, the silence before the peak: one photograph, one line at a time. It
-     opens on why the reader came (JP, iteration one: never lead with "safe, not pure" again, the whole
-     house page owns that line), and each name arrives in the glass as the line says it, in the order
-     the copy names it. GENERATED (Nano Banana Pro, 6 Sep 2026): media/ro/glass.webp. ═════════ -->
-<section class="glass" id="water" data-sc-act="pin" data-sc-span="4.6" data-sc-span-m="4.4" aria-label="Why you are here">
+<!-- ═════════ 1 · WHY YOU'RE HERE — a plate, the whole house page's own shape: the photograph fills the
+     frame, the words sit on it, the six names land one after another with a yellow line drawing under
+     each, then one line closes it. Short (JP, iteration two: "quickly cover what we need to cover in an
+     effective and visual way, then give them the options"). GENERATED (Nano Banana Pro, 6 Sep 2026):
+     media/ro/glass-wide.webp, glass-tall.webp. ═════════ -->
+<section class="why" id="water" data-sc-act="pin" data-sc-span="2.8" data-sc-span-m="2.6" aria-label="Why you're here">
   <div class="sc-stage" data-sc-stage>
-    <figure class="frame glass__ph">
-      <picture><source media="(max-width:859px)" srcset="media/ro/glass-m.webp"><img src="media/ro/glass.webp" alt="A plain glass of Sydney tap water on a white stone kitchen bench, lit from the window behind it" width="1600" height="893" loading="lazy"></picture>
-      <div class="chips" id="waterChips" aria-hidden="true">
-        <span class="chip" style="--x:48%;--y:40%;--c:#0F2748;--d:0s"><span>microplastics</span></span>
-        <span class="chip" style="--x:35%;--y:54%;--c:#0B61F4;--d:.6s"><span>PFAS</span></span>
-        <span class="chip" style="--x:61%;--y:53%;--c:#6D28D9;--d:1.1s"><span>fluoride</span></span>
-        <span class="chip" style="--x:45%;--y:66%;--c:#2E7DFF;--d:.3s"><span>chlorine</span></span>
-        <span class="chip" style="--x:62%;--y:71%;--c:#5B9AE2;--d:1.6s"><span>dissolved metals</span></span>
-        <span class="chip" style="--x:49%;--y:81%;--c:#4E5B75;--d:.9s"><span>salts</span></span>
-      </div>
-    </figure>
-    <div class="glass__copy">
+    <div class="why__fr">
+      <picture><source media="(max-width:859px)" srcset="media/ro/glass-tall.webp"><img src="media/ro/glass-wide.webp" alt="A plain glass of Sydney tap water on a white stone kitchen bench, lit from the window behind it" width="2400" height="1340" loading="lazy"></picture>
+      <div class="why__veil" aria-hidden="true"></div>
+    </div>
+    <div class="why__copy">
       <span class="kick" data-sc-cue="0 1 0 0">Why you're here</span>
-      <div class="glass__lines">
-        <h2 class="pl" data-sc-cue="0 0.24 0 0.26" data-sc-cue-m="0 0.24 0 0.26">You came here to get the microplastics out.</h2>
-        <p class="pl" data-sc-cue="0.2 0.5 0.16 0.18">Or the PFAS. Or the fluoride. Or the chlorine you can taste.</p>
-        <p class="pl" data-sc-cue="0.44 0.72 0.16 0.2">All of it is in the glass. Taking it out is exactly what reverse osmosis is built for.</p>
-        <p class="pl" data-sc-cue="0.68 1 0.22 0" data-sc-cue-m="0.68 1 0.22 0">This is what our systems do for you.<small>Under the kitchen sink, on its own tap. Up to 99% of dissolved contaminants out, and the good minerals back in. Here's how.</small></p>
-      </div>
+      <h2 class="d1" data-sc-cue="0 1 0 0">You came here to get something out of the water.</h2>
+      <ul class="why__names" id="whyNames" aria-label="What reverse osmosis takes out">
+        <li data-sc-cue="0.06 1 0.08 0" style="--at:.06">Microplastics</li>
+        <li data-sc-cue="0.12 1 0.08 0" style="--at:.12">PFAS</li>
+        <li data-sc-cue="0.18 1 0.08 0" style="--at:.18">Fluoride</li>
+        <li data-sc-cue="0.24 1 0.08 0" style="--at:.24">Chlorine</li>
+        <li data-sc-cue="0.30 1 0.08 0" style="--at:.30">Dissolved metals</li>
+        <li data-sc-cue="0.36 1 0.08 0" style="--at:.36">Salts</li>
+      </ul>
+      <p class="why__line" data-sc-cue="0.5 1 0.16 0">Reverse osmosis takes every one of them out. Under the kitchen sink, on its own tap.</p>
     </div>
   </div>
 </section>
 
-<!-- ═════════ 2 · HOW IT WORKS — THE PEAK and THE SIGNATURE. Five stages in a train, the glass at the
-     right; as the water reaches each stage the tile lights and the chips it catches lift out of the
-     glass and land on it; the haze clears at the membrane; the minerals drop back in at the alkaline
-     stage. Page JS off --sc-p. The tile pictures are studio stills of the five cartridges, generated from
-     our supplier photographs (assets/supplier, Nano Banana Pro, 6 Sep 2026): the five stage tiles in media/ro. ═════════ -->
-<section class="how" id="how" data-sc-act="pin" data-sc-span="8.2" data-sc-span-m="7.4" aria-label="How reverse osmosis works">
+<!-- ═════════ 2 · HOW IT WORKS — the five stages, big, in a row, lighting one after another as the water
+     runs along the track under them; one short line each; the number lands at the end. Nothing else
+     (JP, iteration two: less reading, bigger cartridges, no pills). The stills are our supplier
+     cartridges shot on navy (Nano Banana Pro, 6 Sep 2026): the five stage tiles in media/ro. ═════════ -->
+<section class="how" id="how" data-sc-act="pin" data-sc-span="3.6" data-sc-span-m="3.2" aria-label="How reverse osmosis works">
   <div class="sc-stage" data-sc-stage>
     <header class="how__head" data-sc-cue="0 1 0 0">
       <span class="kick">How reverse osmosis works</span>
       <h2 class="d2">Small enough to separate what taste cannot.</h2>
-      <p class="lede">Five stages, in order. Keep scrolling and watch the glass give up what shouldn't be in it.</p>
     </header>
-    <div class="how__left">
-      <div>
-        <ol class="train" id="train">
-          <li class="tile" data-i="0"><span class="tile__pic"><img src="media/ro/stage-1.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 01</span><span class="tile__t">Sediment</span><span class="tile__catch"><em data-chip="sediment">sediment</em></span></li>
-          <li class="tile" data-i="1"><span class="tile__pic"><img src="media/ro/stage-2.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 02</span><span class="tile__t">Carbon block</span><span class="tile__catch"><em data-chip="chlorine">chlorine</em><em data-chip="taste">taste and smell</em></span></li>
-          <li class="tile" data-i="2"><span class="tile__pic"><img src="media/ro/stage-3.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 03</span><span class="tile__t">The membrane</span><span class="tile__catch"><em data-chip="fluoride">fluoride</em><em data-chip="pfas">PFAS</em><em data-chip="micro">microplastics</em><em data-chip="metals">dissolved metals</em><em data-chip="salts">salts</em></span></li>
-          <li class="tile" data-i="3"><span class="tile__pic"><img src="media/ro/stage-4.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 04</span><span class="tile__t">Alkaline</span><span class="tile__catch"><em data-chip="minerals">minerals back in</em></span></li>
-          <li class="tile" data-i="4"><span class="tile__pic"><img src="media/ro/stage-5.webp" alt="" width="360" height="360" loading="lazy"></span><span class="tile__n">Stage 05</span><span class="tile__t">Carbon polish</span><span class="tile__catch"><em data-chip="polish">the last taste</em></span></li>
-        </ol>
-        <div class="train__track" aria-hidden="true"><i id="trainFill"></i></div>
-      </div>
-      <div class="how__caps" id="howCaps">
-        <div class="cap on"><b>Five stages. One glass.</b><p>Sydney Water treats for the city. Under your sink, this is what happens next.</p></div>
-        <div class="cap"><b>01 &middot; Sediment</b><p>A five micron spun cartridge takes the grit, rust and sand out first, so nothing downstream has to.</p></div>
-        <div class="cap"><b>02 &middot; Carbon block</b><p>Coconut carbon takes the chlorine, and with it the taste and the smell.</p></div>
-        <div class="cap"><b>03 &middot; The membrane</b><p>Water is pushed through a membrane with openings around 0.0001 micron. Fluoride, PFAS, microplastics, dissolved metals and salts are rejected and flushed away. <em class="st">Up to 99%</em> of dissolved contaminants out.</p></div>
-        <div class="cap"><b>04 &middot; Alkaline</b><p>Then the good minerals go back in. Minerals are good water, and they are where the taste comes from.</p></div>
-        <div class="cap"><b>05 &middot; Carbon polish</b><p>One last pass before the tap, so the glass tastes like nothing at all.</p></div>
-        <div class="cap"><b>One honest line.</b><p>The membrane doesn't take chloramine out. The carbon does. If chloramine is what you're after, that's the <a href="whole-house-water-filter-sydney">whole house filtration at the mains</a>.</p></div>
-      </div>
-    </div>
-    <div class="hglass" id="hglass">
-      <div class="hglass__fr">
-        <picture><source media="(max-width:859px)" srcset="media/ro/glass-tall-m.webp"><img src="media/ro/glass-tall.webp" alt="" width="1000" height="1250" loading="lazy"></picture>
-        <div class="hglass__haze" aria-hidden="true"></div>
-        <div class="hglass__mins" id="mins" aria-hidden="true">
-          <i style="--x:40%;--y:60%;--s:6px"></i><i style="--x:52%;--y:66%;--s:8px"></i><i style="--x:46%;--y:74%;--s:5px"></i><i style="--x:58%;--y:58%;--s:6px"></i><i style="--x:36%;--y:70%;--s:7px"></i><i style="--x:62%;--y:72%;--s:5px"></i><i style="--x:49%;--y:54%;--s:5px"></i><i style="--x:55%;--y:78%;--s:6px"></i>
-        </div>
-        <div class="hglass__stat" id="howStat"><b>Up to 99%</b><span>of dissolved contaminants out</span></div>
-      </div>
-    </div>
-    <div class="flyers" id="flyers" aria-hidden="true">
-      <span class="fly" data-chip="sediment" data-home="42 30" style="--c:#B8A98C"><span>sediment</span></span>
-      <span class="fly" data-chip="chlorine" data-home="58 38" style="--c:#2E7DFF"><span>chlorine</span></span>
-      <span class="fly" data-chip="fluoride" data-home="38 50" style="--c:#6D28D9"><span>fluoride</span></span>
-      <span class="fly" data-chip="pfas" data-home="62 56" style="--c:#0B61F4"><span>PFAS</span></span>
-      <span class="fly" data-chip="micro" data-home="44 66" style="--c:#0F2748"><span>microplastics</span></span>
-      <span class="fly" data-chip="metals" data-home="60 74" style="--c:#5B9AE2"><span>dissolved metals</span></span>
-      <span class="fly" data-chip="salts" data-home="48 82" style="--c:#4E5B75"><span>salts</span></span>
+    <ol class="stages" id="stages">
+      <li class="stg" data-i="0"><figure class="stg__pic"><img src="media/ro/stage-1.webp" alt="The five micron sediment cartridge" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 01</span><b>Sediment</b><p>Grit, rust and sand out first.</p></li>
+      <li class="stg" data-i="1"><figure class="stg__pic"><img src="media/ro/stage-2.webp" alt="The coconut carbon block cartridge" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 02</span><b>Carbon block</b><p>Chlorine, and the taste and smell with it.</p></li>
+      <li class="stg" data-i="2"><figure class="stg__pic"><img src="media/ro/stage-3.webp" alt="The reverse osmosis membrane" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 03</span><b>The membrane</b><p>Fluoride, PFAS, microplastics, metals and salts, rejected and flushed away.</p></li>
+      <li class="stg" data-i="3"><figure class="stg__pic"><img src="media/ro/stage-4.webp" alt="The alkaline remineralising cartridge" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 04</span><b>Alkaline</b><p>The good minerals go back in.</p></li>
+      <li class="stg" data-i="4"><figure class="stg__pic"><img src="media/ro/stage-5.webp" alt="The coconut carbon polish cartridge" width="360" height="360" loading="lazy"></figure><span class="stg__n">Stage 05</span><b>Carbon polish</b><p>One last pass before the tap.</p></li>
+    </ol>
+    <div class="how__foot">
+      <div class="how__track" aria-hidden="true"><i id="trainFill"></i></div>
+      <div class="how__stat" id="howStat"><b>Up to 99%</b><span>of dissolved contaminants out</span></div>
     </div>
   </div>
 </section>
 
-<!-- ═════════ 3 · THE MONEY — pin: what a year of pure water costs in bottles, and ours, on tap.
+<!-- ═════════ 3 · THE MONEY — a split: the photograph edge to edge on the left, the year on the right.
      The figures are THE-YEARLY-NUMBERS.md (family of four, shop prices, Aug 2026). Masked rises,
-     never counters. GENERATED (Nano Banana Pro, 6 Sep 2026): media/ro/bottles.webp. ═════════ -->
-<section class="money-act" id="money" data-sc-act="pin" data-sc-span="4.8" data-sc-span-m="4.4" aria-label="What you already pay">
+     never counters. GENERATED (Nano Banana Pro, 6 Sep 2026): media/ro/bottles-tall.webp. ═════════ -->
+<section class="money-act" id="money" data-sc-act="pin" data-sc-span="4.6" data-sc-span-m="4.2" aria-label="What you already pay">
   <div class="sc-stage" data-sc-stage>
-    <figure class="frame money__ph">
-      <picture><source media="(max-width:859px)" srcset="media/ro/bottles-m.webp"><img src="media/ro/bottles.webp" alt="Cartons of bottled water stacked inside the front door of a Sydney home" width="1600" height="893" loading="lazy"></picture>
+    <figure class="money__ph">
+      <picture><source media="(max-width:859px)" srcset="media/ro/bottles-m.webp"><img src="media/ro/bottles-tall.webp" alt="Cartons of bottled water stacked inside the front door of a Sydney home" width="1100" height="1375" loading="lazy"></picture>
     </figure>
     <div class="money__copy">
       <span class="kick" data-sc-cue="0 1 0 0">What you already pay</span>
       <h2 class="d1" data-sc-cue="0 1 0 0">Pure water, by the year.</h2>
       <div class="yrows">
-        <div class="yrow" data-sc-cue="0.1 1 0.22 0"><div><b>Bottled spring water</b><span>A year of it, carried in through the front door</span></div><span class="money">$4,470</span></div>
-        <div class="yrow" data-sc-cue="0.27 1 0.22 0"><div><b>Bottled alkaline water</b><span>The same year, in alkaline</span></div><span class="money">$6,380</span></div>
-        <div class="yrow" data-sc-cue="0.44 1 0.22 0"><div><b>Bottled hydrogen water</b><span>Upwards of thirty six grand, if that is the water you drink</span></div><span class="money">$36,500</span></div>
-        <div class="yrow ours" data-sc-cue="0.61 1 0.22 0"><div><b>Pure Premium, on tap</b><span>Hydrogen rich, alkaline, unlimited. A year of servicing, by us.</span></div><span class="money">$650</span></div>
+        <div class="yrow" data-sc-cue="0.1 1 0.22 0"><b>Bottled spring water</b><span class="money">$4,470</span></div>
+        <div class="yrow" data-sc-cue="0.25 1 0.22 0"><b>Bottled alkaline water</b><span class="money">$6,380</span></div>
+        <div class="yrow" data-sc-cue="0.4 1 0.22 0"><b>Bottled hydrogen water</b><span class="money">$36,500</span></div>
+        <div class="yrow ours" data-sc-cue="0.56 1 0.22 0"><b>Pure Premium, on tap<small>Hydrogen rich, alkaline, unlimited. A year of servicing, by us.</small></b><span class="money">$650</span></div>
       </div>
-      <p class="money__frame" data-sc-cue="0.76 1 0.3 0">If that's the water you drink for the year. A family of four at shop prices, as at August 2026. The system itself is $1,590 installed, once, and then it's on tap.</p>
+      <p class="money__pay" data-sc-cue="0.7 1 0.26 0">Pure Premium is $1,590 installed. Against a year of bottled spring water it has paid for itself before its first service.</p>
+      <p class="money__frame" data-sc-cue="0.78 1 0.3 0">If that's the water you drink for the year. A family of four at shop prices, as at August 2026.</p>
     </div>
   </div>
 </section>
@@ -2183,8 +2156,7 @@ body.dopen .drawer{transform:none}
 <section class="range" id="systems" data-sc-act="pin" data-sc-span="6" data-sc-span-m="5.2" aria-label="The three systems">
   <div class="sc-stage" data-sc-stage>
     <header class="range__head" data-sc-cue="0 1 0 0">
-      <div><span class="kick">Three systems</span><h2 class="d2">Three ways to finish the same serious filtration.</h2></div>
-      <p class="lede">All three purify the water the same way, under the sink, on their own tap. The difference is the finish. Tap a system to see inside it.</p>
+      <span class="kick">Three systems</span><h2 class="d2">Three ways to finish the same serious filtration.</h2>
     </header>
     <div class="deck" id="sysDeck">
       <article class="scard plus" id="pure-plus" data-i="0">
@@ -2233,78 +2205,31 @@ body.dopen .drawer{transform:none}
     </div>
   </div>
 </section>
-<section class="stepup" aria-label="The step up">
+<section class="stepup" id="stepup" aria-label="The step up">
   <div class="zone">
     <div class="stepup__head" data-sc-in data-sc-stagger="80">
-      <h3 class="d3">The step up, in one look.</h3>
-      <p class="lede">Every system starts from the same base. Each step up adds a finish to it.</p>
+      <span class="kick">The step up</span>
+      <h2 class="d2">Same water. Each step adds more on top.</h2>
     </div>
-    <div class="ladder" data-sc-in>
-      <div class="lad base">
-        <span class="lad__k">Every system</span>
-        <ul>
-          <li>Up to 99% of dissolved contaminants out</li>
-          <li>Alkaline, the good minerals back in</li>
-          <li>Its own drinking tap, fitted in about two hours</li>
-          <li>WaterMark and NSF certified</li>
-          <li>Covered for life while you stay serviced with us</li>
-        </ul>
-      </div>
-      <div class="lad c plus">
-        <span class="lad__k">01 &middot; Pure Plus</span><b>The base, finished alkaline.</b><span class="lad__p">$1,280 installed</span>
-        <p>Everything in the row above. For most people that is the whole answer.</p>
-        <span class="lad__svc">$600 a year, serviced by us</span>
-      </div>
-      <div class="lad c prem">
-        <span class="tag">Most kitchens choose this</span>
-        <span class="lad__k">02 &middot; Pure Premium</span><b>Everything in Plus, plus two stages.</b><span class="lad__p">$1,590 installed</span>
-        <ul><li>Hydrogen rich water</li><li>A ceramic far infrared stage</li></ul>
-        <span class="lad__svc">$650 a year, serviced by us</span>
-      </div>
-      <div class="lad c luxe">
-        <span class="lad__k">03 &middot; Pure Luxe</span><b>Everything in Plus, in a smart sealed case.</b><span class="lad__p">$2,290 installed</span>
-        <ul><li>Live purity on its own screen</li><li>Quick change cartridges</li><li>A leak sensor and a booster pump</li></ul>
-        <span class="lad__svc">$680 a year, serviced by us</span>
-      </div>
+    <div class="stairs" data-sc-in data-sc-stagger="130">
+      <article class="step s1">
+        <img src="media/systems/pure-plus.webp" alt="The Pure Plus five stage reverse osmosis system" width="607" height="900" loading="lazy">
+        <div class="tread"><span class="step__k">01 &middot; Pure Plus</span><span class="money">$1,280</span><p>Purified, and alkaline.</p></div>
+      </article>
+      <article class="step s2">
+        <img src="media/systems/pure-premium.webp" alt="The Pure Premium seven stage reverse osmosis system" width="602" height="900" loading="lazy">
+        <div class="tread"><span class="tag">Most kitchens choose this</span><span class="step__k">02 &middot; Pure Premium</span><span class="money">$1,590</span><p>Adds hydrogen rich water.</p></div>
+      </article>
+      <article class="step s3">
+        <img src="media/systems/pure-luxe.webp" alt="The Pure Luxe smart reverse osmosis unit" width="573" height="900" loading="lazy">
+        <div class="tread"><span class="step__k">03 &middot; Pure Luxe</span><span class="money">$2,290</span><p>Adds the smart screen, in a sealed case.</p></div>
+      </article>
     </div>
-    <p class="stepup__note" data-sc-in>Every price includes supply, installation and GST, quoted in writing before we start. The price hasn't moved.</p>
+    <p class="stepup__base" data-sc-in><b>Every one of them:</b> up to 99% of dissolved contaminants out, alkaline, its own tap, WaterMark and NSF certified, installed at a price fixed in writing, covered for life while you stay serviced with us.</p>
   </div>
 </section>
 
-<!-- ═════════ 5 · UNDER THE SINK — flow, real photographs: JP at the open cabinet, the branded tank in a
-     Sydney cabinet, and one generated plate of where it goes (Nano Banana Pro, our own product and
-     install references). The two under sink H2s are the blueprint's. ═════════ -->
-<section class="install" id="install" aria-label="Under sink installation">
-  <div class="zone">
-    <header class="install__head" data-sc-in data-sc-stagger="90">
-      <span class="kick">Under the sink</span>
-      <h2 class="d2">What fits under the sink stays under the sink.</h2>
-      <p class="lede">An under sink water filter in Sydney is fitted inside the cabinet, plumbed to its own tap, in about two hours. What you see each day is the tap, the glass and the water.</p>
-    </header>
-    <div class="install__grid">
-      <figure class="frame install__big" data-sc-in>
-        <img src="media/install.webp" alt="Jean-Paul fitting a five stage reverse osmosis system inside the cabinet under a kitchen sink in Sydney" width="1700" height="956" loading="lazy">
-        <figcaption>Under the sink, Strathfield</figcaption>
-      </figure>
-      <div class="install__side" data-sc-in data-sc-stagger="80">
-        <h2>Under sink water filter installation, done in one visit</h2>
-        <p class="lede">Two hours. One licensed plumber. One dedicated drinking tap through the benchtop.</p>
-        <ol class="steps3">
-          <li><b>We check the cabinet</b><span>A photo is enough. We confirm the fit, the tap and the price in writing before we book a day.</span></li>
-          <li><b>We fit it in about two hours</b><span>The system goes inside the cabinet, the tank beside it, the tap through the benchtop or the sink. We leave the kitchen as we found it.</span></li>
-          <li><b>We show you, then we come back</b><span>You see it run and taste it before we go. Every year after that, we come back to service it.</span></li>
-        </ol>
-        <figure class="frame install__small">
-          <picture><source media="(max-width:859px)" srcset="media/ro/undersink-m.webp"><img src="media/ro/undersink.webp" alt="A reverse osmosis system and its white tank fitted neatly inside an open kitchen cabinet" width="1600" height="893" loading="lazy"></picture>
-          <figcaption>Where it goes</figcaption>
-        </figure>
-        <p class="install__lic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="5.2" stroke="currentColor" stroke-width="2"/><path d="m8.4 13.4-1.6 7.2 5.2-2.6 5.2 2.6-1.6-7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Fitted by Jean-Paul Barbar, NSW plumbing licence 461511C. Installed across Sydney from our base in Croydon Park.</span></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═════════ 6 · THE TAPS — a half section so nobody scrolls past the premium three way mixers.
+<!-- ═════════ 5 · THE TAPS — a half section so nobody scrolls past the premium three way mixers.
      GENERATED (Nano Banana Pro, 6 Sep 2026, the real Elysian mixer references, one kitchen):
      media/ro/tap-brass.webp, tap-black, tap-nickel, tap-gunmetal, tap-copper. ═════════ -->
 <section class="taps" id="taps" aria-label="Three way mixer taps">
@@ -2334,25 +2259,51 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ 7 · THE SERVICING — pin on the blue field: the ledger. Everything inside the one price,
-     for life, against a standard plan. Prices FINAL-LADDER-2026-07-01; cover per the lifetime warranty
-     terms (§6.1 to §6.16). ═════════ -->
-<section class="care" id="servicing" data-sc-act="pin" data-sc-span="3.9" data-sc-span-m="3.6" aria-label="Servicing and the lifetime cover">
-  <div class="sc-stage" data-sc-stage>
-    <div class="care__copy">
-      <span class="kick" data-sc-cue="0 1 0 0">Servicing</span>
-      <h2 class="d1" data-sc-cue="0 1 0 0">Why our servicing costs what it costs.</h2>
-      <p class="lede" data-sc-cue="0 1 0 0">Because it covers the system for life, not just the standard cartridges. Once a year we come back, and everything the system needs is inside the one price.</p>
-      <p class="fine" data-sc-cue="0.72 1 0.3 0">Covered for life while you stay serviced with us. <a href="lifetime-warranty">The terms, in writing.</a></p>
+<!-- ═════════ 6 · UNDER THE SINK — one photograph the width of the page, three short steps, the licence.
+     The two under sink H2s are the blueprint's. ═════════ -->
+<section class="install" id="install" aria-label="Under sink installation">
+  <div class="zone">
+    <header class="install__head" data-sc-in data-sc-stagger="90">
+      <span class="kick">Under the sink</span>
+      <h2 class="d2">What fits under the sink stays under the sink.</h2>
+    </header>
+    <figure class="install__big" data-sc-in>
+      <img src="media/install.webp" alt="Jean-Paul fitting a five stage reverse osmosis system inside the cabinet under a kitchen sink in Sydney" width="1700" height="956" loading="lazy">
+      <figcaption>Under the sink, Strathfield</figcaption>
+    </figure>
+    <div class="install__row" data-sc-in data-sc-stagger="80">
+      <h2>Under sink water filter installation, in one visit</h2>
+      <ol class="steps3">
+        <li><b>Send a photo of the cabinet</b><span>The fit, the tap and the price come back in writing.</span></li>
+        <li><b>Fitted in about two hours</b><span>The system in the cabinet, the tank beside it, the tap through the bench.</span></li>
+        <li><b>We come back every year</b><span>To service it. Covered for life while you stay serviced with us.</span></li>
+      </ol>
     </div>
-    <div class="ledger" id="ledger">
-      <div class="lrow head" data-sc-cue="0 1 0 0"><span>What's inside the price</span><span>A standard plan</span><span>Ours</span></div>
-      <div class="lrow" data-sc-cue="0.1 1 0.2 0"><b>The standard cartridges<small>Sediment and carbon, every year</small></b><div class="pair"><span class="std"><i>Included</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Every service</span></div></div>
-      <div class="lrow" data-sc-cue="0.24 1 0.2 0"><b>The membrane<small>Due every two to four years</small></b><div class="pair"><span class="std"><i>Extra</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Included when it's due</span></div></div>
-      <div class="lrow" data-sc-cue="0.38 1 0.2 0"><b>The stages that change every few years<small>Alkaline, hydrogen, the inline stages</small></b><div class="pair"><span class="std"><i>Extra</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Included</span></div></div>
-      <div class="lrow" data-sc-cue="0.52 1 0.2 0"><b>If the sealed system ever fails<small>Housings, the membrane housing, the manifold</small></b><div class="pair"><span class="std"><i>A new system</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Replaced, labour included, for life</span></div></div>
-      <div class="lrow" data-sc-cue="0.64 1 0.2 0"><b>Wear parts<small>Valves and fittings</small></b><div class="pair"><span class="std"><i>Quoted on the day</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Two years free, then a fixed published price</span></div></div>
-      <div class="lrow price" data-sc-cue="0.76 1 0.2 0"><b>A year of servicing<small>Published, not quoted later. The price hasn't moved.</small></b><div class="pair"><span class="std"><i>Quoted later</i></span><span class="ours">$600 &middot; $650 &middot; $680</span></div></div>
+    <p class="install__lic" data-sc-in><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="5.2" stroke="currentColor" stroke-width="2"/><path d="m8.4 13.4-1.6 7.2 5.2-2.6 5.2 2.6-1.6-7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Fitted by Jean-Paul Barbar, NSW plumbing licence 461511C, across Sydney from Croydon Park.</span></p>
+  </div>
+</section>
+
+<!-- ═════════ 7 · THE SERVICING — a split: the real photograph of the work edge to edge on the left, the
+     blue field on the right with a ledger short enough to be SEEN, not read (JP, iteration two). Prices
+     FINAL-LADDER-2026-07-01; cover per the lifetime warranty terms (§6.1 to §6.16). ═════════ -->
+<section class="care" id="servicing" data-sc-act="pin" data-sc-span="3.4" data-sc-span-m="3.2" aria-label="Servicing and the lifetime cover">
+  <div class="sc-stage" data-sc-stage>
+    <figure class="care__ph">
+      <img src="media/care.webp" alt="Jean-Paul fitting a filtered water tap at a Sydney kitchen sink" width="1700" height="956" loading="lazy">
+    </figure>
+    <div class="care__panel">
+      <span class="kick" data-sc-cue="0 1 0 0">Servicing</span>
+      <h2 class="d2" data-sc-cue="0 1 0 0">Why our servicing costs what it costs.</h2>
+      <p class="lede" data-sc-cue="0 1 0 0">Because it covers the system for life. Not just the standard cartridges.</p>
+      <div class="ledger" id="ledger">
+        <div class="lrow head" data-sc-cue="0 1 0 0"><span>Every year</span><span>A standard plan</span><span>Ours</span></div>
+        <div class="lrow" data-sc-cue="0.1 1 0.2 0"><b>The cartridges</b><span class="std"><i>Included</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Included</span></div>
+        <div class="lrow" data-sc-cue="0.22 1 0.2 0"><b>The membrane</b><span class="std"><i>Extra</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Included when due</span></div>
+        <div class="lrow" data-sc-cue="0.34 1 0.2 0"><b>The alkaline and hydrogen stages</b><span class="std"><i>Extra</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Included</span></div>
+        <div class="lrow" data-sc-cue="0.46 1 0.2 0"><b>If the system ever fails</b><span class="std"><i>A new system</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Replaced, labour included</span></div>
+        <div class="lrow price" data-sc-cue="0.6 1 0.2 0"><b>A year of servicing</b><span class="std"><i>Quoted later</i></span><span class="ours">$600 &middot; $650 &middot; $680</span></div>
+      </div>
+      <p class="fine" data-sc-cue="0.74 1 0.3 0">Covered for life while you stay serviced with us. The price hasn't moved. <a href="lifetime-warranty">The terms, in writing.</a></p>
     </div>
   </div>
 </section>
@@ -2372,12 +2323,12 @@ body.dopen .drawer{transform:none}
       <div class="rrow" data-dir="-1">
         <div class="rvc">
           <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
-          <p>&ldquo;Wow what difference! We got the 5 stage reverse osmosis system and you can never go back to drinking normal tap water after having this system installed.&rdquo;</p>
+          <p>&ldquo;Wow what difference! You can never go back to drinking normal tap water after having this system installed.&rdquo;</p>
           <div class="rwho"><b>Jade Danielle</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
         </div>
         <div class="rvc">
           <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
-          <p>&ldquo;He installed our five stage reverse osmosis system and walked us through everything. The setup is super neat and the tap looks beautiful. Our water tastes exceptionally clean and fresh.&rdquo;</p>
+          <p>&ldquo;The setup is super neat and the tap looks beautiful. Our water tastes exceptionally clean and fresh.&rdquo;</p>
           <div class="rwho"><b>Kayla Kagaras</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
         </div>
         <div class="rvp" aria-hidden="true"><img src="media/install.webp" alt="" width="1700" height="956" loading="lazy"><span>Under the sink, Strathfield</span></div>
@@ -2388,7 +2339,7 @@ body.dopen .drawer{transform:none}
         </div>
         <div class="rvc">
           <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
-          <p>&ldquo;Very pleased with Jean-Paul after installing our 5 stage reverse osmosis system. He explained how the smart system worked. Our water tastes significantly better now.&rdquo;</p>
+          <p>&ldquo;Very pleased with Jean-Paul after installing our 5 stage reverse osmosis system. Our water tastes significantly better now.&rdquo;</p>
           <div class="rwho"><b>Jere Skorin</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
         </div>
         <div class="rvp" aria-hidden="true"><img src="media/tap-1.webp" alt="" width="760" height="760" loading="lazy"><span>The tap, after</span></div>
@@ -2396,23 +2347,23 @@ body.dopen .drawer{transform:none}
       <div class="rrow" data-dir="1">
         <div class="rvc">
           <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
-          <p>&ldquo;Now that&rsquo;s water! I don&rsquo;t have to buy bottled water anymore. We upgraded our filtration system and what a difference.&rdquo;</p>
+          <p>&ldquo;Now that&rsquo;s water! I don&rsquo;t have to buy bottled water anymore. What a difference.&rdquo;</p>
           <div class="rwho"><b>Mandy Boustani</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
         </div>
         <div class="rvc">
           <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
-          <p>&ldquo;We had Jean-Paul install our smart reverse osmosis system and he has done a wonderful job. Our water quality is absolutely great!&rdquo;</p>
+          <p>&ldquo;Jean-Paul installed our smart reverse osmosis system and did a wonderful job. Our water quality is absolutely great!&rdquo;</p>
           <div class="rwho"><b>Irene Evans</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
         </div>
         <div class="rvp" aria-hidden="true"><picture><source media="(max-width:859px)" srcset="media/ro/undersink-m.webp"><img src="media/ro/undersink.webp" alt="" width="1600" height="893" loading="lazy"></picture><span>Where it goes</span></div>
         <div class="rvc">
           <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
-          <p>&ldquo;He arrived on time, worked neatly and made the whole process very simple. The water tastes much cleaner now and we are very pleased with the result.&rdquo;</p>
+          <p>&ldquo;He arrived on time, worked neatly and made the whole process very simple. The water tastes much cleaner now.&rdquo;</p>
           <div class="rwho"><b>Elly Barbar</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
         </div>
         <div class="rvc">
           <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
-          <p>&ldquo;Absolutely fantastic experience! They were professional, extremely knowledgeable, friendly, and made the whole process seamless.&rdquo;</p>
+          <p>&ldquo;Absolutely fantastic experience! Professional, extremely knowledgeable, friendly, and the whole process seamless.&rdquo;</p>
           <div class="rwho"><b>Georgia</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
         </div>
         <div class="rvp" aria-hidden="true"><img src="media/care.webp" alt="" width="1700" height="956" loading="lazy"><span>The yearly service</span></div>
@@ -2425,7 +2376,7 @@ body.dopen .drawer{transform:none}
         </div>
         <div class="rvc">
           <span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>
-          <p>&ldquo;Extremely knowledgeable and professional service. With an easy installation and complete satisfaction with the product supplied.&rdquo;</p>
+          <p>&ldquo;Extremely knowledgeable and professional service. An easy installation and complete satisfaction.&rdquo;</p>
           <div class="rwho"><b>Brendan Tink</b><span>Google review</span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></div>
         </div>
         <div class="rvp" aria-hidden="true"><img src="media/bleed-team.webp" alt="" width="1900" height="1068" loading="lazy"><span>New cartridges going in</span></div>
@@ -2542,7 +2493,7 @@ body.dopen .drawer{transform:none}
           <summary><h2>What reverse osmosis removes, and what it does not</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="ch__a">
             <p>Our reverse osmosis systems remove up to 99% of dissolved contaminants. The membrane works down to about 0.0001 micron, which rejects fluoride, heavy metals, nitrates, PFAS and dissolved salts, and helps remove microplastics. Sydney's water is safe to drink. <a href="https://www.sydneywater.com.au/water-the-environment/how-we-manage-sydneys-water/safe-drinking-water/water-analysis.html" target="_blank" rel="noopener">Sydney Water publishes what is in the supply</a>, and it is treated for a whole city. Reverse osmosis is for what is left once it is safe: the taste, and the dissolved things a carbon filter alone does not touch.</p>
-            <p>The one thing the membrane leaves to the carbon is the disinfectant Sydney Water uses across most of the city, and for that the answer is <a href="whole-house-water-filter-sydney">whole house filtration at the mains</a>. Plenty of homes run both: the whole house system for every tap and shower, and a reverse osmosis system for the water they drink.</p>
+            <p>One honest line. The membrane doesn't take chloramine out. The carbon does. Chloramine is the disinfectant Sydney Water uses across most of the city, and for that the answer is <a href="whole-house-water-filter-sydney">whole house filtration at the mains</a>. Plenty of homes run both: the whole house system for every tap and shower, and a reverse osmosis system for the water they drink.</p>
           </div>
         </details>
         <details class="ch" id="det-works" data-sc-in>
@@ -2662,8 +2613,9 @@ body.dopen .drawer{transform:none}
     <li><a href="#how"><i></i><span>How it works</span></a></li>
     <li><a href="#money"><i></i><span>By the year</span></a></li>
     <li><a href="#systems"><i></i><span>Three systems</span></a></li>
-    <li><a href="#install"><i></i><span>Under the sink</span></a></li>
+    <li><a href="#stepup"><i></i><span>The step up</span></a></li>
     <li><a href="#taps"><i></i><span>The taps</span></a></li>
+    <li><a href="#install"><i></i><span>Under the sink</span></a></li>
     <li><a href="#servicing"><i></i><span>Covered for life</span></a></li>
     <li><a href="#reviews"><i></i><span>Reviews</span></a></li>
     <li><a href="#ask"><i></i><span>Book it</span></a></li>
@@ -3725,7 +3677,7 @@ body.dopen .drawer{transform:none}
     }
     if (!reduce){
       gsap.to('#heroLine .hch', {opacity:1, y:0, scale:1, duration:.55, ease:'power3.out', stagger:.018, delay:.8});
-      if (!mph) gsap.fromTo('.hero .hph', {scale:1}, {scale:1.06, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
+      if (!mph) gsap.fromTo('.hero .hbg', {scale:1}, {scale:1.06, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
     } else {
       gsap.set('#heroLine .hch', {opacity:1, y:0, scale:1});
     }
@@ -3734,6 +3686,37 @@ body.dopen .drawer{transform:none}
   } else {
     document.querySelectorAll('.hch').forEach(function(e){ e.style.opacity = 1; e.style.transform = 'none'; });
   }
+
+
+  /* ── THE BACKGROUNDS — five stills of the one kitchen, crossfading every six seconds (JP, iteration two:
+     "seamlessly change in the background, really nice and subtle"). The first is the LCP and ships in the
+     HTML; the others are fetched one at a time after load, a phone gets its own twins, and a slide is never
+     shown before it has decoded. Rests while hidden, while the drawer is up, or once the hero has gone by. ── */
+  (function slides(){
+    var wrap = document.getElementById('hbg'); if (!wrap) return;
+    var pics = [].slice.call(wrap.querySelectorAll('picture'));
+    if (pics.length < 2 || reduce) return;
+    var i = 0, ready = [true], loading = {};
+    function load(n, cb){
+      var pic = pics[n]; if (!pic) return;
+      if (ready[n]){ if (cb) cb(); return; }
+      if (loading[n]) return;
+      loading[n] = true;
+      var src = (mph && pic.getAttribute('data-srcm')) || pic.getAttribute('data-src');
+      var im = new Image(); im.decoding = 'async'; im.className = 'hph'; im.alt = ''; im.width = mph ? 1000 : 2400; im.height = mph ? 1250 : 1340;
+      im.onload = function(){ pic.appendChild(im); ready[n] = true; if (cb) cb(); };
+      im.src = src;
+    }
+    function show(n){ pics.forEach(function(pic, k){ pic.classList.toggle('on', k === n); }); i = n; }
+    function tick(){
+      if (document.hidden || document.body.classList.contains('dopen') || scrollY > innerHeight * .8) return;
+      var n = (i + 1) % pics.length;
+      if (!ready[n]){ load(n); return; }
+      show(n); load((n + 1) % pics.length);
+    }
+    addEventListener('load', function(){ setTimeout(function(){ load(1); }, 1600); });
+    setInterval(tick, 6000);
+  })();
 
   /* ── THE DECK ON THE CARD — the homepage's hero deck mechanic: it deals the next system every
      3.2s (out .26s power2.in, in .58s power3.out, one continuous motion), rests while hovered,
@@ -3801,85 +3784,28 @@ body.dopen .drawer{transform:none}
   function eio(t){ return t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
   function q(v){ return v.toFixed(3); }
 
-  /* 1 · THE GLASS — the six names arrive in the photograph one by one */
-  var waterAct = document.getElementById('water');
-  var waterChips = [].slice.call(document.querySelectorAll('#waterChips .chip'));
-  /* microplastics with the first line; PFAS, fluoride, chlorine with the second; metals and salts with the third */
-  var WCH = [[.05,.11],[.24,.29],[.28,.33],[.32,.37],[.48,.53],[.52,.57]];
-  function driveWater(){
-    if (!waterAct) return;
-    var p = P(waterAct);
-    for (var i = 0; i < waterChips.length; i++){
-      var w = WCH[i] || WCH[WCH.length-1];
-      var k = eo(win(p, w[0], w[1]));
-      if (p > .70) k *= 1 - win(p, .70, .76);   /* they leave as the last line lands */
-      waterChips[i].style.setProperty('--k', q(k));
-    }
+  /* 1 · WHY YOU'RE HERE — the yellow line draws under each name as it lands */
+  var whyAct = document.getElementById('water');
+  var whyNames = [].slice.call(document.querySelectorAll('#whyNames li')).map(function(li){ return {el:li, at:parseFloat(li.style.getPropertyValue('--at')) || 0}; });
+  function driveWhy(){
+    if (!whyAct) return;
+    var p = P(whyAct);
+    for (var i = 0; i < whyNames.length; i++) whyNames[i].el.style.setProperty('--u', q(eo(win(p, whyNames[i].at + .03, whyNames[i].at + .12))));
   }
 
-  /* 2 · THE PEAK — tiles light, the chips lift out of the glass onto the stage that caught them,
-     the haze clears at the membrane, the minerals drop back in at the alkaline stage */
+  /* 2 · HOW IT WORKS — the five stages light one after another as the water runs the track; the number lands last */
   var howAct = document.getElementById('how');
-  var tiles = [].slice.call(document.querySelectorAll('#train .tile'));
-  var caps = [].slice.call(document.querySelectorAll('#howCaps .cap'));
-  var flyers = [].slice.call(document.querySelectorAll('#flyers .fly'));
-  var hglassFr = document.querySelector('#hglass .hglass__fr');
-  var howStage = howAct ? howAct.querySelector('.sc-stage') : null;
+  var stages = [].slice.call(document.querySelectorAll('#stages .stg'));
   var trainFill = document.getElementById('trainFill');
   var howStat = document.getElementById('howStat');
-  var mins = [].slice.call(document.querySelectorAll('#mins i'));
-  var TILE_AT = [.10, .25, .41, .63, .79];
-  var FLY = { sediment:[.12,.20], chlorine:[.27,.35], fluoride:[.43,.49], pfas:[.46,.52], micro:[.49,.55], metals:[.52,.58], salts:[.55,.61] };
-  var flyGeo = [];
-  function layoutFly(){
-    if (!howStage || !hglassFr) return;
-    var S = howStage.getBoundingClientRect(), G = hglassFr.getBoundingClientRect();
-    flyGeo = flyers.map(function(f){
-      var h = (f.getAttribute('data-home') || '50 50').split(/\s+/).map(parseFloat);
-      var key = f.getAttribute('data-chip');
-      var em = document.querySelector('#train em[data-chip="' + key + '"]');
-      var tile = em ? em.closest('.tile') : null;
-      var tr = null;
-      if (em && em.offsetParent !== null){ tr = em.getBoundingClientRect(); }
-      else if (tile){ tr = tile.getBoundingClientRect(); }
-      return {
-        el:f, em:em, tile:tile, w:FLY[key] || [.5,.6],
-        hx: G.left - S.left + G.width * h[0] / 100, hy: G.top - S.top + G.height * h[1] / 100,
-        tx: tr ? tr.left - S.left + tr.width / 2 : 0, ty: tr ? tr.top - S.top + tr.height / 2 : 0
-      };
-    });
-  }
-  var howLast = -1;
+  var STAGE_AT = [.08, .26, .44, .62, .78];
   function driveHow(){
     if (!howAct) return;
     var p = P(howAct);
-    /* the tiles */
-    for (var i = 0; i < tiles.length; i++) tiles[i].classList.toggle('on', p >= TILE_AT[i]);
-    if (trainFill) trainFill.style.setProperty('--f', q(clamp((p - .1) / .76, 0, 1)));
-    /* the caption: one at a time */
-    var ci = p < TILE_AT[0] ? 0 : p < TILE_AT[1] ? 1 : p < TILE_AT[2] ? 2 : p < TILE_AT[3] ? 3 : p < TILE_AT[4] ? 4 : p < .90 ? 5 : 6;
-    if (ci !== howLast){ howLast = ci; caps.forEach(function(c, n){ c.classList.toggle('on', n === ci); }); }
-    /* the glass: haze and clarity */
-    var cl = eio(win(p, .44, .62));
-    if (hglassFr){ hglassFr.style.setProperty('--hz', q(1 - cl)); hglassFr.style.setProperty('--cl', q(cl)); }
-    if (howStat) howStat.style.setProperty('--k', q(eo(win(p, .56, .64))));
-    for (var m = 0; m < mins.length; m++) mins[m].style.setProperty('--k', q(eo(win(p, .65 + m * .012, .73 + m * .012))));
-    /* the chips in flight */
-    for (var f = 0; f < flyGeo.length; f++){
-      var g = flyGeo[f];
-      var appear = eo(win(p, .02 + f * .01, .07 + f * .01));
-      var k = eio(win(p, g.w[0], g.w[1]));
-      var x = g.hx + (g.tx - g.hx) * k, y = g.hy + (g.ty - g.hy) * k - Math.sin(k * Math.PI) * 54;
-      var op = appear * (k < .84 ? 1 : 1 - (k - .84) / .16);
-      g.el.style.setProperty('--tx', x.toFixed(1) + 'px');
-      g.el.style.setProperty('--ty', y.toFixed(1) + 'px');
-      g.el.style.setProperty('--k', q(op));
-      var lit = k > .84;
-      if (g.em) g.em.classList.toggle('lit', lit);
-      g.el.classList.toggle('parked', k >= 1);
-    }
+    for (var i = 0; i < stages.length; i++) stages[i].classList.toggle('on', p >= STAGE_AT[i]);
+    if (trainFill) trainFill.style.setProperty('--f', q(clamp((p - .06) / .78, 0, 1)));
+    if (howStat) howStat.style.setProperty('--k', q(eo(win(p, .84, .93))));
   }
-
 
   /* 4 · THE THREE SYSTEMS — the deck: one card at a time, the next rising from below over the last
      (21st.dev "Stacking Cards", id 25275, rebuilt off --sc-p). A card that is covered closes itself. */
@@ -3939,9 +3865,73 @@ body.dopen .drawer{transform:none}
     }
     function release(key){ if (!RETAIN[key]) return; RETAIN[key] = null; preloaded[key] = null; READY[key] = false; }
     function softEase(x){ return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2; }
+    /* the plus markers, one per cartridge, from the homepage (round 84 positions, measured off each set's end frame) */
+    var SPOTS = {
+      plus: [
+        {x:24, y:47, t:'5 micron sediment', d:'Stage one. Sand, silt, rust and pollen out before anything sensitive sees the water.', p:'l'},
+        {x:80, y:44, t:'5 micron coconut carbon block', d:'Takes the first hit on chlorine and organic chemicals, so the membrane lasts.', p:'r'},
+        {x:64, y:35, t:'0.0001 micron RO membrane', d:'The engine room. Dissolved contaminants, metals and mineral salts come out here.'},
+        {x:60, y:21, t:'Alkaline magnesium minerals', d:'Pure magnesium oxide. The good minerals go back in and it holds the pH up for a full twelve months.', dn:1},
+        {x:44, y:11, t:'Coconut carbon polish', d:'The last cartridge. Pulls the remaining tastes and odours and leaves the water sweet.', dn:1}
+      ],
+      prem: [
+        {x:28, y:47, t:'5 micron sediment', d:'Stage one. Sand, silt, rust and pollen out before anything sensitive sees the water.', p:'l'},
+        {x:72, y:50, t:'5 micron coconut carbon block', d:'Takes the first hit on chlorine and organic chemicals, so the membrane lasts.', p:'r'},
+        {x:70, y:31, t:'0.0001 micron RO membrane', d:'The engine room. Dissolved contaminants, metals and mineral salts come out here.', p:'r'},
+        {x:64, y:22, t:'Hydrogen rich alkaline minerals', d:'Magnesium and potassium go back in, and it holds a high pH for a full twelve months.', dn:1},
+        {x:55, y:13, t:'Coconut carbon polish', d:'The last cartridge. Pulls the remaining tastes and odours and leaves the water sweet.', dn:1},
+        {x:29, y:31, t:'Ceramic far infrared', d:'Sealed ceramic beads that never touch the water, so nothing is added to it. Changed every two years.', p:'l'},
+        {x:33, y:19, t:'Inline magnetic conditioner', d:'A permanent magnet on the line out to your tap. Its field helps keep scale off the faucet, and it never needs replacing.', p:'l', dn:1}
+      ],
+      luxe: [
+        {x:26, y:22, t:'Smart TDS display', d:'Reads the purity live, and tells you when a filter is due.', p:'l', dn:1},
+        {x:83, y:46, t:'1 micron sediment', d:'Stage one, the green one. Sand, silt, rust and pollen caught first.', p:'r'},
+        {x:72, y:39, t:'Granular carbon pre-filter', d:'Loose packed carbon, so the flow stays high while it takes the first hit on chlorine.'},
+        {x:60, y:46, t:'5 micron coconut carbon block', d:'A carbon block matrix. The biggest load of contaminant removal before the membrane.', p:'l'},
+        {x:67, y:61, t:'Coconut carbon and alkaline finish', d:'Behind the front row. Japanese coconut carbon for taste, then calcite lifts the pH back to 7 to 8.'},
+        {x:74, y:71, t:'0.0001 micron RO membrane', d:'Behind the front row. Dissolved contaminants, metals and mineral salts come out here.'}
+      ]
+    };
+    function buildSpots(host, key){
+      if (!host || host.querySelector('.hswrap')) return null;
+      var list = SPOTS[key]; if (!list) return null;
+      var wrap = document.createElement('div'); wrap.className = 'hswrap';
+      list.forEach(function(sp){
+        var el = document.createElement('span');
+        el.className = 'hs' + (sp.p ? ' ' + sp.p : '') + (sp.dn ? ' dn' : '');
+        el.style.left = sp.x + '%'; el.style.top = sp.y + '%';
+        var btn = document.createElement('button'); btn.type = 'button'; btn.setAttribute('aria-label', sp.t + '. ' + sp.d);
+        btn.appendChild(document.createElement('i'));
+        var tip = document.createElement('span'); tip.className = 'tip'; tip.innerHTML = '<b></b><span></span>';
+        tip.querySelector('b').textContent = sp.t; tip.querySelector('span').textContent = sp.d;
+        el.appendChild(btn); el.appendChild(tip);
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          var was = el.classList.contains('on');
+          wrap.querySelectorAll('.hs.on').forEach(function(o){ o.classList.remove('on'); });
+          el.classList.toggle('on', matchMedia('(hover:hover) and (pointer:fine)').matches ? true : !was);
+        });
+        if (matchMedia('(hover:hover) and (pointer:fine)').matches){
+          el.addEventListener('mouseenter', function(){ el.classList.add('on'); });
+          el.addEventListener('mouseleave', function(){ el.classList.remove('on'); });
+        }
+        wrap.appendChild(el);
+      });
+      host.appendChild(wrap);
+      addEventListener('click', function(){ wrap.querySelectorAll('.hs.on').forEach(function(o){ o.classList.remove('on'); }); });
+      return wrap;
+    }
+    /* the markers sit on the PAINTED image, which is contained inside its column: measure it when they show */
+    function placeSpots(host, wrap, img){
+      var H = host.getBoundingClientRect(), nw = img.naturalWidth || 1100, nh = img.naturalHeight || 1472;
+      var sc = Math.min(H.width / nw, H.height / nh), w = nw * sc, h = nh * sc;
+      wrap.style.left = ((H.width - w) / 2).toFixed(1) + 'px'; wrap.style.top = ((H.height - h) / 2).toFixed(1) + 'px';
+      wrap.style.width = w.toFixed(1) + 'px'; wrap.style.height = h.toFixed(1) + 'px';
+    }
     cards.forEach(function(c){
       var key = c.getAttribute('data-set'), img = c.querySelector('img'), SRC = SETS[key];
       if (!SRC || !img) return;
+      var wrap = buildSpots(c, key), spotT = 0;
       if (mph) img.src = SRC[0];
       var pos = 0, shown = -1, raf = null, tw = null, open = false, pend = null;
       function paint(v){ var i = Math.round(v * (N - 1)); if (i === shown) return; shown = i; img.src = SRC[i]; }
@@ -3958,8 +3948,15 @@ body.dopen .drawer{transform:none}
         if (!READY[key]){ var first = pend === null; pend = t; if (first) preload(key).then(function(){ var v = pend; pend = null; go2(v, dur); }); return; }
         go2(t, dur);
       }
-      function toggle(){ open = !open; c.classList.toggle('opened', open); go(open ? 1 : 0, XDUR); window.ffyTrack && window.ffyTrack('explode', {system:key, open:open}); }
-      c.addEventListener('click', toggle);
+      function toggle(){
+        open = !open; c.classList.toggle('opened', open); go(open ? 1 : 0, XDUR);
+        /* the markers belong to the END frame, so they wait for it; a second tap must not be overtaken by the first */
+        clearTimeout(spotT);
+        if (open && wrap) spotT = setTimeout(function(){ if (open){ placeSpots(c, wrap, img); c.classList.add('xopen'); } }, XDUR - 160);
+        else { c.classList.remove('xopen'); if (wrap) wrap.querySelectorAll('.hs.on').forEach(function(o){ o.classList.remove('on'); }); }
+        window.ffyTrack && window.ffyTrack('explode', {system:key, open:open});
+      }
+      c.addEventListener('click', function(e){ if (e.target.closest && e.target.closest('.hs')) return; toggle(); });
       c.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
       c._close = function(){ if (open) toggle(); };
       if ('IntersectionObserver' in window) new IntersectionObserver(function(es){ c.classList.toggle('tapin', es[0].isIntersecting); }, {threshold:.5}).observe(c);
@@ -3989,33 +3986,29 @@ body.dopen .drawer{transform:none}
   var running = false;
   function driveAll(){
     running = false;
-    driveWater(); driveHow(); driveRange(); driveCare();
+    driveWhy(); driveHow(); driveRange(); driveCare();
   }
   function ask(){ if (!running){ running = true; requestAnimationFrame(driveAll); } }
   addEventListener('scroll', ask, {passive:true});
-  addEventListener('resize', function(){ layoutFly(); ask(); }, {passive:true});
-  addEventListener('load', function(){ layoutFly(); ask(); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ layoutFly(); ask(); });
-  layoutFly(); ask();
+  addEventListener('resize', ask, {passive:true});
+  addEventListener('load', ask);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ask);
+  ask();
   /* the engine writes --sc-p on its own frame; read again a frame later so a landed scroll is not a frame stale */
   addEventListener('scroll', function(){ requestAnimationFrame(ask); }, {passive:true});
   if (reduce){
     /* reduced motion lands on the FINISHED state, never a blank one */
-    tiles.forEach(function(t){ t.classList.add('on'); });
-    caps.forEach(function(c, n){ c.classList.toggle('on', n === caps.length - 1); });
-    if (hglassFr){ hglassFr.style.setProperty('--hz', '0'); hglassFr.style.setProperty('--cl', '1'); }
+    stages.forEach(function(t){ t.classList.add('on'); });
     if (howStat) howStat.style.setProperty('--k', '1');
-    mins.forEach(function(m){ m.style.setProperty('--k', '1'); });
-    flyers.forEach(function(f){ f.style.setProperty('--k', '0'); });
-    document.querySelectorAll('#train em').forEach(function(e){ e.classList.add('lit'); });
-    waterChips.forEach(function(c){ c.style.setProperty('--k', '1'); });
+    whyNames.forEach(function(n){ n.el.style.setProperty('--u', '1'); });
     lrows.forEach(function(r){ r.el.style.setProperty('--s', '1'); });
     if (trainFill) trainFill.style.setProperty('--f', '1');
     driveRange();
   }
 
-  /* 6 · THE TAPS — a finish under a fingertip */
+  /* 5 · THE TAPS — a finish under a fingertip; on a phone the swatches ride the photograph so the tap is in view as it changes */
   (function taps(){
+    if (mph){ var swr = document.getElementById('swatches'), fr = document.getElementById('tapFrame'); if (swr && fr) fr.appendChild(swr); }
     var sws = [].slice.call(document.querySelectorAll('#swatches .sw'));
     var imgs = [].slice.call(document.querySelectorAll('#tapFrame picture'));
     var cap = document.getElementById('tapCap');
