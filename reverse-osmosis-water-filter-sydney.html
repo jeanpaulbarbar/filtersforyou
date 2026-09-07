@@ -2248,8 +2248,9 @@ body.dopen .drawer{transform:none}
   html.ro-ph .rej__fam h3{font-size:1.35rem}
   /* 5 · the taps: five dots ON the photograph, from the bottom right corner, lifted, ending before the mixer;
      the finish's name at the top right (JP). A 44px hit area around a 28px dot. */
-  html.ro-ph .taps__fr .swatches{display:flex;position:absolute;right:6px;bottom:11%;z-index:3;flex-direction:row-reverse;gap:0;margin:0}
-  html.ro-ph .taps__fr .sw{width:44px;height:44px;min-height:44px;padding:0;border:0;background:none;box-shadow:none;border-radius:50%;font-size:0;gap:0;display:grid;place-items:center;transform:none}
+  /* iteration eight (JP): the dots a little closer together and further right, away from the mixer's handle */
+  html.ro-ph .taps__fr .swatches{display:flex;position:absolute;right:2px;bottom:11%;z-index:3;flex-direction:row-reverse;gap:0;margin:0}
+  html.ro-ph .taps__fr .sw{width:40px;height:44px;min-height:44px;padding:0;border:0;background:none;box-shadow:none;border-radius:50%;font-size:0;gap:0;display:grid;place-items:center;transform:none}
   html.ro-ph .taps__fr .sw i{width:26px;height:26px;border:2px solid rgba(255,255,255,.92);box-shadow:0 3px 10px rgba(4,16,46,.3),inset 0 -5px 8px rgba(0,0,0,.16);transition:transform .45s var(--e-out),box-shadow .45s ease-in-out}
   html.ro-ph .taps__fr .sw.on i{transform:scale(1.18);box-shadow:0 0 0 2px var(--ink),0 3px 10px rgba(4,16,46,.3)}
   html.ro-ph .taps__fr figcaption{display:inline-flex;top:12px;bottom:auto;right:12px;left:auto}
@@ -2313,6 +2314,118 @@ body.dopen .drawer{transform:none}
   .yrow .money{font-size:clamp(1.7rem,2.8vw,2.4rem)}
   .yrow.ours .money{font-size:clamp(1.9rem,3.2vw,2.8rem)}
   .money__copy{gap:10px;padding-bottom:52px}
+}
+
+/* ═══════════════════ ITERATION EIGHT (8 Sep 2026 — JP: "right, that's perfect" plus four things) ═══════════════════ */
+/* 4 · THE DESKTOP CARD: the words fit the card at EVERY laptop height (JP: "the $680 a year… is coming out of the
+   card"). Measured 8 Sep: 1536×864 and 1440×850 spilled 8px, 1440×700 spilled 15px. The 840 band now starts at 880,
+   and a 720 band sits under it. The card keeps its clip, so a spill would be clipped, never loose: it is the type that
+   gives. */
+@media(min-width:860px) and (max-height:880px){
+  .sysx{padding-block:12px}
+  .sysx__panel{gap:8px}
+  .sysx__panel h3{font-size:2.05rem}
+  .sysx__spec{font-size:1rem;margin-top:-4px}
+  .sysx__price .money{font-size:2.05rem}
+  .sysx__pts{gap:5px}
+  .sysx__pts li{font-size:.97rem;line-height:1.3}
+  .sysx__svc{font-size:15px;line-height:1.35}
+  .range .sc-stage{gap:12px;padding-bottom:36px}
+}
+@media(min-width:860px) and (max-height:720px){
+  .range .sc-stage{gap:8px;padding-top:calc(var(--top) - 16px);padding-bottom:24px}
+  .range__head{gap:4px}
+  .range__head h2{font-size:1.6rem;margin-top:4px}
+  .range__head .lede{display:none}
+  .sysx__copy{padding:12px 20px 12px 26px}
+  .sysx__panel{gap:5px}
+  .sysx__tag{padding:4px 10px;font-size:11px}
+  .sysx__panel h3{font-size:1.7rem}
+  .sysx__spec{font-size:.92rem;margin-top:-2px}
+  .sysx__price .money{font-size:1.7rem}
+  .sysx__pts{gap:3px}
+  .sysx__pts li{font-size:.9rem;line-height:1.25}
+  .sysx__pts li svg{width:16px;height:16px;margin-top:2px}
+  .sysx__go{gap:5px}
+  .sysx__go .btn{min-height:42px}
+  .sysx__svc{font-size:15px;line-height:1.3}
+  .dock button{min-height:42px;padding:5px 14px}
+}
+
+/* 4 · THE PHONE SYSTEMS ARE ONE SCREEN (iteration eight). The iteration-seven flow (three renders stacked down
+   the page) stands down: the renders stack in one stage again, the panels in one card, and two rows the desktop
+   never shows carry the peel, the "See inside", the arrows and the hint. */
+.sysx__bar,.sysx__ctl{display:none}
+@media(max-width:859px){
+  html.ro-ph .range .sc-stage{display:grid;grid-template-rows:auto auto;gap:10px;min-height:100svh;align-content:center;padding:calc(var(--top) - 16px) var(--safe) calc(var(--fabclear) + 6px)}
+  html.ro-ph .range__head{gap:4px}
+  html.ro-ph .range__head h2{font-size:clamp(1.35rem,6vw,1.6rem);margin-top:2px;max-width:none}
+  html.ro-ph .range__head .lede{display:none}
+  html.ro-ph .sysx{display:grid;grid-template-columns:1fr;grid-template-rows:auto var(--stageH,260px) auto auto;gap:8px;width:100%;max-height:none;padding:0}
+  html.ro-ph .sysx__bar{display:flex;align-items:center;justify-content:space-between;gap:10px;order:1}
+  html.ro-ph .sysx__peel{display:inline-flex;align-items:center;min-height:36px;padding:0 13px;border-radius:var(--r-full);background:var(--ink);color:#fff;
+    font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:background .45s ease-in-out,color .45s ease-in-out}
+  html.ro-ph .sysx.t-plus .sysx__peel{background:var(--blue)}
+  html.ro-ph .sysx.t-prem .sysx__peel{background:var(--purple)}
+  html.ro-ph .sysx.t-luxe .sysx__peel{background:#E9BE3C;color:var(--ink)}
+  html.ro-ph .sysx__see{display:inline-flex;align-items:center;min-height:44px;padding:0 15px;border:0;border-radius:var(--r-full);background:var(--blue);color:#fff;cursor:pointer;
+    font-family:var(--badge);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 8px 20px rgba(11,97,244,.3);-webkit-tap-highlight-color:transparent}
+  html.ro-ph .sysx__stage{display:block;order:2;position:relative;height:100%;min-height:0}
+  html.ro-ph .sysx__pic{position:absolute;inset:0;margin:auto;width:auto;height:100%;max-width:100%;aspect-ratio:1100/1472;opacity:0;transform:translateY(14px) scale(.97);pointer-events:none;cursor:pointer}
+  html.ro-ph .sysx__pic.on{opacity:1;transform:none;pointer-events:auto}
+  html.ro-ph .sysx__pic.was{opacity:0;transform:translateY(-18px) scale(.97)}
+  html.ro-ph .sysx__pic img{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 20px 26px rgba(4,16,46,.16))}
+  html.ro-ph .sysx__pic .xtap{display:none}
+  html.ro-ph .sysx__pic::before{width:min(150%,420px)}
+  html.ro-ph .sysx__ctl{display:flex;order:3;align-items:center;justify-content:center;gap:10px}
+  html.ro-ph .sysx__arr{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;
+    box-shadow:0 10px 24px -10px rgba(4,16,46,.4),inset 0 0 0 1px rgba(15,39,72,.08);-webkit-tap-highlight-color:transparent;transition:transform .45s var(--e-out)}
+  html.ro-ph .sysx__arr:active{transform:scale(.94)}
+  html.ro-ph .sysx__arr svg{width:18px;height:18px}
+  html.ro-ph .sysx__hint{min-width:150px;text-align:center;font-size:15px;font-weight:700;color:var(--ink)}
+  html.ro-ph .sysx__copy{display:grid;order:4;position:relative;background:#E3EDFD;border-radius:20px;padding:14px 16px 16px 26px;box-shadow:var(--shadow-sm),0 24px 40px -28px rgba(4,16,46,.35);min-height:0;max-height:none}
+  html.ro-ph .sysx__copy::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:6px;border-radius:0 4px 4px 0;background:var(--hinge,var(--blue))}
+  html.ro-ph .sysx__panel{grid-area:1/1;position:relative;opacity:0;transform:translateY(10px);pointer-events:none;background:none;box-shadow:none;padding:0;margin:0;border-radius:0;order:0;gap:7px}
+  html.ro-ph .sysx__panel::before{display:none}
+  html.ro-ph .sysx__panel.on{opacity:1;transform:none;pointer-events:auto}
+  html.ro-ph .sysx__panel.plus,html.ro-ph .sysx__panel.prem,html.ro-ph .sysx__panel.luxe{background:none}
+  html.ro-ph .sysx__svc{display:block}
+  html.ro-ph .dock{display:none}
+}
+@media(max-width:859px) and (max-height:700px){
+  html.ro-ph .sysx__svc{display:none}
+}
+
+/* the one-screen budget at 390×844 (measured 8 Sep: the render got 170px while the card took 390): the kicker
+   stands down, the service line is one sentence, the arrows ride the render's sides, the hint is one line */
+.sysx__arr{display:none}
+@media(max-width:859px){
+  html.ro-ph .range .sc-stage{padding-top:66px;padding-bottom:var(--fabclear);gap:8px}
+  html.ro-ph .range__head .kick{display:none}
+  html.ro-ph .range__head h2{margin-top:0}
+  html.ro-ph .sysx__svc .svc-d{display:none}
+  html.ro-ph .sysx__copy{padding:12px 14px 14px 24px}
+  html.ro-ph .sysx__panel{gap:6px}
+  html.ro-ph .sysx__ctl{min-height:22px;justify-content:center}
+  html.ro-ph .sysx__hint{font-size:15px;min-width:0}
+  html.ro-ph .sysx__arr{display:grid;position:absolute;top:50%;z-index:4;translate:0 -50%;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;
+    box-shadow:0 10px 24px -10px rgba(4,16,46,.4),inset 0 0 0 1px rgba(15,39,72,.08);-webkit-tap-highlight-color:transparent;transition:transform .45s var(--e-out)}
+  html.ro-ph .sysx__arr.prev{left:0} html.ro-ph .sysx__arr.next{right:0}
+  html.ro-ph .sysx__arr svg{width:18px;height:18px}
+}
+@media(max-width:859px){
+  /* the tag ("the starting point") stands down on the phone card: 32px more for the render (JP: the system a little
+     smaller, the words not) */
+  html.ro-ph .sysx__tag{display:none}
+}
+@media(max-width:859px){
+  html.ro-ph .sysx__arr{transition:transform .45s var(--e-out),opacity .45s ease-in-out,visibility .45s}
+  html.ro-ph .sysx.xopened .sysx__arr{opacity:0;visibility:hidden;pointer-events:none}
+}
+/* qc.mjs 8 Sep: the money act's frame line at a 864px laptop */
+@media(min-width:860px) and (max-height:880px){
+  .money__copy{gap:11px;padding-bottom:54px}
+  .yrow{padding:9px 0}
 }
 
 </style>
@@ -2948,7 +3061,16 @@ body.dopen .drawer{transform:none}
     </header>
 
     <div class="sysx t-plus" id="sysx">
+      <!-- ITERATION EIGHT (JP, 8 Sep): on a phone the three systems are ONE screen, not three: a peel naming the
+           system and the "See inside" above the render, arrows and "Swipe for Premium" under it, the card right
+           under that. The desktop hides these two rows. -->
+      <div class="sysx__bar" aria-hidden="false">
+        <span class="sysx__peel" id="sysPeel">Pure Plus</span>
+        <button class="sysx__see" id="sysSee" type="button">See inside</button>
+      </div>
       <div class="sysx__stage">
+        <button class="sysx__arr prev" type="button" aria-label="Previous system"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="sysx__arr next" type="button" aria-label="Next system"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <figure class="sysx__pic plus on xcard" id="pure-plus" data-set="plus" data-i="0" role="button" tabindex="0" aria-label="See inside the Pure Plus">
           <img src="media/xf-plus/f00.webp" alt="The Pure Plus five stage alkaline reverse osmosis system" width="1100" height="1472" loading="lazy">
           <span class="xtap" aria-hidden="true">See inside</span>
@@ -2976,7 +3098,7 @@ body.dopen .drawer{transform:none}
           </ul>
           <div class="sysx__go">
             <button class="btn js-open" type="button" data-sys="Pure Plus"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
-            <span class="sysx__svc">$600 a year, serviced by us. Covered for life while you stay serviced with us.</span>
+            <span class="sysx__svc">$600 a year, serviced by us.<span class="svc-d"> Covered for life while you stay serviced with us.</span></span>
           </div>
         </article>
         <article class="sysx__panel prem" data-i="1">
@@ -2991,7 +3113,7 @@ body.dopen .drawer{transform:none}
           </ul>
           <div class="sysx__go">
             <button class="btn js-open" type="button" data-sys="Pure Premium"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
-            <span class="sysx__svc">$650 a year, serviced by us. Covered for life while you stay serviced with us.</span>
+            <span class="sysx__svc">$650 a year, serviced by us.<span class="svc-d"> Covered for life while you stay serviced with us.</span></span>
           </div>
         </article>
         <article class="sysx__panel luxe" data-i="2">
@@ -3006,10 +3128,11 @@ body.dopen .drawer{transform:none}
           </ul>
           <div class="sysx__go">
             <button class="btn js-open" type="button" data-sys="Pure Luxe"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
-            <span class="sysx__svc">$680 a year, serviced by us. Covered for life while you stay serviced with us.</span>
+            <span class="sysx__svc">$680 a year, serviced by us.<span class="svc-d"> Covered for life while you stay serviced with us.</span></span>
           </div>
         </article>
       </div>
+      <div class="sysx__ctl" id="sysCtl"><span class="sysx__hint" id="sysHint" aria-live="polite">Swipe for Premium</span></div>
     </div>
 
     <nav class="dock" id="sysDock" aria-label="Choose a system">
@@ -4886,26 +5009,56 @@ body.dopen .drawer{transform:none}
     b.addEventListener('click', go);
     if (window.PointerEvent) b.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') go(e); });
   });
-  /* THE PHONE (iteration seven): the section's ground follows the system in the middle of the screen, the
-     homepage's own mechanism (an observer at the 49% line) */
-  if (mph && rangeAct && rstage && 'IntersectionObserver' in window){
-    var gio = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (!e.isIntersecting) return;
-        var i = parseInt(e.target.getAttribute('data-i'), 10);
-        rstage.style.setProperty('--rbg', RBG[i]);
-        if (sysx){ SYS_KEY.forEach(function(k){ sysx.classList.remove('t-' + k); }); sysx.classList.add('t-' + SYS_KEY[i]); }
-      });
-    }, {rootMargin:'-40% 0px -40% 0px'});
-    sysPics.forEach(function(c){ gio.observe(c); });
-    rstage.style.setProperty('--rbg', RBG[0]);
+  /* ⭐ THE PHONE (iteration eight, JP: "instead of swiping down to Pure Premium and Pure Luxe, have little arrows
+     left and right that go on an infinite loop… be able to see it on one page"): ONE screen. The peel names the
+     system, the arrows (and a sideways swipe on the render) step Plus → Premium → Luxe → Plus, the hint under the
+     render says what is next, the ground and the card change with it, and the render's height is measured so the
+     head, the render, the hint and the card share the screen with the words at full size. */
+  var SYS_SHORT = ['Plus', 'Premium', 'Luxe'], SYS_NAME = ['Pure Plus', 'Pure Premium', 'Pure Luxe'];
+  var sysPeel = document.getElementById('sysPeel'), sysHint = document.getElementById('sysHint'), sysSee = document.getElementById('sysSee'), sysCtl = document.getElementById('sysCtl');
+  function sysLabel(){
+    var i = Math.max(sysCur, 0);
+    if (sysPeel) sysPeel.textContent = SYS_NAME[i];
+    if (sysHint) sysHint.textContent = 'Swipe for ' + SYS_SHORT[(i + 1) % 3];
+    var openNow = !!(sysPics[i] && sysPics[i]._isOpen && sysPics[i]._isOpen());
+    if (sysSee) sysSee.textContent = openNow ? 'Close' : 'See inside';
+    /* the arrows step aside while a unit is open, so its markers and their tips never share a pixel with a button */
+    if (sysx) sysx.classList.toggle('xopened', openNow);
+  }
+  if (mph && rangeAct && rstage){
+    var sysStep = function(dir){ setSys((sysCur + dir + 3) % 3); sysLabel(); };
+    var arrP = sysx && sysx.querySelector('.sysx__arr.prev'), arrN = sysx && sysx.querySelector('.sysx__arr.next');
+    if (arrP) arrP.addEventListener('click', function(){ sysStep(-1); });
+    if (arrN) arrN.addEventListener('click', function(){ sysStep(1); });
+    if (sysSee) sysSee.addEventListener('click', function(){ var c = sysPics[Math.max(sysCur, 0)]; if (c){ c.click(); setTimeout(sysLabel, 30); } });
+    /* a sideways swipe on the render steps too (JP: "even if you want to do a swipe, I don't even care") */
+    var stg = document.querySelector('#sysx .sysx__stage'), sx0 = 0, sy0 = 0, sw = false;
+    if (stg){
+      stg.addEventListener('touchstart', function(e){ sx0 = e.touches[0].clientX; sy0 = e.touches[0].clientY; sw = true; }, {passive:true});
+      stg.addEventListener('touchend', function(e){ if (!sw) return; sw = false; var t = e.changedTouches[0]; var dx = t.clientX - sx0, dy = t.clientY - sy0; if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.4) sysStep(dx < 0 ? 1 : -1); }, {passive:true});
+    }
+    sysPics.forEach(function(c){ c.addEventListener('click', function(){ setTimeout(sysLabel, 30); }); });
+    /* the render's height: what is left of the screen once the head, the two rows and the card have theirs */
+    var sizeCarousel = function(){
+      var st = rangeAct.querySelector('.sc-stage'); if (!st || !sysx) return;
+      var head = rangeAct.querySelector('.range__head'), bar = sysx.querySelector('.sysx__bar'), copy = sysx.querySelector('.sysx__copy');
+      var cs = getComputedStyle(st), gap = parseFloat(getComputedStyle(sysx).rowGap) || 8;
+      var fixed = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + head.offsetHeight + (parseFloat(cs.rowGap) || 0) + bar.offsetHeight + (sysCtl ? sysCtl.offsetHeight : 0) + copy.offsetHeight + gap * 3;
+      var h = Math.round(clamp(innerHeight - fixed, 170, 380));
+      sysx.style.setProperty('--stageH', h + 'px');
+    };
+    setSys(0); sysLabel();
+    sizeCarousel();
+    addEventListener('load', function(){ setTimeout(sizeCarousel, 120); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeCarousel);
+    addEventListener('resize', sizeCarousel, {passive:true});
   }
   /* an old product URL lands on its system: /pure-premium-… 301s into #pure-premium */
   (function landOnSystem(){
     if (!rangeAct || !location.hash) return;
     var i = -1; sysPics.forEach(function(c, n){ if ('#' + c.id === location.hash) i = n; });
     if (i < 1) return;
-    if (mph){ addEventListener('load', function(){ setTimeout(function(){ jump(sysPics[i].getBoundingClientRect().top + scrollY - 80); }, 60); }); return; }
+    if (mph){ addEventListener('load', function(){ setTimeout(function(){ setSys(i); sysLabel(); jump(rangeAct.getBoundingClientRect().top + scrollY - 8); }, 60); }); return; }
     addEventListener('load', function(){ setTimeout(function(){
       var top = rangeAct.getBoundingClientRect().top + scrollY, travel = rangeAct.offsetHeight - innerHeight;
       if (travel <= 0) return;
