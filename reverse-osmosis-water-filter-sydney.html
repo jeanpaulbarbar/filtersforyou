@@ -962,12 +962,10 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
    cyclic and resolves to auto — the 400×1400 cartridge rendered at 1400px, overflowed its row and the
    copy sat on top of it. Absolute + inset:0 + object-fit:contain is a box the image cannot argue with. */
 .stax__pic img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain;
-  filter:drop-shadow(0 42px 46px rgba(0,0,0,.55));
-  /* the still is shot on its own navy backdrop, so without this you see the photograph's rectangle
-     sitting on the page's navy. Feathering the four edges lets the cartridge float on the glow. */
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%);
-  mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%);
-  -webkit-mask-composite:source-in;mask-composite:intersect}
+  /* ITERATION FOUR: the still is a CUTOUT (ro/cutout.py), so there is no rectangle to feather. The
+     page's own navy, glow and shadow sit behind it; the same box for every stage, so the cartridge
+     stands in the same spot each time (JP). */
+  filter:drop-shadow(0 36px 40px rgba(0,0,0,.6)) drop-shadow(0 0 26px rgba(91,154,226,.28))}
 
 /* the words beside it */
 .stax__copy{grid-column:2;grid-row:2;align-self:center;display:grid;gap:clamp(10px,1.6vh,18px);max-width:34ch}
@@ -983,8 +981,8 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 /* the rail: five peers, the water running through them */
 .crail{grid-column:1/-1;grid-row:3;position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1vw,16px);padding-top:20px;padding-right:190px}
 .crail::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;border-radius:2px;background:rgba(255,255,255,.16)}
-.crail::after{content:"";position:absolute;left:0;top:0;height:2px;width:100%;border-radius:2px;
-  background:linear-gradient(90deg,#5B9AE2,#8FB8FF);transform:scaleX(var(--f,0));transform-origin:0 50%;will-change:transform;transition:transform .5s var(--e-out)}
+.crail::after{content:"";position:absolute;left:0;top:0;height:2px;width:var(--fx,0px);border-radius:2px;
+  background:linear-gradient(90deg,#5B9AE2,#8FB8FF);box-shadow:0 0 12px rgba(143,184,255,.55);transition:width .55s var(--e-out)}
 .crail button{position:relative;display:grid;gap:5px;justify-items:start;text-align:left;padding:14px 4px 4px;margin:0;border:0;background:none;cursor:pointer;
   font-family:var(--sans);color:rgba(255,255,255,.5);min-height:56px;transition:color .5s ease-in-out;-webkit-tap-highlight-color:transparent}
 .crail button::before{content:"";position:absolute;left:0;top:-1px;width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.24);transform:translateY(-50%);transition:background .5s ease-in-out,box-shadow .5s ease-in-out}
@@ -1038,8 +1036,8 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 
 /* the lit stage — identical for all three, only --tint changes */
 .sysx__stage{position:relative;height:100%;min-height:0;display:grid;isolation:isolate}
-.sysx__pic{position:absolute;inset:0;opacity:0;transform:translateY(22px) scale(.95);
-  transition:opacity .6s var(--e-out),transform .76s var(--e-out);will-change:opacity,transform;pointer-events:none;
+.sysx__pic{position:absolute;inset:0;opacity:0;transform:translateY(14px) scale(.97);
+  transition:opacity .42s var(--e-out),transform .52s var(--e-out);will-change:opacity,transform;pointer-events:none;
   cursor:pointer;-webkit-tap-highlight-color:transparent}
 .sysx__pic.on{opacity:1;transform:none;pointer-events:auto}
 .sysx__pic.was{opacity:0;transform:translateY(-18px) scale(.97)}
@@ -1049,8 +1047,8 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
   filter:drop-shadow(0 34px 34px rgba(4,16,46,.22));
   /* the render carries its own pale backdrop, so without this you see the photograph's rectangle on
      the page's mist. Feathered, the unit floats on its own tint. */
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 4%,#000 96%,transparent 100%);
-  mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 4%,#000 96%,transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 78%,transparent 100%),linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);
   -webkit-mask-composite:source-in;mask-composite:intersect}
 .sysx__pic:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:var(--r-hero)}
 .sysx__pic.plus{--tint:rgba(11,97,244,.16)}
@@ -1060,7 +1058,7 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 /* the words — one panel per system, stacked, one visible. Same sizes for all three. */
 .sysx__copy{display:grid;min-width:0;align-self:center}
 .sysx__panel{grid-area:1/1;display:grid;align-content:center;gap:clamp(12px,1.8vh,20px);max-width:36ch;
-  opacity:0;transform:translateY(14px);transition:opacity .5s ease-in-out,transform .62s var(--e-out);
+  opacity:0;transform:translateY(10px);transition:opacity .36s ease-in-out,transform .46s var(--e-out);
   will-change:opacity,transform;pointer-events:none}
 .sysx__panel.on{opacity:1;transform:none;pointer-events:auto}
 .sysx__tag{justify-self:start;display:inline-flex;align-items:center;padding:6px 13px;border-radius:var(--r-full);
@@ -1563,12 +1561,7 @@ body.dopen .drawer{transform:none}
   .taps__grid{grid-template-columns:1fr;gap:18px}
   .taps__fr{order:-1;aspect-ratio:4/4.4;max-height:none}
   .taps__fr figcaption{top:12px;bottom:auto;right:12px}
-  .taps__fr .swatches{display:flex;position:absolute;left:12px;right:12px;bottom:12px;z-index:3;margin:0;justify-content:center;gap:10px;padding:8px;border-radius:var(--r-full);background:rgba(255,254,252,.84);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);box-shadow:0 14px 30px -14px rgba(4,16,46,.55),inset 0 0 0 1px rgba(255,255,255,.6)}
-  .taps__fr .sw{min-height:44px;width:44px;padding:0;justify-content:center;border-radius:50%;font-size:0;gap:0;border-color:transparent;background:transparent;box-shadow:none}
-  .taps__fr .sw i{width:28px;height:28px}
-  .taps__fr .sw.on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
-  .taps__copy .swatches{display:none}
-  .sw{min-height:46px;font-size:13.5px}
+  .sw{min-height:46px;font-size:15px}
   /* 7 · the servicing: the photograph on top, the ledger under it */
   .care .sc-stage{grid-template-columns:1fr;grid-template-rows:23svh minmax(0,1fr)}
   .care__ph{height:auto}
@@ -1711,6 +1704,182 @@ body.dopen .drawer{transform:none}
   .sysx__svc{font-size:15px;line-height:1.3;max-width:32ch}
   .sysx__panel{gap:6px}
   .sysx__go{gap:5px}
+}
+
+
+/* ═══════════════════ ITERATION FOUR (7 Sep 2026, JP's section-by-section session review) ═══════════════════
+   Lifestyle stills in the hero and the plate · cutout cartridges on a lit stage with the line locking on the
+   stage · one tinted card for the systems, the dock in the systems' colours · under the sink as a one screen
+   split · the certification marks linked in the ask · soft washes of gradient through the chapters (21st.dev
+   Floating Gradient, id 19381, rebuilt as background layers so nothing paints through a blur filter) · and the
+   phone re-fitted section by section so nothing sits at the foot of the screen. */
+
+/* THE WASHES — dark on the navy act, light on the paper and mist chapters */
+.how .sc-stage{background:
+  radial-gradient(70% 58% at 16% 0%,rgba(11,97,244,.30),transparent 62%),
+  radial-gradient(56% 52% at 94% 100%,rgba(8,70,190,.44),transparent 62%),
+  radial-gradient(40% 40% at 72% 34%,rgba(91,154,226,.09),transparent 60%),
+  var(--ink-blue)}
+.range .sc-stage{background:
+  radial-gradient(58% 50% at 8% 10%,rgba(11,97,244,.11),transparent 60%),
+  radial-gradient(50% 46% at 92% 94%,rgba(109,40,217,.07),transparent 60%),
+  var(--mist)}
+.taps{background:radial-gradient(56% 48% at 0% 100%,rgba(11,97,244,.09),transparent 60%),radial-gradient(40% 40% at 100% 0%,rgba(255,217,0,.10),transparent 60%),var(--mist-2)}
+.install{background:radial-gradient(52% 44% at 100% 0%,rgba(11,97,244,.08),transparent 60%),var(--paper)}
+.ask{background:radial-gradient(50% 40% at 0% 30%,rgba(11,97,244,.07),transparent 60%),var(--paper)}
+.money-act .sc-stage{background:radial-gradient(46% 46% at 100% 0%,rgba(11,97,244,.08),transparent 60%),var(--paper)}
+/* a slow drift on a fine pointer only: the light washes breathe (compositor: background-position on a
+   layer three times the box), never on a phone */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .taps,.install,.ask{background-size:200% 200%,200% 200%,auto;animation:washdrift 26s ease-in-out infinite alternate}
+  .install{background-size:200% 200%,auto}
+}
+@keyframes washdrift{from{background-position:0% 0%,100% 100%,0 0}to{background-position:30% 40%,70% 60%,0 0}}
+
+/* 2 · THE STAGE: the glow behind the cutout, the dot that glows on the lit stage, the label lit with it */
+.stax::before{width:min(124%,620px);background:radial-gradient(circle,rgba(91,154,226,.42) 0%,rgba(11,97,244,.18) 40%,transparent 66%)}
+.stax::after{border-color:rgba(143,184,255,.16)}
+.crail{padding-right:0}
+.crail button.on::before{background:#fff;box-shadow:0 0 0 6px rgba(143,184,255,.22),0 0 18px 4px rgba(91,154,226,.7);animation:dotglow 2.8s ease-in-out infinite}
+.crail button.on b{text-shadow:0 0 16px rgba(143,184,255,.65)}
+.crail button.on i{color:#8FB8FF}
+@keyframes dotglow{0%,100%{box-shadow:0 0 0 6px rgba(143,184,255,.22),0 0 18px 4px rgba(91,154,226,.7)}50%{box-shadow:0 0 0 9px rgba(143,184,255,.14),0 0 28px 8px rgba(91,154,226,.9)}}
+@media(prefers-reduced-motion:reduce){.crail button.on::before{animation:none}}
+
+/* 4 · THE SYSTEMS: one card, tinted by the system; the dock in the systems' three colours */
+.sysx{position:relative;isolation:isolate;border-radius:var(--r-hero);padding:clamp(20px,2.8vw,40px) clamp(24px,3.4vw,52px);
+  background-color:#E6EFFD;box-shadow:var(--shadow-lg),inset 0 0 0 1px rgba(255,255,255,.75);
+  max-height:min(620px,64vh);overflow:clip;transition:background-color .7s ease-in-out}
+.sysx::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(160deg,#fff 0%,rgba(255,255,255,.55) 45%,rgba(255,255,255,0) 100%)}
+.sysx > *{position:relative;z-index:1}
+.sysx.t-plus{background-color:#DCE9FD}
+.sysx.t-prem{background-color:#E9DDFB}
+.sysx.t-luxe{background-color:#F7E7B8}
+.sysx__pic.luxe{--tint:rgba(217,169,58,.22)}
+.sysx__panel.luxe{--tag:#FFF0BF;--tagi:#6E5300}
+.sysx__panel.luxe .sysx__pts li svg{color:#B8860B}
+.dock button.plus b{color:var(--blue)}
+.dock button.prem b{color:var(--purple)}
+.dock button.luxe b{color:#8A6508}
+.dock button.on b{color:#fff}
+.dock button.on span{color:#fff}   /* ⛔ rgba(255,255,255,.88) on the blue pill measured 4.38:1 (Lighthouse, 7 Sep); solid white clears 4.5 */
+.dock button.on.plus{background:var(--blue)}
+.dock button.on.prem{background:var(--purple)}
+.dock button.on.luxe{background:#E9BE3C;color:var(--ink)}
+.dock button.on.luxe b{color:var(--ink)}
+.dock button.on.luxe span{color:rgba(15,39,72,.82)}
+.range .sc-stage{padding-bottom:clamp(40px,6.5vh,72px);gap:clamp(16px,2.4vh,28px)}
+
+/* 5 · THE TAPS: the phone's shorter lede stands down on a desktop */
+.taps__lede-m,.taps__name{display:none}
+
+/* 6 · UNDER THE SINK: a split that fits one screen — and IS one screen on a desktop and a tablet, so the
+   next act's words never pass through the way back's corner on this chapter's last screen (qc.mjs at
+   900×1200 and 1920×1080, 7 Sep) */
+.install{padding:clamp(56px,7vw,96px) 0}
+@media(min-width:860px){.install{display:grid;align-content:center;min-height:100vh}}
+/* the tablet band: the way back sits on the rail's fifth label without this (qc.mjs COVERED, 900 wide) */
+@media(min-width:860px) and (max-width:1079px){.crail{padding-right:170px}}
+.install__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4.5vw,72px);align-items:center}
+.install__copy{display:grid;gap:16px;align-content:center}
+.install__copy h2.d2{margin-top:0;font-size:clamp(2rem,3.6vw,3.2rem)}
+.install__sub{color:var(--ink);font-size:clamp(1.2rem,1.6vw,1.5rem);font-weight:600;line-height:1.2;letter-spacing:0;max-width:24ch;margin-top:4px;text-wrap:balance}
+.install .steps3{grid-template-columns:1fr;gap:14px;margin-top:4px}
+.install .steps3 li{padding:0 0 0 56px;min-height:40px}
+.install .steps3 li::before{top:0}
+.install .steps3 b{padding-top:8px}
+.install__fr{aspect-ratio:4/3.2;max-height:min(66vh,600px);width:100%;box-shadow:var(--shadow-lg)}
+.install__lic{margin-top:6px}
+
+/* 9 · THE ASK: the two certification marks, linked, on their own plate */
+.ask__certs{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;padding:14px 18px;border-radius:var(--r-card);background:var(--mist-2);box-shadow:inset 0 0 0 1px var(--rule)}
+.ask__certs a{display:grid;place-items:center;height:52px;padding:0 14px;border-radius:12px;background:#fff;box-shadow:var(--shadow-sm);transition:transform .3s var(--e-out),box-shadow .3s var(--e-out)}
+.ask__certs a img{height:32px;width:auto;max-width:none}
+.ask__certs a img.nsf{height:38px}
+.ask__certs p{margin:0;font-size:15px;color:var(--muted);line-height:1.45;flex:1 1 220px}
+.ask__certs p b{color:var(--ink);font-weight:700}
+@media(hover:hover) and (pointer:fine){.ask__certs a:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}}
+
+/* ═══════ THE PHONE, iteration four: nothing at the foot of the screen, one idea at eye level ═══════ */
+@media(max-width:859px){
+  /* 1 · why you're here: the words at eye level, the veil carrying them */
+  .why__copy{align-content:center;padding:calc(var(--top) + 16px) calc(var(--safe) + 22px) calc(var(--fabclear) + 24px) var(--safe)}
+  .why__veil{background:linear-gradient(180deg,rgba(4,16,46,.24) 0%,rgba(4,16,46,.6) 30%,rgba(4,16,46,.9) 60%,rgba(4,16,46,.94) 100%)}
+  .why__fr img{object-position:74% 40%}
+  /* 3 · the money: the bottles are the top of the plate and fade into the paper; the rows at eye level */
+  .money-act .sc-stage{grid-template-rows:34svh minmax(0,1fr)}
+  .money__ph{position:relative}
+  .money__ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,254,252,0) 42%,var(--paper) 100%)}
+  .money__ph img{object-position:50% 58%}
+  .money__copy{align-content:center;padding:0 calc(var(--safe) + 22px) var(--fabclear) var(--safe);gap:10px;margin-top:-34px}
+  .money__copy h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  .yrow{padding:11px 0;gap:4px 12px}
+  .yrow b{font-size:1.02rem}
+  .yrow .money{font-size:1.5rem}
+  .yrow.ours{padding:14px 16px;margin-top:8px}
+  .yrow.ours b small{display:none}
+  .yrow.ours .money{font-size:1.7rem}
+  .money__pay{display:none}
+  .money__frame{font-size:15px;max-width:none;margin-top:2px}
+  /* 4 · the systems: one card, the product above the words, the dock under the card */
+  .range .sc-stage{padding:calc(var(--top) - 24px) var(--safe) var(--fabclear);gap:10px}
+  .range__head h2{max-width:20ch}
+  .sysx{padding:12px 16px 14px;border-radius:22px;max-height:none;gap:8px;grid-template-rows:minmax(0,1fr) auto}
+  .sysx__stage{min-height:28svh}
+  .sysx__panel{gap:6px}
+  .sysx__pts li:nth-child(3){display:none}
+  .xtap{right:4%;top:4%}
+  /* 5 · the taps: the finishes under the photograph, the caption stands down, the pill that names itself */
+  .taps{padding:48px 0 var(--fabclear)}
+  .taps__grid{gap:14px}
+  .taps__fr{aspect-ratio:4/3.5;max-height:none}
+  .taps__fr figcaption{display:none}
+  .taps__copy h2{margin-top:10px;font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  .taps__lede-d{display:none}
+  .taps__lede-m{display:block;font-size:1rem;margin-top:10px}
+  .taps__copy .swatches{display:flex;flex-wrap:nowrap;gap:10px;margin-top:14px}
+  .taps__copy .sw{min-height:46px;width:46px;padding:0;justify-content:center;border-radius:50%;font-size:0;gap:0}
+  .taps__copy .sw i{width:28px;height:28px}
+  .taps__name{display:block;margin-top:8px;font-size:15px;font-weight:700;color:var(--ink)}
+  .taps__price{margin-top:14px}
+  .taps__price b{font-size:1.2rem}
+  .taps__go{margin-top:14px}
+  .taps__go .ul{display:none}
+  /* 6 · under the sink: the photograph first, then the three steps */
+  .install{padding:48px 0 var(--fabclear)}
+  .install__grid{grid-template-columns:1fr;gap:16px}
+  .install__fr{order:-1;aspect-ratio:4/3;max-height:none}
+  .install__copy{gap:10px}
+  .install__copy h2.d2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  .install__sub{font-size:1.1rem;max-width:none}
+  .install .steps3{gap:10px;margin-top:2px}
+  .install .steps3 li{padding-left:50px;min-height:38px}
+  .install .steps3 b{padding-top:6px}
+  /* 7 · the servicing: the photograph fades into the field, the ledger at eye level */
+  .care .sc-stage{grid-template-rows:25svh minmax(0,1fr)}
+  .care__ph{position:relative}
+  .care__ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(11,97,244,0) 36%,#0B61F4 100%)}
+  .care__panel{padding:4px calc(var(--safe) + 22px) var(--fabclear) var(--safe);gap:8px;align-content:center}
+  .care__panel .lrow{padding:8px 14px}
+  .care__panel .lrow.head{padding:7px 14px}
+  /* 8 · the reviews: the whole house page's lane, its own numbers */
+  .lane{padding:56px 0 40px}
+  .lane .rmq{margin-top:18px;gap:10px}
+  .lane .rrow{gap:10px}
+  .lane .rvc{padding:13px 14px;gap:7px;flex:0 0 min(300px,76vw);width:auto}
+  .lane .rvc > p{font-size:15px;line-height:1.45}
+  .lane .rvp{flex:0 0 min(238px,58vw)}
+  .lane__all{margin-top:14px;min-height:44px}
+  /* 9 · the certs */
+  .ask__certs{padding:12px 14px;gap:10px 12px}
+  .ask__certs a{height:46px;padding:0 10px}
+  .ask__certs a img{height:26px}
+  .ask__certs a img.nsf{height:32px}
+}
+@media(max-width:859px) and (max-height:700px){
+  .sysx__stage{min-height:24svh}
+  .money-act .sc-stage{grid-template-rows:28svh minmax(0,1fr)}
+  .care .sc-stage{grid-template-rows:18svh minmax(0,1fr)}
 }
 
 </style>
@@ -2163,6 +2332,8 @@ body.dopen .drawer{transform:none}
      GENERATED (Higgsfield Nano Banana Pro, 6 Sep 2026, our own tap and kitchen references):
      media/ro/hero.webp, hero-2, hero-3, hero-4 and close, with phone twins: five stills of the one kitchen
      crossfading every six seconds (JP, iteration two), the first the LCP, the rest fetched after load.
+     ITERATION FOUR (7 Sep): two LIFESTYLE stills of the same kitchen join the loop, interleaved — a mother
+     and child at the tap (hero-5, 4k) and a father pouring for his daughter (hero-6, 2k).
      The card deals Pure Plus, Pure Premium and Pure Luxe every 3.2 seconds and rests while hovered,
      tapped, open, or the drawer is up. ═════════ -->
 <div class="pgtop">
@@ -2172,7 +2343,9 @@ body.dopen .drawer{transform:none}
       <source media="(max-width:859px)" srcset="media/ro/hero-m.webp">
       <img class="hph" src="media/ro/hero.webp" alt="A glass being filled from a brushed brass three way mixer tap on a white stone bench in a Sydney kitchen" width="2400" height="1340" fetchpriority="high">
     </picture>
+    <picture style="--pos:62% 50%" data-src="media/ro/hero-5.webp" data-srcm="media/ro/hero-5-m.webp"></picture>
     <picture style="--pos:58% 52%" data-src="media/ro/hero-3.webp" data-srcm="media/ro/hero-3-m.webp"></picture>
+    <picture style="--pos:66% 52%" data-src="media/ro/hero-6.webp" data-srcm="media/ro/hero-6-m.webp"></picture>
     <picture style="--pos:56% 55%" data-src="media/ro/hero-2.webp" data-srcm="media/ro/hero-2-m.webp"></picture>
     <picture style="--pos:44% 55%" data-src="media/ro/hero-4.webp" data-srcm="media/ro/hero-4-m.webp"></picture>
     <picture style="--pos:40% 55%" data-src="media/ro/close.webp" data-srcm="media/ro/close-m.webp"></picture>
@@ -2213,24 +2386,26 @@ body.dopen .drawer{transform:none}
 <!-- ═════════ 1 · WHY YOU'RE HERE — a plate, the whole house page's own shape: the photograph fills the
      frame, the words sit on it, the six names land one after another with a yellow line drawing under
      each, then one line closes it. Short (JP, iteration two: "quickly cover what we need to cover in an
-     effective and visual way, then give them the options"). GENERATED (Nano Banana Pro, 6 Sep 2026):
-     media/ro/glass-wide.webp, glass-tall.webp. ═════════ -->
+     effective and visual way, then give them the options"). ITERATION FOUR (JP, 7 Sep: the glass on the
+     bench "looks almost identical to the hero… the first one can be a lifestyle one"): a hand holding
+     the glass up to the window light, the left half of the frame open for the words. GENERATED
+     (Nano Banana 2, 7 Sep 2026, our own kitchen references): media/ro/why-life.webp, why-life-m. ═════════ -->
 <section class="why" id="water" data-sc-act="pin" data-sc-span="2.8" data-sc-span-m="2.6" aria-label="Why you're here">
   <div class="sc-stage" data-sc-stage>
     <div class="why__fr">
-      <picture><source media="(max-width:859px)" srcset="media/ro/glass-tall.webp"><img src="media/ro/glass-wide.webp" alt="A plain glass of Sydney tap water on a white stone kitchen bench, lit from the window behind it" width="2400" height="1340" loading="lazy"></picture>
+      <picture><source media="(max-width:859px)" srcset="media/ro/why-life-m.webp"><img src="media/ro/why-life.webp" alt="A hand holding a glass of Sydney tap water up to the window light in a white kitchen" width="2400" height="1340" loading="lazy"></picture>
       <div class="why__veil" aria-hidden="true"></div>
     </div>
     <div class="why__copy">
       <span class="kick" data-sc-cue="0 1 0 0">Why you're here</span>
-      <h2 class="d1" data-sc-cue="0 1 0 0">You came here to get something out of the water.</h2>
+      <h2 class="d1" data-sc-cue="0 1 0 0">You came here to remove the impurities.</h2>
       <ul class="why__names" id="whyNames" aria-label="What reverse osmosis takes out">
         <li data-sc-cue="0.06 1 0.08 0" style="--at:.06">Microplastics</li>
         <li data-sc-cue="0.12 1 0.08 0" style="--at:.12">PFAS</li>
         <li data-sc-cue="0.18 1 0.08 0" style="--at:.18">Fluoride</li>
         <li data-sc-cue="0.24 1 0.08 0" style="--at:.24">Chlorine</li>
         <li data-sc-cue="0.30 1 0.08 0" style="--at:.30">Dissolved metals</li>
-        <li data-sc-cue="0.36 1 0.08 0" style="--at:.36">Salts</li>
+        <li data-sc-cue="0.36 1 0.08 0" style="--at:.36">Sediment</li>
       </ul>
       <p class="why__line" data-sc-cue="0.5 1 0.16 0">Reverse osmosis takes every one of them out. Under the kitchen sink, on its own tap.</p>
     </div>
@@ -2242,28 +2417,32 @@ body.dopen .drawer{transform:none}
      with the five as a rail of peers under it. Scroll moves through them; the rail is also a control.
      Mechanism: 21st.dev Spatial Product Showcase (id 9679) — one subject on a lit stage, a spring swap,
      a dock of peers — rebuilt in vanilla off --sc-p. The stills are our own supplier cartridges shot on
-     navy (Nano Banana Pro, 6 Sep 2026), re-exported at 1100px so they can be shown this big. ═════════ -->
+     navy (Nano Banana Pro, 6 Sep 2026). ITERATION FOUR (JP, 7 Sep: "very harsh… I want it to merge with
+     the background… floating on the site"): every still is a CUTOUT with its own alpha (ro/cutout.py),
+     standing in the same box on the page's own navy and glow; stage two is the 5 micron coconut carbon
+     block re-shot (the round-two still was the 20 micron LPD); the rail's line now ends ON the lit
+     stage's dot, and that dot glows (JP: "the line should be right where two is"). ═════════ -->
 <section class="how" id="how" data-sc-act="pin" data-sc-span="4.6" data-sc-span-m="4.4" aria-label="How reverse osmosis works">
   <div class="sc-stage" data-sc-stage>
     <header class="how__head" data-sc-cue="0 1 0 0">
       <span class="kick">How reverse osmosis works</span>
-      <h2 class="d2">Small enough to separate what taste cannot.</h2>
+      <h2 class="d2">Five stages between the mains and your glass.</h2>
     </header>
 
     <div class="stax" id="stax">
-      <figure class="stax__pic on" data-i="0"><img src="media/ro/stage-1.webp" alt="The five micron sediment cartridge" width="393" height="1200" fetchpriority="low"></figure>
-      <figure class="stax__pic" data-i="1"><img src="media/ro/stage-2.webp" alt="The coconut carbon block cartridge" width="564" height="1200" loading="lazy"></figure>
-      <figure class="stax__pic" data-i="2"><img src="media/ro/stage-3.webp" alt="The reverse osmosis membrane" width="343" height="1200" loading="lazy"></figure>
-      <figure class="stax__pic" data-i="3"><img src="media/ro/stage-4.webp" alt="The alkaline remineralising cartridge" width="361" height="1200" loading="lazy"></figure>
-      <figure class="stax__pic" data-i="4"><img src="media/ro/stage-5.webp" alt="The coconut carbon polish cartridge" width="360" height="1200" loading="lazy"></figure>
+      <figure class="stax__pic on" data-i="0"><img src="media/ro/stage-1.webp" alt="The five micron sediment cartridge" width="377" height="1200" fetchpriority="low"></figure>
+      <figure class="stax__pic" data-i="1"><img src="media/ro/stage-2.webp" alt="The five micron coconut carbon block cartridge" width="430" height="1200" loading="lazy"></figure>
+      <figure class="stax__pic" data-i="2"><img src="media/ro/stage-3.webp" alt="The reverse osmosis membrane" width="323" height="1200" loading="lazy"></figure>
+      <figure class="stax__pic" data-i="3"><img src="media/ro/stage-4.webp" alt="The alkaline remineralising cartridge" width="344" height="1200" loading="lazy"></figure>
+      <figure class="stax__pic" data-i="4"><img src="media/ro/stage-5.webp" alt="The coconut carbon polish cartridge" width="347" height="1200" loading="lazy"></figure>
     </div>
 
     <div class="stax__copy" id="staxCopy">
-      <div class="stax__step on" data-i="0"><span class="stax__n">Stage 01</span><h3>Sediment</h3><p>A five micron cartridge takes the grit, rust and sand out first, so nothing downstream has to.</p></div>
-      <div class="stax__step" data-i="1"><span class="stax__n">Stage 02</span><h3>Carbon block</h3><p>Coconut carbon takes the chlorine, and the taste and the smell go with it.</p></div>
-      <div class="stax__step" data-i="2"><span class="stax__n">Stage 03</span><h3>The membrane</h3><p>Openings around 0.0001 micron. Fluoride, PFAS, microplastics, metals and dissolved salts are rejected and flushed away. <em>Up to 99% out.</em></p></div>
-      <div class="stax__step" data-i="3"><span class="stax__n">Stage 04</span><h3>Alkaline</h3><p>Then the good minerals go back in. Minerals are good water, and they are where the taste comes from.</p></div>
-      <div class="stax__step" data-i="4"><span class="stax__n">Stage 05</span><h3>Carbon polish</h3><p>One last pass before the tap, so the glass tastes of nothing at all.</p></div>
+      <div class="stax__step on" data-i="0"><span class="stax__n">Stage 01</span><h3>Sediment</h3><p>A five micron cartridge catches the dirt, grit, rust and sand first, so nothing downstream has to.</p></div>
+      <div class="stax__step" data-i="1"><span class="stax__n">Stage 02</span><h3>Carbon block</h3><p>A five micron coconut carbon block takes out the chlorine and chemicals, and the taste and the smell go with them.</p></div>
+      <div class="stax__step" data-i="2"><span class="stax__n">Stage 03</span><h3>The membrane</h3><p>The core of the system. A 50 GPD membrane so fine that fluoride, PFAS, microplastics, metals and salts cannot get through. <em>Up to 99% out.</em></p></div>
+      <div class="stax__step" data-i="3"><span class="stax__n">Stage 04</span><h3>Alkaline</h3><p>Then the good minerals go back in. Magnesium and calcium, so the water tastes the way water should.</p></div>
+      <div class="stax__step" data-i="4"><span class="stax__n">Stage 05</span><h3>Carbon polish</h3><p>One final pass through coconut carbon, right before the tap, so every glass is crisp and clean.</p></div>
     </div>
 
     <nav class="crail" id="crail" aria-label="The five stages">
@@ -2285,8 +2464,8 @@ body.dopen .drawer{transform:none}
       <picture><source media="(max-width:859px)" srcset="media/ro/bottles-m.webp"><img src="media/ro/bottles-tall.webp" alt="Cartons of bottled water stacked inside the front door of a Sydney home" width="1100" height="1375" loading="lazy"></picture>
     </figure>
     <div class="money__copy">
-      <span class="kick" data-sc-cue="0 1 0 0">What you already pay</span>
-      <h2 class="d1" data-sc-cue="0 1 0 0">Pure water, by the year.</h2>
+      <span class="kick" data-sc-cue="0 1 0 0">Bottled water, by the year</span>
+      <h2 class="d1" data-sc-cue="0 1 0 0">What you're already paying.</h2>
       <div class="yrows">
         <div class="yrow" data-sc-cue="0.1 1 0.22 0"><b>Bottled spring water</b><span class="money">$4,470</span></div>
         <div class="yrow" data-sc-cue="0.25 1 0.22 0"><b>Bottled alkaline water</b><span class="money">$6,380</span></div>
@@ -2304,16 +2483,20 @@ body.dopen .drawer{transform:none}
      its words in their own column, and a DOCK of three peers under it: same frame, same type, same room
      for each, only the tint moves. Scroll moves through them; the dock picks one. Every still is still
      an .xcard, so the homepage's explosion (media/xf-*) opens inside the stage exactly as before.
-     Mechanism: 21st.dev Spatial Product Showcase (id 9679), rebuilt in vanilla off --sc-p. ═════════ -->
-<section class="range" id="systems" data-sc-act="pin" data-sc-span="6" data-sc-span-m="5.4" aria-label="The three systems">
+     Mechanism: 21st.dev Spatial Product Showcase (id 9679), rebuilt in vanilla off --sc-p.
+     ITERATION FOUR (JP, 7 Sep: "I liked what we had previously with the whole thing on one card and the
+     card changing colours… one nice big card… fit comfortably on the desktop"): the stage and the words
+     sit inside ONE card that tints with the system (Plus blue, Premium purple, Luxe gold), the dock's
+     pills carry the same three colours, and the act is shorter so the swap keeps up with the wheel. ═════════ -->
+<section class="range" id="systems" data-sc-act="pin" data-sc-span="4.6" data-sc-span-m="4.2" aria-label="The three systems">
   <div class="sc-stage" data-sc-stage>
     <header class="range__head" data-sc-cue="0 1 0 0">
       <span class="kick">Three systems</span>
-      <h2 class="d2">Three ways to finish the same serious filtration.</h2>
-      <p class="lede">All three are reverse osmosis, under the sink, on their own tap. The difference is the finish, not whether the water is purified.</p>
+      <h2 class="d2">Reverse osmosis systems, tailored for your needs.</h2>
+      <p class="lede">All three are reverse osmosis, under the sink, on their own tap. They all filter the exact same contaminants. The difference is the finish.</p>
     </header>
 
-    <div class="sysx" id="sysx">
+    <div class="sysx t-plus" id="sysx">
       <div class="sysx__stage">
         <figure class="sysx__pic plus on xcard" id="pure-plus" data-set="plus" data-i="0" role="button" tabindex="0" aria-label="See inside the Pure Plus">
           <img src="media/xf-plus/f00.webp" alt="The Pure Plus five stage alkaline reverse osmosis system" width="1100" height="1472" loading="lazy">
@@ -2379,9 +2562,9 @@ body.dopen .drawer{transform:none}
     </div>
 
     <nav class="dock" id="sysDock" aria-label="Choose a system">
-      <button type="button" class="on" data-i="0"><b>Pure Plus</b><span>$1,280</span></button>
-      <button type="button" data-i="1"><b>Pure Premium</b><span>$1,590</span></button>
-      <button type="button" data-i="2"><b>Pure Luxe</b><span>$2,290</span></button>
+      <button type="button" class="on plus" data-i="0"><b>Pure Plus</b><span>$1,280</span></button>
+      <button type="button" class="prem" data-i="1"><b>Pure Premium</b><span>$1,590</span></button>
+      <button type="button" class="luxe" data-i="2"><b>Pure Luxe</b><span>$2,290</span></button>
     </nav>
   </div>
 </section>
@@ -2394,7 +2577,8 @@ body.dopen .drawer{transform:none}
     <div class="taps__copy" data-sc-in data-sc-stagger="80">
       <span class="kick">Premium three way mixers</span>
       <h2 class="d2">The tap is the part you see every day.</h2>
-      <p class="lede">Every system comes with its own filtered water tap in chrome. If you'd rather one tap did it all, a premium pull out three way mixer puts the purified water on its own lever, in the finish your kitchen wants, fitted with the system in the same visit.</p>
+      <p class="lede taps__lede-d">Every system comes with its own filtered water tap in chrome. If you'd rather one tap did it all, a premium pull out three way mixer puts the purified water on its own lever, in the finish your kitchen wants, fitted with the system in the same visit.</p>
+      <p class="lede taps__lede-m">One tap for hot, cold and purified, in the finish your kitchen wants. Fitted with the system in the same visit.</p>
       <div class="swatches" id="swatches" role="tablist" aria-label="Finish">
         <button class="sw on" type="button" role="tab" aria-selected="true" data-f="brass" style="--f:linear-gradient(145deg,#E2C27A,#B8923F)"><i></i>Brushed gold</button>
         <button class="sw" type="button" role="tab" aria-selected="false" data-f="black" style="--f:linear-gradient(145deg,#3A3D44,#15171B)"><i></i>Matte black</button>
@@ -2402,6 +2586,7 @@ body.dopen .drawer{transform:none}
         <button class="sw" type="button" role="tab" aria-selected="false" data-f="gunmetal" style="--f:linear-gradient(145deg,#7D838C,#464B53)"><i></i>Gunmetal</button>
         <button class="sw" type="button" role="tab" aria-selected="false" data-f="copper" style="--f:linear-gradient(145deg,#D99A73,#9E5A38)"><i></i>Brushed copper</button>
       </div>
+      <span class="taps__name" id="tapName" aria-live="polite">Brushed gold</span>
       <p class="taps__price"><b>Premium pull out three way mixers, from $1,050 installed</b><span>Five finishes. Fixed in writing with the system and fitted in the same visit.</span></p>
       <div class="taps__go"><a class="btn" href="faucets-and-mixers-sydney"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>See the taps and mixers</a><a class="ul" href="faucets-and-mixers-sydney">every filtered water tap we fit</a></div>
     </div>
@@ -2416,27 +2601,28 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ 6 · UNDER THE SINK — one photograph the width of the page, three short steps, the licence.
+<!-- ═════════ 6 · UNDER THE SINK — ⭐ REBUILT ITERATION FOUR (JP, 7 Sep: "the photo is too large and the
+     section doesn't work… a screenshot of the 4K video… I can't even read that"). A split that fits one
+     screen: the three steps and the licence on the left, the cabinet still in the homepage's frame on
+     the right (media/ro/undersink.webp, Nano Banana Pro, 6 Sep, our own system and tank references).
      The two under sink H2s are the blueprint's. ═════════ -->
 <section class="install" id="install" aria-label="Under sink installation">
-  <div class="zone">
-    <header class="install__head" data-sc-in data-sc-stagger="90">
+  <div class="zone install__grid">
+    <div class="install__copy" data-sc-in data-sc-stagger="90">
       <span class="kick">Under the sink</span>
       <h2 class="d2">What fits under the sink stays under the sink.</h2>
-    </header>
-    <figure class="install__big" data-sc-in>
-      <img src="media/install.webp" alt="Jean-Paul fitting a five stage reverse osmosis system inside the cabinet under a kitchen sink in Sydney" width="1700" height="956" loading="lazy">
-      <figcaption>Under the sink, Strathfield</figcaption>
-    </figure>
-    <div class="install__row" data-sc-in data-sc-stagger="80">
-      <h2>Under sink water filter installation, in one visit</h2>
+      <h2 class="install__sub">Under sink water filter installation, in one visit</h2>
       <ol class="steps3">
         <li><b>Send a photo of the cabinet</b><span>The fit, the tap and the price come back in writing.</span></li>
         <li><b>Fitted in about two hours</b><span>The system in the cabinet, the tank beside it, the tap through the bench.</span></li>
         <li><b>We come back every year</b><span>To service it. Covered for life while you stay serviced with us.</span></li>
       </ol>
+      <p class="install__lic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="5.2" stroke="currentColor" stroke-width="2"/><path d="m8.4 13.4-1.6 7.2 5.2-2.6 5.2 2.6-1.6-7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Fitted by Jean-Paul Barbar, NSW plumbing licence 461511C, across Sydney from Croydon Park.</span></p>
     </div>
-    <p class="install__lic" data-sc-in><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="5.2" stroke="currentColor" stroke-width="2"/><path d="m8.4 13.4-1.6 7.2 5.2-2.6 5.2 2.6-1.6-7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Fitted by Jean-Paul Barbar, NSW plumbing licence 461511C, across Sydney from Croydon Park.</span></p>
+    <figure class="frame install__fr" data-sc-in data-sc-tilt="3">
+      <picture><source media="(max-width:859px)" srcset="media/ro/undersink-m.webp"><img src="media/ro/undersink.webp" alt="A five stage reverse osmosis system and its pressure tank fitted inside the cabinet under a Sydney kitchen sink" width="1600" height="893" loading="lazy"></picture>
+      <figcaption>Where it goes</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -2450,14 +2636,14 @@ body.dopen .drawer{transform:none}
     </figure>
     <div class="care__panel">
       <span class="kick" data-sc-cue="0 1 0 0">Servicing</span>
-      <h2 class="d2" data-sc-cue="0 1 0 0">Why our servicing costs what it costs.</h2>
-      <p class="lede" data-sc-cue="0 1 0 0">Because it covers the system for life. Not just the standard cartridges.</p>
+      <h2 class="d2" data-sc-cue="0 1 0 0">What you're paying for.</h2>
+      <p class="lede" data-sc-cue="0 1 0 0">What our servicing includes. Not just the cartridges.</p>
       <div class="ledger" id="ledger">
-        <div class="lrow head" data-sc-cue="0 1 0 0"><span>Every year</span><span>A standard plan</span><span>Ours</span></div>
+        <div class="lrow head" data-sc-cue="0 1 0 0"><span>Every year</span><span>Other companies</span><span>Ours</span></div>
         <div class="lrow" data-sc-cue="0.1 1 0.2 0"><b>The cartridges</b><span class="std"><i>Included</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Included</span></div>
         <div class="lrow" data-sc-cue="0.22 1 0.2 0"><b>The membrane</b><span class="std"><i>Extra</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Included when due</span></div>
         <div class="lrow" data-sc-cue="0.34 1 0.2 0"><b>The alkaline and hydrogen stages</b><span class="std"><i>Extra</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Included</span></div>
-        <div class="lrow" data-sc-cue="0.46 1 0.2 0"><b>If the system ever fails</b><span class="std"><i>A new system</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Replaced, labour included</span></div>
+        <div class="lrow" data-sc-cue="0.46 1 0.2 0"><b>If the system or a part ever fails</b><span class="std"><i>A new system</i></span><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Replaced free, labour included</span></div>
         <div class="lrow price" data-sc-cue="0.6 1 0.2 0"><b>A year of servicing</b><span class="std"><i>Quoted later</i></span><span class="ours">$600 &middot; $650 &middot; $680</span></div>
       </div>
       <p class="fine" data-sc-cue="0.74 1 0.3 0">Covered for life while you stay serviced with us. The price hasn't moved. <a href="lifetime-warranty">The terms, in writing.</a></p>
@@ -2611,7 +2797,11 @@ body.dopen .drawer{transform:none}
         </div>
       </div>
       <p class="ask__call">Rather talk it through? <a class="ul" href="tel:0430546749">Call 0430 546 749</a>, or <a class="ul" href="free-assessment">book a free assessment</a>.</p>
-      <p class="ask__lic">Fitted by Jean-Paul Barbar, NSW plumbing licence 461511C. WaterMark and NSF certified systems.</p>
+      <div class="ask__certs" data-sc-in>
+        <a href="https://www.abcb.gov.au/watermark" target="_blank" rel="noopener" aria-label="WaterMark certification, Australian Building Codes Board"><img src="media/cert-watermark.webp" alt="WaterMark certified" width="851" height="583" loading="lazy"></a>
+        <a href="https://www.nsf.org/" target="_blank" rel="noopener" aria-label="NSF certification"><img class="nsf" src="media/cert-nsf.webp" alt="NSF independently certified" width="288" height="288" loading="lazy"></a>
+        <p><b>WaterMark and NSF certified systems.</b> Fitted by Jean-Paul Barbar, NSW plumbing licence 461511C.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -2770,7 +2960,6 @@ body.dopen .drawer{transform:none}
     <li><a href="#how"><i></i><span>How it works</span></a></li>
     <li><a href="#money"><i></i><span>By the year</span></a></li>
     <li><a href="#systems"><i></i><span>Three systems</span></a></li>
-    <li><a href="#stepup"><i></i><span>The step up</span></a></li>
     <li><a href="#taps"><i></i><span>The taps</span></a></li>
     <li><a href="#install"><i></i><span>Under the sink</span></a></li>
     <li><a href="#servicing"><i></i><span>Covered for life</span></a></li>
@@ -4000,6 +4189,8 @@ body.dopen .drawer{transform:none}
   function setStage(i){
     if (i === staxCur) return;
     var was = staxCur; staxCur = i;
+    /* ITERATION FOUR (JP): the line ends ON the lit stage's dot, not past it — measured off the button */
+    if (crail && crailBtns[i]) crail.style.setProperty('--fx', (crailBtns[i].offsetLeft + 5) + 'px');
     for (var n = 0; n < staxPics.length; n++){
       staxPics[n].classList.toggle('on', n === i);
       staxPics[n].classList.toggle('was', n === was);
@@ -4013,7 +4204,6 @@ body.dopen .drawer{transform:none}
     var i = 0;
     for (var n = 0; n < STAGE_AT.length; n++) if (p >= STAGE_AT[n]) i = n;
     setStage(i);
-    if (crail) crail.style.setProperty('--f', q(clamp((p + .04) / .84, 0, 1)));
   }
   /* the rail is a control: it glides to the middle of that stage's window (law 10: fire on contact) */
   crailBtns.forEach(function(b, i){
@@ -4039,9 +4229,12 @@ body.dopen .drawer{transform:none}
   var dockBtns = sysDock ? [].slice.call(sysDock.querySelectorAll('button')) : [];
   var SYS_AT = [0, .34, .67];                     /* three equal thirds of the act */
   var sysCur = -1;
+  var sysx = document.getElementById('sysx'), SYS_KEY = ['plus', 'prem', 'luxe'];
   function setSys(i){
     if (i === sysCur) return;
     var was = sysCur; sysCur = i;
+    /* ITERATION FOUR (JP): ONE card, and it changes colour with the system */
+    if (sysx){ SYS_KEY.forEach(function(k){ sysx.classList.remove('t-' + k); }); sysx.classList.add('t-' + SYS_KEY[i]); }
     for (var n = 0; n < sysPics.length; n++){
       sysPics[n].classList.toggle('on', n === i);
       sysPics[n].classList.toggle('was', n === was);
@@ -4234,7 +4427,7 @@ body.dopen .drawer{transform:none}
   }
   function ask(){ if (!running){ running = true; requestAnimationFrame(driveAll); } }
   addEventListener('scroll', ask, {passive:true});
-  addEventListener('resize', ask, {passive:true});
+  addEventListener('resize', function(){ var k = staxCur; staxCur = -1; setStage(k < 0 ? 0 : k); ask(); }, {passive:true});
   addEventListener('load', ask);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(ask);
   ask();
@@ -4243,15 +4436,15 @@ body.dopen .drawer{transform:none}
   if (reduce){
     /* reduced motion lands on the FINISHED state, never a blank one */
     setStage(0);                                   /* the stage the reader lands on, finished, not blank */
-    if (crail) crail.style.setProperty('--f', '0.1');
+    if (crail && crailBtns[0]) crail.style.setProperty('--fx', (crailBtns[0].offsetLeft + 5) + 'px');
     whyNames.forEach(function(n){ n.el.style.setProperty('--u', '1'); });
     lrows.forEach(function(r){ r.el.style.setProperty('--s', '1'); });
     driveRange();
   }
 
-  /* 5 · THE TAPS — a finish under a fingertip; on a phone the swatches ride the photograph so the tap is in view as it changes */
+  /* 5 · THE TAPS — a finish under a fingertip. ITERATION FOUR: the swatches stay in the copy on a phone
+     too (JP: "I don't want it on the photo"); the chosen one opens into a pill that names itself. */
   (function taps(){
-    if (mph){ var swr = document.getElementById('swatches'), fr = document.getElementById('tapFrame'); if (swr && fr) fr.appendChild(swr); }
     var sws = [].slice.call(document.querySelectorAll('#swatches .sw'));
     var imgs = [].slice.call(document.querySelectorAll('#tapFrame picture'));
     var cap = document.getElementById('tapCap');
@@ -4260,6 +4453,7 @@ body.dopen .drawer{transform:none}
       sws.forEach(function(b){ var on = b.getAttribute('data-f') === f; b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); });
       imgs.forEach(function(im){ im.classList.toggle('on', im.getAttribute('data-f') === f); });
       if (cap && label) cap.textContent = label;
+      var nm = document.getElementById('tapName'); if (nm && label) nm.textContent = label;
     }
     sws.forEach(function(b){
       var go = function(){ pick(b.getAttribute('data-f'), b.textContent.trim()); };
