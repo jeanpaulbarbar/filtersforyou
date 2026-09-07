@@ -2428,6 +2428,68 @@ body.dopen .drawer{transform:none}
   .yrow{padding:9px 0}
 }
 
+/* ═══════════════════ ITERATION NINE (8 Sep 2026 — JP: "almost", nine things) ═══════════════════ */
+/* 4 · THE CARD, fixed in place: every panel is a flex column stretched to the card, the name at the top, the button and
+   the service line anchored at the FOOT (JP: "I don't like how it keeps moving up and down"). The type steps k1 / k2 are
+   set by fitCard() when the tallest panel would leave the card. */
+.sysx__panel{display:flex;flex-direction:column;align-content:stretch;height:100%;min-height:0}
+.sysx__go{margin-top:auto}
+.sysx.k1{--k:1}
+.sysx.k1 .sysx__panel{gap:8px}
+.sysx.k1 .sysx__panel h3{font-size:2.05rem}
+.sysx.k1 .sysx__spec{font-size:1rem;margin-top:-4px}
+.sysx.k1 .sysx__price .money{font-size:2.05rem}
+.sysx.k1 .sysx__pts{gap:5px}
+.sysx.k1 .sysx__pts li{font-size:.97rem;line-height:1.3}
+.sysx.k1 .sysx__svc{font-size:15px;line-height:1.35}
+.sysx.k2 .sysx__panel{gap:5px}
+.sysx.k2 .sysx__tag{padding:4px 10px;font-size:11px}
+.sysx.k2 .sysx__panel h3{font-size:1.7rem}
+.sysx.k2 .sysx__spec{font-size:.92rem;margin-top:-2px}
+.sysx.k2 .sysx__price .money{font-size:1.7rem}
+.sysx.k2 .sysx__pts{gap:3px}
+.sysx.k2 .sysx__pts li{font-size:.9rem;line-height:1.25}
+.sysx.k2 .sysx__pts li svg{width:16px;height:16px;margin-top:2px}
+.sysx.k2 .sysx__go{gap:5px}
+.sysx.k2 .sysx__go .btn{min-height:42px}
+.sysx.k2 .sysx__svc{font-size:15px;line-height:1.3}
+@media(min-width:860px){.sysx__copy{overflow:hidden}}   /* a spill is clipped, never loose; fitCard() makes sure there is none */
+
+@media(max-width:859px){
+  /* the phone card: the spec keeps two lines' room so the price never moves between systems */
+  html.ro-ph .sysx__spec{min-height:calc(2 * 1.25em)}
+  html.ro-ph .sysx__go{margin-top:auto;padding-top:6px}
+  /* 3 · "See inside" slimmer (JP), still a 44px target */
+  html.ro-ph .sysx__see{min-height:44px;padding:0 12px;font-size:11px;letter-spacing:.05em;box-shadow:0 6px 16px rgba(11,97,244,.26)}
+  html.ro-ph .sysx__peel{min-height:34px;padding:0 12px;font-size:11px}
+  /* 5 · the hint stands down; the arrows PULSE, the right one more (JP) */
+  html.ro-ph .sysx__ctl{display:none}
+  html.ro-ph .sysx__arr.next{animation:arrowpulse 2.6s ease-in-out infinite}
+  html.ro-ph .sysx__arr.prev{animation:arrowpulse 2.6s ease-in-out 1.3s infinite;animation-name:arrowpulsesoft}
+  /* 7 · the explosion's plus signs smaller on a phone (JP) */
+  html.ro-ph .hs > button > i{width:22px;height:22px;box-shadow:0 0 0 3px rgba(255,217,0,.25),0 2px 8px rgba(4,16,46,.3)}
+  html.ro-ph .hs > button > i::before{width:9px;height:2px}
+  html.ro-ph .hs > button > i::after{width:2px;height:9px}
+  html.ro-ph .xopen .hs > button > i{animation:hspulsesm 2.4s ease-in-out infinite}
+  /* 8 · the servicing: everything up more, the ledger compact enough for a phone with its toolbars up, and the stage
+     grows rather than clips so "a year of servicing" is always on the page (JP) */
+  html.ro-ph .care .sc-stage{height:auto;min-height:100dvh}
+  html.ro-ph .care__panel{padding-top:calc(var(--top) - 36px);gap:9px}
+  html.ro-ph .care__panel h2{font-size:clamp(1.6rem,7vw,1.95rem)}
+  html.ro-ph .care__panel .lede{font-size:15px;line-height:1.35}
+  html.ro-ph .care__panel .lrow{padding:9px 13px;gap:4px 10px}
+  html.ro-ph .care__panel .lrow.head{padding:8px 13px}
+  html.ro-ph .care__panel .lrow b{font-size:16px;line-height:1.22}
+  html.ro-ph .lrow .std,html.ro-ph .lrow .ours{font-size:15px}
+  html.ro-ph .lrow .std i{font-size:13px;padding:3px 8px}
+  html.ro-ph .lrow .ours svg{width:20px;height:20px}
+  html.ro-ph .lrow.price .ours{font-size:1.08rem}
+}
+@keyframes arrowpulse{0%,100%{box-shadow:0 10px 24px -10px rgba(4,16,46,.4),inset 0 0 0 1px rgba(15,39,72,.08),0 0 0 0 rgba(11,97,244,.4)}55%{box-shadow:0 10px 24px -10px rgba(4,16,46,.4),inset 0 0 0 1px rgba(15,39,72,.08),0 0 0 12px rgba(11,97,244,0)}}
+@keyframes arrowpulsesoft{0%,100%{box-shadow:0 10px 24px -10px rgba(4,16,46,.4),inset 0 0 0 1px rgba(15,39,72,.08),0 0 0 0 rgba(11,97,244,.22)}55%{box-shadow:0 10px 24px -10px rgba(4,16,46,.4),inset 0 0 0 1px rgba(15,39,72,.08),0 0 0 8px rgba(11,97,244,0)}}
+@keyframes hspulsesm{0%,100%{box-shadow:0 0 0 3px rgba(255,217,0,.25),0 2px 8px rgba(4,16,46,.3)}50%{box-shadow:0 0 0 7px rgba(255,255,255,.22),0 0 12px 4px rgba(255,217,0,.4),0 2px 8px rgba(4,16,46,.2)}}
+@media(prefers-reduced-motion:reduce){html.ro-ph .sysx__arr.next,html.ro-ph .sysx__arr.prev{animation:none}}
+
 </style>
 <script type="application/ld+json">
 {
@@ -4916,6 +4978,14 @@ body.dopen .drawer{transform:none}
       lockBusy = true;
       glide(stageCentre(i), .72, function(){ setTimeout(function(){ lockBusy = false; }, 90); });
     }
+    /* iteration nine: the act is left in ONE glide, to just past its end, and the settle rules stand down until the
+       page is clear of it (before this the release fought the momentum rule, which dragged the page back to stage six) */
+    var freeUntil = 0;
+    function goOut(dir){
+      var top = howAct.getBoundingClientRect().top + scrollY, travel = Math.max(howAct.offsetHeight - innerHeight, 1);
+      lockBusy = true; freeUntil = Date.now() + 1400;
+      glide(dir > 0 ? top + travel + 12 : top - 12, .62, function(){ setTimeout(function(){ lockBusy = false; }, 60); });
+    }
     document.addEventListener('touchstart', function(e){
       touching = true; decided = 0; sy = e.touches[0].clientY; sx = e.touches[0].clientX;
     }, {passive:true});
@@ -4930,9 +5000,9 @@ body.dopen .drawer{transform:none}
       if (Math.abs(dy) < 5 && Math.abs(dx) < 5) return;
       if (Math.abs(dx) > Math.abs(dy)){ decided = -1; return; }   /* a sideways gesture is not a swipe */
       var i = stageOf(p), down = dy < 0;                          /* the finger moves up: the page goes down */
-      if ((down && i >= STAGE_N - 1) || (!down && i <= 0)){ decided = -1; return; }   /* past an end: released */
       decided = 1;
       if (e.cancelable) e.preventDefault();
+      if ((down && i >= STAGE_N - 1) || (!down && i <= 0)){ goOut(down ? 1 : -1); return; }   /* past an end: one move OUT */
       goTo(i + (down ? 1 : -1));
     }, {passive:false});
     var end = function(){ touching = false; decided = 0; };
@@ -4941,7 +5011,7 @@ body.dopen .drawer{transform:none}
     var lastY = scrollY;
     addEventListener('scroll', function(){
       var p = stageP(), y = scrollY, dy = Math.abs(y - lastY); lastY = y;
-      if (lockBusy || touching) return;
+      if (lockBusy || touching || Date.now() < freeUntil) return;
       if (p <= .01 || p >= .99) return;
       var i = stageOf(p);
       if (Math.abs(y - stageCentre(i)) <= 6) return;
@@ -4991,6 +5061,26 @@ body.dopen .drawer{transform:none}
       dockBtns[c].setAttribute('aria-current', c === i ? 'true' : 'false');
     }
   }
+  /* ⭐ ITERATION NINE: the card fits its tallest panel by MEASUREMENT, not by a height band (1600×900 sat between
+     the bands and clipped the Premium and Luxe service lines by 9px, 8 Sep). Two type steps, k1 then k2, each
+     tried only if the tallest panel still overflows the card's inner height. */
+  var sysCopy = document.getElementById('sysCopy');
+  function fitCard(){
+    if (mph || !sysx || !sysCopy || !sysPanels.length) return;
+    sysx.classList.remove('k1', 'k2');
+    var over = function(){
+      var cs = getComputedStyle(sysCopy);
+      var avail = sysCopy.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      for (var i = 0; i < sysPanels.length; i++) if (sysPanels[i].scrollHeight > avail + 1) return true;
+      return false;
+    };
+    if (over()) sysx.classList.add('k1');
+    if (over()){ sysx.classList.remove('k1'); sysx.classList.add('k2'); }
+  }
+  addEventListener('load', function(){ fitCard(); setTimeout(fitCard, 300); });
+  addEventListener('resize', fitCard, {passive:true});
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCard);
+  fitCard();
   function driveRange(){
     if (!rangeAct || mph) return;
     var p = P(rangeAct), i = 0;
@@ -5019,7 +5109,6 @@ body.dopen .drawer{transform:none}
   function sysLabel(){
     var i = Math.max(sysCur, 0);
     if (sysPeel) sysPeel.textContent = SYS_NAME[i];
-    if (sysHint) sysHint.textContent = 'Swipe for ' + SYS_SHORT[(i + 1) % 3];
     var openNow = !!(sysPics[i] && sysPics[i]._isOpen && sysPics[i]._isOpen());
     if (sysSee) sysSee.textContent = openNow ? 'Close' : 'See inside';
     /* the arrows step aside while a unit is open, so its markers and their tips never share a pixel with a button */
