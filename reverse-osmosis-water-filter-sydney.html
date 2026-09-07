@@ -837,7 +837,7 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .hch{display:inline-block;opacity:0;transform:translateY(.26em) scale(.92);transform-origin:50% 80%}
 /* ⛔ .btn and .ul are the shell's. A page never redeclares a shell class. */
 .arrow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--ink);text-decoration:none;min-height:44px}
-.arrow svg{width:16px;height:16px;transition:transform .3s var(--e-out)}
+.arrow svg{width:16px;height:16px;transition:transform .45s var(--e-out)}
 @media(hover:hover) and (pointer:fine){.arrow:hover svg{transform:translateX(4px)}}
 .frame{position:relative;border-radius:var(--r-hero);overflow:clip;background:var(--mist);isolation:isolate}
 .frame > img,.frame > picture > img{width:100%;height:100%;object-fit:cover;max-width:none}
@@ -876,14 +876,14 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .ocard{position:absolute;right:36px;bottom:36px;z-index:12;width:min(580px,94vw);
   background:#F6F7F7;color:var(--ink);border-radius:36px 36px 24px 24px;overflow:hidden;box-shadow:var(--shadow-cc)}
 .ocdots{position:absolute;right:16px;top:14px;z-index:3;display:flex;gap:5px;padding:5px;border-radius:var(--r-full);background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px rgba(4,16,46,.06)}
-.ocdots button{width:30px;height:30px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0;color:var(--muted);transition:background .3s ease-in-out,color .3s ease-in-out}
-.ocdots button i{width:8px;height:8px;border-radius:50%;background:currentColor;display:block;transition:transform .3s var(--e-out)}
+.ocdots button{width:30px;height:30px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0;color:var(--muted);transition:background .45s ease-in-out,color .45s ease-in-out}
+.ocdots button i{width:8px;height:8px;border-radius:50%;background:currentColor;display:block;transition:transform .45s var(--e-out)}
 .ocdots button.on{background:var(--ink);color:#fff}
 .ocdots button.on i{transform:scale(1.15)}
 .ocdots button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .ochead{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center;padding:14px 128px 8px 14px}
 .ochead .oth{width:150px;height:150px;border-radius:22px;overflow:hidden;background:#ECEAE7;box-shadow:inset 0 0 0 1px rgba(4,16,46,.06);display:grid;place-items:center}
-.ochead .oth img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 50%;transition:opacity .3s ease-in-out}
+.ochead .oth img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 50%;transition:opacity .45s ease-in-out}
 .ochead .ot b{display:block;font-size:24px;font-weight:600;letter-spacing:-.005em;line-height:1.22}
 .ochead .ot > span{display:block;font-size:16px;font-weight:500;color:var(--muted);margin-top:8px;line-height:1.3}
 .ochead .ot .pure{color:var(--blue);font-weight:700}
@@ -1058,7 +1058,7 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 /* the words — one panel per system, stacked, one visible. Same sizes for all three. */
 .sysx__copy{display:grid;min-width:0;align-self:center}
 .sysx__panel{grid-area:1/1;display:grid;align-content:center;gap:clamp(12px,1.8vh,20px);max-width:36ch;
-  opacity:0;transform:translateY(10px);transition:opacity .36s ease-in-out,transform .46s var(--e-out);
+  opacity:0;transform:translateY(10px);transition:opacity .48s ease-in-out,transform .46s var(--e-out);
   will-change:opacity,transform;pointer-events:none}
 .sysx__panel.on{opacity:1;transform:none;pointer-events:auto}
 .sysx__tag{justify-self:start;display:inline-flex;align-items:center;padding:6px 13px;border-radius:var(--r-full);
@@ -1099,29 +1099,29 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .xtap{position:absolute;right:9%;top:11%;z-index:6;display:inline-flex;align-items:center;white-space:nowrap;padding:9px 16px;border-radius:16px 16px 16px 3px;
   background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(11,97,244,.35),0 2px 5px rgba(4,16,46,.16);
   font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;pointer-events:none;
-  opacity:0;scale:.8;animation:tapfloat 5.6s ease-in-out infinite,taptilt 7.3s ease-in-out infinite;transition:opacity .3s ease-in-out,scale .42s var(--e-out)}
+  opacity:0;scale:.8;animation:tapfloat 5.6s ease-in-out infinite,taptilt 7.3s ease-in-out infinite;transition:opacity .45s ease-in-out,scale .42s var(--e-out)}
 .xcard.opened .xtap{opacity:0;scale:.86;animation:none}
 @keyframes tapfloat{0%{translate:0 0}22%{translate:1.5px -6px}46%{translate:-.5px -10.5px}68%{translate:-1.5px -6.5px}86%{translate:.5px -2px}100%{translate:0 0}}
 @keyframes taptilt{0%{rotate:0deg}28%{rotate:-1.5deg}55%{rotate:.6deg}80%{rotate:1.4deg}100%{rotate:0deg}}
 .sysx__pic.on.xcard.tapin:not(.opened) .xtap{opacity:1;scale:1}
 .xcard.opened .xtap{opacity:0;scale:.86;animation:none}
 .hswrap{position:absolute;pointer-events:none;z-index:5}
-.hs{position:absolute;transform:translate(-50%,-50%);pointer-events:none;z-index:1;opacity:0;transition:opacity .3s var(--e-out)}
+.hs{position:absolute;transform:translate(-50%,-50%);pointer-events:none;z-index:1;opacity:0;transition:opacity .45s var(--e-out)}
 .hs.on{z-index:12}
 .xopen .hs{opacity:1;pointer-events:auto}
-.hs > button > i{scale:.6;transition:scale .34s var(--e-out)}
+.hs > button > i{scale:.6;transition:scale .48s var(--e-out)}
 .xopen .hs > button > i{scale:1}
-.xopen .hs:nth-child(1){transition-delay:.05s}.xopen .hs:nth-child(2){transition-delay:.1s}.xopen .hs:nth-child(3){transition-delay:.15s}.xopen .hs:nth-child(4){transition-delay:.2s}.xopen .hs:nth-child(5){transition-delay:.25s}.xopen .hs:nth-child(6){transition-delay:.3s}.xopen .hs:nth-child(7){transition-delay:.35s}
+.xopen .hs:nth-child(1){transition-delay:.05s}.xopen .hs:nth-child(2){transition-delay:.1s}.xopen .hs:nth-child(3){transition-delay:.15s}.xopen .hs:nth-child(4){transition-delay:.4s}.xopen .hs:nth-child(5){transition-delay:.4s}.xopen .hs:nth-child(6){transition-delay:.45s}.xopen .hs:nth-child(7){transition-delay:.48s}
 .hs > button{display:grid;place-items:center;width:46px;height:46px;border:0;padding:0;background:none;cursor:pointer;color:var(--ink);font-family:var(--sans)}
 .hs > button > i{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px rgba(255,217,0,.25),0 3px 10px rgba(4,16,46,.34)}
 .hs > button > i::before,.hs > button > i::after{content:"";position:absolute;background:var(--ink);border-radius:1px}
 .hs > button > i::before{width:12px;height:2px}
-.hs > button > i::after{width:2px;height:12px;transition:transform .3s var(--e-out)}
+.hs > button > i::after{width:2px;height:12px;transition:transform .45s var(--e-out)}
 .hs.on > button > i::after{transform:rotate(90deg)}
 .xopen .hs > button > i{animation:hspulse 2.4s ease-in-out infinite}
 .hs.on > button > i{animation:none}
 @keyframes hspulse{0%,100%{box-shadow:0 0 0 4px rgba(255,217,0,.25),0 3px 10px rgba(4,16,46,.34)}50%{box-shadow:0 0 0 9px rgba(255,255,255,.22),0 0 16px 5px rgba(255,217,0,.4),0 3px 12px rgba(4,16,46,.22)}}
-.hs .tip{position:absolute;left:50%;bottom:calc(100% + 11px);transform:translateX(-50%) translateY(5px);width:min(214px,42vw);background:var(--ink-blue);color:#fff;border-radius:var(--r-sm);padding:11px 13px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .24s ease-in-out,transform .3s var(--e-out);z-index:3}
+.hs .tip{position:absolute;left:50%;bottom:calc(100% + 11px);transform:translateX(-50%) translateY(5px);width:min(214px,42vw);background:var(--ink-blue);color:#fff;border-radius:var(--r-sm);padding:11px 13px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .4s ease-in-out,transform .45s var(--e-out);z-index:3}
 .hs.on .tip{opacity:1;transform:translateX(-50%)}
 .hs .tip b{display:block;font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--yellow);margin-bottom:4px}
 .hs .tip span{display:block;font-size:13px;line-height:1.4;color:rgba(255,255,255,.9)}
@@ -1156,7 +1156,7 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .taps__copy .lede{margin-top:16px}
 .swatches{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .sw{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 16px 0 8px;border:1px solid var(--rule);border-radius:var(--r-full);background:#fff;cursor:pointer;
-  font-family:var(--sans);font-size:14.5px;font-weight:600;color:var(--ink);transition:border-color .3s ease-in-out,box-shadow .3s ease-in-out,transform .3s var(--e-out)}
+  font-family:var(--sans);font-size:14.5px;font-weight:600;color:var(--ink);transition:border-color .45s ease-in-out,box-shadow .45s ease-in-out,transform .45s var(--e-out)}
 .sw i{width:26px;height:26px;border-radius:50%;background:var(--f);box-shadow:inset 0 -6px 10px rgba(0,0,0,.18),inset 0 4px 8px rgba(255,255,255,.35),0 1px 2px rgba(4,16,46,.2)}
 .sw.on{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
 .sw:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
@@ -1238,16 +1238,16 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .qform{background:var(--paper);color:var(--ink);border-radius:var(--r-card);padding:28px 24px;display:flex;flex-direction:column;gap:16px;
   box-shadow:var(--shadow-lg)}
 .qform .steps{display:flex;gap:6px}
-.qform .steps i{height:3px;flex:1;border-radius:2px;background:rgba(11,97,244,.18);transition:background .3s ease-in-out}
+.qform .steps i{height:3px;flex:1;border-radius:2px;background:rgba(11,97,244,.18);transition:background .45s ease-in-out}
 .qform .steps i.on{background:var(--blue)}
 .qform .qt{font-size:19px;font-weight:600;letter-spacing:.0025em}
 .qform .hint{font-size:15px;color:var(--muted)}
 .qform input{width:100%;min-height:54px;border-radius:var(--r-sm);border:1px solid var(--rule);background:var(--mist);
-  padding:0 16px;font-family:var(--sans);font-size:16px;color:var(--ink);outline:0;transition:border-color .3s ease-in-out,box-shadow .3s ease-in-out}
+  padding:0 16px;font-family:var(--sans);font-size:16px;color:var(--ink);outline:0;transition:border-color .45s ease-in-out,box-shadow .45s ease-in-out}
 .qform input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(11,97,244,.15)}
 .qform .sysgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .qform .sysopt{display:flex;flex-direction:column;gap:2px;border:1px solid var(--rule);border-radius:var(--r-sm);background:var(--mist);
-  padding:12px 14px;text-align:left;cursor:pointer;font-family:var(--sans);color:var(--ink);transition:border-color .3s ease-in-out,background .3s ease-in-out,box-shadow .3s ease-in-out}
+  padding:12px 14px;text-align:left;cursor:pointer;font-family:var(--sans);color:var(--ink);transition:border-color .45s ease-in-out,background .45s ease-in-out,box-shadow .45s ease-in-out}
 .qform .sysopt b{font-size:15px;font-weight:600;line-height:1.3}
 .qform .sysopt span{font-size:15px;font-weight:700;color:var(--blue)}
 .qform .sysopt.on{border-color:var(--blue);background:var(--blue-pale);box-shadow:0 0 0 1px var(--blue)}
@@ -1262,14 +1262,14 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
 .qform.finished .done{display:flex}
 @media (max-width:859px){.qform{padding:22px 18px;border-radius:18px}
 .qform .sysgrid{grid-template-columns:1fr}}
-.dveil{position:fixed;inset:0;background:rgba(4,16,46,.55);z-index:80;opacity:0;pointer-events:none;transition:opacity .3s ease-in-out}
+.dveil{position:fixed;inset:0;background:rgba(4,16,46,.55);z-index:80;opacity:0;pointer-events:none;transition:opacity .45s ease-in-out}
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100vw);background:var(--paper);z-index:81;
   transform:translateX(103%);transition:transform .5s var(--e-out);display:flex;flex-direction:column;box-shadow:var(--shadow-lg);color:var(--ink)}
 body.dopen .dveil{opacity:1;pointer-events:auto}
 body.dopen .drawer{transform:none}
 .drawer .dhead{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px 22px;border-bottom:1px solid var(--rule)}
 .drawer .dhead b{font-size:18px;font-weight:600}
-.drawer .x{width:44px;height:44px;border-radius:50%;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:background .3s ease-in-out,color .3s ease-in-out}
+.drawer .x{width:44px;height:44px;border-radius:50%;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:background .45s ease-in-out,color .45s ease-in-out}
 .drawer .x svg{width:15px;height:15px}
 @media (hover:hover) and (pointer:fine){.drawer .x:hover{background:var(--ink);color:#fff}}
 .drawer .dbody{padding:22px;overflow-y:auto;flex:1}
@@ -1289,7 +1289,7 @@ body.dopen .drawer{transform:none}
 .srail a span{font-size:12.5px;font-weight:700;white-space:nowrap;padding:4px 11px;border-radius:9px;
   background:rgba(255,254,252,.9);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);
   box-shadow:0 8px 22px -12px rgba(4,16,46,.55), inset 0 0 0 1px rgba(255,255,255,.6);
-  opacity:0;transform:translateX(10px);transition:opacity .36s ease-in-out,transform .45s var(--e-out)}
+  opacity:0;transform:translateX(10px);transition:opacity .48s ease-in-out,transform .45s var(--e-out)}
 .srail a.on i{width:32px;background:var(--blue)}
 .srail.dark a i{background:rgba(255,255,255,.36)}
 .srail.dark a.on i{background:#fff}
@@ -1307,7 +1307,7 @@ body.dopen .drawer{transform:none}
   -webkit-backdrop-filter:blur(22px) saturate(1.3);backdrop-filter:blur(22px) saturate(1.3);
   box-shadow:0 20px 44px -20px rgba(4,16,46,.55), inset 0 0 0 1px rgba(15,39,72,.1);
   opacity:0;visibility:hidden;transform:translateY(16px);
-  transition:opacity .55s var(--e-out),transform .55s var(--e-out),visibility .55s,background .3s ease-in-out}
+  transition:opacity .55s var(--e-out),transform .55s var(--e-out),visibility .55s,background .45s ease-in-out}
 .totop.on{opacity:1;visibility:visible;transform:none}
 .totop i{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff}
 .totop i svg{width:14px;height:14px}
@@ -1332,8 +1332,8 @@ body.dopen .drawer{transform:none}
 .ch:first-of-type{border-top:0}
 .ch > summary{display:flex;align-items:flex-start;gap:18px;cursor:pointer;list-style:none;padding:22px 0;min-height:44px;-webkit-tap-highlight-color:transparent}
 .ch > summary::-webkit-details-marker{display:none}
-.ch > summary h2{flex:1 1 auto;margin:0;font-size:clamp(1.34rem,2.1vw,1.85rem);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--ink);text-wrap:balance;transition:color .3s ease-in-out}
-.ch > summary .chev{flex:0 0 22px;width:22px;height:22px;margin-top:6px;color:var(--blue);transition:transform .35s var(--e-out)}
+.ch > summary h2{flex:1 1 auto;margin:0;font-size:clamp(1.34rem,2.1vw,1.85rem);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--ink);text-wrap:balance;transition:color .45s ease-in-out}
+.ch > summary .chev{flex:0 0 22px;width:22px;height:22px;margin-top:6px;color:var(--blue);transition:transform .48s var(--e-out)}
 .ch[open] > summary .chev{transform:rotate(180deg)}
 .ch > summary:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:var(--r-sm)}
 .ch__a{overflow:hidden;padding-bottom:26px}
@@ -1344,14 +1344,14 @@ body.dopen .drawer{transform:none}
 .ch__a ul li{position:relative;padding-left:22px;font-size:16.5px;line-height:1.55;color:var(--muted)}
 .ch__a ul li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--blue)}
 .ch__a ul li b{color:var(--ink);font-weight:700}
-.ch__a p a,.est .fq .fa a,.est__head a,.ch__a li a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(11,97,244,.4);transition:text-decoration-color .3s ease-in-out}
+.ch__a p a,.est .fq .fa a,.est__head a,.ch__a li a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(11,97,244,.4);transition:text-decoration-color .45s ease-in-out}
 .est__fig{margin:22px 0 0;border-radius:var(--r-card);overflow:hidden;background:#fff;box-shadow:var(--shadow-sm)}
 .est__fig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:56% 45%}
 .est__fig figcaption{padding:12px 16px 13px;font-size:15px;line-height:1.45;color:var(--muted)}
 .est__areas{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
 .est__areas li{padding:0}
 .est__areas li::before{display:none}
-.est__areas a{display:inline-flex;align-items:center;min-height:40px;padding:0 15px;border-radius:var(--r-full);border:1px solid var(--rule);background:#fff;font-size:14.5px;font-weight:600;color:var(--ink);text-decoration:none;transition:border-color .3s ease-in-out,color .3s ease-in-out}
+.est__areas a{display:inline-flex;align-items:center;min-height:40px;padding:0 15px;border-radius:var(--r-full);border:1px solid var(--rule);background:#fff;font-size:14.5px;font-weight:600;color:var(--ink);text-decoration:none;transition:border-color .45s ease-in-out,color .45s ease-in-out}
 .est__faq{margin-top:clamp(48px,6vw,80px);padding-top:clamp(40px,5vw,64px);border-top:1px solid var(--rule)}
 .est .fwrap{display:grid;gap:36px;align-items:start}
 /* ⛔ a .d2 (up to 3.8rem) inside a 12ch measure in a .7fr column wrapped to FOUR lines and ran off the
@@ -1360,13 +1360,13 @@ body.dopen .drawer{transform:none}
 .est .fside .lede{margin-top:16px;max-width:30ch}
 .est .fside .go{margin-top:24px}
 .est .fgrid{display:grid;grid-template-columns:1fr;gap:10px;min-width:0;counter-reset:faq}
-.est .fq{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-card);overflow:hidden;transition:border-color .3s ease-in-out,box-shadow .3s ease-in-out,background-color .3s ease-in-out}
+.est .fq{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-card);overflow:hidden;transition:border-color .45s ease-in-out,box-shadow .45s ease-in-out,background-color .45s ease-in-out}
 .est .fq[open]{border-color:#CBD9EE;background:#fff;box-shadow:0 1px 2px rgba(15,39,72,.04),0 14px 30px -18px rgba(15,39,72,.3)}
 .est .fq summary{display:flex;align-items:center;gap:14px;cursor:pointer;list-style:none;padding:17px 18px;min-height:44px;user-select:none}
 .est .fq summary::before{content:counter(faq,decimal-leading-zero);counter-increment:faq;font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--blue);flex:0 0 26px;line-height:1}
 .est .fq summary::-webkit-details-marker{display:none}
 .est .fq summary h3{flex:1 1 auto;margin:0;font-size:16.5px;font-weight:700;line-height:1.35;letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
-.est .fq .chev{flex:0 0 16px;width:16px;height:16px;color:var(--blue);transition:transform .3s var(--e-out)}
+.est .fq .chev{flex:0 0 16px;width:16px;height:16px;color:var(--blue);transition:transform .45s var(--e-out)}
 .est .fq[open] .chev{transform:rotate(180deg)}
 .est .fq .fa{padding:0 18px 20px 58px;overflow:hidden}
 .est .fq .fa p{font-size:15.5px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch}
@@ -1382,7 +1382,7 @@ body.dopen .drawer{transform:none}
   .est__grid{grid-template-columns:232px minmax(0,1fr);gap:80px;align-items:start}
   .est__nav{display:block;position:sticky;top:calc(var(--top) + 18px)}
   .est__nav b{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-  .est__nav a{display:block;padding:6px 0 6px 14px;border-left:2px solid var(--rule);font-size:14.5px;font-weight:600;line-height:1.35;color:var(--muted);text-decoration:none;transition:color .3s ease-in-out,border-color .3s ease-in-out}
+  .est__nav a{display:block;padding:6px 0 6px 14px;border-left:2px solid var(--rule);font-size:14.5px;font-weight:600;line-height:1.35;color:var(--muted);text-decoration:none;transition:color .45s ease-in-out,border-color .45s ease-in-out}
   .est__nav a.on{color:var(--blue);border-color:var(--blue)}
   .est .fwrap{grid-template-columns:.7fr 1.3fr;gap:64px}
   .est .fside{position:sticky;top:calc(var(--top) + 18px)}
@@ -1611,23 +1611,23 @@ body.dopen .drawer{transform:none}
   body.dopen .mrail{opacity:0;visibility:hidden}
   .mrail .tr{position:absolute;right:8px;top:0;bottom:0;width:24px;border-radius:12px;display:flex;flex-direction:column;justify-content:space-between;padding:12px 0;
     background:rgba(255,254,252,.9);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);
-    box-shadow:0 14px 30px -14px rgba(4,16,46,.55), inset 0 0 0 1px rgba(15,39,72,.1);transition:background .4s ease,box-shadow .4s ease,width .25s var(--e-out),right .25s var(--e-out)}
+    box-shadow:0 14px 30px -14px rgba(4,16,46,.55), inset 0 0 0 1px rgba(15,39,72,.1);transition:background .4s ease,box-shadow .4s ease,width .4s var(--e-out),right .4s var(--e-out)}
   .mrail .tr s{display:block;width:5px;height:5px;border-radius:50%;background:rgba(15,39,72,.26);margin:0 auto}
-  .mrail .th{position:absolute;right:14px;top:calc(12px + var(--mp,0) * (26vh - 24px - 12px));width:12px;height:12px;border-radius:50%;background:var(--blue);transition:top .35s var(--e-out)}
+  .mrail .th{position:absolute;right:14px;top:calc(12px + var(--mp,0) * (26vh - 24px - 12px));width:12px;height:12px;border-radius:50%;background:var(--blue);transition:top .48s var(--e-out)}
   .mrail.dark .tr{background:rgba(4,16,46,.74);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
   .mrail.dark .tr s{background:rgba(255,255,255,.36)}
   .mrail.dark .th{background:#fff}
   .mrail.armed .tr{width:30px;right:6px}
   .mrail .bb{position:absolute;right:52px;top:0;transform:translateY(-50%);padding:9px 14px;border-radius:12px;white-space:nowrap;font-size:14px;font-weight:700;color:var(--ink);
-    background:rgba(255,254,252,.96);box-shadow:0 14px 30px -14px rgba(4,16,46,.55), inset 0 0 0 1px rgba(15,39,72,.1);opacity:0;transition:opacity .2s ease-out}
+    background:rgba(255,254,252,.96);box-shadow:0 14px 30px -14px rgba(4,16,46,.55), inset 0 0 0 1px rgba(15,39,72,.1);opacity:0;transition:opacity .4s ease-out}
   .mrail.armed .bb{opacity:1}
-  .mscrim{display:block;position:fixed;inset:0;z-index:57;background:rgba(4,16,46,.18);opacity:0;pointer-events:none;transition:opacity .3s ease-out}
+  .mscrim{display:block;position:fixed;inset:0;z-index:57;background:rgba(4,16,46,.18);opacity:0;pointer-events:none;transition:opacity .45s ease-out}
   body.pickopen .mscrim{opacity:1;pointer-events:auto}
   .mpick{display:block;position:fixed;z-index:59;right:52px;top:55%;width:min(240px,calc(100vw - 80px));padding:8px;border-radius:20px;
     background:rgba(255,254,252,.96);-webkit-backdrop-filter:blur(20px) saturate(1.3);backdrop-filter:blur(20px) saturate(1.3);
     box-shadow:0 30px 60px -24px rgba(4,16,46,.6), inset 0 0 0 1px rgba(15,39,72,.08);
-    opacity:0;visibility:hidden;transform:translate(14px,-50%);transition:opacity .24s ease-out,transform .38s var(--e-out),visibility 0s linear .38s}
-  body.pickopen .mpick{opacity:1;visibility:visible;transform:translate(0,-50%);transition:opacity .2s ease-out,transform .38s var(--e-out),visibility 0s}
+    opacity:0;visibility:hidden;transform:translate(14px,-50%);transition:opacity .4s ease-out,transform .48s var(--e-out),visibility 0s linear .48s}
+  body.pickopen .mpick{opacity:1;visibility:visible;transform:translate(0,-50%);transition:opacity .4s ease-out,transform .48s var(--e-out),visibility 0s}
   .mpick > b{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 12px 8px}
   .mpick button{display:flex;align-items:center;gap:12px;width:100%;min-height:42px;padding:0 12px;margin:0;border:0;border-radius:14px;background:transparent;
     font-family:var(--sans);font-weight:600;font-size:15px;color:var(--ink);text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -1749,23 +1749,13 @@ body.dopen .drawer{transform:none}
    --range-bg per product the same way); the render floats on it; the words are their own white card with a
    hinge in the system's colour. */
 .sysx{position:relative;padding:0;background:none;box-shadow:none;max-height:none;overflow:visible}
-.range .sc-stage{background-color:#E3EDFD;transition:background-color .7s ease-in-out}
-.range .sc-stage.t-plus{background-color:#E3EDFD}
-.range .sc-stage.t-prem{background-color:#EEE5FB}
-.range .sc-stage.t-luxe{background-color:#F8EDCB}
+.range .sc-stage{background-color:var(--rbg,#ECF0F7);transition:background-color .7s ease-in-out}   /* iteration seven: the frames' own backdrop */
 .sysx__copy{position:relative;background:#fff;border-radius:var(--r-hero);box-shadow:var(--shadow-lg),inset 0 0 0 1px rgba(255,255,255,.8);
   padding:clamp(24px,3vw,44px) clamp(26px,3.2vw,48px) clamp(24px,3vw,44px) calc(clamp(26px,3.2vw,48px) + 10px);align-self:center}
 .sysx__copy::before{content:"";position:absolute;left:0;top:26px;bottom:26px;width:7px;border-radius:0 4px 4px 0;background:var(--hinge,var(--blue));transition:background .7s ease-in-out}
 .sysx.t-plus .sysx__copy{--hinge:var(--blue)}
 .sysx.t-prem .sysx__copy{--hinge:var(--purple)}
 .sysx.t-luxe .sysx__copy{--hinge:#E9BE3C}
-/* the Luxe render RESTS as a true cutout (ro/cutout_pale.py, media/xf-luxe-a/f00): no mask, no blend, it simply
-   stands on the gold. Its exploded frames keep their pale backdrop (their grey housings share its tone, so they
-   cannot be keyed), so the explosion opens ON A PLATE of that exact tone (219/231/240) that fades in under the
-   unit before the first frame paints, and fades out after the last one closes. */
-.sysx__pic.luxe img{-webkit-mask-image:none;mask-image:none;mix-blend-mode:normal;border-radius:22px}
-.xplate{position:absolute;z-index:0;border-radius:22px;background:#DBE7F0;opacity:0;pointer-events:none;transition:opacity .38s ease-in-out;box-shadow:0 30px 50px -30px rgba(4,16,46,.35)}
-.xplate.on{opacity:1}
 .sysx__pic.luxe{--tint:rgba(217,169,58,.22)}
 .sysx__panel.luxe{--tag:#FFF0BF;--tagi:#6E5300}
 .sysx__panel.luxe .sysx__pts li svg{color:#B8860B}
@@ -1782,7 +1772,7 @@ body.dopen .drawer{transform:none}
 .range .sc-stage{padding-bottom:clamp(40px,6.5vh,72px);gap:clamp(16px,2.4vh,28px)}
 
 /* 5 · THE TAPS: the phone's shorter lede stands down on a desktop */
-.taps__lede-m,.taps__name,.sysx__svc .svc-m{display:none}
+.taps__lede-m,.taps__name{display:none}
 
 /* 6 · UNDER THE SINK: a split that fits one screen — and IS one screen on a desktop and a tablet, so the
    next act's words never pass through the way back's corner on this chapter's last screen (qc.mjs at
@@ -1804,7 +1794,7 @@ body.dopen .drawer{transform:none}
 
 /* 9 · THE ASK: the two certification marks, linked, on their own plate */
 .ask__certs{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;padding:14px 18px;border-radius:var(--r-card);background:var(--mist-2);box-shadow:inset 0 0 0 1px var(--rule)}
-.ask__certs a{display:grid;place-items:center;height:52px;padding:0 14px;border-radius:12px;background:#fff;box-shadow:var(--shadow-sm);transition:transform .3s var(--e-out),box-shadow .3s var(--e-out)}
+.ask__certs a{display:grid;place-items:center;height:52px;padding:0 14px;border-radius:12px;background:#fff;box-shadow:var(--shadow-sm);transition:transform .45s var(--e-out),box-shadow .45s var(--e-out)}
 .ask__certs a img{height:32px;width:auto;max-width:none}
 .ask__certs a img.nsf{height:38px}
 .ask__certs p{margin:0;font-size:15px;color:var(--muted);line-height:1.45;flex:1 1 220px}
@@ -1898,7 +1888,6 @@ body.dopen .drawer{transform:none}
 
 /* 4 · THE SYSTEMS: the render MERGES with the card (JP). darken keeps the product's own shading and lets the
    render's pale backdrop take the card's colour; multiply and darken were both screenshotted, darken chosen. */
-.sysx__pic img{mix-blend-mode:darken}
 /* the card grows to its row and the words scale to a short window, so the service line is never clipped */
 .sysx{max-height:none}
 .sysx__copy{min-height:0}
@@ -1918,7 +1907,7 @@ body.dopen .drawer{transform:none}
 .how__cert{position:absolute;z-index:3;top:calc(var(--top) - 2px);right:var(--safe);display:inline-flex;align-items:center;gap:12px;padding:8px 12px 8px 16px;border-radius:var(--r-full);
   background:rgba(255,255,255,.94);box-shadow:0 18px 40px -22px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,255,255,.7);will-change:opacity,transform}
 .how__cert > span{font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
-.how__cert a{display:grid;place-items:center;height:36px;padding:0 6px;border-radius:10px;transition:transform .3s var(--e-out)}
+.how__cert a{display:grid;place-items:center;height:36px;padding:0 6px;border-radius:10px;transition:transform .45s var(--e-out)}
 .how__cert a img{height:24px;width:auto;max-width:none}
 .how__cert a img.nsf{height:30px}
 @media(hover:hover) and (pointer:fine){.how__cert a:hover{transform:translateY(-2px)}}
@@ -1959,13 +1948,11 @@ body.dopen .drawer{transform:none}
 .rej__foot a{color:var(--blue)}
 @media(prefers-reduced-motion:reduce){.rj,.rj .v{transition:none}.rj{opacity:1;transform:none}.rj .v{stroke-dashoffset:calc(100 - var(--p) * 100)}}
 
-/* THE LIGHTBOX — phone only; stands down on a desktop */
-.xlight{display:none}
 
 /* ═══════ THE PHONE, iteration five ═══════ */
 @media(max-width:859px){
   /* 2 · the stages: a lighter shadow, a quicker swap, the phone twins of the cutouts (JP: "laggy, jittery") */
-  .stax__pic{transition:opacity .38s var(--e-out),transform .44s var(--e-out)}
+  .stax__pic{transition:opacity .48s var(--e-out),transform .44s var(--e-out)}
   .stax__pic img{filter:drop-shadow(0 16px 20px rgba(0,0,0,.5))}
   .stax{min-height:33svh}
   .how .sc-stage{gap:8px 0}
@@ -1989,29 +1976,9 @@ body.dopen .drawer{transform:none}
   .sysx__panel h3{font-size:1.5rem}
   .sysx__price .money{font-size:1.6rem}
   .sysx__pts li{line-height:1.28}
-  .sysx__svc .svc-d{display:none}
   .range__head h2{font-size:1.3rem;margin-top:2px}
   .range .sc-stage{padding-top:calc(var(--top) - 34px);gap:8px}
   .dock button{min-height:44px}
-  /* the lightbox: the system's own figure moves in here, enlarges, explodes, and goes back */
-  .xlight{display:block;position:fixed;inset:0;z-index:75;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .42s ease-in-out,visibility 0s linear .42s}
-  .xlight.on{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .42s ease-in-out,visibility 0s}
-  .xl__scrim{position:absolute;inset:0;background:rgba(4,16,46,.88)}
-  /* the panel IS the render: the frame's own 1100×1472 aspect, so the render's backdrop fills it edge to edge
-     and there is no rectangle inside a rectangle (the flat-toned panel still showed one, 7 Sep) */
-  .xl__panel{position:absolute;left:50%;top:50%;width:min(92vw,calc(70svh * 0.747));aspect-ratio:1100/1472;height:auto;transform:translate(-50%,-50%) scale(.9);
-    border-radius:24px;background:transparent;transition:transform .55s var(--e-out)}
-  .xlight.on .xl__panel{transform:translate(-50%,-50%) scale(1)}
-  .xl__hint{position:absolute;left:0;right:0;top:100%;margin-top:16px;text-align:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.86);pointer-events:none}
-  .xlight .sysx__pic{position:absolute;inset:0;opacity:1;transform:none;pointer-events:auto}
-  .xlight .sysx__pic img{mix-blend-mode:normal;-webkit-mask-image:none;mask-image:none;filter:none;border-radius:24px;box-shadow:var(--shadow-cc)}
-  /* the panel wears the render's OWN backdrop tone (sampled off f00: plus and prem 236/238/246, luxe 219/231/240),
-     so the frames sit on it without a rectangle */
-  .xl__panel.xl-plus,.xl__panel.xl-prem,.xl__panel.xl-luxe{background:transparent}
-  .xlight .xtap{display:none}
-  .xl__x{position:absolute;right:16px;top:calc(16px + env(safe-area-inset-top));width:46px;height:46px;border:0;border-radius:50%;background:rgba(255,254,252,.94);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.35)}
-  .xl__x svg{width:18px;height:18px}
-  body.xlopen .sbar,body.xlopen .mrail,body.xlopen .totop{opacity:0;visibility:hidden}
   /* 4b · the rejects on a phone: one family under another */
   .rej{padding:56px 0 var(--fabclear)}
   .rej__head{gap:10px}
@@ -2101,8 +2068,8 @@ body.dopen .drawer{transform:none}
 .rj span{color:var(--ink);opacity:.72}
 .rej__fam:not(.open) .rj.more{display:none}
 .rej__all{justify-self:start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;margin-top:4px;border:0;border-radius:var(--r-full);
-  background:var(--ink);color:#fff;font-family:var(--sans);font-size:14.5px;font-weight:700;cursor:pointer;transition:background .3s ease-in-out,transform .3s var(--e-out)}
-.rej__all::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .3s var(--e-out)}
+  background:var(--ink);color:#fff;font-family:var(--sans);font-size:14.5px;font-weight:700;cursor:pointer;transition:background .45s ease-in-out,transform .45s var(--e-out)}
+.rej__all::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .45s var(--e-out)}
 .rej__fam.open .rej__all::after{transform:rotate(-135deg) translateY(-2px)}
 @media(hover:hover) and (pointer:fine){.rej__all:hover{background:var(--blue)}}
 .rej__foot{color:rgba(255,255,255,.8)}
@@ -2120,10 +2087,6 @@ body.dopen .drawer{transform:none}
   /* 2 · the stages LOCK: a snap marker per stage; the page snaps to the nearest one while the act is under the
      thumb (proximity, never mandatory — mandatory drags the whole page back to its nearest marker). Held off
      around every scripted move, as the whole house page does. */
-  html.snapon{scroll-snap-type:y proximity}
-  html.nosnap{scroll-snap-type:none !important}
-  .snapm{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;pointer-events:none;opacity:0}
-  .how{position:relative}
   /* 4 · the systems like the desktop: the render floats on the tinted ground, big; the words a white card with
      the hinge; the dock right under it, top-anchored so the toolbar's collapse never moves the buttons */
   .range .sc-stage{grid-template-rows:auto auto auto;align-content:start;gap:10px;padding:calc(var(--top) - 30px) var(--safe) var(--fabclear)}
@@ -2140,11 +2103,8 @@ body.dopen .drawer{transform:none}
   .sysx__panel h3{font-size:1.5rem}
   .sysx__spec{font-size:14.5px}
   .sysx__price .money{font-size:1.6rem}
-  .sysx__svc{display:none}
   .sysx__go{gap:0}
   .dock{width:100%;justify-self:stretch}
-  /* the lightbox: no hint line */
-  .xl__hint{display:none}
   /* 4b · the rejects on a phone: three folded cards */
   .rej{padding:52px 0 var(--fabclear)}
   .rej__fam{padding:14px 14px 16px}
@@ -2152,6 +2112,207 @@ body.dopen .drawer{transform:none}
 }
 @media(max-width:859px) and (max-height:700px){
   .sysx__stage{min-height:28svh}
+}
+
+
+/* ═══════════════════ ITERATION SEVEN (8 Sep 2026 — JP's desktop then phone pass) ═══════════════════
+   Six stages (the whole system closes the story) · the systems act on the frames' own ground with the CARD in the
+   system's colour (the homepage's product section, as asked) · a rejects field that moves (21st.dev
+   AnimatedAuroraBackground, id 9402, as lineage: one wide multi-stop gradient drifting under radial washes) with a
+   fold that animates and never moves the page · flow acts from the rejects on, with parallax layers and clip
+   wipes from the scroll-craft kit · every short transition lifted (nothing sharp, nothing fast) · and the phone
+   re-fitted: the stages lock one swipe to one stage, the systems run as the homepage's flow, the finishes ride the
+   mixer photograph, the rejects become tabs, the servicing gets a field and lifts up. */
+
+/* 2 · SIX STAGES: the rail grows a column; the system stands where the cartridges stood */
+.crail{grid-template-columns:repeat(6,minmax(0,1fr))}
+.stax__pic.sys6{inset:3% 0}
+.stax__pic.sys6 img{filter:drop-shadow(0 30px 34px rgba(0,0,0,.55)) drop-shadow(0 0 22px rgba(91,154,226,.22))}
+.stax__step .stax__go{margin-top:4px;justify-self:start}
+.stax__step[data-i="5"] h3{font-size:clamp(1.8rem,2.9vw,2.7rem)}
+
+/* 4 · THE SYSTEMS: the ground is the render's own backdrop (--rbg, set by the script), the render's rectangle
+   dissolves into it on the homepage's own ellipse, the CARD wears blue, purple or gold, and it is shorter so the
+   dock never sits on it (JP: "I don't want overlapping stuff") */
+.sysx__pic img{mix-blend-mode:normal;
+  -webkit-mask-image:radial-gradient(ellipse 74% 70% at 50% 48%,#000 52%,transparent 76%);mask-image:radial-gradient(ellipse 74% 70% at 50% 48%,#000 52%,transparent 76%);
+  -webkit-mask-composite:source-over;mask-composite:add}
+.sysx__pic.luxe img{-webkit-mask-image:radial-gradient(ellipse 74% 70% at 50% 48%,#000 52%,transparent 76%);mask-image:radial-gradient(ellipse 74% 70% at 50% 48%,#000 52%,transparent 76%);border-radius:0}
+.sysx__copy{transition:background-color .7s ease-in-out;padding:clamp(20px,2.4vw,34px) clamp(24px,3vw,42px) clamp(20px,2.4vw,34px) calc(clamp(24px,3vw,42px) + 10px);
+  background:#E3EDFD;box-shadow:0 40px 60px -34px rgba(4,16,46,.28),0 12px 26px -16px rgba(4,16,46,.16),inset 0 0 0 1px rgba(255,255,255,.7)}
+.sysx.t-plus .sysx__copy{background:#E3EDFD}
+.sysx.t-prem .sysx__copy{background:#EEE5FB}
+.sysx.t-luxe .sysx__copy{background:#F8EDCB}
+.sysx__tag{background:rgba(255,255,255,.7)}
+.sysx__panel.prem .sysx__tag,.sysx__panel.luxe .sysx__tag{background:rgba(255,255,255,.7)}
+.sysx{height:100%;min-height:0}
+.sysx__copy{max-height:100%}
+.dock{margin-top:2px}
+@media(min-width:860px) and (max-height:800px){
+  .range .sc-stage{gap:10px;padding-bottom:30px}
+  .sysx__copy{padding:16px 24px 16px 30px}
+  .sysx__panel{gap:6px}
+  .sysx__panel h3{font-size:1.9rem}
+  .sysx__spec{font-size:.95rem;margin-top:-3px}
+  .sysx__price .money{font-size:1.9rem}
+  .sysx__pts{gap:4px}
+  .sysx__pts li{font-size:.94rem;line-height:1.28}
+  .sysx__svc{font-size:14px;line-height:1.35}
+  .sysx__go .btn{min-height:46px}
+  .dock button{min-height:46px}
+}
+
+/* 4b · THE REJECTS: the field moves (21st.dev AnimatedAuroraBackground, id 9402: a wide multi-stop linear
+   gradient, sized three times the box, its position drifting on a long loop — here under two radial washes, on
+   the page's own blues and purple with a breath of yellow). Top-aligned: a card that grows only grows DOWN. */
+.rej{background-color:#0846BE;
+  background-image:
+    radial-gradient(52% 46% at 6% 6%,rgba(255,255,255,.34),transparent 62%),
+    radial-gradient(36% 40% at 92% 92%,rgba(255,217,0,.22),transparent 62%),
+    linear-gradient(118deg,#0B61F4 0%,#3B82F6 16%,#6D28D9 38%,#0846BE 56%,#22B8F0 76%,#0B61F4 100%);
+  background-size:200% 200%,200% 200%,320% 320%;
+  background-position:0% 0%,100% 100%,0% 50%}
+@keyframes auroraflow{0%{background-position:0% 0%,100% 100%,0% 50%}50%{background-position:36% 24%,64% 70%,100% 50%}100%{background-position:0% 0%,100% 100%,0% 50%}}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.rej{animation:auroraflow 38s ease-in-out infinite}}
+@media(min-width:860px){.rej{min-height:100vh;display:grid;align-content:start;padding-top:clamp(84px,11vh,150px)}}
+.rej__tabs{display:none}
+.rej__grid{align-items:start}
+.rej__fam{will-change:transform}
+.rej__fold{display:grid;grid-template-rows:0fr;transition:grid-template-rows .75s var(--e-soft),margin-top .75s var(--e-soft);margin-top:0}
+.rej__fold > ul{min-height:0;overflow:hidden;margin-top:0}
+.rej__fam.open .rej__fold{grid-template-rows:1fr;margin-top:8px}
+.rej__fam:not(.open) .rj.more{display:inline-flex}
+.rj.more{opacity:0;transform:translateY(8px)}
+.rej__fam.open.lit .rj.more{opacity:1;transform:none}
+.rej__fam:not(.open) .rj.more{transition-delay:0ms !important;transition-duration:.4s}
+
+/* 6 · UNDER THE SINK and 5 · THE TAPS: flow acts now, the photograph wipes in on the scroll (kit device 4);
+   the clip is on the FIGURE, whose corners are its own */
+.taps__fr,.install__fr{will-change:clip-path}
+
+/* 7 · THE SERVICING: the same living field as the rejects, so the two blue chapters are one family */
+.care .sc-stage{background-color:#0846BE;
+  background-image:
+    radial-gradient(52% 46% at 6% 6%,rgba(255,255,255,.3),transparent 62%),
+    radial-gradient(36% 40% at 92% 92%,rgba(255,217,0,.2),transparent 62%),
+    linear-gradient(118deg,#0B61F4 0%,#3B82F6 16%,#6D28D9 38%,#0846BE 56%,#22B8F0 76%,#0B61F4 100%);
+  background-size:200% 200%,200% 200%,320% 320%;background-position:0% 0%,100% 100%,0% 50%}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.care .sc-stage{animation:auroraflow 44s ease-in-out infinite}}
+
+/* ═══════ THE PHONE, iteration seven ═══════ */
+@media(max-width:859px){
+  /* the hero: the mixer comes in from the left, the glass peeps from the right (a re-cropped twin) */
+  .hero .hbg picture:first-child img{object-position:50% 50%}
+  /* 2 · the sixth stage's button */
+  .stax__step .stax__go{min-height:44px;margin-top:2px}
+  .stax__step[data-i="5"] h3{font-size:clamp(1.45rem,6.4vw,1.8rem)}
+  .stax__step[data-i="5"] p{display:none}
+  .stax__pic.sys6{inset:0}
+  /* 4 · THE SYSTEMS run as the homepage's flow: one system under another on the ground that matches its frames,
+     the render big, tapped to open where it stands, its words in a card of its own colour under it */
+  html.ro-ph .range .sc-stage{position:static;height:auto;min-height:0;overflow:visible;display:flex;flex-direction:column;gap:12px;
+    padding:52px var(--safe) calc(var(--fabclear) + 4px)}
+  html.ro-ph .range__head{order:0;gap:6px;max-width:none;width:auto}
+  html.ro-ph .range__head h2{font-size:clamp(1.5rem,6.6vw,1.9rem);max-width:none}
+  html.ro-ph .range__head .lede{display:block;font-size:1rem;max-width:none}
+  html.ro-ph .sysx,html.ro-ph .sysx__stage,html.ro-ph .sysx__copy{display:contents}
+  html.ro-ph .sysx__pic{position:relative;inset:auto;opacity:1;transform:none;pointer-events:auto;width:min(84%,336px);margin:14px auto 54px;cursor:pointer}
+  html.ro-ph .sysx__pic.was{opacity:1;transform:none}
+  html.ro-ph .sysx__pic::before{width:min(140%,420px)}
+  html.ro-ph .sysx__pic img{position:relative;inset:auto;width:100%;height:auto;filter:drop-shadow(0 20px 26px rgba(4,16,46,.16))}
+  html.ro-ph .sysx__pic .xtap{position:absolute;top:calc(100% + 10px);bottom:auto;left:50%;translate:-50% 0;rotate:0deg;animation:none;border-radius:var(--r-full);padding:8px 14px;font-size:12px}
+  html.ro-ph .sysx__pic.plus{order:1} html.ro-ph .sysx__panel.plus{order:2}
+  html.ro-ph .sysx__pic.prem{order:3} html.ro-ph .sysx__panel.prem{order:4}
+  html.ro-ph .sysx__pic.luxe{order:5} html.ro-ph .sysx__panel.luxe{order:6}
+  html.ro-ph .sysx__panel{position:relative;opacity:1;transform:none;pointer-events:auto;grid-area:auto;max-width:none;align-content:start;gap:7px;
+    padding:16px 16px 18px 26px;border-radius:20px;background:#E3EDFD;box-shadow:var(--shadow-sm),0 24px 40px -28px rgba(4,16,46,.35);margin:0 0 22px}
+  html.ro-ph .sysx__panel::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:6px;border-radius:0 4px 4px 0;background:var(--blue)}
+  html.ro-ph .sysx__panel.prem{background:#EEE5FB} html.ro-ph .sysx__panel.prem::before{background:var(--purple)}
+  html.ro-ph .sysx__panel.luxe{background:#F8EDCB} html.ro-ph .sysx__panel.luxe::before{background:#E9BE3C}
+  html.ro-ph .sysx__panel h3{font-size:1.65rem}
+  html.ro-ph .sysx__spec{font-size:15px;margin-top:-2px}
+  html.ro-ph .sysx__price .money{font-size:1.75rem}
+  html.ro-ph .sysx__pts li:nth-child(3){display:flex}
+  html.ro-ph .sysx__go{gap:8px;margin-top:4px}
+  html.ro-ph .sysx__svc{display:block;font-size:15px;line-height:1.35;max-width:none}
+  html.ro-ph .dock{display:none}
+  /* 4b · the rejects on a phone: three families as TABS on one card (JP: "too much to slide through") */
+  html.ro-ph .rej{padding:52px 0 calc(var(--fabclear) + 6px)}
+  html.ro-ph .rej__tabs{display:flex;gap:4px;padding:4px;margin-top:16px;border-radius:var(--r-full);background:rgba(4,16,46,.24);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+  html.ro-ph .rej__tabs button{flex:1 1 0;min-height:44px;padding:6px 4px;border:0;border-radius:var(--r-full);background:transparent;color:rgba(255,255,255,.88);
+    font-family:var(--sans);font-size:14.5px;font-weight:700;line-height:1.15;cursor:pointer;transition:background .45s var(--e-out),color .45s ease-in-out;-webkit-tap-highlight-color:transparent}
+  html.ro-ph .rej__tabs button.on{background:#fff;color:var(--ink)}
+  html.ro-ph .rej__grid{margin-top:12px}
+  html.ro-ph .rej__fam{display:none}
+  html.ro-ph .rej__fam.cur{display:grid;animation:famin .55s var(--e-out) both}
+  html.ro-ph .rej__fam h3{font-size:1.35rem}
+  /* 5 · the taps: five dots ON the photograph, from the bottom right corner, lifted, ending before the mixer;
+     the finish's name at the top right (JP). A 44px hit area around a 28px dot. */
+  html.ro-ph .taps__fr .swatches{display:flex;position:absolute;right:6px;bottom:11%;z-index:3;flex-direction:row-reverse;gap:0;margin:0}
+  html.ro-ph .taps__fr .sw{width:44px;height:44px;min-height:44px;padding:0;border:0;background:none;box-shadow:none;border-radius:50%;font-size:0;gap:0;display:grid;place-items:center;transform:none}
+  html.ro-ph .taps__fr .sw i{width:26px;height:26px;border:2px solid rgba(255,255,255,.92);box-shadow:0 3px 10px rgba(4,16,46,.3),inset 0 -5px 8px rgba(0,0,0,.16);transition:transform .45s var(--e-out),box-shadow .45s ease-in-out}
+  html.ro-ph .taps__fr .sw.on i{transform:scale(1.18);box-shadow:0 0 0 2px var(--ink),0 3px 10px rgba(4,16,46,.3)}
+  html.ro-ph .taps__fr figcaption{display:inline-flex;top:12px;bottom:auto;right:12px;left:auto}
+  html.ro-ph .taps__name{display:none}
+  html.ro-ph .taps__copy{gap:0}
+  /* 6 · under the sink: the second heading stands down on a phone (JP: "simplify this section even more") */
+  html.ro-ph .install__sub{display:none}
+  /* 7 · the servicing: everything lifts up, and the field lives (JP: "very bland") */
+  html.ro-ph .care__panel{align-content:start;padding-top:calc(var(--top) - 14px);gap:12px}
+  html.ro-ph .care__panel h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  html.ro-ph .ledger{background:rgba(255,255,255,.11);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 30px 60px -30px rgba(4,16,46,.6)}
+  html.ro-ph .care .sc-stage{background-position:40% 0%,60% 100%,55% 50%}
+  html.ro-ph .rej{background-position:20% 0%,80% 100%,35% 50%}
+}
+@keyframes famin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(max-width:859px) and (max-height:700px){
+  html.ro-ph .sysx__pic{width:min(74%,300px)}
+}
+
+/* the folded pills are unseen until the fold opens (the lit rule outranked them, qc.mjs OVERLAP, 8 Sep) */
+.rej__fam.lit .rj.more{opacity:0;transform:translateY(8px)}
+.rej__fam.open.lit .rj.more{opacity:1;transform:none}
+/* the short desktop (a 13" laptop's browser is ~830px tall): the pinned acts keep their last line off the floor */
+@media(min-width:860px){.how .sc-stage{padding-bottom:clamp(40px,4vh,48px)}}   /* ⛔ scoped: unscoped it overrode the phone's --fabclear floor (qc.mjs, 8 Sep) */
+@media(min-width:860px) and (max-height:820px){
+  .money__copy{gap:12px;padding-top:calc(var(--top) - 4px)}
+  .yrow{padding:10px 0}
+  .yrow.ours{padding:13px 20px;margin-top:6px}
+  .money__pay{font-size:.98rem;line-height:1.4}
+  .money__frame{font-size:14px}
+  .care__panel{gap:12px;padding-top:calc(var(--top) - 4px)}
+  .lrow{padding:10px 20px}
+  .lrow.head{padding:9px 20px}
+  .care__panel .lede{font-size:1.05rem}
+  .how .sc-stage{padding-top:calc(var(--top) - 14px)}
+  .stax__step h3{font-size:clamp(1.9rem,3vw,2.6rem)}
+}
+/* qc.mjs, 8 Sep: the reading floor holds in the short-desktop band, and the money act's frame line clears the floor */
+@media(min-width:860px) and (max-height:820px){
+  .money__frame{font-size:15px}
+  .money__copy{padding-bottom:48px}
+  .sysx__svc{font-size:15px}
+}
+@media(min-width:860px) and (max-height:800px){.sysx__svc{font-size:15px}}
+@media(max-width:859px){
+  /* the stage act's phone budget with six stages: the picture gives up 3svh so the certification pill at the foot
+     of the act keeps the floating chrome's 76px (qc.mjs TOO-LOW, 8 Sep) */
+  .stax{min-height:30svh}
+  .how .sc-stage{gap:6px 0}
+}
+/* the render's figure IS the frame (1100×1472), centred in its column, so the ellipse that dissolves the frame's
+   rectangle is measured on the picture, not on the column around it (1440 sweep, 8 Sep: the rectangle showed) */
+@media(min-width:860px){
+  .sysx__pic{inset:0;margin:auto;width:auto;height:100%;max-width:100%;aspect-ratio:1100/1472}
+  .sysx__pic::before{width:min(150%,540px)}
+  .xtap{right:-6%;top:9%}
+}
+@media(min-width:860px) and (max-height:820px){
+  .money__copy h2{font-size:clamp(2.1rem,3.8vw,3.2rem)}
+  .yrow{padding:8px 0}
+  .yrow .money{font-size:clamp(1.7rem,2.8vw,2.4rem)}
+  .yrow.ours .money{font-size:clamp(1.9rem,3.2vw,2.8rem)}
+  .money__copy{gap:10px;padding-bottom:52px}
 }
 
 </style>
@@ -2697,10 +2858,10 @@ body.dopen .drawer{transform:none}
      standing in the same box on the page's own navy and glow; stage two is the 5 micron coconut carbon
      block re-shot (the round-two still was the 20 micron LPD); the rail's line now ends ON the lit
      stage's dot, and that dot glows (JP: "the line should be right where two is"). ═════════ -->
-<section class="how" id="how" data-sc-act="pin" data-sc-span="4.6" data-sc-span-m="3.8" aria-label="How reverse osmosis works">
-  <!-- PHONE: five snap markers, one per stage, placed by the script at each stage's window (the whole house
-       page's round 96 mechanism: CSS scroll-snap does the stepping, no scrollTo under a thumb). -->
-  <i class="snapm" aria-hidden="true"></i><i class="snapm" aria-hidden="true"></i><i class="snapm" aria-hidden="true"></i><i class="snapm" aria-hidden="true"></i><i class="snapm" aria-hidden="true"></i>
+<section class="how" id="how" data-sc-act="pin" data-sc-span="5.4" data-sc-span-m="4.6" aria-label="How reverse osmosis works">
+  <!-- ITERATION SEVEN (JP, 7 Sep): the snap markers are gone ("it scrolls pathetically now… revert"). On a phone
+       the script locks ONE SWIPE TO ONE STAGE inside this act only (stageLock), and the page scrolls as normal
+       everywhere else. A SIXTH stage closes the story: the whole five stage system, floating like the cartridges. -->
   <div class="sc-stage" data-sc-stage>
     <header class="how__head" data-sc-cue="0 1 0 0">
       <span class="kick">How reverse osmosis works</span>
@@ -2713,6 +2874,7 @@ body.dopen .drawer{transform:none}
       <figure class="stax__pic" data-i="2"><picture><source media="(max-width:859px)" srcset="media/ro/stage-3-m.webp"><img src="media/ro/stage-3.webp" alt="The reverse osmosis membrane" width="323" height="1200" loading="lazy"></picture></figure>
       <figure class="stax__pic" data-i="3"><picture><source media="(max-width:859px)" srcset="media/ro/stage-4-m.webp"><img src="media/ro/stage-4.webp" alt="The alkaline remineralising cartridge" width="344" height="1200" loading="lazy"></picture></figure>
       <figure class="stax__pic" data-i="4"><picture><source media="(max-width:859px)" srcset="media/ro/stage-5-m.webp"><img src="media/ro/stage-5.webp" alt="The coconut carbon polish cartridge" width="347" height="1200" loading="lazy"></picture></figure>
+      <figure class="stax__pic sys6" data-i="5"><img src="media/systems/pure-plus.webp" alt="The five stage alkaline reverse osmosis system, all five cartridges on one bracket" width="607" height="900" loading="lazy"></figure>
     </div>
 
     <div class="stax__copy" id="staxCopy">
@@ -2721,6 +2883,7 @@ body.dopen .drawer{transform:none}
       <div class="stax__step" data-i="2"><span class="stax__n">Stage 03</span><h3>The membrane</h3><p>The core of the system. A 50 GPD membrane so fine that fluoride, PFAS, microplastics, metals and salts cannot get through. <em>Up to 99% out.</em></p></div>
       <div class="stax__step" data-i="3"><span class="stax__n">Stage 04</span><h3>Alkaline</h3><p>Then the good minerals go back in. Magnesium and calcium, so the water tastes the way water should.</p></div>
       <div class="stax__step" data-i="4"><span class="stax__n">Stage 05</span><h3>Carbon polish</h3><p>One final pass through coconut carbon, right before the tap, so every glass is crisp and clean.</p></div>
+      <div class="stax__step" data-i="5"><span class="stax__n">All five, together</span><h3>A five stage alkaline reverse osmosis system.</h3><p>Sediment, carbon, the membrane, alkaline and the polish, on one bracket under your sink. This gives you purified, alkaline water on its own tap.</p><a class="btn stax__go" href="#systems"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>View all systems</a></div>
     </div>
 
     <nav class="crail" id="crail" aria-label="The five stages">
@@ -2729,6 +2892,7 @@ body.dopen .drawer{transform:none}
       <button type="button" data-i="2"><i>03</i><b>The membrane</b></button>
       <button type="button" data-i="3"><i>04</i><b>Alkaline</b></button>
       <button type="button" data-i="4"><i>05</i><b>Carbon polish</b></button>
+      <button type="button" data-i="5"><i>06</i><b>The system</b></button>
     </nav>
     <div class="how__cert" data-sc-cue="0 1 0 0">
       <span>Certified</span>
@@ -2777,7 +2941,7 @@ body.dopen .drawer{transform:none}
        with a shadow and the coloured hinge". The ACT's ground tints with the system; the render floats on it;
        the words are a white card with a hinge in the system's colour. -->
   <div class="sc-stage t-plus" data-sc-stage>
-    <header class="range__head" data-sc-cue="0 1 0 0">
+    <header class="range__head" data-sc-cue="0 1 0 0" data-sc-in>
       <span class="kick">Three systems</span>
       <h2 class="d2">Reverse osmosis systems, tailored for your needs.</h2>
       <p class="lede">All three are reverse osmosis, under the sink, on their own tap. They all filter the exact same contaminants. The difference is the finish.</p>
@@ -2794,7 +2958,7 @@ body.dopen .drawer{transform:none}
           <span class="xtap" aria-hidden="true">See inside</span>
         </figure>
         <figure class="sysx__pic luxe xcard" id="pure-luxe" data-set="luxe" data-i="2" role="button" tabindex="0" aria-label="See inside the Pure Luxe">
-          <img src="media/xf-luxe-a/f00.webp" alt="The Pure Luxe smart five stage alkaline reverse osmosis system" width="1100" height="1472" loading="lazy">
+          <img src="media/xf-luxe/f00.webp" alt="The Pure Luxe smart five stage alkaline reverse osmosis system" width="1100" height="1472" loading="lazy">
           <span class="xtap" aria-hidden="true">See inside</span>
         </figure>
       </div>
@@ -2812,7 +2976,7 @@ body.dopen .drawer{transform:none}
           </ul>
           <div class="sysx__go">
             <button class="btn js-open" type="button" data-sys="Pure Plus"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
-            <span class="sysx__svc"><span class="svc-d">$600 a year, serviced by us. Covered for life while you stay serviced with us.</span><span class="svc-m">$600 a year, serviced by us.</span></span>
+            <span class="sysx__svc">$600 a year, serviced by us. Covered for life while you stay serviced with us.</span>
           </div>
         </article>
         <article class="sysx__panel prem" data-i="1">
@@ -2827,7 +2991,7 @@ body.dopen .drawer{transform:none}
           </ul>
           <div class="sysx__go">
             <button class="btn js-open" type="button" data-sys="Pure Premium"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
-            <span class="sysx__svc"><span class="svc-d">$650 a year, serviced by us. Covered for life while you stay serviced with us.</span><span class="svc-m">$650 a year, serviced by us.</span></span>
+            <span class="sysx__svc">$650 a year, serviced by us. Covered for life while you stay serviced with us.</span>
           </div>
         </article>
         <article class="sysx__panel luxe" data-i="2">
@@ -2842,7 +3006,7 @@ body.dopen .drawer{transform:none}
           </ul>
           <div class="sysx__go">
             <button class="btn js-open" type="button" data-sys="Pure Luxe"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
-            <span class="sysx__svc"><span class="svc-d">$680 a year, serviced by us. Covered for life while you stay serviced with us.</span><span class="svc-m">$680 a year, serviced by us.</span></span>
+            <span class="sysx__svc">$680 a year, serviced by us. Covered for life while you stay serviced with us.</span>
           </div>
         </article>
       </div>
@@ -2855,15 +3019,10 @@ body.dopen .drawer{transform:none}
     </nav>
   </div>
 </section>
-<!-- PHONE ONLY · THE LIGHTBOX (JP, 7 Sep: "when you tap it, the image enlarges into its own card on the
-     phone, and as it enlarges it explodes… tap it again, it closes back"). The system's own figure moves
-     into this panel while it is open, so the explosion and its markers run exactly as on the desktop, at
-     a size a thumb can use. ═════════ -->
-<div class="xlight" id="xlight" aria-hidden="true">
-  <div class="xl__scrim" id="xlScrim"></div>
-  <div class="xl__panel" id="xlPanel"></div>
-  <button class="xl__x" id="xlClose" type="button" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-</div>
+<!-- ITERATION SEVEN (JP, 7 Sep): the phone lightbox is gone ("I don't even like the way it opens in a product card").
+     On a phone this act stands down as a pinned act and runs as the homepage's product section does: the three
+     systems one under another, each render big on the ground that matches its own frames, tapped to open in
+     place, its words in a card of its own colour under it. The script strips data-sc-act on a phone. -->
 
 <!-- ═════════ 4b · WHAT THE MEMBRANE REJECTS — NEW, ITERATION FIVE (JP, 7 Sep: "right after the systems I
      want a brand new section that talks about what it's removing… reconfirm them since they're close to
@@ -2871,15 +3030,20 @@ body.dopen .drawer{transform:none}
      50 GPD membrane (filtersystemsaustralia.com.au, NSF/ANSI 58), every one of the 44, in three families,
      each with a ring that draws to its figure as it comes into view. Spec earns it, the line under each
      family sells it. ═════════ -->
-<section class="rej" id="removes" aria-label="What the membrane rejects">
+<section class="rej" id="removes" data-sc-act="flow" aria-label="What the membrane rejects">
   <div class="zone">
     <header class="rej__head" data-sc-in data-sc-stagger="80">
       <span class="kick">What the membrane rejects</span>
       <h2 class="d2">Everything that doesn't make it through.</h2>
       <p class="lede">Every drop passes through the 50 GPD reverse osmosis membrane, tested and certified to NSF/ANSI Standard 58. These are the maker's tested reduction rates, contaminant by contaminant.</p>
     </header>
+    <div class="rej__tabs" id="rejTabs" role="tablist" aria-label="Choose a family">
+      <button type="button" role="tab" class="on" aria-selected="true" data-f="metals">Metals</button>
+      <button type="button" role="tab" aria-selected="false" data-f="salts">Salts and minerals</button>
+      <button type="button" role="tab" aria-selected="false" data-f="chem">Chemicals</button>
+    </div>
     <div class="rej__grid">
-      <div class="rej__fam f-metals" data-sc-in>
+      <div class="rej__fam f-metals cur" data-sc-in data-sc-parallax="-0.05">
         <h3>Metals</h3>
         <p>The heavy ones people worry about, and the ones that come off old pipes.</p>
         <ul class="rej__list">
@@ -2889,7 +3053,7 @@ body.dopen .drawer{transform:none}
           <li class="rj" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Iron</b><span>98%</span></li>
           <li class="rj" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Aluminium</b><span>98%</span></li>
           <li class="rj" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Chromium VI</b><span>98%</span></li>
-          <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Manganese</b><span>98%</span></li>
+          </ul><div class="rej__fold"><ul class="rej__list rej__more"><li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Manganese</b><span>98%</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Zinc</b><span>98%</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Silver</b><span>98%</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Strontium</b><span>98%</span></li>
@@ -2897,10 +3061,10 @@ body.dopen .drawer{transform:none}
           <li class="rj more" style="--p:.95"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Barium</b><span>95%</span></li>
           <li class="rj more" style="--p:.95"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Selenium</b><span>95%</span></li>
           <li class="rj more" style="--p:.85"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Mercury</b><span>85%</span></li>
-        </ul>
+        </ul></div>
         <button type="button" class="rej__all" data-n="14" aria-expanded="false">See all 14</button>
       </div>
-      <div class="rej__fam f-salts" data-sc-in>
+      <div class="rej__fam f-salts" data-sc-in data-sc-parallax="0.05">
         <h3>Salts and minerals</h3>
         <p>Dissolved solids, fluoride and the salts. Then stage four puts the good minerals back in.</p>
         <ul class="rej__list">
@@ -2910,13 +3074,13 @@ body.dopen .drawer{transform:none}
           <li class="rj" style="--p:.95"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Chloride</b><span>95%</span></li>
           <li class="rj" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Sulphate</b><span>98%</span></li>
           <li class="rj" style="--p:.90"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Nitrate</b><span>90%</span></li>
-          <li class="rj more" style="--p:.95"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Potassium</b><span>95%</span></li>
+          </ul><div class="rej__fold"><ul class="rej__list rej__more"><li class="rj more" style="--p:.95"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Potassium</b><span>95%</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Calcium</b><span>98%</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Magnesium</b><span>98%</span></li>
-        </ul>
+        </ul></div>
         <button type="button" class="rej__all" data-n="9" aria-expanded="false">See all 9</button>
       </div>
-      <div class="rej__fam f-chem" data-sc-in>
+      <div class="rej__fam f-chem" data-sc-in data-sc-parallax="-0.05">
         <h3>Chemicals</h3>
         <p>Chlorine, solvents, pesticides and the compounds a carbon filter alone does not touch.</p>
         <ul class="rej__list">
@@ -2926,7 +3090,7 @@ body.dopen .drawer{transform:none}
           <li class="rj" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>VOCs</b><span>98%+</span></li>
           <li class="rj" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Benzene</b><span>98%+</span></li>
           <li class="rj" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Pesticides</b><span>98%+</span></li>
-          <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Herbicides</b><span>98%+</span></li>
+          </ul><div class="rej__fold"><ul class="rej__list rej__more"><li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Herbicides</b><span>98%+</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>PCBs</b><span>98%+</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>DDT</b><span>98%+</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Atrazine</b><span>98%+</span></li>
@@ -2941,7 +3105,7 @@ body.dopen .drawer{transform:none}
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Phenol</b><span>98%+</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Fluoranthene</b><span>98%+</span></li>
           <li class="rj more" style="--p:.98"><i><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.5"/><circle class="v" cx="18" cy="18" r="15.5" pathLength="100"/></svg></i><b>Tannic acids</b><span>98%+</span></li>
-        </ul>
+        </ul></div>
         <button type="button" class="rej__all" data-n="21" aria-expanded="false">See all 21</button>
       </div>
     </div>
@@ -2952,7 +3116,7 @@ body.dopen .drawer{transform:none}
 <!-- ═════════ 5 · THE TAPS — a half section so nobody scrolls past the premium three way mixers.
      GENERATED (Nano Banana Pro, 6 Sep 2026, the real Elysian mixer references, one kitchen):
      media/ro/tap-brass.webp, tap-black, tap-nickel, tap-gunmetal, tap-copper. ═════════ -->
-<section class="taps" id="taps" aria-label="Three way mixer taps">
+<section class="taps" id="taps" data-sc-act="flow" aria-label="Three way mixer taps">
   <div class="zone taps__grid">
     <div class="taps__copy" data-sc-in data-sc-stagger="80">
       <span class="kick">Premium three way mixers</span>
@@ -2970,7 +3134,7 @@ body.dopen .drawer{transform:none}
       <p class="taps__price"><b>Premium pull out three way mixers, from $1,050 installed</b><span>Five finishes. Fixed in writing with the system and fitted in the same visit.</span></p>
       <div class="taps__go"><a class="btn" href="faucets-and-mixers-sydney"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>See the taps and mixers</a><a class="ul" href="faucets-and-mixers-sydney">every filtered water tap we fit</a></div>
     </div>
-    <figure class="frame taps__fr" id="tapFrame" data-sc-tilt="4" data-sc-in>
+    <figure class="frame taps__fr" id="tapFrame" data-sc-tilt="4" data-sc-in data-sc-reveal="right" data-sc-reveal-at="0.06 0.4">
       <picture class="on" data-f="brass"><source media="(max-width:859px)" srcset="media/ro/tap-brass-m.webp"><img src="media/ro/tap-brass.webp" alt="A brushed gold three way pull out mixer tap on a white stone benchtop" width="1200" height="1490" loading="lazy"></picture>
       <picture data-f="black"><source media="(max-width:859px)" srcset="media/ro/tap-black-m.webp"><img src="media/ro/tap-black.webp" alt="A matte black three way pull out mixer tap on a white stone benchtop" width="1200" height="1490" loading="lazy"></picture>
       <picture data-f="nickel"><source media="(max-width:859px)" srcset="media/ro/tap-nickel-m.webp"><img src="media/ro/tap-nickel.webp" alt="A brushed stainless three way pull out mixer tap on a white stone benchtop" width="1200" height="1490" loading="lazy"></picture>
@@ -2986,20 +3150,20 @@ body.dopen .drawer{transform:none}
      screen: the three steps and the licence on the left, the cabinet still in the homepage's frame on
      the right (media/ro/undersink.webp, Nano Banana Pro, 6 Sep, our own system and tank references).
      The two under sink H2s are the blueprint's. ═════════ -->
-<section class="install" id="install" aria-label="Under sink installation">
+<section class="install" id="install" data-sc-act="flow" aria-label="Under sink installation">
   <div class="zone install__grid">
     <div class="install__copy" data-sc-in data-sc-stagger="90">
       <span class="kick">Under the sink</span>
       <h2 class="d2">What fits under the sink stays under the sink.</h2>
       <h2 class="install__sub">Under sink water filter installation, in one visit</h2>
       <ol class="steps3">
-        <li><b>Send a photo of the cabinet</b><span>The fit, the tap and the price come back in writing.</span></li>
-        <li><b>Fitted in about two hours</b><span>The system in the cabinet, the tank beside it, the tap through the bench.</span></li>
-        <li><b>We come back every year</b><span>To service it. Covered for life while you stay serviced with us.</span></li>
+        <li><b>Send a photo of the cabinet</b><span>The price comes back in writing.</span></li>
+        <li><b>Fitted in about two hours</b><span>System in the cabinet, tap through the bench.</span></li>
+        <li><b>We come back every year</b><span>Covered for life while you stay serviced with us.</span></li>
       </ol>
-      <p class="install__lic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="5.2" stroke="currentColor" stroke-width="2"/><path d="m8.4 13.4-1.6 7.2 5.2-2.6 5.2 2.6-1.6-7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Fitted by Jean-Paul Barbar, NSW plumbing licence 461511C, across Sydney from Croydon Park.</span></p>
+      <p class="install__lic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="5.2" stroke="currentColor" stroke-width="2"/><path d="m8.4 13.4-1.6 7.2 5.2-2.6 5.2 2.6-1.6-7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Fitted by Jean-Paul Barbar, NSW plumbing licence 461511C.</span></p>
     </div>
-    <figure class="frame install__fr" data-sc-in data-sc-tilt="3">
+    <figure class="frame install__fr" data-sc-in data-sc-tilt="3" data-sc-reveal="left" data-sc-reveal-at="0.06 0.4">
       <picture><source media="(max-width:859px)" srcset="media/ro/undersink-m.webp"><img src="media/ro/undersink.webp" alt="A five stage reverse osmosis system and its pressure tank fitted inside the cabinet under a Sydney kitchen sink" width="1600" height="893" loading="lazy"></picture>
       <figcaption>Where it goes</figcaption>
     </figure>
@@ -3127,9 +3291,9 @@ body.dopen .drawer{transform:none}
 
 <!-- ═════════ 9 · THE ASK — the glass full on the bench, the homepage form beside it, the number.
      GENERATED (Nano Banana Pro, 6 Sep 2026): media/ro/close.webp. ═════════ -->
-<section class="ask" id="ask" aria-label="Book your installation">
+<section class="ask" id="ask" data-sc-act="flow" aria-label="Book your installation">
   <div class="zone ask__grid">
-    <figure class="frame ask__fr" data-sc-in>
+    <figure class="frame ask__fr" data-sc-in data-sc-parallax="-0.08">
       <picture><source media="(max-width:859px)" srcset="media/ro/close-m.webp"><img src="media/ro/close.webp" alt="A full glass of purified water set down on the bench beside the tap" width="1600" height="893" loading="lazy"></picture>
       <figcaption>Purified water, on tap</figcaption>
     </figure>
@@ -4180,6 +4344,10 @@ body.dopen .drawer{transform:none}
       a.setAttribute('data-sc-act', 'flow');
       var t = a.querySelector('[data-sc-pan]'); if (t) t.removeAttribute('data-sc-pan');
     });
+    /* ITERATION SEVEN: the systems act is a FLOW on a phone (the homepage's product section, one system under
+       another), and the layered parallax is a desktop device: a stacked phone page keeps its boxes still */
+    var rAct = document.getElementById('systems'); if (rAct) rAct.removeAttribute('data-sc-act');
+    [].forEach.call(document.querySelectorAll('[data-sc-parallax]'), function(c){ c.removeAttribute('data-sc-parallax'); });
     document.documentElement.classList.add('ro-ph');
   }
 
@@ -4565,7 +4733,9 @@ body.dopen .drawer{transform:none}
   /* five equal windows inside the act, with a lead-in so the first stage is already up when the act lands
      and a tail so the last one holds while the act scrolls away (devices.md: a pinned act is on screen a
      viewport before its progress leaves 0) */
-  var STAGE_AT = [0, .20, .40, .60, .80];
+  /* ITERATION SEVEN: SIX windows. The sixth is the whole system (JP: "it should finish off") */
+  var STAGE_N = 6, STAGE_AT = [];
+  for (var sn = 0; sn < STAGE_N; sn++) STAGE_AT.push(sn / STAGE_N);
   var staxCur = -1;
   function setStage(i){
     if (i === staxCur) return;
@@ -4586,39 +4756,83 @@ body.dopen .drawer{transform:none}
     for (var n = 0; n < STAGE_AT.length; n++) if (p >= STAGE_AT[n]) i = n;
     setStage(i);
   }
-  /* ITERATION SIX · THE PHONE LOCKS ON A STAGE. Five markers inside the act, one per stage window, placed once the
-     geometry is final; html.snapon arms proximity snapping; every scripted glide holds .nosnap so the snap
-     engine cannot overrule it (the whole house page's round 100 law). */
-  var snapms = howAct ? [].slice.call(howAct.querySelectorAll('.snapm')) : [];
-  function placeSnaps(){
-    if (!mph || !howAct || !snapms.length) return;
+  /* the middle of a stage's window, in page pixels */
+  function stageCentre(i){
+    var top = howAct.getBoundingClientRect().top + scrollY;
     var travel = Math.max(howAct.offsetHeight - innerHeight, 1);
-    snapms.forEach(function(m, i){ m.style.top = Math.round(travel * (STAGE_AT[i] + .1)) + 'px'; });
+    return top + travel * ((i + .5) / STAGE_N);
   }
-  if (mph && howAct && !reduce){
-    addEventListener('load', function(){ setTimeout(function(){ placeSnaps(); document.documentElement.classList.add('snapon'); }, 900); });
-    addEventListener('resize', placeSnaps, {passive:true});
+  function stageP(){
+    var top = howAct.getBoundingClientRect().top + scrollY;
+    return (scrollY - top) / Math.max(howAct.offsetHeight - innerHeight, 1);
   }
-  var snapHoldT = 0;
-  function holdSnap(ms){
-    document.documentElement.classList.add('nosnap');
-    clearTimeout(snapHoldT);
-    snapHoldT = setTimeout(function(){ document.documentElement.classList.remove('nosnap'); }, ms || 1400);
-  }
+  function stageOf(p){ var i = 0; for (var n = 0; n < STAGE_AT.length; n++) if (p >= STAGE_AT[n]) i = n; return i; }
   /* the rail is a control: it glides to the middle of that stage's window (law 10: fire on contact) */
+  var lockBusy = false;
   crailBtns.forEach(function(b, i){
     var go = function(e){
       if (e && e.cancelable) e.preventDefault();
       if (!howAct) return;
-      var top = howAct.getBoundingClientRect().top + scrollY;
-      var travel = Math.max(howAct.offsetHeight - innerHeight, 1);
-      var mid = STAGE_AT[i] + (i < 4 ? (STAGE_AT[i + 1] - STAGE_AT[i]) / 2 : .1);
-      holdSnap(1400);
-      glide(top + travel * mid, mph ? .7 : 1.0);
+      lockBusy = true;
+      glide(stageCentre(i), mph ? .7 : 1.0, function(){ setTimeout(function(){ lockBusy = false; }, 80); });
     };
     b.addEventListener('click', go);
     if (window.PointerEvent) b.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') go(e); });
   });
+  /* ⭐ ITERATION SEVEN · THE PHONE: ONE SWIPE IS ONE STAGE, inside this act only (JP: "one cartridge, one membrane,
+     one alkaline, one carbon… then when we leave it, it's back to normal"). The iteration six snap markers are
+     gone: proximity snapping on the root slowed the WHOLE page ("it scrolls pathetically now").
+     How: while the act is pinned, the first touchmove decides. A swipe toward a stage that exists is taken over:
+     the move is cancelled and the page glides to that stage's centre over .7s, and the thumb's further movement is
+     ignored until the glide lands. A swipe past either end is left to the page. A flick that carries the page INTO
+     the act on momentum settles on the nearest stage as soon as the scroll goes quiet (phone = settle, never a
+     scrollTo under a thumb: scroll-engine law 4). */
+  if (mph && howAct && !reduce) (function stageLock(){
+    var touching = false, decided = 0, sy = 0, sx = 0, settleT = 0;
+    function goTo(i){
+      lockBusy = true;
+      glide(stageCentre(i), .72, function(){ setTimeout(function(){ lockBusy = false; }, 90); });
+    }
+    document.addEventListener('touchstart', function(e){
+      touching = true; decided = 0; sy = e.touches[0].clientY; sx = e.touches[0].clientX;
+    }, {passive:true});
+    document.addEventListener('touchmove', function(e){
+      if (!touching) return;
+      var p = stageP();
+      if (p < 0 || p > 1){ decided = -1; return; }              /* not inside the act: the page's own scroll */
+      if (lockBusy){ if (e.cancelable) e.preventDefault(); return; }   /* a glide is landing: the thumb waits */
+      if (decided === -1) return;
+      if (decided === 1){ if (e.cancelable) e.preventDefault(); return; }
+      var dy = e.touches[0].clientY - sy, dx = e.touches[0].clientX - sx;
+      if (Math.abs(dy) < 5 && Math.abs(dx) < 5) return;
+      if (Math.abs(dx) > Math.abs(dy)){ decided = -1; return; }   /* a sideways gesture is not a swipe */
+      var i = stageOf(p), down = dy < 0;                          /* the finger moves up: the page goes down */
+      if ((down && i >= STAGE_N - 1) || (!down && i <= 0)){ decided = -1; return; }   /* past an end: released */
+      decided = 1;
+      if (e.cancelable) e.preventDefault();
+      goTo(i + (down ? 1 : -1));
+    }, {passive:false});
+    var end = function(){ touching = false; decided = 0; };
+    document.addEventListener('touchend', end, {passive:true});
+    document.addEventListener('touchcancel', end, {passive:true});
+    var lastY = scrollY;
+    addEventListener('scroll', function(){
+      var p = stageP(), y = scrollY, dy = Math.abs(y - lastY); lastY = y;
+      if (lockBusy || touching) return;
+      if (p <= .01 || p >= .99) return;
+      var i = stageOf(p);
+      if (Math.abs(y - stageCentre(i)) <= 6) return;
+      /* moving fast with no thumb on the glass is momentum: land on this stage now, before it carries through */
+      if (dy > 36){ goTo(i); return; }
+      clearTimeout(settleT);
+      settleT = setTimeout(function(){
+        if (lockBusy || touching) return;
+        var q = stageP(); if (q <= .01 || q >= .99) return;
+        var k = stageOf(q);
+        if (Math.abs(scrollY - stageCentre(k)) > 6) goTo(k);
+      }, 70);
+    }, {passive:true});
+  })();
 
   /* 4 · THE THREE SYSTEMS — ⭐ ROUND 4: the DOCK. One system on a lit stage at a time, its words beside
      it, and three peer pills under them. Scroll picks one; the dock picks one. Nothing stacks on top of
@@ -4631,13 +4845,17 @@ body.dopen .drawer{transform:none}
   var SYS_AT = [0, .34, .67];                     /* three equal thirds of the act */
   var sysCur = -1;
   var sysx = document.getElementById('sysx'), SYS_KEY = ['plus', 'prem', 'luxe'];
+  /* ITERATION SEVEN (JP: "exactly how it's done on the homepage"): the act's ground takes the CURRENT system's own
+     frame backdrop, measured off a 12px border ring of each f00 on the homepage (round 55): plus #ECF0F7 ·
+     prem #EDF1F9 · luxe #DCE6F1. The card, not the ground, carries blue, purple and gold. */
+  var RBG = ['#ECF0F7', '#EDF1F9', '#DCE6F1'];
+  var rstage = rangeAct && rangeAct.querySelector('.sc-stage');
   function setSys(i){
     if (i === sysCur) return;
     var was = sysCur; sysCur = i;
     /* ITERATION FOUR (JP): ONE card, and it changes colour with the system */
     if (sysx){ SYS_KEY.forEach(function(k){ sysx.classList.remove('t-' + k); }); sysx.classList.add('t-' + SYS_KEY[i]); }
-    var rstage = rangeAct && rangeAct.querySelector('.sc-stage');
-    if (rstage){ SYS_KEY.forEach(function(k){ rstage.classList.remove('t-' + k); }); rstage.classList.add('t-' + SYS_KEY[i]); }
+    if (rstage){ SYS_KEY.forEach(function(k){ rstage.classList.remove('t-' + k); }); rstage.classList.add('t-' + SYS_KEY[i]); rstage.style.setProperty('--rbg', RBG[i]); }
     for (var n = 0; n < sysPics.length; n++){
       sysPics[n].classList.toggle('on', n === i);
       sysPics[n].classList.toggle('was', n === was);
@@ -4651,7 +4869,7 @@ body.dopen .drawer{transform:none}
     }
   }
   function driveRange(){
-    if (!rangeAct) return;
+    if (!rangeAct || mph) return;
     var p = P(rangeAct), i = 0;
     for (var n = 0; n < SYS_AT.length; n++) if (p >= SYS_AT[n]) i = n;
     setSys(i);
@@ -4661,7 +4879,6 @@ body.dopen .drawer{transform:none}
     var top = rangeAct.getBoundingClientRect().top + scrollY;
     var travel = Math.max(rangeAct.offsetHeight - innerHeight, 1);
     var mid = SYS_AT[i] + (i < 2 ? (SYS_AT[i + 1] - SYS_AT[i]) / 2 : .16);
-    holdSnap(1400);
     glide(top + travel * mid, mph ? .7 : 1.0);
   }
   dockBtns.forEach(function(b, i){
@@ -4669,11 +4886,26 @@ body.dopen .drawer{transform:none}
     b.addEventListener('click', go);
     if (window.PointerEvent) b.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') go(e); });
   });
+  /* THE PHONE (iteration seven): the section's ground follows the system in the middle of the screen, the
+     homepage's own mechanism (an observer at the 49% line) */
+  if (mph && rangeAct && rstage && 'IntersectionObserver' in window){
+    var gio = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var i = parseInt(e.target.getAttribute('data-i'), 10);
+        rstage.style.setProperty('--rbg', RBG[i]);
+        if (sysx){ SYS_KEY.forEach(function(k){ sysx.classList.remove('t-' + k); }); sysx.classList.add('t-' + SYS_KEY[i]); }
+      });
+    }, {rootMargin:'-40% 0px -40% 0px'});
+    sysPics.forEach(function(c){ gio.observe(c); });
+    rstage.style.setProperty('--rbg', RBG[0]);
+  }
   /* an old product URL lands on its system: /pure-premium-… 301s into #pure-premium */
   (function landOnSystem(){
     if (!rangeAct || !location.hash) return;
     var i = -1; sysPics.forEach(function(c, n){ if ('#' + c.id === location.hash) i = n; });
     if (i < 1) return;
+    if (mph){ addEventListener('load', function(){ setTimeout(function(){ jump(sysPics[i].getBoundingClientRect().top + scrollY - 80); }, 60); }); return; }
     addEventListener('load', function(){ setTimeout(function(){
       var top = rangeAct.getBoundingClientRect().top + scrollY, travel = rangeAct.offsetHeight - innerHeight;
       if (travel <= 0) return;
@@ -4691,7 +4923,6 @@ body.dopen .drawer{transform:none}
     var N = mph ? 37 : 73, FRX = mph ? '-m' : '', XDUR = 1300;
     function frames(dir){ var a = []; for (var i = 0; i < N; i++) a.push(dir + '/f' + (i < 10 ? '0' + i : i) + FRX + '.webp'); return a; }
     var SETS = { plus: frames('media/xf-plus'), prem: frames('media/xf-prem'), luxe: frames('media/xf-luxe') };
-    SETS.luxe[0] = 'media/xf-luxe-a/f00' + FRX + '.webp';   /* iteration six: the Luxe rests as a cutout on the ground */
     var RETAIN = {}, READY = {}, preloaded = {};
     function preload(key){
       if (preloaded[key]) return preloaded[key];
@@ -4770,37 +5001,7 @@ body.dopen .drawer{transform:none}
       wrap.style.left = ((H.width - w) / 2).toFixed(1) + 'px'; wrap.style.top = ((H.height - h) / 2).toFixed(1) + 'px';
       wrap.style.width = w.toFixed(1) + 'px'; wrap.style.height = h.toFixed(1) + 'px';
     }
-    /* ⭐ ITERATION FIVE (JP, 7 Sep: "when you tap it, the image enlarges into its own card on the phone, and as
-       it enlarges it explodes… the plus signs all work… tap it again, it closes back"). The system's OWN
-       figure moves into the fixed panel while it is open, so the explosion, its frames and its markers run
-       exactly as they do on a desktop, at a size a thumb can use; then it goes home. */
-    var xl = document.getElementById('xlight'), xlPanel = document.getElementById('xlPanel'), xlClose = document.getElementById('xlClose'), xlScrim = document.getElementById('xlScrim');
-    var xlCard = null, xlHome = null, xlNext = null, xlBusy = false;
-    function lightOpen(c){
-      if (!xl || xlCard) return;
-      xlCard = c; xlHome = c.parentNode; xlNext = c.nextSibling;
-      xlPanel.className = 'xl__panel xl-' + (c.getAttribute('data-set') || 'plus');
-      xlPanel.insertBefore(c, xlPanel.firstChild);
-      document.body.classList.add('xlopen'); xl.setAttribute('aria-hidden', 'false'); lockScroll(true);
-      requestAnimationFrame(function(){ requestAnimationFrame(function(){ xl.classList.add('on'); }); });
-    }
-    function lightClose(){
-      if (!xlCard || xlBusy) return;
-      xlBusy = true;
-      var c = xlCard;
-      if (c._isOpen && c._isOpen()) c._close();
-      setTimeout(function(){
-        xl.classList.remove('on');
-        setTimeout(function(){
-          xlHome.insertBefore(c, xlNext);
-          document.body.classList.remove('xlopen'); xl.setAttribute('aria-hidden', 'true'); lockScroll(false);
-          xlCard = null; xlBusy = false;
-        }, 440);
-      }, c._isOpen ? 520 : 0);
-    }
-    if (xlClose) xlClose.addEventListener('click', lightClose);
-    if (xlScrim) xlScrim.addEventListener('click', lightClose);
-    addEventListener('keydown', function(e){ if (e.key === 'Escape' && xlCard) lightClose(); });
+    /* ITERATION SEVEN: the phone lightbox is gone (JP). A tap opens the unit where it stands, on every screen. */
     cards.forEach(function(c){
       var key = c.getAttribute('data-set'), img = c.querySelector('img'), SRC = SETS[key];
       if (!SRC || !img) return;
@@ -4821,24 +5022,9 @@ body.dopen .drawer{transform:none}
         if (!READY[key]){ var first = pend === null; pend = t; if (first) preload(key).then(function(){ var v = pend; pend = null; go2(v, dur); }); return; }
         go2(t, dur);
       }
-      /* the Luxe's plate: sized to the painted image, in before the first exploded frame, out after the last */
-      var plate = null;
-      if (key === 'luxe'){ plate = document.createElement('span'); plate.className = 'xplate'; c.insertBefore(plate, c.firstChild); }
-      function placePlate(){
-        if (!plate) return;
-        var H = c.getBoundingClientRect(), nw = img.naturalWidth || 1100, nh = img.naturalHeight || 1472;
-        var sc = Math.min(H.width / nw, H.height / nh), w = nw * sc, h = nh * sc;
-        plate.style.left = ((H.width - w) / 2).toFixed(1) + 'px'; plate.style.top = ((H.height - h) / 2).toFixed(1) + 'px';
-        plate.style.width = w.toFixed(1) + 'px'; plate.style.height = h.toFixed(1) + 'px';
-        /* the frames' own corners round to the plate's: border-radius rounds the element, not a contained image */
-        img.style.clipPath = 'inset(' + ((H.height - h) / 2).toFixed(1) + 'px ' + ((H.width - w) / 2).toFixed(1) + 'px round 22px)';
-      }
       function toggle(){
         open = !open; c.classList.toggle('opened', open);
-        if (plate){
-          if (open){ placePlate(); plate.classList.add('on'); setTimeout(function(){ if (open) go(1, XDUR); }, 340); }
-          else { go(0, XDUR); setTimeout(function(){ if (!open){ plate.classList.remove('on'); img.style.clipPath = ''; } }, XDUR + 40); }
-        } else go(open ? 1 : 0, XDUR);
+        go(open ? 1 : 0, XDUR);
         /* the markers belong to the END frame, so they wait for it; a second tap must not be overtaken by the first */
         clearTimeout(spotT);
         if (open && wrap) spotT = setTimeout(function(){ if (open){ placeSpots(c, wrap, img); c.classList.add('xopen'); } }, XDUR - 160);
@@ -4847,11 +5033,6 @@ body.dopen .drawer{transform:none}
       }
       c.addEventListener('click', function(e){
         if (e.target.closest && e.target.closest('.hs')) return;
-        if (mph && xl){
-          if (!open && !xlCard){ lightOpen(c); setTimeout(function(){ if (!open) toggle(); }, 420); }
-          else lightClose();
-          return;
-        }
         toggle();
       });
       c.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
@@ -4869,14 +5050,24 @@ body.dopen .drawer{transform:none}
     } else { preload('plus'); }
   })();
 
-  /* 4b · WHAT THE MEMBRANE REJECTS — each family lights as it enters, its rings in a short stagger */
+  /* 4b · WHAT THE MEMBRANE REJECTS — each family lights as it enters, its rings in a short stagger.
+     ITERATION SEVEN (JP: "I hate how the whole page moves with it… everything has to have an animation, even that"):
+     the extra pills live in their own fold (grid-template-rows 0fr → 1fr, .75s, the soft ease) and rise in on a
+     stagger; the section is top-aligned so growing a card never re-centres the page; and "Show fewer" glides the
+     card's head back into view while the fold closes, so the reader is never left on a different screen. On a
+     phone the three families are TABS on one card (JP: "too much to slide through"). */
   (function rej(){
     var fams = [].slice.call(document.querySelectorAll('.rej__fam'));
     if (!fams.length) return;
-    fams.forEach(function(f){ [].forEach.call(f.querySelectorAll('.rj'), function(li, i){ li.style.transitionDelay = Math.min(i * 40, 720) + 'ms'; }); });
-    if (!('IntersectionObserver' in window) || reduce){ fams.forEach(function(f){ f.classList.add('lit'); }); return; }
-    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('lit'); io.unobserve(e.target); } }); }, {threshold:.2});
-    fams.forEach(function(f){ io.observe(f); });
+    fams.forEach(function(f){
+      [].forEach.call(f.querySelectorAll('.rej__list:not(.rej__more) .rj'), function(li, i){ li.style.transitionDelay = Math.min(i * 40, 720) + 'ms'; });
+      [].forEach.call(f.querySelectorAll('.rej__more .rj'), function(li, i){ li.style.transitionDelay = (120 + Math.min(i * 34, 640)) + 'ms'; });
+    });
+    if (!('IntersectionObserver' in window) || reduce){ fams.forEach(function(f){ f.classList.add('lit'); }); }
+    else {
+      var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('lit'); io.unobserve(e.target); } }); }, {threshold:.2});
+      fams.forEach(function(f){ io.observe(f); });
+    }
     fams.forEach(function(f){
       var b = f.querySelector('.rej__all'); if (!b) return;
       var n = b.getAttribute('data-n');
@@ -4884,8 +5075,25 @@ body.dopen .drawer{transform:none}
         var open = f.classList.toggle('open');
         b.setAttribute('aria-expanded', open ? 'true' : 'false');
         b.textContent = open ? 'Show fewer' : 'See all ' + n;
+        if (!open){
+          /* the card's head above the screen? bring it back with the fold, one soft move, never a jump */
+          var top = f.getBoundingClientRect().top;
+          if (top < 72) glide(top + scrollY - 96, .8);
+        }
       });
     });
+    /* the phone's tabs */
+    var tabs = document.getElementById('rejTabs');
+    if (tabs){
+      var tbs = [].slice.call(tabs.querySelectorAll('button'));
+      tbs.forEach(function(t){
+        t.addEventListener('click', function(){
+          var key = t.getAttribute('data-f');
+          tbs.forEach(function(o){ var on = o === t; o.classList.toggle('on', on); o.setAttribute('aria-selected', on ? 'true' : 'false'); });
+          fams.forEach(function(f){ var on = f.classList.contains('f-' + key); f.classList.toggle('cur', on); if (on) f.classList.add('lit'); });
+        });
+      });
+    }
   })();
 
   /* 7 · THE LEDGER — each row's tick draws once its row has landed */
@@ -4929,6 +5137,9 @@ body.dopen .drawer{transform:none}
     var imgs = [].slice.call(document.querySelectorAll('#tapFrame picture'));
     var cap = document.getElementById('tapCap');
     if (!sws.length) return;
+    /* ITERATION SEVEN (JP): on a phone the five dots sit ON the photograph, from the bottom right corner, lifted a
+       little, ending before the mixer; the finish's name at the top right of the photograph */
+    if (mph){ var swl = document.getElementById('swatches'), fr = document.getElementById('tapFrame'); if (swl && fr) fr.appendChild(swl); }
     function pick(f, label){
       sws.forEach(function(b){ var on = b.getAttribute('data-f') === f; b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); });
       imgs.forEach(function(im){ im.classList.toggle('on', im.getAttribute('data-f') === f); });
@@ -5013,7 +5224,6 @@ body.dopen .drawer{transform:none}
     var fading = false;
     function fadeTo(y){
       y = Math.max(0, Math.round(y));
-      holdSnap(1600);
       if (reduce || !veil){ jump(y); drive(); return; }
       if (fading) return;
       fading = true;
