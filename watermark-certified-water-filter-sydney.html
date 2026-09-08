@@ -917,13 +917,13 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
 </style>
 <!-- /SC:CSS -->
 <style>
-/* ═══════════ WATERMARK V1 — THE RECORD (8 Sep 2026) ═══════════
-   The certification page. Tokens copied from Website/index.html verbatim (every var() below is
-   defined HERE; an undefined token fails silently). Paper and mist chapters with photographs in the
-   homepage's 24px frame; one deep navy act (what WaterMark means) and one blue field (the licence).
-   One face: Plus Jakarta Sans, the homepage weights: hero h1 700 · display 500 · figures 800.
-   The hero, the plate, the split, the lane, the ask, the form, the rail and the estate are the RO
-   page's own blocks carried as behaviour; the record (the document viewer) is this page's own.
+/* ═══════════ WATERMARK V1 — THE RECORD, renovation (8 Sep 2026 pm) ═══════════
+   The certification page, JP's second brief: a professional certification page, easy to read, easy to
+   navigate, clear what you are clicking on. Nothing pinned but the laboratory split; no photograph on a
+   card; generated backgrounds only. The register language: hairlines, numbered rows, tabular figures,
+   small tracked labels, paper and mist grounds, the site's blue field once.
+   Tokens copied from Website/index.html verbatim (every var() below is defined HERE). One face: Plus
+   Jakarta Sans, the homepage weights: hero h1 700 · display 500 · figures 800.
    ⛔ Nothing here may lead with a shell class (.hdr .util .foot .btn .pgtop .pgcard …): the shell is
    stamped from index.html and verified by site_shell.py check + shell-probe.mjs. */
 :root{
@@ -953,7 +953,8 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
   --fabclear:calc(76px + env(safe-area-inset-bottom))}}
 @media(max-width:599px){:root{--hframe:8px}}
 .zone{padding-inline:var(--safe)}
-[data-sc-in],[data-sc-stagger] > *{transform:translate3d(0,22px,0);transition-duration:1050ms}
+/* the only motion on the page's flow sections: a quiet rise on arrival, once */
+[data-sc-in],[data-sc-stagger] > *{transform:translate3d(0,16px,0);transition-duration:900ms}
 @font-face{font-family:"PJS Fallback";src:local("Arial");
   size-adjust:104.5%;ascent-override:101%;descent-override:26%;line-gap-override:0%}
 *{box-sizing:border-box}
@@ -990,10 +991,10 @@ a{color:inherit}
   background:rgba(255,254,252,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 22px -12px rgba(4,16,46,.5),inset 0 0 0 1px rgba(255,255,255,.6)}
 .sc-stage{background:var(--paper)}
 /* every inline link that is a target on its own is 44px tall */
-.ask__call .ul,.est__go .ul,.est__call .ul,.syd__go .ul,.care__go .ul,.fits__line .ul,.lab__frame .ul{display:inline-flex;align-items:center;min-height:44px}
-.lab__frame .ul,.fits__line .ul{min-height:0;padding:11px 0;margin:-11px 0}
+.ask__call .ul,.est__go .ul,.est__call .ul,.syd__go .ul,.lic__go .ul,.mean__mark .ul,.lab__frame .ul{display:inline-flex;align-items:center;min-height:44px}
+.lab__frame .ul,.mean__mark .ul{min-height:0;padding:11px 0;margin:-11px 0}
 
-/* ══ HERO — the shell's opener, the RO page's slideshow, THE RECORD CARD on it ══ */
+/* ══ HERO — the shell's opener, the record card ══ */
 .hero{min-height:calc(100svh - var(--utilh) - 2*var(--hframe));background:var(--ink-blue);color:#fff;display:flex;align-items:flex-end}
 .hero .hbg{position:absolute;inset:0;z-index:0;overflow:clip}
 .hero .hbg picture{position:absolute;inset:0;opacity:0;transition:opacity 2.2s ease-in-out}
@@ -1011,8 +1012,7 @@ a{color:inherit}
   .hero h1{font-size:clamp(2.4rem,4.6vw,3.6rem)}
 }
 .ocardwrap{display:contents}
-/* narrower than the RO page's deck card (500 against 580) so the glass, at the middle of the picture, stands clear of it
-   at 1280 and 1440 (measured 8 Sep: the 580 card's left edge sat at 57% and covered the subject) */
+/* 500 wide (the RO deck's is 580) so the glass, at the middle of the picture, stands clear of it at 1280 and 1440 */
 .ocard{position:absolute;right:36px;bottom:36px;z-index:12;width:min(500px,94vw);
   background:#F6F7F7;color:var(--ink);border-radius:36px 36px 24px 24px;overflow:hidden;box-shadow:var(--shadow-cc)}
 .ochead{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;padding:14px 20px 8px 14px}
@@ -1039,152 +1039,99 @@ a{color:inherit}
 @keyframes ocardin{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 @media(min-width:860px) and (max-width:1469px){
   .ocard{width:min(500px,40vw)}
-  .ochead{grid-template-columns:120px 1fr}
-  .ochead .oth{width:120px;height:120px;border-radius:18px;padding:14px}
+  .ochead .oth{padding:14px}
   .ochead .ot b{font-size:21px}
   .ocfoot{flex-wrap:wrap}
   .ocfoot .btn{flex:1 1 100%;justify-content:center}
 }
 
-/* ══ 1 · WHAT IT CARRIES (#marks) — the plate ══ */
-.why .sc-stage{background:var(--paper)}   /* ⛔ never position:relative here: it overrides the engine's sticky */
-.why__fr{position:absolute;inset:var(--hframe);border-radius:var(--r-hero);overflow:clip;background:var(--mist)}
-.why__fr img{width:100%;height:100%;object-fit:cover;object-position:62% 45%;max-width:none}
-.why__veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,16,46,.86) 0%,rgba(4,16,46,.68) 32%,rgba(4,16,46,.24) 60%,rgba(4,16,46,.1) 100%)}
-.why__copy{position:absolute;inset:0;display:grid;align-content:center;gap:22px;padding:calc(var(--top) + 8px) var(--safe) 60px;color:#fff;max-width:min(100%,calc(820px + 2 * var(--safe)))}
-.why__copy .kick{color:var(--yellow)}
-.why__copy h2{color:#fff;font-weight:600;max-width:13ch;font-size:clamp(2.4rem,5vw,4.4rem);will-change:opacity,transform}
-.why__names{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:2px}
-.why__names li{position:relative;font-size:clamp(1.5rem,2.6vw,2.4rem);font-weight:600;letter-spacing:-.01em;line-height:1.2;color:#fff;padding-bottom:7px;will-change:opacity,transform}
-.why__names li::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:2px;background:var(--yellow);transform:scaleX(var(--u,0));transform-origin:0 50%}
-.why__line{font-size:clamp(1.15rem,1.6vw,1.45rem);font-weight:500;line-height:1.45;color:rgba(255,255,255,.9);max-width:38ch;will-change:opacity,transform}
-
-/* ══ 2 · WHAT WATERMARK MEANS (#watermark) — navy, one picture on a lit stage, three steps, a rail ══ */
-.how .sc-stage{color:#fff;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:auto minmax(0,1fr) auto;gap:18px clamp(28px,4vw,72px);
-  padding:var(--top) var(--safe) 44px;
-  background:
-    radial-gradient(70% 58% at 16% 0%,rgba(11,97,244,.30),transparent 62%),
-    radial-gradient(56% 52% at 94% 100%,rgba(8,70,190,.44),transparent 62%),
-    radial-gradient(40% 40% at 72% 34%,rgba(91,154,226,.09),transparent 60%),
-    var(--ink-blue)}
-.how__head{grid-column:1/-1;grid-row:1;display:grid;gap:10px;max-width:60ch;will-change:opacity,transform}
-.how__head .kick{color:var(--yellow)}
-.how__head h2{color:#fff}
-.stax{grid-column:1;grid-row:2/4;position:relative;min-height:0;isolation:isolate}
-.stax::before{content:"";position:absolute;left:50%;top:50%;width:min(120%,760px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
-  background:radial-gradient(closest-side,rgba(11,97,244,.34),rgba(11,97,244,.08) 55%,transparent 72%);pointer-events:none;z-index:0}
-.stax__pic{position:absolute;inset:0;margin:0;display:grid;place-items:center;opacity:0;transform:translateY(26px) scale(.96);pointer-events:none;
-  transition:opacity .62s var(--e-out),transform .74s var(--e-out);will-change:opacity,transform;z-index:1}
-.stax__pic.on{opacity:1;transform:none}
-.stax__pic.was{opacity:0;transform:translateY(-22px) scale(.97)}
-/* ⛔ a picture gets a DEFINITE box (the RO page's cyclic-height trap): the frame is absolute, the image contains */
-.stax__pic > img,.stax__pic > picture{position:absolute;inset:0;width:100%;height:100%;margin:auto;max-width:none}
-.stax__pic > picture > img{width:100%;height:100%;object-fit:contain}
-.stax__pic > img{object-fit:contain;object-position:50% 50%}
-.stax__pic:not(.ph) img{border-radius:12px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08);background:#fff}
-.stax__pic:not(.ph){padding:22px}
-.stax__pic.ph img{border-radius:var(--r-hero);object-fit:cover;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
-.stax__pic.ph{padding:10px}
-.stax__badge{position:absolute;z-index:3;left:6%;top:4%;width:clamp(96px,10vw,150px);padding:12px 14px;border-radius:16px;background:#fff;box-shadow:0 24px 50px -20px rgba(0,0,0,.7);pointer-events:none}
-.stax__badge img{width:100%;height:auto}
-.stax__copy{grid-column:2;grid-row:2;position:relative;align-self:center;min-height:0;display:grid}
-.stax__step{grid-area:1/1;display:grid;gap:12px;align-content:center;max-width:44ch;opacity:0;transform:translateY(18px);pointer-events:none;transition:opacity .48s var(--e-out),transform .58s var(--e-out)}
-.stax__step.on{opacity:1;transform:none;pointer-events:auto}
-.stax__n{display:inline-flex;align-items:center;gap:12px;font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--yellow)}
-.stax__n::before{content:"";width:28px;height:2px;background:currentColor;border-radius:2px}
-.stax__step h3{color:#fff;font-weight:600;letter-spacing:-.01em;line-height:1.06;font-size:clamp(2rem,3.4vw,3.1rem);text-wrap:balance}
-.stax__step p{color:rgba(255,255,255,.86);font-size:clamp(1.05rem,1.35vw,1.25rem);line-height:1.5;max-width:40ch}
-.stax__go{margin-top:6px;width:max-content}
-.crail{grid-column:2;grid-row:3;position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding-top:18px;align-self:end}
-.crail::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:rgba(255,255,255,.16);border-radius:2px}
-.crail::after{content:"";position:absolute;left:0;top:0;height:2px;width:var(--fx,0px);background:var(--yellow);border-radius:2px;transition:width .5s var(--e-out)}
-.crail button{position:relative;display:grid;gap:4px;justify-items:start;min-height:52px;padding:14px 8px 0 0;border:0;background:none;color:rgba(255,255,255,.6);cursor:pointer;font-family:var(--sans);text-align:left;transition:color .45s ease-in-out}
-.crail button::before{content:"";position:absolute;left:0;top:0;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3);transform:translate(0,-50%);transition:background .45s ease-in-out,box-shadow .45s ease-in-out}
-.crail button i{font-style:normal;font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.1em}
-.crail button b{font-size:15px;font-weight:700;line-height:1.25}
-.crail button.on{color:#fff}
-.crail button.on::before{background:var(--yellow);box-shadow:0 0 0 6px rgba(255,217,0,.18),0 0 24px rgba(255,217,0,.55)}
-.crail button:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;border-radius:8px}
-
-/* ══ 3 · THE RECORD (#documents) — the list and the viewer ══ */
-.docs{position:relative;z-index:2;padding:clamp(72px,9vw,130px) 0 clamp(64px,7vw,104px);background:radial-gradient(52% 44% at 100% 0%,rgba(11,97,244,.08),transparent 60%),var(--paper)}
-.docs__head{display:grid;gap:14px;max-width:64ch}
-.docs__head h2{color:var(--ink)}
-.docs__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4.5vw,72px);align-items:start;margin-top:clamp(32px,4vw,56px)}
-.docs__list{display:grid;gap:10px;counter-reset:doc}
-.doc{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px 18px;align-items:start;padding:20px 22px;border-radius:var(--r-card);
-  background:#fff;border:1px solid var(--rule);text-decoration:none;color:var(--ink);
-  transition:border-color .45s ease-in-out,box-shadow .45s var(--e-out),transform .45s var(--e-out),background-color .45s ease-in-out}
-.doc__pic,.docs__dots{display:none}
-.doc__n{font-family:var(--badge);font-size:12.5px;font-weight:700;letter-spacing:.1em;color:var(--blue);padding-top:5px;min-width:26px}
-.doc__t{display:grid;gap:6px;min-width:0}
-.doc__t b{font-size:clamp(1.1rem,1.4vw,1.32rem);font-weight:700;line-height:1.25;letter-spacing:-.01em}
-.doc__t > span{font-size:15.5px;line-height:1.5;color:var(--muted)}
-.doc__t em{display:inline-flex;align-items:center;width:max-content;margin-top:4px;padding:5px 10px;border-radius:var(--r-full);background:var(--mist);font-style:normal;font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.doc__go{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--mist);color:var(--ink);transition:background .45s ease-in-out,color .45s ease-in-out,transform .45s var(--e-out)}
-.doc__go svg{width:16px;height:16px}
-.doc.on{border-color:#CBD9EE;box-shadow:0 1px 2px rgba(15,39,72,.04),0 20px 40px -22px rgba(15,39,72,.35)}
-.doc.on .doc__go{background:var(--blue);color:#fff}
-.doc.on .doc__t em{background:var(--blue-pale);color:var(--blue-deep)}
+/* ══ 1 · THE REGISTER (#documents) — numbered rows on hairlines, one clear Open on every row ══ */
+.reg{position:relative;z-index:2;padding:clamp(72px,8vw,120px) 0 clamp(56px,6vw,88px);background:var(--paper)}
+.reg__head{display:grid;gap:14px;max-width:64ch}
+.reg__head h2{color:var(--ink)}
+.reg__list{margin-top:clamp(32px,4vw,52px);border-top:1px solid var(--rule)}
+.rrow{display:grid;grid-template-columns:44px minmax(0,1.25fr) minmax(0,1.3fr) auto;gap:16px 28px;align-items:center;padding:24px 10px;border-bottom:1px solid var(--rule);
+  text-decoration:none;color:var(--ink);border-radius:var(--r-sm);transition:background .45s ease-in-out}
+.rrow__n{font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--blue);font-variant-numeric:tabular-nums;align-self:start;padding-top:6px}
+.rrow__main{display:grid;gap:5px;min-width:0}
+.rrow__main b{font-size:clamp(1.15rem,1.5vw,1.4rem);font-weight:700;line-height:1.25;letter-spacing:-.012em}
+.rrow__main > span{font-size:15.5px;line-height:1.5;color:var(--muted)}
+.rrow__meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 18px;min-width:0}
+.rrow__meta > span{display:grid;gap:3px;min-width:0}
+.rrow__meta i{font-style:normal;font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.rrow__meta b{font-size:15px;font-weight:600;line-height:1.35;color:var(--ink);font-variant-numeric:tabular-nums}
+.rrow__go{display:grid;gap:7px;justify-items:end;text-align:right;min-width:150px}
+.rrow__go i{font-style:normal;font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.rrow__go b{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:var(--r-full);background:var(--ink);color:#fff;font-size:15px;font-weight:700;transition:background .45s ease-in-out,transform .45s var(--e-out)}
+.rrow__go b svg{width:14px;height:14px}
 @media(hover:hover) and (pointer:fine){
-  .doc:hover{transform:translateY(-2px);border-color:#CBD9EE}
-  .doc:hover .doc__go{background:var(--ink);color:#fff;transform:translate(2px,-2px)}
+  .rrow:hover{background:var(--mist-2)}
+  .rrow:hover .rrow__go b{background:var(--blue);transform:translateY(-1px)}
 }
-.docs__view{position:sticky;top:calc(var(--top) + 10px);margin:0;border-radius:var(--r-hero);overflow:clip;background:var(--ink-blue);box-shadow:var(--shadow-lg);isolation:isolate}
-.docs__pages{position:relative;aspect-ratio:1200/1020;background:#0E1A3D}
-.docs__pages img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;max-width:none;opacity:0;transform:scale(1.02);transition:opacity .6s ease-in-out,transform .9s var(--e-out)}
-.docs__pages img.on{opacity:1;transform:none}
-.docs__view figcaption{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:var(--r-full);font-size:15px;font-weight:600;color:var(--ink);
-  background:rgba(255,254,252,.9);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 22px -12px rgba(4,16,46,.5),inset 0 0 0 1px rgba(255,255,255,.6)}
-.docs__note{margin-top:clamp(28px,3.6vw,44px);padding:18px 22px;border-radius:var(--r-card);background:var(--mist-2);box-shadow:inset 0 0 0 1px var(--rule);font-size:16px;line-height:1.55;color:var(--muted);max-width:none}
-.docs__note b{color:var(--ink)}
+.reg__note{margin-top:clamp(24px,3vw,36px);padding:4px 0 4px 22px;border-left:3px solid var(--blue);font-size:16px;line-height:1.55;color:var(--muted);max-width:76ch}
+.reg__note b{color:var(--ink)}
 
-/* ══ 4 · THE LICENCE (#licence) — the split, the RO servicing act's blue field ══ */
-.care .sc-stage{color:#fff;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:0;padding:0;
-  background-color:#0846BE;
+/* ══ 2 · WHAT WATERMARK MEANS (#watermark) — the mark and three statements on hairlines ══ */
+.mean{padding:clamp(72px,8vw,120px) 0;background:var(--mist-2)}
+.mean__grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.35fr);gap:clamp(32px,5vw,88px);align-items:start}
+.mean__mark{display:grid;gap:18px;position:sticky;top:calc(var(--top) + 18px)}
+.mean__plate{display:grid;place-items:center;padding:clamp(28px,4vw,56px);border-radius:var(--r-hero);background:#fff;box-shadow:var(--shadow-sm)}
+.mean__plate img{width:min(100%,340px);height:auto}
+.mean__mark p{font-size:16px;line-height:1.55;color:var(--muted);max-width:40ch}
+.mean__mark .ul{color:var(--ink);font-weight:700}
+.mean__copy{display:grid;gap:16px}
+.mean__copy h2{color:var(--ink)}
+.mean__list{display:grid;border-top:1px solid var(--rule);margin-top:8px}
+.mean__list li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.mean__n{font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--blue);padding-top:9px}
+.mean__list h3{font-size:clamp(1.35rem,2vw,1.8rem);font-weight:600;letter-spacing:-.012em;line-height:1.15;color:var(--ink);text-wrap:balance}
+.mean__list p{margin-top:8px;font-size:16.5px;line-height:1.55;color:var(--muted);max-width:54ch}
+.mean__go{margin-top:8px}
+
+/* ══ 3 · THE LICENCE (#licence) — the site's blue field, one band ══ */
+.lic{padding:clamp(72px,8vw,120px) 0;color:#fff;background-color:#0846BE;
   background-image:
     radial-gradient(52% 46% at 6% 6%,rgba(255,255,255,.3),transparent 62%),
     radial-gradient(36% 40% at 92% 92%,rgba(255,217,0,.2),transparent 62%),
     linear-gradient(118deg,#0B61F4 0%,#3B82F6 16%,#6D28D9 38%,#0846BE 56%,#22B8F0 76%,#0B61F4 100%);
   background-size:200% 200%,200% 200%,320% 320%;background-position:0% 0%,100% 100%,0% 50%}
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.care .sc-stage{animation:auroraflow 44s ease-in-out infinite}}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.lic{animation:auroraflow 44s ease-in-out infinite}}
 @keyframes auroraflow{0%{background-position:0% 0%,100% 100%,0% 50%}50%{background-position:30% 40%,70% 60%,100% 50%}100%{background-position:0% 0%,100% 100%,0% 50%}}
-.care__ph{position:relative;height:100%;min-height:0;overflow:clip;background:var(--ink-blue)}
-.care__ph img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;max-width:none}
-.care__panel{display:grid;gap:16px;align-content:center;padding:calc(var(--top) + 8px) var(--safe) 40px clamp(36px,4vw,64px);max-width:calc(740px + var(--safe) + 64px)}
-.care__panel .kick{color:#fff}
-.care__panel h2{color:#fff}
-.care__panel .lede{color:rgba(255,255,255,.86);max-width:40ch}
-.care__panel .fine{color:rgba(255,255,255,.74);max-width:52ch}
-.care__go{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px}
-.care__go .ul{color:#fff;font-weight:600}
-.ledger{display:grid;gap:0;border-radius:var(--r-hero);overflow:hidden;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
-.lrow{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:12px 16px;align-items:center;padding:14px 20px;border-top:1px solid rgba(255,255,255,.14);will-change:opacity,transform}
-.lrow:first-child{border-top:0}
-.lrow b{font-size:clamp(1rem,1.2vw,1.12rem);font-weight:600;line-height:1.3;color:rgba(255,255,255,.8)}
-.lrow .ours{display:inline-flex;align-items:center;gap:10px;font-size:clamp(1rem,1.25vw,1.15rem);font-weight:700;color:#fff}
-.lrow .ours svg{width:26px;height:26px;padding:5px;border-radius:50%;background:var(--yellow);color:var(--ink);flex:none;box-sizing:border-box}
-.lrow .ours svg path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--s,0));transition:stroke-dashoffset .55s var(--e-out)}
+.lic__grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.45fr);gap:clamp(32px,5vw,88px);align-items:start}
+.lic__mark{display:grid;gap:16px;position:sticky;top:calc(var(--top) + 18px)}
+.lic__plate{display:grid;place-items:center;padding:clamp(28px,4vw,52px);border-radius:var(--r-hero);background:#fff;box-shadow:0 30px 60px -30px rgba(4,16,46,.6)}
+.lic__plate img{width:min(100%,220px);height:auto}
+.lic__mark p{color:rgba(255,255,255,.84);font-size:16px;line-height:1.55;max-width:34ch}
+.lic__copy{display:grid;gap:16px}
+.lic__copy .kick,.lic__copy h2{color:#fff}
+.lic__copy .lede{color:rgba(255,255,255,.86);max-width:44ch}
+.lic__dl{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin-top:6px;border-top:1px solid rgba(255,255,255,.22)}
+.lic__dl div{display:grid;gap:4px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.22)}
+.lic__dl dt{font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.lic__dl dd{font-size:clamp(1.05rem,1.3vw,1.2rem);font-weight:700;line-height:1.3;color:#fff;font-variant-numeric:tabular-nums}
+.lic__go{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin-top:6px}
+.lic__go .ul{color:#fff;font-weight:600}
+.lic .fine{color:rgba(255,255,255,.74);max-width:56ch}
 
-/* ══ 5 · WHAT WE INSTALL (#systems) — two renders on mist, a plate under each ══ */
-.fits{padding:clamp(72px,9vw,130px) 0;background:radial-gradient(56% 48% at 0% 100%,rgba(11,97,244,.09),transparent 60%),radial-gradient(40% 40% at 100% 0%,rgba(255,217,0,.10),transparent 60%),var(--mist-2)}
-@media(min-width:860px){.fits{display:grid;align-content:center;min-height:100vh}}
-.fits__head{display:grid;gap:14px;max-width:64ch}
-.fits__head h2{color:var(--ink)}
-.fits__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,2.6vw,36px);margin-top:clamp(28px,3.6vw,48px)}
-.fit{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:0;min-width:0;border-radius:var(--r-hero);overflow:clip;background:#fff;box-shadow:var(--shadow-sm);text-decoration:none;color:var(--ink);will-change:clip-path;
-  transition:box-shadow .5s var(--e-out),transform .5s var(--e-out)}
-.fit__pic{display:grid;place-items:center;padding:clamp(22px,3vw,44px) clamp(22px,3vw,44px) 8px;background:linear-gradient(180deg,#F4F8F9 0%,#E4EBF3 100%);min-height:min(58vh,560px)}
-.fit__pic img{height:min(52vh,500px);width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 26px 30px rgba(4,16,46,.18))}
-.fit__t{display:grid;gap:6px;padding:18px 22px 22px;min-width:0;justify-items:start}
-.fit__t b{font-size:clamp(1.15rem,1.5vw,1.4rem);font-weight:700;line-height:1.25;letter-spacing:-.01em}
-.fit__t > span{font-size:15.5px;line-height:1.5;color:var(--muted)}
-.fit__t em{display:inline-flex;align-items:center;width:auto;max-width:100%;white-space:normal;margin-top:6px;padding:6px 11px;border-radius:var(--r-full);background:var(--blue-pale);font-style:normal;font-family:var(--badge);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-deep)}
-@media(hover:hover) and (pointer:fine){.fit:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}}
-.fits__line{margin-top:clamp(18px,2.4vw,28px);font-size:16px;color:var(--muted);max-width:none}
-.fits__line .ul{color:var(--ink);font-weight:600}
+/* ══ 4 · EVERY SYSTEM ON THE REGISTER (#systems) — two renders on the ground, the register as a table ══ */
+.sys{padding:clamp(72px,8vw,120px) 0;background:var(--paper)}
+.sys__head{display:grid;gap:14px;max-width:64ch}
+.sys__head h2{color:var(--ink)}
+.sys__grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.5fr);gap:clamp(32px,5vw,80px);align-items:center;margin-top:clamp(32px,4vw,52px)}
+.sys__shelf{display:flex;align-items:flex-end;justify-content:center;gap:clamp(12px,2vw,28px);margin:0;padding:0 0 14px;border-bottom:1px solid var(--rule)}
+.sys__shelf img{height:min(46vh,420px);width:auto;max-width:48%;object-fit:contain;filter:drop-shadow(0 30px 28px rgba(4,16,46,.18))}
+.sys__table{display:grid;border-top:1px solid var(--rule)}
+.srow{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,.7fr) minmax(0,.95fr) minmax(0,.8fr);gap:8px 20px;align-items:center;padding:18px 10px;border-bottom:1px solid var(--rule);
+  text-decoration:none;color:var(--ink);border-radius:var(--r-sm);transition:background .45s ease-in-out}
+.srow.head{padding:10px;border-radius:0}
+.srow.head span{font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.srow > span{font-size:15.5px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink)}
+.srow > span > b{display:block;font-size:clamp(1.05rem,1.3vw,1.2rem);font-weight:700;line-height:1.25;letter-spacing:-.01em}
+.srow > span > span{display:block;margin-top:4px;font-size:15px;font-weight:500;line-height:1.45;color:var(--muted)}
+@media(hover:hover) and (pointer:fine){a.srow:hover{background:var(--mist-2)}}
+.sys__line{margin-top:clamp(22px,3vw,32px);font-size:16px;line-height:1.55;color:var(--muted);max-width:76ch}
 
-/* ══ 6 · THE LABORATORY REPORT (#analysis) — the split, the photograph left, the ledger right ══ */
+/* ══ 5 · THE LABORATORY REPORT (#analysis) — the split JP kept ══ */
 .lab-act .sc-stage{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0;padding:0;background:radial-gradient(46% 46% at 100% 0%,rgba(11,97,244,.08),transparent 60%),var(--paper)}
 .lab__ph{position:relative;height:100%;min-height:0;overflow:clip;background:var(--mist)}
 .lab__ph img{width:100%;height:100%;object-fit:cover;object-position:66% 50%;max-width:none}
@@ -1204,7 +1151,7 @@ a{color:inherit}
 .lab__frame{font-size:16px;line-height:1.5;color:var(--muted);max-width:52ch}
 .lab__frame .ul{color:var(--ink);font-weight:600}
 
-/* ══ 7 · ACROSS SYDNEY (#sydney) — one full plate, the aerial ══ */
+/* ══ 6 · ACROSS SYDNEY (#sydney) — one full plate, the aerial ══ */
 .syd{position:relative;min-height:100vh;display:grid;align-items:end;padding:var(--hframe);background:var(--paper);isolation:isolate}
 .syd__fr{position:absolute;inset:var(--hframe);border-radius:var(--r-hero);overflow:clip;background:var(--ink-blue);z-index:0}
 .syd__fr img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;max-width:none}
@@ -1220,7 +1167,7 @@ a{color:inherit}
 .syd__go{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:8px}
 .syd__go .ul{color:#fff;font-weight:600}
 
-/* ══ 8 · REVIEWS (#reviews) — the brick lane ══ */
+/* ══ 7 · REVIEWS (#reviews) — the brick lane ══ */
 .lane{background:var(--paper);padding:clamp(64px,7.6vw,106px) 0 clamp(44px,5.4vw,74px);position:relative;z-index:2;overflow:clip}
 .lane__head{display:grid;gap:14px;max-width:60ch}
 .lane__badge{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 14px 8px 12px;border-radius:var(--r-full);background:#fff;box-shadow:var(--shadow-sm),inset 0 0 0 1px var(--rule);font-size:15px;font-weight:600;color:var(--ink)}
@@ -1245,8 +1192,8 @@ a{color:inherit}
 .rvp span{position:absolute;left:12px;bottom:10px;right:12px;color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.01em;text-shadow:0 1px 10px rgba(4,16,46,.6)}
 .lane__all{display:inline-flex;align-items:center;min-height:44px;margin-top:22px;font-weight:700;color:var(--ink)}
 
-/* ══ 9 · THE ASK (#ask) ══ */
-.ask{background:radial-gradient(50% 40% at 0% 30%,rgba(11,97,244,.07),transparent 60%),var(--paper);padding:0 0 clamp(72px,9vw,130px)}
+/* ══ 8 · THE ASK (#ask) ══ */
+.ask{background:var(--paper);padding:0 0 clamp(72px,9vw,130px)}
 .ask__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:stretch}
 .ask__fr{min-height:min(78vh,760px)}
 .ask__fr img{object-position:60% 55%}
@@ -1429,26 +1376,20 @@ body.dopen .drawer{transform:none}
 .rotate b{font-size:19px;font-weight:800;letter-spacing:-.01em}
 .rotate span{font-size:14px;color:var(--muted);max-width:34ch}}
 
-/* the slow drift of the light washes on a fine pointer only */
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
-  .fits,.ask,.docs{background-size:200% 200%,200% 200%,auto;animation:washdrift 26s ease-in-out infinite alternate}
-  .docs{background-size:200% 200%,auto}
-}
-@keyframes washdrift{from{background-position:0% 0%,100% 100%,0 0}to{background-position:30% 40%,70% 60%,0 0}}
-
 /* ═══════════════════════════ THE TABLET (860–1079) ═══════════════════════════ */
 @media(min-width:860px) and (max-width:1079px){
-  .stax__step h3{font-size:clamp(1.8rem,3.4vw,2.4rem)}
-  .how .sc-stage{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
-  .docs__grid{grid-template-columns:minmax(0,1fr) minmax(0,.9fr)}
-  .fit__pic img{height:min(32vh,300px)}
-  .crail{padding-right:170px}   /* the way back sits on the rail's third label without this (qc.mjs COVERED, 900 wide) */
+  .rrow{grid-template-columns:40px minmax(0,1fr) auto;gap:12px 22px}
+  .rrow__meta{grid-column:2;grid-row:2;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .rrow__go{grid-column:3;grid-row:1/3}
+  .mean__grid,.lic__grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:40px}
+  .sys__grid{grid-template-columns:1fr;gap:28px}
+  .sys__shelf img{height:min(34vh,300px)}
 }
 
 /* ═══════════════════════════ THE PHONE (≤859px) — the same page, fitted ═══════════════════════════
-   Every act pins on the phone on its own span, one idea per screen, big type, nothing at the foot of
-   the screen (the pill and the way back own the last 76px), a 15px reading floor. Stages are sized in
-   dvh with an svh floor so Safari's toolbar collapse never shows the body under a plate. */
+   Flow sections, one idea at a time, big type, nothing at the foot of the screen (the pill and the way
+   back own the last 76px), a 15px reading floor. The one pinned act (the laboratory) is sized in dvh
+   with an svh floor so Safari's toolbar collapse never shows the body under a plate. */
 @media(max-width:859px){
   .sc-stage{height:100dvh;min-height:100svh}
   /* the hero: the photograph fills the top 56%, fades into the navy, the headline and the card sit on the navy */
@@ -1473,95 +1414,74 @@ body.dopen .drawer{transform:none}
   .ocproof > b{font-size:15px;font-weight:800}
   .ocfoot .btn{width:100%;justify-content:center;min-height:50px}
   .ocspec{display:none}
-  /* 1 · the plate: the words at eye level, the veil carrying them */
-  .why__fr{inset:var(--hframe)}
-  .why__fr img{object-position:60% 40%}
-  .why__veil{background:linear-gradient(180deg,rgba(4,16,46,.24) 0%,rgba(4,16,46,.6) 30%,rgba(4,16,46,.9) 60%,rgba(4,16,46,.94) 100%)}
-  .why__copy{align-content:center;padding:calc(var(--top) + 16px) calc(var(--safe) + 22px) calc(var(--fabclear) + 24px) var(--safe);gap:12px;max-width:none}
-  .why__copy h2{font-size:clamp(1.7rem,7.4vw,2.15rem);max-width:none}
-  .why__names{gap:2px 14px}
-  .why__names li{font-size:clamp(1.05rem,4.8vw,1.35rem);padding-bottom:4px}
-  .why__line{font-size:1rem;max-width:none}
-  /* 2 · what WaterMark means: the head, the picture as big as the stage allows, the words, the rail.
-     Budget at 390×844: 74 top + 92 head + 34svh picture (287) + ~190 copy + 62 rail + 76 fabclear = 781. */
-  .how .sc-stage{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr) auto auto;gap:10px 0;padding:calc(var(--top) - 30px) var(--safe) var(--fabclear)}
-  .how__head{grid-column:1;grid-row:1;gap:4px}
-  .how__head .kick{font-size:13px}
-  .how__head h2{font-size:clamp(1.45rem,6.2vw,1.8rem);max-width:16ch}
-  .stax{grid-column:1;grid-row:2;min-height:34svh}
-  .stax::before{width:min(150%,420px)}
-  .stax__pic:not(.ph){padding:6px 0}
-  .stax__pic.ph{padding:0}
-  .stax__badge{display:none}
-  .stax__copy{grid-column:1;grid-row:3;align-self:start;max-width:none}
-  .stax__step{gap:6px;max-width:none}
-  .stax__n{font-size:12.5px;gap:9px}
-  .stax__n::before{width:20px}
-  .stax__step h3{font-size:clamp(1.5rem,6.6vw,1.9rem)}
-  .stax__step p{font-size:1rem;line-height:1.42;max-width:none}
-  .stax__go{min-height:44px;margin-top:2px}
-  .stax__step[data-i="2"] p{display:none}
-  .crail{grid-column:1;grid-row:4;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding-top:16px;align-self:end}
-  .crail button{justify-items:center;min-height:46px;padding:12px 0 0}
-  .crail button::before{left:50%;transform:translate(-50%,-50%);width:8px;height:8px}
-  .crail button i{font-size:15px;letter-spacing:.04em}
-  .crail button b{display:none}
-  /* 3 · the record on a phone: ONE document at a time, the page and its words on one card, a swipe to the next
-     (the RO page's phone systems carousel, JP: one screen, nothing sliding under anything). The sticky viewer
-     stands down; every row carries its own page. */
-  .docs{padding:56px 0 var(--fabclear)}
-  .docs__head{gap:10px}
-  .docs__head h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
-  .docs__head .lede{font-size:1rem}
-  .docs__grid{grid-template-columns:1fr;gap:12px;margin-top:20px}
-  .docs__view{display:none}
-  .docs__list{display:flex;gap:calc(var(--safe) * 2);margin:0 calc(var(--safe) * -1);padding:0 var(--safe);overflow-x:auto;overscroll-behavior-x:contain;
-    scroll-snap-type:x mandatory;scroll-padding-inline:var(--safe);-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .docs__list::-webkit-scrollbar{display:none}
-  .docs__list li{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;min-width:0}
-  .doc{grid-template-columns:auto minmax(0,1fr) auto;gap:10px 12px;padding:0 0 14px;border-radius:18px;overflow:clip;height:100%}
-  .doc__pic{display:block;grid-column:1/-1;aspect-ratio:1200/820;background:#0E1A3D;overflow:clip}
-  .doc__pic img{width:100%;height:100%;object-fit:cover;object-position:50% 0;max-width:none}
-  .doc__n{padding:2px 0 0 16px;min-width:22px}
-  .doc__t b{font-size:1.05rem}
-  .doc__t > span{font-size:15px;line-height:1.42}
-  .doc__t em{font-size:11px;padding:4px 9px}
-  .doc__go{width:36px;height:36px;margin-right:14px}
-  .docs__dots{display:flex;align-items:center;gap:6px;min-height:24px}
-  .docs__dots i{width:7px;height:7px;border-radius:50%;background:rgba(15,39,72,.2);transition:background .35s ease-in-out,transform .35s var(--e-out)}
-  .docs__dots i.on{background:var(--blue);transform:scale(1.3)}
-  .docs__dots span{margin-left:8px;font-size:15px;font-weight:600;color:var(--muted)}
-  .docs__note{margin-top:14px;padding:14px 16px;font-size:15px}
-  /* 4 · the licence: the photograph fades into the field, the ledger at eye level */
-  .care .sc-stage{grid-template-columns:1fr;grid-template-rows:25svh minmax(0,1fr)}
-  .care__ph{position:relative;height:auto}
-  .care__ph::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(11,97,244,0) 36%,#0B61F4 100%)}
-  .care__ph img{object-position:50% 35%}
-  .care__panel{padding:4px calc(var(--safe) + 22px) var(--fabclear) var(--safe);gap:9px;align-content:center;max-width:none}
-  .care__panel h2{font-size:clamp(1.55rem,6.8vw,1.95rem)}
-  .care__panel .lede{font-size:15px;max-width:34ch}
-  .care__panel .fine{display:none}
-  .care__go{gap:8px 16px}
-  .care__go .btn{min-height:46px}
-  .care__go .ul{font-size:15px}
-  .ledger{border-radius:18px}
-  .lrow{grid-template-columns:1fr;gap:2px 8px;padding:9px 14px}
-  .lrow b{font-size:15px;line-height:1.25}
-  .lrow .ours{font-size:15px;gap:8px}
-  .lrow .ours svg{width:20px;height:20px;padding:4px}
-  /* 5 · what we install: one render under another, each big */
-  .fits{padding:48px 0 var(--fabclear)}
-  .fits__head{gap:8px}
-  .fits__head h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
-  .fits__head .lede{font-size:1rem}
-  .fits__grid{grid-template-columns:1fr;gap:14px;margin-top:18px}
-  .fit__pic{min-height:0;padding:18px 18px 4px}
-  .fit__pic img{height:min(42svh,360px)}
-  .fit__t{padding:14px 16px 16px;gap:4px}
-  .fit__t b{font-size:1.1rem}
-  .fit__t > span{font-size:15px}
-  .fits__line{font-size:15px;margin-top:14px}
-  /* 6 · the laboratory report: the photograph on top and fading into the paper, the rows at eye level */
+  /* 1 · the register: a row is a stack; the whole row is the tap; Open is a full line at its foot */
+  .reg{padding:56px 0 var(--fabclear)}
+  .reg__head{gap:10px}
+  .reg__head h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  .reg__head .lede{font-size:1rem}
+  .reg__list{margin-top:22px}
+  .rrow{grid-template-columns:30px minmax(0,1fr);gap:10px 12px;padding:18px 0;border-radius:0}
+  .rrow__n{padding-top:4px}
+  .rrow__main b{font-size:1.12rem}
+  .rrow__main > span{font-size:15px;line-height:1.42}
+  .rrow__meta{grid-column:2;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:2px}
+  .rrow__meta > span:nth-child(3){grid-column:1/-1}
+  .rrow__meta b{font-size:15px}
+  .rrow__go{grid-column:2;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;margin-top:4px}
+  .rrow__go b{min-height:44px;padding:0 16px}
+  .reg__note{margin-top:18px;padding-left:16px;font-size:15px}
+  /* 2 · what WaterMark means: the mark small at the top, the three statements under it */
+  .mean{padding:56px 0 var(--fabclear)}
+  .mean__grid{grid-template-columns:1fr;gap:20px}
+  .mean__mark{position:static;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:14px}
+  .mean__plate{padding:14px;border-radius:16px}
+  .mean__plate img{width:100%}
+  .mean__mark p{font-size:15px;max-width:none}
+  .mean__copy{gap:10px}
+  .mean__copy h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  .mean__list li{grid-template-columns:34px minmax(0,1fr);gap:10px;padding:18px 0}
+  .mean__n{padding-top:6px}
+  .mean__list h3{font-size:1.25rem}
+  .mean__list p{font-size:15px;line-height:1.45;max-width:none}
+  .mean__go .btn{min-height:46px}
+  /* 3 · the licence */
+  .lic{padding:56px 0 var(--fabclear)}
+  .lic__grid{grid-template-columns:1fr;gap:20px}
+  .lic__mark{position:static;grid-template-columns:84px minmax(0,1fr);align-items:center;gap:14px}
+  .lic__plate{padding:14px;border-radius:16px}
+  .lic__mark p{font-size:15px;max-width:none}
+  .lic__copy{gap:10px}
+  .lic__copy h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  .lic__copy .lede{font-size:1rem;max-width:none}
+  .lic__dl{grid-template-columns:1fr;gap:0}
+  .lic__dl div{padding:12px 0}
+  .lic__dl dd{font-size:1.05rem}
+  .lic__go{gap:10px 16px}
+  .lic__go .btn{min-height:46px}
+  .lic__go .ul{font-size:15px}
+  .lic .fine{font-size:15px}
+  /* 4 · the systems: the renders on the ground, then the register as stacked rows with their labels */
+  .sys{padding:56px 0 var(--fabclear)}
+  .sys__head{gap:10px}
+  .sys__head h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  .sys__head .lede{font-size:1rem}
+  .sys__grid{grid-template-columns:1fr;gap:18px;margin-top:20px}
+  /* one render on a phone, the flagship, as tall as the screen allows (the RO law: a photograph earns its place) */
+  .sys__shelf{gap:0;padding-bottom:10px}
+  .sys__shelf img{height:min(48svh,420px);max-width:88%}
+  .sys__shelf img + img{display:none}
+  .srow.head{display:none}
+  .srow{grid-template-columns:1fr 1fr;gap:10px 14px;padding:16px 0;border-radius:0}
+  .srow > span:first-child{grid-column:1/-1}
+  .srow > span:not(:first-child)::before{display:block;font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .srow > span:nth-child(2)::before{content:"Certificate"}
+  .srow > span:nth-child(3)::before{content:"Standard"}
+  .srow > span:nth-child(4)::before{content:"Valid to"}
+  .srow > span{font-size:15px}
+  .srow > span > b{font-size:1.1rem}
+  .srow > span > span{font-size:15px;line-height:1.42}
+  .sys__line{font-size:15px;margin-top:16px}
+  /* 5 · the laboratory report: the photograph on top and fading into the paper, the rows at eye level */
   .lab-act .sc-stage{grid-template-columns:1fr;grid-template-rows:32svh minmax(0,1fr)}
   .lab__ph{position:relative;height:auto;align-self:stretch;margin:var(--hframe) var(--hframe) 0;border-radius:var(--r-hero);overflow:clip;background:var(--mist)}
   .lab__ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 55%}
@@ -1577,7 +1497,7 @@ body.dopen .drawer{transform:none}
   .yrow.ours{padding:12px 14px;margin-top:6px}
   .yrow.ours .money{font-size:15px}
   .lab__frame{font-size:15px;max-width:none}
-  /* 7 · sydney: the aerial on top, the districts and the ask under it */
+  /* 6 · sydney: the aerial on top, the districts and the ask under it */
   .syd{min-height:0;padding:var(--hframe) var(--hframe) 0;display:block}
   .syd__fr{position:relative;inset:auto;aspect-ratio:4/3.6;border-radius:var(--r-hero)}
   .syd__veil{background:linear-gradient(180deg,rgba(4,16,46,0) 40%,rgba(4,16,46,.85) 100%)}
@@ -1588,17 +1508,17 @@ body.dopen .drawer{transform:none}
   .syd__areas a{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule);min-height:44px;padding:0 14px;font-size:15px}
   .syd__go{gap:8px 16px}
   .syd__go .ul{color:var(--ink);font-size:15px}
-  /* 8 · reviews: two rows, the third stands down */
+  /* 7 · reviews: two rows, the third stands down */
   .lane{padding:56px 0 40px}
   .lane__head h2{font-size:clamp(1.6rem,7.4vw,1.95rem)}
   .rmq{margin-top:18px;gap:10px}
   .rmq .rrow:nth-child(3){display:none}
-  .rrow{gap:10px}
+  .rmq .rrow{gap:10px}
   .rvc{padding:13px 14px;gap:7px;flex:0 0 min(300px,76vw)}
   .rvc > p{font-size:15px;line-height:1.45}
   .rvp{flex:0 0 min(238px,58vw)}
   .lane__all{margin-top:14px;min-height:44px}
-  /* 9 · the ask */
+  /* 8 · the ask */
   .ask__grid{grid-template-columns:1fr;gap:18px}
   .ask__fr{min-height:0;aspect-ratio:4/3}
   .ask__certs{padding:12px 14px;gap:10px 12px}
@@ -1657,10 +1577,8 @@ body.dopen .drawer{transform:none}
 @media(max-width:859px) and (max-height:700px){
   .hero .copy{bottom:186px}
   .hero h1{font-size:clamp(1.5rem,6.4vw,1.8rem)}
-  .stax{min-height:28svh}
-  .stax__step p{font-size:.95rem}
-  .lab-act .sc-stage,.care .sc-stage{grid-template-rows:24svh minmax(0,1fr)}
-  .fit__pic img{height:min(34svh,300px)}
+  .lab-act .sc-stage{grid-template-rows:24svh minmax(0,1fr)}
+  .sys__shelf img{height:min(30svh,260px)}
 }
 
 </style>
@@ -1936,7 +1854,7 @@ body.dopen .drawer{transform:none}
           "name": "Are the water filters Filters For You installs WaterMark certified?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The Pure reverse osmosis and under sink range and the Pure Home HPF-3 whole house system are listed on WaterMark certificate 23247, 131 models, every one active, valid to 3 October 2028. The High Performance Filtration EQ and LSRO systems are listed on certificate 22780, 292 models, valid to 14 November 2028. Both certificates are published on this page and both link to the government register, so you can check them yourself."
+            "text": "Yes. The Pure reverse osmosis and under sink range and the Pure Home whole house system are listed on WaterMark certificate 23247, 131 models, every one active, valid to 3 October 2028. The High Performance Filtration EQ and LSRO systems are listed on certificate 22780, 292 models, valid to 14 November 2028. Both certificates are published on this page and both link to the government register, so you can check them yourself."
           }
         },
         {
@@ -2190,11 +2108,10 @@ body.dopen .drawer{transform:none}
 <!-- /SHELL:HEADER -->
 
 <main>
-<!-- ═════════ THE OPENER — the shell's frame, the RO page's slideshow hero with THE RECORD CARD on it:
-     not a product deck, one still card that says what the page proves. GENERATED (Higgsfield Nano
-     Banana 2, 8 Sep 2026, our own kitchen references): media/wm/hero.webp, the glass at the window with
-     the Sydney skyline beyond. The loop adds two more, slowly (8s): the HPF-3 on a brick wall (REAL,
-     IMG_7464) and a child's hands under the mixer (the whole house 2 Sep set). ═════════ -->
+<!-- ═════════ THE OPENER — the shell's frame, one still record card. GENERATED ONLY (JP, 8 Sep pm: "only
+     generated photos on the background"): media/wm/hero.webp (the glass at the window, the Sydney skyline),
+     hero-life (a mother handing her daughter a glass, a Sydney terrace), hero-child (the whole house set).
+     A slow crossfade, the first swap after 12s. ═════════ -->
 <div class="pgtop">
 <section class="pgcard hero" id="top">
   <div class="hbg" id="hbg">
@@ -2202,7 +2119,7 @@ body.dopen .drawer{transform:none}
       <source media="(max-width:859px)" srcset="media/wm/hero-m.webp">
       <img class="hph" src="media/wm/hero.webp" alt="A glass of purified water on a white stone bench by a window, with the Sydney skyline and harbour beyond" width="2400" height="1340" fetchpriority="high">
     </picture>
-    <picture style="--pos:50% 45%" data-src="media/wm/hero-hpf.webp" data-srcm="media/wm/hero-hpf-m.webp"></picture>
+    <picture style="--pos:64% 50%" data-src="media/wm/hero-life.webp" data-srcm="media/wm/hero-life-m.webp"></picture>
     <picture style="--pos:62% 50%" data-src="media/wm/hero-child.webp" data-srcm="media/wm/hero-child-m.webp"></picture>
   </div>
   <div class="veil" aria-hidden="true"></div>
@@ -2226,180 +2143,137 @@ body.dopen .drawer{transform:none}
     </ul>
     <div class="ocfoot">
       <span class="ocproof"><b>5.0</b><span class="ocp"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg>30 Google reviews</span></span></span>
-      <a class="btn" href="#documents"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Read the certificates</a>
+      <a class="btn" href="#documents"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>See the certificates</a>
     </div>
   </div></div>
 </section>
 </div>
 
-<!-- ═════════ 1 · WHAT IT CARRIES — the RO page's plate: the photograph fills the frame, four names land
-     with a yellow line under each, one line closes it. REAL photograph: JP fitting the tap (IMG_8538). ═════════ -->
-<section class="why" id="marks" data-sc-act="pin" data-sc-span="2.6" data-sc-span-m="2.4" aria-label="What every installation carries">
-  <div class="sc-stage" data-sc-stage>
-    <div class="why__fr">
-      <picture><source media="(max-width:859px)" srcset="media/wm/marks-m.webp"><img src="media/wm/marks.webp" alt="Jean-Paul Barbar fitting a filtered water tap at a Sydney kitchen sink" width="2400" height="1350" loading="lazy"></picture>
-      <div class="why__veil" aria-hidden="true"></div>
-    </div>
-    <div class="why__copy">
-      <span class="kick" data-sc-cue="0 1 0 0">What every installation carries</span>
-      <h2 class="d1" data-sc-cue="0 1 0 0">Certified, licensed, and on the record.</h2>
-      <ul class="why__names" id="whyNames" aria-label="The four marks">
-        <li data-sc-cue="0.06 1 0.08 0" style="--at:.06">WaterMark certified</li>
-        <li data-sc-cue="0.14 1 0.08 0" style="--at:.14">NSW licensed plumber</li>
-        <li data-sc-cue="0.22 1 0.08 0" style="--at:.22">NSF/ANSI compliant media</li>
-        <li data-sc-cue="0.30 1 0.08 0" style="--at:.30">Every certificate published</li>
-      </ul>
-      <p class="why__line" data-sc-cue="0.48 1 0.16 0">Filters For You installs WaterMark certified systems across Sydney, and shows you the paperwork.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═════════ 2 · WHAT WATERMARK MEANS — navy, the RO stages act's shape: ONE picture on a lit stage, three
-     steps lighting in turn, a rail of three. The pictures are the REAL things: page one of the Certificate of
-     Conformity, the live ABCB register entry, and the WaterMark mark on an HPF-3 we installed (IMG_7468).
-     Mechanism: 21st.dev Sticky Scroll Reveal (id 952), rebuilt in vanilla off --sc-p. ═════════ -->
-<section class="how" id="watermark" data-sc-act="pin" data-sc-span="4.2" data-sc-span-m="3.8" aria-label="What WaterMark means">
-  <div class="sc-stage" data-sc-stage>
-    <header class="how__head" data-sc-cue="0 1 0 0">
-      <span class="kick">What WaterMark means</span>
-      <h2 class="d2">One mark. Three things it proves.</h2>
-    </header>
-    <div class="stax" id="stax">
-      <figure class="stax__pic on" data-i="0"><img src="media/wm/doc-coc.webp" alt="Page one of WaterMark Certificate of Conformity 23247" width="1200" height="1020" loading="lazy"></figure>
-      <figure class="stax__pic" data-i="1"><img src="media/wm/doc-reg-23247.webp" alt="Certificate 023247 on the Australian Building Codes Board WaterMark register, marked Active" width="1200" height="1020" loading="lazy"></figure>
-      <figure class="stax__pic ph" data-i="2"><picture><source media="(max-width:859px)" srcset="media/wm/unit-m.webp"><img src="media/wm/unit.webp" alt="The WaterMark mark and the Installed by Filters For You label on an HPF-3 whole house unit" width="1200" height="1600" loading="lazy"></picture></figure>
-      <span class="stax__badge" aria-hidden="true"><img src="media/cert-watermark.webp" alt="" width="851" height="583"></span>
-    </div>
-    <div class="stax__copy" id="staxCopy">
-      <div class="stax__step on" data-i="0"><span class="stax__n">01</span><h3>Tested to the Australian standard.</h3><p>AS 3497:2021, drinking water treatment systems, design and performance. Tested by a JAS-ANZ accredited body, not by the people who sell it.</p></div>
-      <div class="stax__step" data-i="1"><span class="stax__n">02</span><h3>Listed on the government register.</h3><p>Certificate 23247 on the Australian Building Codes Board's WaterMark register. 131 models, every one active, valid to 3 October 2028. You can search it yourself.</p></div>
-      <div class="stax__step" data-i="2"><span class="stax__n">03</span><h3>Installed by a licensed plumber.</h3><p>Anything connected to drinking water in NSW has to be. Every Filters For You installation is carried out under NSW plumbing licence 461511C.</p><a class="btn stax__go" href="free-assessment"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book a free inspection</a></div>
-    </div>
-    <nav class="crail" id="crail" aria-label="The three things">
-      <button type="button" class="on" data-i="0"><i>01</i><b>The standard</b></button>
-      <button type="button" data-i="1"><i>02</i><b>The register</b></button>
-      <button type="button" data-i="2"><i>03</i><b>The licence</b></button>
-    </nav>
-  </div>
-</section>
-
-<!-- ═════════ 3 · THE RECORD (#documents) — every certificate, open to read. 525 pages link here. Not a grid of
-     cards (JP): a LIST on the left and ONE viewer on the right that turns to the document the reader is on,
-     the way a person leafs through a folder. The previews are the REAL pages: pdftoppm on the PDFs, a real
-     browser on the register. On a phone the viewer rides the top of the screen and the list passes under it.
-     Mechanism: 21st.dev Sticky Scroll Reveal (id 952). ═════════ -->
-<section class="docs" id="documents" data-sc-act="flow" aria-label="Every certificate, open to read">
+<!-- ═════════ 1 · THE REGISTER (#documents) — first, because it is the page. A document index the way a
+     register reads: numbered rows, hairlines, the standard, the issuer and the expiry in tabular columns,
+     one clear "Open" on every row. No previews, no cards (JP, 8 Sep pm). 525 pages link here. ═════════ -->
+<section class="reg" id="documents" data-sc-act="flow" aria-label="Every certificate, open to read">
   <div class="zone">
-    <header class="docs__head" data-sc-in data-sc-stagger="90">
+    <header class="reg__head" data-sc-in data-sc-stagger="90">
       <span class="kick">Open records</span>
       <h2 class="d2">Every certificate, open to read.</h2>
-      <p class="lede">We do not ask you to take our word for it. Both WaterMark certificates, the certificate of conformity, the laboratory report, the cartridge specification and the licence, published here. The registers are the government's own, not ours.</p>
+      <p class="lede">We do not ask you to take our word for it. Both WaterMark certificates, the certificate of conformity, the laboratory report, the cartridge specification and the licence. The registers are the government's own, not ours.</p>
     </header>
-    <div class="docs__grid">
-      <ol class="docs__list" id="docList">
-        <li><a class="doc on" href="https://watermark.abcb.gov.au/product-search/certificate/023247" target="_blank" rel="noopener" data-i="0">
-          <span class="doc__pic"><img src="media/wm/doc-reg-23247.webp" alt="Certificate 023247 on the ABCB WaterMark register" width="1200" height="1020" loading="lazy"></span>
-          <span class="doc__n">01</span>
-          <span class="doc__t"><b>WaterMark certificate 23247</b><span>The ABCB register. 131 active models under AS 3497:2021, certified by Pro-Switch, valid to 3 October 2028.</span><em>Live government register</em></span>
-          <span class="doc__go" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a></li>
-        <li><a class="doc" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener" data-i="1">
-          <span class="doc__pic"><img src="media/wm/doc-reg-22780.webp" alt="Certificate 022780 on the ABCB WaterMark register" width="1200" height="1020" loading="lazy"></span>
-          <span class="doc__n">02</span>
-          <span class="doc__t"><b>WaterMark certificate 22780</b><span>The second register entry: the High Performance Filtration EQ and LSRO systems and their cartridges. 292 active models under WMTS-103:2016, certified by IAPMO Oceania, valid to 14 November 2028.</span><em>Live government register</em></span>
-          <span class="doc__go" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a></li>
-        <li><a class="doc" href="assets/compliance/watermark-certificate-of-conformity-23247.pdf" target="_blank" rel="noopener" data-i="2">
-          <span class="doc__pic"><img src="media/wm/doc-coc.webp" alt="Page one of the WaterMark Certificate of Conformity 23247" width="1200" height="1020" loading="lazy"></span>
-          <span class="doc__n">03</span>
-          <span class="doc__t"><b>Certificate of Conformity</b><span>Issued 21 April 2026 by Pro-Switch Pty Ltd, a JAS-ANZ accredited certification body. Every model on the schedule, in full.</span><em>PDF, 15 pages</em></span>
-          <span class="doc__go" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a></li>
-        <li><a class="doc" href="assets/compliance/certificate-of-analysis-ro-membrane.pdf" target="_blank" rel="noopener" data-i="3">
-          <span class="doc__pic"><img src="media/wm/doc-coa.webp" alt="Page one of laboratory report B767408" width="1200" height="1020" loading="lazy"></span>
-          <span class="doc__n">04</span>
-          <span class="doc__t"><b>Certificate of Analysis</b><span>Independent laboratory report B767408. Tap water measured beside reverse osmosis water and the alkaline stages, across more than 40 parameters.</span><em>PDF, 3 pages</em></span>
-          <span class="doc__go" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a></li>
-        <li><a class="doc" href="assets/compliance/hydrogen-alkaline-cartridge-spec-sheet.pdf" target="_blank" rel="noopener" data-i="4">
-          <span class="doc__pic"><img src="media/wm/doc-h2.webp" alt="Page one of the hydrogen alkaline cartridge specification" width="1200" height="1020" loading="lazy"></span>
-          <span class="doc__n">05</span>
-          <span class="doc__t"><b>Hydrogen alkaline cartridge specification</b><span>Model T33-H2-ALK, listed on certificate 23247. The supplier's own pH, ORP and dissolved hydrogen figures across the life of the cartridge.</span><em>PDF, 2 pages &middot; supplier data</em></span>
-          <span class="doc__go" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a></li>
-        <li><a class="doc" href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener" data-i="5">
-          <span class="doc__pic"><img src="media/wm/doc-nsw.webp" alt="The Verify NSW licence register with licence 461511C entered" width="1200" height="1020" loading="lazy"></span>
-          <span class="doc__n">06</span>
-          <span class="doc__t"><b>NSW plumbing licence 461511C</b><span>Jean-Paul Barbar's licence on the NSW Government's Verify NSW register, the same place Fair Trading sends consumers. Type the number and read the record.</span><em>Live government register</em></span>
-          <span class="doc__go" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a></li>
+    <ol class="reg__list" data-sc-in data-sc-stagger="70">
+      <li><a class="rrow" href="https://watermark.abcb.gov.au/product-search/certificate/023247" target="_blank" rel="noopener">
+        <span class="rrow__n">01</span>
+        <span class="rrow__main"><b>WaterMark certificate 23247</b><span>The Pure reverse osmosis range and the Pure Home whole house system. 131 models, every one active.</span></span>
+        <span class="rrow__meta"><span><i>Standard</i><b>AS 3497:2021</b></span><span><i>Issued by</i><b>Pro-Switch Pty Ltd</b></span><span><i>Valid to</i><b>3 Oct 2028</b></span></span>
+        <span class="rrow__go"><i>Government register</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
+      </a></li>
+      <li><a class="rrow" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener">
+        <span class="rrow__n">02</span>
+        <span class="rrow__main"><b>WaterMark certificate 22780</b><span>The High Performance Filtration EQ and LSRO under sink systems and their cartridges. 292 models, every one active.</span></span>
+        <span class="rrow__meta"><span><i>Standard</i><b>WMTS-103:2016</b></span><span><i>Issued by</i><b>IAPMO Oceania</b></span><span><i>Valid to</i><b>14 Nov 2028</b></span></span>
+        <span class="rrow__go"><i>Government register</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
+      </a></li>
+      <li><a class="rrow" href="assets/compliance/watermark-certificate-of-conformity-23247.pdf" target="_blank" rel="noopener">
+        <span class="rrow__n">03</span>
+        <span class="rrow__main"><b>Certificate of Conformity</b><span>Certificate 23247 in full: every model on the schedule, signed by the certifier.</span></span>
+        <span class="rrow__meta"><span><i>Issued</i><b>21 April 2026</b></span><span><i>Issued by</i><b>Pro-Switch Pty Ltd, JAS-ANZ accredited</b></span><span><i>Pages</i><b>15</b></span></span>
+        <span class="rrow__go"><i>PDF</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
+      </a></li>
+      <li><a class="rrow" href="assets/compliance/certificate-of-analysis-ro-membrane.pdf" target="_blank" rel="noopener">
+        <span class="rrow__n">04</span>
+        <span class="rrow__main"><b>Certificate of Analysis</b><span>Tap water measured beside reverse osmosis water and the alkaline stages, across more than 40 parameters.</span></span>
+        <span class="rrow__meta"><span><i>Report</i><b>B767408</b></span><span><i>Issued by</i><b>Independent laboratory</b></span><span><i>Pages</i><b>3</b></span></span>
+        <span class="rrow__go"><i>PDF</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
+      </a></li>
+      <li><a class="rrow" href="assets/compliance/hydrogen-alkaline-cartridge-spec-sheet.pdf" target="_blank" rel="noopener">
+        <span class="rrow__n">05</span>
+        <span class="rrow__main"><b>Hydrogen alkaline cartridge specification</b><span>pH, ORP and dissolved hydrogen across the life of the cartridge. Supplier data, labelled as such.</span></span>
+        <span class="rrow__meta"><span><i>Model</i><b>T33-H2-ALK</b></span><span><i>Listed on</i><b>Certificate 23247</b></span><span><i>Pages</i><b>2</b></span></span>
+        <span class="rrow__go"><i>PDF</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
+      </a></li>
+      <li><a class="rrow" href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener">
+        <span class="rrow__n">06</span>
+        <span class="rrow__main"><b>NSW plumbing licence 461511C</b><span>Jean-Paul Barbar's licence on the NSW Government register. Enter the number and read the record.</span></span>
+        <span class="rrow__meta"><span><i>Status</i><b>Current</b></span><span><i>Held by</i><b>Jean-Paul Barbar</b></span><span><i>Valid to</i><b>26 Mar 2027</b></span></span>
+        <span class="rrow__go"><i>Government register</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
+      </a></li>
+    </ol>
+    <p class="reg__note" data-sc-in><b>Reading these honestly.</b> WaterMark is Australia's mandatory plumbing product certification. It confirms a product is fit to connect to drinking water and may legally be installed by a licensed plumber. It is a plumbing approval, not a health claim. The filter media in our systems is manufactured in compliance with NSF/ANSI standards 42, 53 and 58.</p>
+  </div>
+</section>
+
+<!-- ═════════ 2 · WHAT WATERMARK MEANS (#watermark) — mist. The mark, large, on the left; three numbered
+     statements on hairlines to the right. Nothing pinned, nothing on a card. ═════════ -->
+<section class="mean" id="watermark" data-sc-act="flow" aria-label="What WaterMark means">
+  <div class="zone mean__grid">
+    <div class="mean__mark" data-sc-in>
+      <span class="mean__plate"><img src="media/cert-watermark.webp" alt="The WaterMark certification mark" width="851" height="583" loading="lazy"></span>
+      <p>Australia's mandatory certification for plumbing products, run by the Australian Building Codes Board. Filters For You holds certificates <a class="ul" href="https://watermark.abcb.gov.au/product-search/certificate/023247" target="_blank" rel="noopener">23247</a> and <a class="ul" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener">22780</a>.</p>
+    </div>
+    <div class="mean__copy" data-sc-in data-sc-stagger="90">
+      <span class="kick">What WaterMark means</span>
+      <h2 class="d2">One mark. Three things it proves.</h2>
+      <ol class="mean__list">
+        <li><span class="mean__n">01</span><div><h3>Tested to the Australian standard.</h3><p>AS 3497:2021, drinking water treatment systems, design and performance. Tested by a JAS-ANZ accredited body, not by the people who sell it.</p></div></li>
+        <li><span class="mean__n">02</span><div><h3>Listed on the government register.</h3><p>Certificate 23247 on the Australian Building Codes Board's WaterMark register. 131 models, every one active, valid to 3 October 2028. You can search it yourself.</p></div></li>
+        <li><span class="mean__n">03</span><div><h3>Installed by a licensed plumber.</h3><p>Anything connected to drinking water in NSW has to be. Every Filters For You installation is carried out under NSW plumbing licence 461511C.</p></div></li>
       </ol>
-      <div class="docs__dots" id="docDots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><span>Swipe for the next document</span></div>
-      <figure class="docs__view" id="docView" aria-label="The document">
-        <div class="docs__pages">
-          <img class="on" src="media/wm/doc-reg-23247.webp" alt="Certificate 023247 on the ABCB WaterMark register" width="1200" height="1020" loading="lazy" data-i="0">
-          <img src="media/wm/doc-reg-22780.webp" alt="Certificate 022780 on the ABCB WaterMark register" width="1200" height="1020" loading="lazy" data-i="1">
-          <img src="media/wm/doc-coc.webp" alt="Page one of the WaterMark Certificate of Conformity 23247" width="1200" height="1020" loading="lazy" data-i="2">
-          <img src="media/wm/doc-coa.webp" alt="Page one of laboratory report B767408" width="1200" height="1020" loading="lazy" data-i="3">
-          <img src="media/wm/doc-h2.webp" alt="Page one of the hydrogen alkaline cartridge specification" width="1200" height="1020" loading="lazy" data-i="4">
-          <img src="media/wm/doc-nsw.webp" alt="The Verify NSW licence register with licence 461511C entered" width="1200" height="1020" loading="lazy" data-i="5">
-        </div>
-        <figcaption id="docCap">01 &middot; The ABCB register</figcaption>
-      </figure>
-    </div>
-    <p class="docs__note" data-sc-in><b>Reading these honestly.</b> WaterMark is Australia's mandatory plumbing product certification. It confirms a product is fit to connect to drinking water and may legally be installed by a licensed plumber. It is a plumbing approval, not a health claim. The filter media in our systems is manufactured in compliance with NSF/ANSI standards 42, 53 and 58.</p>
-  </div>
-</section>
-
-<!-- ═════════ 4 · THE LICENCE — the RO servicing split: the REAL photograph edge to edge (JP under the sink,
-     IMG_8563), the blue field beside it with a short ledger, and the way to check it. ═════════ -->
-<section class="care" id="licence" data-sc-act="pin" data-sc-span="3.2" data-sc-span-m="3" aria-label="The licence">
-  <div class="sc-stage" data-sc-stage>
-    <figure class="care__ph">
-      <picture><source media="(max-width:859px)" srcset="media/wm/licence-m.webp"><img src="media/wm/licence.webp" alt="Jean-Paul Barbar fitting a reverse osmosis system inside the cabinet under a Sydney kitchen sink" width="1600" height="1800" loading="lazy"></picture>
-    </figure>
-    <div class="care__panel">
-      <span class="kick" data-sc-cue="0 1 0 0">The licence</span>
-      <h2 class="d2" data-sc-cue="0 1 0 0">Fitted by a licensed plumber. Every time.</h2>
-      <p class="lede" data-sc-cue="0 1 0 0">Jean-Paul Barbar holds the licence, and it is on the NSW Government register for anyone to check.</p>
-      <div class="ledger two" id="ledger">
-        <div class="lrow" data-sc-cue="0.1 1 0.2 0"><b>Licence number</b><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>461511C</span></div>
-        <div class="lrow" data-sc-cue="0.22 1 0.2 0"><b>Status</b><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Current to 26 March 2027</span></div>
-        <div class="lrow" data-sc-cue="0.34 1 0.2 0"><b>Classes</b><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Plumber, drainer, gasfitter, LP gasfitter</span></div>
-        <div class="lrow" data-sc-cue="0.46 1 0.2 0"><b>Checked on</b><span class="ours"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path pathLength="1" d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Verify NSW, the government register</span></div>
-      </div>
-      <p class="care__go" data-sc-cue="0.6 1 0.2 0"><a class="btn" href="free-assessment"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book a free inspection</a><a class="ul" href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener">Check the licence</a></p>
-      <p class="fine" data-sc-cue="0.72 1 0.3 0">The licence number is on every page of this site, every quote and every invoice. That is the law in NSW, and it is how you know who is at your door.</p>
+      <p class="mean__go"><a class="btn" href="free-assessment"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book a free inspection</a></p>
     </div>
   </div>
 </section>
 
-<!-- ═════════ 5 · WHAT WE INSTALL — one screen on mist: two real renders, big, with the certificate that covers
-     each on a plate under it. No prices (JP: this is the trust page). ═════════ -->
-<section class="fits" id="systems" data-sc-act="flow" aria-label="What we install">
+<!-- ═════════ 3 · THE LICENCE (#licence) — the site's blue field, one band: the NSW mark, the record as
+     definition pairs, the way to check it. No photograph. ═════════ -->
+<section class="lic" id="licence" data-sc-act="flow" aria-label="The licence">
+  <div class="zone lic__grid">
+    <div class="lic__mark" data-sc-in>
+      <span class="lic__plate"><img src="media/cert-nsw.webp" alt="NSW Government" width="617" height="590" loading="lazy"></span>
+      <p>Held on the NSW Government's Verify NSW register, the same place Fair Trading sends consumers.</p>
+    </div>
+    <div class="lic__copy" data-sc-in data-sc-stagger="80">
+      <span class="kick">The licence</span>
+      <h2 class="d2">Fitted by a licensed plumber. Every time.</h2>
+      <p class="lede">Jean-Paul Barbar holds the licence, and it is on the government register for anyone to check.</p>
+      <dl class="lic__dl">
+        <div><dt>Licence number</dt><dd>461511C</dd></div>
+        <div><dt>Status</dt><dd>Current to 26 March 2027</dd></div>
+        <div><dt>Classes</dt><dd>Plumber, drainer, gasfitter, LP gasfitter</dd></div>
+        <div><dt>Checked on</dt><dd>Verify NSW, the government register</dd></div>
+      </dl>
+      <p class="lic__go"><a class="btn" href="free-assessment"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book a free inspection</a><a class="ul" href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener">Check the licence on Verify NSW</a></p>
+      <p class="fine">The licence number is on every page of this site, every quote and every invoice. That is the law in NSW, and it is how you know who is at your door.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 4 · EVERY SYSTEM ON THE REGISTER (#systems) — paper. The two renders float on the ground
+     (no card), the register beside them as a table: system, certificate, standard, valid to, one link each.
+     No prices, no model codes. ═════════ -->
+<section class="sys" id="systems" data-sc-act="flow" aria-label="What we install">
   <div class="zone">
-    <header class="fits__head" data-sc-in data-sc-stagger="90">
+    <header class="sys__head" data-sc-in data-sc-stagger="90">
       <span class="kick">What we install</span>
       <h2 class="d2">Every system on the register.</h2>
-      <p class="lede">Filters For You installs High Performance Filtration systems and cartridges. Nothing we fit is off the WaterMark register, and the filter media inside is manufactured in compliance with NSF/ANSI 42, 53 and 58.</p>
+      <p class="lede">Filters For You installs High Performance Filtration systems and cartridges across Sydney. Nothing we fit is off the WaterMark register.</p>
     </header>
-    <div class="fits__grid">
-      <a class="fit" href="whole-house-water-filter-sydney" data-sc-in data-sc-reveal="up" data-sc-reveal-at="0.06 0.4">
-        <span class="fit__pic"><img src="media/systems/pure-home.webp" alt="The Pure Home HPF-3 whole house water filtration system" width="734" height="900" loading="lazy"></span>
-        <span class="fit__t"><b>Pure Home HPF-3, whole house</b><span>Catalytic carbon at the mains, every tap and the shower.</span><em>WaterMark certificate 23247</em></span>
-      </a>
-      <a class="fit" href="reverse-osmosis-water-filter-sydney" data-sc-in data-sc-reveal="up" data-sc-reveal-at="0.06 0.4">
-        <span class="fit__pic"><img src="media/systems/pure-premium.webp" alt="The Pure Premium seven stage hydrogen rich alkaline reverse osmosis system" width="602" height="900" loading="lazy"></span>
-        <span class="fit__t"><b>Pure reverse osmosis, under the sink</b><span>Pure Plus, Pure Premium and Pure Luxe, on their own tap.</span><em>WaterMark certificate 23247 &middot; NSF/ANSI 58 membrane</em></span>
-      </a>
+    <div class="sys__grid">
+      <figure class="sys__shelf" data-sc-in aria-label="The systems">
+        <img src="media/systems/pure-home.webp" alt="The Pure Home whole house water filtration system" width="734" height="900" loading="lazy">
+        <img src="media/systems/pure-premium.webp" alt="The Pure Premium seven stage hydrogen rich alkaline reverse osmosis system" width="602" height="900" loading="lazy">
+      </figure>
+      <div class="sys__table" role="table" aria-label="Systems and their certificates" data-sc-in data-sc-stagger="70">
+        <div class="srow head" role="row"><span role="columnheader">System</span><span role="columnheader">Certificate</span><span role="columnheader">Standard</span><span role="columnheader">Valid to</span></div>
+        <a class="srow" role="row" href="whole-house-water-filter-sydney"><span role="cell"><b>Pure Home, whole house</b><span>Catalytic carbon at the mains. Every tap and the shower.</span></span><span role="cell">23247</span><span role="cell">AS 3497:2021</span><span role="cell">3 Oct 2028</span></a>
+        <a class="srow" role="row" href="reverse-osmosis-water-filter-sydney"><span role="cell"><b>Pure reverse osmosis range</b><span>Pure Plus, Pure Premium and Pure Luxe. Under the sink, on their own tap.</span></span><span role="cell">23247</span><span role="cell">AS 3497:2021</span><span role="cell">3 Oct 2028</span></a>
+        <a class="srow" role="row" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener"><span role="cell"><b>EQ and LSRO, under sink</b><span>High Performance Filtration's quick change under sink systems and their cartridges.</span></span><span role="cell">22780</span><span role="cell">WMTS-103:2016</span><span role="cell">14 Nov 2028</span></a>
+      </div>
     </div>
-    <p class="fits__line" data-sc-in>The EQ and LSRO under sink systems sit on <a class="ul" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener">certificate 22780</a>. Both certificates are above, one click from the register.</p>
+    <p class="sys__line" data-sc-in>The filter media inside every one is manufactured in compliance with NSF/ANSI 42, 53 and 58. NSF is an international standard for the media, never an Australian requirement. WaterMark is the Australian one, and every system carries both.</p>
   </div>
 </section>
 
-<!-- ═════════ 6 · THE LABORATORY REPORT — the RO money split, in reverse: the photograph on the left, the
-     numbers on the right. GENERATED (Nano Banana 2, 8 Sep 2026, our own cartridge references): media/wm/lab.
-     The figures are report B767408, and the frame says what it is: the laboratory's own sample, not Sydney water. ═════════ -->
+<!-- ═════════ 5 · THE LABORATORY REPORT (#analysis) — the split JP kept: the photograph left, the numbers
+     right. GENERATED (Nano Banana 2, 8 Sep 2026, our own cartridge references): media/wm/lab. ═════════ -->
 <section class="lab-act" id="analysis" data-sc-act="pin" data-sc-span="4" data-sc-span-m="3.8" aria-label="The laboratory report">
   <div class="sc-stage" data-sc-stage>
     <figure class="lab__ph">
@@ -2420,8 +2294,7 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ 7 · ACROSS SYDNEY — one full plate: the aerial (GENERATED, Nano Banana 2, 8 Sep 2026), the
-     thirteen districts, the second ask. ═════════ -->
+<!-- ═════════ 6 · ACROSS SYDNEY — the aerial (GENERATED), the thirteen districts, the second ask. ═════════ -->
 <section class="syd" id="sydney" data-sc-act="flow" aria-label="Across Sydney">
   <div class="syd__fr">
     <picture><source media="(max-width:859px)" srcset="media/wm/sydney-m.webp"><img src="media/wm/sydney.webp" alt="Rows of Sydney terrace houses and jacarandas at first light, with the Harbour Bridge and the city on the horizon" width="2400" height="1340" loading="lazy"></picture>
@@ -2438,7 +2311,7 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ 8 · REVIEWS — the brick lane, verbatim from the RO page (whole house round 70). ═════════ -->
+<!-- ═════════ 7 · REVIEWS — the brick lane, the site's own. ═════════ -->
 <section class="lane" id="reviews" data-sc-act="flow" aria-label="Reviews">
   <div class="zone">
     <div class="lane__head" data-sc-in data-sc-stagger="80">
@@ -2530,7 +2403,7 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ 9 · THE ASK — the glass at the window, the homepage form beside it. ═════════ -->
+<!-- ═════════ 8 · THE ASK — the glass at the window, the homepage form beside it. ═════════ -->
 <section class="ask" id="ask" data-sc-act="flow" aria-label="Book a free inspection">
   <div class="zone ask__grid">
     <figure class="frame ask__fr" data-sc-in data-sc-parallax="-0.08">
@@ -2591,7 +2464,7 @@ body.dopen .drawer{transform:none}
 </section>
 
 <!-- ═════════ THE WRITTEN VERSION — what the page shows, in plain words, for a reader who wants it and for
-     the crawler. Chapters collapse; every word ships in the HTML. The whole house and RO pages' estate. ═════════ -->
+     the crawler. Chapters collapse; every word ships in the HTML. ═════════ -->
 <section class="est" id="details" aria-label="WaterMark certification in Sydney, in writing">
   <div class="zone">
     <header class="est__head" data-sc-in data-sc-stagger="90">
@@ -2629,9 +2502,9 @@ body.dopen .drawer{transform:none}
           </div>
         </details>
         <details class="ch" id="det-23247" data-sc-in>
-          <summary><h2>WaterMark certificate 23247, the one behind the Pure range and the HPF-3</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <summary><h2>WaterMark certificate 23247, the one behind the Pure range and the Pure Home whole house system</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="ch__a">
-            <p class="est__lift">Certificate 23247 covers 131 models to AS 3497:2021, every one active, valid to 3 October 2028. The Pure reverse osmosis and under sink range and the Pure Home HPF-3 whole house system sit on it.</p>
+            <p class="est__lift">Certificate 23247 covers 131 models to AS 3497:2021, every one active, valid to 3 October 2028. The Pure reverse osmosis and under sink range and the Pure Home whole house system sit on it.</p>
             <ul>
               <li><b>Certifier.</b> Pro-Switch Pty Ltd, a JAS-ANZ accredited conformity assessment body. First issued 15 December 2016, current revision 21 April 2026.</li>
               <li><b>Standard.</b> AS 3497:2021, drinking water treatment systems, design and performance requirements, to be installed in accordance with the Plumbing Code of Australia.</li>
@@ -2644,7 +2517,7 @@ body.dopen .drawer{transform:none}
           <summary><h2>WaterMark certificate 22780, the EQ and LSRO systems</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="ch__a">
             <p class="est__lift">Certificate 22780 is the second register entry behind what Filters For You installs. It covers the High Performance Filtration EQ and LSRO under sink systems and the cartridges that feed them: 292 active models, valid to 14 November 2028.</p>
-            <p>It was issued by IAPMO Oceania under WMTS-103:2016, the WaterMark technical specification for water treatment systems, first certified in November 2018. The two certificates are not interchangeable. 23247 is the AS 3497 certificate for the Pure range and the HPF-3; 22780 is the WMTS-103 certificate for the EQ and LSRO systems. When you want to know which one covers the system in your kitchen, ask, and we will point you at the exact line on the register.</p>
+            <p>It was issued by IAPMO Oceania under WMTS-103:2016, the WaterMark technical specification for water treatment systems, first certified in November 2018. The two certificates are not interchangeable. 23247 is the AS 3497 certificate for the Pure range and the Pure Home whole house system; 22780 is the WMTS-103 certificate for the EQ and LSRO systems. When you want to know which one covers the system in your kitchen, ask, and we will point you at the exact line on the register.</p>
           </div>
         </details>
         <details class="ch" id="det-licence" data-sc-in>
@@ -2692,7 +2565,7 @@ body.dopen .drawer{transform:none}
               </details>
               <details class="fq">
                 <summary><h3>Are the water filters Filters For You installs WaterMark certified?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>Yes. The Pure reverse osmosis and under sink range and the Pure Home HPF-3 whole house system are on certificate 23247, 131 models, every one active, valid to 3 October 2028. The High Performance Filtration EQ and LSRO systems are on certificate 22780, 292 models, valid to 14 November 2028. Both certificates are published on this page and both link to the government register.</p></div>
+                <div class="fa"><p>Yes. The Pure reverse osmosis and under sink range and the Pure Home whole house system are on certificate 23247, 131 models, every one active, valid to 3 October 2028. The High Performance Filtration EQ and LSRO systems are on certificate 22780, 292 models, valid to 14 November 2028. Both certificates are published on this page and both link to the government register.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>Is NSF certification the same as WaterMark?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
@@ -2729,7 +2602,7 @@ body.dopen .drawer{transform:none}
   </div>
 </section>
 
-<!-- ═════════ PHONE ONLY · the floating pill (whole house round 89) ═════════ -->
+<!-- ═════════ PHONE ONLY · the floating pill ═════════ -->
 <div class="sbar" id="sbar" hidden>
   <button class="btn js-open" type="button" data-sys="">Book an installation</button>
 </div>
@@ -2737,9 +2610,8 @@ body.dopen .drawer{transform:none}
 <nav class="srail" id="srail" aria-label="Jump to a section">
   <ul>
     <li><a href="#top"><i></i><span>The record</span></a></li>
-    <li><a href="#marks"><i></i><span>What it carries</span></a></li>
-    <li><a href="#watermark"><i></i><span>What WaterMark means</span></a></li>
     <li><a href="#documents"><i></i><span>The certificates</span></a></li>
+    <li><a href="#watermark"><i></i><span>What WaterMark means</span></a></li>
     <li><a href="#licence"><i></i><span>The licence</span></a></li>
     <li><a href="#systems"><i></i><span>What we install</span></a></li>
     <li><a href="#analysis"><i></i><span>The lab report</span></a></li>
@@ -3673,10 +3545,11 @@ body.dopen .drawer{transform:none}
 /* ═══════════ WATERMARK V1 — THE RECORD: page script (8 Sep 2026) ═══════════
    The scroll-craft engine (scrollcraft.js) is mounted first and never edited. Everything bespoke
    below reads the --sc-p the engine publishes on each act. GSAP is kept for the hero's letter intro
-   and the scrubbed push-in, exactly as the homepage, the whole house page and the RO page.
+   and the scrubbed push-in, exactly as the homepage, the whole house page and the RO page. Renovated 8 Sep pm:
+   the sections are flow sections with one quiet rise on arrival; only the laboratory split pins.
    ⛔ THE SHELL'S HEADER DRIVER IS THE ONLY HEADER DRIVER. Nothing here touches #hdr, .util or .msheet.
    The rail, the way back, the drawer, the form and the phone pill are the whole house page's,
-   carried over as behaviour, not re-derived. The document viewer is this page's own. */
+   carried over as behaviour, not re-derived. */
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mph = matchMedia('(max-width:859px)').matches;
@@ -3951,125 +3824,7 @@ body.dopen .drawer{transform:none}
     addEventListener('load', function(){ setTimeout(function(){ load(1); }, 4000); setTimeout(function(){ tick(); setInterval(tick, 8000); }, 12000); });
   })();
 
-  /* ── the bespoke drivers, off --sc-p ── */
-  function P(el){ var v = parseFloat(el.style.getPropertyValue('--sc-p')); return isNaN(v) ? 0 : v; }
-  function win(p,a,b){ return clamp((p-a)/(b-a), 0, 1); }
-  function eo(t){ return 1 - Math.pow(1-t, 3); }
-  function q(v){ return v.toFixed(3); }
-
-  /* 1 · WHAT IT CARRIES — the yellow line draws under each name as it lands */
-  var whyAct = document.getElementById('marks');
-  var whyNames = [].slice.call(document.querySelectorAll('#whyNames li')).map(function(li){ return {el:li, at:parseFloat(li.style.getPropertyValue('--at')) || 0}; });
-  function driveWhy(){
-    if (!whyAct) return;
-    var p = P(whyAct);
-    for (var i = 0; i < whyNames.length; i++) whyNames[i].el.style.setProperty('--u', q(eo(win(p, whyNames[i].at + .03, whyNames[i].at + .12))));
-  }
-
-  /* 2 · WHAT WATERMARK MEANS — one picture at a time, three steps, the rail's line ending on the lit dot */
-  var howAct = document.getElementById('watermark');
-  var staxPics = [].slice.call(document.querySelectorAll('#stax .stax__pic'));
-  var staxSteps = [].slice.call(document.querySelectorAll('#staxCopy .stax__step'));
-  var crail = document.getElementById('crail');
-  var crailBtns = crail ? [].slice.call(crail.querySelectorAll('button')) : [];
-  var STAGE_N = 3, STAGE_AT = [0, .36, .7];
-  var staxCur = -1;
-  function setStage(i){
-    if (i === staxCur) return;
-    staxPics.forEach(function(f, k){ f.classList.toggle('on', k === i); f.classList.toggle('was', k === staxCur); });
-    staxSteps.forEach(function(s, k){ s.classList.toggle('on', k === i); });
-    crailBtns.forEach(function(b, k){ b.classList.toggle('on', k === i); });
-    if (crail && crailBtns[i]) crail.style.setProperty('--fx', (crailBtns[i].offsetLeft + (mph ? crailBtns[i].offsetWidth / 2 : 5)) + 'px');
-    staxCur = i;
-  }
-  function stageOf(p){ var i = 0; for (var n = 0; n < STAGE_AT.length; n++) if (p >= STAGE_AT[n]) i = n; return i; }
-  function driveHow(){ if (!howAct) return; setStage(stageOf(P(howAct))); }
-  function stageCentre(i){
-    var top = howAct.getBoundingClientRect().top + scrollY, travel = howAct.offsetHeight - innerHeight;
-    var a = STAGE_AT[i], b = i + 1 < STAGE_N ? STAGE_AT[i + 1] : 1;
-    return top + travel * ((a + b) / 2);
-  }
-  crailBtns.forEach(function(b){
-    var go = function(e){ if (e && e.cancelable) e.preventDefault(); glide(stageCentre(parseInt(b.getAttribute('data-i'), 10)), .9); };
-    b.addEventListener('click', go);
-  });
-
-  /* 4 · THE LICENCE ledger — each tick draws as its row lands */
-  var careAct = document.getElementById('licence');
-  var lrows = [].slice.call(document.querySelectorAll('#ledger .lrow[data-sc-cue]')).map(function(r){
-    var c = (r.getAttribute('data-sc-cue') || '0').split(/\s+/).map(parseFloat);
-    return { el:r, at:c[0] };
-  });
-  function driveCare(){
-    if (!careAct) return;
-    var p = P(careAct);
-    for (var i = 0; i < lrows.length; i++) lrows[i].el.style.setProperty('--s', q(eo(win(p, lrows[i].at + .04, lrows[i].at + .16))));
-  }
-
-  var running = false;
-  function driveAll(){ running = false; driveWhy(); driveHow(); driveCare(); }
-  function ask(){ if (!running){ running = true; requestAnimationFrame(driveAll); } }
-  addEventListener('scroll', ask, {passive:true});
-  addEventListener('resize', function(){ var k = staxCur; staxCur = -1; setStage(k < 0 ? 0 : k); ask(); }, {passive:true});
-  addEventListener('load', ask);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ask);
-  ask();
-  addEventListener('scroll', function(){ requestAnimationFrame(ask); }, {passive:true});
-  if (reduce){
-    setStage(0);
-    whyNames.forEach(function(n){ n.el.style.setProperty('--u', '1'); });
-    lrows.forEach(function(r){ r.el.style.setProperty('--s', '1'); });
-  }
-
-  /* 3 · THE RECORD — the viewer turns to the document the reader is on. The row nearest the reading line
-     (45% down the screen on a desktop; just under the sticky viewer on a phone) is the one; the viewer
-     crossfades to its page; a hover on a fine pointer previews without moving the page. */
-  (function record(){
-    var rows = [].slice.call(document.querySelectorAll('#docList .doc'));
-    var pages = [].slice.call(document.querySelectorAll('#docView .docs__pages img'));
-    var cap = document.getElementById('docCap');
-    var view = document.getElementById('docView');
-    if (!rows.length || !pages.length) return;
-    if (mph){
-      /* the phone: a swipe carousel; the dots follow the slide */
-      var list = document.getElementById('docList'), dots = [].slice.call(document.querySelectorAll('#docDots i'));
-      if (!list) return;
-      var tick = 0;
-      var sync = function(){ tick = 0; var w = list.clientWidth || 1; var i = clamp(Math.round(list.scrollLeft / w), 0, rows.length - 1); dots.forEach(function(d, k){ d.classList.toggle('on', k === i); }); rows.forEach(function(r, k){ r.classList.toggle('on', k === i); }); };
-      list.addEventListener('scroll', function(){ if (!tick) tick = requestAnimationFrame(sync); }, {passive:true});
-      sync();
-      return;
-    }
-    var NAMES = ['01 · The ABCB register', '02 · The ABCB register', '03 · The certificate, page one', '04 · The laboratory report, page one', '05 · The specification, page one', '06 · The Verify NSW register'];
-    var cur = -1, hover = -1;
-    function show(i){
-      if (i === cur) return; cur = i;
-      rows.forEach(function(r, k){ r.classList.toggle('on', k === i); });
-      pages.forEach(function(p, k){ p.classList.toggle('on', k === i); });
-      if (cap) cap.textContent = NAMES[i] || '';
-    }
-    function drive(){
-      if (hover >= 0) return;
-      var line = mph && view ? view.getBoundingClientRect().bottom + 40 : innerHeight * .45;
-      var best = 0, bd = Infinity;
-      for (var k = 0; k < rows.length; k++){
-        var r = rows[k].getBoundingClientRect();
-        var d = r.top > line ? r.top - line : (r.bottom < line ? line - r.bottom : 0);
-        if (d < bd){ bd = d; best = k; }
-      }
-      show(best);
-    }
-    if (matchMedia('(hover:hover) and (pointer:fine)').matches){
-      rows.forEach(function(r, k){
-        r.addEventListener('mouseenter', function(){ hover = k; show(k); });
-        r.addEventListener('mouseleave', function(){ hover = -1; drive(); });
-      });
-    }
-    addEventListener('scroll', drive, {passive:true});
-    addEventListener('resize', drive, {passive:true});
-    addEventListener('load', drive);
-    drive();
-  })();
+  /* the one pinned act, the laboratory report: the engine's cues do the rows; nothing bespoke to drive */
 
   /* 8 · THE LANE — the reviews marquee: 30px/s, rows in alternate directions, the pace leaning on the scroll on a desktop */
   (function rmq(){
@@ -4122,7 +3877,7 @@ body.dopen .drawer{transform:none}
     if (!rail) return;
     var links = [].slice.call(rail.querySelectorAll('a'));
     var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
-    var DARK = {watermark:1, licence:1, sydney:1};
+    var DARK = {licence:1, sydney:1};
     var cur = -1, on = false, dark = false, tOn = false, mrail = null;
     var vh = innerHeight;
     function drive(){
