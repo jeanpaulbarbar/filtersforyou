@@ -142,7 +142,13 @@ in `page-law.py` will say so if a page was changed and never re-probed.
 `Workspace/Projects/website-redesign-2026-08/mockup/pure-home-v7.html`, then re-run
 `cutover-v7.py`, which restamps the shell and asserts `check` passes.
 
-## STILL OUTSTANDING — 541 pages on the OLD header
-Only `index.html`, `humm.html` and `whole-house-water-filter-sydney.html` carry the shell. The
-other 541 run a legacy `.nav-links` header from before this law existed. They are not covered by
+## THE WATERMARK PAGE IS GENERATED TOO
+⛔ Never hand-edit `Website/watermark-certified-water-filter-sydney.html`. Edit the parts in
+`Workspace/Projects/website-redesign-2026-08/wm/`, then `build-wm.py` → `cutover-wm.py` (8 Sep 2026).
+The RO page is the same: `ro/` → `build-ro.py` → `cutover-ro.py`.
+
+## STILL OUTSTANDING — 539 pages on the OLD header
+Only `index.html`, `humm.html`, `whole-house-water-filter-sydney.html`,
+`reverse-osmosis-water-filter-sydney.html` and `watermark-certified-water-filter-sydney.html` carry the
+shell. The other 539 run a legacy `.nav-links` header from before this law existed. They are not covered by
 anything above. Migrating them is its own job, and it is not done.
