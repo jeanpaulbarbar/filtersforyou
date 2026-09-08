@@ -4479,6 +4479,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 .certrow > .certlink:hover{opacity:.74;transform:translateY(-1px)}
 .certrow > .certlink:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
 @media(prefers-reduced-motion:reduce){.certrow > .certlink{transition:none}.certrow > .certlink:hover{transform:none}}
+
+/* 8 Sep 2026 — NSW badge opens the Fair Trading register, HPF mark opens the manufacturer.
+   .certrow > img.hpfi cannot reach a wrapped image, so the anchor carries the size.
+   ⛔ The NSF mark is deliberately NOT linked while the claim is unsubstantiated. */
+.certrow > .certlink > img.hpfi{height:56px;width:auto;display:block}
+.certrow > .certlink-lic{display:inline-flex;align-items:center;text-decoration:none;color:inherit;border-radius:8px;transition:opacity .18s cubic-bezier(.2,.7,.3,1),transform .18s cubic-bezier(.2,.7,.3,1)}
+.certrow > .certlink-lic:hover{opacity:.74;transform:translateY(-1px)}
+.certrow > .certlink-lic:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.certrow > .certlink-lic{transition:none}.certrow > .certlink-lic:hover{transform:none}}
 </style>
 <!-- ═══════════ ROUND 29 — THE STRUCTURED DATA GRAPH ══════════════
      Was one flat LocalBusiness node. Now a connected @graph: the business,
@@ -5189,11 +5198,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       <span class="lab"><img src="media/mark.svg" alt="" width="48" height="48">The range</span>
       <h2 class="d2 sline">Water filters.<br>Every Sydney home.</h2>
       <div class="certrow rv">
-        <span class="lic"><img src="media/cert-nsw.webp" alt="NSW Government" width="617" height="590" loading="lazy" decoding="async"><span class="t"><b>Licensed plumbers</b><span>NSW Lic. 461511C</span></span></span>
+        <a class="certlink-lic" href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener" aria-label="Verify our plumbing licence 461511C on the NSW Government register"><span class="lic"><img src="media/cert-nsw.webp" alt="NSW Government" width="617" height="590" loading="lazy" decoding="async"><span class="t"><b>Licensed plumbers</b><span>NSW Lic. 461511C</span></span></span></a>
         <i></i>
         <a class="certlink" href="/watermark-certified-water-filter-sydney#documents" target="_blank" rel="noopener" aria-label="Our WaterMark certificates and compliance documents"><img src="media/cert-watermark.webp" alt="WaterMark certified" width="851" height="583" loading="lazy" decoding="async"></a>
         <img class="nsf" src="media/cert-nsf.webp" alt="NSF independently certified" width="288" height="288" loading="lazy" decoding="async">
-        <img class="hpfi" src="media/cert-hpf-icon.webp" alt="High Performance Filtration" width="52" height="71" loading="lazy" decoding="async">
+        <a class="certlink" href="https://www.highperformancefiltration.com.au/" target="_blank" rel="noopener" aria-label="High Performance Filtration, the manufacturer"><img class="hpfi" src="media/cert-hpf-icon.webp" alt="High Performance Filtration" width="52" height="71" loading="lazy" decoding="async"></a>
       </div>
     </div>
     <div class="wrap">
