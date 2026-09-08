@@ -1335,6 +1335,63 @@ a{text-decoration:none;color:inherit}
   </div>
 </section>
 
+<!-- CERTIFICATES & DOCUMENTS -->
+<section class="sec sec-white reveal" id="documents">
+  <div class="container">
+    <div class="sec-head">
+      <div class="yline yline-c"></div>
+      <span class="eyebrow">Open Records</span>
+      <h2 class="sec-title sec-title-dark">Every Certificate, Open To Read</h2>
+      <p class="sec-sub">We do not ask you to take our word for it. Every certificate behind the systems we install is published here, and the WaterMark register is the government's own database, not ours.</p>
+    </div>
+
+    <div class="doc-grid">
+
+      <a class="doc-card doc-card-lead" href="https://watermark.abcb.gov.au/product-search/certificate/023247" target="_blank" rel="noopener">
+        <span class="doc-tag">Live government register</span>
+        <h3 class="doc-title">WaterMark Certificate 23247</h3>
+        <p class="doc-desc">The Australian Building Codes Board register. 131 active models under Australian Standard AS/NZS 3497:2021, held by Filter Systems Australia, valid to 3 October 2028. Search it yourself.</p>
+        <span class="doc-link">Open the ABCB register &rarr;</span>
+      </a>
+
+      <a class="doc-card" href="/assets/compliance/watermark-certificate-of-conformity-23247.pdf" target="_blank" rel="noopener">
+        <span class="doc-tag">PDF, 15 pages</span>
+        <h3 class="doc-title">Certificate of Conformity</h3>
+        <p class="doc-desc">Issued by Pro-Switch Pty Ltd, a JAS-ANZ accredited certification body, on 21 April 2026. Lists every model ID covered, with the WaterMark schedule in full.</p>
+        <span class="doc-link">Download the certificate &rarr;</span>
+      </a>
+
+      <a class="doc-card" href="/assets/compliance/certificate-of-analysis-ro-membrane.pdf" target="_blank" rel="noopener">
+        <span class="doc-tag">PDF, 3 pages</span>
+        <h3 class="doc-title">Certificate of Analysis</h3>
+        <p class="doc-desc">Independent laboratory report B767408. Tap water measured side by side against reverse osmosis water and the alkaline stages, across more than 40 parameters.</p>
+        <span class="doc-link">Download the analysis &rarr;</span>
+      </a>
+
+      <a class="doc-card" href="/assets/compliance/hydrogen-alkaline-cartridge-spec-sheet.pdf" target="_blank" rel="noopener">
+        <span class="doc-tag">PDF, 2 pages</span>
+        <h3 class="doc-title">Hydrogen Alkaline Cartridge Spec</h3>
+        <p class="doc-desc">Model T33-H2-ALK, listed on certificate 23247. Supplier data showing pH, ORP and dissolved hydrogen measured across the life of the cartridge, from 50 to 4,000 litres.</p>
+        <span class="doc-link">Download the spec sheet &rarr;</span>
+      </a>
+
+      <a class="doc-card" href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener">
+        <span class="doc-tag">Live government register</span>
+        <h3 class="doc-title">NSW Plumbing Licence 461511C</h3>
+        <p class="doc-desc">Jean-Paul Barbar holds a NSW plumbing licence. Check it on the NSW Government verify service, the same place Fair Trading points consumers to.</p>
+        <span class="doc-link">Verify the licence &rarr;</span>
+      </a>
+
+      <div class="doc-card doc-card-note">
+        <span class="doc-tag">What this covers</span>
+        <h3 class="doc-title">Reading these honestly</h3>
+        <p class="doc-desc">WaterMark is Australia's mandatory plumbing product certification. It confirms a product is safe and fit to connect to drinking water, and that a licensed plumber may legally install it. It is a plumbing approval, not a health claim. The filter media in our systems is manufactured in compliance with NSF/ANSI standards 42, 53 and 61 for taste, odour and contaminant reduction.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="sec sec-white reveal" id="faq">
   <div class="container">
@@ -2302,6 +2359,27 @@ revealEls.forEach(el => io.observe(el));
 .sp-close{position:absolute;top:8px;right:8px;background:none;border:none;cursor:pointer;color:#9aa5b8;font-size:16px;line-height:1;padding:2px 4px;border-radius:4px;transition:color .15s}
 .sp-close:hover{color:#324158}
 .sp-popup{position:relative}
+
+/* ── Certificates & documents (8 Sep 2026) ── */
+.sec-sub{max-width:660px;margin:0 auto;color:var(--muted);font-size:16px;line-height:1.65}
+.sec-head .sec-sub{margin-top:4px}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:40px}
+.doc-card{display:flex;flex-direction:column;background:#fff;border:1px solid #dde5f2;border-radius:14px;padding:26px 24px 24px;text-decoration:none;color:inherit;transition:border-color .18s,box-shadow .18s,transform .18s}
+a.doc-card:hover{border-color:var(--blue);box-shadow:0 10px 28px rgba(11,97,244,.10);transform:translateY(-2px)}
+a.doc-card:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.doc-card-lead{background:var(--dark);border-color:var(--dark)}
+.doc-card-lead .doc-title{color:#fff}
+.doc-card-lead .doc-desc{color:#c3cde0}
+.doc-card-lead .doc-tag{color:#0f1725;background:var(--yellow)}
+.doc-card-lead .doc-link{color:var(--yellow)}
+a.doc-card-lead:hover{border-color:var(--yellow);box-shadow:0 10px 28px rgba(30,45,64,.22)}
+.doc-card-note{background:var(--light);border-color:#d6dfee}
+.doc-tag{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--blue);background:#e4edfd;border-radius:100px;padding:5px 11px;margin-bottom:14px}
+.doc-title{font-size:19px;font-weight:800;line-height:1.25;letter-spacing:-.01em;color:var(--dark);margin:0 0 10px}
+.doc-desc{font-size:14.5px;line-height:1.62;color:var(--muted);margin:0 0 18px}
+.doc-card-note .doc-desc{margin-bottom:0}
+.doc-link{margin-top:auto;font-size:14px;font-weight:700;color:var(--blue)}
+@media(max-width:560px){.doc-grid{grid-template-columns:1fr;gap:14px}.doc-card{padding:22px 20px}}
 </style>
 <div class="sp-wrap">
   <div class="sp-popup" id="spPopup" role="status" aria-live="polite">

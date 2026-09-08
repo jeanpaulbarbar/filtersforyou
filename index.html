@@ -4471,6 +4471,14 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     .show .stage::after,
     .show .sys .mimg.tapmode::after{animation:none;translate:none;rotate:none}
   }
+
+/* 8 Sep 2026 — the WaterMark badge opens our certificate on the ABCB register.
+   .certrow > img no longer reaches it once wrapped, so the anchor carries the size. */
+.certrow > .certlink{display:inline-flex;align-items:center;border-radius:8px;transition:opacity .18s cubic-bezier(.2,.7,.3,1),transform .18s cubic-bezier(.2,.7,.3,1)}
+.certrow > .certlink > img{height:44px;width:auto;display:block}
+.certrow > .certlink:hover{opacity:.74;transform:translateY(-1px)}
+.certrow > .certlink:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.certrow > .certlink{transition:none}.certrow > .certlink:hover{transform:none}}
 </style>
 <!-- ═══════════ ROUND 29 — THE STRUCTURED DATA GRAPH ══════════════
      Was one flat LocalBusiness node. Now a connected @graph: the business,
@@ -5183,7 +5191,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       <div class="certrow rv">
         <span class="lic"><img src="media/cert-nsw.webp" alt="NSW Government" width="617" height="590" loading="lazy" decoding="async"><span class="t"><b>Licensed plumbers</b><span>NSW Lic. 461511C</span></span></span>
         <i></i>
-        <img src="media/cert-watermark.webp" alt="WaterMark certified" width="851" height="583" loading="lazy" decoding="async">
+        <a class="certlink" href="https://watermark.abcb.gov.au/product-search/certificate/023247" target="_blank" rel="noopener" aria-label="Our WaterMark certificate 23247 on the ABCB register"><img src="media/cert-watermark.webp" alt="WaterMark certified" width="851" height="583" loading="lazy" decoding="async"></a>
         <img class="nsf" src="media/cert-nsf.webp" alt="NSF independently certified" width="288" height="288" loading="lazy" decoding="async">
         <img class="hpfi" src="media/cert-hpf-icon.webp" alt="High Performance Filtration" width="52" height="71" loading="lazy" decoding="async">
       </div>
