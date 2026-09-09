@@ -241,3 +241,122 @@ Fixed phone plate becomes a document plate for the homepage engine. */
 #proof .lane__head .lede{text-wrap-style:pretty}
 @media(max-width:859px){#proof .lane__head .lede{font-size:18.88px;line-height:1.5}}
 @media(prefers-reduced-motion:reduce){#proof .rmq{overflow-x:auto}#proof .rrow{transform:none!important}}
+
+/* Requested imagery pass: keep the approved full-screen chapter language. */
+.slide.s3 .inwrap .box{margin-left:0;text-align:left;max-width:560px}
+.slide.s3 .inwrap .box h3,.slide.s3 .inwrap .box p{margin-left:0}
+.hp-care-photo picture{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.hp-care-photo picture.on{opacity:1}
+.hp-care-photo img{object-position:67% center}
+.hp-care-shade{background:linear-gradient(90deg,#0645b3 0%,rgba(4,58,153,.97) 29%,rgba(4,32,86,.67) 48%,rgba(4,16,46,.06) 79%),linear-gradient(0deg,rgba(4,16,46,.86),transparent 28%)}
+.hp-ready .hp-care-intro{top:9%;width:43%}
+.hp-care-intro h2{font-size:clamp(54px,5.6vw,80px);margin:18px 0}
+.hp-care-intro>p{font-size:18px;line-height:1.5;max-width:42ch}
+.hp-ready .hp-costs{left:var(--safe);right:52%;top:43%;bottom:180px}
+.hp-cost h3{font-size:32px}
+.hp-cost-desc{font-size:15px;margin-top:8px}
+.hp-care-figures{display:flex;gap:32px;align-items:start;margin-top:23px}
+.hp-care-figures>div{display:grid;gap:6px}
+.hp-care-figures span{font-size:13px;line-height:1.4;color:rgba(255,255,255,.8);max-width:23ch;min-height:36px}
+.hp-care-figures strong{font-size:70px;line-height:1;letter-spacing:-.05em;font-weight:600;font-variant-numeric:tabular-nums}
+.hp-repair-amount strong{color:#fff}
+.hp-care-figures small{font-size:12px;line-height:1.4;color:rgba(255,255,255,.85)}
+.hp-install-price{margin:18px 0 8px;font-size:14px;color:rgba(255,255,255,.78)}
+.hp-install-price b{color:#fff;font-weight:600;margin-left:10px;font-size:19px;white-space:nowrap}
+.hp-cover-note{font-size:12px;line-height:1.5;color:rgba(255,255,255,.8);margin:0;max-width:none}
+.hp-cover-note a{text-decoration:underline;text-underline-offset:3px;color:inherit}
+.hp-cover-note a{white-space:nowrap}
+.hp-first-service{display:inline-flex;align-items:center;gap:20px;margin:12px 0 0;padding:7px 0;border-block:1px solid rgba(255,255,255,.3);font-size:15px;font-weight:600;color:#fff}
+.hp-first-service b{font-size:24px;line-height:1;letter-spacing:-.025em}
+.hp-first-service+.hp-care-figures{margin-top:12px}
+.hp-tour-price{margin-top:22px;max-width:460px;color:#fff;opacity:0;transform:translateY(14px);transition:opacity .7s ease .2s,transform .8s cubic-bezier(.22,1,.36,1) .2s}
+.tour .tpanel.xopen .hp-tour-price{opacity:1;transform:none}
+.hp-tour-price>span{font-size:18px}.hp-tour-price strong{font-size:40px;font-weight:600;letter-spacing:-.035em;margin-inline:5px}
+.hp-tour-price p{font-size:16px;line-height:1.5;margin:10px 0 5px;color:inherit}
+.hp-tour-price small{font-size:14px;font-weight:600}
+/* Removing the 64px pull-up here lets the service CTA leave with its own stage. */
+#hp-flow #included{margin-top:0;border-radius:0;padding:110px 0 150px;background:radial-gradient(ellipse at 3% 100%,rgba(11,97,244,.09),transparent 60%),var(--mist)}
+.hp-inclusions-layout{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+#hp-flow #included .ihead{position:sticky;top:150px}
+#hp-flow #included .ihead h2{font-size:clamp(42px,5vw,72px);margin:0;line-height:1.06;max-width:12ch;font-weight:500;letter-spacing:-.045em}
+.hp-inclusions-note{font-size:15px;color:var(--muted);margin-top:32px;padding-top:22px;border-top:1px solid rgba(15,39,72,.16)}
+#hp-flow #included .ilist{grid-template-columns:1fr;margin:0;gap:0}
+#hp-flow #included .ilist li{padding:25px 0 25px 44px;border-bottom:1px solid rgba(15,39,72,.14)}
+#hp-flow #included .ilist li:first-child{padding-top:0}
+#hp-flow #included .ilist li::before{top:26px}
+#hp-flow #included .ilist li:first-child::before{top:2px}
+#hp-flow #included .ilist b{font-size:25px;font-weight:600}
+#hp-flow #included .ilist span{font-size:16px;max-width:35ch}
+#hp-flow #payments{border-top-left-radius:clamp(24px,4vw,64px);border-top-right-radius:clamp(24px,4vw,64px)}
+#hp-flow #taps{border-top-left-radius:clamp(24px,4vw,64px);border-top-right-radius:clamp(24px,4vw,64px);overflow:clip}
+#hp-flow #newbuilds{align-items:flex-start;min-height:110svh;padding-top:82px}
+#hp-flow #newbuilds .ndcopy{max-width:900px}
+#hp-flow #newbuilds h2{max-width:20ch;font-size:clamp(42px,4.7vw,68px)}
+#hp-flow #newbuilds .lede{max-width:52ch;font-size:19px}
+#hp-flow #newbuilds .ndbg{object-position:50% 60%}
+#hp-flow #newbuilds .veil{background:linear-gradient(180deg,rgba(4,16,46,.9),rgba(4,16,46,.76) 29%,rgba(4,16,46,.08) 66%)}
+/* Once-only arrivals: ScrollCraft observes these; legacy inner drivers stay independent. */
+@media(prefers-reduced-motion:no-preference){
+ .hp-ready [data-sc-in]{opacity:0;transform:translateY(34px);transition:opacity .75s ease,transform 1s cubic-bezier(.22,1,.36,1)}
+ .hp-ready [data-sc-in].sc-in{opacity:1;transform:none}
+}
+@media(min-width:860px) and (max-height:780px){
+ .hp-ready .hp-care-intro{top:11%}.hp-care-intro h2{font-size:54px;margin:12px 0}.hp-care-intro>p{font-size:16px}
+ .hp-ready .hp-costs{top:40%;bottom:142px}.hp-cost h3{font-size:27px}.hp-care-figures{margin-top:14px}.hp-care-figures strong{font-size:58px}.hp-care-figures span{min-height:32px;font-size:12px}.hp-cover-note{font-size:11px}.hp-install-price{margin-top:12px}
+ .hp-first-service{font-size:13px;margin-top:8px;padding:5px 0}.hp-first-service b{font-size:21px}
+}
+@media(min-width:860px) and (max-width:1099px){.hp-ready .hp-costs{right:46%}.hp-care-figures{gap:30px}.hp-inclusions-layout{gap:48px}.hp-care-photo img{object-position:100% center}}
+@media(max-width:859px){
+ .hp-care-photo{inset:112px 0 auto;height:38%;width:100%}
+ .hp-care-photo::after{content:"";position:absolute;inset:-1px;background:linear-gradient(#0643ad,transparent 24%,transparent 72%,#0643ad)}
+ .hp-care-photo img{object-fit:cover;object-position:67% 52%;transform:none}
+ .hp-care-shade{background:linear-gradient(0deg,#0643ad 0%,#0643ad 49%,rgba(6,67,173,.1) 72%,rgba(6,67,173,.8) 87%,#0643ad 98%)}
+ .hp-ready .hp-care-intro{top:62px;width:auto;left:24px;right:24px}
+ .hp-ready .hp-care-intro .hp-kicker{display:none}
+ .hp-ready .hp-care-intro h2{font-size:34px;line-height:1.05;margin:0}
+ .hp-ready .hp-care-intro>p{display:none}
+ .hp-ready .hp-costs{top:42%;left:24px;right:24px;bottom:142px}
+ .hp-cost h3{font-size:27px}.hp-cost-desc{font-size:13px;min-height:0;margin-top:6px}
+ .hp-care-figures{gap:35px;margin-top:16px}.hp-care-figures span{font-size:12px;min-height:32px}.hp-care-figures strong{font-size:64px}.hp-care-figures small{font-size:11px}
+ .hp-first-service{font-size:13px;padding:6px 0;margin-top:9px;gap:18px}.hp-first-service b{font-size:22px}
+ .hp-install-price{font-size:12px;margin:14px 0 6px}.hp-install-price b{font-size:18px}
+ .hp-cover-note{font-size:11px;max-width:45ch}
+ .hp-ready .hp-care-foot{bottom:22px}.hp-care-terms p{font-size:11px}
+ .hp-tour-price{margin-top:12px;color:var(--ink)}
+ .hp-tour-price>span{font-size:14px}.hp-tour-price strong{font-size:29px}
+ .hp-tour-price p{font-size:13px;line-height:1.4;margin:6px 0}.hp-tour-price small{font-size:12px}
+ .tour .tcopy{margin-top:24px;margin-bottom:0}
+ .tour .tcopy h2{font-size:clamp(29px,8vw,40px);max-width:16ch}
+ #hp-flow #included{padding:72px 0 108px}
+ .hp-inclusions-layout{display:block}
+ #hp-flow #included .ihead{position:static}
+ #hp-flow #included .ihead h2{font-size:43px;max-width:14ch}
+ .hp-inclusions-note{margin-top:22px;padding-top:16px}
+ #hp-flow #included .ilist{margin-top:34px}
+ #hp-flow #included .ilist b{font-size:23px}
+ #hp-flow #included .ilist li{padding-block:22px}
+ #hp-flow #included .ilist li::before{top:24px}
+ #hp-flow #newbuilds{display:block;padding-top:46svh;padding-bottom:86px;min-height:100svh;background:var(--ink-blue)}
+ #hp-flow #newbuilds .ndbg{height:50svh;object-fit:cover;object-position:50% 50%}
+ #hp-flow #newbuilds .veil{background:linear-gradient(180deg,transparent 20svh,rgba(4,16,46,.08) 30svh,var(--ink-blue) 49svh)}
+ #hp-flow #newbuilds h2{font-size:40px;max-width:18ch}
+ #hp-flow #newbuilds .lede{font-size:16px}
+}
+@media(max-width:859px) and (max-height:720px){
+ .hp-ready .hp-care-intro{top:62px}.hp-ready .hp-care-intro h2{font-size:30px}
+ .hp-care-photo{top:100px;height:32%}.hp-ready .hp-costs{top:37%}
+ .hp-care-shade{background:linear-gradient(0deg,#0643ad 0%,#0643ad 52%,rgba(6,67,173,.06) 74%,rgba(6,67,173,.75) 88%,#0643ad 100%)}
+ .hp-cost h3{font-size:24px}.hp-cost-desc{font-size:12px;margin-top:4px}
+ .hp-care-figures{margin-top:10px;gap:32px}.hp-care-figures strong{font-size:52px}.hp-care-figures span{font-size:11px;min-height:29px}
+ .hp-first-service{font-size:12px;margin-top:7px;padding:4px 0}.hp-first-service b{font-size:20px}.hp-first-service+.hp-care-figures{margin-top:8px}
+ .hp-install-price{margin:9px 0 4px;font-size:12px}.hp-install-price b{font-size:16px}.hp-cover-note{font-size:11px}
+ .hp-tour-price p{font-size:12px}.hp-tour-price strong{font-size:26px}.hp-tour-price{margin-top:7px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hp-tour-price{opacity:1;transform:none}.hp-care-photo picture{transition:none}
+ .hp-care-photo{height:100%;inset:0}.hp-care-photo picture:not(.on){display:none}
+ .hp-ready .hp-care-intro>p{display:block;margin-top:20px}
+ .hp-ready .hp-care-intro,.hp-ready .hp-costs,.hp-ready .hp-care-foot{position:relative;inset:auto}
+ .hp-care-shade{background:linear-gradient(90deg,rgba(6,67,173,.98),rgba(4,16,46,.8))}
+ #hp-flow #included .ihead{position:static}
+}

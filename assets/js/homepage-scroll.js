@@ -8,6 +8,16 @@
  const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
  const care=root.querySelector('#ledger'),finish=root.querySelector('#taps');
  const costs=[...care.querySelectorAll('[data-hp-cost]')];
+ const carePics=[...care.querySelectorAll('[data-hp-care-photo]')],careDecoded=new Map();
+ let carePhotoVersion=0;
+ function decodeCare(i){
+   if(!careDecoded.has(i)){const img=carePics[i].querySelector('img');img.loading='eager';careDecoded.set(i,img.decode().then(()=>true).catch(()=>{careDecoded.delete(i);return false}));}
+   return careDecoded.get(i);
+ }
+ async function showCarePhoto(i){
+   const ticket=++carePhotoVersion,loaded=await decodeCare(i);if(!loaded||ticket!==carePhotoVersion||i!==currentCare)return;
+   carePics.forEach((el,n)=>{el.classList.toggle('on',n===i);el.setAttribute('aria-hidden',String(n!==i));});
+ }
  const pics=[...finish.querySelectorAll('[data-hp-finish-photo]')];
  const names=[...finish.querySelectorAll('[data-hp-finish-name]')];
  const careNav=[...care.querySelectorAll('[data-hp-jump]')];
@@ -23,7 +33,7 @@
    return decoded.get(i);
  }
  function setCare(i){
-   if(currentCare===i)return;currentCare=i;
+   if(currentCare===i)return;currentCare=i;showCarePhoto(i);
    costs.forEach((el,n)=>{el.classList.toggle('on',n===i);if(!reduce){el.inert=n!==i;el.setAttribute('aria-hidden',String(n!==i));}});
    careNav.forEach((el,n)=>{el.classList.toggle('on',n===i);el.setAttribute('aria-current',String(n===i));});
    care.querySelector('[data-sc-stage]').dataset.scVerifyState='care-'+i;
@@ -58,6 +68,7 @@
  }
  if(!ready){careNav.forEach(b=>b.hidden=true);}
  setCare(0);setFinish(0);
+ new IntersectionObserver(entries=>{if(entries[0].isIntersecting)carePics.forEach((_,i)=>decodeCare(i));},{rootMargin:'150% 0px'}).observe(care);
  new IntersectionObserver(entries=>{if(entries[0].isIntersecting)pics.forEach((_,i)=>decodePhoto(i));},{rootMargin:'150% 0px'}).observe(finish);
  function jump(el,i){
    if(reduce||!ready){if(el===finish)setFinish(i);return;}
@@ -66,7 +77,7 @@
  }
  careNav.forEach((b,i)=>b.addEventListener('click',()=>jump(care,i)));
  finishNav.forEach((b,i)=>b.addEventListener('click',()=>jump(finish,i)));
- addEventListener('scroll',request,{passive:true});addEventListener('resize',()=>{decoded.clear();request()});
+ addEventListener('scroll',request,{passive:true});addEventListener('resize',()=>{decoded.clear();careDecoded.clear();showCarePhoto(currentCare);request()});
  request();document.fonts.ready.then(request);
 
  // Direct reuse of the product page's review movement: three opposing rows,
