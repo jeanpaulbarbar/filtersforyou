@@ -2150,7 +2150,8 @@ html.lenis{scroll-behavior:auto}
  .ts-studio .ts-photo-area{order:1;display:grid;justify-items:center}
  .ts-studio .ts-photo-area>.ts-zoom{right:0;top:auto;bottom:0}
  .ts-studio .ts-mobile-models{order:0;margin:0 0 16px}
- .ts-studio .ts-preview .ts-stage{--photo-height:clamp(120px,calc(100svh - 480px),300px);height:var(--photo-height);width:calc(var(--photo-height) * .75);max-width:100%;align-self:center;order:1;border-radius:20px}
+ .ts-studio .ts-preview .ts-stage{--photo-height:clamp(160px,calc(100svh - 400px),400px);height:var(--photo-height);width:calc(var(--photo-height) * .75);max-width:100%;align-self:center;order:1;border-radius:20px}
+ .ts-studio .ts-preview .ts-stage .ts-zoom{top:auto;right:12px;bottom:12px}
  .ts-studio #mobile-finishes{order:2;padding:0;margin:16px 0 0;display:flex;flex-direction:column}
  .ts-studio #mobile-finishes .ts-shape{margin:0;padding:0;gap:8px}
  .ts-studio #mobile-finishes .ts-shape button{height:44px;min-height:44px;font-size:13px;padding:0 8px}
@@ -2175,7 +2176,7 @@ html.lenis{scroll-behavior:auto}
  .ts-studio .ts-price-note{max-width:18ch}
 }
 @media(max-width:859px) and (max-height:650px){
- .ts-studio .ts-preview .ts-stage{--photo-height:clamp(100px,calc(100svh - 480px),170px)}
+ .ts-studio .ts-preview .ts-stage{--photo-height:clamp(160px,calc(100svh - 400px),250px)}
  .ts-studio .ts-mobile-models{margin-bottom:12px}
  .ts-studio #mobile-finishes{margin-top:12px}
 }
@@ -4992,7 +4993,7 @@ const studioMedia=matchMedia('(max-width:859px)');
 const studioModels=$('.ts-models'),studioFinishes=$('#finish-controls'),studioPrice=$('.ts-price-line'),studioAction=$('.ts-action');
 function arrangeStudio(){
  if(studioMedia.matches){
-  $('#mobile-models').append(studioModels);$('.ts-photo-area').append($('#zoom'));
+  $('#mobile-models').append(studioModels);stage.append($('#zoom'));
   $('#mobile-finishes').append(studioFinishes,studioPrice,studioAction);
  }else{
   $('#studioCard').prepend(studioModels);stage.append($('#zoom'));
