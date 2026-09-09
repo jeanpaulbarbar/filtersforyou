@@ -158,6 +158,14 @@ links directly to `faucets-and-mixers-sydney` in the main bar. Mobile uses an op
 photo gallery with the same destinations; short screens scroll inside the active level.
 Preserve keyboard focus, Escape, hover intent, the gap bridge, delayed pointer exit, reduced
 motion and scroll restoration. Higgsfield imagery uses Nano Banana Pro unless JP specifies otherwise.
+Every servicing destination uses matching studio artwork. The main servicing photo fills its
+card edge to edge at its natural square ratio, without matting. The homepage rotating product
+cards use the same studio images as the navigation, including the smaller-framed 5-stage shot;
+keep the image square at every visible breakpoint.
+Homepage section links fade directly to their destination using the existing page-transition
+style; they must not tween the viewport through intervening sections. The areas destination
+opens its native disclosure before positioning. Preserve mobile unlock, URL history, keyboard
+focus, reduced-motion and non-View-Transition fallbacks when changing this router.
 
 The six themed pages are `index.html`, `humm.html`, `whole-house-water-filter-sydney.html`,
 `reverse-osmosis-water-filter-sydney.html`, `watermark-certified-water-filter-sydney.html` and
