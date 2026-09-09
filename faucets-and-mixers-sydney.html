@@ -307,133 +307,96 @@ body.mopen .hdr .mark{filter:none}
 @media (hover:hover) and (pointer:fine){.util .soc a:hover i{color:var(--blue)}}
 @media (max-width:1079px){.util{display:none}}
 .hdr.mini .util{display:none}
-.dd{position:relative;display:flex;align-items:center;gap:26px}
-.dd > button{display:inline-flex;align-items:center;gap:7px;min-height:44px;font-size:17px;font-weight:600;
-    color:inherit;background:none;border:0;cursor:pointer;font-family:var(--sans);padding:0}
-.dd > button svg{width:12px;height:12px;transition:transform .4s var(--e-out)}
+.dd{position:relative;display:flex;align-items:center;gap:24px}
+.dd > button{display:inline-flex;align-items:center;gap:7px;min-height:44px;font-size:16px;font-weight:600;color:inherit;background:none;border:0;cursor:pointer;font-family:var(--sans);padding:0}
+.hdr .dd > a{font-size:16px}
+.dd > button svg{width:12px;height:12px;transition:transform .3s var(--e-out)}
 .dd > button[aria-expanded="true"] svg{transform:rotate(180deg)}
-.dd > button:focus-visible{outline:2px solid currentColor;outline-offset:6px;border-radius:4px}
-.dd .ddbar{position:absolute;left:0;bottom:8px;width:1px;height:2px;border-radius:2px;
-    background:currentColor;opacity:0;pointer-events:none;transform-origin:left center;
-    transform:translateX(var(--dx,0px)) scaleX(var(--dw,0));
-    transition:transform .48s var(--e-out),opacity .3s ease-in-out}
-.dd.open .ddbar{opacity:.9}
-.ddpanel{position:absolute;top:100%;left:0;right:0;
-    background:var(--paper);color:var(--ink);
-    border-radius:0 0 var(--r-hero) var(--r-hero);box-shadow:var(--shadow-lg);
-    height:0;overflow:hidden;visibility:hidden;
-    transition:height .52s var(--e-out),visibility 0s linear .52s}
-.ddpanel.on{height:var(--ddh,0px);visibility:visible;
-    transition:height .52s var(--e-out),visibility 0s}
-@media (max-width:1079px){.ddpanel{display:none}}
+.dd > button:focus-visible,.dd > a:focus-visible{outline:2px solid currentColor;outline-offset:5px;border-radius:4px}
+.dd .ddbar{position:absolute;left:0;bottom:5px;width:1px;height:2px;background:currentColor;opacity:0;pointer-events:none;transform-origin:left center;transform:translateX(var(--dx,0px)) scaleX(var(--dw,0));transition:transform .4s var(--e-out),opacity .3s ease-in-out}
+.dd.open .ddbar{opacity:1}
+.ddpanel{position:absolute;top:100%;left:0;right:0;background:var(--paper);color:var(--ink);border-radius:0 0 var(--r-hero) var(--r-hero);box-shadow:var(--shadow-lg);height:var(--ddh,0px);max-height:calc(100dvh - var(--nav-bottom,112px) - 12px);overflow:auto;overscroll-behavior:contain;visibility:hidden;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s linear .4s}
+.ddpanel.on{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s}
 body.ddon .hdr{background:var(--paper);color:var(--ink);box-shadow:none;transform:none}
 body.ddon .hdr .mark{filter:none}
-body.ddon .hdr .burger{background:rgba(10,16,32,.07)}
-.ddpanel .ddveil{position:absolute;inset:-10% -6%;pointer-events:none;opacity:0;
-    background:radial-gradient(56% 118% at 16% 0%,rgba(11,97,244,.11),transparent 64%),
-               radial-gradient(46% 104% at 86% 4%,rgba(255,217,0,.12),transparent 62%);
-    transition:opacity .7s ease-in-out}
-.ddpanel.on .ddveil{opacity:1}
-@media (prefers-reduced-motion:no-preference){.ddpanel.on .ddveil{animation:ddrift 22s ease-in-out infinite alternate}}
-.ddstage{position:relative}
-.ddpanel .ddp{position:absolute;top:0;left:0;right:0;padding:32px 0 36px;
-    opacity:0;transform:translateY(8px);pointer-events:none;
-    transition:opacity .3s ease-in-out,transform .5s var(--e-out)}
-.ddpanel .ddp.on{opacity:1;transform:none;pointer-events:auto}
-.ddpanel .ddgrid{display:grid;grid-template-columns:minmax(0,336px) minmax(0,1fr) minmax(0,1fr);
-    gap:30px;align-items:stretch}
-@media (max-width:1199px){.ddpanel .ddgrid{grid-template-columns:minmax(0,288px) minmax(0,1fr) minmax(0,1fr);gap:22px}}
-.ddhero{position:relative;display:flex;flex-direction:column;justify-content:flex-end;
-    align-self:stretch;min-height:296px;border-radius:var(--r-card);overflow:clip;text-decoration:none;
-    background:var(--ink-blue);isolation:isolate}
-.ddhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    transform:scale(1.02);transition:transform 1.15s var(--e-out)}
-@media (hover:hover) and (pointer:fine){.ddhero:hover img{transform:scale(1.08)}}
-.ddhero .v{position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(4,16,46,0) 30%,rgba(4,16,46,.24) 56%,rgba(4,16,46,.80) 100%)}
-.ddhero .c{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:14px;
-    padding:22px}
-.ddhero .c > span{min-width:0}
-.ddhero b{display:block;color:#fff;font-size:23px;font-weight:600;line-height:1.14;letter-spacing:-.016em}
-.ddhero b + span{display:block;color:rgba(255,255,255,.84);font-size:14.5px;font-weight:500;
-    line-height:1.35;margin-top:7px;max-width:24ch}
-.ddhero i{display:grid;place-items:center;flex:0 0 auto;width:44px;height:44px;border-radius:50%;
-    background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.32);color:#fff;
-    transition:background .3s ease-in-out,color .3s ease-in-out,transform .42s var(--e-out)}
-.ddhero i svg{width:16px;height:16px}
-@media (hover:hover) and (pointer:fine){.ddhero:hover i{background:#fff;color:var(--ink);transform:translate(2px,-2px)}}
-.ddhero:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-.ddcol{min-width:0}
-.ddlab{display:block;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--muted);padding:0 12px 8px}
-.ddrow{display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:var(--r-sm);
-    text-decoration:none;min-height:64px;transition:background .24s ease-in-out}
-@media (hover:hover) and (pointer:fine){.ddrow:hover{background:var(--mist)}}
-.ddrow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
-.ddrow img{width:52px;height:52px;flex:0 0 52px;box-sizing:border-box;object-fit:contain;
-    border-radius:var(--r-sm);background:var(--mist);padding:3px}
-.ddrow.pic img{object-fit:cover;padding:0}
-.ddrow > span{display:block;min-width:0;flex:1;color:var(--ink)}
-.ddrow b{display:block;font-size:15px;font-weight:600;line-height:1.25;color:var(--ink)}
-.ddrow b + span{display:block;font-size:14px;font-weight:700;color:var(--blue);margin-top:2px}
-.ddrow.pic b + span{color:var(--muted);font-weight:500}
-.ddrow > i{display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;border-radius:50%;
-    color:var(--ink);opacity:0;transform:translateX(-5px);
-    transition:opacity .3s ease-in-out,transform .38s var(--e-out)}
-.ddrow > i svg{width:14px;height:14px}
-@media (hover:hover) and (pointer:fine){.ddrow:hover > i{opacity:1;transform:none}}
-.ddpanel .ddhero,.ddpanel .ddlab,.ddpanel .ddrow{opacity:0;transform:translateY(10px);
-    transition:opacity .34s ease-in-out,transform .46s var(--e-out),background .24s ease-in-out}
-.ddpanel.on .ddp.on .ddhero,.ddpanel.on .ddp.on .ddlab,.ddpanel.on .ddp.on .ddrow{opacity:1;transform:none}
-.ddpanel.on .ddp.on .ddhero{transition-delay:.04s}
-.ddpanel.on .ddp.on .ddcol:nth-child(2) .ddlab{transition-delay:.07s}
-.ddpanel.on .ddp.on .ddcol:nth-child(3) .ddlab{transition-delay:.11s}
-.ddpanel.on .ddp.on .ddcol .ddrow:nth-child(2){transition-delay:.10s}
-.ddpanel.on .ddp.on .ddcol .ddrow:nth-child(3){transition-delay:.14s}
-.ddpanel.on .ddp.on .ddcol .ddrow:nth-child(4){transition-delay:.18s}
-.ddpanel.on .ddp.on .ddcol .ddrow:nth-child(5){transition-delay:.22s}
-@media (prefers-reduced-motion:reduce){.ddpanel,.ddpanel *,.dd .ddbar{transition-duration:1ms !important;transition-delay:0s !important;
-      animation:none !important}}
-.msheet{padding:0}
-.msheet .mlvl{position:absolute;inset:0;display:flex;flex-direction:column;
-    padding:calc(86px + env(safe-area-inset-top)) var(--gut) calc(clamp(8px,1.7svh,16px) + env(safe-area-inset-bottom));
-    opacity:0;visibility:hidden;pointer-events:none;transform:translateX(30px);
-    transition:opacity .32s ease-in-out,transform .46s var(--e-out),visibility 0s linear .46s}
-.msheet .mlvl.on{opacity:1;visibility:visible;pointer-events:auto;transform:none;
-    transition:opacity .32s ease-in-out,transform .46s var(--e-out),visibility 0s}
-.msheet .mlvl.back{transform:translateX(-30px)}
-.msheet .mback{display:flex;align-items:center;gap:12px;flex:0 0 auto;
-    min-height:clamp(44px,6svh,52px);margin-bottom:clamp(4px,1svh,10px);
-    background:none;border:0;padding:0;cursor:pointer;font-family:var(--sans);
-    font-size:clamp(15px,2.1svh,16.5px);font-weight:600;color:var(--muted);text-align:left}
-.msheet .mback i{display:grid;place-items:center;width:34px;height:34px;flex:0 0 auto;
-    border-radius:50%;box-shadow:inset 0 0 0 1px var(--rule);color:var(--ink)}
-.msheet .mback i svg{width:14px;height:14px}
-.msheet .mback b{font-size:clamp(17px,2.4svh,20px);font-weight:600;color:var(--ink);letter-spacing:-.012em}
-.msheet .ddrow{min-height:clamp(56px,8.4svh,74px);padding:6px 10px;margin:0 -10px;opacity:1;transform:none}
-.msheet .ddrow img{width:clamp(44px,6.2svh,54px);height:clamp(44px,6.2svh,54px);flex-basis:auto}
-.msheet .ddrow b{font-size:clamp(15.5px,2.2svh,17px)}
-.msheet .ddrow b + span{font-size:clamp(13.5px,1.85svh,14.5px)}
-.msheet .ddrow > i{opacity:1;transform:none;width:30px;height:30px;color:var(--muted)}
-.msheet .ddlab{padding:0 0 6px;font-size:11.5px;opacity:1;transform:none}
-.msheet .mlinks button{display:flex;align-items:center;justify-content:space-between;gap:16px;
-    width:100%;background:none;border:0;padding:0;cursor:pointer;font-family:var(--sans);text-align:left;
-    min-height:clamp(44px,6.3svh,58px);
-    font-size:clamp(19px,2.9svh,26px);font-weight:500;letter-spacing:-.012em;line-height:1.15;color:var(--ink)}
-.msheet .mlinks button i{display:grid;place-items:center;
-    width:clamp(34px,4.6svh,40px);height:clamp(34px,4.6svh,40px);flex:0 0 auto;aspect-ratio:1;
-    border-radius:50%;box-shadow:inset 0 0 0 1px var(--rule);color:var(--ink);
-    transition:background .3s ease-in-out,color .3s ease-in-out}
-.msheet .mlinks button i svg{width:15px;height:15px}
-@media (hover:hover) and (pointer:fine){.msheet .mlinks button:hover i{background:var(--ink);color:#fff}}
-.msheet .mlvl .ddcol{display:flex;flex-direction:column;flex:0 0 auto}
-.msheet .mlvl .ddcol + .ddcol{margin-top:clamp(6px,1.4svh,14px)}
-.hdr.solid{background:rgba(255,254,252,.92);color:var(--ink);box-shadow:0 1px 0 var(--rule)}
+.hdr.solid{background:var(--paper);color:var(--ink);box-shadow:0 1px 0 var(--rule)}
 .hdr.hide{box-shadow:none}
 .hdr.solid .mark{filter:none}
-.hdr.solid .burger{background:rgba(10,16,32,.07)}
+.hdr.solid .burger,body.ddon .hdr .burger{background:var(--mist)}
 .hdr.mini .row{min-height:62px}
 .hdr.mini .mark{height:36px}
+body.ddon .util,.hdr.solid .util{background:transparent}
+.ddstage{position:relative}
+.ddpanel .ddp{position:absolute;inset:0 0 auto;padding:24px 0 26px;opacity:0;visibility:hidden;transform:translateY(8px);pointer-events:none;transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s linear .24s}
+.ddpanel .ddp.on{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s}
+.ddpanel .ddcatalog{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
+.ddpanel .ddgroup:first-child{grid-column:span 3}
+.ddpanel .ddgroup{min-width:0}
+.ddpanel .ddheading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin:0 0 12px;font-size:16px;font-weight:700;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
+.ddpanel .ddheading > span{font-size:20px;font-weight:400;color:var(--blue)}
+.ddpanel .ddproducts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.ddpanel .ddproduct{display:flex;flex-direction:column;min-width:0;text-decoration:none;color:var(--ink);border-radius:var(--r-card)}
+.ddpanel .ddphoto{display:block;overflow:hidden;border-radius:var(--r-card);background:var(--mist)}
+.ddpanel .ddproduct img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;transition:transform .5s var(--e-out)}
+.ddpanel .ddproduct .ddcaption{display:block;padding:15px 2px 9px}
+.ddpanel .ddproduct b{display:block;font-size:17px;font-weight:600;line-height:1.35;letter-spacing:-.015em}
+.ddpanel .ddproduct small{display:block;margin-top:5px;font-size:14px;line-height:1.45;color:var(--muted)}
+.ddpanel .ddfoot{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:22px;padding-top:12px;border-top:1px solid var(--rule)}
+.ddpanel .ddfoot a{display:inline-flex;align-items:center;gap:16px;min-height:44px;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none}
+.ddpanel .ddfoot a span{color:var(--blue)}
+.ddpanel .ddgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px}
+.ddhero{display:flex;flex-direction:column;min-width:0;align-self:start;border-radius:var(--r-card);overflow:hidden;text-decoration:none;background:var(--mist);color:var(--ink)}
+.ddhero img{display:block;width:100%;height:176px;object-fit:cover;transition:transform .5s var(--e-out)}
+.ddhero .v{display:none}
+.ddhero .c{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px}
+.ddhero b{display:block;font-size:21px;font-weight:600;line-height:1.2}
+.ddhero b + span{display:block;color:var(--muted);font-size:14px;line-height:1.45;margin-top:7px}
+.ddhero i{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:var(--paper)}
+.ddhero i svg{width:16px;height:16px}
+.ddcol{min-width:0}
+.ddlab{display:block;padding:10px 0 12px;font-size:16px;font-weight:700;color:var(--ink)}
+.ddrow{display:flex;align-items:center;gap:16px;padding:12px 0;min-height:82px;border-radius:12px;text-decoration:none;color:var(--ink)}
+.ddrow img{width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:12px;background:var(--mist)}
+.ddrow > span{display:block;min-width:0;flex:1}
+.ddrow b{display:block;font-size:16px;font-weight:600;line-height:1.35}
+.ddrow b + span{display:block;font-size:14px;color:var(--muted);line-height:1.4;margin-top:4px}
+.ddrow > i{display:grid;place-items:center;flex:0 0 24px;color:var(--muted)}
+.ddrow > i svg{width:14px;height:14px}
+.ddpanel a:focus-visible,.msheet a:focus-visible,.msheet button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.ddpanel a:active,.msheet a:active,.msheet button:active{opacity:.75}
+@media (hover:hover) and (pointer:fine){.ddpanel .ddproduct:hover img,.ddhero:hover img{transform:scale(1.045)}
+.ddpanel a:hover,.msheet .ddrow:hover{color:var(--blue)}
+.ddrow:hover{background:var(--mist)}}
+.ddpanel .ddproduct:focus-visible img{transform:scale(1.045)}
+@media (min-width:1080px) and (max-width:1279px){.hdr .ph{display:none}
+.dd{gap:22px}
+.ddpanel .ddcatalog{gap:18px}
+.ddpanel .ddproducts{gap:18px}
+.ddpanel .ddproduct b{font-size:16px}}
+@media (max-width:1079px){.ddpanel{display:none}}
+.msheet{padding:0}
+.msheet .mlvl{position:absolute;inset:0;display:flex;flex-direction:column;padding:calc(94px + env(safe-area-inset-top)) var(--gut) calc(20px + env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;pointer-events:none;transform:translateX(24px);transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s linear .4s}
+.msheet .mlvl.on{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s}
+.msheet .mlvl.back{transform:translateX(-24px)}
+.msheet .mback{display:flex;align-items:center;gap:12px;flex:0 0 auto;min-height:44px;margin-bottom:8px;background:none;border:0;padding:0;cursor:pointer;font-family:var(--sans);font-size:16px;color:var(--muted);text-align:left}
+.msheet .mback i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--rule)}
+.msheet .mback svg{width:14px;height:14px}
+.msheet .mback b{font-size:18px;font-weight:600;color:var(--ink)}
+.msheet .mlinks button{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;background:none;border:0;padding:0;cursor:pointer;font-family:var(--sans);text-align:left;min-height:clamp(48px,6.3svh,58px);font-size:clamp(19px,2.9svh,26px);font-weight:500;letter-spacing:-.012em;line-height:1.15;color:var(--ink)}
+.msheet .mlinks button i{display:grid;place-items:center;width:38px;height:38px;flex:0 0 auto;border-radius:50%;box-shadow:inset 0 0 0 1px var(--rule)}
+.msheet .mlinks button svg{width:15px;height:15px}
+.msheet .mlvl .ddcol{display:flex;flex-direction:column;flex:0 0 auto}
+.msheet .mlvl .ddcol + .ddcol{margin-top:12px}
+.msheet .ddrow{min-height:86px;padding:8px 0;flex:0 0 auto}
+.msheet .ddrow img{width:76px;height:76px;flex:0 0 76px}
+.msheet .ddrow b{font-size:16px}
+.msheet .ddrow b + span{font-size:14px}
+.msheet .ddlab{display:flex;align-items:center;min-height:44px;padding:4px 0;font-size:15px;text-decoration:none;color:var(--ink)}
+.msheet #ms-serv .ddrow{min-height:80px}
+.msheet #ms-serv .ddrow img{width:64px;height:64px;flex-basis:64px}
+.msheet .mnavask{display:flex;align-items:center;justify-content:center;min-height:48px;flex:0 0 auto;margin-top:18px;padding:12px 18px;background:var(--yellow);color:var(--ink);border-radius:40px;font-size:15px;font-weight:700;text-decoration:none}
+body.mopen .hdr{box-shadow:none}
+@media (prefers-reduced-motion:reduce){.ddpanel,.ddpanel *,.dd .ddbar,.dd > button svg,.msheet,.msheet *{transition:none!important;animation:none!important;transform:none!important}}
 @media (prefers-reduced-motion: no-preference){.hdr .row{animation:hdrin .8s var(--e-out) .85s backwards}}
 .hdr{view-transition-name:hdr}
 ::view-transition-old(root){animation:vtout .3s ease-in-out both}
@@ -529,61 +492,6 @@ body.fabon .fab{opacity:1;transform:none}
     to{clip-path:inset(0 round var(--r-hero))}}
 @keyframes vtout{to{opacity:0}}
 @keyframes vtin{from{opacity:0}}
-@keyframes ddrift{
-    from{transform:translate3d(-2%,0,0) scale(1.02)}
-    to{transform:translate3d(2%,1.5%,0) scale(1.07)}
-  }
-  /* ⭐ ROUND 54 — NO BLUR ON THE FIXED HEADER. Measured on C&C 2026-08-26: their
-     scrolled header is rgba(255,254,252,.92) and NO backdrop-filter, at every
-     scroll position, on both viewports. A fixed element with backdrop-filter
-     re-blurs everything under it on every scroll frame, and on iOS Safari that
-     is a standing scroll-jank source that headless Chromium cannot show. */
-  .hdr.solid{background:rgba(255,254,252,.92);color:var(--ink);box-shadow:0 1px 0 var(--rule)}
-  /* V7 round 91, promoted to the shell 6 Sep: stepped aside, the header's 1px rule
-     lands on row 0 of the screen and reads as a thin white line. Must sit AFTER
-     .hdr.solid — same specificity, source order decides. */
-  .hdr.hide{box-shadow:none}
-  .hdr.solid .mark{filter:none}
-  .hdr.solid .burger{background:rgba(10,16,32,.07)}
-  .hdr.mini .row{min-height:62px}
-  .hdr.mini .mark{height:36px}
-
-  /* ── HERO — framed film, giant type, floating proof card ─── */
-  /* ⭐ ROUND 39 — THE OPENING. Measured off C&C's home load, 2026-08-20:
-     their film sits in a radius-24 card inset 12px on the PAGE ground, the
-     mini utility strip lives in that top border band, and on load the card
-     opens out from a small centred rectangle (~1.15s, decelerating), the
-     main header following on a delay. Ours is the same grammar with one
-     deliberate difference JP asked for: the frame ground is --mist — the
-     NEXT scene's ground — so the hero's bottom border hands straight into
-     the range section with no seam.
-     The card is .hcard; film, veil, copy, cue and deck all live inside it.
-     The reveal is a pure-CSS clip-path inset animation: no transform is ever
-     left on an ancestor (sticky/ScrollTrigger safe), the radius stays
-     constant while it opens, and it still runs if the GSAP CDN dies.
-     `backwards` fill on purpose — after it ends the clip-path returns to
-     none and the corners are carried by border-radius + overflow:clip. */
-  /* round 54: the frame around the hero card is PAPER, like theirs. The cool
-     tint starts under the card and fades out (see .show). */
-  /* ⭐ ROUND 57, JP: "the whole border around the 4K video is supposed to be
-     the same colour as the next section, that little light blue, so it all
-     looks continuous." The frame is back at every width and it is
-     --range-bg, the range's own ground (home #E4EBF3 at load), utility strip
-     included. Round 56's ink strip and the paper before it were both wrong. */
-  .hero{position:relative;background:var(--range-bg,#E4EBF3);
-    padding:calc(var(--utilh) + var(--hframe)) var(--hframe) var(--hframe)}
-  .hcard{position:relative;min-height:calc(100svh - var(--utilh) - 2*var(--hframe));
-    display:flex;align-items:flex-end;background:var(--ink-blue);
-    border-radius:var(--r-hero);overflow:clip}
-  @media (prefers-reduced-motion: no-preference){
-    .hcard{animation:hcardin 1.15s var(--e-out) .12s backwards}
-    .hdr .row{animation:hdrin .8s var(--e-out) .85s backwards}
-  }
-  /* the from-state is ~32% wide × 26% tall of the card, centred — C&C's small
-     card measured ~400×240 at 1440. Both ends carry the same round() so the
-     radius never pops when the animation hands off to border-radius. */
-  @keyframes hcardin{from{clip-path:inset(37% 34% 37% 34% round var(--r-hero))}
-    to{clip-path:inset(0 round var(--r-hero))}}
 /* ── the opener: the homepage's frame on every page that carries one ── */
 main{padding-top:72px}
 @media(max-width:1079px){ main{padding-top:70px} }
@@ -2225,6 +2133,7 @@ html.lenis{scroll-behavior:auto}
       <span class="dd" id="dd">
         <button class="ddt" type="button" data-panel="p-sys" aria-expanded="false" aria-controls="ddpanel">Systems <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="ddt" type="button" data-panel="p-serv" aria-expanded="false" aria-controls="ddpanel">Servicing &amp; prices <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <a class="ul" href="faucets-and-mixers-sydney">Taps &amp; mixers</a>
         <a class="ul" href="humm">Buy now, pay later</a>
         <span class="ddbar" aria-hidden="true"></span>
       </span>
@@ -2238,7 +2147,6 @@ html.lenis{scroll-behavior:auto}
 
   <!-- ═════════ THE NAV SHEET — one container, two panes, morphing height ═════════ -->
   <div class="ddpanel" id="ddpanel" aria-hidden="true">
-    <span class="ddveil" aria-hidden="true"></span>
     <div class="ddstage">
 
       <!-- ⛔ ROUND 29 STILL HOLDS: every system entry goes to a real system page.
@@ -2250,33 +2158,20 @@ html.lenis{scroll-behavior:auto}
            whole house page instead of scrolling to #wholehome — JP: "I've got the
            whole home, which needs to go to the whole home filtration page now
            that we have it." -->
-      <div class="ddp" id="p-sys">
-        <div class="in ddgrid">
-          <a class="ddhero" href="whole-house-water-filter-sydney">
-            <img data-src="media/nav/nav-home.webp" alt="" width="760" height="800" loading="lazy" decoding="async">
-            <span class="v"></span>
-            <span class="c">
-              <span><b>Whole home filtration</b><span>Every tap, shower, bath and appliance in the house</span></span>
-              <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-            </span>
-          </a>
-          <div class="ddcol">
-            <span class="ddlab">Reverse osmosis</span>
-            <a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-plus"><img data-src="media/xf-plus/f00.webp" alt="" width="1100" height="1472" loading="lazy" decoding="async"><span><b>5 Stage Alkaline Reverse Osmosis</b><span>Pure Plus</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-premium"><img data-src="media/xf-prem/f00.webp" alt="" width="1100" height="1472" loading="lazy" decoding="async"><span><b>7 Stage Hydrogen Rich RO</b><span>Pure Premium</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-luxe"><img data-src="media/xf-luxe/f00.webp" alt="" width="1100" height="1472" loading="lazy" decoding="async"><span><b>Smart 5 Stage Alkaline RO</b><span>Pure Luxe</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="reverse-osmosis-water-filter-sydney"><img data-src="media/nav/t-ro.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>All reverse osmosis systems</b><span>The full range, side by side</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+      <div class="ddp" id="p-sys" inert>
+        <div class="in">
+          <div class="ddcatalog">
+            <div class="ddgroup"><a class="ddheading" href="reverse-osmosis-water-filter-sydney">Reverse osmosis systems <span aria-hidden="true">↗</span></a><div class="ddproducts"><a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-plus"><span class="ddphoto"><img data-src="media/ro/card-plus.webp" alt="Pure Plus 5 stage" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>5 stage</b><small>Pure Plus</small></span></a>
+<a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-premium"><span class="ddphoto"><img data-src="media/ro/card-prem.webp" alt="Pure Premium 7 stage" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>7 stage</b><small>Pure Premium</small></span></a>
+<a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-luxe"><span class="ddphoto"><img data-src="media/ro/card-luxe.webp" alt="Pure Luxe Smart 5 stage" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Smart 5 stage</b><small>Pure Luxe</small></span></a></div></div>
+            <div class="ddgroup"><a class="ddheading" href="whole-house-water-filter-sydney">Whole house <span aria-hidden="true">↗</span></a><a class="ddproduct" href="whole-house-water-filter-sydney"><span class="ddphoto"><img data-src="media/v7/prod-home-studio.webp" alt="Pure Home Whole house filtration" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house filtration</b><small>Pure Home</small></span></a></div>
+            <div class="ddgroup"><a class="ddheading" href="faucets-and-mixers-sydney">Taps &amp; mixers <span aria-hidden="true">↗</span></a><a class="ddproduct" href="faucets-and-mixers-sydney"><span class="ddphoto"><img data-src="media/tap-studio/card-classic.webp" alt="Find your finish Taps &amp; mixers" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Taps &amp; mixers</b><small>Find your finish</small></span></a></div>
           </div>
-          <div class="ddcol">
-            <span class="ddlab">Whole home &amp; taps</span>
-            <a class="ddrow" href="whole-house-water-filter-sydney"><img data-src="media/xf-home/f00.webp" alt="" width="1100" height="1472" loading="lazy" decoding="async"><span><b>Whole House Filtration System</b><span>Pure Home</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="/#taps"><img data-src="media/nav/t-taps.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Taps &amp; mixers</b><span>Match the tap to the kitchen</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="reverse-osmosis-vs-whole-house-water-filter-sydney"><img data-src="media/nav/t-compare.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Reverse osmosis or whole house</b><span>Which one your home needs</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-          </div>
+          <div class="ddfoot"><a href="reverse-osmosis-water-filter-sydney">Explore all reverse osmosis systems <span aria-hidden="true">↗</span></a><a href="reverse-osmosis-vs-whole-house-water-filter-sydney">Reverse osmosis or whole house? <span aria-hidden="true">↗</span></a></div>
         </div>
       </div>
 
-      <div class="ddp" id="p-serv">
+      <div class="ddp" id="p-serv" inert>
         <div class="in ddgrid">
           <a class="ddhero" href="/#ledger">
             <img data-src="media/nav/nav-care.webp" alt="" width="760" height="800" loading="lazy" decoding="async">
@@ -2311,6 +2206,7 @@ html.lenis{scroll-behavior:auto}
     <div class="mrow mlinks">
       <button type="button" data-open="ms-sys">Systems <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
       <button type="button" data-open="ms-serv">Servicing &amp; prices <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
+      <a href="faucets-and-mixers-sydney">Taps &amp; mixers <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
     </div>
     <hr class="mrow">
     <div class="mrow mmore">
@@ -2348,30 +2244,17 @@ html.lenis{scroll-behavior:auto}
     </a>
   </div>
 
-  <div class="mlvl" id="ms-sys" data-lvl="sys">
+  <div class="mlvl" id="ms-sys" data-lvl="sys" inert>
     <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Systems</b></button>
-    <div class="ddcol">
-      <a class="ddrow" href="whole-house-water-filter-sydney"><img src="media/xf-home/f00.webp" alt="" width="1100" height="1472" loading="lazy" decoding="async"><span><b>Whole House Filtration System</b><span>Pure Home</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-plus"><img src="media/xf-plus/f00.webp" alt="" width="1100" height="1472" loading="lazy" decoding="async"><span><b>5 Stage Alkaline Reverse Osmosis</b><span>Pure Plus</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-premium"><img src="media/xf-prem/f00.webp" alt="" width="1100" height="1472" loading="lazy" decoding="async"><span><b>7 Stage Hydrogen Rich RO</b><span>Pure Premium</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-luxe"><img src="media/xf-luxe/f00.webp" alt="" width="1100" height="1472" loading="lazy" decoding="async"><span><b>Smart 5 Stage Alkaline RO</b><span>Pure Luxe</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="reverse-osmosis-water-filter-sydney"><img src="media/nav/t-ro.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>All reverse osmosis systems</b><span>The full range, side by side</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="/#taps"><img src="media/nav/t-taps.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Taps &amp; mixers</b><span>Match the tap to the kitchen</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-    </div>
-    <!-- the ask closes every level, not just level 0 — a deeper screen that
-         ends in 250px of nothing is a screen that asks for a back tap. It is
-         the same card and the same flex:1, so it takes exactly the remainder. -->
-    <a class="mrow mcard js-open" href="/#ask" data-sys="">
-      <img src="media/tap-pour.webp" alt="" width="1600" height="1062" loading="lazy">
-      <span class="v"></span>
-      <span class="c">
-        <b>Book now<br>or request a quote</b>
-        <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-      </span>
-    </a>
+    <div class="ddcol"><a class="ddlab" href="reverse-osmosis-water-filter-sydney">Reverse osmosis systems ↗</a><a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-plus"><img src="media/ro/card-plus.webp" alt="Pure Plus 5 stage" width="600" height="600" loading="lazy" decoding="async"><span><b>5 stage</b><span>Pure Plus</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+<a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-premium"><img src="media/ro/card-prem.webp" alt="Pure Premium 7 stage" width="600" height="600" loading="lazy" decoding="async"><span><b>7 stage</b><span>Pure Premium</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+<a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-luxe"><img src="media/ro/card-luxe.webp" alt="Pure Luxe Smart 5 stage" width="600" height="600" loading="lazy" decoding="async"><span><b>Smart 5 stage</b><span>Pure Luxe</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></div>
+    <div class="ddcol"><a class="ddrow" href="whole-house-water-filter-sydney"><img src="media/v7/prod-home-studio.webp" alt="Pure Home Whole house filtration" width="600" height="600" loading="lazy" decoding="async"><span><b>Whole house filtration</b><span>Pure Home</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+<a class="ddrow" href="faucets-and-mixers-sydney"><img src="media/tap-studio/card-classic.webp" alt="Find your finish Taps &amp; mixers" width="600" height="600" loading="lazy" decoding="async"><span><b>Taps &amp; mixers</b><span>Find your finish</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></div>
+    <a class="mnavask js-open" href="/#ask" data-sys="">Book now or request a quote</a>
   </div>
 
-  <div class="mlvl" id="ms-serv" data-lvl="serv">
+  <div class="mlvl" id="ms-serv" data-lvl="serv" inert>
     <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Servicing &amp; prices</b></button>
     <div class="ddcol">
       <a class="ddrow pic" href="/#ledger"><img src="media/nav/t-service.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
@@ -2384,14 +2267,7 @@ html.lenis{scroll-behavior:auto}
     <!-- the ask closes every level, not just level 0 — a deeper screen that
          ends in 250px of nothing is a screen that asks for a back tap. It is
          the same card and the same flex:1, so it takes exactly the remainder. -->
-    <a class="mrow mcard js-open" href="/#ask" data-sys="">
-      <img src="media/tap-pour.webp" alt="" width="1600" height="1062" loading="lazy">
-      <span class="v"></span>
-      <span class="c">
-        <b>Book now<br>or request a quote</b>
-        <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-      </span>
-    </a>
+    <a class="mnavask js-open" href="/#ask" data-sys="">Book now or request a quote</a>
   </div>
 
 </nav>
@@ -3412,6 +3288,7 @@ html.lenis{scroll-behavior:auto}
       if (v){
         lastFocus = document.activeElement;
         sheet.hidden = false;
+        sheet.inert = false;
         /* ⛔ ROUND 63d — LOCK BEFORE ANYTHING ELSE, AND HOLD THE POSITION IN
            `top`. `body{position:fixed}` on its own snaps the page to 0 and would
            land him somewhere else entirely on close. Read the scroll, fix the
@@ -3423,7 +3300,7 @@ html.lenis{scroll-behavior:auto}
         sheet.scrollTop = 0;
         msLevel('0');
         var first = sheet.querySelector('a,button');
-        if (first) setTimeout(function(){ first.focus({preventScroll:true}); }, 60);
+        if (first) setTimeout(function(){ if (open) first.focus({preventScroll:true}); }, 60);
       } else {
         /* ⛔ UNLOCK, RESTORE, THEN START LENIS — and tell lenis where we landed.
            It caches its own scroll value and would otherwise glide back to the
@@ -3444,10 +3321,14 @@ html.lenis{scroll-behavior:auto}
         if (lenis){
           requestAnimationFrame(function(){
             window.scrollTo({top: lockY, left: 0, behavior: 'instant'});
+            /* The fixed body temporarily makes Lenis's scroll limit zero.
+               Refresh its dimensions before restoring a narrow desktop window. */
+            if (lenis.resize) lenis.resize();
             lenis.start();
             if (lenis.scrollTo) lenis.scrollTo(lockY, {immediate:true, force:true});
           });
         }
+        sheet.inert = true;
         /* wait out the transition before pulling it from the a11y tree */
         setTimeout(function(){ if (!open) sheet.hidden = true; }, 340);
         if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
@@ -3466,6 +3347,9 @@ html.lenis{scroll-behavior:auto}
       lvls.forEach(function(l){
         var on = (id === '0') ? l.getAttribute('data-lvl') === '0' : l.id === id;
         l.classList.toggle('on', on);
+        l.inert = !on;
+        l.setAttribute('aria-hidden', on ? 'false' : 'true');
+        if (on) l.scrollTop = 0;
         /* level 0 leaves to the LEFT when you go deeper, so the two read as one
            surface travelling sideways rather than two sheets crossfading */
         l.classList.toggle('back', !on && l.getAttribute('data-lvl') === '0' && id !== '0');
@@ -3473,7 +3357,7 @@ html.lenis{scroll-behavior:auto}
       var now = lvls.filter(function(l){ return l.classList.contains('on'); })[0];
       if (now){
         var f = now.querySelector('a,button');
-        if (f) setTimeout(function(){ f.focus({preventScroll:true}); }, 200);
+        if (f) setTimeout(function(){ if (open && now.classList.contains('on')) f.focus({preventScroll:true}); }, 200);
       }
     }
 
@@ -3489,11 +3373,12 @@ html.lenis{scroll-behavior:auto}
       if (!open) return;
       if (e.key === 'Escape'){ setOpen(false); return; }
       if (e.key !== 'Tab') return;
-      var f = sheet.querySelectorAll('a[href],button:not([disabled])');
+      var f = [burger].concat([].slice.call(sheet.querySelectorAll('.mlvl.on a[href],.mlvl.on button:not([disabled])')));
       if (!f.length) return;
       var first = f[0], last = f[f.length - 1];
       if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
       else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      else if (f.indexOf(document.activeElement) < 0){ e.preventDefault(); first.focus(); }
     });
     /* rotating to landscape / resizing past the desktop nav must not strand it */
     matchMedia('(min-width:1080px)').addEventListener('change', function(m){
@@ -3519,6 +3404,7 @@ html.lenis{scroll-behavior:auto}
     function ddMeasure(){
       var pane = ddCur && document.getElementById(ddCur);
       if (pane) ddpanel.style.setProperty('--ddh', pane.offsetHeight + 'px');
+      ddpanel.style.setProperty('--nav-bottom', Math.max(0, ddpanel.getBoundingClientRect().top) + 'px');
     }
     /* the bar is one 1px element that TRANSLATES and SCALES to the live
        trigger — a transform, never a layout, so it can ride --e-out */
@@ -3539,8 +3425,14 @@ html.lenis{scroll-behavior:auto}
         if (on) hit = b;
       });
       if (open) ddFeed();
-      ddPanes.forEach(function(p){ p.classList.toggle('on', p.id === ddCur); });
+      ddPanes.forEach(function(p){
+        var active = p.id === ddCur;
+        p.classList.toggle('on', active);
+        p.inert = !active;
+        p.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
       ddMeasure();
+      ddpanel.inert = !open;
       ddpanel.classList.toggle('on', open);
       ddpanel.setAttribute('aria-hidden', open ? 'false' : 'true');
       dd.classList.toggle('open', open);
@@ -3578,12 +3470,13 @@ html.lenis{scroll-behavior:auto}
        a close at all, it is the morph. */
     var ddT = null;
     var ddCancel = function(){ if (ddT){ clearTimeout(ddT); ddT = null; } };
-    var ddClose  = function(){ ddCancel(); ddT = setTimeout(function(){ ddSet(null); ddT = null; }, 220); };
+    var ddClose  = function(){ ddCancel(); ddT = setTimeout(function(){ if (!ddpanel.contains(document.activeElement)) ddSet(null); ddT = null; }, 240); };
 
     ddBtns.forEach(function(b){
       var name = b.getAttribute('data-panel');
       b.addEventListener('click', function(e){
         e.stopPropagation();
+        ddCancel();
         ddSet(ddCur === name ? null : name);
       });
       if (ddHover) b.addEventListener('mouseenter', function(){ ddCancel(); ddSet(name); });
@@ -3593,8 +3486,9 @@ html.lenis{scroll-behavior:auto}
          unreachable by keyboard. Down and Tab both step into it. */
       b.addEventListener('keydown', function(e){
         if (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey && ddCur === name)){
+          e.preventDefault(); ddCancel(); ddSet(name);
           var first = ddpanel.querySelector('.ddp.on a');
-          if (first){ e.preventDefault(); ddSet(name); first.focus(); }
+          if (first) first.focus({preventScroll:true});
         }
       });
     });
@@ -3607,6 +3501,7 @@ html.lenis{scroll-behavior:auto}
        elements, which is why this is on the document and not on .dd */
     document.addEventListener('focusin', function(e){
       if (!ddCur) return;
+      if (ddpanel.contains(e.target)) ddCancel();
       if (!dd.contains(e.target) && !ddpanel.contains(e.target)) ddSet(null);
     });
     addEventListener('click', function(e){
@@ -3615,7 +3510,28 @@ html.lenis{scroll-behavior:auto}
     addEventListener('keydown', function(e){
       if (e.key === 'Escape' && ddCur){ var b = dd.querySelector('.ddt[aria-expanded="true"]'); ddSet(null); if (b) b.focus(); }
     });
-    ddpanel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ ddSet(null); }); });
+    ddpanel.addEventListener('keydown', function(e){
+      if (e.key !== 'Tab' || !ddCur) return;
+      var links = [].slice.call(document.getElementById(ddCur).querySelectorAll('a[href],button'));
+      var trigger = dd.querySelector('.ddt[aria-expanded="true"]');
+      if (e.shiftKey && document.activeElement === links[0]){
+        e.preventDefault(); trigger.focus();
+      } else if (!e.shiftKey && document.activeElement === links[links.length - 1]){
+        e.preventDefault();
+        var next = trigger.nextElementSibling;
+        ddSet(null);
+        if (next && next.focus) next.focus();
+      }
+    });
+    ddpanel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ ddCancel(); ddSet(null); }); });
+    matchMedia('(min-width:1080px)').addEventListener('change', function(m){
+      if (!m.matches){ ddCancel(); ddSet(null); }
+    });
+    if ('ResizeObserver' in window){
+      var ddObserver = new ResizeObserver(ddMeasure);
+      ddPanes.forEach(function(p){ ddObserver.observe(p); });
+    }
+    if (document.fonts) document.fonts.ready.then(ddMeasure);
     /* a resize changes both numbers the sheet is holding — the pane's height
        and the bar's target — and neither is recomputed by CSS */
     addEventListener('resize', function(){ ddMeasure(); ddBarTo(dd.querySelector('.ddt[aria-expanded="true"]')); }, {passive:true});

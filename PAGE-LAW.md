@@ -147,8 +147,19 @@ in `page-law.py` will say so if a page was changed and never re-probed.
 `Workspace/Projects/website-redesign-2026-08/wm/`, then `build-wm.py` → `cutover-wm.py` (8 Sep 2026).
 The RO page is the same: `ro/` → `build-ro.py` → `cutover-ro.py`.
 
-## STILL OUTSTANDING — 539 pages on the OLD header
-Only `index.html`, `humm.html`, `whole-house-water-filter-sydney.html`,
-`reverse-osmosis-water-filter-sydney.html` and `watermark-certified-water-filter-sydney.html` carry the
-shell. The other 539 run a legacy `.nav-links` header from before this law existed. They are not covered by
-anything above. Migrating them is its own job, and it is not done.
+## SHARED NAVIGATION — 9 September 2026
+The navigation source is still `index.html`. Systems shows the three RO studio photographs
+together, followed by whole house and taps, without category tabs. Taps & mixers links directly
+to `faucets-and-mixers-sydney` in the desktop bar and mobile menu. The opened header, review
+strip and dropdown share one paper surface. Mobile uses the same destinations and photographs;
+short screens scroll inside the menu so no destination is clipped. Preserve keyboard focus,
+Escape, delayed pointer exit, reduced motion and scroll restoration when revising it.
+
+The six themed pages are `index.html`, `humm.html`, `whole-house-water-filter-sydney.html`,
+`reverse-osmosis-water-filter-sydney.html`, `watermark-certified-water-filter-sydney.html` and
+`faucets-and-mixers-sydney.html`. Restamp all five inner pages whenever the source navigation
+changes. `site_shell.py new` stamps the current source into future pages automatically.
+
+## LEGACY PAGES ARE A SEPARATE MIGRATION
+Pages still using the legacy `.nav-links` header have not been migrated by this navigation
+redesign. Bringing those pages onto the theme remains a separate job.
