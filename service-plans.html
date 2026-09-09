@@ -2542,6 +2542,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBooking
       set(forms[i], 'landing_page', landing);
       set(forms[i], 'submitted_page', location.pathname);
       set(forms[i], 'referrer', ref);
+      if (window.ffyStampClick) window.ffyStampClick(forms[i]);
     }
   }
   store();
@@ -2594,6 +2595,101 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBooking
       source_page: location.pathname
     }, { eventID: 'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) });
   }, false);
+})();
+</script>
+<!-- FFY CLICK ID — added 2026-09-09 -->
+<script>
+/* Google stamps every paid click with a click id in the URL of the FIRST page
+   the visitor lands on, and it is gone the moment they navigate. Nothing on
+   this site has ever read it, so no lead in the CRM could be traced back to
+   the keyword that paid for it and no Google Ads conversion could be reported.
+
+   This stores it on arrival, so a form filled in twenty minutes and six pages
+   later still carries the click that produced it. gbraid and wbraid are the
+   same thing on iOS app and web-to-app journeys, where Google withholds gclid.
+
+   localStorage, not sessionStorage: Google's conversion window runs to 90 days
+   and people come back. Only non-empty values are ever written onto a form, so
+   an ordinary organic visitor submits exactly what they submit today. */
+(function () {
+  var STORE = 'ffy_click', WINDOW_DAYS = 90;
+  var CLICK_KEYS = ['gclid', 'gbraid', 'wbraid'];
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign'];
+  var FIELDS = ['gclid', 'click_source'].concat(UTM_KEYS);
+
+  function params() {
+    var out = {}, q = (location.search || '').replace(/^\?/, '');
+    if (!q) return out;
+    q.split('&').forEach(function (pair) {
+      if (!pair) return;
+      var i = pair.indexOf('=');
+      var k = i < 0 ? pair : pair.slice(0, i);
+      var v = i < 0 ? '' : pair.slice(i + 1);
+      try { out[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, ' ')); }
+      catch (e) { /* a malformed query string must never break the page */ }
+    });
+    return out;
+  }
+
+  function fromUrl() {
+    var p = params(), rec = null, utm = {}, has = false;
+    for (var i = 0; i < CLICK_KEYS.length; i++) {
+      if (p[CLICK_KEYS[i]]) { rec = { id: p[CLICK_KEYS[i]], src: CLICK_KEYS[i] }; break; }
+    }
+    UTM_KEYS.forEach(function (k) { if (p[k]) { utm[k] = p[k]; has = true; } });
+    if (!rec && !has) return null;
+    rec = rec || { id: '', src: '' };
+    rec.utm = utm;
+    rec.t = Date.now();
+    return rec;
+  }
+
+  function stored() {
+    try {
+      var rec = JSON.parse(localStorage.getItem(STORE) || 'null');
+      if (!rec || !rec.t) return null;
+      if (Date.now() - rec.t > WINDOW_DAYS * 864e5) return null;
+      return rec;
+    } catch (e) { return null; }
+  }
+
+  /* The newest click always wins. Someone who clicks a second ad is a second
+     click, and Google credits the last one. */
+  var fresh = fromUrl();
+  if (fresh) { try { localStorage.setItem(STORE, JSON.stringify(fresh)); } catch (e) {} }
+  var rec = fresh || stored() || { id: '', src: '', utm: {} };
+
+  function value(field) {
+    if (field === 'gclid') return rec.id || '';
+    if (field === 'click_source') return rec.src || '';
+    return (rec.utm && rec.utm[field]) || '';
+  }
+
+  /* Called by both page shapes. Writes nothing when there is nothing to write,
+     so a form from an organic visitor is unchanged. */
+  /* The tap studio page builds a FormData by hand instead of stamping a form,
+     so it needs the values rather than a form to write them onto. */
+  window.ffyClickFields = function () {
+    var out = {};
+    FIELDS.forEach(function (name) { var v = value(name); if (v) out[name] = v; });
+    return out;
+  };
+
+  window.ffyStampClick = function (form) {
+    if (!form || !form.querySelector) return;
+    FIELDS.forEach(function (name) {
+      var v = value(name);
+      if (!v) return;
+      var el = form.querySelector('input[name="' + name + '"]');
+      if (!el) {
+        el = document.createElement('input');
+        el.type = 'hidden';
+        el.name = name;
+        form.appendChild(el);
+      }
+      el.value = v;
+    });
+  };
 })();
 </script>
 </body>
