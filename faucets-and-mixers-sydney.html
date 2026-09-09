@@ -2036,8 +2036,8 @@ html.lenis{scroll-behavior:auto}
 .ts-installation-world .ts-installation-caption{position:absolute;bottom:24px;right:28px;left:auto;z-index:2;color:rgba(255,255,255,.8);font-size:12px;margin:0}
 @media(max-width:859px){
  .ts-preview{display:flex;flex-direction:column}
- .ts-preview .ts-stage{order:0;height:clamp(240px,37svh,360px)}
- .ts-mobile-models{order:1;margin:12px 0 0}
+ .ts-preview .ts-stage{order:1;height:clamp(240px,37svh,360px)}
+ .ts-mobile-models{order:0;margin:0 0 12px}
  #mobile-finishes{order:2;padding:12px 2px 0}
  .ts-stage figcaption,.ts-stage-tag{display:none}
  .ts-mobile-models .ts-models{margin:0}
@@ -2074,7 +2074,7 @@ html.lenis{scroll-behavior:auto}
 
 @media(max-width:859px){#tap-main .hero .hbg picture.collection img{object-fit:cover;object-position:58% 50%}}
 @media(min-width:860px){#tap-main .hero .hbg picture.collection img{height:auto;object-fit:initial;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 70%,transparent 100%)}}
-@media(max-width:859px){.ts-preview .ts-scene img,.ts-preview .ts-lifestyle img{object-fit:cover;object-position:50% 48%}}
+@media(max-width:859px){.ts-preview .ts-scene img,.ts-preview .ts-lifestyle img{object-fit:contain;object-position:50% 50%;background:#eeede8}}
 
 /* Review three: natural scroll enters a short sticky photographic hold. */
 .ts-installation-act{position:relative;background:var(--ink-blue)}
@@ -2085,6 +2085,17 @@ html.lenis{scroll-behavior:auto}
  .ts-installation-act>.ts-installation-world{position:relative;clip-path:none!important}
 }
 .ts-installation-act #waterArt{transform-origin:50% 0}
+
+/* Mobile studio: full photographs and price before the finish controls. */
+@media(max-width:859px){
+ .ts-mobile-models .ts-models button{min-height:44px;font-size:14px}
+ #mobile-finishes{display:flex;flex-direction:column;padding-top:0}
+ #mobile-finishes .ts-price-line{margin:0 0 12px;padding:12px 2px;border-top:0;border-bottom:1px solid var(--rule)}
+ #mobile-finishes .ts-price strong{font-size:1.85rem}
+ #mobile-finishes .ts-price-note{font-size:13px;line-height:1.4}
+ #mobile-finishes .ts-surprise{min-height:44px;font-size:13px}
+ #mobile-finishes .ts-action{width:100%;margin-top:16px;min-height:48px}
+}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage",
@@ -2402,7 +2413,7 @@ html.lenis{scroll-behavior:auto}
   </figure>
   <div id="mobile-finishes"></div></div>
   <div class="ts-card" id="studioCard">
-   <div class="ts-models" role="group" aria-label="Tap style"><button type="button" data-model="pullout" aria-pressed="true">Pull out</button><button type="button" data-model="classic" aria-pressed="false">Classic</button><button type="button" data-model="filter" aria-pressed="false">Filter tap</button><button type="button" data-model="sprayer" aria-pressed="false">Sprayer</button></div>
+   <div class="ts-models" role="group" aria-label="Tap style"><button type="button" data-model="pullout" aria-pressed="true">Pull out</button><button type="button" data-model="classic" aria-pressed="false">Classic</button><button type="button" data-model="filter" aria-pressed="false">Filter tap</button></div>
 
    <div class="ts-card-head"><span class="ts-kicker" id="model-kicker">The premium mixer</span><button type="button" class="ts-details-btn" id="details-toggle" aria-expanded="false" aria-controls="tap-details">The details</button></div>
    <h3 id="model-title">One beautiful tap.<br>Every kind of water.</h3>
@@ -4888,7 +4899,6 @@ const models={
   pullout:{label:'Premium pull out three way mixer',short:'Premium pull out mixer',kicker:'The premium mixer',title:'One beautiful tap.<br>Every kind of water.',description:'Hot and cold for the kitchen. Purified water on its own lever. A concealed pull out hose gives you that extra reach.',finishes:['gold','black','stainless','gunmetal','copper'],cut:f=>'3way-mixer-pullout-'+f,scene:true,card:'media/tap-studio/card-pullout.webp',cardAlt:'The premium pull out three way mixer in brushed gold, studio shot',price:'From <strong>$1,050</strong>',note:'Installed with your system',details:['Hot, cold and filtered water connections','Separate filtered water control','Concealed pull out hose']},
   classic:{label:'Classic three way mixer',short:'Classic three way mixer',kicker:'The everyday original',title:'A cleaner bench.<br>A classic curve.',description:'Replace your kitchen mixer with one tap for hot, cold and filtered water. The familiar gooseneck shape, with a little more going on inside.',finishes:['chrome','black'],cut:(f,shape)=>'3way-mixer-'+shape+'-'+(f==='chrome'?'stainless':f),scene:false,card:'media/tap-studio/card-classic.webp',cardAlt:'The classic three way gooseneck mixer in polished chrome, studio shot',price:'From <strong>$500</strong>',note:'Installed with your system',details:['Classic fixed gooseneck spout','Hot, cold and filtered water','Your existing mixer is replaced']},
   filter:{label:'Dedicated filtered water tap',short:'Dedicated filter tap',kicker:'The little finishing touch',title:'Your mixer stays.<br>Pure water joins it.',description:'A dedicated drinking tap beside your existing mixer. Chrome comes with your system. Or match your kitchen with a premium finish.',finishes:['chrome','gold','black','stainless','gunmetal','copper'],cut:f=>'filter-tap-'+({chrome:'chrome',gold:'brushed-gold',black:'matte-black',stainless:'brushed',gunmetal:'gunmetal',copper:'copper'}[f]),scene:false,card:'media/tap-studio/card-filter.webp',cardAlt:'The dedicated filtered water tap in polished chrome, studio shot',price:'<strong>Included</strong>',note:'Chrome with your system',details:['Dedicated filtered water only','Your kitchen mixer stays in place','Separate sink or benchtop opening required']},
-  sprayer:{label:'Three way vegie sprayer mixer',short:'Vegie sprayer mixer',kicker:'A little more reach',title:'Rinse. Reach.<br>Refill your glass.',description:'A flexible sprayer for the daily kitchen jobs, with a separate filtered water control for drinking. One tap, ready for more than the washing up.',finishes:['stainless','black','gunmetal','gold','copper'],cut:f=>'3way-vegie-sprayer-'+f,scene:false,card:'media/tap-studio/card-pullout.webp',cardAlt:'A three way mixer, studio shot',price:'From <strong>$650</strong>',note:'Installed with your system',details:['Flexible sprayer head','Stream and spray functions','Hot, cold and filtered water']}
 };
 let model='pullout',finish='gold',shape='gooseneck',lastFocus=null;
 const cutSrc=()=>'media/tap-studio/cut/'+models[model].cut(finish,shape)+'.webp';
@@ -4897,10 +4907,11 @@ const selection=()=>models[model].label+(model==='classic'?' ('+shape+')':'')+' 
 const stage=$('#product-stage');
 if(mph){
  $('#mobile-models').append($('.ts-models'));
- $('#mobile-finishes').append($('#finish-controls'),$('.ts-price-line'));
+ $('#mobile-finishes').append($('.ts-price-line'),$('#finish-controls'));
+ $('#mobile-finishes').append($('.ts-action'));
 }
 function keepPreviewInView(){
- if(!mph)return;const r=stage.getBoundingClientRect();
+ if(!mph)return;const r=$('.ts-preview').getBoundingClientRect();
  if(r.top<80||r.top>120||r.bottom>innerHeight-100){const target=$('.ts-preview');glide(target.getBoundingClientRect().top+scrollY-90,.4)}
 }
 let imageRequest=0;
@@ -4928,10 +4939,10 @@ function update(animate=true){
   if(usesScene){imageRequest++;stage.setAttribute('aria-busy','false');$$('#sceneStack picture').forEach(p=>p.classList.toggle('on',p.dataset.f===finish))}
   else if(usesLifestyle)showLifestyle(lifestyleSrc());
   else{imageRequest++;const c=$('#cutImg');c.src='assets/faucets-mixers/'+models[model].cut(finish,shape)+'.webp';c.alt=selection();stage.setAttribute('aria-busy','false')}
-  $('#stageTag').textContent=model==='sprayer'?'The sprayer collection':'Explore the finish';
+  $('#stageTag').textContent='Explore the finish';
   const big=usesScene?sceneSrc(finish):usesLifestyle?lifestyleSrc().replace('.webp','-full.webp'):'assets/faucets-mixers/'+m.cut(finish,shape)+'.webp';
   $('#lightbox-image').src=big;$('#lightbox-image').alt=selection();$('#lightbox-caption').textContent=selection();
-  $('#price-label').innerHTML=model==='filter'?(finish==='chrome'?'<strong>Included</strong>':'<strong>$150</strong>'):model==='classic'?(finish==='black'?'From <strong>$550</strong>':m.price):model==='sprayer'?(finish==='stainless'?m.price:'From <strong>$750</strong>'):m.price;
+  $('#price-label').innerHTML=model==='filter'?(finish==='chrome'?'<strong>Included</strong>':'<strong>$150</strong>'):model==='classic'?(finish==='black'?'From <strong>$550</strong>':m.price):m.price;
   $('#price-note').textContent=model==='filter'?(finish==='chrome'?'Chrome with your system':'Finish upgrade with your system'):m.note;
   $('#details-list').replaceChildren(...m.details.map(t=>{const li=document.createElement('li');li.textContent=t;return li}));
   $('#quote-image').src=usesLifestyle?lifestyleSrc():usesScene?sceneSrc(finish):big;$('#quote-image').alt=selection();$('#quote-selection').textContent=selection();
