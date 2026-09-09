@@ -153,7 +153,7 @@ img{max-width:100%;display:block}
 .sec-body-c{margin-left:auto;margin-right:auto}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
 .reveal.visible{opacity:1;transform:none}
-/* HEADER */
+
 .site-header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:transform .3s ease}
 .site-header.header-hidden{transform:translateY(-100%)}
 .site-header.nav-only .ticker{display:none}
@@ -178,7 +178,7 @@ img{max-width:100%;display:block}
 .nav-hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;transition:transform .2s,opacity .2s}
 #navSpacer{height:92px}
 @media(max-width:900px){.nav-links{display:none}.nav-hamburger{display:flex}}
-/* MOBILE NAV */
+
 .mobile-nav{position:fixed;inset:0;background:#fff;z-index:2000;overflow-y:auto;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
 .mobile-nav.open{transform:none}
 .mobile-nav-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(50,65,88,.08)}
@@ -195,7 +195,7 @@ img{max-width:100%;display:block}
 .mobile-plain-links{padding:16px 0 8px}
 .mobile-plain-links a{display:block;padding:10px 0;font-size:15px;font-weight:600;color:var(--dark);border-bottom:1px solid rgba(50,65,88,.05)}
 .mobile-cta{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--blue);color:#fff;padding:14px;border-radius:10px;font-family:'Sora',sans-serif;font-size:16px;font-weight:700;margin-top:16px;width:100%}
-/* HERO */
+
 .hero{background:var(--blue);padding:72px 24px 64px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(255,255,255,.07) 0%,transparent 60%),radial-gradient(ellipse at 10% 80%,rgba(12,75,185,.5) 0%,transparent 50%);pointer-events:none}
 .hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;text-align:center}
@@ -209,19 +209,19 @@ img{max-width:100%;display:block}
 .btn-secondary:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4)}
 .trust-bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .trust-chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:7px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.9);display:flex;align-items:center;gap:7px}
-/* ALERT BOX */
+
 .alert-box{background:#fff3cd;border:2px solid #ffc107;border-radius:10px;padding:20px 24px;margin:32px 0;display:flex;gap:16px;align-items:flex-start}
 .alert-icon{color:#e65c00;flex-shrink:0;margin-top:2px}
 .alert-box h3{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:6px}
 .alert-box p{font-size:0.92rem;color:#555;line-height:1.6}
-/* INFO GRID */
+
 .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:8px}
 .info-card{background:#fff;border:1px solid rgba(11,97,244,.1);border-radius:12px;padding:24px;position:relative}
 .info-card-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--blue);margin-bottom:10px}
 .info-card h3{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:8px}
 .info-card p{font-size:0.9rem;color:#555;line-height:1.65}
 .info-card.highlight{border-color:var(--blue);background:#f0f6ff}
-/* SERVICES GRID */
+
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
 .service-card{background:#fff;border:1px solid rgba(11,97,244,.12);border-radius:14px;padding:28px;transition:box-shadow .2s,transform .2s}
 .service-card:hover{box-shadow:0 8px 32px rgba(11,97,244,.12);transform:translateY(-2px)}
@@ -230,7 +230,7 @@ img{max-width:100%;display:block}
 .sc-desc{font-size:0.88rem;color:#555;line-height:1.65;margin-bottom:12px}
 .sc-price{font-size:1.3rem;font-weight:800;color:var(--blue);margin-bottom:4px}
 .sc-price-note{font-size:0.8rem;color:#888}
-/* COMPARISON TABLE */
+
 .comparison-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:0.9rem}
 .comparison-table th{background:var(--blue);color:#fff;padding:12px 16px;text-align:left;font-weight:700;font-size:0.85rem}
 .comparison-table td{padding:12px 16px;border-bottom:1px solid rgba(50,65,88,.08);vertical-align:top}
@@ -239,13 +239,13 @@ img{max-width:100%;display:block}
 .tick{color:#16a34a;font-weight:700}
 .cross{color:#dc2626;font-weight:700}
 .table-wrap{overflow-x:auto}
-/* WHY GRID */
+
 .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
 .why-card{display:flex;gap:16px;align-items:flex-start}
 .why-icon{width:44px;height:44px;background:#f0f6ff;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .why-card h3{font-size:1rem;font-weight:700;margin-bottom:6px;color:var(--dark)}
 .why-card p{font-size:0.88rem;color:#555;line-height:1.6}
-/* CONTENT BODY */
+
 .content-body{max-width:800px;margin:0 auto}
 .content-body h2{font-size:1.5rem;font-weight:800;color:var(--dark);margin:32px 0 12px}
 .content-body h3{font-size:1.15rem;font-weight:700;color:var(--dark);margin:24px 0 8px}
@@ -253,13 +253,13 @@ img{max-width:100%;display:block}
 .content-body ul{list-style:none;padding:0;margin:0 0 14px}
 .content-body ul li{font-size:0.93rem;color:#444;line-height:1.7;padding-left:20px;position:relative;margin-bottom:6px}
 .content-body ul li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;background:var(--blue);border-radius:50%}
-/* REVIEWS */
+
 .reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .review-card{background:#fff;border:1px solid rgba(11,97,244,.1);border-radius:12px;padding:24px}
 .rc-stars{color:#f59e0b;font-size:1.1rem;margin-bottom:10px}
 .rc-text{font-size:0.88rem;color:#444;line-height:1.7;margin-bottom:12px}
 .rc-name{font-size:0.8rem;font-weight:700;color:var(--blue)}
-/* FAQ */
+
 .faq-list{max-width:760px;margin:0 auto}
 .faq-item{border:1px solid rgba(11,97,244,.12);border-radius:10px;margin-bottom:10px;overflow:hidden}
 .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;background:var(--blue);color:#fff;font-family:'Sora',sans-serif;font-size:0.95rem;font-weight:600;text-align:left;border:none;cursor:pointer;line-height:1.4}
@@ -267,11 +267,11 @@ img{max-width:100%;display:block}
 .faq-item.open .faq-icon{transform:rotate(45deg)}
 .faq-a{display:none;padding:16px 20px;font-size:0.9rem;color:#444;line-height:1.7;background:#fff}
 .faq-item.open .faq-a{display:block}
-/* SUBURB LINKS */
+
 .suburb-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 .suburb-link{background:#fff;border:1px solid rgba(11,97,244,.2);color:var(--blue);padding:7px 14px;border-radius:100px;font-size:13px;font-weight:600;transition:background .15s,color .15s}
 .suburb-link:hover{background:var(--blue);color:#fff}
-/* CTA */
+
 .cta-section{background:var(--dark-blue);padding:64px 24px;text-align:center}
 .cta-section h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:#fff;margin-bottom:12px;line-height:1.2}
 .cta-section p{color:rgba(255,255,255,.8);font-size:1rem;margin-bottom:24px;line-height:1.6}
@@ -290,13 +290,13 @@ img{max-width:100%;display:block}
 .f-check-wrap a{color:rgba(255,255,255,.8);text-decoration:underline}
 .f-submit{width:100%;padding:14px;background:var(--yellow);color:var(--dark);font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;border:none;border-radius:8px;cursor:pointer;transition:transform .15s,box-shadow .15s}
 .f-submit:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,217,0,.4)}
-/* PHOTO BANNER */
+
 .photo-banner{position:relative;height:280px;overflow:hidden}
 .photo-banner img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
 .photo-banner-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,97,244,.85) 0%,rgba(11,97,244,.4) 60%,transparent 100%);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:24px}
 .photo-banner-text{color:#fff;font-size:1.2rem;font-weight:700;margin-bottom:4px}
 .photo-banner-sub{color:rgba(255,255,255,.8);font-size:0.85rem;text-align:center}
-/* FOOTER V2 */
+
 .footer-v2{background:#1e2d40;color:rgba(255,255,255,.6);padding:56px 32px 32px}
 .footer-v2 .fv2-inner{max-width:1380px;margin:0 auto}
 .fv2-brand-row{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:32px}
@@ -335,7 +335,7 @@ img{max-width:100%;display:block}
 }
 @media(max-width:640px){.fv2-grid{grid-template-columns:1fr 1fr}.fv2-brand-row{flex-direction:column}}
 @media(max-width:400px){.fv2-grid{grid-template-columns:1fr}}
-/* SOCIAL PROOF */
+
 .sp-wrap{position:fixed;bottom:24px;left:24px;z-index:9990;max-width:300px;pointer-events:none}
 .sp-popup{background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(11,97,244,.15),0 2px 8px rgba(0,0,0,.08);padding:12px 14px 12px 12px;display:flex;align-items:flex-start;gap:11px;pointer-events:auto;transform:translateY(20px);opacity:0;transition:transform .38s cubic-bezier(.34,1.56,.64,1),opacity .3s ease;will-change:transform,opacity;position:relative}
 .sp-popup.sp-show{transform:translateY(0);opacity:1}
@@ -350,7 +350,7 @@ img{max-width:100%;display:block}
 .sp-close:hover{color:#324158}
 </style>
 <style id="ffy-canonical-chrome-css">
-/* === FFY CANONICAL CHROME — copied verbatim from index.html, !important on every rule to force override === */
+
 .ticker{background:var(--yellow)!important;color:var(--dark)!important;font-size:15px!important;font-weight:700!important;padding:11px 0!important;overflow:hidden!important;white-space:nowrap!important;display:block!important}
 .ticker-track{display:inline-flex!important;animation:tick 28s linear infinite!important}
 .ticker-item{padding:0 28px!important;display:inline-flex!important;align-items:center!important;gap:8px!important}
@@ -440,14 +440,7 @@ img{max-width:100%;display:block}
 }
 </style>
 <style id="aws-legacy-css">
-/* ROUND 105 — "Areas we service", the collapsible district directory, set small.
-   JP, 6 Sep: "make the font size a lot smaller... almost exactly like Clean and Clear Water's footer, that way
-   it's not scrolling forever." MEASURED off their live panel the same day: 10px suburb links on a 16px line,
-   in a grid of 6 columns at 1440 and 2 at 390. The GRID is what kills the height, not the type alone.
-   Ours: 11px on a 24px line, auto-filled columns from 132px. 24px is the WCAG 2.5.8 AA minimum target and a
-   deliberate override of round 29's 44px floor for THIS directory only — every other footer link keeps 44px.
-   Native <details>: no script, keyboard and screen reader correct, and all 458 links ship in the HTML whether
-   it is open or shut. Generated by build-footer-areas-legacy.py — do not hand-edit. */
+
 .fv2-aws{border-top:1px solid rgba(255,255,255,.08);margin-bottom:24px;padding-top:20px}
 .fv2-aws>summary{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;list-style:none;
   font-family:'Sora',sans-serif;-webkit-tap-highlight-color:transparent}
@@ -478,7 +471,6 @@ img{max-width:100%;display:block}
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="site-header" id="siteHeader">
   <div class="ticker">
     <span>Sydney's 5-Star Water Filter Specialists &mdash; Fixed Prices, No Hidden Fees &mdash; <a href="tel:0430546749">Call 0430 546 749</a></span>
@@ -577,7 +569,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- KEY FACT ALERT -->
 <section class="sec sec-white">
   <div class="container">
     <div class="alert-box">
@@ -609,7 +600,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- FILTER COMPARISON -->
 <section class="sec sec-light reveal">
   <div class="container">
     <div class="sec-head">
@@ -678,7 +668,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- RO PRODUCTS -->
 <section class="sec sec-white reveal">
   <div class="container">
     <div class="sec-head">
@@ -720,7 +709,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- CONTENT BODY -->
 <section class="sec sec-light reveal">
   <div class="container">
     <div class="content-body">
@@ -751,7 +739,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- WHY FFY -->
 <section class="sec sec-white reveal">
   <div class="container">
     <div class="sec-head">
@@ -806,7 +793,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- REVIEWS -->
 <section class="sec sec-light reveal">
   <div class="container">
     <div class="sec-head">
@@ -834,7 +820,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="sec sec-white reveal" id="faq">
   <div class="container">
     <div class="sec-head">
@@ -875,7 +860,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- RELATED GUIDES -->
 <section style="background:#f8faff;padding:40px 20px">
   <div style="max-width:900px;margin:0 auto;text-align:center">
     <div class="yline yline-c" style="margin-bottom:16px"></div>
@@ -901,7 +885,6 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
-<!-- CTA -->
 <section class="cta-section" id="quote">
   <div style="max-width:700px;margin:0 auto">
     <div class="yline yline-c"></div>
@@ -933,7 +916,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- FOOTER -->
 <style id="footer-v2-css">
 .footer-v2{background:#1e2d40;color:rgba(255,255,255,.6);padding:56px 32px 32px}
 .footer-v2 .fv2-inner{max-width:1380px;margin:0 auto}
@@ -1039,7 +1021,7 @@ img{max-width:100%;display:block}
         </div>
       </div>
     </div>
-    <!-- AWS:START — round 104, the collapsible district directory. Generated by build-footer-areas-legacy.py; never hand-edit. -->
+    <!-- AWS:START -->
 <details class="fv2-aws">
 <summary><b>Areas we service</b><span>All 13 Sydney districts</span><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></i></summary>
 <div class="fv2-awsg">
@@ -1729,7 +1711,6 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 })();
 </script>
 
-<!-- SOCIAL PROOF WIDGET -->
 <div class="sp-wrap">
   <div class="sp-popup" id="spPopup" role="status" aria-live="polite">
     <div class="sp-avatar" id="spAvatar"></div>
@@ -1779,19 +1760,19 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 
 <script id="ffy-mobile-nav-fallback-js">
-/* FFY mobile-nav handler — clones nodes to strip any pre-existing listeners (from page-level dropdown-nav-js scripts that may have run before mobile-nav was in DOM, or that already bound), then attaches a single canonical handler set. Runs at DOMContentLoaded so the static mobile-nav element is guaranteed to exist. */
+ 
 (function(){
   function setup(){
     var mob=document.getElementById('mobileNav');
     if(!mob)return;
-    /* Clone-replace the hamburger so any pre-existing click handlers from older scripts are dropped */
+     
     var ham=document.getElementById('navHamburger');
     if(ham){
       var hamClone=ham.cloneNode(true);
       ham.parentNode.replaceChild(hamClone,ham);
       ham=hamClone;
     }
-    /* Clone-replace the close button */
+     
     var cls=mob.querySelector('#mobileNavClose,.mobile-nav-close');
     if(cls){
       var clsClone=cls.cloneNode(true);
@@ -1802,13 +1783,13 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     function closeMob(){mob.classList.remove('open');if(ham)ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
     if(ham)ham.addEventListener('click',openMob);
     if(cls)cls.addEventListener('click',closeMob);
-    /* Clone-replace each anchor so old close-on-click handlers are dropped, then bind ours once */
+     
     mob.querySelectorAll('a').forEach(function(a){
       var c=a.cloneNode(true);
       a.parentNode.replaceChild(c,a);
       c.addEventListener('click',closeMob);
     });
-    /* Clone-replace each section toggle button so the original page-level handler is removed and only ours fires (prevents double-toggle that cancels itself) */
+     
     mob.querySelectorAll('.mobile-section-btn').forEach(function(btn){
       var c=btn.cloneNode(true);
       btn.parentNode.replaceChild(c,btn);
@@ -1818,7 +1799,7 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
       document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMob();});
       document.__ffyEsc=true;
     }
-    /* Active page highlight in nav links */
+     
     var pg=(location.pathname.split('/').pop()||'index.html');
     if(pg==='')pg='index.html';
     document.querySelectorAll('.nav-links a[href],.dropdown a[href],.mobile-section-links a[href],.mobile-plain-links a[href]').forEach(function(a){
@@ -1831,22 +1812,9 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',setup);}else{setup();}
 })();
 </script>
-<!-- HubSpot Embed Code REMOVED 2026-08-25. The HubSpot CRM was retired; this tag loaded a
-     third-party script on every page view for a system nobody reads. index.html dropped it at
-     cutover, the other 544 pages kept it for four months. There are no HubSpot forms and no
-     hbspt calls anywhere on the site, so nothing depended on it. -->
-<!-- FFY ATTRIBUTION — added 2026-08-05 -->
+<!-- FFY ATTRIBUTION -->
 <script>
-/* Two gaps this closes, both measured 2026-08-05:
-   1. Every website lead reached the CRM carrying the single word "Website".
-      No page could ever be credited with an install, so no SEO or content
-      decision was judgeable. form_watcher.py already reads landing_page,
-      submitted_page and referrer — this is the half that sends them.
-   2. GA4 records zero tel: clicks. The phone is the primary above-fold CTA on
-      all 545 pages and it has never been counted once.
-   NOT added: form_submit / form_start. GA4 enhanced measurement already fires
-   both with the page attached (48 events in July, verified). Firing our own
-   would double-count against a key event that counts once per session. */
+ 
 (function () {
   var KEY = 'ffy_landing', REF = 'ffy_referrer';
   function store() {
@@ -1898,22 +1866,9 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   } else { fill(); }
 })();
 </script>
-<!-- FFY META LEAD EVENT — added 2026-08-12, CRM task 411 -->
+<!-- FFY META LEAD EVENT -->
 <script>
-/* Every form on this site posts to Formspree and fired no fbq Lead. The pixel
-   was initialised and sent PageView only, so Meta could never report, attribute
-   or optimise for a single website conversion. That is what this closes.
-
-   Fires once per form, on a submit that already passed validation — the
-   capture-phase validity guard in the block above calls stopImmediatePropagation
-   on an invalid form, so this listener never sees one.
-
-   It does NOT intercept or delay the submit. The native Formspree forms navigate
-   away on submit and the pixel's own beacon handles that; a delay here would put
-   the lead itself at risk to save a tracking event, which is the wrong trade.
-
-   eventID is generated so a Conversions API send can be matched to this browser
-   event later without double counting. */
+ 
 (function () {
   var fired = [];
   document.addEventListener('submit', function (e) {
@@ -1932,20 +1887,9 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   }, false);
 })();
 </script>
-<!-- FFY CLICK ID — added 2026-09-09 -->
+<!-- FFY CLICK ID -->
 <script>
-/* Google stamps every paid click with a click id in the URL of the FIRST page
-   the visitor lands on, and it is gone the moment they navigate. Nothing on
-   this site has ever read it, so no lead in the CRM could be traced back to
-   the keyword that paid for it and no Google Ads conversion could be reported.
-
-   This stores it on arrival, so a form filled in twenty minutes and six pages
-   later still carries the click that produced it. gbraid and wbraid are the
-   same thing on iOS app and web-to-app journeys, where Google withholds gclid.
-
-   localStorage, not sessionStorage: Google's conversion window runs to 90 days
-   and people come back. Only non-empty values are ever written onto a form, so
-   an ordinary organic visitor submits exactly what they submit today. */
+ 
 (function () {
   var STORE = 'ffy_click', WINDOW_DAYS = 90;
   var CLICK_KEYS = ['gclid', 'gbraid', 'wbraid'];
@@ -1961,7 +1905,7 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
       var k = i < 0 ? pair : pair.slice(0, i);
       var v = i < 0 ? '' : pair.slice(i + 1);
       try { out[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, ' ')); }
-      catch (e) { /* a malformed query string must never break the page */ }
+      catch (e) {   }
     });
     return out;
   }
@@ -1988,8 +1932,7 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     } catch (e) { return null; }
   }
 
-  /* The newest click always wins. Someone who clicks a second ad is a second
-     click, and Google credits the last one. */
+   
   var fresh = fromUrl();
   if (fresh) { try { localStorage.setItem(STORE, JSON.stringify(fresh)); } catch (e) {} }
   var rec = fresh || stored() || { id: '', src: '', utm: {} };
@@ -2000,10 +1943,8 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     return (rec.utm && rec.utm[field]) || '';
   }
 
-  /* Called by both page shapes. Writes nothing when there is nothing to write,
-     so a form from an organic visitor is unchanged. */
-  /* The tap studio page builds a FormData by hand instead of stamping a form,
-     so it needs the values rather than a form to write them onto. */
+   
+   
   window.ffyClickFields = function () {
     var out = {};
     FIELDS.forEach(function (name) { var v = value(name); if (v) out[name] = v; });

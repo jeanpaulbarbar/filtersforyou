@@ -1,4 +1,4 @@
-/* Keep the mobile heading above the actual card, including every RO selection. */
+ 
 (()=>{
   const card=document.querySelector('[data-product-card]');
   if(!card)return;

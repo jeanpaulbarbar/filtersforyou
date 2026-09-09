@@ -3,11 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- ═════════ NEW PAGE — starts from the shell template ═════════
-     Made by: Console/venv/bin/python3 .claude/skills/web-designer/scripts/site_shell.py new <slug> --title … --description …
-     The header, mobile sheet, footer, their CSS and their JS are stamped between
-     the SHELL markers from index.html. ⛔ Never hand-edit inside a marker pair.
-     When the homepage shell changes, run `site_shell.py apply <page>`. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -54,11 +49,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"></n
 <!-- SHELL:CSS -->
 <!-- /SHELL:CSS -->
 <style>
-/* ═══ this page only ═══
-   The opener is the shell's (.pgtop > .pgcard, stamped CSS): the utility strip
-   on top, the header transparent over a framed card that grows open, solid on
-   the first scroll — the homepage's own opening, on every page (JP, 28 Aug).
-   This page only styles what sits INSIDE the card. */
+
 .page-hero{background:var(--ink-blue);color:#fff;padding:140px 0 56px}
 .page-hero .lab{color:#fff}
 .page-hero .lab img{background:#fff;border-radius:var(--r-full);padding:5px;width:38px;height:38px}
@@ -78,8 +69,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"></n
 <!-- /SHELL:HEADER -->
 
 <main>
-  <!-- THE OPENER — keep <div class="pgtop"><section class="pgcard …"> as the
-       first thing in <main>. The shell's CSS and JS key off it. -->
+  
   <div class="pgtop">
   <section class="pgcard page-hero">
     <div class="in">

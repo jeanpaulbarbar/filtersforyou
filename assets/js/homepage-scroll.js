@@ -1,5 +1,4 @@
-/* Full-screen homepage chapters. ScrollCraft owns the stages; one local driver
-   follows scroll for their photographic/cost states. */
+ 
 (() => {
  'use strict';
  const root=document.getElementById('hp-flow');if(!root)return;
@@ -61,7 +60,7 @@
    });
  }
  function request(){if(!pending){pending=true;requestAnimationFrame(drive);}}
- // Mount after adding the enhancement class: no-JS and reduced-motion keep all costs readable.
+ 
  if(window.ScrollCraft){
    try{root.classList.add('hp-ready');window.ScrollCraft.mount(root);ready=true;}
    catch(_){root.classList.remove('hp-ready');[care,finish].forEach(el=>el.style.height='');}
@@ -80,8 +79,8 @@
  addEventListener('scroll',request,{passive:true});addEventListener('resize',()=>{decoded.clear();careDecoded.clear();showCarePhoto(currentCare);request()});
  request();document.fonts.ready.then(request);
 
- // Direct reuse of the product page's review movement: three opposing rows,
- // 30px/s, with the same desktop scroll-velocity push and four-degree lean.
+ 
+ 
  const wrap=document.getElementById('rmq');if(!wrap)return;
  const rows=[...wrap.querySelectorAll('.rrow')];
  const lanes=rows.map(row=>{

@@ -1,5 +1,4 @@
-/* Full-size scroll chapters. The product sequence, warranty deck and shared shell
-   keep their original controllers. No compact image-card layout. */
+
 #range.show{padding-top:clamp(48px,5vw,72px)}
 #range .shead h2{margin-top:0}
 .slide.s2{background:var(--ink-blue);color:#fff;isolation:isolate}
@@ -60,7 +59,7 @@
 #hp-flow #included .ilist b{font-size:24px}
 #hp-flow #included .ilist span{font-size:17px}
 #hp-flow #included .ilist{gap:44px 60px}
-/* A full-screen kitchen; its five finishes advance with scroll. */
+
 .hp-finish-pics{position:absolute;inset:0;z-index:-3;transform:scale(var(--hp-zoom,1));transform-origin:60% 50%}
 .hp-finish-pics picture{position:absolute;inset:0;opacity:0;transition:opacity .75s ease-in-out}
 .hp-finish-pics picture.on{opacity:1}
@@ -172,8 +171,7 @@
  .hp-ready .hp-care-intro>p{display:block}.hp-care-terms p{display:block}.hp-cost-desc{min-height:0}
 }
 
-/* Product-page reviews: exact component styles, scoped to #proof.
-Fixed phone plate becomes a document plate for the homepage engine. */
+
 #proof.lane{background:var(--paper);padding:clamp(64px,7.6vw,106px) 0 clamp(44px,5.4vw,74px);position:relative;z-index:2;overflow:clip}
 #proof .lane__badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 12px;border-radius:var(--r-full);background:#fff;
   box-shadow:var(--shadow-sm);font-size:14.5px;font-weight:800;margin-bottom:20px}
@@ -242,7 +240,7 @@ Fixed phone plate becomes a document plate for the homepage engine. */
 @media(max-width:859px){#proof .lane__head .lede{font-size:18.88px;line-height:1.5}}
 @media(prefers-reduced-motion:reduce){#proof .rmq{overflow-x:auto}#proof .rrow{transform:none!important}}
 
-/* Requested imagery pass: keep the approved full-screen chapter language. */
+
 .slide.s3 .inwrap .box{margin-left:0;text-align:left;max-width:560px}
 .slide.s3 .inwrap .box h3,.slide.s3 .inwrap .box p{margin-left:0}
 .hp-care-photo picture{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
@@ -274,7 +272,7 @@ Fixed phone plate becomes a document plate for the homepage engine. */
 .hp-tour-price>span{font-size:18px}.hp-tour-price strong{font-size:40px;font-weight:600;letter-spacing:-.035em;margin-inline:5px}
 .hp-tour-price p{font-size:16px;line-height:1.5;margin:10px 0 5px;color:inherit}
 .hp-tour-price small{font-size:14px;font-weight:600}
-/* Removing the 64px pull-up here lets the service CTA leave with its own stage. */
+
 #hp-flow #included{margin-top:0;border-radius:0;padding:110px 0 150px;background:radial-gradient(ellipse at 3% 100%,rgba(11,97,244,.09),transparent 60%),var(--mist)}
 .hp-inclusions-layout{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
 #hp-flow #included .ihead{position:sticky;top:150px}
@@ -295,7 +293,7 @@ Fixed phone plate becomes a document plate for the homepage engine. */
 #hp-flow #newbuilds .lede{max-width:52ch;font-size:19px}
 #hp-flow #newbuilds .ndbg{object-position:50% 60%}
 #hp-flow #newbuilds .veil{background:linear-gradient(180deg,rgba(4,16,46,.9),rgba(4,16,46,.76) 29%,rgba(4,16,46,.08) 66%)}
-/* Once-only arrivals: ScrollCraft observes these; legacy inner drivers stay independent. */
+
 @media(prefers-reduced-motion:no-preference){
  .hp-ready [data-sc-in]{opacity:0;transform:translateY(34px);transition:opacity .75s ease,transform 1s cubic-bezier(.22,1,.36,1)}
  .hp-ready [data-sc-in].sc-in{opacity:1;transform:none}

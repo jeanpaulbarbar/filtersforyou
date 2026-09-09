@@ -1,2 +1,37 @@
-# never deploy the shell template as a page
+# WHAT NEVER LEAVES THIS MACHINE
+#
+# Everything in this folder is uploaded to a public CDN unless it is named here.
+# On 9 Sep 2026 twenty of these files were readable on the live domain, including
+# PAGE-LAW.md and three build scripts quoting JP by name. They are tools, not the
+# website. Anything added here that is not a page, an asset or a crawler file
+# belongs in this list on the day it is created.
+
+# the template a new page is stamped from, never a page itself
 _shell-template.html
+
+# the internal rules and the old site extract
+PAGE-LAW.md
+website-info.txt
+Start Claude.command
+
+# the tools that build, fix and verify the site
+tools/
+shell-probe.mjs
+verify-shell.sh
+seo-bulk-fix.mjs
+suburb-content-update.mjs
+local-insights-upgrade.mjs
+_r23.mjs
+_s.mjs
+_shot_rc.mjs
+*.py
+
+# working files
+__pycache__/
+temporary screenshots/
+inspiration/
+AGENCY/
+.claude/
+node_modules/
+*.bak
+.DS_Store
