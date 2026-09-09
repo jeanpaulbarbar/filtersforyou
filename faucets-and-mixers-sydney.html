@@ -2098,6 +2098,87 @@ html.lenis{scroll-behavior:auto}
  #mobile-finishes .ts-surprise{min-height:44px;font-size:13px}
  #mobile-finishes .ts-action{width:100%;margin-top:16px;min-height:48px}
 }
+
+/* The studio is a stable workspace: changing a product never changes its geometry. */
+.ts-studio{overflow-anchor:none}
+.ts-studio .ts-bench{--studio-height:clamp(480px,calc(100svh - 176px),640px);max-width:1120px;grid-template-columns:calc(var(--studio-height) * .75) minmax(0,1fr);gap:40px;align-items:start}
+.ts-studio .ts-photo-area{position:relative}
+.ts-studio .ts-preview{position:relative;top:auto;min-width:0}
+.ts-studio .ts-preview .ts-stage{width:100%;height:var(--studio-height);aspect-ratio:3/4;max-height:none;box-shadow:0 24px 44px -22px rgba(4,16,46,.22),0 6px 18px -12px rgba(4,16,46,.12)}
+.ts-studio .ts-card{height:var(--studio-height);padding:24px;gap:10px;border-radius:24px}
+.ts-studio .ts-card::before{display:none}
+.ts-studio .ts-models{margin:0;flex-shrink:0;height:54px}
+.ts-studio .ts-models button{min-height:44px;font-size:14px}
+.ts-studio .ts-card-copy{flex:1;min-height:0;position:relative}
+.ts-studio .ts-card-head{height:28px;margin:0 0 8px}
+.ts-studio .ts-card h3{font-size:28px;line-height:1.12;min-height:0;height:63px;margin:0;text-wrap:initial}
+.ts-studio .ts-card-desc{font-size:15px;line-height:1.45;margin:8px 0 0;min-height:0}
+.ts-studio .ts-card-details{position:absolute;inset:0;z-index:6;padding:48px 18px 18px;background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);overflow:auto}
+.ts-studio .ts-details-btn{position:relative;z-index:7;min-height:44px}
+.ts-studio .ts-finish-controls{margin:0;flex-shrink:0}
+.ts-studio .ts-shape-slot{height:44px;display:grid;align-items:center;margin-bottom:8px}
+.ts-studio .ts-shape-slot>*{grid-area:1/1}
+.ts-studio #shape-summary{font-size:14px;font-weight:500;color:var(--muted)}
+.ts-studio .ts-shape{grid-template-columns:1fr 1fr;gap:8px;margin:0;padding:0;border:0;height:44px}
+.ts-studio .ts-shape button{height:44px;min-height:44px;font-size:13px;padding:0 10px;gap:8px}
+.ts-studio .ts-shape button svg{width:24px;height:24px}
+.ts-studio .ts-finish-head{height:32px;min-height:32px;margin:0;padding:0;border:0;gap:8px;flex-wrap:nowrap}
+.ts-studio .ts-finish-head>.ts-kicker{display:none}
+.ts-studio .ts-finish-head b{font-size:14px;white-space:nowrap}
+.ts-studio .ts-surprise{font-size:12px;min-height:44px}
+.ts-studio .ts-swatches{height:44px;min-height:44px;margin:4px 0 0;gap:8px;flex-wrap:nowrap!important;align-items:center}
+.ts-studio .ts-swatches .sw{height:44px;min-height:44px;width:44px;padding:0;flex:none;justify-content:center;border-radius:50%;font-size:0;gap:0}
+.ts-studio .ts-swatches .sw i{width:28px;height:28px}
+.ts-studio .ts-price-line{height:56px;min-height:56px;align-items:center;flex-shrink:0;margin:0;padding:10px 0 0;border-top:1px solid var(--rule);border-bottom:0}
+.ts-studio .ts-price strong{font-size:30px}
+.ts-studio .ts-price-note{font-size:12px;max-width:21ch}
+.ts-studio .ts-action{min-height:48px;height:48px;flex-shrink:0;margin:0}
+.ts-studio .ts-quote-note{height:18px;font-size:12px;line-height:18px;margin:0}
+@media(min-width:860px) and (max-height:850px){
+ .ts-studio .ts-card-desc{display:none}
+ .ts-studio .ts-card{gap:8px;padding:20px}
+}
+@media(min-width:860px) and (max-width:1100px){
+ .ts-studio .ts-bench{--studio-height:clamp(480px,calc(100svh - 176px),590px);grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:28px}
+ .ts-studio .ts-preview .ts-stage{height:auto;aspect-ratio:3/4}
+ .ts-studio .ts-card{height:auto;min-height:var(--studio-height)}
+ .ts-studio .ts-card-copy{min-height:110px}
+}
+@media(max-width:859px){
+ .ts-studio .ts-bench{display:block;max-width:480px;padding-inline:28px}
+ .ts-studio .ts-preview{display:flex;flex-direction:column;align-items:stretch}
+ .ts-studio .ts-photo-area{order:1;display:grid;justify-items:center}
+ .ts-studio .ts-photo-area>.ts-zoom{right:0;top:auto;bottom:0}
+ .ts-studio .ts-mobile-models{order:0;margin:0 0 16px}
+ .ts-studio .ts-preview .ts-stage{--photo-height:clamp(120px,calc(100svh - 480px),300px);height:var(--photo-height);width:calc(var(--photo-height) * .75);max-width:100%;align-self:center;order:1;border-radius:20px}
+ .ts-studio #mobile-finishes{order:2;padding:0;margin:16px 0 0;display:flex;flex-direction:column}
+ .ts-studio #mobile-finishes .ts-shape{margin:0;padding:0;gap:8px}
+ .ts-studio #mobile-finishes .ts-shape button{height:44px;min-height:44px;font-size:13px;padding:0 8px}
+ .ts-studio #mobile-finishes .ts-shape button svg{width:24px;height:24px}
+ .ts-studio #mobile-finishes .ts-finish-head{height:32px;min-height:32px;gap:8px}
+ .ts-studio #mobile-finishes .ts-surprise{min-height:44px;font-size:12px}
+ .ts-studio #mobile-finishes .ts-swatches{gap:8px;margin:4px 0 0;justify-content:flex-start}
+ .ts-studio #mobile-finishes .ts-price-line{height:56px;min-height:56px;margin:12px 0 0;padding:10px 0 0;border-top:1px solid var(--rule);border-bottom:0}
+ .ts-studio #mobile-finishes .ts-price strong{font-size:28px}
+ .ts-studio #mobile-finishes .ts-price-note{font-size:12px;max-width:21ch}
+ .ts-studio #mobile-finishes .ts-action{height:48px;min-height:48px;margin-top:12px}
+ .ts-studio .ts-card{height:auto;min-height:0;padding:24px;margin-top:36px;gap:0;box-shadow:none;background:var(--mist)}
+ .ts-studio .ts-card-copy{flex:none}
+ .ts-studio .ts-card h3{height:63px;font-size:27px}
+ .ts-studio .ts-card-desc{height:90px;font-size:15px}
+ .ts-studio .ts-quote-note{margin-top:16px}
+}
+@media(max-width:359px){
+ .ts-studio .ts-bench{padding-inline:22px}
+ .ts-studio #mobile-finishes .ts-swatches{gap:2px!important;justify-content:space-between}
+ .ts-studio .ts-price{font-size:14px}
+ .ts-studio .ts-price-note{max-width:18ch}
+}
+@media(max-width:859px) and (max-height:650px){
+ .ts-studio .ts-preview .ts-stage{--photo-height:clamp(100px,calc(100svh - 480px),170px)}
+ .ts-studio .ts-mobile-models{margin-bottom:12px}
+ .ts-studio #mobile-finishes{margin-top:12px}
+}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage",
@@ -2392,7 +2473,7 @@ html.lenis{scroll-behavior:auto}
  </div>
  <div class="ts-wrap ts-bench">
   <div class="ts-preview"><div class="ts-mobile-models" id="mobile-models"></div>
-  <figure class="frame ts-stage" id="product-stage" data-sc-spotlight>
+  <div class="ts-photo-area"><figure class="frame ts-stage" id="product-stage" data-sc-spotlight>
     <div class="ts-scene" id="sceneStack" aria-hidden="true">
       <picture class="on" data-f="gold"><source media="(max-width:859px)" srcset="media/ro/tap-brass-m.webp"><img src="media/ro/tap-brass.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
       <picture data-f="black"><source media="(max-width:859px)" srcset="media/ro/tap-black-m.webp"><img src="media/ro/tap-black.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
@@ -2412,20 +2493,20 @@ html.lenis{scroll-behavior:auto}
     <figcaption id="stageCap">Brushed gold</figcaption>
     <span class="ts-stage-tag" id="stageTag">Explore the finish</span>
     <button type="button" class="ts-zoom" id="zoom" aria-label="Enlarge the selected tap"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
-  </figure>
+  </figure></div>
   <div id="mobile-finishes"></div></div>
   <div class="ts-card" id="studioCard">
    <div class="ts-models" role="group" aria-label="Tap style"><button type="button" data-model="pullout" aria-pressed="true">Pull out</button><button type="button" data-model="classic" aria-pressed="false">Classic</button><button type="button" data-model="filter" aria-pressed="false">Filter tap</button></div>
 
-   <div class="ts-card-head"><span class="ts-kicker" id="model-kicker">The premium mixer</span><button type="button" class="ts-details-btn" id="details-toggle" aria-expanded="false" aria-controls="tap-details">The details</button></div>
+   <div class="ts-card-copy"><div class="ts-card-head"><span class="ts-kicker" id="model-kicker">The premium mixer</span><button type="button" class="ts-details-btn" id="details-toggle" aria-expanded="false" aria-controls="tap-details">The details</button></div>
    <h3 id="model-title">One beautiful tap.<br>Every kind of water.</h3>
    <p class="ts-card-desc" id="model-description">Hot and cold for the kitchen. Purified water on its own lever. A concealed pull out hose gives you that extra reach.</p>
    <div class="ts-card-details" id="tap-details" hidden><ul id="details-list"><li>Hot, cold and filtered water connections</li><li>Separate filtered water control</li><li>Concealed pull out hose</li></ul><p>Filtration system quoted separately. We confirm the connections and clearance before installation.</p></div>
-   <div class="ts-finish-controls" id="finish-controls"><div class="ts-shape" id="classic-shapes" role="group" aria-label="Choose your Classic mixer shape" hidden>
-    <span class="ts-shape-label">Choose your Classic shape <small>2 styles</small></span>
+   </div><div class="ts-finish-controls" id="finish-controls"><div class="ts-shape-slot"><span id="shape-summary">Premium pull out mixer</span><div class="ts-shape" id="classic-shapes" role="group" aria-label="Choose your Classic mixer shape" hidden>
+
     <button type="button" data-shape="gooseneck" aria-pressed="true"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M12 35V15a9 9 0 0 1 18 0v6M7 35h12M9 27h9m-1-5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Gooseneck</span></button>
     <button type="button" data-shape="square" aria-pressed="false"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M12 35V8h19v5M7 35h12M9 27h9m-1-5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Square</span></button>
-   </div><div class="ts-finish-head"><span class="ts-kicker">The finish</span><b id="finish-name" aria-live="polite">Brushed gold</b><button type="button" class="ts-surprise" id="surprise">Surprise me</button></div>
+   </div></div><div class="ts-finish-head"><span class="ts-kicker">The finish</span><b id="finish-name" aria-live="polite">Brushed gold</b><button type="button" class="ts-surprise" id="surprise">Surprise me</button></div>
    <div class="swatches ts-swatches" id="finish-options" role="group" aria-label="Choose a finish"></div></div>
    <div class="ts-price-line"><span class="ts-price" id="price-label">From <strong>$1,050</strong></span><span class="ts-price-note" id="price-note">Installed with your system</span></div>
    <button type="button" class="btn ts-action" data-quote><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Add this tap to my quote</button>
@@ -4907,22 +4988,25 @@ const cutSrc=()=>'media/tap-studio/cut/'+models[model].cut(finish,shape)+'.webp'
 const sceneSrc=(f,m)=>'media/ro/tap-'+finishes[f].scene+(m?'-m':'')+'.webp';
 const selection=()=>models[model].label+(model==='classic'?' ('+shape+')':'')+' · '+finishes[finish].name;
 const stage=$('#product-stage');
-if(mph){
- $('#mobile-models').append($('.ts-models'));
- $('#mobile-finishes').append($('.ts-price-line'),$('#finish-controls'));
- $('#mobile-finishes').append($('.ts-action'));
+const studioMedia=matchMedia('(max-width:859px)');
+const studioModels=$('.ts-models'),studioFinishes=$('#finish-controls'),studioPrice=$('.ts-price-line'),studioAction=$('.ts-action');
+function arrangeStudio(){
+ if(studioMedia.matches){
+  $('#mobile-models').append(studioModels);$('.ts-photo-area').append($('#zoom'));
+  $('#mobile-finishes').append(studioFinishes,studioPrice,studioAction);
+ }else{
+  $('#studioCard').prepend(studioModels);stage.append($('#zoom'));
+  $('.ts-quote-note').before(studioFinishes,studioPrice,studioAction);
+ }
 }
-function keepPreviewInView(){
- if(!mph)return;const r=$('.ts-preview').getBoundingClientRect();
- if(r.top<80||r.top>120||r.bottom>innerHeight-100){const target=$('.ts-preview');glide(target.getBoundingClientRect().top+scrollY-90,.4)}
-}
+arrangeStudio();studioMedia.addEventListener('change',arrangeStudio);
 let imageRequest=0;
 const lifestyleSrc=()=> 'media/tap-studio/polish-nanopro/'+(model==='classic'?'classic-'+shape:model)+'-'+finish+'.webp';
 function showLifestyle(src){
  const request=++imageRequest;stage.setAttribute('aria-busy','true');
  let pic=$$('#lifestyleStack picture').find(p=>p.dataset.src===src);
  if(!pic){pic=document.createElement('picture');pic.dataset.src=src;const source=document.createElement('source');source.media='(max-width:859px)';source.srcset=src.replace('.webp','-m.webp');const im=new Image();im.alt='';pic.append(source,im);$('#lifestyleStack').append(pic);im.src=src}
- pic.querySelector('img').decode().then(()=>{if(request!==imageRequest)return;stage.style.setProperty('--ts-photo-ratio',pic.querySelector('img').naturalWidth+'/'+pic.querySelector('img').naturalHeight);$$('#lifestyleStack picture').forEach(p=>p.classList.toggle('on',p===pic));stage.setAttribute('aria-busy','false')}).catch(()=>{if(request===imageRequest)stage.setAttribute('aria-busy','false')});
+ pic.querySelector('img').decode().then(()=>{if(request!==imageRequest)return;$$('#lifestyleStack picture').forEach(p=>p.classList.toggle('on',p===pic));stage.setAttribute('aria-busy','false')}).catch(()=>{if(request===imageRequest)stage.setAttribute('aria-busy','false')});
 }
 
 
@@ -4938,7 +5022,7 @@ function update(animate=true){
   stage.classList.toggle('cut',!usesScene&&!usesLifestyle);
   stage.classList.toggle('lifestyle',usesLifestyle);
   $('#cutStage').hidden=usesScene||usesLifestyle;
-  if(usesScene){imageRequest++;stage.setAttribute('aria-busy','false');$$('#sceneStack picture').forEach(p=>p.classList.toggle('on',p.dataset.f===finish));const im=$('#sceneStack picture.on img'),request=imageRequest;im.decode().then(()=>{if(request===imageRequest)stage.style.setProperty('--ts-photo-ratio',im.naturalWidth+'/'+im.naturalHeight)}).catch(()=>{})}
+  if(usesScene){imageRequest++;stage.setAttribute('aria-busy','false');$$('#sceneStack picture').forEach(p=>p.classList.toggle('on',p.dataset.f===finish))}
   else if(usesLifestyle)showLifestyle(lifestyleSrc());
   else{imageRequest++;const c=$('#cutImg');c.src='assets/faucets-mixers/'+models[model].cut(finish,shape)+'.webp';c.alt=selection();stage.setAttribute('aria-busy','false')}
   $('#stageTag').textContent='Explore the finish';
@@ -4949,10 +5033,10 @@ function update(animate=true){
   $('#details-list').replaceChildren(...m.details.map(t=>{const li=document.createElement('li');li.textContent=t;return li}));
   $('#quote-image').src=usesLifestyle?lifestyleSrc():usesScene?sceneSrc(finish):big;$('#quote-image').alt=selection();$('#quote-selection').textContent=selection();
   $$('[data-model]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.model===model)));
-  $('#classic-shapes').hidden=model!=='classic';$$('[data-shape]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.shape===shape)));
+  $('#classic-shapes').hidden=model!=='classic';$('#shape-summary').hidden=model==='classic';$('#shape-summary').textContent=m.short;$$('[data-shape]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.shape===shape)));
   /* the swatches: the RO page's own pills, real finish colours, names on a desktop */
   const focused=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.finish;
-  $('#finish-options').replaceChildren(...m.finishes.map(k=>{const b=document.createElement('button');b.type='button';b.className='sw'+(k===finish?' on':'');b.dataset.finish=k;b.setAttribute('aria-label',finishes[k].name);b.setAttribute('aria-pressed',String(k===finish));b.title=finishes[k].name;b.style.setProperty('--f',finishes[k].sw);const i=document.createElement('i');b.append(i,document.createTextNode(finishes[k].name));b.addEventListener('click',()=>{finish=k;update();keepPreviewInView()});return b}));
+  $('#finish-options').replaceChildren(...m.finishes.map(k=>{const b=document.createElement('button');b.type='button';b.className='sw'+(k===finish?' on':'');b.dataset.finish=k;b.setAttribute('aria-label',finishes[k].name);b.setAttribute('aria-pressed',String(k===finish));b.title=finishes[k].name;b.style.setProperty('--f',finishes[k].sw);const i=document.createElement('i');b.append(i,document.createTextNode(finishes[k].name));b.addEventListener('click',()=>{finish=k;update()});return b}));
   if(focused){const b=$(`[data-finish="${finish}"]`);b&&b.focus({preventScroll:true})}
   if(animate&&!reduce){stage.classList.remove('wipe-on');void stage.offsetWidth;stage.classList.add('wipe-on')}
 }
@@ -4964,11 +5048,11 @@ function warmFamily(){
 }
 function setModel(m){if(!models[m])return;model=m;if(!models[model].finishes.includes(finish))finish=models[model].finishes[0];update();warmFamily()}
 
-$$('[data-shape]').forEach(b=>b.addEventListener('click',()=>{shape=b.dataset.shape;update();warmFamily();keepPreviewInView()}));
-$$('[data-model]').forEach(b=>b.addEventListener('click',()=>{setModel(b.dataset.model);keepPreviewInView()}));
+$$('[data-shape]').forEach(b=>b.addEventListener('click',()=>{shape=b.dataset.shape;update();warmFamily()}));
+$$('[data-model]').forEach(b=>b.addEventListener('click',()=>{setModel(b.dataset.model)}));
 $$('[data-pick]').forEach(b=>b.addEventListener('click',()=>{if(b.closest('#finishes'))finish=SWEEP[sweepI].f;setModel(b.dataset.pick)}));
 $('#finish-options').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const a=models[model].finishes;let i=a.indexOf(finish);i=e.key==='Home'?0:e.key==='End'?a.length-1:(i+(e.key==='ArrowRight'?1:-1)+a.length)%a.length;finish=a[i];update();const b=$(`[data-finish="${finish}"]`);b&&b.focus({preventScroll:true})});
-$('#surprise').addEventListener('click',()=>{const a=models[model].finishes.filter(f=>f!==finish);finish=a[Math.floor(Math.random()*a.length)];update();keepPreviewInView()});
+$('#surprise').addEventListener('click',()=>{const a=models[model].finishes.filter(f=>f!==finish);finish=a[Math.floor(Math.random()*a.length)];update()});
 $('#details-toggle').addEventListener('click',()=>{const open=$('#details-toggle').getAttribute('aria-expanded')!=='true';$('#details-toggle').setAttribute('aria-expanded',String(open));$('#tap-details').hidden=!open;$('#details-toggle').textContent=open?'Close the details':'The details'});
 stage.addEventListener('animationend',e=>{if(e.target===stage.querySelector('.ts-metal-wipe'))stage.classList.remove('wipe-on')});
 
