@@ -162,6 +162,11 @@ Every servicing destination uses matching studio artwork. The main servicing pho
 card edge to edge at its natural square ratio, without matting. The homepage rotating product
 cards use the same studio images as the navigation, including the smaller-framed 5-stage shot;
 keep the image square at every visible breakpoint.
+Studio product and service photographs use the canonical `[data-studio-gold]` frame:
+a static 1px masked metallic-gold edge from `--studio-gold`. Apply it to the photo wrapper,
+never bake it into an image or add padding/matting. This includes navigation, hero product
+cards, and the studio photo frames on the RO, whole-house and taps pages. Keep the original
+corner radius and photo geometry; the gold is an overlay, not a new card border or glow.
 Homepage section links fade directly to their destination using the existing page-transition
 style; they must not tween the viewport through intervening sections. The areas destination
 opens its native disclosure before positioning. Preserve mobile unlock, URL history, keyboard

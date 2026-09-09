@@ -213,6 +213,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      names leading, brand fields, no sideways motion anywhere.
      ═══════════════════════════════════════════════════════════ */
   :root{
+    --studio-gold:linear-gradient(135deg,rgba(150,111,48,.64) 0%,rgba(242,220,165,.9) 21%,rgba(165,124,57,.7) 46%,rgba(247,231,186,.9) 72%,rgba(148,108,43,.62) 100%);
     --blue:#0B61F4; --blue-deep:#0846BE; --blue-pale:#E8F0FE; --ink-blue:#04102E;
     /* ⛔ Round 19, JP: "let's just stick to blue and purple. Get rid of the green
        and the other one." The four category colours (green #0A7A47, cyan #0E7490,
@@ -713,6 +714,16 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .ddpanel .ddgrid{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.11fr) minmax(0,1.11fr);gap:30px}
   .ddhero{display:flex;flex-direction:column;min-width:0;align-self:start;border-radius:var(--r-card);overflow:hidden;text-decoration:none;background:var(--mist);color:var(--ink)}
   .ddhero img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;transition:transform .5s var(--e-out)}
+  .ddhero .ddhero-photo{display:block;border-radius:var(--r-card) var(--r-card) 0 0;overflow:hidden}
+  .ddrow .ddthumb{display:block;flex:0 0 auto;border-radius:12px;overflow:hidden}
+  .ddrow .ddthumb img{display:block}
+  /* A one-pixel metal edge, over the photograph: no matting or layout shift.
+     Attribute selectors carry this standard through the extracted site shell. */
+  [data-studio-gold]{position:relative;isolation:isolate}
+  [data-studio-gold]::after{content:"";position:absolute;inset:0;z-index:5;border-radius:inherit;
+    padding:1px;background:var(--studio-gold);pointer-events:none;
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude}
   .ddhero .v{display:none}
   .ddhero .c{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px}
   .ddhero b{display:block;font-size:21px;font-weight:600;line-height:1.2}
@@ -1217,6 +1228,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     height:186px;width:auto;max-width:100%;object-fit:cover;border-radius:16px;
     transition:height .8s var(--e-soft)}
   .hdeck .face .t{grid-column:1;grid-row:1}
+  .hdeck .hdstudio{display:block;grid-column:2;grid-row:1;align-self:center;justify-self:center;max-width:100%;border-radius:16px;overflow:hidden;line-height:0}
+  .hdeck .hdstudio img{display:block}
   /* ⛔ THE OPEN CARD KEEPS THE CLOSED CARD'S GRAMMAR — text left, product
      right. It used to become a centred portrait stack (image above text),
      which is the re-flow JP read as chaotic and the reason the open card was
@@ -4663,13 +4676,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       <div class="ddp" id="p-sys" inert>
         <div class="in">
           <div class="ddcatalog">
-            <a class="ddproduct" href="whole-house-water-filter-sydney"><span class="ddphoto"><img data-src="media/v7/prod-home-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto"><img data-src="media/nav/ro-collection-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Reverse osmosis</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-vs-whole-house-water-filter-sydney"><span class="ddphoto"><img data-src="media/nav/whole-house-ro-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house vs RO</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-plus"><span class="ddphoto"><img data-src="media/nav/five-stage-balanced-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>5-stage</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-premium"><span class="ddphoto"><img data-src="media/ro/card-prem.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>7-stage</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-luxe"><span class="ddphoto"><img data-src="media/ro/card-luxe.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Smart 5-stage</b></span></a>
-            <a class="ddproduct" href="faucets-and-mixers-sydney"><span class="ddphoto"><img data-src="media/tap-studio/card-pullout.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
+            <a class="ddproduct" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/v7/prod-home-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/ro-collection-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Reverse osmosis</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-vs-whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/whole-house-ro-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house vs RO</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-plus"><span class="ddphoto" data-studio-gold><img data-src="media/nav/five-stage-balanced-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>5-stage</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-premium"><span class="ddphoto" data-studio-gold><img data-src="media/ro/card-prem.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>7-stage</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-luxe"><span class="ddphoto" data-studio-gold><img data-src="media/ro/card-luxe.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Smart 5-stage</b></span></a>
+            <a class="ddproduct" href="faucets-and-mixers-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/tap-studio/card-pullout.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
           </div>
         </div>
       </div>
@@ -4677,7 +4690,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       <div class="ddp" id="p-serv" inert>
         <div class="in ddgrid">
           <a class="ddhero" href="#ledger">
-            <img data-src="media/nav/service-prices-studio.webp" alt="" width="760" height="800" loading="lazy" decoding="async">
+            <span class="ddhero-photo" data-studio-gold><img data-src="media/nav/service-prices-studio.webp" alt="" width="760" height="800" loading="lazy" decoding="async"></span>
             <span class="v"></span>
             <span class="c">
               <span><b>Servicing &amp; prices</b><span>What it costs to keep a system running, every year</span></span>
@@ -4686,15 +4699,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           </a>
           <div class="ddcol">
             <span class="ddlab">Owning one</span>
-            <a class="ddrow pic" href="#ledger"><img data-src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="lifetime-warranty"><img data-src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><img data-src="media/nav/cartridge-replacement-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+            <a class="ddrow pic" href="#ledger"><span class="ddthumb" data-studio-gold><img data-src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+            <a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold><img data-src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+            <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold><img data-src="media/nav/cartridge-replacement-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
           </div>
           <div class="ddcol">
             <span class="ddlab">Before you book</span>
-            <a class="ddrow pic" href="#newbuilds"><img data-src="media/nav/new-developments-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="#areas"><img data-src="media/nav/areas-covered-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="how-water-filters-work"><img data-src="media/nav/how-filters-work-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>How water filters work</b><span>The plain version</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+            <a class="ddrow pic" href="#newbuilds"><span class="ddthumb" data-studio-gold><img data-src="media/nav/new-developments-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+            <a class="ddrow pic" href="#areas"><span class="ddthumb" data-studio-gold><img data-src="media/nav/areas-covered-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+            <a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold><img data-src="media/nav/how-filters-work-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
           </div>
         </div>
       </div>
@@ -4759,13 +4772,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   <div class="mlvl" id="ms-sys" data-lvl="sys" inert>
     <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Systems</b></button>
     <div class="ddcatalog">
-            <a class="ddproduct" href="whole-house-water-filter-sydney"><span class="ddphoto"><img src="media/v7/prod-home-studio.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Whole house</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto"><img src="media/nav/ro-collection-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Reverse osmosis</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-vs-whole-house-water-filter-sydney"><span class="ddphoto"><img src="media/nav/whole-house-ro-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house vs RO</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-plus"><span class="ddphoto"><img src="media/nav/five-stage-balanced-studio.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>5-stage</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-premium"><span class="ddphoto"><img src="media/ro/card-prem.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>7-stage</b></span></a>
-            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-luxe"><span class="ddphoto"><img src="media/ro/card-luxe.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Smart 5-stage</b></span></a>
-            <a class="ddproduct" href="faucets-and-mixers-sydney"><span class="ddphoto"><img src="media/tap-studio/card-pullout.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
+            <a class="ddproduct" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/v7/prod-home-studio.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Whole house</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/ro-collection-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Reverse osmosis</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-vs-whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/whole-house-ro-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house vs RO</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-plus"><span class="ddphoto" data-studio-gold><img src="media/nav/five-stage-balanced-studio.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>5-stage</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-premium"><span class="ddphoto" data-studio-gold><img src="media/ro/card-prem.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>7-stage</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-luxe"><span class="ddphoto" data-studio-gold><img src="media/ro/card-luxe.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Smart 5-stage</b></span></a>
+            <a class="ddproduct" href="faucets-and-mixers-sydney"><span class="ddphoto" data-studio-gold><img src="media/tap-studio/card-pullout.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
           </div>
     <a class="mnavask js-open" href="#ask" data-sys="">Book now or request a quote</a>
   </div>
@@ -4773,13 +4786,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   <div class="mlvl" id="ms-serv" data-lvl="serv" inert>
     <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Servicing &amp; prices</b></button>
     <div class="ddcol">
-      <a class="ddrow pic" href="#ledger"><img src="media/nav/service-prices-studio.webp" alt="" width="600" height="600" loading="lazy" decoding="async"><span><b>Servicing &amp; prices</b><span>Service costs at a glance</span></span></a>
-      <a class="ddrow pic" href="#ledger"><img src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="lifetime-warranty"><img src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><img src="media/nav/cartridge-replacement-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="#newbuilds"><img src="media/nav/new-developments-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="#areas"><img src="media/nav/areas-covered-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="how-water-filters-work"><img src="media/nav/how-filters-work-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>How water filters work</b><span>The plain version</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+      <a class="ddrow pic" href="#ledger"><span class="ddthumb" data-studio-gold><img src="media/nav/service-prices-studio.webp" alt="" width="600" height="600" loading="lazy" decoding="async"></span><span><b>Servicing &amp; prices</b><span>Service costs at a glance</span></span></a>
+      <a class="ddrow pic" href="#ledger"><span class="ddthumb" data-studio-gold><img src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+      <a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold><img src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+      <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold><img src="media/nav/cartridge-replacement-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+      <a class="ddrow pic" href="#newbuilds"><span class="ddthumb" data-studio-gold><img src="media/nav/new-developments-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+      <a class="ddrow pic" href="#areas"><span class="ddthumb" data-studio-gold><img src="media/nav/areas-covered-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+      <a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold><img src="media/nav/how-filters-work-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
     </div>
     <!-- the ask closes every level, not just level 0 — a deeper screen that
          ends in 250px of nothing is a screen that asks for a back tap. It is
@@ -4901,7 +4914,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         <button class="tgl" type="button" id="hdTgl" aria-label="Show what is included" aria-expanded="false" aria-controls="hdMore"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
       <button class="face" type="button" id="hdFace" aria-expanded="false" aria-controls="hdMore">
-        <img id="hdImg" src="media/v7/prod-home-studio.webp" alt="" width="600" height="600">
+        <span class="hdstudio" data-studio-gold><img id="hdImg" src="media/v7/prod-home-studio.webp" alt="" width="600" height="600"></span>
         <!-- ⭐ ROUND 63 — TWO FACTS ON THE FACE. NOTHING ELSE.
              JP, 28 Aug: "there's too much jargon going on in the cards and it's
              making it hard to read on the mobile version… I want ours to be
