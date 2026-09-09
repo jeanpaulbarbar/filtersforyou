@@ -680,7 +680,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(max-width:1079px){.util{display:none}}
   .hdr.mini .util{display:none}
   /* Shared navigation, 9 Sep 2026. Photo-first gallery informed by 21st.dev
-     Navbar Menu. One paper surface; no category tabs or decorative washes. */
+     Navbar Menu. Detached glass card; the header keeps its own appearance. */
   .dd{position:relative;display:flex;align-items:center;gap:24px}
   .dd > button{display:inline-flex;align-items:center;gap:7px;min-height:44px;font-size:16px;font-weight:600;color:inherit;background:none;border:0;cursor:pointer;font-family:var(--sans);padding:0}
   .hdr .dd > a{font-size:16px}
@@ -689,38 +689,30 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .dd > button:focus-visible,.dd > a:focus-visible{outline:2px solid currentColor;outline-offset:5px;border-radius:4px}
   .dd .ddbar{position:absolute;left:0;bottom:5px;width:1px;height:2px;background:currentColor;opacity:0;pointer-events:none;transform-origin:left center;transform:translateX(var(--dx,0px)) scaleX(var(--dw,0));transition:transform .4s var(--e-out),opacity .3s ease-in-out}
   .dd.open .ddbar{opacity:1}
-  .ddpanel{position:absolute;top:100%;left:0;right:0;background:var(--paper);color:var(--ink);border-radius:0 0 var(--r-hero) var(--r-hero);box-shadow:var(--shadow-lg);height:var(--ddh,0px);max-height:calc(100dvh - var(--nav-bottom,112px) - 12px);overflow:auto;overscroll-behavior:contain;visibility:hidden;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s linear .4s}
-  .ddpanel.on{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s}
-  body.ddon .hdr{background:var(--paper);color:var(--ink);box-shadow:none;transform:none}
-  body.ddon .hdr .mark{filter:none}
+  .ddpanel{position:fixed;z-index:61;top:var(--nav-bottom,124px);left:24px;right:24px;max-width:1320px;margin-inline:auto;color:var(--ink);height:var(--ddh,0px);visibility:hidden;pointer-events:none;transition:visibility 0s linear .22s}
+  .ddpanel.on{visibility:visible;transition-delay:0s}
+  .ddpanel.on::before{content:"";position:absolute;inset:-14px 0 auto;height:16px;pointer-events:auto}
+  body.ddon .hdr{transform:none}
   .hdr.solid{background:var(--paper);color:var(--ink);box-shadow:0 1px 0 var(--rule)}
   .hdr.hide{box-shadow:none}
   .hdr.solid .mark{filter:none}
-  .hdr.solid .burger,body.ddon .hdr .burger{background:var(--mist)}
+  .hdr.solid .burger{background:var(--mist)}
   .hdr.mini .row{min-height:62px}
   .hdr.mini .mark{height:36px}
-  body.ddon .util,.hdr.solid .util{background:transparent}
+  .hdr.solid .util{background:transparent}
   .ddstage{position:relative}
-  .ddpanel .ddp{position:absolute;inset:0 0 auto;padding:24px 0 26px;opacity:0;visibility:hidden;transform:translateY(8px);pointer-events:none;transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s linear .24s}
-  .ddpanel .ddp.on{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s}
-  .ddpanel .ddcatalog{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
-  .ddpanel .ddgroup:first-child{grid-column:span 3}
-  .ddpanel .ddgroup{min-width:0}
-  .ddpanel .ddheading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin:0 0 12px;font-size:16px;font-weight:700;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
-  .ddpanel .ddheading > span{font-size:20px;font-weight:400;color:var(--blue)}
-  .ddpanel .ddproducts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-  .ddpanel .ddproduct{display:flex;flex-direction:column;min-width:0;text-decoration:none;color:var(--ink);border-radius:var(--r-card)}
-  .ddpanel .ddphoto{display:block;overflow:hidden;border-radius:var(--r-card);background:var(--mist)}
-  .ddpanel .ddproduct img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;transition:transform .5s var(--e-out)}
-  .ddpanel .ddproduct .ddcaption{display:block;padding:15px 2px 9px}
-  .ddpanel .ddproduct b{display:block;font-size:17px;font-weight:600;line-height:1.35;letter-spacing:-.015em}
-  .ddpanel .ddproduct small{display:block;margin-top:5px;font-size:14px;line-height:1.45;color:var(--muted)}
-  .ddpanel .ddfoot{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:22px;padding-top:12px;border-top:1px solid var(--rule)}
-  .ddpanel .ddfoot a{display:inline-flex;align-items:center;gap:16px;min-height:44px;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none}
-  .ddpanel .ddfoot a span{color:var(--blue)}
+  .ddpanel .ddp{position:absolute;inset:0 0 auto;padding:22px;max-height:calc(100dvh - var(--nav-bottom,124px) - 20px);overflow-y:auto;overscroll-behavior:contain;border:1px solid rgba(255,255,255,.8);border-radius:24px;background:rgba(255,254,252,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 12px 38px rgba(15,39,72,.12),0 2px 6px rgba(15,39,72,.04);opacity:0;visibility:hidden;transform:translateY(6px);pointer-events:none;transition:opacity .22s ease-in-out,transform .3s var(--e-out),visibility 0s linear .22s}
+  .ddpanel .ddp.on{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .22s ease-in-out,transform .3s var(--e-out),visibility 0s}
+  .ddpanel .ddp > .in{width:100%;max-width:none;padding:0}
+  .ddpanel .ddcatalog{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:16px}
+  .ddpanel .ddproduct{display:flex;flex-direction:column;min-width:0;text-decoration:none;color:var(--ink);border-radius:16px}
+  .ddpanel .ddphoto,.msheet .ddphoto{display:block;overflow:hidden;border-radius:16px;background:#e9e9e7;aspect-ratio:1}
+  .ddpanel .ddproduct img,.msheet .ddproduct img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s var(--e-out)}
+  .ddpanel .ddproduct .ddcaption,.msheet .ddproduct .ddcaption{display:block;padding:12px 2px 3px}
+  .ddpanel .ddproduct b,.msheet .ddproduct b{display:block;font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.015em}
   .ddpanel .ddgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px}
   .ddhero{display:flex;flex-direction:column;min-width:0;align-self:start;border-radius:var(--r-card);overflow:hidden;text-decoration:none;background:var(--mist);color:var(--ink)}
-  .ddhero img{display:block;width:100%;height:176px;object-fit:cover;transition:transform .5s var(--e-out)}
+  .ddhero img{display:block;width:100%;height:260px;object-fit:contain;background:#e5e1de;transition:transform .5s var(--e-out)}
   .ddhero .v{display:none}
   .ddhero .c{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px}
   .ddhero b{display:block;font-size:21px;font-weight:600;line-height:1.2}
@@ -730,7 +722,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .ddcol{min-width:0}
   .ddlab{display:block;padding:10px 0 12px;font-size:16px;font-weight:700;color:var(--ink)}
   .ddrow{display:flex;align-items:center;gap:16px;padding:12px 0;min-height:82px;border-radius:12px;text-decoration:none;color:var(--ink)}
-  .ddrow img{width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:12px;background:var(--mist)}
+  .ddrow img{width:96px;height:96px;flex:0 0 96px;object-fit:cover;border-radius:12px;background:var(--mist)}
   .ddrow > span{display:block;min-width:0;flex:1}
   .ddrow b{display:block;font-size:16px;font-weight:600;line-height:1.35}
   .ddrow b + span{display:block;font-size:14px;color:var(--muted);line-height:1.4;margin-top:4px}
@@ -747,12 +739,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(min-width:1080px) and (max-width:1279px){
     .hdr .ph{display:none}
     .dd{gap:22px}
-    .ddpanel .ddcatalog{gap:18px}
-    .ddpanel .ddproducts{gap:18px}
-    .ddpanel .ddproduct b{font-size:16px}
+    .ddpanel .ddcatalog{gap:12px}
+    .ddpanel .ddproduct b{font-size:14px}
+    .ddpanel .ddgrid{gap:22px}
   }
   @media(max-width:1079px){.ddpanel{display:none}}
-  /* Phone screens share the same grouping and images. Short screens and text
+  /* Phone screens share the same destinations and images. Short screens and text
      zoom scroll inside the sheet instead of clipping destinations. */
   .msheet{padding:0}
   .msheet .mlvl{position:absolute;inset:0;display:flex;flex-direction:column;padding:calc(94px + env(safe-area-inset-top)) var(--gut) calc(20px + env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;pointer-events:none;transform:translateX(24px);transition:opacity .24s ease-in-out,transform .4s var(--e-out),visibility 0s linear .4s}
@@ -773,7 +765,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .msheet .ddrow b + span{font-size:14px}
   .msheet .ddlab{display:flex;align-items:center;min-height:44px;padding:4px 0;font-size:15px;text-decoration:none;color:var(--ink)}
   .msheet #ms-serv .ddrow{min-height:80px}
-  .msheet #ms-serv .ddrow img{width:64px;height:64px;flex-basis:64px}
+  .msheet #ms-serv .ddrow img{width:88px;height:88px;flex-basis:88px}
+  .msheet .ddcatalog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px;flex:0 0 auto;padding-top:8px}
+  .msheet .ddproduct{display:flex;flex-direction:column;min-width:0;color:var(--ink);text-decoration:none;border-radius:16px}
+  .msheet .ddproduct .ddphoto{width:100%}
   .msheet .mnavask{display:flex;align-items:center;justify-content:center;min-height:48px;flex:0 0 auto;margin-top:18px;padding:12px 18px;background:var(--yellow);color:var(--ink);border-radius:40px;font-size:15px;font-weight:700;text-decoration:none}
   body.mopen .hdr{box-shadow:none}
   @media(prefers-reduced-motion:reduce){
@@ -4668,20 +4663,21 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       <div class="ddp" id="p-sys" inert>
         <div class="in">
           <div class="ddcatalog">
-            <div class="ddgroup"><a class="ddheading" href="reverse-osmosis-water-filter-sydney">Reverse osmosis systems <span aria-hidden="true">↗</span></a><div class="ddproducts"><a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-plus"><span class="ddphoto"><img data-src="media/ro/card-plus.webp" alt="Pure Plus 5 stage" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>5 stage</b><small>Pure Plus</small></span></a>
-<a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-premium"><span class="ddphoto"><img data-src="media/ro/card-prem.webp" alt="Pure Premium 7 stage" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>7 stage</b><small>Pure Premium</small></span></a>
-<a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-luxe"><span class="ddphoto"><img data-src="media/ro/card-luxe.webp" alt="Pure Luxe Smart 5 stage" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Smart 5 stage</b><small>Pure Luxe</small></span></a></div></div>
-            <div class="ddgroup"><a class="ddheading" href="whole-house-water-filter-sydney">Whole house <span aria-hidden="true">↗</span></a><a class="ddproduct" href="whole-house-water-filter-sydney"><span class="ddphoto"><img data-src="media/v7/prod-home-studio.webp" alt="Pure Home Whole house filtration" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house filtration</b><small>Pure Home</small></span></a></div>
-            <div class="ddgroup"><a class="ddheading" href="faucets-and-mixers-sydney">Taps &amp; mixers <span aria-hidden="true">↗</span></a><a class="ddproduct" href="faucets-and-mixers-sydney"><span class="ddphoto"><img data-src="media/tap-studio/card-classic.webp" alt="Find your finish Taps &amp; mixers" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Taps &amp; mixers</b><small>Find your finish</small></span></a></div>
+            <a class="ddproduct" href="whole-house-water-filter-sydney"><span class="ddphoto"><img data-src="media/v7/prod-home-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto"><img data-src="media/nav/ro-collection-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Reverse osmosis</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-vs-whole-house-water-filter-sydney"><span class="ddphoto"><img data-src="media/nav/whole-house-ro-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house vs RO</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-plus"><span class="ddphoto"><img data-src="media/ro/card-plus.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>5-stage</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-premium"><span class="ddphoto"><img data-src="media/ro/card-prem.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>7-stage</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-luxe"><span class="ddphoto"><img data-src="media/ro/card-luxe.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Smart 5-stage</b></span></a>
+            <a class="ddproduct" href="faucets-and-mixers-sydney"><span class="ddphoto"><img data-src="media/tap-studio/card-pullout.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
           </div>
-          <div class="ddfoot"><a href="reverse-osmosis-water-filter-sydney">Explore all reverse osmosis systems <span aria-hidden="true">↗</span></a><a href="reverse-osmosis-vs-whole-house-water-filter-sydney">Reverse osmosis or whole house? <span aria-hidden="true">↗</span></a></div>
         </div>
       </div>
 
       <div class="ddp" id="p-serv" inert>
         <div class="in ddgrid">
           <a class="ddhero" href="#ledger">
-            <img data-src="media/nav/nav-care.webp" alt="" width="760" height="800" loading="lazy" decoding="async">
+            <img data-src="media/nav/service-prices-studio.webp" alt="" width="760" height="800" loading="lazy" decoding="async">
             <span class="v"></span>
             <span class="c">
               <span><b>Servicing &amp; prices</b><span>What it costs to keep a system running, every year</span></span>
@@ -4690,8 +4686,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           </a>
           <div class="ddcol">
             <span class="ddlab">Owning one</span>
-            <a class="ddrow pic" href="#ledger"><img data-src="media/nav/t-service.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="lifetime-warranty"><img data-src="media/nav/t-warranty.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+            <a class="ddrow pic" href="#ledger"><img data-src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+            <a class="ddrow pic" href="lifetime-warranty"><img data-src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
             <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><img data-src="media/nav/t-cartridge.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
           </div>
           <div class="ddcol">
@@ -4762,19 +4758,24 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 
   <div class="mlvl" id="ms-sys" data-lvl="sys" inert>
     <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Systems</b></button>
-    <div class="ddcol"><a class="ddlab" href="reverse-osmosis-water-filter-sydney">Reverse osmosis systems ↗</a><a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-plus"><img src="media/ro/card-plus.webp" alt="Pure Plus 5 stage" width="600" height="600" loading="lazy" decoding="async"><span><b>5 stage</b><span>Pure Plus</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-<a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-premium"><img src="media/ro/card-prem.webp" alt="Pure Premium 7 stage" width="600" height="600" loading="lazy" decoding="async"><span><b>7 stage</b><span>Pure Premium</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-<a class="ddrow" href="reverse-osmosis-water-filter-sydney#pure-luxe"><img src="media/ro/card-luxe.webp" alt="Pure Luxe Smart 5 stage" width="600" height="600" loading="lazy" decoding="async"><span><b>Smart 5 stage</b><span>Pure Luxe</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></div>
-    <div class="ddcol"><a class="ddrow" href="whole-house-water-filter-sydney"><img src="media/v7/prod-home-studio.webp" alt="Pure Home Whole house filtration" width="600" height="600" loading="lazy" decoding="async"><span><b>Whole house filtration</b><span>Pure Home</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-<a class="ddrow" href="faucets-and-mixers-sydney"><img src="media/tap-studio/card-classic.webp" alt="Find your finish Taps &amp; mixers" width="600" height="600" loading="lazy" decoding="async"><span><b>Taps &amp; mixers</b><span>Find your finish</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></div>
+    <div class="ddcatalog">
+            <a class="ddproduct" href="whole-house-water-filter-sydney"><span class="ddphoto"><img src="media/v7/prod-home-studio.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Whole house</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto"><img src="media/nav/ro-collection-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Reverse osmosis</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-vs-whole-house-water-filter-sydney"><span class="ddphoto"><img src="media/nav/whole-house-ro-studio.webp" alt="" width="600" height="600" decoding="async"></span><span class="ddcaption"><b>Whole house vs RO</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-plus"><span class="ddphoto"><img src="media/ro/card-plus.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>5-stage</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-premium"><span class="ddphoto"><img src="media/ro/card-prem.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>7-stage</b></span></a>
+            <a class="ddproduct" href="reverse-osmosis-water-filter-sydney#pure-luxe"><span class="ddphoto"><img src="media/ro/card-luxe.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Smart 5-stage</b></span></a>
+            <a class="ddproduct" href="faucets-and-mixers-sydney"><span class="ddphoto"><img src="media/tap-studio/card-pullout.webp" alt="" width="600" height="600" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
+          </div>
     <a class="mnavask js-open" href="#ask" data-sys="">Book now or request a quote</a>
   </div>
 
   <div class="mlvl" id="ms-serv" data-lvl="serv" inert>
     <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Servicing &amp; prices</b></button>
     <div class="ddcol">
-      <a class="ddrow pic" href="#ledger"><img src="media/nav/t-service.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="lifetime-warranty"><img src="media/nav/t-warranty.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+      <a class="ddrow pic" href="#ledger"><img src="media/nav/service-prices-studio.webp" alt="" width="600" height="600" loading="lazy" decoding="async"><span><b>Servicing &amp; prices</b><span>Service costs at a glance</span></span></a>
+      <a class="ddrow pic" href="#ledger"><img src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+      <a class="ddrow pic" href="lifetime-warranty"><img src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
       <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><img src="media/nav/t-cartridge.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
       <a class="ddrow pic" href="#newbuilds"><img src="media/nav/t-newdev.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
       <a class="ddrow pic" href="#areas"><img src="media/nav/t-areas.webp" alt="" width="112" height="112" loading="lazy" decoding="async"><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
@@ -6836,22 +6837,21 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   var dd = document.getElementById('dd');
   var ddpanel = document.getElementById('ddpanel');
   if (dd && ddpanel){
+    /* The glass needs its own layer outside the named header view-transition
+       root; otherwise Chromium cannot blur the page behind the floating card. */
+    document.body.appendChild(ddpanel);
     var ddBtns  = [].slice.call(dd.querySelectorAll('.ddt'));
     var ddPanes = [].slice.call(ddpanel.querySelectorAll('.ddp'));
     var ddBar   = dd.querySelector('.ddbar');
     var ddCur   = null;
 
-    /* ⛔ THE HEIGHT IS MEASURED, NEVER GUESSED. The sheet's whole point is that
-       it MORPHS from the Systems pane to the Servicing one instead of cutting
-       (which is exactly what C&C do — their submenu's computed transition is
-       `visibility steps(1, start)`). Both panes are absolute and stacked, so
-       the container has no height of its own: --ddh is the live offsetHeight of
-       whichever pane is showing, and `height` is what animates. A hard-coded
-       height would be wrong the moment a row is added or the type wraps. */
+    /* The wrapper never animates. Each detached pane owns its surface, so
+       changing menus cannot resize or recolour the header. Measure against
+       the header, never against a pane's animated transform. */
     function ddMeasure(){
+      ddpanel.style.setProperty('--nav-bottom', Math.max(0, document.getElementById('hdr').getBoundingClientRect().bottom + 12) + 'px');
       var pane = ddCur && document.getElementById(ddCur);
       if (pane) ddpanel.style.setProperty('--ddh', pane.offsetHeight + 'px');
-      ddpanel.style.setProperty('--nav-bottom', Math.max(0, ddpanel.getBoundingClientRect().top) + 'px');
     }
     /* the bar is one 1px element that TRANSLATES and SCALES to the live
        trigger — a transform, never a layout, so it can ride --e-out */
@@ -6910,13 +6910,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     dd.addEventListener('focusin', ddFeed);
 
     var ddHover = matchMedia('(hover:hover) and (pointer:fine)').matches;
-    /* Round 13, kept verbatim in spirit: closing was instant, so any wobble on
-       the way to the panel killed it. Opening stays immediate; closing waits
-       ~220ms and is cancelled the moment you come back — the menu "sticks
-       there" the way JP described C&C's. Moving BETWEEN the two triggers is not
-       a close at all, it is the morph. */
-    var ddT = null;
-    var ddCancel = function(){ if (ddT){ clearTimeout(ddT); ddT = null; } };
+    /* A short hover intent avoids accidental openings. Exit grace and the
+       transparent gap bridge keep diagonal movement into the card forgiving. */
+    var ddT = null, ddIntent = null;
+    var ddCancel = function(){ clearTimeout(ddT); clearTimeout(ddIntent); ddT = null; ddIntent = null; };
     var ddClose  = function(){ ddCancel(); ddT = setTimeout(function(){ if (!ddpanel.contains(document.activeElement)) ddSet(null); ddT = null; }, 240); };
 
     ddBtns.forEach(function(b){
@@ -6926,7 +6923,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         ddCancel();
         ddSet(ddCur === name ? null : name);
       });
-      if (ddHover) b.addEventListener('mouseenter', function(){ ddCancel(); ddSet(name); });
+      if (ddHover){
+        b.addEventListener('mouseenter', function(){ ddCancel(); ddIntent = setTimeout(function(){ ddIntent = null; ddSet(name); }, 90); });
+        b.addEventListener('mouseleave', function(){ clearTimeout(ddIntent); ddIntent = null; });
+      }
       /* ⛔ TAB FROM A TRIGGER MUST LAND IN THE SHEET. The sheet is a sibling of
          .row (it spans the full header width, so it cannot live inside .dd), and
          DOM order would otherwise send Tab to the phone number — the whole menu
@@ -6949,13 +6949,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     document.addEventListener('focusin', function(e){
       if (!ddCur) return;
       if (ddpanel.contains(e.target)) ddCancel();
-      if (!dd.contains(e.target) && !ddpanel.contains(e.target)) ddSet(null);
+      if (!dd.contains(e.target) && !ddpanel.contains(e.target)){ ddCancel(); ddSet(null); }
     });
     addEventListener('click', function(e){
-      if (!dd.contains(e.target) && !ddpanel.contains(e.target)) ddSet(null);
+      if (!dd.contains(e.target) && !ddpanel.contains(e.target)){ ddCancel(); ddSet(null); }
     });
     addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && ddCur){ var b = dd.querySelector('.ddt[aria-expanded="true"]'); ddSet(null); if (b) b.focus(); }
+      if (e.key === 'Escape' && (ddCur || ddIntent)){ ddCancel(); var b = dd.querySelector('.ddt[aria-expanded="true"]'); ddSet(null); if (b) b.focus(); }
     });
     ddpanel.addEventListener('keydown', function(e){
       if (e.key !== 'Tab' || !ddCur) return;
@@ -6977,6 +6977,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     if ('ResizeObserver' in window){
       var ddObserver = new ResizeObserver(ddMeasure);
       ddPanes.forEach(function(p){ ddObserver.observe(p); });
+      ddObserver.observe(document.getElementById('hdr'));
     }
     if (document.fonts) document.fonts.ready.then(ddMeasure);
     /* a resize changes both numbers the sheet is holding — the pane's height

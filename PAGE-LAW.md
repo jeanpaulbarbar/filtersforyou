@@ -148,12 +148,16 @@ in `page-law.py` will say so if a page was changed and never re-probed.
 The RO page is the same: `ro/` → `build-ro.py` → `cutover-ro.py`.
 
 ## SHARED NAVIGATION — 9 September 2026
-The navigation source is still `index.html`. Systems shows the three RO studio photographs
-together, followed by whole house and taps, without category tabs. Taps & mixers links directly
-to `faucets-and-mixers-sydney` in the desktop bar and mobile menu. The opened header, review
-strip and dropdown share one paper surface. Mobile uses the same destinations and photographs;
-short screens scroll inside the menu so no destination is clipped. Preserve keyboard focus,
-Escape, delayed pointer exit, reduced motion and scroll restoration when revising it.
+The navigation source is still `index.html`. Desktop dropdowns are separate floating glass
+cards with a 12px gap below the header. Opening them must not recolour or resize the header or
+review strip. Only the pane fades and settles 6px; its transparent wrapper does not animate.
+Systems has seven picture-and-name destinations, without category headings or bottom links:
+whole house, RO overview, whole house vs RO, 5-stage, 7-stage, smart 5-stage, and taps & mixers.
+Use the RO collection studio shot for its overview and the gold studio tap. Taps & mixers also
+links directly to `faucets-and-mixers-sydney` in the main bar. Mobile uses an opaque, two-column
+photo gallery with the same destinations; short screens scroll inside the active level.
+Preserve keyboard focus, Escape, hover intent, the gap bridge, delayed pointer exit, reduced
+motion and scroll restoration. Higgsfield imagery uses Nano Banana Pro unless JP specifies otherwise.
 
 The six themed pages are `index.html`, `humm.html`, `whole-house-water-filter-sydney.html`,
 `reverse-osmosis-water-filter-sydney.html`, `watermark-certified-water-filter-sydney.html` and
