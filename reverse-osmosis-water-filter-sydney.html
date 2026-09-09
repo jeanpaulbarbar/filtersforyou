@@ -3114,6 +3114,8 @@ body.dopen .drawer{transform:none}
   ]
 }
 </script>
+<link rel="stylesheet" href="assets/css/product-hero-card.css">
+<script src="assets/js/product-hero-card.js" defer></script>
 </head>
 <body>
 
@@ -3327,11 +3329,11 @@ body.dopen .drawer{transform:none}
     <h1 id="heroLine" aria-label="Reverse osmosis, installed across Sydney."><span aria-hidden="true"><span class="hw"><span class="hch">R</span><span class="hch">e</span><span class="hch">v</span><span class="hch">e</span><span class="hch">r</span><span class="hch">s</span><span class="hch">e</span></span> <span class="hw"><span class="hch">o</span><span class="hch">s</span><span class="hch">m</span><span class="hch">o</span><span class="hch">s</span><span class="hch">i</span><span class="hch">s</span><span class="hch">,</span></span> <span class="hw"><span class="hch">i</span><span class="hch">n</span><span class="hch">s</span><span class="hch">t</span><span class="hch">a</span><span class="hch">l</span><span class="hch">l</span><span class="hch">e</span><span class="hch">d</span></span> <span class="hw"><span class="hch">a</span><span class="hch">c</span><span class="hch">r</span><span class="hch">o</span><span class="hch">s</span><span class="hch">s</span></span> <span class="hw"><span class="hch">S</span><span class="hch">y</span><span class="hch">d</span><span class="hch">n</span><span class="hch">e</span><span class="hch">y</span><span class="hch">.</span></span></span></h1>
     <p class="lede">Pure water. Your way. Three systems for the water you drink, fitted under the sink on their own tap by a licensed plumber.</p>
   </div>
-  <div class="ocardwrap"><div class="ocard" id="ocard" aria-live="polite">
+  <div class="ocardwrap"><div class="ocard" id="ocard" data-product-card aria-live="polite">
     <div class="ocdots" role="tablist" aria-label="Choose a system">
-      <button type="button" role="tab" class="on" aria-selected="true" aria-label="Pure Plus" data-i="0"><i></i></button>
-      <button type="button" role="tab" aria-selected="false" aria-label="Pure Premium" data-i="1"><i></i></button>
-      <button type="button" role="tab" aria-selected="false" aria-label="Pure Luxe" data-i="2"><i></i></button>
+      <button type="button" role="tab" class="on" aria-selected="true" aria-label="5-stage Pure Plus" data-i="0"><span>5-stage</span></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="7-stage Pure Premium" data-i="1"><span>7-stage</span></button>
+      <button type="button" role="tab" aria-selected="false" aria-label="Smart 5-stage Pure Luxe" data-i="2"><span>Smart 5-stage</span></button>
     </div>
     <div class="ochead">
       <span class="oth" data-studio-gold><img id="ocImg" src="media/nav/five-stage-balanced-studio.webp" alt="The Pure Plus five stage reverse osmosis system, studio shot" width="600" height="600"></span>
@@ -5469,12 +5471,16 @@ body.dopen .drawer{transform:none}
     }
     apply(0);
     dots.forEach(function(b){ b.addEventListener('click', function(){ held = true; heldT = Date.now(); set(parseInt(b.getAttribute('data-i'), 10)); }); });
+    dots.forEach(function(b,k){b.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?(k+1)%dots.length:e.key==='ArrowLeft'?(k+dots.length-1)%dots.length:e.key==='Home'?0:e.key==='End'?dots.length-1:-1;
+      if(n<0)return;e.preventDefault();dots[n].focus();dots[n].click();
+    });});
     card.addEventListener('mouseenter', function(){ hover = true; });
     card.addEventListener('mouseleave', function(){ hover = false; });
     /* a tap on the card face rests the deck (JP: "pauses on hover or tap"); it lets go after twelve seconds */
     card.addEventListener('pointerdown', function(e){ if (e.pointerType === 'mouse') return; if (e.target.closest('button')) return; held = !held; heldT = Date.now(); }, {passive:true});
     if (!reduce) setInterval(function(){
-      if (hover || busy || document.body.classList.contains('dopen') || document.hidden) return;
+      if (hover || busy || card.contains(document.activeElement) || document.body.classList.contains('dopen') || document.hidden) return;
       if (held && Date.now() - heldT < 12000) return;
       held = false;
       if (scrollY > innerHeight * .8) return;

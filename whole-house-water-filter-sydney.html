@@ -1934,6 +1934,8 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
 }
 /* /ESTATE:CSS */
 </style>
+<link rel="stylesheet" href="assets/css/product-hero-card.css">
+<script src="assets/js/product-hero-card.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -2373,8 +2375,10 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
       <img class="hph" src="media/home-hero-day.webp" alt="The whole house water filtration system installed at the front fence of a modern Sydney home, pressure gauges on top and a garden bed around it" width="2200" height="1228" fetchpriority="high">
     </picture>
     <!-- Generated Nano Banana Pro lifestyle scenes, 9 Sep 2026; original opener retained. -->
-    <picture class="wh-slide" data-src="media/hero-scenes/home-exterior-4k.webp" data-srcm="media/hero-scenes/home-exterior-m.webp" data-alt="A whole-house filter beside the landscaped entrance of a contemporary Sydney home"></picture>
+    <picture class="wh-slide" data-src="media/hero-scenes/home-exterior-visible-4k.webp" data-srcm="media/hero-scenes/home-exterior-visible-m.webp" data-alt="A stainless whole-house filter and its three pressure gauges beside a garden courtyard wall"></picture>
     <picture class="wh-slide" data-src="media/hero-scenes/home-family-4k.webp" data-srcm="media/hero-scenes/home-family-m.webp" data-alt="A family sharing a glass of water in a warm oak kitchen overlooking their garden"></picture>
+    <picture class="wh-slide" data-src="media/v7/water-child.webp" data-srcm="media/v7/water-child-m.webp" data-width="2000" data-height="1131" data-alt="A child's cupped hands beneath a running kitchen tap"></picture>
+    <picture class="wh-slide" data-src="media/v7/family.webp" data-srcm="media/v7/family-m.webp" data-width="2000" data-height="1131" data-alt="A family sharing breakfast and glasses of water in a bright kitchen"></picture>
     <button class="wh-slideshow-pause" type="button" aria-label="Pause the background slideshow" aria-pressed="false"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg></button>
     <div class="veil"></div>
     <div class="in copy">
@@ -2385,7 +2389,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     <div class="in" style="position:absolute;left:0;right:0;bottom:0;pointer-events:none">
       <span class="cue" style="pointer-events:auto"><span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M4.5 9.5 8 13l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Scroll to explore</span>
     </div>
-    <div class="ocardwrap"><div class="ocard" id="ocard">
+    <div class="ocardwrap"><div class="ocard" id="ocard" data-product-card>
       <div class="ochead">
         <span class="oth" data-studio-gold><img src="media/v7/prod-home-studio.webp" alt="" width="1200" height="1200" loading="lazy"></span>
         <span class="ot">
@@ -6003,7 +6007,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     var pic=pics[n];if(loading[n])return loading[n];if(pic.querySelector('img'))return Promise.resolve();
     loading[n]=new Promise(function(resolve,reject){
       var source=document.createElement('source');source.media='(max-width:859px)';source.srcset=pic.dataset.srcm;
-      var img=new Image();img.className='hph';img.alt=pic.dataset.alt;img.width=3840;img.height=2160;img.decoding='async';
+      var img=new Image();img.className='hph';img.alt=pic.dataset.alt;img.width=Number(pic.dataset.width)||3840;img.height=Number(pic.dataset.height)||2160;img.decoding='async';
       img.onload=function(){img.decode().catch(function(){}).then(resolve);};img.onerror=function(){source.remove();img.remove();delete loading[n];reject(new Error('Background image unavailable'));};
       pic.appendChild(source);pic.appendChild(img);img.src=pic.dataset.src;
     });return loading[n];

@@ -1,0 +1,60 @@
+/* Shared product-page hero card. Homepage deck is deliberately outside this scope.
+   21st.dev Single Pricing Card (bankkroll, 1775): quiet sections, clear action hierarchy.
+   Native CSS implementation; no framework or animation dependency. */
+:is(main, #tap-main) .hero [data-product-card]{width:min(480px,43vw);right:32px;bottom:32px;display:flex;flex-direction:column;background:#FFFEFC;color:var(--ink);border:1px solid rgba(255,255,255,.85);border-radius:26px;overflow:hidden;box-shadow:0 3px 8px rgba(4,16,46,.04),0 20px 55px -18px rgba(4,16,46,.28)}
+:is(main, #tap-main) .hero [data-product-card] .ochead{order:1;grid-template-columns:108px minmax(0,1fr);gap:18px;align-items:center;padding:20px;background:transparent;border-radius:0;box-shadow:none}
+:is(main, #tap-main) .hero [data-product-card] .ochead .oth{width:108px;height:108px;border-radius:18px;flex:none}
+:is(main, #tap-main) .hero [data-product-card] .ochead .ot{min-width:0}
+:is(main, #tap-main) .hero [data-product-card] .ochead .ot b{font-size:21px;line-height:1.25;font-weight:600;letter-spacing:-.025em;text-wrap:balance}
+:is(main, #tap-main) .hero [data-product-card] .ochead .ot > span{font-size:15px;line-height:1.4;margin-top:7px;font-weight:400}
+:is(main, #tap-main) .hero [data-product-card] .ochead .ot .pure{color:var(--ink);font-weight:600}
+:is(main, #tap-main) .hero [data-product-card] .ochead .ot .amt{font-size:22px;font-weight:700;letter-spacing:-.035em;margin-top:10px;line-height:1.2}
+:is(main, #tap-main) .hero [data-product-card] .ochead .ot .amt i{font-size:13px;line-height:1.4;font-weight:400}
+:is(main, #tap-main) .hero [data-product-card] .ocdots{position:relative;inset:auto;order:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin:0 20px 16px;padding:3px;border-radius:12px;background:#F0F2F3;box-shadow:none}
+:is(main, #tap-main) .hero [data-product-card] .ocdots button{width:auto;height:38px;min-width:0;border-radius:9px;font-family:inherit;font-size:13px;font-weight:600;color:var(--muted);transition:background .25s ease,color .25s ease,box-shadow .25s ease}
+:is(main, #tap-main) .hero [data-product-card] .ocdots button i{display:none}
+:is(main, #tap-main) .hero [data-product-card] .ocdots button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(4,16,46,.1)}
+:is(main, #tap-main) .hero [data-product-card] .ocspec{order:3;display:grid;gap:12px;padding:0 20px 20px;margin:0;list-style:none}
+:is(main, #tap-main) .hero [data-product-card] .ocspec li{font-size:15px;line-height:1.4;font-weight:400;gap:11px;align-items:flex-start;color:var(--muted)}
+:is(main, #tap-main) .hero [data-product-card] .ocspec li b{font-weight:600;color:var(--ink)}
+:is(main, #tap-main) .hero [data-product-card] .ocspec i{width:18px;height:20px;flex:0 0 18px;border-radius:0;background:transparent;color:#60778E;margin-top:1px}
+:is(main, #tap-main) .hero [data-product-card] .ocspec i svg{width:18px;height:18px}
+:is(main, #tap-main) .hero [data-product-card] .ocfoot{order:4;display:flex;flex-direction:column;align-items:stretch;gap:14px;padding:15px 20px 20px;background:transparent;border-radius:0;border-top:1px solid rgba(15,39,72,.09)}
+:is(main, #tap-main) .hero [data-product-card] .ocproof{display:flex;justify-content:center;align-items:center;gap:9px}
+:is(main, #tap-main) .hero [data-product-card] .ocproof > b{font-size:19px;line-height:1.2;font-weight:600;letter-spacing:-.03em}
+:is(main, #tap-main) .hero [data-product-card] .ocproof .ocp{display:flex;flex-direction:row;align-items:center;gap:9px;font-size:12px;font-weight:400;line-height:1.2}
+:is(main, #tap-main) .hero [data-product-card] .ocproof .ocp > span{gap:4px;white-space:nowrap}
+:is(main, #tap-main) .hero [data-product-card] .stars5 svg{width:12px;height:12px}
+:is(main, #tap-main) .hero [data-product-card] .gicon{width:14px;height:14px;display:block}
+:is(main, #tap-main) .hero [data-product-card] .ocfoot .btn{width:100%;flex:none;justify-content:center;min-height:52px;padding:9px 18px;font-size:15px;line-height:1.3}
+:is(main, #tap-main) .hero [data-product-card] .ocfoot .btn > i{width:30px;height:30px}
+/* Reserve the tallest RO variant so selection never nudges the card or headline. */
+main .hero [data-product-card]:has(.ocdots){min-height:474px}
+main .hero [data-product-card]:has(.ocdots) .ocfoot{margin-top:auto}
+@media(min-width:860px) and (max-width:1100px){
+  main .hero [data-product-card]:has(.ocdots){min-height:486px}
+  :is(main, #tap-main) .hero [data-product-card]{width:410px;right:24px;bottom:24px}
+  :is(main, #tap-main) .hero [data-product-card] .ochead{grid-template-columns:92px minmax(0,1fr);gap:14px;padding:18px}
+  :is(main, #tap-main) .hero [data-product-card] .ochead .oth{width:92px;height:92px}
+  :is(main, #tap-main) .hero [data-product-card] .ochead .ot b{font-size:19px}
+}
+@media(max-width:859px){
+  main .hero [data-product-card]:has(.ocdots){min-height:301px}
+  main .hero [data-product-card]:has(.ocdots) .ochead{min-height:139px}
+  :is(main, #tap-main) .hero:has([data-product-card]) .copy{bottom:calc(var(--product-card-height,230px) + 36px + env(safe-area-inset-bottom))}
+  :is(main, #tap-main) .hero [data-product-card]{position:relative;inset:auto;width:100%;margin:0;border-radius:22px;background:#FFFEFC;box-shadow:0 12px 32px -16px rgba(4,16,46,.35)}
+  :is(main, #tap-main) .hero [data-product-card] .ochead{grid-template-columns:78px minmax(0,1fr);gap:12px;padding:12px}
+  :is(main, #tap-main) .hero [data-product-card] .ochead .oth{width:78px;height:78px;border-radius:14px}
+  :is(main, #tap-main) .hero [data-product-card] .ochead .ot b{font-size:16px;line-height:1.25;letter-spacing:-.02em;text-wrap:initial}
+  :is(main, #tap-main) .hero [data-product-card] .ochead .ot > span{font-size:15px;line-height:1.3;margin-top:4px}
+  :is(main, #tap-main) .hero [data-product-card] .ochead .ot .amt{font-size:19px;margin-top:6px}
+  :is(main, #tap-main) .hero [data-product-card] .ochead .ot .amt i{font-size:12px}
+  :is(main, #tap-main) .hero [data-product-card] .ocdots{margin:0 12px 12px;padding:2px;border-radius:11px}
+  :is(main, #tap-main) .hero [data-product-card] .ocdots button{height:44px;font-size:12px}
+  :is(main, #tap-main) .hero [data-product-card] .ocspec{display:none}
+  :is(main, #tap-main) .hero [data-product-card] .ocfoot{padding:10px 12px 12px;gap:10px}
+  :is(main, #tap-main) .hero [data-product-card] .ocproof > b{font-size:16px}
+  :is(main, #tap-main) .hero [data-product-card] .ocproof .ocp{font-size:11px;gap:7px}
+  :is(main, #tap-main) .hero [data-product-card] .ocfoot .btn{min-height:48px;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){:is(main, #tap-main) .hero [data-product-card] .ocdots button{transition:none}}

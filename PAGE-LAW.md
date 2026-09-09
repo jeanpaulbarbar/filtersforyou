@@ -172,6 +172,13 @@ style; they must not tween the viewport through intervening sections. The areas 
 opens its native disclosure before positioning. Preserve mobile unlock, URL history, keyboard
 focus, reduced-motion and non-View-Transition fallbacks when changing this router.
 
+RO, whole-house and taps hero product cards share `assets/css/product-hero-card.css` and
+`assets/js/product-hero-card.js`, scoped to `[data-product-card]`. Keep the paper surface,
+quiet review row, full-width action and existing gold-edged studio photo. RO selection is
+labelled and keyboard operable. The mobile heading clears the measured card height, including
+every product selection. The homepage deck is a separate, approved design; do not restyle it
+through these shared product-page rules. Edit page source parts and rebuild, not generated HTML.
+
 The six themed pages are `index.html`, `humm.html`, `whole-house-water-filter-sydney.html`,
 `reverse-osmosis-water-filter-sydney.html`, `watermark-certified-water-filter-sydney.html` and
 `faucets-and-mixers-sydney.html`. Restamp all five inner pages whenever the source navigation
