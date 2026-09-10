@@ -4156,7 +4156,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     if (mph){ driveRoomsPhone(); return; }
     var p = P(roomsAct), sig = [];
     if (!mosOn && p >= MOSAIC){ mosOn = true; mosT0 = performance.now(); }
-    else if (mosOn && p < MOSAIC - .07){ mosOn = false; }    
+    else if (mosOn && !reduce && p < MOSAIC - .07){ mosOn = false; }    
     var now = performance.now();
     var W = deck.clientWidth, H = deck.clientHeight, g = 10;
     rooms.forEach(function(r, i){
@@ -4948,6 +4948,8 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     mosOn = true; mosT0 = -1e7;               
     rooms.forEach(function(r, i){ r.style.opacity = 1; });
     driveRooms();
+    addEventListener('scroll', driveRooms, {passive:true});
+    addEventListener('resize', function(){ vh = VH(); geo = null; driveRooms(); }, {passive:true});
     relLines.forEach(function(l){ l.style.setProperty('--sw', 1); });
     months.forEach(function(m){ m.classList.add('on'); });
     if (beam) beam.style.transform = 'scaleX(1)';
@@ -5293,7 +5295,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   },6000);
 })();
 
- 
+/* FFY TRACKING */
 (function(){
   window.ffyTrack = function(name, params){
     try {
