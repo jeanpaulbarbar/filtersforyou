@@ -8,7 +8,7 @@
  const care=root.querySelector('#ledger'),finish=root.querySelector('#taps');
  const costs=[...care.querySelectorAll('[data-hp-cost]')];
  const carePics=[...care.querySelectorAll('[data-hp-care-photo]')],careDecoded=new Map();
- let carePhotoVersion=0;
+ let carePhotoVersion=0,careNear=false,finishNear=false;
  function decodeCare(i){
    if(!careDecoded.has(i)){const img=carePics[i].querySelector('img');img.loading='eager';careDecoded.set(i,img.decode().then(()=>true).catch(()=>{careDecoded.delete(i);return false}));}
    return careDecoded.get(i);
@@ -32,13 +32,13 @@
    return decoded.get(i);
  }
  function setCare(i){
-   if(currentCare===i)return;currentCare=i;showCarePhoto(i);
+   if(currentCare===i)return;currentCare=i;if(careNear)showCarePhoto(i);
    costs.forEach((el,n)=>{el.classList.toggle('on',n===i);if(!reduce){el.inert=n!==i;el.setAttribute('aria-hidden',String(n!==i));}});
    careNav.forEach((el,n)=>{el.classList.toggle('on',n===i);el.setAttribute('aria-current',String(n===i));});
    care.querySelector('[data-sc-stage]').dataset.scVerifyState='care-'+i;
  }
  async function setFinish(i){
-   wantedFinish=i;if(currentFinish===i)return;
+   wantedFinish=i;if(!finishNear||currentFinish===i)return;
    const ticket=++version;
    const loaded=await decodePhoto(i);if(!loaded||ticket!==version||wantedFinish!==i)return;
    currentFinish=i;
@@ -67,8 +67,8 @@
  }
  if(!ready){careNav.forEach(b=>b.hidden=true);}
  setCare(0);setFinish(0);
- new IntersectionObserver(entries=>{if(entries[0].isIntersecting)carePics.forEach((_,i)=>decodeCare(i));},{rootMargin:'150% 0px'}).observe(care);
- new IntersectionObserver(entries=>{if(entries[0].isIntersecting)pics.forEach((_,i)=>decodePhoto(i));},{rootMargin:'150% 0px'}).observe(finish);
+ new IntersectionObserver(entries=>{careNear=entries[0].isIntersecting;if(careNear){showCarePhoto(currentCare);carePics.forEach((_,i)=>decodeCare(i));}},{rootMargin:'150% 0px'}).observe(care);
+ new IntersectionObserver(entries=>{finishNear=entries[0].isIntersecting;if(finishNear){setFinish(wantedFinish);pics.forEach((_,i)=>decodePhoto(i));}},{rootMargin:'150% 0px'}).observe(finish);
  function jump(el,i){
    if(reduce||!ready){if(el===finish)setFinish(i);return;}
    const top=el.getBoundingClientRect().top+scrollY,travel=el.offsetHeight-innerHeight;
@@ -76,7 +76,7 @@
  }
  careNav.forEach((b,i)=>b.addEventListener('click',()=>jump(care,i)));
  finishNav.forEach((b,i)=>b.addEventListener('click',()=>jump(finish,i)));
- addEventListener('scroll',request,{passive:true});addEventListener('resize',()=>{decoded.clear();careDecoded.clear();showCarePhoto(currentCare);request()});
+ addEventListener('scroll',request,{passive:true});addEventListener('resize',()=>{decoded.clear();careDecoded.clear();if(careNear)showCarePhoto(currentCare);request()});
  request();document.fonts.ready.then(request);
 
  

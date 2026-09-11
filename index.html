@@ -2439,7 +2439,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 </script>
 <link rel="stylesheet" href="assets/css/homepage-scroll.css?v=3">
 <script defer src="assets/js/scrollcraft.js"></script>
-<script defer src="assets/js/homepage-scroll.js?v=3"></script>
+<script defer src="assets/js/homepage-scroll.js?v=4"></script>
 </head>
 <body>
 
@@ -4156,13 +4156,18 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     var uR = gl.getUniformLocation(pr,'r'), uT = gl.getUniformLocation(pr,'t');
     gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
     size(); addEventListener('resize', size);
-    var t0 = performance.now(), running = true;
-    new IntersectionObserver(function(e){ running = e[0].isIntersecting; if (running) loop(); })
+    var t0 = performance.now(), running = false, causticsRaf = null;
+    function syncCaustics(){
+      if (causticsRaf !== null) cancelAnimationFrame(causticsRaf);
+      causticsRaf = null;
+      if (running && !document.hidden) causticsRaf = requestAnimationFrame(loop);
+    }
+    new IntersectionObserver(function(e){ running = e[0].isIntersecting; syncCaustics(); })
       .observe(document.querySelector('.hero'));
-    function loop(){ if (!running) return;
+    document.addEventListener('visibilitychange', syncCaustics);
+    function loop(){ causticsRaf = null; if (!running || document.hidden) return;
       gl.uniform2f(uR, cv.width, cv.height); gl.uniform1f(uT, (performance.now()-t0)/1000);
-      gl.drawArrays(gl.TRIANGLES,0,3); requestAnimationFrame(loop); }
-    loop();
+      gl.drawArrays(gl.TRIANGLES,0,3); causticsRaf = requestAnimationFrame(loop); }
   })();
 
    
@@ -4543,15 +4548,20 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       if (preloaded[key]) return preloaded[key];
       RETAIN[key] = [];
       var keep = RETAIN[key];
-      preloaded[key] = Promise.all(SETS[key].map(function(u){
+      var nextFrame = 0;
+      function loadFrame(){
+        if (RETAIN[key] !== keep || nextFrame >= SETS[key].length) return Promise.resolve();
+        var u = SETS[key][nextFrame++];
         var im = new Image();
         im.decoding = 'async';
          
         im.fetchPriority = 'low';
         im.src = u;
         keep.push(im);
-        return (im.decode ? im.decode() : Promise.resolve()).catch(function(){});
-      }));
+        return (im.decode ? im.decode() : new Promise(function(resolve){ im.onload = im.onerror = resolve; }))
+          .catch(function(){}).then(loadFrame);
+      }
+      preloaded[key] = Promise.all([loadFrame(), loadFrame(), loadFrame(), loadFrame()]);
       var mine = preloaded[key];
       mine.then(function(){ if (preloaded[key] === mine) READY[key] = true; });
       return mine;
@@ -4576,20 +4586,21 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       if (matchMedia('(max-width:859px)').matches && 'IntersectionObserver' in window){
         var near = new IntersectionObserver(function(es){
           es.forEach(function(en){ if (en.isIntersecting) preload(en.target.getAttribute('data-set')); });
-        }, {rootMargin:'120% 0px'});
+        }, {rootMargin:Math.round(innerHeight * .2) + 'px 0px'});
         var far = new IntersectionObserver(function(es){
           es.forEach(function(en){ if (!en.isIntersecting) release(en.target.getAttribute('data-set')); });
         }, {rootMargin:'250% 0px'});
         document.querySelectorAll('.mimg.xscrubm').forEach(function(m){ near.observe(m); far.observe(m); });
         return;
       }
-      var v = document.getElementById('heroVideo'), started = false;
-      var go = function(){ if (started) return; started = true; preloadQueue(); };
-      if (v && v.readyState < 3){
-        v.addEventListener('canplaythrough', go, {once:true});
-        setTimeout(go, 6000);             
-      } else {
-        setTimeout(go, 1200);
+      var show = document.getElementById('stage');
+      if (show && 'IntersectionObserver' in window){
+        var approaching = new IntersectionObserver(function(entries){
+          if (!entries.some(function(entry){ return entry.isIntersecting; })) return;
+          approaching.disconnect();
+          preloadQueue();
+        }, {rootMargin:Math.round(innerHeight * .2) + 'px 0px'});
+        approaching.observe(show);
       }
     })();
 
@@ -4628,6 +4639,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
        
       var pend = null;
       return function(t, dur){
+        if (t === 0 && pos === 0 && target === 0 && !raf && pend === null) return;
         preload(key);
         if (reduce){ pos = target = t; paint(t); return; }
         if (dur && !READY[key]){
