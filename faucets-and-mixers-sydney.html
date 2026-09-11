@@ -2027,6 +2027,27 @@ html.lenis{scroll-behavior:auto}
 @media(hover:hover){.ts-warranty-link:hover,.ts-warranty-document:hover{color:var(--ink)}.ts-warranty-head button:hover{background:var(--blue-pale)}}
 .ts-warranty-link:focus-visible,.ts-warranty a:focus-visible,.ts-warranty button:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 @media(max-width:599px){.ts-warranty{border-radius:20px}.ts-warranty-head{padding-inline:18px}.ts-warranty-body{padding:20px}.ts-warranty-cover>div{gap:12px}.ts-warranty-cover .ts-warranty-main{padding:16px}.ts-warranty-main dd{font-size:36px}}
+
+.ts-style-pills{display:flex;align-items:center;gap:4px;width:100%;height:44px;padding:0;border:0;border-radius:24px;background:var(--mist);box-shadow:inset 0 0 0 1px var(--rule)}
+.ts-style-pills[hidden]{display:none}
+.ts-style-pills button{flex:1;min-width:0;height:44px;border:0;border-radius:22px;background:transparent;color:var(--muted);font-size:13px;font-weight:600;line-height:1.2;font-family:inherit;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+.ts-style-pills button[aria-pressed="true"]{background:var(--paper);color:var(--blue);box-shadow:0 2px 8px #07163112}
+.ts-style-pills button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ts-studio .ts-card-head{gap:8px;flex-wrap:wrap;height:auto;min-height:44px}
+.ts-card-links{display:flex;align-items:center;gap:16px;margin-left:auto}
+.ts-card-links .ts-warranty-link{position:static;min-height:44px;padding:0;font-size:12px}
+.ts-card-links .ts-details-btn{position:static;min-height:44px;white-space:nowrap}
+#tap-main[data-tap-model="deluxe"] #shape-summary{padding-right:0}
+.ts-warranty-main dd.ts-lifetime{font-size:clamp(25px,5vw,35px);letter-spacing:-.04em}
+.ts-warranty-help{font-size:13px;line-height:1.6;border-top:1px solid var(--rule);padding-top:18px;margin:18px 0 0;color:var(--muted)}
+.ts-warranty-help a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.ts-detail-features{list-style:none;counter-reset:feature;margin:0 0 24px;padding:0}
+.ts-detail-features li{counter-increment:feature;display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--rule);font-size:14px;line-height:1.5}
+.ts-detail-features li::before{content:'0' counter(feature);display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:var(--blue-pale);color:var(--blue);font-size:11px;font-weight:700}
+.ts-detail-selection{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px;background:var(--blue-pale);border-radius:14px;margin-bottom:20px;font-size:14px}
+.ts-detail-selection strong{font-size:22px;white-space:nowrap}
+@media(max-width:859px){.ts-studio .ts-card-head{align-items:center;margin-bottom:10px}.ts-card-links{gap:14px}.ts-studio .ts-card h3{height:auto;min-height:63px}.ts-studio .ts-card-desc{min-height:0}.ts-studio .ts-card .ts-kicker{font-size:10px}.ts-style-pills button{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.ts-style-pills button{transition:none}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage",
@@ -2301,13 +2322,13 @@ html.lenis{scroll-behavior:auto}
   </figure></div>
   <div id="mobile-finishes"></div></div>
   <div class="ts-card" id="studioCard">
-   <div class="ts-models" role="group" aria-label="Tap style"><button type="button" data-model="pullout" aria-pressed="true">Premium</button><button type="button" data-model="classic" aria-pressed="false">Classic</button><button type="button" data-model="deluxe" aria-pressed="false">Deluxe</button><button type="button" data-model="filter" aria-pressed="false">Filter Tap</button></div>
+   <div class="ts-models" role="group" aria-label="Tap style"><button type="button" data-model="pullout" aria-pressed="true">Premium</button><button type="button" data-model="classic" aria-pressed="false">Classic</button><button type="button" data-model="deluxe" aria-pressed="false">Deluxe</button><button type="button" data-model="filter" aria-pressed="false">Filter</button></div>
 
-   <div class="ts-card-copy"><div class="ts-card-head"><span class="ts-kicker" id="model-kicker">The premium mixer</span><button type="button" class="ts-details-btn" id="details-toggle" aria-expanded="false" aria-controls="tap-details">The details</button></div>
+   <div class="ts-card-copy"><div class="ts-card-head"><span class="ts-kicker" id="model-kicker">The premium mixer</span><div class="ts-card-links"><button type="button" class="ts-warranty-link" id="warranty-open" aria-haspopup="dialog" aria-controls="warranty-dialog" hidden>Warranty <span aria-hidden="true">↗</span></button><button type="button" class="ts-details-btn" id="details-toggle" aria-haspopup="dialog" aria-controls="details-dialog">The details</button></div></div>
    <h3 id="model-title">One beautiful tap.<br>Every kind of water.</h3>
    <p class="ts-card-desc" id="model-description">A concealed pull out hose gives you extra reach for rinsing and filling. Hot and cold use the main handle, with a separate lever for purified drinking water.</p>
-   <div class="ts-card-details" id="tap-details" hidden><ul id="details-list"><li>Hot, cold and filtered water connections</li><li>Separate filtered water control</li><li>Concealed pull out hose</li></ul><p>Filtration system quoted separately. We confirm the connections and clearance before installation.</p></div>
-   </div><div class="ts-finish-controls" id="finish-controls"><div class="ts-shape-slot"><span id="shape-summary">Premium pull out mixer</span><button type="button" class="ts-warranty-link" id="warranty-open" aria-haspopup="dialog" aria-controls="warranty-dialog" hidden>Warranty <span aria-hidden="true">↗</span></button><div class="ts-shape" id="classic-shapes" role="group" aria-label="Choose your Classic mixer shape" hidden>
+
+   </div><div class="ts-finish-controls" id="finish-controls"><div class="ts-shape-slot"><div class="ts-style-pills" id="premium-styles" role="group" aria-label="Premium style"><button type="button" data-premium-style="modern" aria-pressed="true">Modern</button><button type="button" data-premium-style="victorian" aria-pressed="false">Victorian</button><button type="button" data-premium-style="antique" aria-pressed="false">Antique</button></div><div class="ts-style-pills" id="filter-styles" role="group" aria-label="Filter tap range" hidden><button type="button" data-filter-style="classic" aria-pressed="true">Classic</button><button type="button" data-filter-style="premium" aria-pressed="false">Premium</button></div><span id="shape-summary">Premium pull out mixer</span><div class="ts-shape" id="classic-shapes" role="group" aria-label="Choose your Classic mixer shape" hidden>
 
     <button type="button" data-shape="gooseneck" aria-pressed="true"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M12 35V15a9 9 0 0 1 18 0v6M7 35h12M9 27h9m-1-5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Gooseneck</span></button>
     <button type="button" data-shape="square" aria-pressed="false"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M12 35V8h19v5M7 35h12M9 27h9m-1-5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Square</span></button>
@@ -2318,7 +2339,7 @@ html.lenis{scroll-behavior:auto}
    <p class="ts-quote-note">Your full price, in writing, before we start.</p>
   </div>
  </div>
-<noscript><div class="ts-wrap"><h3>Mizu Deluxe three way mixer</h3><p>Twist the ribbed end of the spout to turn on filtered water through that spout. The side handle controls hot and cold water. Chrome, Warm Nickel and Matte Black are $680. Brushed Brass, Brushed Bronze and Gun Metal are $800, installed with your system.</p><p>Warm Nickel has a subtle warm tone. <a href="tel:0430546749">Call 0430 546 749 to choose your tap.</a></p></div></noscript>
+<noscript><div class="ts-wrap"><h3>Choose your tap</h3><p>Premium Modern mixers start at $1,050. Victorian mixers are $1,150. Antique mixers are $1,400 in Bronze, Aurum, Slate or Steel. Classic mixers start at $500. Premium dedicated filter taps are $480 in Brushed gold, Matte black, Brushed stainless, Gunmetal or Brushed copper. Classic Chrome filter taps are included with your system, with other finishes a $150 upgrade.</p><h3>Deluxe three way mixer</h3><p>Twist the ribbed end of the spout to turn on filtered water through that spout. The side handle controls hot and cold water. Chrome, Warm Nickel and Matte Black are $680. Brushed Brass, Brushed Bronze and Gun Metal are $800, installed with your system.</p><p>Warm Nickel has a subtle warm tone. <a href="tel:0430546749">Call 0430 546 749 to choose your tap.</a></p></div></noscript>
 </section>
 
 
@@ -2576,12 +2597,17 @@ html.lenis{scroll-behavior:auto}
 <div class="dfoot"><span>Rather talk it through?</span><a class="ul" href="tel:0430546749">Call 0430 546 749</a></div></dialog>
 <dialog class="ts-lightbox" id="lightbox" aria-label="Selected tap close up"><button type="button" data-close aria-label="Close image"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><img id="lightbox-image" src="media/ro/tap-brass.webp" width="1200" height="1490" alt="Selected tap enlarged"><p id="lightbox-caption">Brushed gold</p></dialog>
 
+<dialog class="ts-warranty ts-detail-dialog" id="details-dialog" aria-labelledby="details-name" data-lenis-prevent><div class="ts-warranty-head"><span class="ts-kicker">A closer look</span><button type="button" data-close aria-label="Close details"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div><div class="ts-warranty-body"><h2 id="details-name">Premium Modern mixer</h2><p class="ts-warranty-intro" id="details-description"></p><ul id="details-list" class="ts-detail-features"></ul><div class="ts-detail-selection"><span id="details-finish"></span><strong id="details-price"></strong></div><p class="ts-warranty-terms">Installed with your filtration system. The system is quoted separately. We confirm your connections, bench space and cabinet clearance before installation.</p></div></dialog>
 <dialog class="ts-warranty" id="warranty-dialog" aria-labelledby="warranty-title" data-lenis-prevent>
- <div class="ts-warranty-head"><span class="ts-kicker">Mizu Deluxe</span><button type="button" data-close aria-label="Close warranty"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
- <div class="ts-warranty-body"><h2 id="warranty-title">Made for the everyday.<br>Covered for the years ahead.</h2><p class="ts-warranty-intro">Mizu manufacturer warranty for your Deluxe tapware, with cover periods for each component.</p>
+ <div class="ts-warranty-head"><span class="ts-kicker" id="warranty-range">Deluxe</span><button type="button" data-close aria-label="Close warranty"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+ <div class="ts-warranty-body"><h2 id="warranty-title">Made for the everyday.<br>Covered for the years ahead.</h2><p class="ts-warranty-intro" id="warranty-selection"></p><div id="deluxe-warranty"><p class="ts-warranty-intro">Tapware warranty for your Deluxe mixer, with cover periods for each component.</p>
  <dl class="ts-warranty-cover"><div class="ts-warranty-main"><dt>Residential &amp; commercial use<sup>^</sup></dt><dd>25 <span>years</span></dd></div><div><dt>Cartridge</dt><dd>10 years</dd></div><div><dt>Mixer flexible hoses<small>Replacement parts only</small></dt><dd>15 years</dd></div><div><dt>Product finish<sup>*</sup></dt><dd>10 years</dd></div><div><dt>Electrical components<small>Where fitted</small></dt><dd>2 years</dd></div><div><dt>Spare parts<sup>^^</sup> &amp; labour</dt><dd>1 year</dd></div></dl>
  <div class="ts-warranty-terms"><p><sup>^</sup> Commercial kitchens are excluded.</p><p><sup>*</sup> Living finishes are covered only up to installation.</p><p><sup>^^</sup> Spare parts include washers, O-rings, handpieces, hoses, aerators and wastes.</p><p>Proof of purchase, qualified installation and the manufacturer's care requirements apply. This tapware cover is separate from your filtration system warranty and is additional to your rights under Australian Consumer Law.</p></div>
- <a class="ts-warranty-document" href="https://digitalassets.reecegroup.com.au/asset/74879ff3-c884-427d-8794-7ff1f462d41d/Mizu-Warranty.pdf" target="_blank" rel="noopener">Read the full Mizu warranty <span aria-hidden="true">↗</span></a></div>
+ </div><div id="premium-warranty" hidden>
+ <p class="ts-warranty-intro">Manufacturer’s additional warranty for eligible indoor residential and commercial installations.</p>
+ <dl class="ts-warranty-cover"><div class="ts-warranty-main"><dt>Tap body &amp;<br>ceramic cartridge</dt><dd class="ts-lifetime">Lifetime<sup>*</sup></dd></div><div><dt>Selected product finish</dt><dd id="warranty-finish-period">15 years</dd></div><div><dt>Other parts</dt><dd>2 years</dd></div></dl>
+ <div class="ts-warranty-terms"><p><sup>*</sup> Lifetime applies while the original purchaser continuously owns and occupies the original installation premises, up to 75 years. Cover is not transferable.</p><p>This additional warranty covers manufacturing defects in eligible purchases. Parts repair or replacement is covered; removal, installation and labour are excluded, subject to Australian Consumer Law.</p><p>Correct licensed installation and care are required. Normal wear, misuse, accidental damage, unsuitable cleaning and outdoor use are excluded. Keep your purchase and installation records.</p><p>Eligibility depends on the original purchase channel and product status. Clearance products have different terms. We confirm the applicable cover with your quote.</p><p>The ceramic cartridge controls water flow inside the tap; filtration cartridges are separate. Your Australian Consumer Law rights remain unaffected.</p></div></div>
+ <p class="ts-warranty-help">Need help with your tap? <a href="tel:0430546749">Contact Filters For You</a>.</p></div>
 </dialog>
 </main>
 
@@ -4601,14 +4627,25 @@ finishes.warmnickel={name:'Warm Nickel',color:'#B8B3A5',sw:'linear-gradient(145d
 const models={
   pullout:{label:'Premium pull out three way mixer',short:'Premium pull out mixer',kicker:'The premium mixer',title:'One beautiful tap.<br>Every kind of water.',description:'A concealed pull out hose gives you extra reach for rinsing and filling. Hot and cold use the main handle, with a separate lever for purified drinking water.',finishes:['gold','black','stainless','gunmetal','copper'],cut:f=>'3way-mixer-pullout-'+f,scene:true,card:'media/tap-studio/card-pullout.webp',cardAlt:'The premium pull out three way mixer in brushed gold, studio shot',price:'From <strong>$1,050</strong>',note:'Installed with your system',details:['Hot, cold and filtered water connections','Separate filtered water control','Concealed pull out hose']},
   classic:{label:'Classic three way mixer',short:'Classic three way mixer',kicker:'The everyday original',title:'A cleaner bench.<br>A classic curve.',description:'Replace your kitchen mixer with one tap for hot, cold and filtered water. The familiar gooseneck shape, with a little more going on inside.',finishes:['chrome','black'],cut:(f,shape)=>'3way-mixer-'+shape+'-'+(f==='chrome'?'stainless':f),scene:false,card:'media/tap-studio/card-classic.webp',cardAlt:'The classic three way gooseneck mixer in polished chrome, studio shot',price:'From <strong>$500</strong>',note:'Installed with your system',details:['Classic fixed gooseneck spout','Hot, cold and filtered water','Your existing mixer is replaced']},
-  deluxe:{label:'Mizu Deluxe three way mixer',short:'Mizu Deluxe mixer',kicker:'Mizu Deluxe',title:'Pure water.<br>With a simple twist.',description:'Twist the ribbed end of the spout to turn on filtered water, delivered through that spout. The side handle controls your everyday hot and cold water.',finishes:['chrome','warmnickel','black','brass','bronze','gunmetal'],price:'<strong>$680</strong>',note:'Installed with your system',details:['Twist the ribbed spout to turn filtered water on','Side handle controls normal hot and cold water','Warm Nickel has a subtle warm tone']},
+  deluxe:{label:'Deluxe three way mixer',short:'Deluxe mixer',kicker:'Deluxe',title:'Pure water.<br>With a simple twist.',description:'Twist the ribbed end of the spout to turn on filtered water, delivered through that spout. The side handle controls your everyday hot and cold water.',finishes:['chrome','warmnickel','black','brass','bronze','gunmetal'],price:'<strong>$680</strong>',note:'Installed with your system',details:['Twist the ribbed spout to turn filtered water on','Side handle controls normal hot and cold water','Warm Nickel has a subtle warm tone']},
   filter:{label:'Dedicated filtered water tap',short:'Dedicated filter tap',kicker:'The little finishing touch',title:'Your mixer stays.<br>Pure water joins it.',description:'A dedicated drinking tap beside your existing mixer. Chrome comes with your system. Or match your kitchen with a premium finish.',finishes:['chrome','gold','black','stainless','gunmetal','copper'],cut:f=>'filter-tap-'+({chrome:'chrome',gold:'brushed-gold',black:'matte-black',stainless:'brushed',gunmetal:'gunmetal',copper:'copper'}[f]),scene:false,card:'media/tap-studio/card-filter.webp',cardAlt:'The dedicated filtered water tap in polished chrome, studio shot',price:'<strong>Included</strong>',note:'Chrome with your system',details:['Dedicated filtered water only','Your kitchen mixer stays in place','Separate sink or benchtop opening required']},
 };
-let model='pullout',finish='gold',shape='gooseneck',lastFocus=null;
+const premiumStyles={
+ modern:{...models.pullout,label:'Premium Modern three way mixer',short:'Premium Modern mixer'},
+ victorian:{...models.pullout,label:'Premium Victorian three way mixer',short:'Premium Victorian mixer',kicker:'The Victorian mixer',title:'Heritage detail.<br>Everyday freedom.',description:'A sculpted spout and turned handles bring a heritage touch to your kitchen. Pull the nozzle out for rinsing, with a separate handle for filtered drinking water.',finishes:['gold','black','stainless','chrome','copper'],price:'<strong>$1,150</strong>',details:['Turned handles and a sculpted swivel spout','Pull out nozzle for extra reach','Separate filtered water handle']},
+ antique:{...models.pullout,label:'Premium Antique three way mixer',short:'Premium Antique mixer',kicker:'The Antique mixer',title:'Rich in texture.<br>Quietly distinctive.',description:'The depth of aged metal, in a beautifully textured finish. A pull out nozzle adds reach, while separate controls keep filtered drinking water at hand.',finishes:['bronze','aurum','slate','steel'],price:'<strong>$1,400</strong>',details:['A finely textured, antique metal finish','Swivel spout with a concealed pull out hose','Separate controls for filtered and everyday water']}
+};
+const filterStyles={classic:models.filter,premium:{...models.filter,label:'Premium dedicated filter tap',short:'Premium filter tap',kicker:'The premium filter tap',title:'A finer detail.<br>A fresh glass.',description:'A slender curved spout and a neat side paddle, dedicated to your filtered drinking water. Your kitchen mixer stays right where it is.',finishes:['gold','black','stainless','gunmetal','copper'],price:'<strong>$480</strong>',note:'Installed with your system',details:['Dedicated filtered drinking water','Side paddle control and swivel spout','Your existing hot and cold mixer stays']}};
+finishes.aurum={name:'Aurum',color:'#B79A58',sw:'linear-gradient(145deg,#C9B17A,#8F773E)'};
+finishes.slate={name:'Slate',color:'#595B58',sw:'linear-gradient(145deg,#797A70,#333632)'};
+finishes.steel={name:'Steel',color:'#9EA19B',sw:'linear-gradient(145deg,#C4C7BC,#777C75)'};
+let model='pullout',finish='gold',shape='gooseneck',premiumStyle='modern',filterStyle='classic',lastFocus=null;
+const current=()=>model==='pullout'?premiumStyles[premiumStyle]:model==='filter'?filterStyles[filterStyle]:models[model];
+const namedFinish=k=>model==='pullout'&&premiumStyle==='antique'&&k==='bronze'?'Bronze':model==='deluxe'?({chrome:'Chrome',black:'Matte Black',gunmetal:'Gun Metal'}[k]||finishes[k].name):finishes[k].name;
 const cutSrc=()=>'media/tap-studio/cut/'+models[model].cut(finish,shape)+'.webp';
 const sceneSrc=(f,m)=>'media/ro/tap-'+finishes[f].scene+(m?'-m':'')+'.webp';
-const finishName=()=>model==='deluxe'?({chrome:'Chrome',black:'Matte Black',gunmetal:'Gun Metal'}[finish]||finishes[finish].name):finishes[finish].name;
-const selection=()=>models[model].label+(model==='classic'?' ('+shape+')':'')+' · '+finishName();
+const finishName=()=>namedFinish(finish);
+const selection=()=>current().label+(model==='classic'?' ('+shape+')':'')+' · '+finishName();
 const stage=$('#product-stage');
 const studioMedia=matchMedia('(max-width:859px)');
 const studioModels=$('.ts-models'),studioFinishes=$('#finish-controls'),studioPrice=$('.ts-price-line'),studioAction=$('.ts-action');
@@ -4623,7 +4660,7 @@ function arrangeStudio(){
 }
 arrangeStudio();studioMedia.addEventListener('change',arrangeStudio);
 let imageRequest=0;
-const lifestyleSrc=()=>model==='deluxe'?'media/tap-studio/mizu-deluxe/deluxe-'+finish+'.webp':'media/tap-studio/polish-nanopro/'+(model==='classic'?'classic-'+shape:model)+'-'+finish+'.webp';
+const lifestyleSrc=(f=finish)=>model==='deluxe'?'media/tap-studio/deluxe/deluxe-'+f+'.webp':model==='pullout'?'media/tap-studio/ranges/'+premiumStyle+'-'+f+'.webp':model==='filter'&&filterStyle==='premium'?'media/tap-studio/filter-premium/filter-'+f+'.webp':'media/tap-studio/polish-nanopro/'+(model==='classic'?'classic-'+shape:model)+'-'+f+'.webp';
 function showLifestyle(src){
  const request=++imageRequest;stage.setAttribute('aria-busy','true');
  let pic=$$('#lifestyleStack picture').find(p=>p.dataset.src===src);
@@ -4633,8 +4670,8 @@ function showLifestyle(src){
 
 
 function update(animate=true){
-  const m=models[model],f=finishes[finish];
-  root.dataset.tapModel=model;$('#warranty-open').hidden=model!=='deluxe';
+  const m=current(),f=finishes[finish];
+  root.dataset.tapModel=model;root.dataset.tapStyle=model==='pullout'?premiumStyle:model==='filter'?filterStyle:shape;$('#warranty-open').hidden=!(model==='deluxe'||model==='pullout'||model==='filter'&&filterStyle==='premium');
   root.style.setProperty('--ts-metal',f.color);
   $('#model-kicker').textContent=m.kicker;
   $('#model-title').innerHTML=model==='classic'&&shape==='square'?'A cleaner bench.<br>A sharper line.':m.title;
@@ -4642,7 +4679,7 @@ function update(animate=true){
   $('#finish-name').textContent=finishName();
   $('#stageCap').textContent=finishName();
   stage.setAttribute('aria-label',selection());
-  const usesScene=model==='pullout',usesLifestyle=model==='classic'||model==='filter'||model==='deluxe';
+  const usesScene=model==='pullout'&&premiumStyle==='modern',usesLifestyle=!usesScene;
   stage.classList.toggle('cut',!usesScene&&!usesLifestyle);
   stage.classList.toggle('lifestyle',usesLifestyle);
   $('#cutStage').hidden=usesScene||usesLifestyle;
@@ -4652,38 +4689,44 @@ function update(animate=true){
   $('#stageTag').textContent='Explore the finish';
   const big=usesScene?sceneSrc(finish):usesLifestyle?lifestyleSrc().replace('.webp','-full.webp'):'assets/faucets-mixers/'+m.cut(finish,shape)+'.webp';
   $('#lightbox-image').src=big;$('#lightbox-image').alt=selection();$('#lightbox-caption').textContent=selection();
-  $('#price-label').innerHTML=model==='deluxe'?'<strong>$'+(['brass','bronze','gunmetal'].includes(finish)?800:680)+'</strong>':model==='filter'?(finish==='chrome'?'<strong>Included</strong>':'<strong>$150</strong>'):model==='classic'?(finish==='black'?'From <strong>$550</strong>':m.price):m.price;
-  $('#price-note').textContent=model==='filter'?(finish==='chrome'?'Chrome with your system':'Finish upgrade with your system'):m.note;
-  $('#details-list').replaceChildren(...m.details.map(t=>{const li=document.createElement('li');li.textContent=t;return li}));
+  $('#price-label').innerHTML=model==='deluxe'?'<strong>$'+(['brass','bronze','gunmetal'].includes(finish)?800:680)+'</strong>':model==='filter'&&filterStyle==='classic'?(finish==='chrome'?'<strong>Included</strong>':'<strong>$150</strong>'):model==='classic'?(finish==='black'?'From <strong>$550</strong>':m.price):m.price;
+  $('#price-note').textContent=model==='filter'&&filterStyle==='classic'?(finish==='chrome'?'Chrome with your system':'Finish upgrade with your system'):m.note;
+  $('#details-name').textContent=m.short;$('#details-description').textContent=$('#model-description').textContent;$('#details-finish').textContent=finishName();$('#details-price').textContent=$('#price-label').textContent;$('#details-list').replaceChildren(...m.details.map(t=>{const li=document.createElement('li');li.textContent=t;return li}));
   $('#quote-image').src=usesLifestyle?lifestyleSrc():usesScene?sceneSrc(finish):big;$('#quote-image').alt=selection();$('#quote-selection').textContent=selection();
   $$('[data-model]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.model===model)));
-  $('#classic-shapes').hidden=model!=='classic';$('#shape-summary').hidden=model==='classic';$('#shape-summary').textContent=m.short;$$('[data-shape]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.shape===shape)));
+  $('#classic-shapes').hidden=model!=='classic';$('#shape-summary').hidden=model!=='deluxe';$('#premium-styles').hidden=model!=='pullout';$('#filter-styles').hidden=model!=='filter';$$('[data-premium-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.premiumStyle===premiumStyle)));$$('[data-filter-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filterStyle===filterStyle)));$('#shape-summary').textContent=m.short;$$('[data-shape]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.shape===shape)));
    
   const focused=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.finish;
-  $('#finish-options').replaceChildren(...m.finishes.map(k=>{const b=document.createElement('button');b.type='button';b.className='sw'+(k===finish?' on':'');b.dataset.finish=k;const name=model==='deluxe'?({chrome:'Chrome',black:'Matte Black',gunmetal:'Gun Metal'}[k]||finishes[k].name):finishes[k].name;b.setAttribute('aria-label',name);b.setAttribute('aria-pressed',String(k===finish));b.title=name;b.style.setProperty('--f',finishes[k].sw);const i=document.createElement('i');b.append(i,document.createTextNode(name));b.addEventListener('click',()=>{finish=k;update()});return b}));
+  $('#finish-options').replaceChildren(...m.finishes.map(k=>{const b=document.createElement('button');b.type='button';b.className='sw'+(k===finish?' on':'');b.dataset.finish=k;const name=namedFinish(k);b.setAttribute('aria-label',name);b.setAttribute('aria-pressed',String(k===finish));b.title=name;b.style.setProperty('--f',finishes[k].sw);const i=document.createElement('i');b.append(i,document.createTextNode(name));b.addEventListener('click',()=>{finish=k;update()});return b}));
   if(focused){const b=$(`[data-finish="${finish}"]`);b&&b.focus({preventScroll:true})}
   if(animate&&!reduce){stage.classList.remove('wipe-on');void stage.offsetWidth;stage.classList.add('wipe-on')}
 }
 const warmImages=new Map();
 function warmFamily(){
- if(model!=='classic'&&model!=='filter'&&model!=='deluxe')return;
- const family=model==='classic'?'classic-'+shape:model;
- models[model].finishes.forEach(f=>{const src=(model==='deluxe'?'media/tap-studio/mizu-deluxe/':'media/tap-studio/polish-nanopro/')+family+'-'+f+(mph?'-m':'')+'.webp';if(warmImages.has(src))return;const im=new Image();im.decoding='async';im.fetchPriority='low';im.src=src;warmImages.set(src,im)})
+ if(model==='pullout'&&premiumStyle==='modern')return;
+ current().finishes.forEach(f=>{const src=lifestyleSrc(f).replace('.webp',(studioMedia.matches?'-m':'')+'.webp');if(warmImages.has(src))return;const im=new Image();im.decoding='async';im.fetchPriority='low';im.src=src;warmImages.set(src,im)})
 }
-function setModel(m){if(!models[m])return;model=m;if(!models[model].finishes.includes(finish))finish=models[model].finishes[0];update();warmFamily()}
+function setModel(m){if(!models[m])return;model=m;if(m==='filter')filterStyle='classic';if(m==='pullout')premiumStyle='modern';if(!current().finishes.includes(finish))finish=current().finishes[0];update();warmFamily()}
+function setStyle(kind,value){if(kind==='premium')premiumStyle=value;else filterStyle=value;if(!current().finishes.includes(finish))finish=current().finishes[0];update();warmFamily()}
+$$('[data-premium-style]').forEach(b=>b.addEventListener('click',()=>setStyle('premium',b.dataset.premiumStyle)));
+$$('[data-filter-style]').forEach(b=>b.addEventListener('click',()=>setStyle('filter',b.dataset.filterStyle)));
 
 $$('[data-shape]').forEach(b=>b.addEventListener('click',()=>{shape=b.dataset.shape;update();warmFamily()}));
 $$('[data-model]').forEach(b=>b.addEventListener('click',()=>{setModel(b.dataset.model)}));
 $$('[data-pick]').forEach(b=>b.addEventListener('click',()=>{if(b.closest('#finishes'))finish=SWEEP[sweepI].f;setModel(b.dataset.pick)}));
-$('#finish-options').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const a=models[model].finishes;let i=a.indexOf(finish);i=e.key==='Home'?0:e.key==='End'?a.length-1:(i+(e.key==='ArrowRight'?1:-1)+a.length)%a.length;finish=a[i];update();const b=$(`[data-finish="${finish}"]`);b&&b.focus({preventScroll:true})});
-$('#surprise').addEventListener('click',()=>{const a=models[model].finishes.filter(f=>f!==finish);finish=a[Math.floor(Math.random()*a.length)];update()});
-$('#details-toggle').addEventListener('click',()=>{const open=$('#details-toggle').getAttribute('aria-expanded')!=='true';$('#details-toggle').setAttribute('aria-expanded',String(open));$('#tap-details').hidden=!open;$('#details-toggle').textContent=open?'Close the details':'The details'});
+$('#finish-options').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const a=current().finishes;let i=a.indexOf(finish);i=e.key==='Home'?0:e.key==='End'?a.length-1:(i+(e.key==='ArrowRight'?1:-1)+a.length)%a.length;finish=a[i];update();const b=$(`[data-finish="${finish}"]`);b&&b.focus({preventScroll:true})});
+$('#surprise').addEventListener('click',()=>{const a=current().finishes.filter(f=>f!==finish);finish=a[Math.floor(Math.random()*a.length)];update()});
+$('#details-toggle').addEventListener('click',()=>showDialog($('#details-dialog')));
 stage.addEventListener('animationend',e=>{if(e.target===stage.querySelector('.ts-metal-wipe'))stage.classList.remove('wipe-on')});
 
  
 function showDialog(d,sys){lastFocus=document.activeElement;if(d.id==='quote-dialog'){$('#quote-system').textContent=sys?'With the '+sys+' reverse osmosis system':''}lenis&&lenis.stop();d.showModal()}
 $$('[data-quote]').forEach(b=>b.addEventListener('click',()=>{if(b.id==='ocBtn'){finish='gold';setModel('pullout')}showDialog($('#quote-dialog'),b.dataset.sys||'')}));
-$('#warranty-open').addEventListener('click',()=>showDialog($('#warranty-dialog')));
+$('#warranty-open').addEventListener('click',()=>{
+ const deluxe=model==='deluxe';$('#deluxe-warranty').hidden=!deluxe;$('#premium-warranty').hidden=deluxe;$('#warranty-range').textContent=current().short;$('#warranty-selection').textContent=finishName();
+ $('#warranty-finish-period').textContent=((model==='pullout'&&premiumStyle==='victorian'&&finish==='chrome')||(model==='filter'&&finish==='black')?2:15)+' years';
+ showDialog($('#warranty-dialog'));
+});
 $('#zoom').addEventListener('click',()=>{update(false);showDialog($('#lightbox'))});
 $('#installation-zoom').addEventListener('click',()=>{$('#lightbox-image').src='media/tap-studio/polish-nanopro/installation-gold-4k.webp';$('#lightbox-image').alt='Gold mixer with Pure Luxe and pressure tank, illustrated installation';$('#lightbox-caption').textContent='One mixer. Separate hot, cold and purified connections.';showDialog($('#lightbox'))});
 $$('#tap-main dialog').forEach(d=>{d.querySelector('[data-close]').addEventListener('click',()=>d.close());d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close()}});d.addEventListener('close',()=>{lenis&&lenis.start();lastFocus&&lastFocus.focus&&lastFocus.focus({preventScroll:true})})});
