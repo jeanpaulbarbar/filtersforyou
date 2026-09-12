@@ -3,7 +3,12 @@
 import puppeteer from 'puppeteer';
 import { readdirSync } from 'fs';
 
-const BASE = 'http://localhost:3000';
+// BASE=https://filtersforyou.com.au checks what the LIVE url serves, not the local file.
+// Live uses clean urls, so the .html is dropped and the expected path with it.
+const BASE = process.env.BASE || 'http://localhost:3000';
+const LIVE = !BASE.includes('localhost');
+const urlFor = f => `${BASE}/${LIVE ? f.replace(/\.html$/, '').replace(/^index$/, '') : f}`;
+const pathFor = f => LIVE ? '/' + f.replace(/\.html$/, '').replace(/^index$/, '') : '/' + f;
 const all = readdirSync('.').filter(f => f.endsWith('.html') && !f.startsWith('_'));
 const N = Number(process.env.N || 24);
 const pick = [
@@ -34,7 +39,7 @@ for (const file of pick) {
     }
     r.continue().catch(() => {});
   });
-  await page.goto(`${BASE}/${file}`, { waitUntil: 'domcontentloaded' });
+  await page.goto(urlFor(file), { waitUntil: 'domcontentloaded' });
   await new Promise(r => setTimeout(r, 500));
   const s = await page.evaluate(() => {
     const f = document.querySelector('form[action*="formspree"]');
@@ -51,7 +56,7 @@ for (const file of pick) {
     };
   });
   const ok = s.module === 'function' && s.success === 'function' && s.loaders === 1 &&
-    (!s.form || (s.submitted === '/' + file && s.state.startsWith('v1 ')));
+    (!s.form || (s.submitted === pathFor(file) && s.state.startsWith('v1 ')));
   // Page errors are REPORTED, not failed on. Some suburb pages have thrown
   // "Cannot read properties of null (reading 'addEventListener')" from their own nav
   // script since long before this change — verified against the same page at HEAD.

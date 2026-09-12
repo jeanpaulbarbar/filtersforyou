@@ -3,7 +3,14 @@
 // is intercepted and answered locally, so no lead, message or conversion is ever created.
 import puppeteer from 'puppeteer';
 
+// BASE=https://filtersforyou.com.au runs the same scenarios against what the LIVE url
+// serves. Live uses clean urls, so the .html comes off both the address and the path the
+// page is expected to report.
 const BASE = process.env.BASE || 'http://localhost:3000';
+const LIVE = !BASE.includes('localhost');
+const slug = f => f.replace(/\.html$/, '').replace(/^index$/, '');
+const U = (f, q = '') => `${BASE}/${LIVE ? slug(f) : f}${q}`;
+const P = f => '/' + (LIVE ? slug(f) : f);
 const BLOCK = [
   'formspree.io', 'googletagmanager.com', 'google-analytics.com', 'analytics.google.com',
   'facebook.net', 'facebook.com/tr', 'doubleclick.net', 'googleadservices.com',
@@ -172,16 +179,16 @@ try {
     const sent = [];
     const page = await newPage(browser, sent);
     await arriveFrom(page, 'https://www.google.com/');
-    await goto(page, `${BASE}/index.html`, { waitUntil: 'networkidle2' });
+    await goto(page, U('index.html'), { waitUntil: 'networkidle2' });
     await arriveFrom(page, '');
-    await goto(page, `${BASE}/reverse-osmosis-water-filter-sydney.html`, { waitUntil: 'networkidle2' });
+    await goto(page, U('reverse-osmosis-water-filter-sydney.html'), { waitUntil: 'networkidle2' });
     const f = await fields(page);
     results.push('1 · Google search, then internal navigation to another page');
-    check('landing_page is the first page', f.landing_page, '/index.html');
-    check('submitted_page is where they are now', f.submitted_page, '/reverse-osmosis-water-filter-sydney.html');
+    check('landing_page is the first page', f.landing_page, P('index.html'));
+    check('submitted_page is where they are now', f.submitted_page, P('reverse-osmosis-water-filter-sydney.html'));
     check('referrer is the external one', f.referrer, 'https://www.google.com/');
     check('first_referrer_state', f.first_referrer_state, 'external');
-    check('internal navigation did not restart the visit', f.visit_page, '/index.html');
+    check('internal navigation did not restart the visit', f.visit_page, P('index.html'));
     check('so this visit is still the first one', f.visit_referrer, 'https://www.google.com/');
     check('and shares its timestamp', f.visit_seen_at === f.first_seen_at, true);
     check('capture health recorded', f.attr_state, 'v1 store=local');
@@ -194,17 +201,17 @@ try {
     const sent = [];
     const page = await newPage(browser, sent);
     await arriveFrom(page, 'https://www.instagram.com/');
-    await goto(page, `${BASE}/index.html?utm_source=ig&utm_medium=social&utm_campaign=spring`,
+    await goto(page, U('index.html', '?utm_source=ig&utm_medium=social&utm_campaign=spring'),
       { waitUntil: 'networkidle2' });
     // a NEW visit: same storage, new tab session
     await page.evaluate(() => sessionStorage.clear());
     await arriveFrom(page, 'https://www.google.com/');
-    await goto(page, `${BASE}/contact.html`, { waitUntil: 'networkidle2' });
+    await goto(page, U('contact.html'), { waitUntil: 'networkidle2' });
     const f = await fields(page);
     results.push('\n2 · Instagram first, Google on the visit they submitted in');
-    check('first visit page kept', f.landing_page, '/index.html');
+    check('first visit page kept', f.landing_page, P('index.html'));
     check('first visit referrer kept', f.referrer, 'https://www.instagram.com/');
-    check('this visit page', f.visit_page, '/contact.html');
+    check('this visit page', f.visit_page, P('contact.html'));
     check('this visit referrer', f.visit_referrer, 'https://www.google.com/');
     check('the tags are timestamped', !!f.utm_at, true);
     check('the first visit is timestamped', !!f.first_seen_at, true);
@@ -218,9 +225,9 @@ try {
   {
     const sent = [];
     const page = await newPage(browser, sent);
-    await goto(page, `${BASE}/index.html?gclid=TESTCLICK123`, { waitUntil: 'networkidle2' });
+    await goto(page, U('index.html', '?gclid=TESTCLICK123'), { waitUntil: 'networkidle2' });
     await page.evaluate(() => sessionStorage.clear());
-    await goto(page, `${BASE}/index.html?utm_source=ig&utm_medium=social`, { waitUntil: 'networkidle2' });
+    await goto(page, U('index.html', '?utm_source=ig&utm_medium=social'), { waitUntil: 'networkidle2' });
     const f = await fields(page);
     results.push('\n3 · Google Ads click, then an Instagram link a day later');
     check('the paid click survived the social visit', f.gclid, 'TESTCLICK123');
@@ -236,12 +243,12 @@ try {
   {
     const sent = [];
     const page = await newPage(browser, sent);
-    await goto(page, `${BASE}/index.html`, { waitUntil: 'networkidle2' });
+    await goto(page, U('index.html'), { waitUntil: 'networkidle2' });
     const f = await fields(page);
     results.push('\n4 · Direct arrival, nothing to go on');
     check('empty referrer is not sent as a field', f.referrer, undefined);
     check('but the state says it was captured and empty', f.first_referrer_state, 'empty');
-    check('landing page still recorded', f.landing_page, '/index.html');
+    check('landing page still recorded', f.landing_page, P('index.html'));
     await page.close(); await page.__ctx.close();
   }
 
@@ -251,18 +258,18 @@ try {
     const sent = [];
     const page = await newPage(browser, sent);
     await arriveFrom(page, 'https://www.google.com/');
-    await goto(page, `${BASE}/index.html?gclid=ABC999`, { waitUntil: 'networkidle2' });
+    await goto(page, U('index.html', '?gclid=ABC999'), { waitUntil: 'networkidle2' });
     await fillHomepage(page);
     const ev = await events(page), mt = await meta(page);
     results.push('\n5 · Homepage enquiry, accepted');
     check('one submission reached Formspree', sent.length, 1);
-    check('it carried the landing page', sent[0]?.landing_page, '/index.html');
+    check('it carried the landing page', sent[0]?.landing_page, P('index.html'));
     check('it carried the referrer', sent[0]?.referrer, 'https://www.google.com/');
     check('it carried the click id', sent[0]?.gclid, 'ABC999');
     check('it carried the capture health', sent[0]?.attr_state, 'v1 store=local');
     check('exactly one form_submit', ev.filter(e => e[0] === 'form_submit').length, 1);
     check('exactly one Meta Lead', mt.filter(e => e[0] === 'Lead').length, 1);
-    check('the event names the page', ev.find(e => e[0] === 'form_submit')?.[1]?.landing_page, '/index.html');
+    check('the event names the page', ev.find(e => e[0] === 'form_submit')?.[1]?.landing_page, P('index.html'));
     await page.close(); await page.__ctx.close();
   }
 
@@ -271,7 +278,7 @@ try {
   {
     const sent = [];
     const page = await newPage(browser, sent);
-    await goto(page, `${BASE}/contact.html`, { waitUntil: 'networkidle2' });
+    await goto(page, U('contact.html'), { waitUntil: 'networkidle2' });
     await page.type('#contactForm input[name="full-name"]', 'ZZ TEST');
     await page.type('#contactForm input[name="phone"]', '0400000000');
     await page.type('#contactForm input[name="email"]', 'zz@example.com');
@@ -283,7 +290,7 @@ try {
     results.push('\n6 · Contact page enquiry, accepted');
     check('the success message is shown', shown, 'flex');
     check('one submission reached Formspree', sent.length, 1);
-    check('it carried the landing page', sent[0]?.landing_page, '/contact.html');
+    check('it carried the landing page', sent[0]?.landing_page, P('contact.html'));
     check('a form_submit fired', ev.filter(e => e[0] === 'form_submit').length, 1);
     check('a Meta Lead fired', mt.filter(e => e[0] === 'Lead').length, 1);
     await page.close(); await page.__ctx.close();
@@ -312,7 +319,7 @@ try {
       req.continue();
     });
     await page.evaluateOnNewDocument(SHIM);
-    await goto(page, `${BASE}/contact.html`, { waitUntil: 'networkidle2' });
+    await goto(page, U('contact.html'), { waitUntil: 'networkidle2' });
     page.on('dialog', d => d.dismiss());
     await page.type('#contactForm input[name="full-name"]', 'ZZ TEST');
     await page.type('#contactForm input[name="phone"]', '0400000000');
@@ -336,12 +343,12 @@ try {
     const sent = [];
     const page = await newPage(browser, sent);
     await arriveFrom(page, 'https://chatgpt.com/');
-    await goto(page, `${BASE}/reverse-osmosis-vs-whole-house-water-filter-sydney.html`,
+    await goto(page, U('reverse-osmosis-vs-whole-house-water-filter-sydney.html'),
       { waitUntil: 'networkidle2' });
     const f = await fields(page);
     results.push('\n8 · The RO versus whole house page');
     check('it captures a landing page now', f.landing_page,
-      '/reverse-osmosis-vs-whole-house-water-filter-sydney.html');
+      P('reverse-osmosis-vs-whole-house-water-filter-sydney.html'));
     check('it captures the referrer now', f.referrer, 'https://chatgpt.com/');
     check('and it loads the shared module', await page.evaluate(() => typeof window.ffyStampForm), 'function');
     check('the page does not redefine the stamper', await page.evaluate(
@@ -361,10 +368,10 @@ try {
       Object.defineProperty(window, 'sessionStorage', { get: () => boom });
     });
     await arriveFrom(page, 'https://www.bing.com/');
-    await goto(page, `${BASE}/index.html`, { waitUntil: 'networkidle2' });
+    await goto(page, U('index.html'), { waitUntil: 'networkidle2' });
     const f = await fields(page);
     results.push('\n9 · Browser storage unavailable');
-    check('the page still submits its pages', f.submitted_page, '/index.html');
+    check('the page still submits its pages', f.submitted_page, P('index.html'));
     check('the referrer is still captured', f.referrer, 'https://www.bing.com/');
     check('and the record says so', f.attr_state, 'v1 store=memory');
     await page.close(); await page.__ctx.close();
@@ -376,10 +383,10 @@ try {
     const sent = [];
     const page = await newPage(browser, sent);
     await arriveFrom(page, 'https://www.google.com/');
-    await goto(page, `${BASE}/water-filter-installation-bayview.html`, { waitUntil: 'networkidle2' });
+    await goto(page, U('water-filter-installation-bayview.html'), { waitUntil: 'networkidle2' });
     const f = await fields(page);
     results.push('\n10 · A suburb page (native POST, 537 of them)');
-    check('landing page', f.landing_page, '/water-filter-installation-bayview.html');
+    check('landing page', f.landing_page, P('water-filter-installation-bayview.html'));
     check('referrer', f.referrer, 'https://www.google.com/');
     check('the subject directive is untouched', f._subject, 'Water Filter Quote Request, Bayview');
     await page.evaluate(() => {
