@@ -1902,19 +1902,7 @@ main:has(> .pgtop){padding-top:0}
 </script>
 <!-- /SHELL:JS -->
 <!-- FFY ATTRIBUTION -->
-<script>
-(function(){
-  try{
-    var KEY='ffy_attr';
-    if(!sessionStorage.getItem(KEY)){
-      sessionStorage.setItem(KEY, JSON.stringify({
-        landing_page: location.pathname + location.search,
-        referrer: document.referrer || ''
-      }));
-    }
-  }catch(e){}
-})();
-</script>
+<script src="assets/js/ffy-attribution.js?v=1"></script>
 <!-- HUMM:CALC -->
 <script>
  
@@ -2227,7 +2215,6 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
 
   function money(n){ return '$' + Number(n).toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2}); }
   function whole(n){ return '$' + Number(n).toLocaleString('en-AU', {maximumFractionDigits:0}); }
-  function sess(k, fallback){ try { return sessionStorage.getItem(k) || fallback; } catch (e) { return fallback; } }
   function hid(name, value){
     var el = form.querySelector('input[type="hidden"][name="' + name + '"]');
     if (!el){ el = document.createElement('input'); el.type = 'hidden'; el.name = name; form.appendChild(el); }
@@ -2393,21 +2380,12 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
       + (names().join(' + ') || 'extras only')
       + (term === null ? '. No term picked yet.' : '. Term picked: ' + term + ' months.')
       + ' Call to confirm the figures in writing, then send the application link.');
-    hid('landing_page', sess('ffy_landing', location.pathname));
-    hid('submitted_page', location.pathname);
-    hid('referrer', sess('ffy_referrer', document.referrer || ''));
-    if (window.ffyStampClick) window.ffyStampClick(form);
+    if (window.ffyStampForm) window.ffyStampForm(form);
     sending = true; sendBtn.disabled = true; sendLbl.textContent = 'Sending…';
     var done = function(){
       res.classList.remove('asking'); res.classList.add('finished');
-      window.ffyTrack && window.ffyTrack('form_submit', {form:'repayments', system: names().join(' + ')});
+      window.ffyLeadSuccess && window.ffyLeadSuccess(form, {form:'repayments', label:'humm_repayments', system: names().join(' + ')});
        
-      if (typeof fbq === 'function'){
-        try {
-          fbq('track', 'Lead', {content_name:'humm_repayments', content_category:'website_form', source_page:location.pathname},
-              {eventID:'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8)});
-        } catch (err) {}
-      }
     };
     fetch(form.action, {method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}})
       .then(function(r){ if (!r.ok) throw new Error('formspree ' + r.status); done(); })
@@ -2424,86 +2402,6 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
   render();
 })();
 </script>
-<!-- FFY CLICK ID -->
-<script>
- 
-(function () {
-  var STORE = 'ffy_click', WINDOW_DAYS = 90;
-  var CLICK_KEYS = ['gclid', 'gbraid', 'wbraid'];
-  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign'];
-  var FIELDS = ['gclid', 'click_source'].concat(UTM_KEYS);
 
-  function params() {
-    var out = {}, q = (location.search || '').replace(/^\?/, '');
-    if (!q) return out;
-    q.split('&').forEach(function (pair) {
-      if (!pair) return;
-      var i = pair.indexOf('=');
-      var k = i < 0 ? pair : pair.slice(0, i);
-      var v = i < 0 ? '' : pair.slice(i + 1);
-      try { out[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, ' ')); }
-      catch (e) {   }
-    });
-    return out;
-  }
-
-  function fromUrl() {
-    var p = params(), rec = null, utm = {}, has = false;
-    for (var i = 0; i < CLICK_KEYS.length; i++) {
-      if (p[CLICK_KEYS[i]]) { rec = { id: p[CLICK_KEYS[i]], src: CLICK_KEYS[i] }; break; }
-    }
-    UTM_KEYS.forEach(function (k) { if (p[k]) { utm[k] = p[k]; has = true; } });
-    if (!rec && !has) return null;
-    rec = rec || { id: '', src: '' };
-    rec.utm = utm;
-    rec.t = Date.now();
-    return rec;
-  }
-
-  function stored() {
-    try {
-      var rec = JSON.parse(localStorage.getItem(STORE) || 'null');
-      if (!rec || !rec.t) return null;
-      if (Date.now() - rec.t > WINDOW_DAYS * 864e5) return null;
-      return rec;
-    } catch (e) { return null; }
-  }
-
-   
-  var fresh = fromUrl();
-  if (fresh) { try { localStorage.setItem(STORE, JSON.stringify(fresh)); } catch (e) {} }
-  var rec = fresh || stored() || { id: '', src: '', utm: {} };
-
-  function value(field) {
-    if (field === 'gclid') return rec.id || '';
-    if (field === 'click_source') return rec.src || '';
-    return (rec.utm && rec.utm[field]) || '';
-  }
-
-   
-   
-  window.ffyClickFields = function () {
-    var out = {};
-    FIELDS.forEach(function (name) { var v = value(name); if (v) out[name] = v; });
-    return out;
-  };
-
-  window.ffyStampClick = function (form) {
-    if (!form || !form.querySelector) return;
-    FIELDS.forEach(function (name) {
-      var v = value(name);
-      if (!v) return;
-      var el = form.querySelector('input[name="' + name + '"]');
-      if (!el) {
-        el = document.createElement('input');
-        el.type = 'hidden';
-        el.name = name;
-        form.appendChild(el);
-      }
-      el.value = v;
-    });
-  };
-})();
-</script>
 </body>
 </html>

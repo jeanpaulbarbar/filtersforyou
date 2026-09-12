@@ -3485,19 +3485,7 @@ html.lenis{scroll-behavior:auto}
 })();
 </script>
 <!-- FFY ATTRIBUTION -->
-<script>
-(function(){
-  try{
-    var KEY='ffy_attr';
-    if(!sessionStorage.getItem(KEY)){
-      sessionStorage.setItem(KEY, JSON.stringify({
-        landing_page: location.pathname + location.search,
-        referrer: document.referrer || ''
-      }));
-    }
-  }catch(e){}
-})();
-</script>
+<script src="assets/js/ffy-attribution.js?v=1"></script>
 <script src="vendor/lenis-1.1.18.min.js"></script><script> 
 
 (function (global) {
@@ -4749,15 +4737,14 @@ async function sendLiveQuote(data){
  const body=new FormData();Object.entries(data).forEach(([k,v])=>body.set(k,v||''));
  body.set('submitted_page',location.pathname);body.set('_subject','Mixer tap enquiry');
  body.set('message',[data.tap,data.system,data.installation].filter(Boolean).join(' · '));
- try{body.set('landing_page',sessionStorage.getItem('ffy_landing')||location.pathname);body.set('referrer',sessionStorage.getItem('ffy_referrer')||document.referrer||'')}catch{body.set('landing_page',location.pathname)}
- try{if(window.ffyClickFields)Object.entries(window.ffyClickFields()).forEach(([k,v])=>body.set(k,v))}catch(e){}
+ try{if(window.ffyAttrFields)Object.entries(window.ffyAttrFields()).forEach(([k,v])=>{if(v)body.set(k,v)})}catch(e){}
  trackQuote('form_start',{form:'tap_studio'});
  try{
   const response=await fetch(quoteForm.action,{method:'POST',body,headers:{Accept:'application/json'}});
   if(!response.ok)throw new Error('Enquiry was not accepted');
   sentQuote=true;quoteStatus.textContent="Thanks. We've received your enquiry and will be in touch to confirm your fixed price.";
   $('#quote-form [data-nextlabel]').textContent='Enquiry sent';
-  trackQuote('form_submit',{form:'tap_studio',system:data.system||'not chosen'});
+  if(window.ffyLeadSuccess)window.ffyLeadSuccess(quoteForm,{form:'tap_studio',label:'taps_quote',system:data.system||'not chosen'});
  }catch{
   quoteStatus.textContent="That didn't send. Your details are still here. Please try again, or call 0430 546 749.";
   quoteNext.disabled=false;$('#quote-form [data-nextlabel]').textContent='Try again';
@@ -5140,86 +5127,6 @@ setInterval(async()=>{if(paused||document.hidden||$('#quote-dialog').open||scrol
   addEventListener('resize', onScroll, {passive:true});
   if (!mph) setSys(0);
   driveRange();
-})();
-</script><!-- FFY CLICK ID -->
-<script>
- 
-(function () {
-  var STORE = 'ffy_click', WINDOW_DAYS = 90;
-  var CLICK_KEYS = ['gclid', 'gbraid', 'wbraid'];
-  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign'];
-  var FIELDS = ['gclid', 'click_source'].concat(UTM_KEYS);
-
-  function params() {
-    var out = {}, q = (location.search || '').replace(/^\?/, '');
-    if (!q) return out;
-    q.split('&').forEach(function (pair) {
-      if (!pair) return;
-      var i = pair.indexOf('=');
-      var k = i < 0 ? pair : pair.slice(0, i);
-      var v = i < 0 ? '' : pair.slice(i + 1);
-      try { out[decodeURIComponent(k)] = decodeURIComponent(v.replace(/\+/g, ' ')); }
-      catch (e) {   }
-    });
-    return out;
-  }
-
-  function fromUrl() {
-    var p = params(), rec = null, utm = {}, has = false;
-    for (var i = 0; i < CLICK_KEYS.length; i++) {
-      if (p[CLICK_KEYS[i]]) { rec = { id: p[CLICK_KEYS[i]], src: CLICK_KEYS[i] }; break; }
-    }
-    UTM_KEYS.forEach(function (k) { if (p[k]) { utm[k] = p[k]; has = true; } });
-    if (!rec && !has) return null;
-    rec = rec || { id: '', src: '' };
-    rec.utm = utm;
-    rec.t = Date.now();
-    return rec;
-  }
-
-  function stored() {
-    try {
-      var rec = JSON.parse(localStorage.getItem(STORE) || 'null');
-      if (!rec || !rec.t) return null;
-      if (Date.now() - rec.t > WINDOW_DAYS * 864e5) return null;
-      return rec;
-    } catch (e) { return null; }
-  }
-
-   
-  var fresh = fromUrl();
-  if (fresh) { try { localStorage.setItem(STORE, JSON.stringify(fresh)); } catch (e) {} }
-  var rec = fresh || stored() || { id: '', src: '', utm: {} };
-
-  function value(field) {
-    if (field === 'gclid') return rec.id || '';
-    if (field === 'click_source') return rec.src || '';
-    return (rec.utm && rec.utm[field]) || '';
-  }
-
-   
-   
-  window.ffyClickFields = function () {
-    var out = {};
-    FIELDS.forEach(function (name) { var v = value(name); if (v) out[name] = v; });
-    return out;
-  };
-
-  window.ffyStampClick = function (form) {
-    if (!form || !form.querySelector) return;
-    FIELDS.forEach(function (name) {
-      var v = value(name);
-      if (!v) return;
-      var el = form.querySelector('input[name="' + name + '"]');
-      if (!el) {
-        el = document.createElement('input');
-        el.type = 'hidden';
-        el.name = name;
-        form.appendChild(el);
-      }
-      el.value = v;
-    });
-  };
 })();
 </script>
 </body>
