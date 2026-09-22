@@ -1364,7 +1364,7 @@ em.hb{font-style:normal;color:var(--blue);font-weight:600}
   
   
   html.snapon{scroll-snap-type:y proximity}
-  #set .snapm{scroll-snap-stop:always}
+  #water .snapm, #rooms .snapm, #set .snapm, #relationship .snapm, #payments .snapm, #cost .snapm{scroll-snap-stop:always}
   html.nosnap{scroll-snap-type:none !important}
   html{scroll-padding-top:0}
   .snapm{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start;scroll-snap-stop:normal;pointer-events:none;opacity:0}
@@ -1682,6 +1682,16 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   .est .fq,.est .fq .chev,.ch > summary .chev,.ch > summary h2,.est__areas a,.est__nav a{transition:none}
 }
 /* /ESTATE:CSS */
+@media (prefers-reduced-motion:no-preference) and (min-width:860px){
+  .room{transition:transform 1.3s cubic-bezier(.3,0,.15,1),opacity .7s ease,border-radius 1.3s ease}
+  .room img{transition:transform 1.3s ease}
+  .room .rs{transition:opacity 1.3s ease}
+  .room__cap{transition:opacity .35s ease,transform .35s ease}
+  .room.full .room__cap{transition:opacity .8s ease .45s,transform .8s ease .45s}
+  .cap{transition:opacity .3s ease,transform .3s ease,visibility 0s .3s}
+  .cap.live{transition-delay:0s}
+  .kin,.set__title::before,.cap::before{transition:opacity .3s ease,transform .3s ease}
+}
 </style>
 <link rel="stylesheet" href="assets/css/product-hero-card.css">
 <script src="assets/js/product-hero-card.js" defer></script>
@@ -3667,23 +3677,37 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
 
    
   var ROLL = !/[?&]roll=0/.test(location.search);
-  var lenis = null;
+  var lenis = null, wheelAt = 0, wheelDir = 0, wheelLimit = null, sceneReadyAt = 0;
+  function resetWheel(){ wheelAt = 0; wheelDir = 0; wheelLimit = null; }
+  function nextWheelStop(y, direction){
+    var found = null;
+    (STOPS || []).forEach(function(sp){
+      if ((sp.y-y)*direction <= 8) return;
+      if (found === null || (sp.y-found)*direction < 0) found = sp.y;
+    });
+    return found;
+  }
   if (ROLL && !reduce && hasGsap && typeof Lenis !== 'undefined' && matchMedia('(pointer:fine)').matches && !mph){
-     
-    lenis = new Lenis({duration:1.65, smoothWheel:true, syncTouch:false, wheelMultiplier:1.0,
+    lenis = new Lenis({duration:1.15, smoothWheel:true, syncTouch:false, wheelMultiplier:1,
       virtualScroll:function(input){
-        
-        
         if (!input.deltaY || input.event.ctrlKey) return;
-        var direction = input.deltaY > 0 ? 1 : -1;
-        var pending = lenis ? lenis.targetScroll - lenis.animatedScroll : 0;
-        var distance = Math.min(Math.abs(input.deltaY), innerHeight * .40);
-        var allowance = Math.max(0, innerHeight * 1.12 - Math.max(0, pending * direction));
-        input.deltaY = direction * Math.max(.01, Math.min(distance, allowance));
-        
-        if (pending * direction < 0) input.deltaY -= pending;
+        var now = performance.now(), direction = input.deltaY > 0 ? 1 : -1;
+        var y = lenis ? lenis.animatedScroll : scrollY;
+        var target = lenis ? lenis.targetScroll : y;
+        var reverse = wheelDir && direction !== wheelDir;
+        var fresh = now-wheelAt > 200;
+        if (reverse || wheelLimit === null || (fresh && now >= sceneReadyAt && Math.abs(y-wheelLimit)<10)){
+          wheelLimit = nextWheelStop(y, direction);
+        }
+        wheelAt = now; wheelDir = direction;
+        if (reverse) target = y;
+        var desired = target + input.deltaY;
+        if (wheelLimit !== null && (desired-wheelLimit)*direction > 0) desired = wheelLimit;
+        var delta = desired - (lenis ? lenis.targetScroll : y);
+        if (Math.abs(delta)<.01){ input.event.preventDefault(); return false; }
+        input.deltaY = delta;
       },
-      easing:function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }});
+      easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));}});
     document.documentElement.classList.add('lenis');
   }
 
@@ -4083,13 +4107,13 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   var rooms = deck ? [].slice.call(deck.querySelectorAll('.room')) : [];
   var roomsLast = '';
    
-  var MOSAIC = .13, TILE_GAP = 520, TILE_IN = 900;         
+  var MOSAIC = .13, TILE_GAP = 160, TILE_IN = 700;
   var RS = [.26, .42, .58, .74], RW = .06;
   var CO0 = .06, CO1 = .115;                               
   var mosOn = false, mosT0 = 0;
    
   var RSC = [.16, .2875, .455, .615, .775];               
-  var rmScene = -1, rmState = [], rmTok = rooms.map(function(){ return 0; }), rmPop = [];
+  var rmW = 0, rmH = 0, rmScene = -1, rmState = [], rmTok = rooms.map(function(){ return 0; }), rmPop = [], rmReturning = [];
   function roomScene(p){ var s = 0; for (var i = 0; i < RSC.length; i++) if (p >= RSC[i]) s = i + 1; return s; }
   function tileTf(i, W, H){
     var g = 10, c = i % 2, rw = i < 2 ? 0 : 1;
@@ -4103,7 +4127,8 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     r.classList.toggle('under', state === 'under');
     if (state === 'full'){
        
-      if (i > 0 && prev === 'tile') placeNow(r, 'translate3d(0,' + H + 'px,0) scale(1,1)');
+      if (i > 0 && prev === 'tile' && !rmReturning[i]) placeNow(r, 'translate3d(0,' + H + 'px,0) scale(1,1)');
+      rmReturning[i] = false;
       r.style.zIndex = String(10 + i);
       r.style.transform = 'translate3d(0,0,0) scale(1,1)';
       r.style.borderRadius = '0px';
@@ -4122,7 +4147,8 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
          
         r.style.transform = 'translate3d(0,' + H + 'px,0) scale(1,1)';
         r.style.borderRadius = '28px';
-        setTimeout(function(){ if (rmTok[i] === tok) placeNow(r, tileTf(i, W, H), String(1 + i)); }, 1350);
+        rmReturning[i] = true;
+        setTimeout(function(){ if (rmTok[i] === tok){ rmReturning[i] = false; placeNow(r, tileTf(i, W, H), String(1 + i)); } }, 1350);
       } else {
         r.style.transform = tileTf(i, W, H);
         r.style.borderRadius = '28px';
@@ -4132,10 +4158,12 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     }
   }
   function driveRoomsPhone(){
-    var p = P(roomsAct), s = roomScene(p);
-    if (s === rmScene) return;
-    var W = deck.clientWidth, H = deck.clientHeight, first = rmScene < 0, was = rmScene;
+    var p = P(roomsAct), s = roomScene(p), W = deck.clientWidth, H = deck.clientHeight;
+    if (s === rmScene && W === rmW && H === rmH) return;
+    var first = rmScene < 0 || W !== rmW || H !== rmH, was = rmScene;
+    rmW = W; rmH = H;
     rmScene = s;
+    if (p > 0 && p < 1) sceneReadyAt = performance.now() + 1500;
      
     rmPop.forEach(clearTimeout); rmPop = [];
     rooms.forEach(function(r, i){
@@ -4151,43 +4179,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     deck.setAttribute('data-sc-verify-state', 'ph' + s);
   }
   function driveRooms(){
-    if (!roomsAct || !rooms.length) return;
-    if (mph){ driveRoomsPhone(); return; }
-    var p = P(roomsAct), sig = [];
-    if (!mosOn && p >= MOSAIC){ mosOn = true; mosT0 = performance.now(); }
-    else if (mosOn && !reduce && p < MOSAIC - .07){ mosOn = false; }    
-    var now = performance.now();
-    var W = deck.clientWidth, H = deck.clientHeight, g = 10;
-    rooms.forEach(function(r, i){
-      var kin = mosOn ? eo(clamp((now - mosT0 - i * TILE_GAP) / TILE_IN, 0, 1)) : 0;
-      var e = eio(win(p, RS[i], RS[i] + RW));
-       
-      if (e > 0) kin = 1;
-      var en = i < 3 ? eio(win(p, RS[i+1], RS[i+1] + RW)) : 0;
-      var c = i % 2, rw = i < 2 ? 0 : 1;
-      var tl = c ? W/2 + g/2 : g, tt = rw ? H/2 + g/2 : g, tw = W/2 - 1.5*g, th = H/2 - 1.5*g;
-      var l, t, w, hh, rad;
-      if (i === 0 || e <= 0){
-         
-        l = tl * (1-e); t = tt * (1-e); w = tw + (W - tw) * e; hh = th + (H - th) * e; rad = 28 * (1 - e);
-      } else {
-         
-        l = 0; t = H * (1 - e); w = W; hh = H; rad = 28 * (1 - e);
-      }
-      var rec = 1 - .05 * en;                        
-       
-      r.style.borderRadius = (rad / Math.max(w / W, .05)).toFixed(1) + 'px';
-      r.style.opacity = Math.min(1, kin * 1.5).toFixed(3);
-      r.style.transform = 'translate3d(' + l.toFixed(1) + 'px,' + (t + (1 - kin) * H * .09).toFixed(1) + 'px,0) scale(' + (w / W * rec).toFixed(4) + ',' + (hh / H * rec).toFixed(4) + ')';
-      r.style.zIndex = e > 0 ? 10 + i : 1 + i;
-      var img = r.firstElementChild; if (img) img.style.transform = 'scale(' + (1.06 - .06 * e).toFixed(4) + ')';
-      var co = eo(win(p, RS[i] + CO0, RS[i] + CO1)) * (1 - en);
-      r.style.setProperty('--co', co.toFixed(3));
-      r.style.setProperty('--so', (.62 + .24 * e + .3 * en).toFixed(3));
-      sig.push(e.toFixed(2));
-    });
-    var s = sig.join(' ');
-    if (s !== roomsLast){ roomsLast = s; deck.setAttribute('data-sc-verify-state', s); }
+    if (roomsAct && rooms.length) driveRoomsPhone();
   }
 
    
@@ -4328,16 +4320,17 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   }
   var still2 = document.getElementById('setStill2'), stillTop = 0, stillTok = 0;    
   function hideStill(){
+    ++stillTok;
     if (!still) return;
     still.style.setProperty('--so', '0');
-    if (mph && still2){ still2.style.setProperty('--so', '0'); stillSrc = ''; }    
+    if (still2){ still2.style.setProperty('--so', '0'); stillSrc = ''; }
   }
   function showStill(i){
     i = SI(i);
     if (!still || i < 0 || i >= KEYS.length) return;
     var src = SS + (i < 10 ? '0' : '') + i + SX;
     preStill(i);
-    if (!mph || !still2){
+    if (!still2){
       if (src !== stillSrc){ stillSrc = src; still.src = src; }
       var show = function(){ if (still.getAttribute('src') === stillSrc) still.style.setProperty('--so', '1'); };
       if (still.complete && still.naturalWidth) show(); else still.onload = show;
@@ -4369,7 +4362,8 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   function goBeat(n){
     if (n === curBeat) return;
     var from = curBeat; curBeat = n;
-    if (!vid || !vidReady || reduce){ jumpTo(n); if (mph) wordsAt(n, 260); return; }    
+    sceneReadyAt = performance.now() + 1900;
+    if (!vid || !vidReady || reduce){ jumpTo(n); wordsAt(n, 260); return; }
     var fwd = n === from + 1;
      
     if (mph && fwd && KEYS[n] - KEYS[from] < .06){ showStill(n); wordsAt(n, 320); return; }
@@ -4388,10 +4382,10 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
       vid.playbackRate = mph ? clamp(seg / 1.15, 1, 2) : clamp((KEYS[n] - KEYS[from]) / 1.5, 1, 2.4);
       hideStill();
       var pr = vid.play();
-      if (pr && pr.catch) pr.catch(function(){ jumpTo(n); if (mph) wordsAt(n, 260); });
+      if (pr && pr.catch) pr.catch(function(){ jumpTo(n); wordsAt(n, 260); });
        
-      if (mph) wordsAt(n, n === 10 ? 250 : Math.round(seg / vid.playbackRate * 1000 * .6));
-    } else { jumpTo(n); if (mph) wordsAt(n, 260); }
+      wordsAt(n, n === 10 ? 250 : Math.round(seg / vid.playbackRate * 1000 * .6));
+    } else { jumpTo(n); wordsAt(n, 260); }
   }
   function beatAt(p){
     var best = PB[0], d = 1e9;
@@ -4456,35 +4450,8 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     if (want !== curBeat && p > .004 && p < .996) goBeat(want);
     else if (playTo < 0 && vidReady && stillSrc.indexOf((SI(curBeat) < 10 ? '0' : '') + SI(curBeat) + SX) < 0) showStill(curBeat);
     var sb = 0, active = -1, kf = 0;
-    if (mph){ var pw = setPhoneWords(p); active = pw.active; kf = pw.kf; } else {
-     
-    var k0 = presence(0, p), k1 = presence(1, p);
-    driveUnits(T1U, arrival(0, p) * 1.55, 0); setProp(setT1, '--x', 1 - k0, t1Vars);
-    driveUnits(T2U, arrival(1, p) * 1.55, 0);
-    setProp(setT2, '--x', 1 - k1, t2Vars);
-    setProp(setTitle, '--pk', Math.max(k0, k1), ttVars);
-     
-    var sb = 0, active = -1;
-    for (var i = 0; i < CAPS.length; i++){
-      var c = CAPS[i], k = presence(c.beat, p), on = k > .001;
-      if (on !== c.live){ c.live = on; c.el.classList.toggle('live', on); }
-      if (!on) continue;
-      active = c.beat;
-      var ar = arrival(c.beat, p);
-      var q = ar * 1.55, tau = ar * 2.9;
-      var x = Math.round((1 - k) * 1000) / 1000;
-      if (x !== c.x){ c.x = x; c.el.style.setProperty('--x', String(x)); }
-      driveUnits(c.units, q, tau);
-      var v = Math.round(k * 1000) / 1000;
-      if (v !== c.pk){ c.pk = v; c.el.style.setProperty('--pk', String(v)); }
-      if (c.side === 'b') sb = Math.max(sb, v);
-    }
-     
-    var kf = presence(10, p), arf = arrival(10, p);
-    driveUnits(FINU, arf * 1.55, arf * 2.9);
-    setProp(bar, '--k', kf, barVars);
-    if ((kf > .9) !== barOn){ barOn = kf > .9; bar.classList.toggle('on', barOn); }
-    setProp(scrim, '--sb', sb, scrimVars);
+    var pw = setPhoneWords(p); active = pw.active; kf = pw.kf;
+    if (!mph){
      
     var live = null;
     for (i = 0; i < CAPS.length; i++){ if (CAPS[i].beat === curBeat) live = CAPS[i]; }
@@ -4619,6 +4586,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   function globalIndex(id,i){ for(var k=0;k<STOPS.length;k++) if(STOPS[k].a.id===id && STOPS[k].i===i) return k; return -1; }
   var assisting=false, touching=false, idleT=null, inputAt=0, assistUntil=0, scrollDirection=1, previousY=scrollY;
   function fireTo(k){
+    resetWheel();
     var sp=STOPS[k]; if(!sp) return;
     assisting=true; assistUntil=performance.now()+1500;
     glide(sp.y,.65,function(){assisting=false;});
@@ -4637,7 +4605,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     if(nearest<0 || distance<3) return;
     var sp=STOPS[nearest], radius=vh*.18;
     if(sp.a.id==='set') radius=actGeo(setAct).travel*.065;
-    if(distance<=radius) fireTo(nearest);
+    if(distance<=radius && (wheelLimit === null || Math.abs(sp.y-wheelLimit)<3)) fireTo(nearest);
   }
   function readerInput(){
     inputAt=performance.now();clearTimeout(idleT);
@@ -4645,13 +4613,13 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     assistUntil=0;
   }
   addEventListener('wheel',readerInput,{passive:true,capture:true});
-  addEventListener('pointerdown',readerInput,{passive:true,capture:true});
-  addEventListener('keydown',function(e){if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].indexOf(e.key)>=0) readerInput();});
+  addEventListener('pointerdown',function(){resetWheel();readerInput();},{passive:true,capture:true});
+  addEventListener('keydown',function(e){if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].indexOf(e.key)>=0){resetWheel();readerInput();}});
   addEventListener('touchstart',function(){touching=true;readerInput();},{passive:true});
   var lift=function(){touching=false;};
   addEventListener('touchend',lift,{passive:true});addEventListener('touchcancel',lift,{passive:true});
   if(!reduce) addEventListener('scroll',function(){if(!assisting && Math.abs(scrollY-previousY)>1) scrollDirection=scrollY>previousY?1:-1;previousY=scrollY;clearTimeout(idleT);idleT=setTimeout(settle,220);},{passive:true});
-  function rebuild(){STOPS=[];buildStops();}
+  function rebuild(){resetWheel();STOPS=[];buildStops();}
   addEventListener('resize',rebuild,{passive:true});addEventListener('orientationchange',rebuild);
   addEventListener('load',function(){rebuild();if(mph && !reduce) document.documentElement.classList.add('snapon');});
   buildStops();
