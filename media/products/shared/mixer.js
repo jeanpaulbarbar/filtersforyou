@@ -1,0 +1,7 @@
+(()=>{
+ const root=document.querySelector('#pure-plus-page #taps');if(!root)return;
+ const buttons=[...root.querySelectorAll('.sw')],pictures=[...root.querySelectorAll('picture[data-f]')],swatches=root.querySelector('#swatches'),frame=root.querySelector('#tapFrame'),name=root.querySelector('#tapName'),caption=root.querySelector('#tapCap'),phone=matchMedia('(max-width:859px)');let ticket=0;
+ buttons.forEach((button,i)=>{button.tabIndex=i===0?0:-1;button.setAttribute('aria-label',button.textContent.trim());button.addEventListener('click',()=>pick(button));button.addEventListener('keydown',e=>{let n=buttons.indexOf(button);if(e.key==='ArrowRight')n++;else if(e.key==='ArrowLeft')n--;else if(e.key==='Home')n=0;else if(e.key==='End')n=buttons.length-1;else return;e.preventDefault();const next=buttons[(n+buttons.length)%buttons.length];next.focus();pick(next)})});
+ async function pick(button){const token=++ticket,picture=pictures.find(p=>p.dataset.f===button.dataset.f);try{await picture.querySelector('img').decode()}catch{return}if(token!==ticket)return;buttons.forEach(b=>{const on=b===button;b.classList.toggle('on',on);b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1});pictures.forEach(p=>p.classList.toggle('on',p===picture));name.textContent=caption.textContent=button.textContent.trim()}
+ function layout(){document.documentElement.classList.toggle('pp-mixer-phone',phone.matches);if(phone.matches)frame.append(swatches);else name.before(swatches)}phone.addEventListener('change',layout);layout();
+})();

@@ -3,8 +3,8 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/pure-home-water-filter-sydney",
-      "destination": "/whole-house-water-filter-sydney",
+      "source": "/pure-home",
+      "destination": "/pure-home-water-filter-sydney",
       "statusCode": 301
     },
     {
