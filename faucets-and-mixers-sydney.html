@@ -2048,6 +2048,26 @@ html.lenis{scroll-behavior:auto}
 .ts-detail-selection strong{font-size:22px;white-space:nowrap}
 @media(max-width:859px){.ts-studio .ts-card-head{align-items:center;margin-bottom:10px}.ts-card-links{gap:14px}.ts-studio .ts-card h3{height:auto;min-height:63px}.ts-studio .ts-card-desc{min-height:0}.ts-studio .ts-card .ts-kicker{font-size:10px}.ts-style-pills button{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.ts-style-pills button{transition:none}}
+
+.ts-deluxe{position:relative;isolation:isolate;min-height:100svh;display:grid;align-items:center;overflow:clip;background:var(--ink-blue);color:#fff}
+.ts-deluxe-photo,.ts-deluxe-photo img{position:absolute;inset:0;width:100%;height:100%}
+.ts-deluxe-photo img{object-fit:cover;object-position:65% 50%}
+.ts-deluxe-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,16,46,.97),rgba(4,16,46,.86) 27%,rgba(4,16,46,.18) 63%,transparent 90%)}
+.ts-deluxe-content{position:relative;z-index:1;padding-block:100px}
+.ts-deluxe-copy{max-width:510px;display:grid;justify-items:start;gap:20px}
+.ts-deluxe .kick{color:var(--yellow)}
+.ts-deluxe .d2{max-width:13ch;color:#fff}
+.ts-deluxe .lede{color:#fff;max-width:30ch;font-size:22px}
+.ts-deluxe-description{max-width:39ch;color:#dce5f0;font-size:16px;line-height:1.65}
+.ts-deluxe-price{margin-top:8px;font-size:17px;color:#e1e8f1}
+.ts-deluxe-price strong{font-size:clamp(42px,4vw,60px);font-weight:800;letter-spacing:-.03em;color:#fff;margin-left:6px}
+.ts-deluxe-price>span{display:block;font-size:14px;margin-top:2px}
+.ts-deluxe-service{font-size:15px;color:#e1e8f1;margin-top:-8px}
+.ts-deluxe-link{color:#fff;text-decoration:underline;text-underline-offset:5px;min-height:44px;display:inline-flex;align-items:center;gap:12px;font-size:14px}
+.ts-deluxe-link:hover{color:var(--yellow)}.ts-deluxe-link:active{opacity:.75}
+@media(max-width:859px){.ts-deluxe{min-height:0;padding-top:clamp(300px,66vw,480px)}.ts-deluxe-photo{height:clamp(380px,85vw,580px)}.ts-deluxe-photo img{object-position:50% 42%}.ts-deluxe-shade{background:linear-gradient(0deg,var(--ink-blue) 0%,var(--ink-blue) 60%,transparent 90%)}.ts-deluxe-content{padding:24px 22px 64px}.ts-deluxe-copy{gap:18px;max-width:520px}.ts-deluxe .d2{font-size:clamp(40px,10.8vw,60px)}.ts-deluxe .lede{font-size:20px}.ts-deluxe .btn{max-width:100%}}
+
+#mixertapstudio,#MixerTapStudio{scroll-margin-top:112px}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage",
@@ -2263,36 +2283,9 @@ html.lenis{scroll-behavior:auto}
 
 
 
-<section class="ts-sweep" id="finishes" data-sc-act="pin" data-sc-span="4.4" data-sc-span-m="3.6" aria-label="Five finishes. One kitchen.">
- <div class="sc-stage" data-sc-stage data-sc-verify-state="initial">
-  <div class="ts-sweep-pics" id="sweepPics" aria-hidden="true">
-<picture class="on"><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-gold-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-gold-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
-<picture><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-black-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-black-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
-<picture><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-stainless-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-stainless-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
-<picture><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-gunmetal-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-gunmetal-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
-<picture><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-copper-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-copper-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
-  </div>
-  <div class="ts-sweep-scrim" aria-hidden="true"></div>
-  <div class="ts-sweep-copy">
-    <span class="kick">Five finishes. One kitchen.</span>
-    <span class="ts-sweep-count" id="sweepCount" aria-hidden="true">01 / 05</span>
-    <h2 class="ts-sweep-name"><span class="ts-mask"><span class="ts-word" id="sweepWord">Brushed gold</span></span></h2>
-    <p class="ts-sweep-line" id="sweepLine" aria-live="polite">Warm, quiet, and it catches the morning light first.</p>
-    <a class="btn" href="#MixerTapStudio" data-pick="pullout"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Try it in the studio</a>
-  </div>
-  <ol class="ts-sweep-rail" id="sweepRail" aria-label="Finishes on this page">
-    <li><button type="button" class="on" data-i="0" data-f="gold" aria-label="Brushed gold" style="--f:linear-gradient(145deg,#E2C27A,#B8923F)"><i></i><span>Brushed gold</span></button></li>
-    <li><button type="button" data-i="1" data-f="black" aria-label="Matte black" style="--f:linear-gradient(145deg,#3A3D44,#15171B)"><i></i><span>Matte black</span></button></li>
-    <li><button type="button" data-i="2" data-f="stainless" aria-label="Brushed stainless" style="--f:linear-gradient(145deg,#E9ECEF,#A9B0B8)"><i></i><span>Brushed stainless</span></button></li>
-    <li><button type="button" data-i="3" data-f="gunmetal" aria-label="Gunmetal" style="--f:linear-gradient(145deg,#7D838C,#464B53)"><i></i><span>Gunmetal</span></button></li>
-    <li><button type="button" data-i="4" data-f="copper" aria-label="Brushed copper" style="--f:linear-gradient(145deg,#D99A73,#9E5A38)"><i></i><span>Brushed copper</span></button></li>
-  </ol>
-  <div class="ts-sweep-bar" aria-hidden="true"><i id="sweepBar"></i></div>
- </div>
-</section>
-
-<section class="ts-studio" id="MixerTapStudio" data-sc-act="flow" aria-labelledby="studio-title">
- <div class="ts-wrap ts-studio-head" data-sc-in data-sc-stagger="80">
+<section class="ts-studio" id="studio" data-sc-act="flow" aria-labelledby="studio-title">
+ <div id="MixerTapStudio" aria-hidden="true"></div>
+ <div class="ts-wrap ts-studio-head" id="mixertapstudio" data-sc-in data-sc-stagger="80">
    <span class="kick">Make it your kind of beautiful</span>
    <h2 id="studio-title" class="d2">Mixer Tap Studio.</h2>
    <p class="lede">Find your shape. See your finish. A little detail that changes the whole kitchen.</p>
@@ -2341,6 +2334,36 @@ html.lenis{scroll-behavior:auto}
  </div>
 <noscript><div class="ts-wrap"><h3>Choose your tap</h3><p>Premium Modern mixers start at $1,050. Victorian mixers are $1,150. Antique mixers are $1,400 in Bronze, Aurum, Slate or Steel. Classic mixers start at $500. Premium dedicated filter taps are $480 in Brushed gold, Matte black, Brushed stainless, Gunmetal or Brushed copper. Classic Chrome filter taps are included with your system, with other finishes a $150 upgrade.</p><h3>Deluxe three way mixer</h3><p>Twist the ribbed end of the spout to turn on filtered water through that spout. The side handle controls hot and cold water. Chrome, Warm Nickel and Matte Black are $680. Brushed Brass, Brushed Bronze and Gun Metal are $800, installed with your system.</p><p>Warm Nickel has a subtle warm tone. <a href="tel:0430546749">Call 0430 546 749 to choose your tap.</a></p></div></noscript>
 </section>
+
+<section class="ts-sweep" id="finishes" data-sc-act="pin" data-sc-span="4.4" data-sc-span-m="3.6" aria-label="Five finishes. One kitchen.">
+ <div class="sc-stage" data-sc-stage data-sc-verify-state="initial">
+  <div class="ts-sweep-pics" id="sweepPics" aria-hidden="true">
+<picture class="on"><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-gold-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-gold-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
+<picture><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-black-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-black-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
+<picture><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-stainless-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-stainless-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
+<picture><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-gunmetal-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-gunmetal-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
+<picture><source media="(max-width:859px)" srcset="media/tap-studio/polish-nanopro/sweep-copper-m.webp"><img src="media/tap-studio/polish-nanopro/sweep-copper-4k.webp" alt="" width="3840" height="2160" loading="lazy"></picture>
+  </div>
+  <div class="ts-sweep-scrim" aria-hidden="true"></div>
+  <div class="ts-sweep-copy">
+    <span class="kick">Five finishes. One kitchen.</span>
+    <span class="ts-sweep-count" id="sweepCount" aria-hidden="true">01 / 05</span>
+    <h2 class="ts-sweep-name"><span class="ts-mask"><span class="ts-word" id="sweepWord">Brushed gold</span></span></h2>
+    <p class="ts-sweep-line" id="sweepLine" aria-live="polite">Warm, quiet, and it catches the morning light first.</p>
+    <a class="btn" href="#studio" data-pick="pullout"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Try it in the studio</a>
+  </div>
+  <ol class="ts-sweep-rail" id="sweepRail" aria-label="Finishes on this page">
+    <li><button type="button" class="on" data-i="0" data-f="gold" aria-label="Brushed gold" style="--f:linear-gradient(145deg,#E2C27A,#B8923F)"><i></i><span>Brushed gold</span></button></li>
+    <li><button type="button" data-i="1" data-f="black" aria-label="Matte black" style="--f:linear-gradient(145deg,#3A3D44,#15171B)"><i></i><span>Matte black</span></button></li>
+    <li><button type="button" data-i="2" data-f="stainless" aria-label="Brushed stainless" style="--f:linear-gradient(145deg,#E9ECEF,#A9B0B8)"><i></i><span>Brushed stainless</span></button></li>
+    <li><button type="button" data-i="3" data-f="gunmetal" aria-label="Gunmetal" style="--f:linear-gradient(145deg,#7D838C,#464B53)"><i></i><span>Gunmetal</span></button></li>
+    <li><button type="button" data-i="4" data-f="copper" aria-label="Brushed copper" style="--f:linear-gradient(145deg,#D99A73,#9E5A38)"><i></i><span>Brushed copper</span></button></li>
+  </ol>
+  <div class="ts-sweep-bar" aria-hidden="true"><i id="sweepBar"></i></div>
+ </div>
+</section>
+
+
 
 
 
@@ -2522,6 +2545,24 @@ html.lenis{scroll-behavior:auto}
 </section>
 
 
+<section class="ts-deluxe" id="deluxe-home" data-sc-act="flow" aria-labelledby="deluxe-home-title">
+ <picture class="ts-deluxe-photo"><source media="(max-width:859px)" srcset="media/homepage-care/care-deluxe-m.webp"><img src="media/homepage-care/care-deluxe.webp" width="2400" height="1340" alt="Whole house filtration, Pure Premium reverse osmosis and a gold premium mixer together in an illustrative studio setting" loading="lazy"></picture>
+ <div class="ts-deluxe-shade" aria-hidden="true"></div>
+ <div class="ts-wrap ts-deluxe-content">
+  <div class="ts-deluxe-copy" data-sc-in>
+   <span class="kick">Beyond the kitchen</span>
+   <h2 class="d2" id="deluxe-home-title">The Deluxe Home Filtration Setup.</h2>
+   <p class="lede">Whole house filtration. Seven stage reverse osmosis. One premium mixer.</p>
+   <p class="ts-deluxe-description">Filtered water throughout your home, with a dedicated reverse osmosis system for drinking water at the kitchen sink.</p>
+   <div class="ts-deluxe-price">From <strong>$6,290</strong><span>installed, including GST</span></div>
+   <p class="ts-deluxe-service">First year of servicing included.</p>
+   <button class="btn" type="button" data-quote data-package="Deluxe Home Filtration Setup: whole house filtration, Pure Premium seven stage reverse osmosis and mixer"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get my Deluxe quote</button>
+   <a class="ts-deluxe-link" href="/reverse-osmosis-vs-whole-house-water-filter-sydney#deluxe">Explore the complete setup <span aria-hidden="true">↗</span></a>
+   <noscript><a class="ts-deluxe-link" href="tel:0430546749">Call for your Deluxe quote</a></noscript>
+  </div>
+ </div>
+</section>
+
 <section class="ts-filter" id="filter-tap" data-sc-act="flow" aria-labelledby="filter-title">
  <div class="ts-wrap ts-filter-grid">
   <figure class="frame ts-filter-fr" data-sc-tilt="3" data-sc-in data-sc-reveal="right" data-sc-reveal-at="0.06 0.4">
@@ -2533,7 +2574,7 @@ html.lenis{scroll-behavior:auto}
     <h2 id="filter-title" class="d2">Love your mixer?<br><span>Keep it.</span></h2>
     <p class="lede">A dedicated filtered water tap sits beside the mixer you already own. A little room on the bench, your own control for the water you drink, and a finish that ties the two together.</p>
     <div class="ts-filter-price"><b>Chrome is included.</b><span>With your filtration system. Brushed gold, matte black, stainless, gunmetal and copper are a $150 upgrade.</span></div>
-    <a href="#MixerTapStudio" class="btn" data-pick="filter"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Explore filter taps</a>
+    <a href="#studio" class="btn" data-pick="filter"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Explore filter taps</a>
   </div>
  </div>
 </section>
@@ -4601,32 +4642,6 @@ function jump(y){cancelGlide();if(lenis)lenis.scrollTo(Math.round(y),{immediate:
 function P(el){const v=parseFloat(el.style.getPropertyValue('--sc-p'));return isNaN(v)?0:v}
 window.__ts={P,glide,jump,mph,reduce,clamp,get lenis(){return lenis}};
 
-const studioSec=document.getElementById('MixerTapStudio');
-function studioFrame(){
-  if(!studioSec)return;
-  const head=studioSec.querySelector('.ts-studio-head'),bench=studioSec.querySelector('.ts-bench');
-  if(!head||!bench)return;
-  const at=el=>{let t=0;for(;el;el=el.offsetParent)t+=el.offsetTop;return t};
-  const sTop=at(studioSec),hTop=at(head);
-  const span=at(bench)+bench.offsetHeight-hTop;
-  const gap=Math.max(16,Math.round((innerHeight-span)/2));
-  studioSec.style.scrollMarginTop=(gap-(hTop-sTop))+'px';
-}
-function studioLand(){
-  if(!studioSec||location.hash!=='#MixerTapStudio')return;
-  studioFrame();
-  const y=studioSec.getBoundingClientRect().top+scrollY-parseFloat(studioSec.style.scrollMarginTop||0);
-  if(Math.abs(y-scrollY)>1)glide(y,.25);
-}
-studioFrame();
-addEventListener('resize',studioFrame,{passive:true});
-addEventListener('load',studioFrame);
-if(location.hash==='#MixerTapStudio'){
-  if('scrollRestoration' in history)history.scrollRestoration='manual';
-  requestAnimationFrame(studioLand);
-  addEventListener('load',()=>{studioLand();setTimeout(studioLand,400)});
-}
-
  
 const finishes={
   gold:{name:'Brushed gold',color:'#C2A26B',sw:'linear-gradient(145deg,#E2C27A,#B8923F)',scene:'brass'},
@@ -4736,7 +4751,7 @@ stage.addEventListener('animationend',e=>{if(e.target===stage.querySelector('.ts
 
  
 function showDialog(d,sys){lastFocus=document.activeElement;if(d.id==='quote-dialog'){$('#quote-system').textContent=sys?'With the '+sys+' reverse osmosis system':''}lenis&&lenis.stop();d.showModal()}
-$$('[data-quote]').forEach(b=>b.addEventListener('click',()=>{if(b.id==='ocBtn'){finish='gold';setModel('pullout')}showDialog($('#quote-dialog'),b.dataset.sys||'')}));
+$$('[data-quote]').forEach(b=>b.addEventListener('click',()=>{if(b.id==='ocBtn'){finish='gold';setModel('pullout')}showDialog($('#quote-dialog'),b.dataset.sys||'');if(b.dataset.package)$('#quote-system').textContent=b.dataset.package}));
 $('#warranty-open').addEventListener('click',()=>{
  const deluxe=model==='deluxe';$('#deluxe-warranty').hidden=!deluxe;$('#premium-warranty').hidden=deluxe;$('#warranty-range').textContent=current().short;$('#warranty-selection').textContent=finishName();
  $('#warranty-finish-period').textContent=((model==='pullout'&&premiumStyle==='victorian'&&finish==='chrome')||(model==='filter'&&finish==='black')?2:15)+' years';
@@ -4785,7 +4800,7 @@ $('#quote-form').addEventListener('submit',e=>{e.preventDefault();if(sendingQuot
 document.addEventListener('click',e=>{const a=e.target.closest('a');if(a&&['/#ask','#ask','/#quote'].includes(a.getAttribute('href'))){e.preventDefault();showDialog($('#quote-dialog'))}});
 
  
-document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href');if(id.length<2)return;const target=document.getElementById(id.slice(1));if(!target)return;e.preventDefault();if(target===studioSec)studioFrame();const sm=parseFloat(target.style.scrollMarginTop);let y=target.getBoundingClientRect().top+scrollY-(isNaN(sm)?(mph?80:96):sm);if(!isNaN(sm)&&y<scrollY)y-=document.getElementById('hdr').offsetHeight;glide(y,mph?.8:1.2)});
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href');if(id.length<2)return;const target=document.getElementById(id.slice(1));if(!target)return;e.preventDefault();glide(target.getBoundingClientRect().top+scrollY-(mph?80:96),mph?.8:1.2)});
 
  
 if(window.ScrollCraft)ScrollCraft.mount(root);
@@ -4858,6 +4873,14 @@ addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(paint);ticking
 addEventListener('resize',paint,{passive:true});
 update(false);setSweep(0);paint();
 addEventListener('load',()=>setTimeout(paint,200));
+
+function landOnStudio(){
+ if(!['#mixertapstudio','#studio'].includes(location.hash.toLowerCase()))return;
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{const target=$('#mixertapstudio');jump(target.getBoundingClientRect().top+scrollY-112)}));
+}
+addEventListener('hashchange',landOnStudio);
+if(document.readyState==='complete')document.fonts.ready.then(landOnStudio);
+else addEventListener('load',()=>document.fonts.ready.then(landOnStudio),{once:true});
 
  
 const headline=$('#heroLine'),text=headline.textContent;headline.setAttribute('aria-label',text);
@@ -5155,6 +5178,5 @@ setInterval(async()=>{if(paused||document.hidden||$('#quote-dialog').open||scrol
   if (!mph) setSys(0);
   driveRange();
 })();
-</script>
-</body>
+</script></body>
 </html>
