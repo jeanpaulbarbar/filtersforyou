@@ -2068,6 +2068,10 @@ html.lenis{scroll-behavior:auto}
 @media(max-width:859px){.ts-deluxe{min-height:0;padding-top:clamp(300px,66vw,480px)}.ts-deluxe-photo{height:clamp(380px,85vw,580px)}.ts-deluxe-photo img{object-position:50% 42%}.ts-deluxe-shade{background:linear-gradient(0deg,var(--ink-blue) 0%,var(--ink-blue) 60%,transparent 90%)}.ts-deluxe-content{padding:24px 22px 64px}.ts-deluxe-copy{gap:18px;max-width:520px}.ts-deluxe .d2{font-size:clamp(40px,10.8vw,60px)}.ts-deluxe .lede{font-size:20px}.ts-deluxe .btn{max-width:100%}}
 
 #mixertapstudio,#MixerTapStudio{scroll-margin-top:112px}
+
+.ts-models [data-model="deluxe"]{position:relative}
+.ts-bestseller{position:absolute;left:50%;top:-18px;transform:translateX(-50%);padding:3px 9px;border-radius:999px;background:var(--yellow);color:var(--ink-blue);font-family:var(--badge);font-size:9px;font-weight:700;line-height:1.4;letter-spacing:.03em;white-space:nowrap;pointer-events:none;box-shadow:0 2px 5px rgba(4,16,46,.1)}
+.ts-bestseller::after{content:"";position:absolute;left:50%;bottom:-3px;transform:translateX(-50%) rotate(45deg);width:6px;height:6px;background:var(--yellow)}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage",
@@ -2294,7 +2298,7 @@ html.lenis{scroll-behavior:auto}
  </div>
  <div class="ts-wrap ts-bench">
   <div class="ts-preview"><div class="ts-mobile-models" id="mobile-models"></div>
-  <div class="ts-photo-area"><figure class="frame ts-stage" id="product-stage" data-studio-gold>
+  <div class="ts-photo-area"><figure class="frame ts-stage lifestyle" id="product-stage" data-studio-gold>
     <div class="ts-scene" id="sceneStack" aria-hidden="true">
       <picture class="on" data-f="gold"><source media="(max-width:859px)" srcset="media/ro/tap-brass-m.webp"><img src="media/ro/tap-brass.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
       <picture data-f="black"><source media="(max-width:859px)" srcset="media/ro/tap-black-m.webp"><img src="media/ro/tap-black.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
@@ -2302,7 +2306,7 @@ html.lenis{scroll-behavior:auto}
       <picture data-f="gunmetal"><source media="(max-width:859px)" srcset="media/ro/tap-gunmetal-m.webp"><img src="media/ro/tap-gunmetal.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
       <picture data-f="copper"><source media="(max-width:859px)" srcset="media/ro/tap-copper-m.webp"><img src="media/ro/tap-copper.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
     </div>
-    <div class="ts-lifestyle" id="lifestyleStack" aria-hidden="true"></div>
+    <div class="ts-lifestyle" id="lifestyleStack" aria-hidden="true"><picture class="on" data-src="media/tap-studio/deluxe/deluxe-brass.webp"><source media="(max-width:859px)" srcset="media/tap-studio/deluxe/deluxe-brass-m.webp"><img src="media/tap-studio/deluxe/deluxe-brass.webp" alt="Deluxe three way mixer in Brushed Brass" width="1200" height="1600" loading="lazy"></picture></div>
     <div class="ts-cutstage" id="cutStage" hidden>
       <img class="ts-cutground" src="media/ro/tap-nickel-m.webp" alt="" width="760" height="943" loading="lazy" aria-hidden="true">
       <span class="ts-cutglow" aria-hidden="true"></span>
@@ -2311,25 +2315,25 @@ html.lenis{scroll-behavior:auto}
     </div>
     <span class="ts-spot" aria-hidden="true"></span>
     <div class="ts-metal-wipe" aria-hidden="true"></div>
-    <figcaption id="stageCap">Brushed gold</figcaption>
+    <figcaption id="stageCap">Brushed Brass</figcaption>
     <span class="ts-stage-tag" id="stageTag">Explore the finish</span>
     <button type="button" class="ts-zoom" id="zoom" aria-label="Enlarge the selected tap"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
   </figure></div>
   <div id="mobile-finishes"></div></div>
   <div class="ts-card" id="studioCard">
-   <div class="ts-models" role="group" aria-label="Tap style"><button type="button" data-model="pullout" aria-pressed="true">Premium</button><button type="button" data-model="classic" aria-pressed="false">Classic</button><button type="button" data-model="deluxe" aria-pressed="false">Deluxe</button><button type="button" data-model="filter" aria-pressed="false">Filter</button></div>
+   <div class="ts-models" role="group" aria-label="Tap style"><button type="button" data-model="deluxe" aria-pressed="true" aria-label="Deluxe, Bestseller"><span class="ts-bestseller" aria-hidden="true">Bestseller</span>Deluxe</button><button type="button" data-model="pullout" aria-pressed="false">Premium</button><button type="button" data-model="classic" aria-pressed="false">Classic</button><button type="button" data-model="filter" aria-pressed="false">Filter</button></div>
 
-   <div class="ts-card-copy"><div class="ts-card-head"><span class="ts-kicker" id="model-kicker">The premium mixer</span><div class="ts-card-links"><button type="button" class="ts-warranty-link" id="warranty-open" aria-haspopup="dialog" aria-controls="warranty-dialog" hidden>Warranty <span aria-hidden="true">↗</span></button><button type="button" class="ts-details-btn" id="details-toggle" aria-haspopup="dialog" aria-controls="details-dialog">The details</button></div></div>
-   <h3 id="model-title">One beautiful tap.<br>Every kind of water.</h3>
-   <p class="ts-card-desc" id="model-description">A concealed pull out hose gives you extra reach for rinsing and filling. Hot and cold use the main handle, with a separate lever for purified drinking water.</p>
+   <div class="ts-card-copy"><div class="ts-card-head"><span class="ts-kicker" id="model-kicker">Deluxe</span><div class="ts-card-links"><button type="button" class="ts-warranty-link" id="warranty-open" aria-haspopup="dialog" aria-controls="warranty-dialog" hidden>Warranty <span aria-hidden="true">↗</span></button><button type="button" class="ts-details-btn" id="details-toggle" aria-haspopup="dialog" aria-controls="details-dialog">The details</button></div></div>
+   <h3 id="model-title">Pure water.<br>With a simple twist.</h3>
+   <p class="ts-card-desc" id="model-description">Twist the ribbed end of the spout to turn on filtered water, delivered through that spout. The side handle controls your everyday hot and cold water.</p>
 
-   </div><div class="ts-finish-controls" id="finish-controls"><div class="ts-shape-slot"><div class="ts-style-pills" id="premium-styles" role="group" aria-label="Premium style"><button type="button" data-premium-style="modern" aria-pressed="true">Modern</button><button type="button" data-premium-style="victorian" aria-pressed="false">Victorian</button><button type="button" data-premium-style="antique" aria-pressed="false">Antique</button></div><div class="ts-style-pills" id="filter-styles" role="group" aria-label="Filter tap range" hidden><button type="button" data-filter-style="classic" aria-pressed="true">Classic</button><button type="button" data-filter-style="premium" aria-pressed="false">Premium</button></div><span id="shape-summary">Premium pull out mixer</span><div class="ts-shape" id="classic-shapes" role="group" aria-label="Choose your Classic mixer shape" hidden>
+   </div><div class="ts-finish-controls" id="finish-controls"><div class="ts-shape-slot"><div class="ts-style-pills" id="premium-styles" role="group" aria-label="Premium style" hidden><button type="button" data-premium-style="modern" aria-pressed="true">Modern</button><button type="button" data-premium-style="victorian" aria-pressed="false">Victorian</button><button type="button" data-premium-style="antique" aria-pressed="false">Antique</button></div><div class="ts-style-pills" id="filter-styles" role="group" aria-label="Filter tap range" hidden><button type="button" data-filter-style="classic" aria-pressed="true">Classic</button><button type="button" data-filter-style="premium" aria-pressed="false">Premium</button></div><span id="shape-summary">Deluxe mixer</span><div class="ts-shape" id="classic-shapes" role="group" aria-label="Choose your Classic mixer shape" hidden>
 
     <button type="button" data-shape="gooseneck" aria-pressed="true"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M12 35V15a9 9 0 0 1 18 0v6M7 35h12M9 27h9m-1-5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Gooseneck</span></button>
     <button type="button" data-shape="square" aria-pressed="false"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M12 35V8h19v5M7 35h12M9 27h9m-1-5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Square</span></button>
-   </div></div><div class="ts-finish-head"><span class="ts-kicker">The finish</span><b id="finish-name" aria-live="polite">Brushed gold</b><button type="button" class="ts-surprise" id="surprise">Surprise me</button></div>
+   </div></div><div class="ts-finish-head"><span class="ts-kicker">The finish</span><b id="finish-name" aria-live="polite">Brushed Brass</b><button type="button" class="ts-surprise" id="surprise">Surprise me</button></div>
    <div class="swatches ts-swatches" id="finish-options" role="group" aria-label="Choose a finish"></div></div>
-   <div class="ts-price-line"><span class="ts-price" id="price-label">From <strong>$1,050</strong></span><span class="ts-price-note" id="price-note">Installed with your system</span></div>
+   <div class="ts-price-line"><span class="ts-price" id="price-label"><strong>$800</strong></span><span class="ts-price-note" id="price-note">Installed with your system</span></div>
    <button type="button" class="btn ts-action" data-quote><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Add this tap to my quote</button>
    <p class="ts-quote-note">Your full price, in writing, before we start.</p>
   </div>
@@ -4671,7 +4675,7 @@ const filterStyles={classic:models.filter,premium:{...models.filter,label:'Premi
 finishes.aurum={name:'Aurum',color:'#B79A58',sw:'linear-gradient(145deg,#C9B17A,#8F773E)'};
 finishes.slate={name:'Slate',color:'#595B58',sw:'linear-gradient(145deg,#797A70,#333632)'};
 finishes.steel={name:'Steel',color:'#9EA19B',sw:'linear-gradient(145deg,#C4C7BC,#777C75)'};
-let model='pullout',finish='gold',shape='gooseneck',premiumStyle='modern',filterStyle='classic',lastFocus=null;
+let model='deluxe',finish='brass',shape='gooseneck',premiumStyle='modern',filterStyle='classic',lastFocus=null;
 const current=()=>model==='pullout'?premiumStyles[premiumStyle]:model==='filter'?filterStyles[filterStyle]:models[model];
 const namedFinish=k=>model==='pullout'&&premiumStyle==='antique'&&k==='bronze'?'Bronze':model==='deluxe'?({chrome:'Chrome',black:'Matte Black',gunmetal:'Gun Metal'}[k]||finishes[k].name):finishes[k].name;
 const cutSrc=()=>'media/tap-studio/cut/'+models[model].cut(finish,shape)+'.webp';
