@@ -2300,13 +2300,13 @@ html.lenis{scroll-behavior:auto}
   <div class="ts-preview"><div class="ts-mobile-models" id="mobile-models"></div>
   <div class="ts-photo-area"><figure class="frame ts-stage lifestyle" id="product-stage" data-studio-gold>
     <div class="ts-scene" id="sceneStack" aria-hidden="true">
-      <picture class="on" data-f="gold"><source media="(max-width:859px)" srcset="media/ro/tap-brass-m.webp"><img src="media/ro/tap-brass.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
+      <picture class="on" data-f="gold"><source media="(max-width:859px)" srcset="media/tap-studio/gold-callouts/premium-gold-m.webp"><img src="media/tap-studio/gold-callouts/premium-gold.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
       <picture data-f="black"><source media="(max-width:859px)" srcset="media/ro/tap-black-m.webp"><img src="media/ro/tap-black.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
       <picture data-f="stainless"><source media="(max-width:859px)" srcset="media/ro/tap-nickel-m.webp"><img src="media/ro/tap-nickel.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
       <picture data-f="gunmetal"><source media="(max-width:859px)" srcset="media/ro/tap-gunmetal-m.webp"><img src="media/ro/tap-gunmetal.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
       <picture data-f="copper"><source media="(max-width:859px)" srcset="media/ro/tap-copper-m.webp"><img src="media/ro/tap-copper.webp" alt="" width="1200" height="1490" loading="lazy"></picture>
     </div>
-    <div class="ts-lifestyle" id="lifestyleStack" aria-hidden="true"><picture class="on" data-src="media/tap-studio/deluxe/deluxe-brass.webp"><source media="(max-width:859px)" srcset="media/tap-studio/deluxe/deluxe-brass-m.webp"><img src="media/tap-studio/deluxe/deluxe-brass.webp" alt="Deluxe three way mixer in Brushed Brass" width="1200" height="1600" loading="lazy"></picture></div>
+    <div class="ts-lifestyle" id="lifestyleStack" aria-hidden="true"><picture class="on" data-src="media/tap-studio/gold-callouts/deluxe-brass.webp"><source media="(max-width:859px)" srcset="media/tap-studio/gold-callouts/deluxe-brass-m.webp"><img src="media/tap-studio/gold-callouts/deluxe-brass.webp" alt="Deluxe three way mixer in Brushed Brass" width="1200" height="1600" loading="lazy"></picture></div>
     <div class="ts-cutstage" id="cutStage" hidden>
       <img class="ts-cutground" src="media/ro/tap-nickel-m.webp" alt="" width="760" height="943" loading="lazy" aria-hidden="true">
       <span class="ts-cutglow" aria-hidden="true"></span>
@@ -2643,7 +2643,7 @@ html.lenis{scroll-behavior:auto}
 <div class="nav2"><button class="back" type="button" data-back hidden>Back</button><button class="btn" type="submit" data-next style="margin-left:auto"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span data-nextlabel>Next</span></button></div>
 <p class="ts-local-note" hidden></p><p id="quote-status" role="status"></p></form></div></div>
 <div class="dfoot"><span>Rather talk it through?</span><a class="ul" href="tel:0430546749">Call 0430 546 749</a></div></dialog>
-<dialog class="ts-lightbox" id="lightbox" aria-label="Selected tap close up"><button type="button" data-close aria-label="Close image"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><img id="lightbox-image" src="media/ro/tap-brass.webp" width="1200" height="1490" alt="Selected tap enlarged"><p id="lightbox-caption">Brushed gold</p></dialog>
+<dialog class="ts-lightbox" id="lightbox" aria-label="Selected tap close up"><button type="button" data-close aria-label="Close image"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><img id="lightbox-image" src="media/tap-studio/gold-callouts/premium-gold.webp" width="1200" height="1490" alt="Selected tap enlarged"><p id="lightbox-caption">Brushed gold</p></dialog>
 
 <dialog class="ts-warranty ts-detail-dialog" id="details-dialog" aria-labelledby="details-name" data-lenis-prevent><div class="ts-warranty-head"><span class="ts-kicker">A closer look</span><button type="button" data-close aria-label="Close details"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div><div class="ts-warranty-body"><h2 id="details-name">Premium Modern mixer</h2><p class="ts-warranty-intro" id="details-description"></p><ul id="details-list" class="ts-detail-features"></ul><div class="ts-detail-selection"><span id="details-finish"></span><strong id="details-price"></strong></div><p class="ts-warranty-terms">Installed with your filtration system. The system is quoted separately. We confirm your connections, bench space and cabinet clearance before installation.</p></div></dialog>
 <dialog class="ts-warranty" id="warranty-dialog" aria-labelledby="warranty-title" data-lenis-prevent>
@@ -4679,7 +4679,7 @@ let model='deluxe',finish='brass',shape='gooseneck',premiumStyle='modern',filter
 const current=()=>model==='pullout'?premiumStyles[premiumStyle]:model==='filter'?filterStyles[filterStyle]:models[model];
 const namedFinish=k=>model==='pullout'&&premiumStyle==='antique'&&k==='bronze'?'Bronze':model==='deluxe'?({chrome:'Chrome',black:'Matte Black',gunmetal:'Gun Metal'}[k]||finishes[k].name):finishes[k].name;
 const cutSrc=()=>'media/tap-studio/cut/'+models[model].cut(finish,shape)+'.webp';
-const sceneSrc=(f,m)=>'media/ro/tap-'+finishes[f].scene+(m?'-m':'')+'.webp';
+const sceneSrc=(f,m)=>f==='gold'?'media/tap-studio/gold-callouts/premium-gold'+(m?'-m':'')+'.webp':'media/ro/tap-'+finishes[f].scene+(m?'-m':'')+'.webp';
 const finishName=()=>namedFinish(finish);
 const selection=()=>current().label+(model==='classic'?' ('+shape+')':'')+' · '+finishName();
 const stage=$('#product-stage');
@@ -4696,7 +4696,7 @@ function arrangeStudio(){
 }
 arrangeStudio();studioMedia.addEventListener('change',arrangeStudio);
 let imageRequest=0;
-const lifestyleSrc=(f=finish)=>model==='deluxe'?'media/tap-studio/deluxe/deluxe-'+f+'.webp':model==='pullout'?'media/tap-studio/ranges/'+premiumStyle+'-'+f+'.webp':model==='filter'&&filterStyle==='premium'?'media/tap-studio/filter-premium/filter-'+f+'.webp':'media/tap-studio/polish-nanopro/'+(model==='classic'?'classic-'+shape:model)+'-'+f+'.webp';
+const lifestyleSrc=(f=finish)=>model==='deluxe'?(f==='brass'?'media/tap-studio/gold-callouts/deluxe-brass.webp':'media/tap-studio/deluxe/deluxe-'+f+'.webp'):model==='pullout'?'media/tap-studio/ranges/'+premiumStyle+'-'+f+'.webp':model==='filter'&&filterStyle==='premium'?'media/tap-studio/filter-premium/filter-'+f+'.webp':'media/tap-studio/polish-nanopro/'+(model==='classic'?'classic-'+shape:model)+'-'+f+'.webp';
 function showLifestyle(src){
  const request=++imageRequest;stage.setAttribute('aria-busy','true');
  let pic=$$('#lifestyleStack picture').find(p=>p.dataset.src===src);
