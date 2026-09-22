@@ -3668,15 +3668,15 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   var lenis = null;
   if (ROLL && !reduce && hasGsap && typeof Lenis !== 'undefined' && matchMedia('(pointer:fine)').matches && !mph){
      
-    lenis = new Lenis({duration:1.65, smoothWheel:true, syncTouch:false, wheelMultiplier:.5,
+    lenis = new Lenis({duration:1.65, smoothWheel:true, syncTouch:false, wheelMultiplier:1.0,
       virtualScroll:function(input){
         
         
         if (!input.deltaY || input.event.ctrlKey) return;
         var direction = input.deltaY > 0 ? 1 : -1;
         var pending = lenis ? lenis.targetScroll - lenis.animatedScroll : 0;
-        var distance = Math.min(Math.abs(input.deltaY), innerHeight * .20);
-        var allowance = Math.max(0, innerHeight * .56 - Math.max(0, pending * direction));
+        var distance = Math.min(Math.abs(input.deltaY), innerHeight * .40);
+        var allowance = Math.max(0, innerHeight * 1.12 - Math.max(0, pending * direction));
         input.deltaY = direction * Math.max(.01, Math.min(distance, allowance));
         
         if (pending * direction < 0) input.deltaY -= pending;
