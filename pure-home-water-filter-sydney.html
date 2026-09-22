@@ -278,6 +278,10 @@ body.ddon .hdr{transform:none}
 .ddpanel .ddproduct{display:flex;flex-direction:column;min-width:0;text-decoration:none;color:var(--ink);border-radius:16px}
 .ddpanel .ddphoto,.msheet .ddphoto{display:block;overflow:hidden;border-radius:16px;background:#e9e9e7;aspect-ratio:1}
 .ddpanel .ddproduct img,.msheet .ddproduct img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s var(--e-out)}
+.ddpanel .ddcaption,.msheet .ddcaption{position:relative}
+.ddpanel .range-bubble,.msheet .range-bubble{display:inline-block;border-radius:999px;background:var(--yellow);color:var(--ink);padding:6px 10px;font-size:11px;font-weight:700;line-height:1.2;transform:none;box-shadow:0 3px 10px #04102e20}
+.ddpanel .ddproduct,.msheet .ddproduct{position:relative;overflow:visible}
+.ddpanel .ddproduct>.range-bubble,.msheet .ddproduct>.range-bubble{position:absolute;right:8px;top:-8px;z-index:3;white-space:nowrap;font-size:11px;transform:none}
 .ddpanel .ddproduct .ddcaption,.msheet .ddproduct .ddcaption{display:block;padding:12px 2px 3px}
 .ddpanel .ddproduct b,.msheet .ddproduct b{display:block;font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.015em}
 .ddpanel .ddgrid{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.11fr) minmax(0,1.11fr);gap:30px}
@@ -1432,161 +1436,147 @@ fbq('track', 'PageView');
 <body>
 <!-- SHELL:HEADER -->
 <header class="hdr" id="hdr">
-  <div class="util"><div class="in rowu">
-    <a class="ustars ul" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" target="_blank" rel="noopener"><span class="st5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>5.0 from 30 Google reviews</a>
-    <nav class="ulinks" aria-label="Utility">
-      <a class="ul" href="lifetime-warranty">Warranty</a>
-      <a class="ul" href="/#areas">Areas we cover</a>
-      <a class="ul" href="/#proof">Reviews</a>
-      <a class="ul" href="/#contact">Contact</a>
-    </nav>
-    <span class="soc">
-      <a href="https://www.facebook.com/filtersforyouau" target="_blank" rel="noopener" aria-label="Facebook"><i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.9v3h2.4v7h2.2Z"/></svg></i></a>
-      <a href="https://www.instagram.com/filtersforyouau" target="_blank" rel="noopener" aria-label="Instagram"><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg></i></a>
-      <a href="https://www.tiktok.com/@filtersforyouau" target="_blank" rel="noopener" aria-label="TikTok"><i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"/></svg></i></a>
-    </span>
-  </div></div>
-  <div class="in"><div class="row">
-    <a class="mark-link" href="/" aria-label="Filters For You home"><img class="mark" src="media/logo.svg" alt="Filters For You" width="400" height="120"></a>
-    <nav aria-label="Main">
-      
-      <span class="dd" id="dd">
-        <button class="ddt" type="button" data-panel="p-sys" aria-expanded="false" aria-controls="ddpanel">Systems <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="ddt" type="button" data-panel="p-serv" aria-expanded="false" aria-controls="ddpanel">Servicing &amp; prices <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <a class="ul" href="faucets-and-mixers-sydney">Taps &amp; mixers</a>
-        <a class="ul" href="humm">Buy now, pay later</a>
-        <span class="ddbar" aria-hidden="true"></span>
-      </span>
-    </nav>
-    <div class="r">
-      <a class="ph ul" href="tel:0430546749">0430 546 749</a>
-      <button class="btn btn-sm js-open" type="button" data-sys=""><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book now</button>
-      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="msheet"><span class="bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
-    </div>
-  </div></div>
-
-  
-  <div class="ddpanel" id="ddpanel" aria-hidden="true">
-    <div class="ddstage">
-
-      
-      <div class="ddp" id="p-sys" inert>
-        <div class="in">
-          <div class="ddcatalog">
-            <a class="ddproduct ddcategory" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/whole-house-collection.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Whole House Water Filters</b></span></a>
-<a class="ddproduct ddcategory" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/ro-collection-landscape.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Reverse Osmosis Water Filters</b></span></a>
-<a class="ddproduct ddcategory" href="faucets-and-mixers-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/taps-collection.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Taps &amp; Mixers</b></span></a>
-<a class="ddproduct ddcategory" href="water-filter-systems"><span class="ddphoto" data-studio-gold><img data-src="media/systems-hub/collection-hero.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>View All Systems</b></span></a>
-<a class="ddproduct" href="pure-plus-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/five-stage-balanced-studio.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Plus</b></span></a>
-<a class="ddproduct" href="pure-premium-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/ro/card-prem.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Premium</b></span></a>
-<a class="ddproduct" href="pure-luxe-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/ro/card-luxe.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Luxe</b></span></a>
-<a class="ddproduct" href="pure-home-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/v7/prod-home-studio.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Home</b></span></a>
-<a class="ddproduct" href="pure-home-reserve-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/systems-hub/pure-home-reserve.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Home Reserve</b></span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="ddp" id="p-serv" inert>
-        <div class="in ddgrid">
-          <a class="ddhero" href="/#ledger">
-            <span class="ddhero-photo" data-studio-gold><img data-src="media/nav/service-prices-studio.webp" alt="" width="760" height="800" loading="lazy" decoding="async"></span>
-            <span class="v"></span>
-            <span class="c">
-              <span><b>Servicing &amp; prices</b><span>What it costs to keep a system running, every year</span></span>
-              <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-            </span>
-          </a>
-          <div class="ddcol">
-            <span class="ddlab">Owning one</span>
-            <a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold><img data-src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold><img data-src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold><img data-src="media/nav/cartridge-replacement-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-          </div>
-          <div class="ddcol">
-            <span class="ddlab">Before you book</span>
-            <a class="ddrow pic" href="/#newbuilds"><span class="ddthumb" data-studio-gold><img data-src="media/nav/new-developments-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="/#areas"><span class="ddthumb" data-studio-gold><img data-src="media/nav/areas-covered-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold><img data-src="media/nav/how-filters-work-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
+<div class="util"><div class="in rowu">
+<a class="ustars ul" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" rel="noopener" target="_blank"><span aria-hidden="true" class="st5"><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>5.0 from 30 Google reviews</a>
+<nav aria-label="Utility" class="ulinks">
+<a class="ul" href="lifetime-warranty">Warranty</a>
+<a class="ul" href="/#areas">Areas we cover</a>
+<a class="ul" href="/#proof">Reviews</a>
+<a class="ul" href="/#contact">Contact</a>
+</nav>
+<span class="soc">
+<a aria-label="Facebook" href="https://www.facebook.com/filtersforyouau" rel="noopener" target="_blank"><i><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.9v3h2.4v7h2.2Z"></path></svg></i></a>
+<a aria-label="Instagram" href="https://www.instagram.com/filtersforyouau" rel="noopener" target="_blank"><i><svg aria-hidden="true" fill="none" viewbox="0 0 24 24"><rect height="17" rx="5" stroke="currentColor" stroke-width="1.8" width="17" x="3.5" y="3.5"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.2" cy="6.8" fill="currentColor" r="1.2"></circle></svg></i></a>
+<a aria-label="TikTok" href="https://www.tiktok.com/@filtersforyouau" rel="noopener" target="_blank"><i><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"></path></svg></i></a>
+</span>
+</div></div>
+<div class="in"><div class="row">
+<a aria-label="Filters For You home" class="mark-link" href="/#top"><img alt="Filters For You" class="mark" height="120" src="media/logo.svg" width="400"/></a>
+<nav aria-label="Main">
+<span class="dd" id="dd">
+<button aria-controls="ddpanel" aria-expanded="false" class="ddt" data-panel="p-sys" type="button">Systems <svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></button>
+<button aria-controls="ddpanel" aria-expanded="false" class="ddt" data-panel="p-serv" type="button">Servicing &amp; prices <svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></button>
+<a class="ul" href="faucets-and-mixers-sydney">Taps &amp; mixers</a>
+<a class="ul" href="humm">Buy now, pay later</a>
+<span aria-hidden="true" class="ddbar"></span>
+</span>
+</nav>
+<div class="r">
+<a class="ph ul" href="tel:0430546749">0430 546 749</a>
+<button class="btn btn-sm js-open" data-sys="" type="button"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>Book now</button>
+<button aria-controls="msheet" aria-expanded="false" aria-label="Open menu" class="burger" id="burger" type="button"><span aria-hidden="true" class="bars"><span></span><span></span><span></span></span></button>
+</div>
+</div></div>
+<div aria-hidden="true" class="ddpanel" id="ddpanel">
+<div class="ddstage">
+<div class="ddp" id="p-sys" inert="">
+<div class="in">
+<div class="ddcatalog">
+<a class="ddproduct ddcategory" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/nav/whole-house-collection.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Whole House Water Filters</b></span></a>
+<a class="ddproduct ddcategory" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/nav/ro-collection-landscape.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Reverse Osmosis Water Filters</b></span></a>
+<a class="ddproduct ddcategory" href="faucets-and-mixers-sydney"><span class="range-bubble">35 styles &amp; finishes</span><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/nav/taps-collection.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
+<a class="ddproduct ddcategory" href="water-filter-systems"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/systems-hub/collection-hero.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>View All Systems</b></span></a>
+<a class="ddproduct" href="pure-plus-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/nav/five-stage-balanced-studio.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Plus</b></span></a>
+<a class="ddproduct" href="pure-premium-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/ro/card-prem.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Premium</b></span></a>
+<a class="ddproduct" href="pure-luxe-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/ro/card-luxe.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Luxe</b></span></a>
+<a class="ddproduct" href="pure-home-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/v7/prod-home-studio.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Home</b></span></a>
+<a class="ddproduct" href="pure-home-reserve-water-filter-sydney"><span class="range-bubble">20+ colours</span><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/systems-hub/pure-home-reserve.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Home Reserve</b></span></a>
+</div>
+</div>
+</div>
+<div class="ddp" id="p-serv" inert="">
+<div class="in ddgrid">
+<a class="ddhero" href="/#ledger">
+<span class="ddhero-photo" data-studio-gold=""><img alt="" data-src="media/nav/service-prices-studio.webp" decoding="async" height="800" loading="lazy" width="760"/></span>
+<span class="v"></span>
+<span class="c">
+<span><b>Servicing &amp; prices</b><span>What it costs to keep a system running, every year</span></span>
+<i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>
+</span>
+</a>
+<div class="ddcol">
+<span class="ddlab">Owning one</span>
+<a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/annual-service-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/lifetime-warranty-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/cartridge-replacement-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+</div>
+<div class="ddcol">
+<span class="ddlab">Before you book</span>
+<a class="ddrow pic" href="/#newbuilds"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/new-developments-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="/#areas"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/areas-covered-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/how-filters-work-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
 </header>
 
 <nav class="msheet" id="msheet" aria-label="Menu" hidden>
-
-  <div class="mlvl on" data-lvl="0">
-    <div class="mrow mlinks">
-      <button type="button" data-open="ms-sys">Systems <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
-      <button type="button" data-open="ms-serv">Servicing &amp; prices <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
-      <a href="faucets-and-mixers-sydney">Taps &amp; mixers <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-    </div>
-    <hr class="mrow">
-    <div class="mrow mmore">
-      
-      <a href="lifetime-warranty">Lifetime warranty</a>
-      <a href="/#proof">Reviews</a>
-      <a href="/#areas">Areas we cover</a>
-      <a href="/#pillars">About us</a>
-      <a href="/#ask">Contact us</a>
-    </div>
-    
-    <a class="mrow mhumm" href="humm">
-      <img src="media/humm/humm-tag-white-300.webp" alt="humm. Made for living." width="300" height="101" loading="lazy">
-      <b>Buy now, pay later</b>
-      <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-    </a>
-    <div class="mrow mcontact">
-      <a class="tel" href="tel:0430546749">0430 546 749</a>
-      <span class="msoc">
-        <a href="https://www.facebook.com/filtersforyouau" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.9v3h2.4v7h2.2Z"/></svg></a>
-        <a href="https://www.instagram.com/filtersforyouau" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="17.2" cy="6.8" r="1.2"/></svg></a>
-        <a href="https://www.tiktok.com/@filtersforyouau" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"/></svg></a>
-      </span>
-    </div>
-    <a class="mrow mcard js-open" href="/#ask" data-sys="">
-      <img src="media/tap-pour.webp" alt="" width="1600" height="1062" loading="lazy">
-      <span class="v"></span>
-      <span class="c">
-        <b>Book now<br>or request a quote</b>
-        <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-      </span>
-    </a>
-  </div>
-
-  <div class="mlvl" id="ms-sys" data-lvl="sys" inert>
-    <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Systems</b></button>
-    <div class="ddcatalog">
-            <a class="ddproduct ddcategory" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/whole-house-collection.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Whole House Water Filters</b></span></a>
-<a class="ddproduct ddcategory" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/ro-collection-landscape.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Reverse Osmosis Water Filters</b></span></a>
-<a class="ddproduct ddcategory" href="faucets-and-mixers-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/taps-collection.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Taps &amp; Mixers</b></span></a>
-<a class="ddproduct ddcategory" href="water-filter-systems"><span class="ddphoto" data-studio-gold><img src="media/systems-hub/collection-hero.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>View All Systems</b></span></a>
-<a class="ddproduct" href="pure-plus-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/five-stage-balanced-studio.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Plus</b></span></a>
-<a class="ddproduct" href="pure-premium-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/ro/card-prem.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Premium</b></span></a>
-<a class="ddproduct" href="pure-luxe-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/ro/card-luxe.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Luxe</b></span></a>
-<a class="ddproduct" href="pure-home-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/v7/prod-home-studio.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Home</b></span></a>
-<a class="ddproduct" href="pure-home-reserve-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/systems-hub/pure-home-reserve.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Home Reserve</b></span></a>
-          </div>
-    <a class="mnavask js-open" href="/#ask" data-sys="">Book now or request a quote</a>
-  </div>
-
-  <div class="mlvl" id="ms-serv" data-lvl="serv" inert>
-    <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Servicing &amp; prices</b></button>
-    <div class="ddcol">
-      <a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold><img src="media/nav/service-prices-studio.webp" alt="" width="600" height="600" loading="lazy" decoding="async"></span><span><b>Servicing &amp; prices</b><span>Service costs at a glance</span></span></a>
-      <a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold><img src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold><img src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold><img src="media/nav/cartridge-replacement-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="/#newbuilds"><span class="ddthumb" data-studio-gold><img src="media/nav/new-developments-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="/#areas"><span class="ddthumb" data-studio-gold><img src="media/nav/areas-covered-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold><img src="media/nav/how-filters-work-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-    </div>
-    
-    <a class="mnavask js-open" href="/#ask" data-sys="">Book now or request a quote</a>
-  </div>
-
+<div class="mlvl on" data-lvl="0">
+<div class="mrow mlinks">
+<button data-open="ms-sys" type="button">Systems <i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></button>
+<button data-open="ms-serv" type="button">Servicing &amp; prices <i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></button>
+<a href="faucets-and-mixers-sydney">Taps &amp; mixers <i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+</div>
+<hr class="mrow"/>
+<div class="mrow mmore">
+<a href="lifetime-warranty">Lifetime warranty</a>
+<a href="/#proof">Reviews</a>
+<a href="/#areas">Areas we cover</a>
+<a href="/#pillars">About us</a>
+<a href="/#ask">Contact us</a>
+</div>
+<a class="mrow mhumm" href="humm">
+<img alt="humm. Made for living." height="101" loading="lazy" src="media/humm/humm-tag-white-300.webp" width="300"/>
+<b>Buy now, pay later</b>
+<i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></i>
+</a>
+<div class="mrow mcontact">
+<a class="tel" href="tel:0430546749">0430 546 749</a>
+<span class="msoc">
+<a aria-label="Facebook" href="https://www.facebook.com/filtersforyouau" rel="noopener" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.9v3h2.4v7h2.2Z"></path></svg></a>
+<a aria-label="Instagram" href="https://www.instagram.com/filtersforyouau" rel="noopener" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="17" rx="5" stroke="currentColor" stroke-width="1.8" width="17" x="3.5" y="3.5"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.2" cy="6.8" r="1.2"></circle></svg></a>
+<a aria-label="TikTok" href="https://www.tiktok.com/@filtersforyouau" rel="noopener" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"></path></svg></a>
+</span>
+</div>
+<a class="mrow mcard js-open" data-sys="" href="/#ask">
+<img alt="" height="1062" loading="lazy" src="media/tap-pour.webp" width="1600"/>
+<span class="v"></span>
+<span class="c">
+<b>Book now<br/>or request a quote</b>
+<i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>
+</span>
+</a>
+</div>
+<div class="mlvl" data-lvl="sys" id="ms-sys" inert="">
+<button class="mback" data-back="" type="button"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i><b>Systems</b></button>
+<div class="ddcatalog">
+<a class="ddproduct ddcategory" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/nav/whole-house-collection.webp" width="600"/></span><span class="ddcaption"><b>Whole House Water Filters</b></span></a>
+<a class="ddproduct ddcategory" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/nav/ro-collection-landscape.webp" width="600"/></span><span class="ddcaption"><b>Reverse Osmosis Water Filters</b></span></a>
+<a class="ddproduct ddcategory" href="faucets-and-mixers-sydney"><span class="range-bubble">35 styles &amp; finishes</span><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/nav/taps-collection.webp" width="600"/></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
+<a class="ddproduct ddcategory" href="water-filter-systems"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/systems-hub/collection-hero.webp" width="600"/></span><span class="ddcaption"><b>View All Systems</b></span></a>
+<a class="ddproduct" href="pure-plus-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/nav/five-stage-balanced-studio.webp" width="600"/></span><span class="ddcaption"><b>Pure Plus</b></span></a>
+<a class="ddproduct" href="pure-premium-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/ro/card-prem.webp" width="600"/></span><span class="ddcaption"><b>Pure Premium</b></span></a>
+<a class="ddproduct" href="pure-luxe-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/ro/card-luxe.webp" width="600"/></span><span class="ddcaption"><b>Pure Luxe</b></span></a>
+<a class="ddproduct" href="pure-home-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/v7/prod-home-studio.webp" width="600"/></span><span class="ddcaption"><b>Pure Home</b></span></a>
+<a class="ddproduct" href="pure-home-reserve-water-filter-sydney"><span class="range-bubble">20+ colours</span><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/systems-hub/pure-home-reserve.webp" width="600"/></span><span class="ddcaption"><b>Pure Home Reserve</b></span></a>
+</div>
+<a class="mnavask js-open" data-sys="" href="/#ask">Book now or request a quote</a>
+</div>
+<div class="mlvl" data-lvl="serv" id="ms-serv" inert="">
+<button class="mback" data-back="" type="button"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i><b>Servicing &amp; prices</b></button>
+<div class="ddcol">
+<a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="600" loading="lazy" src="media/nav/service-prices-studio.webp" width="600"/></span><span><b>Servicing &amp; prices</b><span>Service costs at a glance</span></span></a>
+<a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/annual-service-studio.webp" width="112"/></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/lifetime-warranty-studio.webp" width="112"/></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/cartridge-replacement-studio.webp" width="112"/></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="/#newbuilds"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/new-developments-studio.webp" width="112"/></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="/#areas"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/areas-covered-studio.webp" width="112"/></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/how-filters-work-studio.webp" width="112"/></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+</div>
+<a class="mnavask js-open" data-sys="" href="/#ask">Book now or request a quote</a>
+</div>
 </nav>
 <!-- /SHELL:HEADER -->
 <main data-product="home" id="pure-plus-page"><div class="pgtop"><section class="pgcard hero" id="top">

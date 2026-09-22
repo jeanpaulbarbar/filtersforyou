@@ -316,6 +316,10 @@ body.ddon .hdr{transform:none}
 .ddpanel .ddproduct{display:flex;flex-direction:column;min-width:0;text-decoration:none;color:var(--ink);border-radius:16px}
 .ddpanel .ddphoto,.msheet .ddphoto{display:block;overflow:hidden;border-radius:16px;background:#e9e9e7;aspect-ratio:1}
 .ddpanel .ddproduct img,.msheet .ddproduct img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s var(--e-out)}
+.ddpanel .ddcaption,.msheet .ddcaption{position:relative}
+.ddpanel .range-bubble,.msheet .range-bubble{display:inline-block;border-radius:999px;background:var(--yellow);color:var(--ink);padding:6px 10px;font-size:11px;font-weight:700;line-height:1.2;transform:none;box-shadow:0 3px 10px #04102e20}
+.ddpanel .ddproduct,.msheet .ddproduct{position:relative;overflow:visible}
+.ddpanel .ddproduct>.range-bubble,.msheet .ddproduct>.range-bubble{position:absolute;right:8px;top:-8px;z-index:3;white-space:nowrap;font-size:11px;transform:none}
 .ddpanel .ddproduct .ddcaption,.msheet .ddproduct .ddcaption{display:block;padding:12px 2px 3px}
 .ddpanel .ddproduct b,.msheet .ddproduct b{display:block;font-size:15px;font-weight:600;line-height:1.4;letter-spacing:-.015em}
 .ddpanel .ddgrid{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.11fr) minmax(0,1.11fr);gap:30px}
@@ -980,12 +984,54 @@ html:not(.cmp-motion) .cmp-world{opacity:.36}
 @media(max-width:859px) and (max-height:680px){.cmp-hero-copy{padding-top:130px;padding-bottom:110px}.cmp-hero h1{font-size:39px}.cmp-hero-line{font-size:18px;margin:18px 0 20px}.cmp-hero .kick{font-size:11px}.cmp-coverage-head{padding-top:78px}.cmp-coverage-head h2{font-size:30px}.cmp-coverage-head .kick{font-size:10px}.cmp-world-shot[data-world="0"]{top:25%;bottom:35%}.cmp-world-pair{inset:26% 0 35%}.cmp-motion .cmp-coverage-copy{bottom:84px}.cmp-coverage-copy h3{font-size:25px}.cmp-coverage-copy p{font-size:14px;margin:9px 0 0;max-width:40ch}.cmp-coverage-nav{bottom:18px}.cmp-coverage-copy .arrow{min-height:40px}.cmp-world-shade{background:linear-gradient(0deg,#04102e 0%,#04102ef2 39%,#04102e25 65%,#04102e 100%)}.cmp-chapter{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.cmp-slide,.cmp-world-shot,.cmp-product-photo img{transition:none}.cmp-coverage-nav{display:none!important}.cmp-coverage-copy article{margin-top:35px}.cmp-world{opacity:.35}.cmp-coverage-stage{height:auto!important}.cmp-deluxe-stage{height:auto!important}.cmp-review-motion .rmq{overflow-x:auto}}
 
-.cmp-table-wrap{margin-top:48px}.cmp-table{width:100%;border-collapse:collapse;font-size:15px;text-align:left}.cmp-table th,.cmp-table td{padding:23px 26px;border-bottom:1px solid #d7e1e6;vertical-align:top;line-height:1.5}.cmp-table thead th{background:#edf3f7;font-weight:600;font-size:17px}.cmp-table thead th:first-child{border-radius:12px 0 0 0}.cmp-table thead th:last-child{border-radius:0 12px 0 0}.cmp-table th[scope=row]{font-weight:500;width:30%}.cmp-table td{color:#4e5b75;width:35%}.cmp-table td:nth-child(2){background:#f5f8fa}.cmp-evidence{margin-top:22px;background:#f4f7f8;border-radius:12px}.cmp-evidence summary{list-style:none;display:flex;justify-content:space-between;padding:22px 26px;font-size:15px;cursor:pointer;font-weight:600;gap:15px}.cmp-evidence summary::-webkit-details-marker,.cmp-faq summary::-webkit-details-marker{display:none}.cmp-evidence>div{padding:0 26px 16px;max-width:950px}.cmp-evidence p{font-size:14px}.cmp-evidence a,.cmp-small a,.cmp-form-note a{text-decoration:underline;text-underline-offset:3px}.cmp-evidence[open] summary>span,.cmp-faq details[open] summary>span{transform:rotate(45deg)}
+.cmp-table-wrap{margin-top:48px}.cmp-table{width:100%;border-collapse:collapse;font-size:15px;text-align:left}.cmp-table th,.cmp-table td{padding:23px 26px;border-bottom:1px solid #d7e1e6;vertical-align:top;line-height:1.5}.cmp-table thead th{background:#edf3f7;font-weight:600;font-size:17px}.cmp-table thead th:first-child{border-radius:12px 0 0 0}.cmp-table thead th:last-child{border-radius:0 12px 0 0}.cmp-table th[scope=row]{font-weight:500;width:30%}.cmp-table td{color:#4e5b75;width:35%}.cmp-table td:nth-child(2){background:#f5f8fa}.cmp-evidence{margin-top:22px;background:#f4f7f8;border-radius:12px}.cmp-evidence summary{list-style:none;display:flex;justify-content:space-between;padding:22px 26px;font-size:15px;cursor:pointer;font-weight:600;gap:15px}.cmp-evidence summary::-webkit-details-marker,.cmp-faq summary::-webkit-details-marker{display:none}.cmp-evidence>div{padding:0 26px 16px;max-width:950px}.cmp-evidence p{font-size:14px}.cmp-evidence a,.cmp-small a,.cmp-form-note a{text-decoration:underline;text-underline-offset:3px}.cmp-evidence[open] summary>span,.cmp-faq details[open] summary>span{transform:none}
 
 @media(max-width:699px){
 .cmp-table{display:block;font-size:14px}.cmp-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}.cmp-table tbody{display:block}.cmp-table tr{display:grid;grid-template-columns:1fr 1fr;margin-bottom:18px;border:1px solid #d7e1e6;border-radius:12px;overflow:hidden}.cmp-table th[scope=row]{grid-column:1/-1;width:auto;padding:15px 17px;background:#eaf0f3;font-size:14px;font-weight:600;border:0}.cmp-table td{width:auto;padding:16px;font-size:13px;border:0}.cmp-table td:before{display:block;font-size:10px;font-weight:700;letter-spacing:.035em;margin-bottom:9px;color:#0f2748}.cmp-table td:nth-child(2):before{content:'WHOLE HOUSE'}.cmp-table td:nth-child(3):before{content:'REVERSE OSMOSIS'}
 }
 .cmp-motion .cmp-deluxe.sc-act--pinned .cmp-deluxe-stage{position:sticky}
+
+.lane{background:var(--paper);padding:clamp(64px,7.6vw,106px) 0 clamp(44px,5.4vw,74px);position:relative;z-index:2;overflow:clip}
+.lane__head{display:grid;gap:14px;max-width:60ch}
+.lane__badge{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 14px 8px 12px;border-radius:var(--r-full);background:#fff;box-shadow:var(--shadow-sm),inset 0 0 0 1px var(--rule);font-size:15px;font-weight:600;color:var(--ink)}
+.lane__badge .stars5 svg{width:15px;height:15px}
+.lane__badge .gicon{width:18px;height:18px}
+.lane__badge > span:last-child{color:var(--muted);font-weight:600}
+.lane__head h2{max-width:none;color:var(--ink)}
+.lane__head .lede{margin-top:0}
+.rmq{position:relative;margin:36px calc(var(--gut) * -1) 0;overflow:hidden;display:flex;flex-direction:column;gap:14px}
+.rmq .rrow{display:flex;gap:14px;width:max-content;align-items:stretch;will-change:transform}
+@media (prefers-reduced-motion:reduce){.rmq{overflow-x:auto}}
+.rvc{background:#fff;border:1px solid var(--rule);border-radius:var(--r-card);padding:17px 18px 15px;display:grid;grid-template-columns:1fr auto;grid-template-rows:1fr auto;gap:13px 10px;flex:0 0 min(300px,76vw)}
+.rvc > p{grid-area:1/1/2/3;align-self:start;font-size:14.5px;line-height:1.55;color:var(--ink)}
+.rvc .rwho{grid-area:2/1/3/2;align-self:end;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.rvc > .stars5{grid-area:2/2/3/3;align-self:end;justify-self:end;gap:2px}
+.rvc .stars5 svg{width:13px;height:13px}
+.rvc .rwho b{font-size:14.5px;font-weight:700}
+.rvc .rwho span{font-size:13px;color:var(--muted);font-weight:600}
+.rvc .rwho .gicon{width:16px;height:16px;align-self:center}
+.rvp{position:relative;flex:0 0 min(238px,58vw);border-radius:var(--r-card);overflow:clip;background:var(--ink-blue);min-height:100%}
+.rvp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;filter:saturate(1.02)}
+.rvp span{position:absolute;left:12px;bottom:10px;right:12px;color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.01em;text-shadow:0 1px 10px rgba(4,16,46,.6)}
+.lane__all{display:inline-flex;align-items:center;min-height:44px;margin-top:22px;font-weight:700;color:var(--ink)}
+
+
+
+#cmp-main .cmp-product-links{grid-template-columns:repeat(5,minmax(0,1fr));gap:22px}
+#cmp-main .cmp-product-photo{aspect-ratio:1;position:relative;overflow:visible;border-radius:20px}
+#cmp-main .cmp-product-photo img{border-radius:20px;object-fit:cover;transform:none}
+#cmp-main .cmp-product-name{font-size:22px;line-height:1.2;align-items:start;gap:8px;min-height:54px}
+#cmp-main .cmp-product-desc{font-size:16px;line-height:1.5}
+.cmp-colour-bubble{position:absolute;top:10px;right:-5px;transform:none;border-radius:999px;padding:8px 12px;background:var(--yellow);color:var(--ink);font:700 12px/1.3 var(--sans);box-shadow:0 3px 10px #04102e20}
+#cmp-main .lane .rvc{flex-basis:min(300px,76vw)}
+#cmp-main .lane .rvp{flex-basis:min(238px,58vw)}
+#cmp-main .lane__head h2{font-weight:500;letter-spacing:-.045em}
+#cmp-main .cmp-hero-copy{padding-bottom:70px}
+@media(max-width:1099px){#cmp-main .cmp-product-links{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 20px}}
+@media(max-width:859px){#cmp-main .cmp-product-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 18px}#cmp-main .cmp-product-name{font-size:20px;min-height:48px}#cmp-main .cmp-product-desc{font-size:16px}#cmp-main .lane .rvc{padding:12px 13px;gap:6px;flex-basis:236px}#cmp-main .lane .rvc>p{font-size:13px;line-height:1.42}#cmp-main .lane .rvc .rwho b,#cmp-main .lane .rvc .rwho span{font-size:13px}#cmp-main .lane .rvp{flex-basis:170px}#cmp-main .lane__badge{font-size:12px;gap:5px;padding:8px 10px}#cmp-main .lane__badge .stars5 svg{width:12px;height:12px}#cmp-main .cmp-hero-copy{padding-bottom:60px}}
+@media(max-width:359px){#cmp-main .cmp-product-links{grid-template-columns:1fr}#cmp-main .cmp-product-link{display:grid;grid-template-columns:112px minmax(0,1fr);gap:0 16px;align-items:center}#cmp-main .cmp-product-photo{grid-row:1/3}#cmp-main .cmp-product-name{margin:0;min-height:0;font-size:20px}#cmp-main .cmp-product-desc{margin:6px 0 0}.cmp-colour-bubble{font-size:10px;padding:6px 8px;right:-6px;top:-9px}#cmp-main .lane__badge{flex-wrap:wrap;max-width:100%;width:fit-content}}
+
+@media(max-width:859px){.cmp-hero h1{font-size:clamp(24px,7.2vw,34.4px);line-height:1.1;letter-spacing:-.01em}}
 
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://filtersforyou.com.au/reverse-osmosis-vs-whole-house-water-filter-sydney#page", "name": "Whole house vs reverse osmosis: which is better?", "url": "https://filtersforyou.com.au/reverse-osmosis-vs-whole-house-water-filter-sydney", "description": "Compare whole-house coverage and extra drinking-water purification, then choose one system or the Deluxe Home Package.", "inLanguage": "en-AU", "isPartOf": {"@type": "WebSite", "name": "Filters For You", "url": "https://filtersforyou.com.au/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://filtersforyou.com.au/"}, {"@type": "ListItem", "position": 2, "name": "Whole house vs reverse osmosis", "item": "https://filtersforyou.com.au/reverse-osmosis-vs-whole-house-water-filter-sydney"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What’s the difference between whole house and reverse osmosis?", "acceptedAnswer": {"@type": "Answer", "text": "Whole-house filtration treats incoming water before it reaches your household taps, showers and baths. An under-sink reverse osmosis system adds membrane purification at a dedicated drinking tap. They cover different needs and can work together."}}, {"@type": "Question", "name": "Which is better, whole house or reverse osmosis?", "acceptedAnswer": {"@type": "Answer", "text": "Whole house is the better fit if your priority is filtered water throughout your home. RO is the better fit if your priority is extra purification for drinking and cooking. The Deluxe Home Package combines whole-house filtration, Pure Premium RO and a premium three-way mixer for both needs."}}, {"@type": "Question", "name": "Can I drink the water with just a whole-house filter?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. On a safe, drinkable mains supply, whole-house filtration also treats the water at your kitchen tap. It helps reduce sediment, chlorine and chloramine throughout your home. RO is an optional additional step for drinking water, rather than something every whole-house customer must add."}}, {"@type": "Question", "name": "Do I need to install both at the same time?", "acceptedAnswer": {"@type": "Answer", "text": "No. You can choose the system that meets your priority now and discuss adding the other later. If you already want both, the Deluxe Home Package brings the whole-house system, Pure Premium RO and a premium three-way mixer into one planned installation."}}]}]}</script>
@@ -995,307 +1041,370 @@ html:not(.cmp-motion) .cmp-world{opacity:.36}
 
 <!-- SHELL:HEADER -->
 <header class="hdr" id="hdr">
-  <div class="util"><div class="in rowu">
-    <a class="ustars ul" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" target="_blank" rel="noopener"><span class="st5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span>5.0 from 30 Google reviews</a>
-    <nav class="ulinks" aria-label="Utility">
-      <a class="ul" href="lifetime-warranty">Warranty</a>
-      <a class="ul" href="/#areas">Areas we cover</a>
-      <a class="ul" href="/#proof">Reviews</a>
-      <a class="ul" href="/#contact">Contact</a>
-    </nav>
-    <span class="soc">
-      <a href="https://www.facebook.com/filtersforyouau" target="_blank" rel="noopener" aria-label="Facebook"><i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.9v3h2.4v7h2.2Z"/></svg></i></a>
-      <a href="https://www.instagram.com/filtersforyouau" target="_blank" rel="noopener" aria-label="Instagram"><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg></i></a>
-      <a href="https://www.tiktok.com/@filtersforyouau" target="_blank" rel="noopener" aria-label="TikTok"><i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"/></svg></i></a>
-    </span>
-  </div></div>
-  <div class="in"><div class="row">
-    <a class="mark-link" href="/" aria-label="Filters For You home"><img class="mark" src="media/logo.svg" alt="Filters For You" width="400" height="120"></a>
-    <nav aria-label="Main">
-      
-      <span class="dd" id="dd">
-        <button class="ddt" type="button" data-panel="p-sys" aria-expanded="false" aria-controls="ddpanel">Systems <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="ddt" type="button" data-panel="p-serv" aria-expanded="false" aria-controls="ddpanel">Servicing &amp; prices <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <a class="ul" href="faucets-and-mixers-sydney">Taps &amp; mixers</a>
-        <a class="ul" href="humm">Buy now, pay later</a>
-        <span class="ddbar" aria-hidden="true"></span>
-      </span>
-    </nav>
-    <div class="r">
-      <a class="ph ul" href="tel:0430546749">0430 546 749</a>
-      <button class="btn btn-sm js-open" type="button" data-sys=""><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book now</button>
-      <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="msheet"><span class="bars" aria-hidden="true"><span></span><span></span><span></span></span></button>
-    </div>
-  </div></div>
-
-  
-  <div class="ddpanel" id="ddpanel" aria-hidden="true">
-    <div class="ddstage">
-
-      
-      <div class="ddp" id="p-sys" inert>
-        <div class="in">
-          <div class="ddcatalog">
-            <a class="ddproduct ddcategory" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/whole-house-collection.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Whole House Water Filters</b></span></a>
-<a class="ddproduct ddcategory" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/ro-collection-landscape.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Reverse Osmosis Water Filters</b></span></a>
-<a class="ddproduct ddcategory" href="faucets-and-mixers-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/taps-collection.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Taps &amp; Mixers</b></span></a>
-<a class="ddproduct ddcategory" href="water-filter-systems"><span class="ddphoto" data-studio-gold><img data-src="media/systems-hub/collection-hero.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>View All Systems</b></span></a>
-<a class="ddproduct" href="pure-plus-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/nav/five-stage-balanced-studio.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Plus</b></span></a>
-<a class="ddproduct" href="pure-premium-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/ro/card-prem.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Premium</b></span></a>
-<a class="ddproduct" href="pure-luxe-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/ro/card-luxe.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Luxe</b></span></a>
-<a class="ddproduct" href="pure-home-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/v7/prod-home-studio.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Home</b></span></a>
-<a class="ddproduct" href="pure-home-reserve-water-filter-sydney"><span class="ddphoto" data-studio-gold><img data-src="media/systems-hub/pure-home-reserve.webp" alt="" width="600" height="400" decoding="async"></span><span class="ddcaption"><b>Pure Home Reserve</b></span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="ddp" id="p-serv" inert>
-        <div class="in ddgrid">
-          <a class="ddhero" href="/#ledger">
-            <span class="ddhero-photo" data-studio-gold><img data-src="media/nav/service-prices-studio.webp" alt="" width="760" height="800" loading="lazy" decoding="async"></span>
-            <span class="v"></span>
-            <span class="c">
-              <span><b>Servicing &amp; prices</b><span>What it costs to keep a system running, every year</span></span>
-              <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-            </span>
-          </a>
-          <div class="ddcol">
-            <span class="ddlab">Owning one</span>
-            <a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold><img data-src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold><img data-src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold><img data-src="media/nav/cartridge-replacement-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-          </div>
-          <div class="ddcol">
-            <span class="ddlab">Before you book</span>
-            <a class="ddrow pic" href="/#newbuilds"><span class="ddthumb" data-studio-gold><img data-src="media/nav/new-developments-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="/#areas"><span class="ddthumb" data-studio-gold><img data-src="media/nav/areas-covered-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-            <a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold><img data-src="media/nav/how-filters-work-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
+<div class="util"><div class="in rowu">
+<a class="ustars ul" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" rel="noopener" target="_blank"><span aria-hidden="true" class="st5"><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg aria-hidden="true" fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>5.0 from 30 Google reviews</a>
+<nav aria-label="Utility" class="ulinks">
+<a class="ul" href="lifetime-warranty">Warranty</a>
+<a class="ul" href="/#areas">Areas we cover</a>
+<a class="ul" href="/#proof">Reviews</a>
+<a class="ul" href="/#contact">Contact</a>
+</nav>
+<span class="soc">
+<a aria-label="Facebook" href="https://www.facebook.com/filtersforyouau" rel="noopener" target="_blank"><i><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.9v3h2.4v7h2.2Z"></path></svg></i></a>
+<a aria-label="Instagram" href="https://www.instagram.com/filtersforyouau" rel="noopener" target="_blank"><i><svg aria-hidden="true" fill="none" viewbox="0 0 24 24"><rect height="17" rx="5" stroke="currentColor" stroke-width="1.8" width="17" x="3.5" y="3.5"></rect><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.2" cy="6.8" fill="currentColor" r="1.2"></circle></svg></i></a>
+<a aria-label="TikTok" href="https://www.tiktok.com/@filtersforyouau" rel="noopener" target="_blank"><i><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"></path></svg></i></a>
+</span>
+</div></div>
+<div class="in"><div class="row">
+<a aria-label="Filters For You home" class="mark-link" href="/#top"><img alt="Filters For You" class="mark" height="120" src="media/logo.svg" width="400"/></a>
+<nav aria-label="Main">
+<span class="dd" id="dd">
+<button aria-controls="ddpanel" aria-expanded="false" class="ddt" data-panel="p-sys" type="button">Systems <svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></button>
+<button aria-controls="ddpanel" aria-expanded="false" class="ddt" data-panel="p-serv" type="button">Servicing &amp; prices <svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></button>
+<a class="ul" href="faucets-and-mixers-sydney">Taps &amp; mixers</a>
+<a class="ul" href="humm">Buy now, pay later</a>
+<span aria-hidden="true" class="ddbar"></span>
+</span>
+</nav>
+<div class="r">
+<a class="ph ul" href="tel:0430546749">0430 546 749</a>
+<button class="btn btn-sm js-open" data-sys="" type="button"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>Book now</button>
+<button aria-controls="msheet" aria-expanded="false" aria-label="Open menu" class="burger" id="burger" type="button"><span aria-hidden="true" class="bars"><span></span><span></span><span></span></span></button>
+</div>
+</div></div>
+<div aria-hidden="true" class="ddpanel" id="ddpanel">
+<div class="ddstage">
+<div class="ddp" id="p-sys" inert="">
+<div class="in">
+<div class="ddcatalog">
+<a class="ddproduct ddcategory" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/nav/whole-house-collection.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Whole House Water Filters</b></span></a>
+<a class="ddproduct ddcategory" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/nav/ro-collection-landscape.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Reverse Osmosis Water Filters</b></span></a>
+<a class="ddproduct ddcategory" href="faucets-and-mixers-sydney"><span class="range-bubble">35 styles &amp; finishes</span><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/nav/taps-collection.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
+<a class="ddproduct ddcategory" href="water-filter-systems"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/systems-hub/collection-hero.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>View All Systems</b></span></a>
+<a class="ddproduct" href="pure-plus-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/nav/five-stage-balanced-studio.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Plus</b></span></a>
+<a class="ddproduct" href="pure-premium-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/ro/card-prem.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Premium</b></span></a>
+<a class="ddproduct" href="pure-luxe-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/ro/card-luxe.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Luxe</b></span></a>
+<a class="ddproduct" href="pure-home-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/v7/prod-home-studio.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Home</b></span></a>
+<a class="ddproduct" href="pure-home-reserve-water-filter-sydney"><span class="range-bubble">20+ colours</span><span class="ddphoto" data-studio-gold=""><img alt="" data-src="media/systems-hub/pure-home-reserve.webp" decoding="async" height="400" width="600"/></span><span class="ddcaption"><b>Pure Home Reserve</b></span></a>
+</div>
+</div>
+</div>
+<div class="ddp" id="p-serv" inert="">
+<div class="in ddgrid">
+<a class="ddhero" href="/#ledger">
+<span class="ddhero-photo" data-studio-gold=""><img alt="" data-src="media/nav/service-prices-studio.webp" decoding="async" height="800" loading="lazy" width="760"/></span>
+<span class="v"></span>
+<span class="c">
+<span><b>Servicing &amp; prices</b><span>What it costs to keep a system running, every year</span></span>
+<i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>
+</span>
+</a>
+<div class="ddcol">
+<span class="ddlab">Owning one</span>
+<a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/annual-service-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/lifetime-warranty-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/cartridge-replacement-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+</div>
+<div class="ddcol">
+<span class="ddlab">Before you book</span>
+<a class="ddrow pic" href="/#newbuilds"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/new-developments-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="/#areas"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/areas-covered-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/how-filters-work-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
 </header>
 
 <nav class="msheet" id="msheet" aria-label="Menu" hidden>
-
-  <div class="mlvl on" data-lvl="0">
-    <div class="mrow mlinks">
-      <button type="button" data-open="ms-sys">Systems <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
-      <button type="button" data-open="ms-serv">Servicing &amp; prices <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
-      <a href="faucets-and-mixers-sydney">Taps &amp; mixers <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-    </div>
-    <hr class="mrow">
-    <div class="mrow mmore">
-      
-      <a href="lifetime-warranty">Lifetime warranty</a>
-      <a href="/#proof">Reviews</a>
-      <a href="/#areas">Areas we cover</a>
-      <a href="/#pillars">About us</a>
-      <a href="/#ask">Contact us</a>
-    </div>
-    
-    <a class="mrow mhumm" href="humm">
-      <img src="media/humm/humm-tag-white-300.webp" alt="humm. Made for living." width="300" height="101" loading="lazy">
-      <b>Buy now, pay later</b>
-      <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-    </a>
-    <div class="mrow mcontact">
-      <a class="tel" href="tel:0430546749">0430 546 749</a>
-      <span class="msoc">
-        <a href="https://www.facebook.com/filtersforyouau" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.9v3h2.4v7h2.2Z"/></svg></a>
-        <a href="https://www.instagram.com/filtersforyouau" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="17.2" cy="6.8" r="1.2"/></svg></a>
-        <a href="https://www.tiktok.com/@filtersforyouau" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"/></svg></a>
-      </span>
-    </div>
-    <a class="mrow mcard js-open" href="/#ask" data-sys="">
-      <img src="media/tap-pour.webp" alt="" width="1600" height="1062" loading="lazy">
-      <span class="v"></span>
-      <span class="c">
-        <b>Book now<br>or request a quote</b>
-        <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-      </span>
-    </a>
-  </div>
-
-  <div class="mlvl" id="ms-sys" data-lvl="sys" inert>
-    <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Systems</b></button>
-    <div class="ddcatalog">
-            <a class="ddproduct ddcategory" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/whole-house-collection.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Whole House Water Filters</b></span></a>
-<a class="ddproduct ddcategory" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/ro-collection-landscape.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Reverse Osmosis Water Filters</b></span></a>
-<a class="ddproduct ddcategory" href="faucets-and-mixers-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/taps-collection.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Taps &amp; Mixers</b></span></a>
-<a class="ddproduct ddcategory" href="water-filter-systems"><span class="ddphoto" data-studio-gold><img src="media/systems-hub/collection-hero.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>View All Systems</b></span></a>
-<a class="ddproduct" href="pure-plus-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/nav/five-stage-balanced-studio.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Plus</b></span></a>
-<a class="ddproduct" href="pure-premium-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/ro/card-prem.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Premium</b></span></a>
-<a class="ddproduct" href="pure-luxe-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/ro/card-luxe.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Luxe</b></span></a>
-<a class="ddproduct" href="pure-home-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/v7/prod-home-studio.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Home</b></span></a>
-<a class="ddproduct" href="pure-home-reserve-water-filter-sydney"><span class="ddphoto" data-studio-gold><img src="media/systems-hub/pure-home-reserve.webp" alt="" width="600" height="400" decoding="async" loading="lazy"></span><span class="ddcaption"><b>Pure Home Reserve</b></span></a>
-          </div>
-    <a class="mnavask js-open" href="/#ask" data-sys="">Book now or request a quote</a>
-  </div>
-
-  <div class="mlvl" id="ms-serv" data-lvl="serv" inert>
-    <button class="mback" type="button" data-back><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>Servicing &amp; prices</b></button>
-    <div class="ddcol">
-      <a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold><img src="media/nav/service-prices-studio.webp" alt="" width="600" height="600" loading="lazy" decoding="async"></span><span><b>Servicing &amp; prices</b><span>Service costs at a glance</span></span></a>
-      <a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold><img src="media/nav/annual-service-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold><img src="media/nav/lifetime-warranty-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold><img src="media/nav/cartridge-replacement-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="/#newbuilds"><span class="ddthumb" data-studio-gold><img src="media/nav/new-developments-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="/#areas"><span class="ddthumb" data-studio-gold><img src="media/nav/areas-covered-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-      <a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold><img src="media/nav/how-filters-work-studio.webp" alt="" width="112" height="112" loading="lazy" decoding="async"></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
-    </div>
-    
-    <a class="mnavask js-open" href="/#ask" data-sys="">Book now or request a quote</a>
-  </div>
-
+<div class="mlvl on" data-lvl="0">
+<div class="mrow mlinks">
+<button data-open="ms-sys" type="button">Systems <i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></button>
+<button data-open="ms-serv" type="button">Servicing &amp; prices <i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m6 3.5 5 4.5-5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></button>
+<a href="faucets-and-mixers-sydney">Taps &amp; mixers <i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+</div>
+<hr class="mrow"/>
+<div class="mrow mmore">
+<a href="lifetime-warranty">Lifetime warranty</a>
+<a href="/#proof">Reviews</a>
+<a href="/#areas">Areas we cover</a>
+<a href="/#pillars">About us</a>
+<a href="/#ask">Contact us</a>
+</div>
+<a class="mrow mhumm" href="humm">
+<img alt="humm. Made for living." height="101" loading="lazy" src="media/humm/humm-tag-white-300.webp" width="300"/>
+<b>Buy now, pay later</b>
+<i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></i>
+</a>
+<div class="mrow mcontact">
+<a class="tel" href="tel:0430546749">0430 546 749</a>
+<span class="msoc">
+<a aria-label="Facebook" href="https://www.facebook.com/filtersforyouau" rel="noopener" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.9v3h2.4v7h2.2Z"></path></svg></a>
+<a aria-label="Instagram" href="https://www.instagram.com/filtersforyouau" rel="noopener" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><rect fill="none" height="17" rx="5" stroke="currentColor" stroke-width="1.8" width="17" x="3.5" y="3.5"></rect><circle cx="12" cy="12" fill="none" r="4" stroke="currentColor" stroke-width="1.8"></circle><circle cx="17.2" cy="6.8" r="1.2"></circle></svg></a>
+<a aria-label="TikTok" href="https://www.tiktok.com/@filtersforyouau" rel="noopener" target="_blank"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M16.6 3c.4 2 1.7 3.3 3.9 3.5v2.6c-1.5 0-2.8-.4-3.9-1.2v5.9c0 3.4-2.4 5.6-5.5 5.6-3 0-5.1-2-5.1-4.8 0-2.9 2.3-4.9 5.5-4.7v2.7c-1.6-.3-2.8.5-2.8 2 0 1.3 1 2.2 2.4 2.2 1.6 0 2.7-1.1 2.7-3V3h2.8Z"></path></svg></a>
+</span>
+</div>
+<a class="mrow mcard js-open" data-sys="" href="/#ask">
+<img alt="" height="1062" loading="lazy" src="media/tap-pour.webp" width="1600"/>
+<span class="v"></span>
+<span class="c">
+<b>Book now<br/>or request a quote</b>
+<i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>
+</span>
+</a>
+</div>
+<div class="mlvl" data-lvl="sys" id="ms-sys" inert="">
+<button class="mback" data-back="" type="button"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i><b>Systems</b></button>
+<div class="ddcatalog">
+<a class="ddproduct ddcategory" href="whole-house-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/nav/whole-house-collection.webp" width="600"/></span><span class="ddcaption"><b>Whole House Water Filters</b></span></a>
+<a class="ddproduct ddcategory" href="reverse-osmosis-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/nav/ro-collection-landscape.webp" width="600"/></span><span class="ddcaption"><b>Reverse Osmosis Water Filters</b></span></a>
+<a class="ddproduct ddcategory" href="faucets-and-mixers-sydney"><span class="range-bubble">35 styles &amp; finishes</span><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/nav/taps-collection.webp" width="600"/></span><span class="ddcaption"><b>Taps &amp; mixers</b></span></a>
+<a class="ddproduct ddcategory" href="water-filter-systems"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/systems-hub/collection-hero.webp" width="600"/></span><span class="ddcaption"><b>View All Systems</b></span></a>
+<a class="ddproduct" href="pure-plus-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/nav/five-stage-balanced-studio.webp" width="600"/></span><span class="ddcaption"><b>Pure Plus</b></span></a>
+<a class="ddproduct" href="pure-premium-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/ro/card-prem.webp" width="600"/></span><span class="ddcaption"><b>Pure Premium</b></span></a>
+<a class="ddproduct" href="pure-luxe-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/ro/card-luxe.webp" width="600"/></span><span class="ddcaption"><b>Pure Luxe</b></span></a>
+<a class="ddproduct" href="pure-home-water-filter-sydney"><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/v7/prod-home-studio.webp" width="600"/></span><span class="ddcaption"><b>Pure Home</b></span></a>
+<a class="ddproduct" href="pure-home-reserve-water-filter-sydney"><span class="range-bubble">20+ colours</span><span class="ddphoto" data-studio-gold=""><img alt="" decoding="async" height="400" loading="lazy" src="media/systems-hub/pure-home-reserve.webp" width="600"/></span><span class="ddcaption"><b>Pure Home Reserve</b></span></a>
+</div>
+<a class="mnavask js-open" data-sys="" href="/#ask">Book now or request a quote</a>
+</div>
+<div class="mlvl" data-lvl="serv" id="ms-serv" inert="">
+<button class="mback" data-back="" type="button"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i><b>Servicing &amp; prices</b></button>
+<div class="ddcol">
+<a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="600" loading="lazy" src="media/nav/service-prices-studio.webp" width="600"/></span><span><b>Servicing &amp; prices</b><span>Service costs at a glance</span></span></a>
+<a class="ddrow pic" href="/#ledger"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/annual-service-studio.webp" width="112"/></span><span><b>Annual servicing &amp; prices</b><span>We come back every year</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="lifetime-warranty"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/lifetime-warranty-studio.webp" width="112"/></span><span><b>Lifetime warranty</b><span>Covered for life, labour and all</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/cartridge-replacement-studio.webp" width="112"/></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="/#newbuilds"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/new-developments-studio.webp" width="112"/></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="/#areas"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/areas-covered-studio.webp" width="112"/></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="how-water-filters-work"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/how-filters-work-studio.webp" width="112"/></span><span><b>How water filters work</b><span>The plain version</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+</div>
+<a class="mnavask js-open" data-sys="" href="/#ask">Book now or request a quote</a>
+</div>
 </nav>
 <!-- /SHELL:HEADER -->
 
 <main id="cmp-main">
 <div class="pgtop">
-<section class="pgcard cmp-hero" aria-labelledby="cmp-title">
-  <div class="cmp-slides" aria-hidden="true">
-    <picture class="cmp-slide is-active"><source media="(max-width:699px)" srcset="media/comparison/bathroom-m.webp"><img src="media/comparison/bathroom.webp" width="2400" height="1350" alt="" fetchpriority="high"></picture>
-    <picture class="cmp-slide"><source media="(max-width:699px)" srcset="media/comparison/kitchen-m.webp"><img src="media/comparison/kitchen.webp" width="2400" height="1350" alt="" decoding="async"></picture>
-    <picture class="cmp-slide"><source media="(max-width:699px)" srcset="/media/homepage-care/care-deluxe-m.webp"><img src="/media/homepage-care/care-deluxe.webp" width="2400" height="1340" alt="" decoding="async"></picture>
-  </div>
-  <div class="cmp-hero-veil"></div>
-  <div class="zone cmp-hero-copy">
-    <span class="kick">A simpler way to choose</span>
-    <h1 id="cmp-title">Whole house vs<br><em class="hl">reverse osmosis.</em></h1>
-    <p class="lede cmp-hero-line">One for your home.<br><span>One extra step for your glass.</span></p>
-    <a class="btn" href="#difference"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>See the difference</a>
-  </div>
-  <div class="cmp-hero-bottom zone">
-    <div class="cmp-slide-nav" aria-label="Background photographs" hidden>
-      <button class="is-active" type="button" data-slide="0" aria-pressed="true"><span>01</span>Your home</button>
-      <button type="button" data-slide="1" aria-pressed="false"><span>02</span>Your glass</button>
-      <button type="button" data-slide="2" aria-pressed="false"><span>03</span>Together</button>
-    </div>
-    <button type="button" class="cmp-pause" aria-label="Pause background slideshow" hidden>Pause <span aria-hidden="true">Ⅱ</span></button>
-  </div>
-</section>
+<section aria-labelledby="cmp-title" class="pgcard cmp-hero">
+<div aria-hidden="true" class="cmp-slides">
+<picture class="cmp-slide is-active"><source media="(max-width:699px)" srcset="media/comparison/bathroom-m.webp"/><img alt="" fetchpriority="high" height="1350" src="media/comparison/bathroom.webp" width="2400"/></picture>
+
+
+</div>
+<div class="cmp-hero-veil"></div>
+<div class="zone cmp-hero-copy">
+<span class="kick">A simpler way to choose</span>
+<h1 id="cmp-title">Whole house vs<br/><em class="hl">reverse osmosis.</em></h1>
+<p class="lede cmp-hero-line">One for your home.<br/><span>One extra step for your glass.</span></p>
+<a class="btn" href="#difference"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>See the difference</a>
 </div>
 
-<section class="cmp-intro zone" id="difference" data-sc-act="flow" aria-labelledby="difference-title">
-  <div data-sc-in data-sc-stagger="90"><span class="kick">The short answer</span><h2 class="d1" id="difference-title">Two jobs.<br><em class="hb">One home.</em></h2></div>
-  <div class="cmp-answer" data-sc-in data-sc-stagger="90"><p class="lede">Whole house treats the water throughout your home. Reverse osmosis adds a finer purification step at your drinking tap.</p><p>One improves your daily routine. The other goes further for what you drink. Both are valuable on their own.</p><a class="arrow" href="#coverage">See it in your home ↓</a></div>
 </section>
-<section class="cmp-coverage" id="coverage" data-sc-act="pin" data-sc-span="3.6" data-sc-span-m="3.2" aria-labelledby="coverage-title">
- <div class="cmp-coverage-stage" data-sc-stage>
-  <div class="cmp-world" aria-hidden="true">
-   <div class="cmp-world-shot is-active" data-world="0"><img class="cmp-world-home" src="media/comparison/home.webp" width="2400" height="1350" alt="" loading="lazy"></div>
-   <div class="cmp-world-shot" data-world="1"><picture><source media="(max-width:859px)" srcset="media/comparison/kitchen-m.webp"><img src="media/comparison/kitchen.webp" width="2400" height="1350" alt="" loading="lazy"></picture></div>
-   <div class="cmp-world-shot cmp-world-pair" data-world="2"><img src="media/comparison/bathroom-m.webp" width="900" height="1200" alt="" loading="lazy"><img src="media/comparison/kitchen-m.webp" width="900" height="1200" alt="" loading="lazy"></div>
-  </div>
-  <div class="cmp-world-shade"></div>
-  <header class="cmp-coverage-head zone"><span class="kick">Follow the water</span><h2 class="d2" id="coverage-title">Where would you<br>like the difference?</h2></header>
-  <div class="cmp-coverage-copy zone">
-   <article data-coverage-panel="home"><span class="cmp-chapter">01 / THROUGHOUT YOUR HOME</span><h3 class="d3">Every shower.<br>Every bath. Every tap.</h3><p>Sediment filtration and catalytic carbon help reduce sediment, chlorine and chloramine. Your kitchen tap is included.</p><a class="arrow" href="/pure-home-water-filter-sydney">Meet Pure Home ↗</a></article>
-   <article data-coverage-panel="glass"><span class="cmp-chapter">02 / AT YOUR DRINKING TAP</span><h3 class="d3">An extra step.<br>In every glass.</h3><p>RO adds membrane purification for drinking and cooking. Choose alkaline water, or hydrogen-rich alkaline with Pure Premium.</p><a class="arrow" href="/reverse-osmosis-water-filter-sydney">Explore reverse osmosis ↗</a></article>
-   <article data-coverage-panel="both"><span class="cmp-chapter">03 / BOTH WORKING TOGETHER</span><h3 class="d3">The whole home.<br>And the daily glass.</h3><p>Whole house treats the incoming water. Pure Premium adds that finer step at the kitchen. This is the thinking behind Deluxe.</p><a class="arrow" href="#deluxe">Discover Deluxe ↓</a></article>
-  </div>
-  <nav class="cmp-coverage-nav" aria-label="Explore the water choices" hidden><button type="button" data-home="home" aria-pressed="true"><span>01</span>Your home</button><button type="button" data-home="glass" aria-pressed="false"><span>02</span>Your glass</button><button type="button" data-home="both" aria-pressed="false"><span>03</span>Both together</button></nav>
-  <span class="cmp-scene-note">Illustrative interiors</span>
- </div>
+</div>
+<section aria-labelledby="difference-title" class="cmp-intro zone" data-sc-act="flow" id="difference">
+<div data-sc-in="" data-sc-stagger="90"><span class="kick">The short answer</span><h2 class="d1" id="difference-title">Two jobs.<br/><em class="hb">One home.</em></h2></div>
+<div class="cmp-answer" data-sc-in="" data-sc-stagger="90"><p class="lede">Whole house treats the water throughout your home. Reverse osmosis adds a finer purification step at your drinking tap.</p><p>One improves your daily routine. The other goes further for what you drink. Both are valuable on their own.</p><a class="arrow" href="#coverage">See it in your home ↓</a></div>
 </section>
-<section class="cmp-reassurance zone" id="whole-house" data-sc-act="flow" aria-labelledby="reassure-title">
- <figure class="frame cmp-reassure-photo" data-sc-reveal="left" data-sc-reveal-at=".06 .38"><picture><source media="(max-width:859px)" srcset="media/comparison/bathroom-m.webp"><img src="media/comparison/bathroom.webp" alt="Sunlit bath and shower in a warm stone bathroom, illustrative interior" width="2400" height="1350" loading="lazy"></picture><figcaption>Water for the way you live.</figcaption></figure>
- <div class="cmp-reassure-copy" data-sc-in data-sc-stagger="90"><span class="kick">A good choice on its own</span><h2 class="d2" id="reassure-title">Whole house.<br>A whole lot<br><em class="hb">of difference.</em></h2><p class="lede">Yes, your drinking water is filtered too.</p><p>Your kitchen, shower, bath and laundry all receive treated water. Less sediment. Reduced chlorine and chloramine. A worthwhile upgrade throughout your home.</p><p>RO builds on that value with an extra purification step for the water you drink.</p><a class="arrow" href="/whole-house-water-filter-sydney">See what whole house does ↗</a></div>
-</section>
-<section class="cmp-compare cmp-section" data-sc-act="flow" aria-labelledby="cmp-compare-title">
-  <div class="zone">
-    <div class="cmp-section-heading" data-sc-in data-sc-stagger="90"><span class="kick">The difference at a glance</span><h2 class="d2" id="cmp-compare-title">Which is better?<br><span class="cmp-muted">Start with what matters to you.</span></h2><p>For water throughout the house, choose whole house. For extra drinking-water purification, choose RO. For both, bring them together.</p></div>
-    <div class="cmp-table-wrap" data-sc-in><table class="cmp-table"><caption class="cmp-sr">Comparison of FFY whole-house filtration and under-sink reverse osmosis</caption><thead><tr><th scope="col">What matters to you</th><th scope="col">Whole house</th><th scope="col">Reverse osmosis</th></tr></thead><tbody>
-      <tr><th scope="row">Where it works</th><td>Household taps, showers &amp; baths</td><td>Drinking tap at the kitchen sink</td></tr>
-      <tr><th scope="row">Sediment, chlorine &amp; chloramine</th><td>Catalytic carbon + sediment filtration for your home</td><td>Carbon prefilters + membrane; dedicated chloramine treatment is whole house</td></tr>
-      <tr><th scope="row">Dissolved substances, including fluoride</th><td>Not its treatment focus</td><td>Extra membrane purification at the drinking tap</td></tr>
-      <tr><th scope="row">Alkaline or hydrogen-rich water</th><td>Retains naturally occurring dissolved minerals</td><td>Alkaline options; hydrogen-rich alkaline with Pure Premium</td></tr>
-      <tr><th scope="row">A great fit when…</th><td>You want filtered water across your everyday routine</td><td>You want a dedicated source of purified drinking water</td></tr>
-    </tbody></table></div>
-    <details class="cmp-evidence"><summary>Want the detail on filtration? <span aria-hidden="true">+</span></summary><div><p>Different filters target different substances. Carbon helps reduce chlorine and chloramine; an RO membrane adds treatment for dissolved substances such as fluoride. Performance depends on the system, water conditions and cartridge care.</p><p>Microplastics are particles; fluoride and phosphates are dissolved substances. Those are different filtration questions. An exact reduction percentage needs testing of the particular system for the particular substance.</p><p>The supplied <a href="https://filtersforyou.com.au/assets/compliance/certificate-of-analysis-ro-membrane.pdf" target="_blank" rel="noopener">laboratory report B767408</a> compares Gold Coast tap water with RO and alkaline outputs in 2019. It illustrates treatment under those test conditions, rather than proving a removal percentage for every FFY installation.</p><p>Pure Premium’s alkaline and hydrogen features are supported by the <a href="https://filtersforyou.com.au/assets/compliance/hydrogen-alkaline-cartridge-spec-sheet.pdf" target="_blank" rel="noopener">supplier’s cartridge data</a>. These describe the water, without promising health outcomes. For a plain explanation of the technologies, see the <a href="https://www.cdc.gov/drinking-water/about/about-home-water-treatment-systems.html" target="_blank" rel="noopener">CDC’s home water treatment guide</a>.</p></div></details>
-  </div>
-</section>
+<section aria-labelledby="coverage-title" class="cmp-coverage" data-sc-act="pin" data-sc-span="4.8" data-sc-span-m="4.2" id="coverage">
+<div class="cmp-coverage-stage" data-sc-stage="">
+<div aria-hidden="true" class="cmp-world">
+<div class="cmp-world-shot is-active" data-world="0"><img alt="" class="cmp-world-home" height="1350" loading="lazy" src="media/comparison/home.webp" width="2400"/></div>
+<div class="cmp-world-shot" data-world="1"><picture><source media="(max-width:859px)" srcset="media/comparison/kitchen-m.webp"/><img alt="" height="1350" loading="lazy" src="media/comparison/kitchen.webp" width="2400"/></picture></div>
+<div class="cmp-world-shot cmp-world-pair" data-world="2"><img alt="" height="1200" loading="lazy" src="media/comparison/bathroom-m.webp" width="900"/><img alt="" height="1200" loading="lazy" src="media/comparison/kitchen-m.webp" width="900"/></div>
+</div>
+<div class="cmp-world-shade"></div>
+<header class="cmp-coverage-head zone"><span class="kick">Follow the water</span><h2 class="d2" id="coverage-title">Where would you<br/>like the difference?</h2></header>
+<div class="cmp-coverage-copy zone">
+<article data-coverage-panel="home"><span class="cmp-chapter">01 / THROUGHOUT YOUR HOME</span><h3 class="d3">Every shower.<br/>Every bath. Every tap.</h3><p>Sediment filtration and catalytic carbon help reduce sediment, chlorine and chloramine. Your kitchen tap is included.</p><a class="arrow" href="/pure-home-water-filter-sydney">Meet Pure Home ↗</a></article>
+<article data-coverage-panel="glass"><span class="cmp-chapter">02 / AT YOUR DRINKING TAP</span><h3 class="d3">An extra step.<br/>In every glass.</h3><p>RO adds membrane purification for drinking and cooking. Choose alkaline water, or hydrogen-rich alkaline with Pure Premium.</p><a class="arrow" href="/reverse-osmosis-water-filter-sydney">Explore reverse osmosis ↗</a></article>
+<article data-coverage-panel="both"><span class="cmp-chapter">03 / BOTH WORKING TOGETHER</span><h3 class="d3">The whole home.<br/>And the daily glass.</h3><p>Whole house treats the incoming water. Pure Premium adds that finer step at the kitchen. This is the thinking behind Deluxe.</p><a class="arrow" href="#deluxe">Discover Deluxe ↓</a></article>
+</div>
+<nav aria-label="Explore the water choices" class="cmp-coverage-nav" hidden=""><button aria-pressed="true" data-home="home" type="button"><span>01</span>Your home</button><button aria-pressed="false" data-home="glass" type="button"><span>02</span>Your glass</button><button aria-pressed="false" data-home="both" type="button"><span>03</span>Both together</button></nav>
 
-<section class="cmp-deluxe" id="deluxe" data-sc-act="pin" data-sc-span="2.5" aria-labelledby="cmp-deluxe-title"><div class="cmp-deluxe-stage" data-sc-stage>
- <figure class="cmp-deluxe-photo"><picture><source media="(max-width:859px)" srcset="/media/homepage-care/care-deluxe-m.webp"><img src="/media/homepage-care/care-deluxe.webp" width="2400" height="1340" alt="Deluxe package with FFY-labelled whole-house system, Pure Premium RO and premium mixer, illustrative studio setting" loading="lazy"></picture></figure><div class="cmp-deluxe-shade"></div>
- <div class="cmp-deluxe-content zone"><span class="kick">Bring it all together</span><h2 class="d1" id="cmp-deluxe-title">The home.<br>The glass.<br><em class="hl">The Deluxe.</em></h2><p class="lede">Two kinds of filtration.<br>One complete home package.</p>
- <div class="cmp-package-parts"><span>Pure Home</span><i>+</i><span>Pure Premium</span><i>+</i><span>Premium mixer</span></div>
- <div class="cmp-deluxe-close"><p class="cmp-price">From <strong class="money">$6,290</strong> installed <small>Including GST. Final quote depends on your installation.</small></p><a href="#ask" data-system="Deluxe Home Package" class="btn"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Ask about Deluxe</a></div></div>
- <div class="cmp-deluxe-caption"><span>Whole-house filtration</span><span>Hydrogen-rich alkaline RO</span><span>Premium three-way mixer</span></div>
+</div>
+</section>
+<section aria-labelledby="reassure-title" class="cmp-reassurance zone" data-sc-act="flow" id="whole-house">
+<figure class="frame cmp-reassure-photo" data-sc-reveal="left" data-sc-reveal-at=".06 .38"><picture><source media="(max-width:859px)" srcset="media/comparison/bathroom-m.webp"/><img alt="Sunlit bath and shower in a warm stone bathroom, illustrative interior" height="1350" loading="lazy" src="media/comparison/bathroom.webp" width="2400"/></picture><figcaption>Water for the way you live.</figcaption></figure>
+<div class="cmp-reassure-copy" data-sc-in="" data-sc-stagger="90"><span class="kick">A good choice on its own</span><h2 class="d2" id="reassure-title">Whole house.<br/>A whole lot<br/><em class="hb">of difference.</em></h2><p class="lede">Yes, your drinking water is filtered too.</p><p>Your kitchen, shower, bath and laundry all receive treated water. Less sediment. Reduced chlorine and chloramine. A worthwhile upgrade throughout your home.</p><p>RO builds on that value with an extra purification step for the water you drink.</p><a class="arrow" href="/whole-house-water-filter-sydney">See what whole house does ↗</a></div>
+</section>
+<section aria-labelledby="cmp-compare-title" class="cmp-compare cmp-section" data-sc-act="flow">
+<div class="zone">
+<div class="cmp-section-heading" data-sc-in="" data-sc-stagger="90"><span class="kick">The difference at a glance</span><h2 class="d2" id="cmp-compare-title">Which is better?<br/><span class="cmp-muted">Start with what matters to you.</span></h2><p>For water throughout the house, choose whole house. For extra drinking-water purification, choose RO. For both, bring them together.</p></div>
+<div class="cmp-table-wrap" data-sc-in=""><table class="cmp-table"><caption class="cmp-sr">Comparison of FFY whole-house filtration and under-sink reverse osmosis</caption><thead><tr><th scope="col">What matters to you</th><th scope="col">Whole house</th><th scope="col">Reverse osmosis</th></tr></thead><tbody>
+<tr><th scope="row">Where it works</th><td>Household taps, showers &amp; baths</td><td>Drinking tap at the kitchen sink</td></tr>
+<tr><th scope="row">Sediment, chlorine &amp; chloramine</th><td>Catalytic carbon + sediment filtration for your home</td><td>Carbon prefilters + membrane; dedicated chloramine treatment is whole house</td></tr>
+<tr><th scope="row">Dissolved substances, including fluoride</th><td>Not its treatment focus</td><td>Extra membrane purification at the drinking tap</td></tr>
+<tr><th scope="row">Alkaline or hydrogen-rich water</th><td>Retains naturally occurring dissolved minerals</td><td>Alkaline options; hydrogen-rich alkaline with Pure Premium</td></tr>
+<tr><th scope="row">A great fit when…</th><td>You want filtered water across your everyday routine</td><td>You want a dedicated source of purified drinking water</td></tr>
+</tbody></table></div>
+<details class="cmp-evidence"><summary>Want the detail on filtration? <span aria-hidden="true">+</span></summary><div><p>Different filters target different substances. Carbon helps reduce chlorine and chloramine; an RO membrane adds treatment for dissolved substances such as fluoride. Performance depends on the system, water conditions and cartridge care.</p><p>Microplastics are particles; fluoride and phosphates are dissolved substances. Those are different filtration questions. An exact reduction percentage needs testing of the particular system for the particular substance.</p><p>The supplied <a href="https://filtersforyou.com.au/assets/compliance/certificate-of-analysis-ro-membrane.pdf" rel="noopener" target="_blank">laboratory report B767408</a> compares Gold Coast tap water with RO and alkaline outputs in 2019. It illustrates treatment under those test conditions, rather than proving a removal percentage for every FFY installation.</p><p>Pure Premium’s alkaline and hydrogen features are supported by the <a href="https://filtersforyou.com.au/assets/compliance/hydrogen-alkaline-cartridge-spec-sheet.pdf" rel="noopener" target="_blank">supplier’s cartridge data</a>. These describe the water, without promising health outcomes. For a plain explanation of the technologies, see the <a href="https://www.cdc.gov/drinking-water/about/about-home-water-treatment-systems.html" rel="noopener" target="_blank">CDC’s home water treatment guide</a>.</p></div></details>
+</div>
+</section>
+<section aria-labelledby="cmp-deluxe-title" class="cmp-deluxe" data-sc-act="pin" data-sc-span="2.5" id="deluxe"><div class="cmp-deluxe-stage" data-sc-stage="">
+<figure class="cmp-deluxe-photo"><picture><source media="(max-width:859px)" srcset="/media/homepage-care/care-deluxe-m.webp"/><img alt="Deluxe package with FFY-labelled whole-house system, Pure Premium RO and premium mixer, illustrative studio setting" height="1340" loading="lazy" src="/media/homepage-care/care-deluxe.webp" width="2400"/></picture></figure><div class="cmp-deluxe-shade"></div>
+<div class="cmp-deluxe-content zone"><span class="kick">Bring it all together</span><h2 class="d1" id="cmp-deluxe-title">The home.<br/>The glass.<br/><em class="hl">The Deluxe.</em></h2><p class="lede">Two kinds of filtration.<br/>One complete home package.</p>
+<div class="cmp-package-parts"><span>Pure Home</span><i>+</i><span>Pure Premium</span><i>+</i><span>Premium mixer</span></div>
+<div class="cmp-deluxe-close"><p class="cmp-price">From <strong class="money">$6,290</strong> installed <small>Including GST. Final quote depends on your installation.</small></p><a class="btn" data-system="Deluxe Home Package" href="#ask"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>Ask about Deluxe</a></div></div>
+
 </div></section>
-<section class="cmp-range cmp-section" data-sc-act="flow" id="systems" aria-labelledby="cmp-range-title">
-  <div class="zone"><div class="cmp-range-heading" data-sc-in data-sc-stagger="90"><div><span class="kick">Start with what suits you</span><h2 class="d2" id="cmp-range-title">One is a good<br>place to start.</h2></div><p>Explore the system that fits your priority. You can talk to us about adding the other later.</p></div>
-    <div class="cmp-product-links">
-      <a class="cmp-product-link" data-sc-in href="/whole-house-water-filter-sydney"><span class="cmp-product-photo" data-studio-gold><img src="/media/v7/prod-home-studio.webp" width="600" height="600" alt="FFY Pure Home whole-house filtration cabinet" loading="lazy"></span><span class="cmp-product-name">Whole House <i>↗</i></span><span class="cmp-product-desc">For every tap, shower and bath.</span></a>
-      <a class="cmp-product-link" data-sc-in href="/pure-plus-water-filter-sydney"><span class="cmp-product-photo" data-studio-gold><img src="/media/nav/five-stage-balanced-studio.webp" width="600" height="600" alt="FFY Pure Plus five-stage reverse osmosis system" loading="lazy"></span><span class="cmp-product-name">Pure Plus <i>↗</i></span><span class="cmp-product-desc">Five-stage alkaline RO.</span></a>
-      <a class="cmp-product-link" data-sc-in href="/pure-premium-water-filter-sydney"><span class="cmp-product-photo" data-studio-gold><img src="/media/ro/card-prem.webp" width="600" height="600" alt="FFY Pure Premium seven-stage reverse osmosis system" loading="lazy"></span><span class="cmp-product-name">Pure Premium <i>↗</i></span><span class="cmp-product-desc">Seven-stage hydrogen-rich alkaline RO.</span></a>
-      <a class="cmp-product-link" data-sc-in href="/pure-luxe-water-filter-sydney"><span class="cmp-product-photo" data-studio-gold><img src="/media/ro/card-luxe.webp" width="600" height="600" alt="FFY Pure Luxe smart reverse osmosis system" loading="lazy"></span><span class="cmp-product-name">Pure Luxe <i>↗</i></span><span class="cmp-product-desc">Smart five-stage alkaline RO.</span></a>
-    </div>
-  </div>
+<section aria-labelledby="cmp-range-title" class="cmp-range cmp-section" data-sc-act="flow" id="systems">
+<div class="zone"><div class="cmp-range-heading" data-sc-in="" data-sc-stagger="90"><div><span class="kick">Start with what suits you</span><h2 class="d2" id="cmp-range-title">One is a good<br/>place to start.</h2></div><p>Explore the system that fits your priority. You can talk to us about adding the other later.</p></div>
+<div class="cmp-product-links">
+<a class="cmp-product-link" data-sc-in="" href="/pure-home-water-filter-sydney"><span class="cmp-product-photo" data-studio-gold=""><img alt="FFY Pure Home whole-house filtration cabinet" height="600" loading="lazy" src="/media/v7/prod-home-studio.webp" width="600"/></span><span class="cmp-product-name">Pure Home <i>↗</i></span><span class="cmp-product-desc">For every tap, shower and bath.</span></a><a class="cmp-product-link" data-sc-in="" href="/pure-home-reserve-water-filter-sydney"><span class="cmp-product-photo" data-studio-gold=""><img alt="Pure Home Reserve whole house filtration cabinet" height="600" loading="lazy" src="/media/systems-hub/pure-home-reserve.webp" width="600"/><span class="cmp-colour-bubble">20+ colours</span></span><span class="cmp-product-name">Pure Home Reserve <i>↗</i></span><span class="cmp-product-desc">Whole house filtration. Your finish.</span></a>
+<a class="cmp-product-link" data-sc-in="" href="/pure-plus-water-filter-sydney"><span class="cmp-product-photo" data-studio-gold=""><img alt="FFY Pure Plus five-stage reverse osmosis system" height="600" loading="lazy" src="/media/nav/five-stage-balanced-studio.webp" width="600"/></span><span class="cmp-product-name">Pure Plus <i>↗</i></span><span class="cmp-product-desc">Five-stage alkaline RO.</span></a>
+<a class="cmp-product-link" data-sc-in="" href="/pure-premium-water-filter-sydney"><span class="cmp-product-photo" data-studio-gold=""><img alt="FFY Pure Premium seven-stage reverse osmosis system" height="600" loading="lazy" src="/media/ro/card-prem.webp" width="600"/></span><span class="cmp-product-name">Pure Premium <i>↗</i></span><span class="cmp-product-desc">Seven-stage hydrogen-rich alkaline RO.</span></a>
+<a class="cmp-product-link" data-sc-in="" href="/pure-luxe-water-filter-sydney"><span class="cmp-product-photo" data-studio-gold=""><img alt="FFY Pure Luxe smart reverse osmosis system" height="600" loading="lazy" src="/media/ro/card-luxe.webp" width="600"/></span><span class="cmp-product-name">Pure Luxe <i>↗</i></span><span class="cmp-product-desc">Smart five-stage alkaline RO.</span></a>
+</div>
+</div>
 </section>
-
-<section class="lane" id="reviews" data-sc-act="flow" aria-labelledby="reviews-title"><div class="zone"><div class="lane__head" data-sc-in data-sc-stagger="80"><span class="kick">In their own words</span><h2 class="d2" id="reviews-title">The difference people notice.</h2><p class="lede">Real words from customers who made the change.</p></div></div><div class="rmq" id="rmq"><div class="rrow" data-dir="-1"><article class="rvc"><span class="stars5" aria-label="5 stars"><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>“Very professional and knowledgeable - went above and beyond to ensure we were happy with the service. Highly recommend Jean Paul &amp; Kayla if you’re looking for water filters tailored to your home and needs👍”</p><div class="rwho"><b>Clare Yeung</b><span>Google review</span></div></article><article class="rvc"><span class="stars5" aria-label="5 stars"><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>“Great service and great prices. Highly recommend!”</p><div class="rwho"><b>Anthony</b><span>Google review</span></div></article><article class="rvc"><span class="stars5" aria-label="5 stars"><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>“Absolutely brilliant service. Everything was handled quickly and efficiently, and the guy who helped me was genuinely lovely — friendly, professional, and made the whole experience a pleasure. Would highly recommend.”</p><div class="rwho"><b>Jacinda Gugliemino</b><span>Google review</span></div></article></div><div class="rrow" data-dir="1"><article class="rvc"><span class="stars5" aria-label="5 stars"><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>“From start to finish the interaction, communication and experience was positive, fast and comprehensive . Jean-Paul was fantastic to deal with every step of the way and the service and products I had installed work exactly as described. It’s a genuine 5 stars from me.”</p><div class="rwho"><b>Scott Pursey</b><span>Google review</span></div></article><article class="rvc"><span class="stars5" aria-label="5 stars"><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>“Extremely knowledgeable and professional service. With an easy installation and complete satisfaction with the product supplied. It has been working for two weeks now and has not missed a beat those few times that I have to have normal tapwater now certainly demonstrate the difference.”</p><div class="rwho"><b>Brendan Tink</b><span>Google review</span></div></article><article class="rvc"><span class="stars5" aria-label="5 stars"><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><p>“Great services, so happy that found this installer directly from the filter manufacturer. This young man is every passionate with these water filters and job was vey neat and clean.”</p><div class="rwho"><b>Allan Y</b><span>Google review</span></div></article></div></div><div class="zone"><a class="lane__all" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" target="_blank" rel="noopener">Read our Google reviews ↗</a><button class="cmp-review-pause" type="button" hidden>Pause reviews</button></div></section>
-<section class="ask" id="ask" data-sc-act="flow" aria-label="Book your installation">
-  <div class="zone ask__grid">
-    <figure class="frame ask__fr" data-sc-in data-sc-parallax="-0.08">
-      <picture><source media="(max-width:859px)" srcset="media/comparison/kitchen-m.webp"><img src="media/comparison/kitchen.webp" alt="Glass of water beside a kitchen tap, illustrative interior" width="1600" height="893" loading="lazy"></picture>
-      <figcaption>Purified water, on tap</figcaption>
-    </figure>
-    <div class="askbox" data-sc-in data-sc-stagger="80">
-      <span class="kick">Book it</span>
-      <h2 class="d2">Your home. Your choice.<br>In writing first.</h2>
-      <p class="lede">Tell us where you live and what you want from your water. We’ll help you find the right fit, with a quote for your home.</p>
-      <div class="qform" data-qform>
-        <div class="steps" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
-        <form action="https://formspree.io/f/mbdqdlve" method="POST">
-<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
-          <div data-step="0">
-            <p class="qt">Where's home?</p>
-            <p class="hint">Suburb or postcode. That's all we need to start.</p>
-            <div style="margin-top:14px"><input type="text" name="suburb" autocomplete="address-level2" placeholder="e.g. Strathfield or 2135" aria-label="Your suburb or postcode" required></div>
-          </div>
-          <div data-step="1">
-            <p class="qt">Which system are you thinking about?</p>
-            <p class="hint">A guess is fine. The quote settles it.</p>
-            <label class="cmp-native-system">Your system<select name="system"><option>Not sure yet</option><option>Deluxe Home Package</option><option>Pure Home</option><option>Pure Plus</option><option>Pure Premium</option><option>Pure Luxe</option></select></label><div class="sysgrid" style="margin-top:14px"><button class="sysopt" type="button" data-v="Deluxe Home Package"><b>The Deluxe Home Package</b><span>Whole house + Pure Premium + mixer</span></button>
-              <button class="sysopt" type="button" data-v="Pure Plus"><b>5 Stage Alkaline RO</b><span>Pure Plus &middot; $1,280</span></button>
-              <button class="sysopt" type="button" data-v="Pure Premium"><b>7 Stage Hydrogen Rich RO</b><span>Pure Premium &middot; $1,590</span></button>
-              <button class="sysopt" type="button" data-v="Pure Luxe"><b>Smart 5 Stage Alkaline RO</b><span>Pure Luxe &middot; $2,290</span></button>
-              <button class="sysopt" type="button" data-v="Pure Home"><b>Whole House System</b><span>Pure Home &middot; from $3,850</span></button>
-              <button class="sysopt" type="button" data-v="Not sure yet"><b>Not sure yet, help me choose</b><span>We'll size it on the call</span></button>
-            </div>
-          </div>
-          <div data-step="2">
-            <p class="qt">Where do we send the price?</p>
-            <p class="hint">A person replies, usually the same day.</p>
-            <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
-              <input type="text" name="name" autocomplete="name" placeholder="Your name" aria-label="Your name" required>
-              <input type="tel" name="phone" autocomplete="tel" placeholder="Your mobile" aria-label="Your mobile number" required>
-              <input type="email" name="email" autocomplete="email" placeholder="Your email address" aria-label="Your email address" required>
-            </div>
-          </div>
-          <div class="nav2">
-            <button class="back" type="button" data-back hidden>Back</button>
-            <button class="btn" type="submit" data-next style="margin-left:auto"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span data-nextlabel>Get my fixed price</span></button>
-          </div>
-        <input type="hidden" name="submitted_page" value="/reverse-osmosis-vs-whole-house-water-filter-sydney"><p class="cmp-form-status" role="status" tabindex="-1" hidden></p><p class="cmp-privacy">We’ll use your details to respond to your enquiry. <a href="/privacy-policy">Privacy policy</a>.</p></form>
-        <div class="done">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="#0B61F4" stroke-width="1.6"/><path d="m7.5 12.5 3 3 6-6.5" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <b>Done. We're onto it.</b>
-          <p>Your details are with us. We’ll be in touch with a recommendation and a quote for your home.</p>
-        </div>
-      </div>
-      <p class="ask__call">Rather talk it through? <a class="ul" href="tel:0430546749">Call 0430 546 749</a>, or <a class="ul" href="free-assessment">book a free assessment</a>.</p>
-      <p class="ask__lic">Installed by a licensed plumber. <a href="/lifetime-warranty">Lifetime warranty while you stay serviced with us.</a></p>
-    </div>
-  </div>
+<section aria-label="Reviews" class="lane" data-sc-act="flow" id="reviews">
+<div class="zone">
+<div class="lane__head" data-sc-in="" data-sc-stagger="80">
+<span class="lane__badge"><span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg><b>5.0</b><span>30 Google reviews</span></span>
+<h2 class="d2">From homes like yours.</h2>
+<p class="lede">What our clients say about their water and our service.</p>
+</div>
+</div>
+<div class="rmq" id="rmq">
+<div class="rrow" data-dir="-1">
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Wow what difference! You can never go back to drinking normal tap water after having this system installed.”</p>
+<div class="rwho"><b>Jade Danielle</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“The setup is super neat and the tap looks beautiful. Our water tastes exceptionally clean and fresh.”</p>
+<div class="rwho"><b>Kayla Kagaras</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div aria-hidden="true" class="rvp"><img alt="" height="956" loading="lazy" src="media/install.webp" width="1700"/><span>Under the sink, Strathfield</span></div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Great job from Jean-Paul installing our 7 stage reverse osmosis. Very happy with the install.”</p>
+<div class="rwho"><b>Yous</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Very pleased with Jean-Paul after installing our 5 stage reverse osmosis system. Our water tastes significantly better now.”</p>
+<div class="rwho"><b>Jere Skorin</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div aria-hidden="true" class="rvp"><img alt="" height="760" loading="lazy" src="media/tap-1.webp" width="760"/><span>The tap, after</span></div>
+</div>
+<div class="rrow" data-dir="1">
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Now that’s water! I don’t have to buy bottled water anymore. What a difference.”</p>
+<div class="rwho"><b>Mandy Boustani</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Jean-Paul installed our smart reverse osmosis system and did a wonderful job. Our water quality is absolutely great!”</p>
+<div class="rwho"><b>Irene Evans</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div aria-hidden="true" class="rvp"><picture><source media="(max-width:859px)" srcset="media/ro/undersink-m.webp"/><img alt="" height="893" loading="lazy" src="media/ro/undersink.webp" width="1600"/></picture><span>Where it goes</span></div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“He arrived on time, worked neatly and made the whole process very simple. The water tastes much cleaner now.”</p>
+<div class="rwho"><b>Elly Barbar</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Absolutely fantastic experience! Professional, extremely knowledgeable, friendly, and the whole process seamless.”</p>
+<div class="rwho"><b>Georgia</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div aria-hidden="true" class="rvp"><img alt="" height="956" loading="lazy" src="media/care.webp" width="1700"/><span>The yearly service</span></div>
+</div>
+<div class="rrow" data-dir="-1">
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“From start to finish the interaction, communication and experience was positive, fast and comprehensive.”</p>
+<div class="rwho"><b>Scott Pursey</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Extremely knowledgeable and professional service. An easy installation and complete satisfaction.”</p>
+<div class="rwho"><b>Brendan Tink</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div aria-hidden="true" class="rvp"><img alt="" height="1068" loading="lazy" src="media/bleed-team.webp" width="1900"/><span>New cartridges going in</span></div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Fantastic home filters. Clean and easy to deal with. Highly recommend.”</p>
+<div class="rwho"><b>Oliver Alameri</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Great to deal with, quality work. Highly recommend.”</p>
+<div class="rwho"><b>Jye O’Neil</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+<div class="rvc">
+<span aria-hidden="true" class="stars5"><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg><svg fill="#FBBC04" viewbox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"></path></svg></span>
+<p>“Jean-Paul came for a free inspection and provided everything I needed to make the right decision.”</p>
+<div class="rwho"><b>Sergio Zambrano</b><span>Google review</span><svg aria-hidden="true" class="gicon" viewbox="0 0 24 24"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"></path><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"></path><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"></path><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"></path></svg></div>
+</div>
+</div>
+</div>
+<div class="zone">
+<a class="lane__all arrow" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" rel="noopener" target="_blank">Read them all on Google<svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></a>
+<button class="cmp-review-pause" hidden="" type="button">Pause reviews</button></div>
 </section>
-
-
-<section class="est" id="details" aria-label="The comparison in writing"><div class="zone"><header class="est__head" data-sc-in data-sc-stagger="90"><span class="est__lab"><img src="/media/mark.svg" alt="" width="48" height="48">The written version</span><h2 class="d2">Whole house vs RO,<br>written down.</h2><p class="lede">The difference, which suits you, and why some homes choose both. Open what you want to read.</p></header><div class="est__grid"><nav class="est__nav" aria-label="Comparison chapters"><b>On this page</b><a href="#det-difference">The difference</a><a href="#det-better">Which is better?</a><a href="#det-both">Using both</a><a href="#det-finish">Alkaline & hydrogen</a><a href="#det-evidence">The evidence</a><a href="#det-faq">Your questions</a></nav><div class="est__body"><details class="ch" id="det-difference" data-sc-in open><summary><h2>What’s the difference between whole house and reverse osmosis?</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="ch__a"><p class="est__lift">Whole-house filtration treats the incoming water for your household outlets. Reverse osmosis adds a finer purification step for your drinking water.</p><p>Pure Home uses sediment filtration and catalytic carbon to help reduce sediment, chlorine and chloramine. Showers, baths, laundry and the kitchen all receive treated water. Under-sink RO uses a membrane to reduce dissolved substances such as fluoride at a dedicated drinking tap. Coverage and treatment depth are different questions.</p></div></details><details class="ch" id="det-better" data-sc-in><summary><h2>Which is better for your home?</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="ch__a"><p class="est__lift">Start with where you want to notice the change.</p><p>Choose whole house when your priority is water across the household. Choose RO when your priority is extra purification for drinking and cooking. Neither makes the other pointless. On a drinkable mains supply, whole-house filtration is a useful improvement at the kitchen tap as well as everywhere else. <a href="/pure-home-water-filter-sydney">Explore Pure Home</a> or <a href="/reverse-osmosis-water-filter-sydney">compare the RO systems</a> for the detailed specifications.</p></div></details><details class="ch" id="det-both" data-sc-in><summary><h2>Can you use whole house and reverse osmosis together?</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="ch__a"><p class="est__lift">Yes. They do different jobs, in the same home.</p><p>The whole-house system treats water as it enters. The RO system then adds membrane purification at the kitchen. The Deluxe Home Package brings Pure Home, Pure Premium seven-stage hydrogen-rich alkaline RO and a premium three-way mixer together, from $6,290 installed including GST. Your final quote depends on the installation. You can also start with one system and discuss the second later.</p></div></details><details class="ch" id="det-finish" data-sc-in><summary><h2>Where do alkaline and hydrogen-rich water fit?</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="ch__a"><p class="est__lift">They describe the finish of the RO drinking water.</p><p>The membrane performs the separation first; the finishing stages then remineralise the water. Pure Plus is the alkaline starting point. Pure Premium adds a hydrogen-rich alkaline stage. Pure Luxe is the smart alkaline option. Whole-house filtration retains naturally occurring dissolved minerals. These features describe treatment and water characteristics; they do not establish health benefits. <a href="/reverse-osmosis-water-filter-sydney">See the individual RO options</a>.</p></div></details><details class="ch" id="det-evidence" data-sc-in><summary><h2>What about fluoride, microplastics and reduction percentages?</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="ch__a"><p class="est__lift">Different substances need different treatment and test evidence.</p><p>An RO membrane adds treatment for dissolved substances such as fluoride. Microplastics are particles, while fluoride and phosphates are dissolved substances. A blanket reduction percentage across all of them needs testing for each substance on the particular system. The <a href="https://filtersforyou.com.au/assets/compliance/certificate-of-analysis-ro-membrane.pdf" target="_blank" rel="noopener">supplied laboratory report</a> records specific RO and alkaline outputs in 2019; it does not prove a reduction percentage for every FFY system. Pure Premium’s finishing features are described in the <a href="https://filtersforyou.com.au/assets/compliance/hydrogen-alkaline-cartridge-spec-sheet.pdf" target="_blank" rel="noopener">supplier’s cartridge data</a>.</p></div></details><div class="est__faq" id="det-faq"><div class="fwrap"><div class="fside" data-sc-in data-sc-stagger="80"><span class="est__lab"><img src="/media/mark.svg" width="48" height="48" alt="">The comparison questions</span><h2 class="d2">Still deciding?</h2><p class="lede">The questions that help you choose. Simply put.</p><div class="go"><a class="btn" href="tel:0430546749"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Call 0430 546 749</a></div></div><div class="fgrid" data-sc-in><details class="fq" open><summary><h3>What’s the difference between whole house and reverse osmosis?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="fa"><p>Whole-house filtration treats incoming water before it reaches your household taps, showers and baths. An under-sink reverse osmosis system adds membrane purification at a dedicated drinking tap. They cover different needs and can work together.</p></div></details><details class="fq"><summary><h3>Which is better, whole house or reverse osmosis?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="fa"><p>Whole house is the better fit if your priority is filtered water throughout your home. RO is the better fit if your priority is extra purification for drinking and cooking. The Deluxe Home Package combines whole-house filtration, Pure Premium RO and a premium three-way mixer for both needs.</p></div></details><details class="fq"><summary><h3>Can I drink the water with just a whole-house filter?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="fa"><p>Yes. On a safe, drinkable mains supply, whole-house filtration also treats the water at your kitchen tap. It helps reduce sediment, chlorine and chloramine throughout your home. RO is an optional additional step for drinking water, rather than something every whole-house customer must add.</p></div></details><details class="fq"><summary><h3>Do I need to install both at the same time?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary><div class="fa"><p>No. You can choose the system that meets your priority now and discuss adding the other later. If you already want both, the Deluxe Home Package brings the whole-house system, Pure Premium RO and a premium three-way mixer into one planned installation.</p></div></details></div></div></div><div class="est__ask" data-sc-in><h2 class="d3">Find your fit.</h2><p class="lede">Whole house, RO, or both. We’ll help you choose what makes sense for your home.</p><p class="est__go"><a class="btn" data-system="Not sure yet" href="#ask"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Help me choose</a></p></div></div></div></div></section>
+<section aria-label="Book your installation" class="ask" data-sc-act="flow" id="ask">
+<div class="zone ask__grid">
+<figure class="frame ask__fr" data-sc-in="" data-sc-parallax="-0.08">
+<picture><source media="(max-width:859px)" srcset="media/comparison/kitchen-m.webp"/><img alt="Glass of water beside a kitchen tap, illustrative interior" height="893" loading="lazy" src="media/comparison/kitchen.webp" width="1600"/></picture>
+<figcaption>Purified water, on tap</figcaption>
+</figure>
+<div class="askbox" data-sc-in="" data-sc-stagger="80">
+<span class="kick">Book it</span>
+<h2 class="d2">Your home. Your choice.<br/>In writing first.</h2>
+<p class="lede">Tell us where you live and what you want from your water. We’ll help you find the right fit, with a quote for your home.</p>
+<div class="qform" data-qform="">
+<div aria-hidden="true" class="steps"><i class="on"></i><i></i><i></i></div>
+<form action="https://formspree.io/f/mbdqdlve" method="POST">
+<input aria-hidden="true" autocomplete="off" name="_gotcha" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden" tabindex="-1" type="text"/>
+<div data-step="0">
+<p class="qt">Where's home?</p>
+<p class="hint">Suburb or postcode. That's all we need to start.</p>
+<div style="margin-top:14px"><input aria-label="Your suburb or postcode" autocomplete="address-level2" name="suburb" placeholder="e.g. Strathfield or 2135" required="" type="text"/></div>
+</div>
+<div data-step="1">
+<p class="qt">Which system are you thinking about?</p>
+<p class="hint">A guess is fine. The quote settles it.</p>
+<label class="cmp-native-system">Your system<select name="system"><option>Not sure yet</option><option>Deluxe Home Package</option><option>Pure Home</option><option>Pure Home Reserve</option><option>Pure Plus</option><option>Pure Premium</option><option>Pure Luxe</option></select></label><div class="sysgrid" style="margin-top:14px"><button class="sysopt" data-v="Deluxe Home Package" type="button"><b>The Deluxe Home Package</b><span>Whole house + Pure Premium + mixer</span></button>
+<button class="sysopt" data-v="Pure Plus" type="button"><b>5 Stage Alkaline RO</b><span>Pure Plus · $1,280</span></button>
+<button class="sysopt" data-v="Pure Premium" type="button"><b>7 Stage Hydrogen Rich RO</b><span>Pure Premium · $1,590</span></button>
+<button class="sysopt" data-v="Pure Luxe" type="button"><b>Smart 5 Stage Alkaline RO</b><span>Pure Luxe · $2,290</span></button>
+<button class="sysopt" data-v="Pure Home" type="button"><b>Whole House System</b><span>Pure Home · from $3,850</span></button><button aria-pressed="false" class="sysopt" data-v="Pure Home Reserve" type="button"><b>Pure Home Reserve</b><span>22 colours · from $5,150</span></button>
+<button class="sysopt" data-v="Not sure yet" type="button"><b>Not sure yet, help me choose</b><span>We'll size it on the call</span></button>
+</div>
+</div>
+<div data-step="2">
+<p class="qt">Where do we send the price?</p>
+<p class="hint">A person replies, usually the same day.</p>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+<input aria-label="Your name" autocomplete="name" name="name" placeholder="Your name" required="" type="text"/>
+<input aria-label="Your mobile number" autocomplete="tel" name="phone" placeholder="Your mobile" required="" type="tel"/>
+<input aria-label="Your email address" autocomplete="email" name="email" placeholder="Your email address" required="" type="email"/>
+</div>
+</div>
+<div class="nav2">
+<button class="back" data-back="" hidden="" type="button">Back</button>
+<button class="btn" data-next="" style="margin-left:auto" type="submit"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i><span data-nextlabel="">Get my fixed price</span></button>
+</div>
+<input name="submitted_page" type="hidden" value="/reverse-osmosis-vs-whole-house-water-filter-sydney"/><p class="cmp-form-status" hidden="" role="status" tabindex="-1"></p><p class="cmp-privacy">We’ll use your details to respond to your enquiry. <a href="/privacy-policy">Privacy policy</a>.</p></form>
+<div class="done">
+<svg aria-hidden="true" fill="none" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10.5" stroke="#0B61F4" stroke-width="1.6"></circle><path d="m7.5 12.5 3 3 6-6.5" stroke="#0B61F4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<b>Done. We're onto it.</b>
+<p>Your details are with us. We’ll be in touch with a recommendation and a quote for your home.</p>
+</div>
+</div>
+<p class="ask__call">Rather talk it through? <a class="ul" href="tel:0430546749">Call 0430 546 749</a>, or <a class="ul" href="free-assessment">book a free assessment</a>.</p>
+<p class="ask__lic">Installed by a licensed plumber. <a href="/lifetime-warranty">Lifetime warranty while you stay serviced with us.</a></p>
+</div>
+</div>
+</section>
+<section aria-label="The comparison in writing" class="est" id="details"><div class="zone"><header class="est__head" data-sc-in="" data-sc-stagger="90"><span class="est__lab"><img alt="" height="48" src="/media/mark.svg" width="48"/>The written version</span><h2 class="d2">Whole house vs RO,<br/>written down.</h2><p class="lede">The difference, which suits you, and why some homes choose both. Open what you want to read.</p></header><div class="est__grid"><nav aria-label="Comparison chapters" class="est__nav"><b>On this page</b><a href="#det-difference">The difference</a><a href="#det-better">Which is better?</a><a href="#det-both">Using both</a><a href="#det-finish">Alkaline &amp; hydrogen</a><a href="#det-evidence">The evidence</a><a href="#det-faq">Your questions</a></nav><div class="est__body"><details class="ch" data-sc-in="" id="det-difference" open=""><summary><h2>What’s the difference between whole house and reverse osmosis?</h2><svg aria-hidden="true" class="chev" fill="none" viewbox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></summary><div class="ch__a"><p class="est__lift">Whole-house filtration treats the incoming water for your household outlets. Reverse osmosis adds a finer purification step for your drinking water.</p><p>Pure Home uses sediment filtration and catalytic carbon to help reduce sediment, chlorine and chloramine. Showers, baths, laundry and the kitchen all receive treated water. Under-sink RO uses a membrane to reduce dissolved substances such as fluoride at a dedicated drinking tap. Coverage and treatment depth are different questions.</p></div></details><details class="ch" data-sc-in="" id="det-better"><summary><h2>Which is better for your home?</h2><svg aria-hidden="true" class="chev" fill="none" viewbox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></summary><div class="ch__a"><p class="est__lift">Start with where you want to notice the change.</p><p>Choose whole house when your priority is water across the household. Choose RO when your priority is extra purification for drinking and cooking. Neither makes the other pointless. On a drinkable mains supply, whole-house filtration is a useful improvement at the kitchen tap as well as everywhere else. <a href="/pure-home-water-filter-sydney">Explore Pure Home</a> or <a href="/reverse-osmosis-water-filter-sydney">compare the RO systems</a> for the detailed specifications.</p></div></details><details class="ch" data-sc-in="" id="det-both"><summary><h2>Can you use whole house and reverse osmosis together?</h2><svg aria-hidden="true" class="chev" fill="none" viewbox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></summary><div class="ch__a"><p class="est__lift">Yes. They do different jobs, in the same home.</p><p>The whole-house system treats water as it enters. The RO system then adds membrane purification at the kitchen. The Deluxe Home Package brings Pure Home, Pure Premium seven-stage hydrogen-rich alkaline RO and a premium three-way mixer together, from $6,290 installed including GST. Your final quote depends on the installation. You can also start with one system and discuss the second later.</p></div></details><details class="ch" data-sc-in="" id="det-finish"><summary><h2>Where do alkaline and hydrogen-rich water fit?</h2><svg aria-hidden="true" class="chev" fill="none" viewbox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></summary><div class="ch__a"><p class="est__lift">They describe the finish of the RO drinking water.</p><p>The membrane performs the separation first; the finishing stages then remineralise the water. Pure Plus is the alkaline starting point. Pure Premium adds a hydrogen-rich alkaline stage. Pure Luxe is the smart alkaline option. Whole-house filtration retains naturally occurring dissolved minerals. These features describe treatment and water characteristics; they do not establish health benefits. <a href="/reverse-osmosis-water-filter-sydney">See the individual RO options</a>.</p></div></details><details class="ch" data-sc-in="" id="det-evidence"><summary><h2>What about fluoride, microplastics and reduction percentages?</h2><svg aria-hidden="true" class="chev" fill="none" viewbox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></summary><div class="ch__a"><p class="est__lift">Different substances need different treatment and test evidence.</p><p>An RO membrane adds treatment for dissolved substances such as fluoride. Microplastics are particles, while fluoride and phosphates are dissolved substances. A blanket reduction percentage across all of them needs testing for each substance on the particular system. The <a href="https://filtersforyou.com.au/assets/compliance/certificate-of-analysis-ro-membrane.pdf" rel="noopener" target="_blank">supplied laboratory report</a> records specific RO and alkaline outputs in 2019; it does not prove a reduction percentage for every FFY system. Pure Premium’s finishing features are described in the <a href="https://filtersforyou.com.au/assets/compliance/hydrogen-alkaline-cartridge-spec-sheet.pdf" rel="noopener" target="_blank">supplier’s cartridge data</a>.</p></div></details><div class="est__faq" id="det-faq"><div class="fwrap"><div class="fside" data-sc-in="" data-sc-stagger="80"><span class="est__lab"><img alt="" height="48" src="/media/mark.svg" width="48"/>The comparison questions</span><h2 class="d2">Still deciding?</h2><p class="lede">The questions that help you choose. Simply put.</p><div class="go"><a class="btn" href="tel:0430546749"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>Call 0430 546 749</a></div></div><div class="fgrid" data-sc-in=""><details class="fq" open=""><summary><h3>What’s the difference between whole house and reverse osmosis?</h3><svg aria-hidden="true" class="chev" fill="none" viewbox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></summary><div class="fa"><p>Whole-house filtration treats incoming water before it reaches your household taps, showers and baths. An under-sink reverse osmosis system adds membrane purification at a dedicated drinking tap. They cover different needs and can work together.</p></div></details><details class="fq"><summary><h3>Which is better, whole house or reverse osmosis?</h3><svg aria-hidden="true" class="chev" fill="none" viewbox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></summary><div class="fa"><p>Whole house is the better fit if your priority is filtered water throughout your home. RO is the better fit if your priority is extra purification for drinking and cooking. The Deluxe Home Package combines whole-house filtration, Pure Premium RO and a premium three-way mixer for both needs.</p></div></details><details class="fq"><summary><h3>Can I drink the water with just a whole-house filter?</h3><svg aria-hidden="true" class="chev" fill="none" viewbox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></summary><div class="fa"><p>Yes. On a safe, drinkable mains supply, whole-house filtration also treats the water at your kitchen tap. It helps reduce sediment, chlorine and chloramine throughout your home. RO is an optional additional step for drinking water, rather than something every whole-house customer must add.</p></div></details><details class="fq"><summary><h3>Do I need to install both at the same time?</h3><svg aria-hidden="true" class="chev" fill="none" viewbox="0 0 16 16"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></summary><div class="fa"><p>No. You can choose the system that meets your priority now and discuss adding the other later. If you already want both, the Deluxe Home Package brings the whole-house system, Pure Premium RO and a premium three-way mixer into one planned installation.</p></div></details></div></div></div><div class="est__ask" data-sc-in=""><h2 class="d3">Find your fit.</h2><p class="lede">Whole house, RO, or both. We’ll help you choose what makes sense for your home.</p><p class="est__go"><a class="btn" data-system="Not sure yet" href="#ask"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i>Help me choose</a></p></div></div></div></div></section>
 </main>
 
 <!-- SHELL:FOOTER -->
@@ -2134,11 +2243,11 @@ html:not(.cmp-motion) .cmp-world{opacity:.36}
           <div data-step="1">
             <p class="qt">Which system are you thinking about?</p>
             <p class="hint">A guess is fine. The quote settles it.</p>
-            <label class="cmp-native-system">Your system<select name="system"><option>Not sure yet</option><option>Deluxe Home Package</option><option>Pure Home</option><option>Pure Plus</option><option>Pure Premium</option><option>Pure Luxe</option></select></label><div class="sysgrid" style="margin-top:14px"><button class="sysopt" type="button" data-v="Deluxe Home Package"><b>The Deluxe Home Package</b><span>Whole house + Pure Premium + mixer</span></button>
+            <label class="cmp-native-system">Your system<select name="system"><option>Not sure yet</option><option>Deluxe Home Package</option><option>Pure Home</option><option>Pure Home Reserve</option><option>Pure Plus</option><option>Pure Premium</option><option>Pure Luxe</option></select></label><div class="sysgrid" style="margin-top:14px"><button class="sysopt" type="button" data-v="Deluxe Home Package"><b>The Deluxe Home Package</b><span>Whole house + Pure Premium + mixer</span></button>
               <button class="sysopt" type="button" data-v="Pure Plus"><b>5 Stage Alkaline RO</b><span>Pure Plus &middot; $1,280</span></button>
               <button class="sysopt" type="button" data-v="Pure Premium"><b>7 Stage Hydrogen Rich RO</b><span>Pure Premium &middot; $1,590</span></button>
               <button class="sysopt" type="button" data-v="Pure Luxe"><b>Smart 5 Stage Alkaline RO</b><span>Pure Luxe &middot; $2,290</span></button>
-              <button class="sysopt" type="button" data-v="Pure Home"><b>Whole House System</b><span>Pure Home &middot; from $3,850</span></button>
+              <button class="sysopt" type="button" data-v="Pure Home Reserve"><b>Pure Home Reserve</b><span>22 colours &middot; from $5,150</span></button><button class="sysopt" type="button" data-v="Pure Home"><b>Whole House System</b><span>Pure Home &middot; from $3,850</span></button>
               <button class="sysopt" type="button" data-v="Not sure yet"><b>Not sure yet, help me choose</b><span>We'll size it on the call</span></button>
             </div>
           </div>
@@ -2162,7 +2271,8 @@ html:not(.cmp-motion) .cmp-world{opacity:.36}
           <p>Your details are with us. We’ll be in touch with a recommendation and a quote for your home.</p>
         </div>
       </div>
-      </div><div class="dfoot">Rather talk? <a href="tel:0430546749">0430 546 749</a></div></aside><script src="/vendor/gsap-3.12.5.min.js"></script><script src="/vendor/lenis-1.1.18.min.js"></script><script src="/assets/js/scrollcraft.js"></script><script>
+      </div><div class="dfoot">Rather talk? <a href="tel:0430546749">0430 546 749</a></div></aside><script src="/vendor/gsap-3.12.5.min.js"></script><script src="/vendor/lenis-1.1.18.min.js"></script><script src="/assets/js/scrollcraft.js"></script>
+<script>
 (() => {
 'use strict';
 const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -2201,13 +2311,8 @@ document.querySelector('#dclose').addEventListener('click',closeDrawer);veil.add
 document.addEventListener('keydown',e=>{if(!document.body.classList.contains('dopen'))return;if(e.key==='Escape'){e.preventDefault();closeDrawer();}if(e.key==='Tab'){const focusable=[...drawer.querySelectorAll('a,button,input,select,[tabindex="-1"]')].filter(el=>!el.disabled&&el.getClientRects().length&&el.tabIndex>=0);const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
 document.addEventListener('click',e=>{const button=e.target.closest('.js-open');if(!button)return;e.preventDefault();openDrawer(button.dataset.sys||'Not sure yet');},true);
 document.querySelectorAll('#cmp-main a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const target=document.getElementById(a.hash.slice(1));if(!target)return;e.preventDefault();if(a.dataset.system)inline._setSystem(a.dataset.system);if(target.tagName==='DETAILS')target.open=true;glide(target.getBoundingClientRect().top+scrollY-76);history.replaceState(null,'',a.hash);}));
-const slides=[...document.querySelectorAll('.cmp-slide')],slideButtons=[...document.querySelectorAll('[data-slide]')],pause=document.querySelector('.cmp-pause'),hero=document.querySelector('.cmp-hero');let slide=0,paused=reduced,visible=true,elapsed=0,last=performance.now();
-function selectSlide(i){slide=i;elapsed=0;slides.forEach((el,n)=>el.classList.toggle('is-active',n===i));slideButtons.forEach((b,n)=>{b.classList.toggle('is-active',n===i);b.setAttribute('aria-pressed',String(n===i));});}
-function pauseLabel(){pause.innerHTML=paused?'Play <span aria-hidden="true">▷</span>':'Pause <span aria-hidden="true">Ⅱ</span>';pause.setAttribute('aria-label',(paused?'Play':'Pause')+' background slideshow');}
-slideButtons.forEach((b,i)=>b.addEventListener('click',()=>{selectSlide(i);paused=true;pauseLabel();}));pause.addEventListener('click',()=>{paused=!paused;elapsed=0;pauseLabel();});document.querySelector('.cmp-slide-nav').hidden=false;pause.hidden=false;pauseLabel();
+const hero=document.querySelector('.cmp-hero');let visible=true;
 new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(hero);
-setInterval(()=>{const now=performance.now(),dt=now-last;last=now;if(!paused&&visible&&!document.hidden){elapsed+=dt;if(elapsed>=6500)selectSlide((slide+1)%slides.length);}},250);
-hero.addEventListener('focusin',e=>{if(e.target.closest('.cmp-pause'))return;paused=true;pauseLabel();});
 if(window.gsap&&!reduced){const h1=document.querySelector('#cmp-title');h1.setAttribute('aria-label','Whole house versus reverse osmosis.');const walker=document.createTreeWalker(h1,NodeFilter.SHOW_TEXT);let node;const nodes=[];while(node=walker.nextNode())nodes.push(node);for(const text of nodes){const fragment=document.createDocumentFragment();for(const word of text.textContent.split(/(\s+)/)){if(!word.trim()){fragment.append(word);continue;}const w=document.createElement('span');w.className='hw';w.setAttribute('aria-hidden','true');for(const char of word){const c=document.createElement('span');c.className='hch';c.textContent=char;w.append(c);}fragment.append(w);}text.replaceWith(fragment);}gsap.to('#cmp-title .hch',{opacity:1,y:0,scale:1,duration:.55,ease:'power3.out',stagger:.018,delay:.8});}
 if(phone)document.querySelectorAll('[data-sc-span-m]').forEach(el=>el.dataset.scSpan=el.dataset.scSpanM);
 if(phone||reduced)document.querySelector('#deluxe').dataset.scAct='flow';
@@ -2219,8 +2324,9 @@ function choose(i){if(current===i)return;current=i;coverage.dataset.coverage=cho
 if(engine&&!reduced){coverage.querySelector('nav').hidden=false;choose(0);choices.forEach((b,i)=>{function go(){const top=coverage.getBoundingClientRect().top+scrollY;glide(top+(coverage.offsetHeight-innerHeight)*[.08,.5,.9][i]);}b.addEventListener('click',go);b.addEventListener('keydown',e=>{const n=e.key==='ArrowRight'?(i+1)%3:e.key==='ArrowLeft'?(i+2)%3:e.key==='Home'?0:e.key==='End'?2:-1;if(n<0)return;e.preventDefault();choices[n].focus({preventScroll:true});choices[n].click();});});}
 const deluxe=document.querySelector('#deluxe'),deluxePhoto=deluxe.querySelector('.cmp-deluxe-photo'),parts=[...deluxe.querySelectorAll('.cmp-package-parts>span')],closer=deluxe.querySelector('.cmp-deluxe-close');
 function motionTick(){if(!document.hidden){if(engine&&!reduced){const rec=engine.acts.find(a=>a.el===coverage);if(rec?.live){const p=rec.p;choose(p<.33?0:p<.67?1:2);const local=p<.33?p/.33:p<.67?(p-.33)/.34:(p-.67)/.33;worlds[current].style.transform='scale('+(1.04-local*.04)+')';}const dr=engine.acts.find(a=>a.el===deluxe);if(dr?.live&&!phone){const p=dr.p;deluxePhoto.style.transform='scale('+(1.06-.06*p)+')';parts.forEach((el,i)=>{const v=clamp((p-i*.09)/.24);el.style.opacity=.28+.72*v;el.style.transform='translateY('+(1-v)*18+'px)';});const v=clamp((p-.22)/.32);closer.style.opacity=.35+.65*v;closer.style.transform='translateY('+(1-v)*22+'px)';}if(visible&&!phone)document.querySelector('.cmp-slides').style.transform='scale('+(1+clamp(scrollY/innerHeight)*.06)+')';}}requestAnimationFrame(motionTick);}if(!reduced)requestAnimationFrame(motionTick);
-const rmq=document.querySelector('#rmq'),reviewPause=document.querySelector('.cmp-review-pause');let reviewPaused=false,reviewVisible=false;
-if(!reduced){document.documentElement.classList.add('cmp-review-motion');reviewPause.hidden=false;const lanes=[...rmq.querySelectorAll('.rrow')].map(row=>{const originals=[...row.children];originals.forEach(el=>{const clone=el.cloneNode(true);clone.setAttribute('aria-hidden','true');clone.inert=true;row.append(clone);});return {el:row,dir:Number(row.dataset.dir),x:0,width:0};});function size(){lanes.forEach(l=>{l.width=l.el.scrollWidth/2+7;if(l.dir>0&&l.x===0)l.x=-l.width;});}size();window.addEventListener('resize',size);reviewPause.addEventListener('click',()=>{reviewPaused=!reviewPaused;reviewPause.textContent=reviewPaused?'Play reviews':'Pause reviews';});new IntersectionObserver(es=>{reviewVisible=es[0].isIntersecting;}).observe(rmq);let lastTime=performance.now(),lastY=scrollY,velocity=0;function reviews(t){const dt=Math.min((t-lastTime)/1000,.05);lastTime=t;const dy=scrollY-lastY;lastY=scrollY;velocity+=(phone?0:clamp(dy/Math.max(dt,.001)/900,-1,1)-velocity)*Math.min(1,dt*6);if(reviewVisible&&!reviewPaused&&!document.hidden){lanes.forEach(l=>{l.x+=l.dir*(30+Math.abs(velocity)*260)*dt;if(l.x<=-l.width)l.x+=l.width;if(l.x>0)l.x-=l.width;l.el.style.transform='translateX('+l.x+'px) skewX('+(-velocity*4)+'deg)';});}requestAnimationFrame(reviews);}requestAnimationFrame(reviews);}
+const rmq=document.querySelector('#rmq'),reviewPause=document.querySelector('.cmp-review-pause');let reviewPaused=false,reviewVisible=false,reviewHover=false;
+rmq.addEventListener('pointerenter',()=>reviewHover=true);rmq.addEventListener('pointerleave',()=>reviewHover=false);
+if(!reduced){document.documentElement.classList.add('cmp-review-motion');reviewPause.hidden=false;const lanes=[...rmq.querySelectorAll('.rrow')].map(row=>{const originals=[...row.children];originals.forEach(el=>{const clone=el.cloneNode(true);clone.setAttribute('aria-hidden','true');clone.inert=true;row.append(clone);});return {el:row,first:originals[0],copy:row.children[originals.length],dir:Number(row.dataset.dir),x:0,width:0};});function size(){lanes.forEach(l=>{l.width=l.copy.offsetLeft-l.first.offsetLeft;if(l.dir>0&&l.x===0)l.x=-l.width;});}size();new ResizeObserver(size).observe(rmq);window.addEventListener('resize',size);reviewPause.addEventListener('click',()=>{reviewPaused=!reviewPaused;reviewPause.textContent=reviewPaused?'Play reviews':'Pause reviews';});new IntersectionObserver(es=>{reviewVisible=es[0].isIntersecting;}).observe(rmq);let lastTime=performance.now(),lastY=scrollY,velocity=0;function reviews(t){const dt=Math.min((t-lastTime)/1000,.05);lastTime=t;const dy=scrollY-lastY;lastY=scrollY;velocity+=(phone?0:clamp(dy/Math.max(dt,.001)/900,-1,1)-velocity)*Math.min(1,dt*6);if(reviewVisible&&!reviewPaused&&!reviewHover&&!document.hidden){lanes.forEach(l=>{l.x+=l.dir*(30+Math.abs(velocity)*260)*dt;if(l.x<=-l.width)l.x+=l.width;if(l.x>0)l.x-=l.width;l.el.style.transform='translateX('+l.x+'px) skewX('+(-velocity*4)+'deg)';});}requestAnimationFrame(reviews);}requestAnimationFrame(reviews);}
 document.fonts.ready.then(()=>{engine?.layout();window.dispatchEvent(new Event('resize'));});
 window.addEventListener('load',()=>engine?.layout());
 })();

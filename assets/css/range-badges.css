@@ -1,0 +1,8 @@
+#systems-hub .sg-system-image{position:relative;overflow:visible}
+#systems-hub .sg-system-image img{border-radius:inherit}
+#systems-hub .sg-colour-bubble,#systems-hub .sg-hero-colour-bubble{position:absolute;z-index:3;right:-5px;top:8px;transform:none;background:var(--yellow);color:var(--ink);border-radius:999px;padding:8px 11px;font:700 12px/1.3 var(--sans);box-shadow:0 3px 10px #04102e20;white-space:nowrap}
+#systems-hub #ocard .oth{position:relative;overflow:visible}
+#systems-hub .sg-hero-colour-bubble{top:-8px;right:-5px;font-size:11px}
+@media(max-width:359px){#systems-hub .sg-colour-bubble{font-size:10px;padding:6px 8px;top:-8px}}
+
+#systems-hub .sg-hero-colour-bubble{display:none;pointer-events:none}#systems-hub #ocard[data-reserve="true"] .sg-hero-colour-bubble{display:block}#systems-hub #ocard .oth img{border-radius:inherit}

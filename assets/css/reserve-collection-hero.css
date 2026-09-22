@@ -1,0 +1,5 @@
+#pure-plus-page .hero .hbg{background:#28212b}#pure-plus-page .hero .hbg .hph{object-fit:cover;object-position:center;filter:none}#pure-plus-page .hero .veil{background:linear-gradient(90deg,#04102eb0,#04102e20 65%,#04102e35)}
+@media(max-width:859px){#pure-plus-page .hero .hbg .hph{object-fit:cover;object-position:center}#pure-plus-page .hero .veil{background:linear-gradient(0deg,#04102e75,transparent 50%,#04102e85)}}
+@media(max-width:359px){#pure-plus-page .hero [data-product-card] .ocfoot .btn{font-size:12.5px;gap:8px;padding-inline:12px}}
+
+#pure-plus-page .hero .hbg,#pure-plus-page .hero .hbg picture{position:absolute;inset:0;width:100%;height:100%}#pure-plus-page .hero .hbg .hph{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
