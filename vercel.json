@@ -16,6 +16,21 @@
       "source": "/pure-home-reserve",
       "destination": "/pure-home-reserve-water-filter-sydney",
       "statusCode": 301
+    },
+    {
+      "source": "/pure-compact-water-filter-sydney",
+      "destination": "/water-filter-systems",
+      "statusCode": 301
+    },
+    {
+      "source": "/pure-neutral-water-filter-sydney",
+      "destination": "/pure-essential-water-filter-sydney",
+      "statusCode": 301
+    },
+    {
+      "source": "/pure-balance-water-filter-sydney",
+      "destination": "/pure-essential-water-filter-sydney",
+      "statusCode": 301
     }
   ],
   "headers": [

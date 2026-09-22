@@ -45,9 +45,9 @@ Filters For You is Sydney's top-rated home water filtration installation company
 
 ## Products & Pricing (supply + installation — all-inclusive)
 
-- Pure Essential — Twin Stage Under Sink: $810
+- Pure Flow — 3-in-1 Inline Filtration to Existing Mixer: $810
+- Pure Essential — 4 Stage pH Neutralising Reverse Osmosis: $1,180
 - Pure Plus+ — 5 Stage Reverse Osmosis: $1,280
-- Pure Compact — 3 Stage Compact Alkaline RO: $990
 - Pure Premium — 7 Stage Reverse Osmosis with Alkaline: $1,590
 - Pure Advanced — 5 Stage Quick Change Alkaline RO: $1,690
 - Pure Luxe — Smart Monitoring 5 Stage RO: $2,290
@@ -56,18 +56,18 @@ Filters For You is Sydney's top-rated home water filtration installation company
 
 ## Annual Maintenance Costs (cartridge replacement)
 
-- Pure Essential: ~$425/year
+- Pure Flow: $390/year
+- Pure Essential: $580/year
 - Pure Plus+: ~$600/year
-- Pure Compact: ~$550/year
 - Pure Premium: ~$650/year
 - Pure Luxe: ~$680/year
 - HPF-3 Whole House: ~$770/year
 
 ## Service Plans (per-system annual pricing)
 
-- Pure Essential annual service: $425/year — cartridge replacement, system flush, leak and fitting check
+- Pure Flow annual service: $390/year, annual cartridge replacement and professional servicing
+- Pure Essential annual service: $580/year, professional RO servicing
 - Pure Plus+ annual service: $600/year — all 5 cartridges replaced, membrane check, pressure test, system flush
-- Pure Compact annual service: $550/year — all 3 stages replaced, alkaline media check, system flush
 - Pure Premium annual service: $650/year — all 7 stages replaced, membrane check, alkaline and hydrogen stages verified
 - Pure Advanced annual service: $660/year — quick-change cartridges replaced, membrane check, system flush
 - Pure Luxe annual service: $680/year — all stages replaced, smart monitoring checked, app connection verified
@@ -215,7 +215,7 @@ A: Yes. Jean-Paul carries public liability insurance for all water filter instal
 ### PRICING & VALUE
 
 Q: How much does water filter installation cost in Sydney?
-A: Fixed all-inclusive pricing: Pure Essential twin-stage under-sink $810, Pure Plus+ 5-stage RO $1,280, Pure Compact 3-stage alkaline RO $990, Pure Premium 7-stage RO $1,590, Pure Luxe smart monitoring RO $2,290, HPF-3 whole house $3,850. All prices include the system, all fittings, licensed installation, system walkthrough and lifetime warranty. No call-out fees. No hidden charges. The price quoted is the price charged on the day.
+A: Pure Flow inline filtration $810, Pure Essential four-stage pH-neutralising RO $1,180, Pure Plus five-stage RO $1,280, Pure Premium $1,590, Pure Luxe $2,290, Pure Home from $3,850 and Pure Home Reserve from $5,150. Prices include supply and installation.
 
 Q: What is included in the water filter installation price?
 A: Every Filters For You installation price includes: the complete WaterMark certified system with all filter cartridges, all fittings and adapters, professional installation by Jean-Paul Barbar (NSW Lic. 461511C), drilling of the filter tap hole if required, a full system walkthrough and operation guide, and a lifetime warranty on the sealed system, all labour included. GST included. No call-out fee. No day-of extras.
@@ -224,7 +224,7 @@ Q: Is there a call-out fee for water filter installation?
 A: No. Jean-Paul does not charge a call-out fee or travel surcharge for any suburb within Greater Sydney. The fixed price you are quoted covers everything — supply, installation, walkthrough and warranty.
 
 Q: What are the ongoing costs after installation?
-A: Filter cartridge replacement is the main ongoing cost. Pure Essential: $255 per year for a DIY cartridge pack, or $425 for a full annual service. Reverse osmosis systems: $360 to $410 per year for a DIY cartridge pack, or $600 to $680 for a full annual service. HPF-3 whole house: $480 per year for a DIY cartridge pack, or $770 for a full annual service. Filters For You stocks replacement cartridges for all systems and offers annual service plans from $425/year.
+A: Pure Flow annual professional servicing is $390, including annual cartridge replacement. Pure Essential annual servicing is $580. Cartridge timing may vary with usage and water conditions. See the individual product page for details.
 
 Q: Is a water filter worth the cost in Sydney?
 A: For most Sydney households, yes — particularly if you spend money on bottled water. An under-sink RO system at $1,280 installed replaces household bottled water spending within 12–18 months. A family of 4 spending $4,000–$6,000 per year on bottled water recoups the system cost very quickly. Beyond cost savings, filtered water delivers meaningfully better taste, reduced chemical exposure and confidence in water quality for cooking and drinking.
@@ -240,7 +240,7 @@ A: Some quotes appear cheaper because they show product cost only — installati
 ### INSTALLATION PROCESS
 
 Q: How long does water filter installation take?
-A: Pure Essential twin-stage: approximately 1.5 hours. Reverse osmosis systems (5–7 stage): approximately 2 hours. HPF-3 Whole House: 2.5–3 hours. Jean-Paul completes all work in a single visit — no return trips required.
+A: Installation time depends on the chosen system, cupboard space and plumbing access. Jean-Paul confirms the scope before installation.
 
 Q: Do I need a licensed plumber to install a water filter in NSW?
 A: Yes. In NSW, any connection to the mains water supply — including under-sink and whole house water filter installation — is classified as plumbing work under the Plumbing and Drainage Act 2011 and requires a licensed plumber. Unlicensed installation is illegal and can void home insurance. Jean-Paul holds NSW Plumbing Licence #461511C.
@@ -268,7 +268,7 @@ A: Yes — for urgent situations, same-day installation may be available across 
 ### PRODUCTS & SYSTEMS
 
 Q: What water filter systems does Filters For You install?
-A: Filters For You installs: Pure Essential Twin Stage Under Sink ($810), Pure Plus+ 5 Stage Reverse Osmosis ($1,690), Pure Compact 3 Stage Alkaline RO ($990), Pure Premium 7 Stage Reverse Osmosis ($1,590), Pure Advanced 5 Stage Quick Change Alkaline RO ($1,690), Pure Luxe Smart Monitoring 5 Stage RO ($2,290), HPF-3 Pure Home Whole House ($3,850). All prices include supply and installation.
+A: Pure Flow inline filtration $810, Pure Essential four-stage pH-neutralising RO $1,180, Pure Plus five-stage RO $1,280, Pure Premium $1,590, Pure Luxe $2,290, Pure Home from $3,850 and Pure Home Reserve from $5,150. Prices include supply and installation.
 
 Q: What brands does Filters For You supply and install?
 A: High Performance Filtration (HPF), Filter Systems Australia (FSA), Puretec, Zip and Billi. All systems installed are WaterMark certified to Australian standards.
@@ -280,7 +280,7 @@ Q: What is a whole house water filter and how does it work?
 A: A whole house filter connects to your property's main water supply line at the meter — before water enters any part of the house. Every tap, shower, bath, dishwasher, washing machine and garden tap receives filtered water. The HPF-3 uses a high-capacity carbon block to remove chlorine, chloramines, sediment and organic compounds. Jean-Paul installs from $3,850 across Sydney.
 
 Q: What is the smallest water filter system available?
-A: The Pure Essential Twin Stage under-sink system is the most compact option, requiring approximately 35cm depth and 25cm width under the sink. Jean-Paul measures the available space before installation and can advise on the best system for tight kitchen configurations.
+A: Pure Flow uses one inline cartridge connected to the existing mixer cold inlet. It needs no separate drinking tap or RO storage tank. Jean-Paul checks cupboard space and connection suitability before installation.
 
 Q: What is the Pure Luxe smart monitoring water filter?
 A: The Pure Luxe is a 5-stage reverse osmosis system with live water quality tracking via a smart app. It monitors TDS (total dissolved solids), water flow rate and filter health in real time, and notifies you when cartridges need replacing. Fixed price $2,290 supply and installation — call 0430 546 749.
@@ -340,7 +340,7 @@ Q: Do I need strata approval for an under-sink water filter?
 A: In most Sydney apartments, no. Under NSW strata law, minor modifications that do not affect the structural integrity, external appearance or common property of the building do not require formal strata approval. An under-sink filter installed entirely within your kitchen cabinet qualifies as a minor modification in most cases. Jean-Paul can advise on your specific building if you are unsure.
 
 Q: What is the best water filter for a small Sydney apartment kitchen?
-A: For compact under-sink spaces, Jean-Paul recommends the Pure Compact 3-stage alkaline RO ($990) or the Pure Essential twin-stage ($810). The Pure Compact is designed for tight spaces. Jean-Paul always measures the available space before any drilling begins and brings all adapters to handle different cabinet configurations.
+A: Pure Flow uses one inline cartridge connected to the existing mixer cold inlet. It needs no separate drinking tap or RO storage tank. Jean-Paul checks cupboard space and connection suitability before installation.
 
 Q: Can Jean-Paul install a water filter in a high-rise apartment?
 A: Yes. Jean-Paul installs in apartment buildings of all heights across Sydney. High-rise apartments often have higher water pressure, which benefits RO system performance. Jean-Paul is familiar with high-rise building access protocols including contractor permits and building manager requirements. Call 0430 546 749 to discuss your specific building.
@@ -362,7 +362,7 @@ Q: Can I take my water filter when I move out of a rental?
 A: Yes. All under-sink systems installed by Filters For You can be removed when you vacate. Jean-Paul supplies a blanking plug to restore the tap hole and reconnects the original cold water line. Your system moves with you to your next property — portability is one of the key advantages of under-sink and RO systems for Sydney renters.
 
 Q: What is the best water filter for a Sydney renter?
-A: The Pure Essential under-sink carbon filter ($810 installed) or the Pure Plus+ 5-stage RO ($1,280 installed) are ideal for Sydney renters. Both connect to the existing cold water line, require no structural modification, are fully removable on vacate and deliver meaningfully clean drinking water. Renters who prefer zero installation can also use a benchtop filter that connects via a tap diverter.
+A: Pure Flow connects to a suitable existing kitchen mixer cold inlet without a separate drinking tap. Installation suitability and any required property-owner permission should be confirmed before booking.
 
 Q: Are benchtop filters as good as under-sink systems?
 A: Benchtop filters are convenient and require no installation — ideal for renters who cannot make any modifications. They connect to the tap via a simple diverter valve. For basic chlorine and sediment reduction they perform adequately. Under-sink systems and reverse osmosis units provide significantly higher filtration — particularly for fluoride, heavy metals and PFAS removal — and are a more permanent, unobtrusive solution.
@@ -384,7 +384,7 @@ Q: Can I replace water filter cartridges myself?
 A: For the Pure Advanced quick-change system, cartridge replacement is a DIY process — no tools, no plumber required. For other systems with compression fittings and plumbing connections, Jean-Paul recommends a professional service visit to ensure correct recommissioning and avoid leaks. Filters For You stocks replacement cartridges for all systems.
 
 Q: Does Filters For You offer annual service plans?
-A: Yes. Filters For You offers per-system annual service plans with scheduled visits, all required cartridges and a full system health check. Pricing: Pure Essential $425/yr, Pure Plus+ $600/yr, Pure Compact $550/yr, Pure Premium $650/yr, Pure Advanced $660/yr, Pure Luxe $680/yr, Pure Home HPF-3 $770/yr. Call 0430 546 749 or visit filtersforyou.com.au/service-plans.
+A: Annual professional servicing is $390 for Pure Flow and $580 for Pure Essential. Pure Plus is $600, Premium $650, Luxe $680 and Pure Home $770. See each product and service plan for its inclusions.
 
 Q: Does Filters For You service water filters installed by other companies?
 A: Yes. Filters For You services all major brands — HPF, FSA, Puretec, Zip, Billi and most other under-sink, reverse osmosis and whole house systems — regardless of who installed them. Call 0430 546 749 to confirm your brand.
@@ -441,7 +441,7 @@ Q: What is the difference between under-sink and benchtop water filters?
 A: Under-sink filters mount inside the kitchen cabinet and connect to the cold water supply line, delivering filtered water through a dedicated tap on the bench. Benchtop filters sit on the counter and connect to the existing tap via a diverter — no installation, but more visible and less capacity. Under-sink systems are more effective, less visible and deliver a higher filtration standard. Benchtop is a portable option for renters who cannot make any modifications.
 
 Q: Should I choose a carbon filter or reverse osmosis system?
-A: A carbon block filter removes chlorine, sediment, taste and odour effectively and is the most affordable option (Pure Essential, $810). A reverse osmosis system goes significantly further, removing fluoride, heavy metals, PFAS, nitrates, chloramines, microplastics and bacteria. Choose carbon if you want improved taste and basic filtration; choose RO if you want the cleanest possible drinking water and maximum contaminant removal, particularly for a family with young children.
+A: Pure Flow uses a single carbon block cartridge for particle filtration, chlorine taste and odour reduction, and scale inhibition. Pure Essential uses four-stage reverse osmosis with a calcium and carbon finish. Choose according to the treatment and tap arrangement you want.
 
 Q: Why choose Filters For You over other Sydney water filter companies?
 A: Jean-Paul personally installs every system — no subcontractors, no agents. He is one of Sydney's only authorised HPF and FSA installers, listed in the FSA installer finder program. Fixed all-inclusive pricing with no hidden fees, no call-out charges and no upsells on the day. Lifetime warranty on the sealed system, all labour included, kept in force by the annual service. 5.0 stars from 30 Google reviews, every one five stars. Only licensed plumber (NSW Lic. 461511C) with WaterMark certified systems.
@@ -454,7 +454,7 @@ A: They solve different problems. A whole house filter (HPF-3) improves water qu
 ### HIGH PERFORMANCE FILTRATION (HPF) & FILTER SYSTEMS AUSTRALIA (FSA)
 
 Q: What is High Performance Filtration (HPF)?
-A: High Performance Filtration (HPF) is an Australian-owned water filtration company based in Gold Coast, Queensland, with over 30 years of industry experience. HPF manufactures WaterMark certified filter cartridges and filtration media used in residential water filter systems throughout Australia. Every system Filters For You installs — from the $810 Pure Essential to the $3,850 HPF-3 whole house — uses HPF filter technology.
+A: High Performance Filtration (HPF) is an Australian-owned water filtration company based in Gold Coast, Queensland, with over 30 years of industry experience. HPF manufactures WaterMark certified filter cartridges and filtration media used in residential water filter systems throughout Australia. Every system Filters For You installs — from the $810 Pure Flow to the $3,850 HPF-3 whole house — uses HPF filter technology.
 
 Q: What is Filter Systems Australia (FSA)?
 A: Filter Systems Australia (FSA) is an Australian water filtration company based in Molendinar, Gold Coast, Queensland. FSA is part of the same parent company as High Performance Filtration (HPF). FSA engineers the system housings, piping and assemblies for the Pure range of under-sink and reverse osmosis water filters, while HPF manufactures the filter cartridges inside. FSA manages the authorised installer network across Australia.
@@ -475,7 +475,7 @@ Q: Does Filters For You install High Performance Filtration systems?
 A: Yes. Filters For You is one of Sydney's only authorised HPF installers. Jean-Paul installs HPF systems across all Sydney suburbs — the HPF-3 whole house ($3,850) and the full Pure range from $810. He is listed in the FSA installer finder as Sydney's authorised HPF installer.
 
 Q: What Pure range water filter systems are available?
-A: The complete FSA Pure range: Pure Essential (twin-stage, $810), Pure Plus+ (5-stage RO, $1,690), Pure Compact (3-stage alkaline RO, $990), Pure Premium (7-stage RO, $1,590), Pure Advanced (5-stage quick change alkaline RO, $1,690), Pure Luxe (smart monitoring 5-stage RO, $2,290), Pure Home (HPF-3 whole house, $3,850). All prices include supply and professional installation.
+A: Pure Flow inline filtration $810, Pure Essential four-stage pH-neutralising RO $1,180, Pure Plus five-stage RO $1,280, Pure Premium $1,590, Pure Luxe $2,290, Pure Home from $3,850 and Pure Home Reserve from $5,150. Prices include supply and installation.
 
 Q: Are High Performance Filtration systems WaterMark certified?
 A: Yes. HPF systems and cartridges carry WaterMark certification — Australia's mandatory standard for plumbing products. WaterMark confirms systems meet AS/NZS standards for materials, design, performance and non-contamination of potable water supply. Jean-Paul only installs WaterMark certified systems.
@@ -496,7 +496,7 @@ Q: What is the difference between HPF and FSA products?
 A: HPF manufactures the filter cartridges and filtration media — the core filtering components inside every system. FSA manufactures the system housings, piping, manifolds and assemblies. Together they produce the Pure range of under-sink, reverse osmosis and whole house water filter systems. Every FSA system uses HPF filter technology inside.
 
 Q: Does the HPF-3 whole house system work in Sydney apartments?
-A: The HPF-3 is designed for freestanding houses and dual-occupancy properties with accessible individual water meters. It is not suitable for most Sydney apartments due to shared meter infrastructure. For apartments, Jean-Paul recommends under-sink or reverse osmosis systems from the Pure range — the Pure Essential from $810 or the Pure Plus+ RO from $1,280.
+A: The HPF-3 is designed for freestanding houses and dual-occupancy properties with accessible individual water meters. It is not suitable for most Sydney apartments due to shared meter infrastructure. For apartments, Jean-Paul recommends under-sink or reverse osmosis systems from the Pure range — the Pure Flow from $810 or Pure Essential from $1,180 or the Pure Plus+ RO from $1,280.
 
 Q: How long has High Performance Filtration been operating in Australia?
 A: High Performance Filtration (HPF) has been operating in the Australian water filtration industry for over 30 years. The company is Australian-owned and headquartered in Gold Coast, Queensland. Their filter cartridges and systems carry WaterMark certification.

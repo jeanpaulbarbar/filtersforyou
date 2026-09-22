@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Core Pages -->
   <url>
     <loc>https://filtersforyou.com.au/</loc>
     <lastmod>2026-09-08</lastmod>
@@ -34,7 +32,7 @@
   </url>
   <url>
     <loc>https://filtersforyou.com.au/water-filter-systems</loc>
-    <lastmod>2026-08-05</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -44,11 +42,9 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Product Pages -->
   <url>
     <loc>https://filtersforyou.com.au/pure-essential-water-filter-sydney</loc>
-    <lastmod>2026-08-05</lastmod>
+    <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -57,24 +53,6 @@
     <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://filtersforyou.com.au/pure-neutral-water-filter-sydney</loc>
-    <lastmod>2026-08-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://filtersforyou.com.au/pure-balance-water-filter-sydney</loc>
-    <lastmod>2026-08-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://filtersforyou.com.au/pure-compact-water-filter-sydney</loc>
-    <lastmod>2026-08-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://filtersforyou.com.au/pure-advanced-water-filter-sydney</loc>
@@ -94,8 +72,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Service Pages -->
   <url>
     <loc>https://filtersforyou.com.au/under-sink-water-filter-sydney</loc>
     <lastmod>2026-08-05</lastmod>
@@ -132,8 +108,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Brand Pages -->
   <url>
     <loc>https://filtersforyou.com.au/high-performance-filtration-sydney</loc>
     <lastmod>2026-08-05</lastmod>
@@ -146,8 +120,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-
-  <!-- Suburb Pages -->
   <url>
     <loc>https://filtersforyou.com.au/water-filter-installation-sydney-cbd</loc>
     <lastmod>2026-08-05</lastmod>
@@ -460,7 +432,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://filtersforyou.com.au/water-filter-installation-paddington</loc>
     <lastmod>2026-08-05</lastmod>
@@ -509,8 +480,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- RO Service Pages by Area -->
   <url>
     <loc>https://filtersforyou.com.au/reverse-osmosis-installation-bondi</loc>
     <lastmod>2026-08-05</lastmod>
@@ -541,16 +510,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
-
-  <!-- FAQ Hub -->
   <url>
     <loc>https://filtersforyou.com.au/water-filter-faq-sydney</loc>
     <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Guide / Content Pages -->
   <url>
     <loc>https://filtersforyou.com.au/sydney-water-quality-guide</loc>
     <lastmod>2026-08-05</lastmod>
@@ -659,8 +624,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Comparison Pages -->
   <url>
     <loc>https://filtersforyou.com.au/under-sink-water-filter-vs-benchtop-sydney</loc>
     <lastmod>2026-08-05</lastmod>
@@ -673,8 +636,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Service + Location Pages -->
   <url>
     <loc>https://filtersforyou.com.au/under-sink-water-filter-bondi</loc>
     <lastmod>2026-08-05</lastmod>
@@ -2259,8 +2220,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Region Hub Pages -->
   <url>
     <loc>https://filtersforyou.com.au/locations-inner-west</loc>
     <lastmod>2026-08-05</lastmod>
@@ -2297,8 +2256,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-
-  <!-- Calculator Pages -->
   <url>
     <loc>https://filtersforyou.com.au/water-savings-calculator</loc>
     <lastmod>2026-08-05</lastmod>
@@ -2311,8 +2268,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- New Service & Guide Pages (Phase 2) -->
   <url>
     <loc>https://filtersforyou.com.au/fluoride-water-filter-sydney</loc>
     <lastmod>2026-08-05</lastmod>
@@ -2355,8 +2310,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-
-  <!-- Authority/Content Pages (Phase 3) -->
   <url>
     <loc>https://filtersforyou.com.au/what-is-in-sydney-water</loc>
     <lastmod>2026-08-05</lastmod>
@@ -2381,8 +2334,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- New Suburb Pages (Phase 2) -->
   <url>
     <loc>https://filtersforyou.com.au/water-filter-installation-dulwich-hill</loc>
     <lastmod>2026-08-05</lastmod>
@@ -2437,15 +2388,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Warranty -->
   <url>
     <loc>https://filtersforyou.com.au/lifetime-warranty</loc>
     <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Policy Pages -->
   <url>
     <loc>https://filtersforyou.com.au/privacy-policy</loc>
     <lastmod>2026-08-05</lastmod>
@@ -2464,7 +2412,6 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
   <url>
     <loc>https://filtersforyou.com.au/water-filter-installation-camperdown</loc>
     <lastmod>2026-08-05</lastmod>
@@ -3310,5 +3257,9 @@
     <lastmod>2026-09-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://filtersforyou.com.au/pure-flow-water-filter-sydney</loc>
+    <lastmod>2026-09-22</lastmod>
   </url>
 </urlset>
