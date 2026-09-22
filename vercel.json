@@ -11,6 +11,11 @@
       "source": "/reverse-osmosis-vs-whole-house-sydney",
       "destination": "/reverse-osmosis-vs-whole-house-water-filter-sydney",
       "statusCode": 301
+    },
+    {
+      "source": "/pure-home-reserve",
+      "destination": "/pure-home-reserve-water-filter-sydney",
+      "statusCode": 301
     }
   ],
   "headers": [
