@@ -2136,7 +2136,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   </div>
 </section>
 
-<section class="plate ch1 cover first" id="water" data-sc-act="pin" data-sc-span="4.2" data-sc-span-m="4.2" aria-label="Sydney's water">
+<section class="plate ch1 cover first" id="water" data-sc-act="pin" data-sc-span="6.4" data-sc-span-m="4.2" aria-label="Sydney's water">
   <div class="sc-stage" data-sc-stage>
     <div class="plate__fr fr" id="waterFr">
       <picture>
@@ -2155,7 +2155,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   </div>
 </section>
 
-<section class="rooms cover" id="rooms" data-sc-act="pin" data-sc-span="6.8" data-sc-span-m="6.8" aria-label="Where it gets to you">
+<section class="rooms cover" id="rooms" data-sc-act="pin" data-sc-span="11.4" data-sc-span-m="6.8" aria-label="Where it gets to you">
   <div class="sc-stage" data-sc-stage>
     <div class="rooms__fr fr">
       <div class="rooms__mosaic" id="roomsDeck" data-sc-verify-state="0">
@@ -2311,7 +2311,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   </div>
 </section>
 
-<section class="plate rel cover" id="relationship" data-sc-act="pin" data-sc-span="4.6" data-sc-span-m="4.6" aria-label="The relationship">
+<section class="plate rel cover" id="relationship" data-sc-act="pin" data-sc-span="7.2" data-sc-span-m="4.6" aria-label="The relationship">
   <div class="sc-stage" data-sc-stage>
     <div class="plate__fr fr">
       <picture>
@@ -2407,7 +2407,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   </div>
 </section>
 
-<section class="hummact opens" id="payments" data-sc-act="pin" data-sc-span="3.5" data-sc-span-m="3.2" aria-label="Payment plans with humm">
+<section class="hummact opens" id="payments" data-sc-act="pin" data-sc-span="4.4" data-sc-span-m="3.2" aria-label="Payment plans with humm">
   <div class="sc-stage" data-sc-stage>
     <div class="humm__plate fr">
       <img class="humm__tag" src="media/humm/humm-tag-white.webp" alt="humm. Made for living." width="300" height="101" loading="lazy">
@@ -2434,7 +2434,7 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   </div>
 </section>
 
-<section class="costact cover" id="cost" data-sc-act="pin" data-sc-span="3.5" data-sc-span-m="3.5" aria-label="What it costs">
+<section class="costact cover" id="cost" data-sc-act="pin" data-sc-span="4.4" data-sc-span-m="3.5" aria-label="What it costs">
   <div class="sc-stage" data-sc-stage>
     <div class="cost__plate fr">
       <div class="cost__in">
@@ -3668,16 +3668,19 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   var lenis = null;
   if (ROLL && !reduce && hasGsap && typeof Lenis !== 'undefined' && matchMedia('(pointer:fine)').matches && !mph){
      
-    lenis = new Lenis({duration:1.35, smoothWheel:true, syncTouch:false, wheelMultiplier:1.0,
+    lenis = new Lenis({duration:1.65, smoothWheel:true, syncTouch:false, wheelMultiplier:.25,
       virtualScroll:function(input){
         
         
-        var sec = document.getElementById('set');
-        if (sec){ var r = sec.getBoundingClientRect();
-          if (r.top < innerHeight && r.bottom > innerHeight)
-            input.deltaY = clamp(input.deltaY, -innerHeight * .5, innerHeight * .5);
-        }
-      },    
+        if (!input.deltaY || input.event.ctrlKey) return;
+        var direction = input.deltaY > 0 ? 1 : -1;
+        var pending = lenis ? lenis.targetScroll - lenis.animatedScroll : 0;
+        var distance = Math.min(Math.abs(input.deltaY), innerHeight * .10);
+        var allowance = Math.max(0, innerHeight * .28 - Math.max(0, pending * direction));
+        input.deltaY = direction * Math.max(.01, Math.min(distance, allowance));
+        
+        if (pending * direction < 0) input.deltaY -= pending;
+      },
       easing:function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }});
     document.documentElement.classList.add('lenis');
   }
