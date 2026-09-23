@@ -3676,36 +3676,9 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
 
    
   var ROLL = !/[?&]roll=0/.test(location.search);
-  var lenis = null, wheelAt = 0, wheelDir = 0, wheelLimit = null, sceneReadyAt = 0;
-  function resetWheel(){ wheelAt = 0; wheelDir = 0; wheelLimit = null; }
-  function nextWheelStop(y, direction){
-    var found = null;
-    (STOPS || []).forEach(function(sp){
-      if ((sp.y-y)*direction <= 8) return;
-      if (found === null || (sp.y-found)*direction < 0) found = sp.y;
-    });
-    return found;
-  }
+  var lenis = null;
   if (ROLL && !reduce && hasGsap && typeof Lenis !== 'undefined' && matchMedia('(pointer:fine)').matches && !mph){
-    lenis = new Lenis({duration:1.15, smoothWheel:true, syncTouch:false, wheelMultiplier:1,
-      virtualScroll:function(input){
-        if (!input.deltaY || input.event.ctrlKey) return;
-        var now = performance.now(), direction = input.deltaY > 0 ? 1 : -1;
-        var y = lenis ? lenis.animatedScroll : scrollY;
-        var target = lenis ? lenis.targetScroll : y;
-        var reverse = wheelDir && direction !== wheelDir;
-        var fresh = now-wheelAt > 200;
-        if (reverse || wheelLimit === null || (fresh && now >= sceneReadyAt && Math.abs(y-wheelLimit)<10)){
-          wheelLimit = nextWheelStop(y, direction);
-        }
-        wheelAt = now; wheelDir = direction;
-        if (reverse) target = y;
-        var desired = target + input.deltaY;
-        if (wheelLimit !== null && (desired-wheelLimit)*direction > 0) desired = wheelLimit;
-        var delta = desired - (lenis ? lenis.targetScroll : y);
-        if (Math.abs(delta)<.01){ input.event.preventDefault(); return false; }
-        input.deltaY = delta;
-      },
+    lenis = new Lenis({duration:.65, smoothWheel:true, syncTouch:false, wheelMultiplier:1,
       easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));}});
     document.documentElement.classList.add('lenis');
   }
@@ -4162,7 +4135,6 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     var first = rmScene < 0 || W !== rmW || H !== rmH, was = rmScene;
     rmW = W; rmH = H;
     rmScene = s;
-    if (p > 0 && p < 1) sceneReadyAt = performance.now() + 1500;
      
     rmPop.forEach(clearTimeout); rmPop = [];
     rooms.forEach(function(r, i){
@@ -4361,7 +4333,6 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
   function goBeat(n){
     if (n === curBeat) return;
     var from = curBeat; curBeat = n;
-    sceneReadyAt = performance.now() + 1900;
     if (!vid || !vidReady || reduce){ jumpTo(n); wordsAt(n, 260); return; }
     var fwd = n === from + 1;
      
@@ -4583,42 +4554,21 @@ body.mopen .pbar,body.askvis .pbar,body.dopen .pbar{transform:translateY(102%)}
     });
   }
   function globalIndex(id,i){ for(var k=0;k<STOPS.length;k++) if(STOPS[k].a.id===id && STOPS[k].i===i) return k; return -1; }
-  var assisting=false, touching=false, idleT=null, inputAt=0, assistUntil=0, scrollDirection=1, previousY=scrollY;
+  var assisting=false;
   function fireTo(k){
-    resetWheel();
     var sp=STOPS[k]; if(!sp) return;
-    assisting=true; assistUntil=performance.now()+1500;
+    assisting=true;
     glide(sp.y,.65,function(){assisting=false;});
   }
   function goToStop(id,i){ if(!STOPS.length) buildStops(); var k=globalIndex(id,i);if(k>=0) fireTo(k); }
-  function settle(){
-    if(mph || reduce || touching || veilOn || assisting || performance.now()<assistUntil) return;
-    if(document.body.classList.contains('dopen') || document.body.classList.contains('mopen')) return;
-    if(performance.now()-inputAt<200) return;
-    if(!STOPS.length) buildStops();
-    var y=scrollY, nearest=-1, distance=Infinity;
-    STOPS.forEach(function(sp,k){
-      if(sp.a.id==='top' || (sp.y-y)*scrollDirection<0) return;
-      var d=Math.abs(sp.y-y);if(d<distance){distance=d;nearest=k;}
-    });
-    if(nearest<0 || distance<3) return;
-    var sp=STOPS[nearest], radius=vh*.18;
-    if(sp.a.id==='set') radius=actGeo(setAct).travel*.065;
-    if(distance<=radius && (wheelLimit === null || Math.abs(sp.y-wheelLimit)<3)) fireTo(nearest);
-  }
   function readerInput(){
-    inputAt=performance.now();clearTimeout(idleT);
     if(assisting){cancelGlide();assisting=false;}
-    assistUntil=0;
   }
   addEventListener('wheel',readerInput,{passive:true,capture:true});
-  addEventListener('pointerdown',function(){resetWheel();readerInput();},{passive:true,capture:true});
-  addEventListener('keydown',function(e){if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].indexOf(e.key)>=0){resetWheel();readerInput();}});
-  addEventListener('touchstart',function(){touching=true;readerInput();},{passive:true});
-  var lift=function(){touching=false;};
-  addEventListener('touchend',lift,{passive:true});addEventListener('touchcancel',lift,{passive:true});
-  if(!reduce) addEventListener('scroll',function(){if(!assisting && Math.abs(scrollY-previousY)>1) scrollDirection=scrollY>previousY?1:-1;previousY=scrollY;clearTimeout(idleT);idleT=setTimeout(settle,220);},{passive:true});
-  function rebuild(){resetWheel();STOPS=[];buildStops();}
+  addEventListener('pointerdown',readerInput,{passive:true,capture:true});
+  addEventListener('keydown',function(e){if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].indexOf(e.key)>=0) readerInput();});
+  addEventListener('touchstart',readerInput,{passive:true});
+  function rebuild(){STOPS=[];buildStops();}
   addEventListener('resize',rebuild,{passive:true});addEventListener('orientationchange',rebuild);
   addEventListener('load',function(){rebuild();if(mph && !reduce) document.documentElement.classList.add('snapon');});
   buildStops();
