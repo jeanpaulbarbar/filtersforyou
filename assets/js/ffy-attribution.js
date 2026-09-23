@@ -4,6 +4,9 @@
   var P = 'ffy1_';
   var K_FIRST = P + 'first', K_LAST = P + 'last', K_TAG = P + 'tag';
   var K_CLICK = P + 'click', K_VISIT = P + 'visit';
+  // Meta click (fbclid) is kept apart from the Google click so neither overwrites
+  // the other. K_TEST marks our own test forms for this browser tab only.
+  var K_FB = P + 'fbc', K_TEST = P + 'test';
   var LEGACY_CLICK = 'ffy_click';
   var DAY = 864e5, CLICK_DAYS = 90;
   var CLICK_KEYS = ['gclid', 'gbraid', 'wbraid'];
@@ -132,12 +135,59 @@
   if (newVisit || !readRec(K_LAST)) writeRec(K_LAST, visit);
   if (taggedNow) writeRec(K_TAG, { utm: utm, t: now, page: here });
   if (clickNow) writeRec(K_CLICK, { id: clickNow.id, param: clickNow.param, t: now, page: here });
+  if (q.fbclid && /^[A-Za-z0-9_\-]{1,500}$/.test(q.fbclid)) {
+    writeRec(K_FB, { v: 'fb.1.' + now + '.' + q.fbclid, t: now });
+  }
+
+  // ?ffy_test=1 keeps OUR test form out of Meta and GA4; ?ffy_test=meta lets it
+  // through for a tracking check; ?ffy_test=0 clears it. Nothing is suppressed
+  // unless the form's email is also our test address (the CRM applies the same
+  // rule), so a real customer on a flagged tab is never silenced.
+  var TEST_EMAIL = /^[a-z0-9._-]+\+ffytest[a-z0-9._-]*@filtersforyou\.com\.au$/;
+  var testMode = '';
+  if (q.ffy_test) {
+    var tq = String(q.ffy_test).toLowerCase();
+    testMode = tq === 'meta' ? 'meta' : (tq === '0' || tq === 'off' ? '' : '1');
+    try {
+      if (session) { if (testMode) session.setItem(K_TEST, testMode); else session.removeItem(K_TEST); }
+    } catch (e) {}
+  } else {
+    try { testMode = (session && session.getItem(K_TEST)) || ''; } catch (e) { testMode = ''; }
+  }
+  function isTestForm(form) {
+    if (!testMode) return false;
+    var el = form.querySelector('input[type="email"], input[name="email"]');
+    return !!(el && TEST_EMAIL.test(String(el.value || '').trim().toLowerCase()));
+  }
+
+  function cookie(name) {
+    try {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : '';
+    } catch (e) { return ''; }
+  }
+  // The most recent Meta click wins, whether the pixel wrote it (_fbc cookie) or we
+  // did (fbclid in the URL). If the pixel is blocked its cookie can be stale.
+  function metaClick(fb) {
+    var ck = cookie('_fbc'), ckAt = 0;
+    var m = /^fb\.\d+\.(\d{13})\./.exec(ck);
+    if (m) ckAt = parseInt(m[1], 10); else ck = '';
+    var ours = fb && fb.v ? fb.v : '', oursAt = fb && typeof fb.t === 'number' ? fb.t : 0;
+    return oursAt > ckAt ? ours : (ck || ours);
+  }
+  function pageUrl() {
+    try { return (location.origin + location.pathname).slice(0, MAX_PATH); } catch (e) { return ''; }
+  }
+  function agent() {
+    try { return String(navigator.userAgent || '').slice(0, 400); } catch (e) { return ''; }
+  }
 
   function fields() {
     var first = readRec(K_FIRST) || visit;
     var last = readRec(K_LAST) || visit;
     var tag = within(readRec(K_TAG), CLICK_DAYS);
     var clk = within(readRec(K_CLICK), CLICK_DAYS);
+    var fb = within(readRec(K_FB), CLICK_DAYS);
     var tu = (tag && tag.utm) || {};
     return {
       landing_page: first.page || here,
@@ -156,7 +206,13 @@
       gclid: clk ? clk.id : '',
       click_source: clk ? clk.param : '',
       click_at: clk ? iso(clk.t) : '',
-      attr_state: 'v1 store=' + mode
+      attr_state: 'v1 store=' + mode,
+      // Meta matching. Read at submit time: the pixel may set its cookies late.
+      fbc: metaClick(fb),
+      fbp: cookie('_fbp'),
+      client_ua: agent(),
+      page_url: pageUrl(),
+      ffy_test: testMode
     };
   }
 
@@ -169,10 +225,24 @@
     return a.indexOf('formspree') !== -1 || f.id === 'bookingForm';
   }
 
+  // One id per SUBMISSION, shared by the browser Lead and the CRM's server Lead so
+  // Meta counts the enquiry once. A retry of the same submission keeps its id; once
+  // a submission has succeeded, the next stamp gives the form a fresh one.
+  var used = {};
+  function eventId(form) {
+    var id = form.getAttribute('data-ffy-eid');
+    if (!id || used[id]) {
+      id = 'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+      form.setAttribute('data-ffy-eid', id);
+    }
+    return id;
+  }
+
   function stamp(form) {
     if (!isLeadForm(form)) return;
     var v = fields();
-    MANAGED.forEach(function (name) {
+    v.meta_event_id = eventId(form);
+    MANAGED.concat(['meta_event_id']).forEach(function (name) {
       var el = form.querySelector('input[name="' + name + '"]');
       var val = v[name];
       if (!val) {
@@ -197,10 +267,11 @@
     for (var n = 0; n < forms.length; n++) stamp(forms[n]);
   }
 
-  var done = [];
   function success(form, meta) {
-    if (!form || done.indexOf(form) !== -1) return;
-    done.push(form);
+    if (!form) return;
+    var id = form.getAttribute('data-ffy-eid') || eventId(form);
+    if (used[id]) return;          // this submission already reported
+    used[id] = true;
     var m = meta || {};
     var v = fields();
     var p = {
@@ -210,6 +281,7 @@
       delivery: m.delivery || 'ajax'
     };
     if (m.system) p.system = String(m.system).slice(0, 60);
+    if (testMode === '1' && isTestForm(form)) return;   // our own test form: out of GA4 and Meta
     try { if (typeof gtag === 'function') gtag('event', 'form_submit', p); } catch (e) {}
     try {
       if (typeof fbq === 'function') {
@@ -217,7 +289,7 @@
           content_name: String(m.label || p.form).slice(0, 60),
           content_category: 'website_form',
           source_page: p.page_path
-        }, { eventID: 'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) });
+        }, { eventID: id });
       }
     } catch (e) {}
   }
