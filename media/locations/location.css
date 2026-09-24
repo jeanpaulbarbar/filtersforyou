@@ -445,3 +445,14 @@ html.lp-js .lp .lp-offer.is-new{animation:lp-card .42s var(--e-out)}
  .lp .lp-years span{font-size:12.5px}
 }
 @media(max-width:359px){.lp .lp-years span{font-size:11.5px}}
+.lp .lp-near__map{min-width:0}
+.lp .lp-map__more-t{margin:18px 0 10px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.lp .lp-map__more{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.lp .lp-map__more a{display:inline-flex;align-items:center;min-height:40px;padding:0 15px;border-radius:var(--r-full);background:rgba(4,16,46,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.34);font-size:15px;font-weight:600;color:#fff;text-decoration:none}
+.lp .lp-map__more a:hover{background:#fff;color:var(--ink)}
+@media(max-width:859px){
+ .lp .lp-near .lp-near__map{order:2;margin-top:22px}
+ .lp .lp-near .lp-map{margin-top:0}
+ .lp .lp-near .lp-map__more-t{margin:14px 0 8px;color:var(--muted)}
+ .lp .lp-near .lp-map__more a{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule)}
+}
