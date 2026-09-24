@@ -19,6 +19,7 @@ function set(n,swap=true){const b=find(n);if(!b)return;current=n;window.reserveC
  nameEl.textContent=n;count.textContent=String(list.indexOf(b)+1).padStart(2,'0')+' / 22';
  if(input){input.value=n;input.setAttribute('value',n)}
  root.querySelectorAll('[data-rv-photo]').forEach(x=>{x.src=b.dataset.src;x.alt='Pure Home Reserve in '+n});
+ root.querySelectorAll('[data-rv-thumb]').forEach(x=>x.src=b.dataset.src);
  if(swap)show(n)}
 all.forEach(b=>b.addEventListener('click',()=>{warm();set(b.dataset.finish)}));
 picker.addEventListener('pointerenter',warm,{once:true});picker.addEventListener('touchstart',warm,{once:true,passive:true});
@@ -61,16 +62,17 @@ const why=root.querySelector('.rv-why'),micron=root.querySelector('[data-rv-micr
 if(why&&micron&&scale&&!reduce&&'IntersectionObserver' in window){const num=micron.querySelector('[data-rv-count]'),fill=scale.querySelector('.rv-scale__fill'),items=[...scale.querySelectorAll('.rv-scale__item')],end=88.6;
  const caught=[...why.querySelectorAll('.rv-caught li')],pct=[...why.querySelectorAll('[data-rv-pct]')];
  scale.classList.add('rv-anim');why.classList.add('rv-anim');num.textContent='70';fill.style.width='0%';
- let tallied=false;
- const tally=()=>{if(tallied)return;tallied=true;caught.forEach((li,i)=>setTimeout(()=>li.classList.add('on'),i*90));
-  const t0=performance.now();(function step(t){const k=Math.min(1,(t-t0)/900);pct.forEach(el=>el.textContent=Math.round(99*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(step)})(t0)};
- const run=()=>{pct.forEach(el=>el.textContent='0');const t0=performance.now(),D=1900,ease=x=>1-Math.pow(1-x,3);
+ const stats=why.querySelector('.rv-stats');let tallied=false;
+ const tally=()=>{if(tallied)return;tallied=true;caught.forEach((li,i)=>setTimeout(()=>li.classList.add('on'),i*90))};
+ 
+ const count99=()=>{stats.classList.add('on');const t0=performance.now();(function step(t){const k=Math.min(1,(t-t0)/1500);pct.forEach(el=>el.textContent=Math.round(99*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(step)})(t0)};
+ const run=()=>{count99();const t0=performance.now(),D=1900,ease=x=>1-Math.pow(1-x,3);
   (function step(t){const k=Math.min(1,(t-t0)/D),e=ease(k),um=Math.pow(10,Math.log10(70)+(Math.log10(0.22)-Math.log10(70))*e);
    num.textContent=um>=10?um.toFixed(0):um>=1?um.toFixed(1):um.toFixed(2);fill.style.width=(end*e)+'%';
    items.forEach(li=>li.classList.toggle('caught',um<=parseFloat(li.dataset.um)));
    if(k>.7)tally();
    if(k<1)requestAnimationFrame(step);else num.textContent='0.22'})(t0)};
- whenSeen(scale,run)}
+ whenSeen(micron,run,.6)}
 
 
 const flow=root.querySelector('[data-rv-flow]');
@@ -84,4 +86,12 @@ if(flow&&!reduce&&'IntersectionObserver' in window){const stage=flow.querySelect
  addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(follow)}},{passive:true});
  addEventListener('resize',()=>{measure();if(phone.matches)follow();else if(ran)paint(1);else{const r=stage.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)run()}});
  whenSeen(stage,run,.4)}
+
+const stagger=(box,sel,gap)=>{box.classList.add('rv-anim');whenSeen(box,()=>[...box.querySelectorAll(sel)].forEach((x,i)=>setTimeout(()=>x.classList.add('on'),i*gap)),.35)};
+if(!reduce&&'IntersectionObserver' in window){
+ root.querySelectorAll('.rv-seals,.rv-kit').forEach(b=>stagger(b,':scope>li',110));
+ const cw=root.querySelector('.rv-callouts');if(cw)stagger(cw,'.rv-callout',260);
+ const specs=root.querySelector('.rv-specs');
+ if(specs){const nums=[...specs.querySelectorAll('[data-rv-to]')];stagger(specs,':scope>li',80);
+  whenSeen(specs,()=>{const t0=performance.now();(function step(t){const k=Math.min(1,(t-t0)/1400),e=1-Math.pow(1-k,3);nums.forEach(n=>n.textContent=Math.round(+n.dataset.rvTo*e));if(k<1)requestAnimationFrame(step)})(t0)},.35)}}
 })();

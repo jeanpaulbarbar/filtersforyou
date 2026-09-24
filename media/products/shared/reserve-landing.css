@@ -451,3 +451,105 @@
 @media(min-width:860px){#pure-plus-page .rv-stage__text{text-align:center}#pure-plus-page .rv-stage__dots{justify-content:center}}
 @media(max-width:859px){#pure-plus-page .rv-why__grid{grid-template-columns:minmax(0,1fr)}#pure-plus-page .rv-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}#pure-plus-page .rv-stats strong{font-size:36px}}
 @media(max-width:374px){#pure-plus-page .rv-stats{grid-template-columns:minmax(0,1fr)}}
+
+/* Round 4, 24 Sep night (JP: "Australia is slightly out", then "go for gold" down the page) */
+
+/* Designed in Australia seal: the words sit inside the gold ring at every size */
+#pure-plus-page .rv-seal--navy{padding:12px 14px}
+#pure-plus-page .rv-seal--navy svg{width:28px;height:28px;margin:-2px 0 3px}
+#pure-plus-page .rv-seal--navy span{font-size:8.5px;letter-spacing:.01em;line-height:1.1}
+#pure-plus-page .rv-seal--navy b{font-size:11px;letter-spacing:-.01em;line-height:1.15}
+@media(max-width:859px){
+ #pure-plus-page .rv-seal--navy{padding:9px 11px}
+ #pure-plus-page .rv-seal--navy svg{width:21px;height:21px;margin:-1px 0 2px}
+ #pure-plus-page .rv-seal--navy span{font-size:7px}
+ #pure-plus-page .rv-seal--navy b{font-size:9px}
+}
+@media(max-width:359px){#pure-plus-page .rv-seal--navy b{font-size:8px}#pure-plus-page .rv-seal--navy svg{width:19px;height:19px}}
+#pure-plus-page .rv-seals p b,#pure-plus-page .rv-seals p span,#pure-plus-page .rv-feel span,#pure-plus-page .rv-minis li{text-wrap:balance}
+
+/* The two 99% figures stay hidden until they count */
+#pure-plus-page .rv-why.rv-anim .rv-stats li{opacity:0;transform:translateY(10px);transition:opacity .5s var(--e-out),transform .6s var(--e-out)}
+#pure-plus-page .rv-why.rv-anim .rv-stats.on li{opacity:1;transform:none}
+#pure-plus-page .rv-why.rv-anim .rv-stats.on li+li{transition-delay:.12s}
+
+/* Seals pop in one after another */
+#pure-plus-page .rv-seals.rv-anim .rv-seal{opacity:0;transform:scale(.55) rotate(-14deg)}
+#pure-plus-page .rv-seals.rv-anim p{opacity:0;transform:translateY(8px)}
+#pure-plus-page .rv-seals.rv-anim li.on .rv-seal{opacity:1;transform:none;transition:transform .75s cubic-bezier(.2,1.5,.4,1),opacity .35s var(--e-out)}
+#pure-plus-page .rv-seals.rv-anim li.on p{opacity:1;transform:none;transition:opacity .5s var(--e-out) .15s,transform .6s var(--e-out) .15s}
+
+/* Spec numbers: each rule draws in, then the number counts up */
+#pure-plus-page .rv-specs li{position:relative;border-top:0}
+#pure-plus-page .rv-specs li:before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--blue);transform-origin:0 50%}
+#pure-plus-page .rv-specs.rv-anim li{opacity:0;transform:translateY(10px)}
+#pure-plus-page .rv-specs.rv-anim li:before{transform:scaleX(0)}
+#pure-plus-page .rv-specs.rv-anim li.on{opacity:1;transform:none;transition:opacity .5s var(--e-out),transform .6s var(--e-out)}
+#pure-plus-page .rv-specs.rv-anim li.on:before{transform:none;transition:transform .7s var(--e-out)}
+#pure-plus-page .rv-specs strong span{font-variant-numeric:tabular-nums}
+
+/* Add drinking water: callouts on the photo */
+#pure-plus-page .rv-deluxe__photo{position:relative}
+#pure-plus-page .rv-callouts{position:absolute;inset:0;pointer-events:none}
+#pure-plus-page .rv-callout{position:absolute;left:var(--x);top:var(--y);width:0;height:0}
+#pure-plus-page .rv-callout i{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 4px rgba(255,217,0,.3),0 4px 10px rgba(4,16,46,.45)}
+#pure-plus-page .rv-callout:before{content:"";position:absolute;left:-1px;bottom:7px;width:2px;height:30px;border-radius:2px;background:var(--yellow);box-shadow:0 1px 4px rgba(4,16,46,.4)}
+#pure-plus-page .rv-callout b{position:absolute;bottom:37px;left:0;transform:translateX(-50%);padding:8px 13px;border-radius:var(--r-full);background:rgba(255,254,252,.96);color:var(--ink);font-size:14px;font-weight:600;white-space:nowrap;box-shadow:0 10px 24px -12px rgba(4,16,46,.55)}
+#pure-plus-page .rv-callout[data-d=right] b{left:auto;right:-16px;transform:none}
+#pure-plus-page .rv-callouts.rv-anim .rv-callout{opacity:0;transform:translateY(10px)}
+#pure-plus-page .rv-callouts.rv-anim .rv-callout.on{opacity:1;transform:none;transition:opacity .5s var(--e-out),transform .6s var(--e-out)}
+@media(prefers-reduced-motion:no-preference){#pure-plus-page .rv-callout i{animation:rv-pulse 2.6s var(--e-out) infinite}}
+@media(max-width:859px){
+ #pure-plus-page .rv-callout{left:var(--mx);top:var(--my)}
+ #pure-plus-page .rv-callout b{font-size:13px;padding:7px 11px}
+ #pure-plus-page .rv-callout[data-m=left] b{left:-16px;right:auto;transform:none}
+ #pure-plus-page .rv-callout[data-m=right] b{left:auto;right:-16px;transform:none}
+}
+
+/* Add drinking water: the package in three parts, the first in their colour */
+#pure-plus-page .rv-kit__label{margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+#pure-plus-page .rv-kit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:0 0 26px;padding:0;list-style:none}
+#pure-plus-page .rv-kit li{position:relative;display:grid;justify-items:start;gap:4px}
+#pure-plus-page .rv-kit li+li:before{content:"+";position:absolute;left:-17px;top:12px;width:12px;text-align:center;font-size:22px;font-weight:500;line-height:1;color:var(--muted)}
+#pure-plus-page .rv-kit i{display:grid;place-items:center;width:48px;height:48px;margin-bottom:8px;border-radius:50%;background:#fff;color:var(--blue);box-shadow:inset 0 0 0 1px var(--rule),0 8px 18px -12px rgba(4,16,46,.4)}
+#pure-plus-page .rv-kit i svg{width:23px;height:23px}
+#pure-plus-page .rv-kit i .rv-dot{width:30px;height:30px}
+#pure-plus-page .rv-kit b{font-size:16px;font-weight:600;line-height:1.25;color:var(--ink)}
+#pure-plus-page .rv-kit span{font-size:14px;line-height:1.35;color:var(--muted)}
+#pure-plus-page .rv-kit em{font-style:normal;color:var(--ink);font-weight:600}
+#pure-plus-page .rv-kit.rv-anim li{opacity:0;transform:translateY(10px)}
+#pure-plus-page .rv-kit.rv-anim li.on{opacity:1;transform:none;transition:opacity .5s var(--e-out),transform .6s var(--e-out)}
+#pure-plus-page .rv-deluxe__price{margin:0 0 12px;font-size:17px}
+#pure-plus-page .rv-deluxe__price strong{display:inline;font-size:40px;margin-right:4px}
+#pure-plus-page .rv-gold-chip{display:inline-flex;align-items:center;gap:8px;margin:0 0 24px;padding:8px 14px 8px 10px;border-radius:var(--r-full);color:#513b13;font-size:14px;font-weight:700;background:radial-gradient(ellipse at 25% 15%,#fff4cc 0,transparent 44%),linear-gradient(125deg,#a17a31,#eedb9d 25%,#c8a34e 44%,#fff0b5 58%,#b48b38 80%,#e9d38f);box-shadow:inset 0 0 0 1px #a47c35,0 8px 18px -10px rgba(53,38,13,.55)}
+#pure-plus-page .rv-gold-chip svg{width:18px;height:18px}
+@media(max-width:859px){
+ #pure-plus-page .rv-kit{gap:16px;margin-bottom:22px}
+ #pure-plus-page .rv-kit li+li:before{left:-13px;font-size:18px;top:11px}
+ #pure-plus-page .rv-kit i{width:42px;height:42px;margin-bottom:6px}
+ #pure-plus-page .rv-kit i svg{width:20px;height:20px}
+ #pure-plus-page .rv-kit i .rv-dot{width:26px;height:26px}
+ #pure-plus-page .rv-kit b{font-size:14.5px}
+ #pure-plus-page .rv-kit span{font-size:13px}
+ #pure-plus-page .rv-deluxe__price strong{font-size:34px}
+}
+
+/* Form: their cabinet in their colour, and three small badges under the form */
+#pure-plus-page .rv-form-thumb{flex:0 0 auto;width:46px;height:46px;border-radius:12px;overflow:hidden;background:#e9e6e3;box-shadow:inset 0 0 0 1px #c6a66b}
+#pure-plus-page .rv-form-thumb img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transform-origin:50% 51%}
+#pure-plus-page .rv-form-colour summary .rv-dot{width:16px;height:16px}
+#pure-plus-page .rv-minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 0;padding:0;list-style:none}
+#pure-plus-page .rv-minis li{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;line-height:1.3;color:var(--ink)}
+#pure-plus-page .rv-seal--mini{flex:0 0 auto;width:38px;height:38px;padding:0}
+#pure-plus-page .rv-seal--mini svg{width:17px;height:17px;margin:0}
+#pure-plus-page .rv-seal--mini.rv-seal--gold{box-shadow:inset 0 0 0 1px #a47c35,inset 0 0 0 3px #f9e7b266,0 6px 12px -8px rgba(53,38,13,.5)}
+#pure-plus-page .rv-seal--mini.rv-seal--google{box-shadow:inset 0 0 0 1px #d9e0ea,0 6px 12px -8px rgba(4,16,46,.3)}
+#pure-plus-page .rv-seal--mini.rv-seal--blue{box-shadow:inset 0 0 0 1px #0848b8,inset 0 0 0 3px rgba(255,255,255,.35),0 6px 12px -8px rgba(11,97,244,.5)}
+#pure-plus-page .rv-seal--mini:after{display:none}
+@media(max-width:859px){#pure-plus-page .rv-minis{gap:8px}#pure-plus-page .rv-minis li{flex-direction:column;align-items:flex-start;gap:7px;font-size:12.5px}}
+@media(max-width:859px){#pure-plus-page .rv-seal--google b{font-size:15px}#pure-plus-page .rv-seal--google .rv-g{width:13px;height:13px}}
+@media(max-width:359px){#pure-plus-page .rv-seal b{font-size:9.5px}#pure-plus-page .rv-seal--google b{font-size:13px;margin:0}#pure-plus-page .rv-seal svg{width:14px;height:14px}#pure-plus-page .rv-seal--google .rv-g{width:11px;height:11px}#pure-plus-page .rv-stars svg{width:6px;height:6px}}
+#pure-plus-page .rv-specs strong span{display:inline;margin:0;font-size:inherit;font-weight:inherit;color:inherit}
+#pure-plus-page .rv-form-colour summary .rv-form-thumb+.rv-dot{display:none}
+#pure-plus-page .rv-kit li{justify-items:center;align-content:start;text-align:center}
+#pure-plus-page .rv-kit li+li:before{top:13px}
