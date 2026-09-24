@@ -787,3 +787,8 @@ html.lp-js .lp .lp-offer.is-new{animation:lp-card .42s var(--e-out)}
  .lp .asksec .lp-seals--mini .lp-seal--navy svg{width:14px;height:14px}
 }
 @media(max-width:359px){.lp .asksec .lp-seals--mini .lp-seal--google b{font-size:11px}.lp .asksec .lp-seals--mini .lp-seal--google{--star:4.5px}.lp .asksec .lp-seals--mini .lp-seal--google .lp-g{width:10px;height:10px}}
+
+
+.lp .lp-intro{padding:96px 0 104px}
+.lp .lp-intro__grid{border-top:0;padding-top:0}
+@media(max-width:859px){.lp .lp-intro{padding:56px 0}.lp .lp-intro__grid{padding-top:0}}
