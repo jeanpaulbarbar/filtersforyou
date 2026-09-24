@@ -1,0 +1,88 @@
+/* Product landing pages (24 Sep 2026). Loaded after reserve-landing.css, which holds the shared kit.
+   Only what the other products need on top: the 99% dot grid, the tap choice, studio photos for the
+   pins and the price card, and the water stage for one, five or seven cartridges. */
+
+/* Proof: "Up to 99%" with a grid of a hundred dots, ninety nine go yellow */
+#pure-plus-page .rv-micron--pct strong{align-items:flex-end}
+#pure-plus-page .rv-micron--pct strong em{align-self:flex-start;margin:.32em .12em 0 0;font-style:normal;font-size:.15em;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7);white-space:nowrap}
+#pure-plus-page .rv-micron--pct strong small{font-size:.42em;color:var(--yellow);margin-left:.02em}
+#pure-plus-page .rv-dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:8px;max-width:560px;margin:26px 0 12px}
+#pure-plus-page .rv-dots i{display:block;aspect-ratio:1;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 3px rgba(255,217,0,.14)}
+#pure-plus-page .rv-dots i:nth-child(58){background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.2),0 0 14px rgba(255,255,255,.6)}
+#pure-plus-page .rv-dots.rv-anim i{background:rgba(255,255,255,.9);box-shadow:none;transition:background .35s,box-shadow .35s}
+#pure-plus-page .rv-dots.rv-anim i.on{background:var(--yellow);box-shadow:0 0 0 3px rgba(255,217,0,.14)}
+#pure-plus-page .rv-dots.rv-anim i:nth-child(58){background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.2),0 0 14px rgba(255,255,255,.6)}
+#pure-plus-page .rv-dots__note{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+#pure-plus-page .rv-dots__key{display:inline-block;width:10px;height:10px;border-radius:50%;background:#fff;margin-right:-8px;vertical-align:middle}
+#pure-plus-page .rv-dots__key--out{background:var(--yellow)}
+#pure-plus-page .rv-stats--plain strong{font-size:40px}
+#pure-plus-page .rv-stats--plain b{font-size:14.5px}
+
+/* Tap choice: the colour picker pattern with the included tap and five mixer finishes */
+#pure-plus-page .rv-taps .rv-grid__photo{justify-self:center;width:100%;max-width:470px}
+#pure-plus-page .rv-photo--tap{position:relative;border-radius:24px}
+#pure-plus-page .rv-photo--tap img{aspect-ratio:1200/1490}
+#pure-plus-page .rc-swatches.rv-tap-swatches{grid-template-columns:repeat(6,minmax(0,1fr));max-width:420px}
+#pure-plus-page .rv-taps .rc-swatch span{width:34px;height:34px}
+#pure-plus-page .rv-taps .rv-guide b{color:var(--ink);font-weight:600}
+#pure-plus-page .rv-taps .rv-next svg{width:13px;height:13px}
+
+/* Pins on a studio photo keep the photo's own shape */
+#pure-plus-page .rv-hot--studio .rv-photo img{aspect-ratio:var(--ar);object-fit:cover;background:#efece8}
+
+/* Price card and form thumbnails for studio shots */
+#pure-plus-page .rv-offer__img--studio{background:#f3f1ee}
+#pure-plus-page .rv-offer__img--studio img{transform:none;object-fit:contain}
+#pure-plus-page .rv-chip--note{font-size:14.5px;line-height:1.35;color:var(--muted)}
+#pure-plus-page .rv-offer__note{margin:10px 0 0;font-size:14px;color:var(--muted)}
+#pure-plus-page .rv-form-product{display:flex;align-items:center;gap:12px;margin:0;font-size:14.5px;line-height:1.4;color:var(--muted)}
+#pure-plus-page .rv-form-product b{color:var(--ink)}
+#pure-plus-page .rv-form-thumb--studio{background:#f3f1ee}
+#pure-plus-page .rv-form-thumb--studio img{transform:none;object-fit:contain}
+#pure-plus-page .rv-form-colour .rv-form-thumb img{object-position:50% 40%;transform:none}
+
+/* The water stage for one, five or seven cartridges */
+#pure-plus-page .rv-flow[data-count="1"] .rv-flow__list{grid-template-columns:minmax(0,420px);justify-content:center}
+#pure-plus-page .rv-flow[data-count="5"] .rv-flow__list{grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;padding:0 96px}
+#pure-plus-page .rv-flow[data-count="7"] .rv-flow__list{grid-template-columns:repeat(7,minmax(0,1fr));gap:14px;padding:0 92px}
+#pure-plus-page .rv-flow[data-count="5"] .rv-stage__img,#pure-plus-page .rv-flow[data-count="7"] .rv-stage__img{height:260px}
+#pure-plus-page .rv-flow[data-count="5"] .rv-flow__stage,#pure-plus-page .rv-flow[data-count="7"] .rv-flow__stage{--pipe:130px}
+#pure-plus-page .rv-flow[data-count="5"] .rv-stage__img:before,#pure-plus-page .rv-flow[data-count="7"] .rv-stage__img:before{width:170px;height:250px}
+#pure-plus-page .rv-flow[data-count="5"] h4{font-size:18px}
+#pure-plus-page .rv-flow[data-count="7"] h4{font-size:16px}
+#pure-plus-page .rv-flow[data-count="5"] .rv-stage__text p{font-size:14.5px}
+#pure-plus-page .rv-flow[data-count="7"] .rv-stage__text p{font-size:13.5px;line-height:1.45}
+#pure-plus-page .rv-flow[data-count="7"] .rv-stage__chip{font-size:12px;padding:5px 10px}
+#pure-plus-page .rv-flow .rv-stage--finest .rv-stage__chip{background:var(--yellow);color:var(--ink);box-shadow:0 0 22px rgba(255,217,0,.35)}
+#pure-plus-page .rv-flow:not([data-count="3"]) .rv-stage:last-child:not(.rv-stage--finest) .rv-stage__chip{background:rgba(255,255,255,.08);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+
+@media(max-width:859px){
+ #pure-plus-page:not([data-landing="reserve"]) .rv-why__grid{grid-template-areas:"head" "micron" "stats" "scale" "label" "tags"}
+ #pure-plus-page:not([data-landing="reserve"]) .rv-stats{margin-top:14px}
+ #pure-plus-page .rv-dots{gap:5px;margin:18px 0 8px}
+ #pure-plus-page .rv-dots i{box-shadow:none}
+ #pure-plus-page .rv-stats--plain strong{font-size:32px}
+ #pure-plus-page .rv-stats--plain b{font-size:13px}
+ #pure-plus-page .rv-taps .rv-grid__photo{max-width:none}
+ #pure-plus-page .rv-photo--tap img{aspect-ratio:4/5;object-fit:cover}
+ #pure-plus-page .rv-flow[data-count] .rv-flow__list{grid-template-columns:1fr;padding:0;gap:26px}
+ #pure-plus-page .rv-flow[data-count] .rv-stage__img{height:228px}
+ #pure-plus-page .rv-flow[data-count="7"] .rv-stage__img{height:200px}
+ #pure-plus-page .rv-flow[data-count] h4{font-size:19px}
+ #pure-plus-page .rv-flow[data-count] .rv-stage__text p{font-size:15px}
+}
+@media(max-width:1099px) and (min-width:860px){#pure-plus-page .rv-flow[data-count="7"] .rv-flow__list{padding:0 84px;gap:10px}#pure-plus-page .rv-flow[data-count="5"] .rv-flow__list{padding:0 84px;gap:14px}}
+
+/* Package photo callouts that point in from the side, so the label sits on empty stone, not on a product */
+#pure-plus-page .rv-callout[data-d=sidel]:before{left:auto;right:7px;bottom:-1px;width:30px;height:2px}
+#pure-plus-page .rv-callout[data-d=sidel] b{left:auto;right:37px;bottom:auto;top:0;transform:translateY(-50%)}
+@media(max-width:859px){
+ #pure-plus-page .rv-callout[data-m=mid] b{left:0;right:auto;transform:translateX(-50%)}
+ #pure-plus-page .rv-callout[data-m=sidel]:before{left:auto;right:7px;bottom:-1px;width:26px;height:2px}
+ #pure-plus-page .rv-callout[data-m=sidel] b{left:auto;right:33px;bottom:auto;top:0;transform:translateY(-50%)}
+ #pure-plus-page .rv-photo--tap img{aspect-ratio:1;object-position:50% 45%}
+}
+
+/* Tall studio photos for the pins stay a comfortable size on desktop */
+@media(min-width:860px){#pure-plus-page .rv-hot--studio{width:100%;max-width:520px;justify-self:center}}
+@media(max-width:359px){#pure-plus-page:not([data-landing="reserve"]) .rv-bar .rv-dot{display:none}#pure-plus-page:not([data-landing="reserve"]) .rv-bar__name b{overflow:visible}}

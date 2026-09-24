@@ -5,10 +5,10 @@
 
 /* Hero: same full screen zoom JP approved on 23 Sep, slid up so the rows clear the headline.
    The exposed strip at the bottom is the image's own dark floor colour. */
-#pure-plus-page .hero .hbg{background:#221b1e}
-#pure-plus-page .hero .hbg .hph{transform:translateY(-18%)}
-#pure-plus-page .hero .hbg::after{content:"";position:absolute;inset:auto 0 0 0;height:34%;background:linear-gradient(180deg,rgba(34,27,30,0),#221b1e 55%);pointer-events:none}
-@media(max-width:859px){#pure-plus-page .hero .hbg .hph{transform:translateY(-14%)}#pure-plus-page .hero .hbg::after{height:30%}}
+#pure-plus-page[data-landing="reserve"] .hero .hbg{background:#221b1e}
+#pure-plus-page[data-landing="reserve"] .hero .hbg .hph{transform:translateY(-18%)}
+#pure-plus-page[data-landing="reserve"] .hero .hbg::after{content:"";position:absolute;inset:auto 0 0 0;height:34%;background:linear-gradient(180deg,rgba(34,27,30,0),#221b1e 55%);pointer-events:none}
+@media(max-width:859px){#pure-plus-page[data-landing="reserve"] .hero .hbg .hph{transform:translateY(-14%)}#pure-plus-page[data-landing="reserve"] .hero .hbg::after{height:30%}}
 
 /* Shared two column layout: photo on one side, heading then detail on the other */
 #pure-plus-page .rv-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr);grid-template-areas:"photo head" "photo body";column-gap:64px;row-gap:26px;align-items:start}
