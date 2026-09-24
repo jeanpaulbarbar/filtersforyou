@@ -86,7 +86,7 @@
   const barEl = $('#lp-bar');
   function bar(r) {
     if (!barEl) return;
-    $('small', barEl).textContent = r.name; $('[data-lp-bar-name]', barEl).textContent = r.price.replace('From ', 'from ') + ' installed';
+    $('small', barEl).textContent = r.price.replace('From ', 'from ') + ' installed'; $('[data-lp-bar-name]', barEl).textContent = r.name;
     const im = $('.lp-bar__img img', barEl); if (im.getAttribute('src') !== r.img) im.src = r.img;
     $('[data-lp-bar-cta]', barEl).dataset.sys = r.sys;
   }
