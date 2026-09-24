@@ -41,20 +41,47 @@ if(bar&&colours&&ask){bar.hidden=false;bar.classList.add('off');let queued=false
  const check=()=>{queued=false;const c=colours.getBoundingClientRect(),a=ask.getBoundingClientRect(),h=innerHeight;bar.classList.toggle('off',!(c.bottom<h*.35&&(a.top>h*.9||a.bottom<0)&&!(foot&&foot.getBoundingClientRect().top<h)&&!(offerCta&&(()=>{const o=offerCta.getBoundingClientRect();return o.top<h&&o.bottom>0})())))};
  addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(check)}},{passive:true});addEventListener('resize',check);check()}
 
-const pins=[...root.querySelectorAll('.rv-pin')];
-function closePins(except){pins.forEach(p=>{if(p===except)return;p.setAttribute('aria-expanded','false');const pop=root.querySelector('#'+p.getAttribute('aria-controls'));if(pop)pop.hidden=true})}
-pins.forEach(p=>{const pop=root.querySelector('#'+p.getAttribute('aria-controls')),x=parseFloat(p.style.left),y=parseFloat(p.style.top);
- if(pop){if(y<32)pop.classList.add('rv-pop--low');if(x<30)pop.classList.add('rv-pop--right');else if(x>60)pop.classList.add('rv-pop--left')}
- p.addEventListener('click',e=>{e.stopPropagation();const open=p.getAttribute('aria-expanded')==='true';closePins(p);p.setAttribute('aria-expanded',String(!open));if(pop)pop.hidden=open})});
+const pins=[...root.querySelectorAll('.rv-pin')],hover=matchMedia('(hover:hover) and (pointer:fine)');
+const popOf=p=>root.querySelector('#'+p.getAttribute('aria-controls'));
+function openPin(p,open=true){pins.forEach(x=>{const on=x===p&&open;x.setAttribute('aria-expanded',String(on));const pop=popOf(x);if(pop)pop.hidden=!on})}
+function closePins(){openPin(null,false)}
+pins.forEach(p=>{const pop=popOf(p);let t;
+ const enter=()=>{if(!hover.matches)return;clearTimeout(t);openPin(p)},leave=()=>{if(!hover.matches)return;clearTimeout(t);t=setTimeout(()=>{if(p.getAttribute('aria-expanded')==='true')closePins()},160)};
+ p.addEventListener('pointerenter',enter);p.addEventListener('pointerleave',leave);
+ if(pop){pop.addEventListener('pointerenter',()=>clearTimeout(t));pop.addEventListener('pointerleave',leave)}
+ p.addEventListener('focus',()=>{if(hover.matches)openPin(p)});
+ p.addEventListener('click',e=>{e.stopPropagation();const open=p.getAttribute('aria-expanded')==='true';openPin(p,hover.matches?true:!open)})});
 document.addEventListener('click',()=>closePins());document.addEventListener('keydown',e=>{if(e.key==='Escape')closePins()});
 
-const micron=root.querySelector('[data-rv-micron]'),scale=root.querySelector('[data-rv-scale]');
-if(micron&&scale&&!reduce&&'IntersectionObserver' in window){const num=micron.querySelector('[data-rv-count]'),fill=scale.querySelector('.rv-scale__fill'),items=[...scale.querySelectorAll('.rv-scale__item')],end=88.6;
- scale.classList.add('rv-anim');num.textContent='70';fill.style.width='0%';
- const run=()=>{const t0=performance.now(),D=1900,ease=x=>1-Math.pow(1-x,3);
+const whenSeen=(el,fn,at=.45)=>{let done=false;const go=()=>{if(done)return;done=true;fn()};
+ new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();go()}},{threshold:at}).observe(el);
+ const past=()=>{if(!done&&el.getBoundingClientRect().bottom<0)go()};addEventListener('scroll',past,{passive:true})};
+
+const why=root.querySelector('.rv-why'),micron=root.querySelector('[data-rv-micron]'),scale=root.querySelector('[data-rv-scale]');
+if(why&&micron&&scale&&!reduce&&'IntersectionObserver' in window){const num=micron.querySelector('[data-rv-count]'),fill=scale.querySelector('.rv-scale__fill'),items=[...scale.querySelectorAll('.rv-scale__item')],end=88.6;
+ const caught=[...why.querySelectorAll('.rv-caught li')],pct=[...why.querySelectorAll('[data-rv-pct]')];
+ scale.classList.add('rv-anim');why.classList.add('rv-anim');num.textContent='70';fill.style.width='0%';
+ let tallied=false;
+ const tally=()=>{if(tallied)return;tallied=true;caught.forEach((li,i)=>setTimeout(()=>li.classList.add('on'),i*90));
+  const t0=performance.now();(function step(t){const k=Math.min(1,(t-t0)/900);pct.forEach(el=>el.textContent=Math.round(99*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(step)})(t0)};
+ const run=()=>{pct.forEach(el=>el.textContent='0');const t0=performance.now(),D=1900,ease=x=>1-Math.pow(1-x,3);
   (function step(t){const k=Math.min(1,(t-t0)/D),e=ease(k),um=Math.pow(10,Math.log10(70)+(Math.log10(0.22)-Math.log10(70))*e);
    num.textContent=um>=10?um.toFixed(0):um>=1?um.toFixed(1):um.toFixed(2);fill.style.width=(end*e)+'%';
    items.forEach(li=>li.classList.toggle('caught',um<=parseFloat(li.dataset.um)));
-   if(k<1)requestAnimationFrame(step);else{num.textContent='0.22'}})(t0)};
- new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();run()}},{threshold:.45}).observe(scale)}
+   if(k>.7)tally();
+   if(k<1)requestAnimationFrame(step);else num.textContent='0.22'})(t0)};
+ whenSeen(scale,run)}
+
+
+const flow=root.querySelector('[data-rv-flow]');
+if(flow&&!reduce&&'IntersectionObserver' in window){const stage=flow.querySelector('.rv-flow__stage'),st=[...flow.querySelectorAll('.rv-stage')],phone=matchMedia('(max-width:859px)');
+ flow.classList.add('rv-anim');let marks=[],ran=false,queued=false;
+ const measure=()=>{const r=stage.getBoundingClientRect();marks=st.map(li=>{const i=li.querySelector('.rv-stage__img').getBoundingClientRect();return phone.matches?(i.top+i.height/2-r.top)/r.height:(i.left+i.width/2-r.left)/r.width})};
+ const paint=v=>{stage.style.setProperty('--p',v.toFixed(4));st.forEach((li,k)=>li.classList.toggle('lit',v>=marks[k]-.015))};
+ const follow=()=>{queued=false;if(!phone.matches)return;const r=stage.getBoundingClientRect();paint(Math.min(1,Math.max(0,(innerHeight*.6-r.top)/r.height)))};
+ const run=()=>{if(ran||phone.matches)return;ran=true;const t0=performance.now(),D=2600,ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;(function step(t){const k=Math.min(1,(t-t0)/D);paint(ease(k));if(k<1)requestAnimationFrame(step)})(t0)};
+ measure();paint(0);follow();
+ addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(follow)}},{passive:true});
+ addEventListener('resize',()=>{measure();if(phone.matches)follow();else if(ran)paint(1);else{const r=stage.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)run()}});
+ whenSeen(stage,run,.4)}
 })();
