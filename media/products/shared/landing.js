@@ -43,10 +43,24 @@ if(picker){
  if(formPick)formPick.querySelectorAll('.rc-swatch').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>formPick.open=false,180)));
 }
 
+
+const tapInput=root.querySelector('[name=tap_choice]');
+let tap={label:'Chrome filtered tap',price:'Included',image:'/photos/landing/tap-chrome-m.webp'};
+const setTap=t=>{if(!t||!t.label)return;tap=t;const inc=!t.price||/included/i.test(t.price);
+ root.querySelectorAll('[data-rv-name]').forEach(x=>x.textContent=t.label);
+ root.querySelectorAll('[data-rv-short]').forEach(x=>x.textContent=t.label.replace(/ filtered| filter| mixer|,.*$/gi,'').trim()||t.label);
+ root.querySelectorAll('[data-rv-tapprice]').forEach(x=>x.textContent=inc?'Included':t.price+' upgrade, installed with your system');
+ root.querySelectorAll('[data-rv-tapline]').forEach(x=>{x.hidden=inc;x.textContent=inc?'':'Tap upgrade: '+t.price+', installed with your system.'});
+ if(t.image)root.querySelectorAll('[data-rv-thumb]').forEach(x=>x.src=t.image);
+ if(tapInput){const v=t.label+(inc?' (included)':', '+t.price+' upgrade');tapInput.value=v;tapInput.setAttribute('value',v)}};
+document.addEventListener('ffy:tap',e=>setTap(e.detail));
+if(window.ffyTap)setTap(window.ffyTap);
+
 const addon=root.querySelector('[data-rv-addon]'),price=root.querySelector('[data-rv-price]'),basePrice=price?price.innerHTML:'';
 window.rvPackage=()=>addon&&addon.checked?addon.dataset.package:NAME;
 window.rvSummary=timing=>{const pk=window.rvPackage();let s=pk+' installation request.';
  if(picker)s+=' '+LABEL+': '+current+(pk!==NAME?'':current===INCLUDED?' (included)':' (upgrade, quoted separately)')+'.';
+ else if(tapInput)s+=' Tap: '+tapInput.value+'.';
  if(timing)s+=' Timing: '+timing+'.';if(pk!==NAME&&addon)s+=' '+addon.dataset.includes;return s};
 const priceLine=()=>{if(price)price.innerHTML=addon&&addon.checked?addon.dataset.price:basePrice};
 if(addon)addon.addEventListener('change',priceLine);
@@ -60,7 +74,10 @@ if(bar&&why&&ask){bar.hidden=false;bar.classList.add('off');let queued=false;
 
 const pins=[...root.querySelectorAll('.rv-pin')],hover=matchMedia('(hover:hover) and (pointer:fine)');
 const popOf=p=>root.querySelector('#'+p.getAttribute('aria-controls'));
-const openPin=(p,open=true)=>pins.forEach(x=>{const on=x===p&&open;x.setAttribute('aria-expanded',String(on));const pop=popOf(x);if(pop)pop.hidden=!on});
+
+const fit=pop=>{pop.style.marginLeft='0px';const r=pop.getBoundingClientRect(),W=document.documentElement.clientWidth;let dx=0;
+ if(r.right>W-10)dx=W-10-r.right;if(r.left+dx<10)dx=10-r.left;pop.style.marginLeft=dx+'px'};
+const openPin=(p,open=true)=>pins.forEach(x=>{const on=x===p&&open;x.setAttribute('aria-expanded',String(on));const pop=popOf(x);if(pop){pop.hidden=!on;if(on)fit(pop)}});
 const closePins=()=>openPin(null,false);
 pins.forEach(p=>{const pop=popOf(p);let t;
  const enter=()=>{if(!hover.matches)return;clearTimeout(t);openPin(p)},leave=()=>{if(!hover.matches)return;clearTimeout(t);t=setTimeout(()=>{if(p.getAttribute('aria-expanded')==='true')closePins()},160)};
@@ -70,6 +87,21 @@ pins.forEach(p=>{const pop=popOf(p);let t;
  p.addEventListener('click',e=>{e.stopPropagation();const open=p.getAttribute('aria-expanded')==='true';openPin(p,hover.matches?true:!open)})});
 document.addEventListener('click',()=>closePins());document.addEventListener('keydown',e=>{if(e.key==='Escape')closePins()});
 if(reduce||!('IntersectionObserver' in window))return;
+
+const xp=root.querySelector('[data-rv-explode]');
+if(xp&&!reduce&&'IntersectionObserver' in window){const img=xp.querySelector('.rv-x__img'),btn=xp.querySelector('[data-rv-x-toggle]'),dir=xp.dataset.rvExplode;
+ const N=phoneMQ.matches?37:73,sfx=phoneMQ.matches?'-m':'',src=i=>dir+'/f'+String(i).padStart(2,'0')+sfx+'.webp';
+ let pos=0,shown=-1,raf=0,open=false,ready=null;const keep=[];
+ const load=()=>ready||(ready=Promise.all(Array.from({length:N},(_,i)=>{const im=new Image();im.decoding='async';im.src=src(i);keep.push(im);return(im.decode?im.decode():Promise.resolve()).catch(()=>{})})));
+ const paint=v=>{const i=Math.round(v*(N-1));if(i!==shown){shown=i;img.src=src(i)}};
+ const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+ const go=to=>{load().then(()=>{cancelAnimationFrame(raf);const from=pos,t0=performance.now(),D=1300;
+  (function step(t){const k=Math.min(1,(t-t0)/D);pos=from+(to-from)*ease(k);paint(pos);if(k<1)raf=requestAnimationFrame(step);else xp.classList.toggle('rv-x-open',to===1)})(t0)})};
+ const set=o=>{open=o;btn.setAttribute('aria-pressed',String(o));if(!o){xp.classList.remove('rv-x-open');closePins()}go(o?1:0)};
+ xp.classList.remove('rv-x-open');img.src=src(0);shown=0;
+ btn.addEventListener('click',e=>{e.stopPropagation();set(!open)});
+ new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){load();o.disconnect()}},{rootMargin:'120% 0px'}).observe(xp);
+ new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();setTimeout(()=>{if(!open)set(true)},250)}},{threshold:.55}).observe(xp)}
 
 const whenSeen=(el,fn,at=.45)=>{let done=false;const go=()=>{if(done)return;done=true;fn()};
  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();go()}},{threshold:at}).observe(el);

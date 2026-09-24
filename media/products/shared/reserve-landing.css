@@ -553,3 +553,31 @@
 #pure-plus-page .rv-form-colour summary .rv-form-thumb+.rv-dot{display:none}
 #pure-plus-page .rv-kit li{justify-items:center;align-content:start;text-align:center}
 #pure-plus-page .rv-kit li+li:before{top:13px}
+
+/* 25 Sep (JP): the product image in the price card, bigger on every product page, the Reserve included */
+#pure-plus-page .rv-offer__top{grid-template-columns:clamp(150px,34%,210px) minmax(0,1fr);gap:20px}
+#pure-plus-page .rv-offer__img{border-radius:20px}
+@media(max-width:859px){#pure-plus-page .rv-offer__top{grid-template-columns:132px minmax(0,1fr);gap:16px}}
+@media(max-width:359px){#pure-plus-page .rv-offer__top{grid-template-columns:108px minmax(0,1fr)}}
+
+/* Real installation photos: a quiet button in the price card, a lightbox */
+#pure-plus-page .rv-installs{display:flex;align-items:center;gap:12px;width:100%;margin:16px 0 0;padding:10px 12px;border:1px solid var(--rule);border-radius:16px;background:#fff;color:var(--ink);font:inherit;text-align:left;cursor:pointer;min-height:56px;transition:border-color .2s,background .2s}
+#pure-plus-page .rv-installs:hover{border-color:var(--blue);background:var(--blue-pale)}
+#pure-plus-page .rv-installs:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+#pure-plus-page .rv-installs__thumbs{display:flex;flex:0 0 auto}
+#pure-plus-page .rv-installs__thumbs img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 2px 6px rgba(4,16,46,.18)}
+#pure-plus-page .rv-installs__thumbs img+img{margin-left:-12px}
+#pure-plus-page .rv-installs__txt{display:grid;flex:1;font-size:15px;font-weight:600;line-height:1.25}
+#pure-plus-page .rv-installs__txt small{font-size:13px;font-weight:500;color:var(--muted)}
+#pure-plus-page .rv-installs__go{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--mist-2);color:var(--ink)}
+#pure-plus-page .rv-installs__go svg{width:14px;height:14px}
+#pure-plus-page .rv-lightbox{width:min(92vw,760px);max-height:92vh;padding:0;border:0;border-radius:22px;background:#0b1428;color:#fff;overflow:hidden}
+#pure-plus-page .rv-lightbox::backdrop{background:rgba(4,16,46,.78)}
+#pure-plus-page .rv-lightbox figure{margin:0}
+#pure-plus-page .rv-lightbox img{display:block;width:100%;height:min(74vh,720px);object-fit:contain;background:#0b1428}
+#pure-plus-page .rv-lightbox figcaption{padding:14px 64px 16px 18px;font-size:15px;color:rgba(255,255,255,.85)}
+#pure-plus-page .rv-lb__btn,#pure-plus-page .rv-lb__close{position:absolute;display:grid;place-items:center;width:48px;height:48px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);font-size:30px;line-height:1;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+#pure-plus-page .rv-lb__prev{left:12px;top:calc(min(74vh,720px) / 2 - 24px)}
+#pure-plus-page .rv-lb__next{right:12px;top:calc(min(74vh,720px) / 2 - 24px)}
+#pure-plus-page .rv-lb__close{top:12px;right:12px;font-size:26px}
+#pure-plus-page .rv-lb__count{position:absolute;right:18px;bottom:14px;margin:0;font-size:14px;color:rgba(255,255,255,.7)}
