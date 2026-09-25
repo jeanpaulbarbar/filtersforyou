@@ -40,12 +40,20 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" alt=""
 src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"></noscript>
-
 <title>humm – Big Buys Made Easy | Flexible Payment Plans | Filters For You</title>
-<meta name="description" content="Filters For You offers finance through humm. Interest free terms up to 24 months on water filtration systems installed across Sydney, with fortnightly repayments. Apply online in under 10 minutes.">
+<meta name="description" content="Pay off your water filter over time with humm. Interest free on purchases up to $10,000, over 6 to 24 months with fortnightly repayments. Every system, every fee.">
 <link rel="canonical" href="https://filtersforyou.com.au/humm">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Filters For You">
+<meta property="og:title" content="Buy now, pay later with humm | Filters For You">
+<meta property="og:description" content="Pay off your water filter over time with humm. Interest free on purchases up to $10,000, over 6 to 24 months with fortnightly repayments. Every system, every fee.">
+<meta property="og:url" content="https://filtersforyou.com.au/humm">
+<meta property="og:image" content="https://filtersforyou.com.au/media/og-preview.jpg">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="media/mark.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="preload" as="image" href="/media/locations/v2/shared/sys-home.webp" fetchpriority="high">
 <!-- SHELL:CSS -->
 <style>
 @font-face{
@@ -505,284 +513,663 @@ main:has(> .pgtop){padding-top:0}
 </style>
 <!-- /SHELL:CSS -->
 <style>
+#hm{--tang:#EE6604;--hgrey:#333333;--tang-ink:#C24F00;--hm-r:20px}
+#hm [id]{scroll-margin-top:92px}
+#hm .wm{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.14em;margin-bottom:-.1em}
+#hm .wm > span{display:inline-block}
+#hm .wm > span.up{animation:hmup .62s var(--e-out) both}
+#hm .rc .wm > span.up{animation-name:hmupc}
+@keyframes hmupc{from{transform:translateY(108%)}to{transform:none}}
+@keyframes hmup{from{transform:translateY(135%)}to{transform:none}}
+html.hm-js #hm [data-hm-up]:not(.up):not(.done){transform:translateY(135%)}
+#hm .hm-kick{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+#hm .hm-kick::before{content:"";width:3px;height:16px;border-radius:2px;background:currentColor}
+#hm .d2{font-weight:500;letter-spacing:-.005em;line-height:1.06;font-size:clamp(2.2rem,4.6vw,3.8rem);color:var(--ink);margin:16px 0 0;text-wrap:balance}
+#hm .hm-dim{color:#8A97AD}
+#hm .lede{font-size:clamp(1.18rem,1.5vw,1.4rem);line-height:1.5;font-weight:500;color:var(--muted);max-width:46ch;margin:18px 0 0}
 
-.humm{background:#EE6604;color:#fff;position:relative;overflow:hidden}
+#hm .hm-open{background:var(--tang);color:#fff;padding:0}
+#hm .hm-bird{position:absolute;right:-150px;top:-30px;width:min(760px,60vw);height:auto;opacity:.13;transform:rotate(-10deg);pointer-events:none;user-select:none;z-index:1}
+#hm .hm-open__in{width:100%;padding-top:136px;padding-bottom:60px}
+#hm .hm-open__head{display:flex;align-items:center;justify-content:space-between;gap:20px}
+#hm .hm-open .lab{color:#fff;font-size:19px;font-weight:700}
+#hm .hm-logo{width:210px;height:auto;display:block}
+#hm .hm-open__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:56px;align-items:end;margin-top:22px}
+#hm .hm-h1{font-family:var(--hummf);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:.96;font-size:clamp(3.2rem,7.6vw,6.9rem);margin:0}
+#hm .hm-lede{font-family:var(--sans);font-weight:700;color:#fff;font-size:clamp(1.25rem,1.7vw,1.6rem);line-height:1.4;max-width:34ch;margin:22px 0 0}
+#hm .hm-figs{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:0 28px;align-items:end;margin:36px 0 0;max-width:780px}
+#hm .hm-fig{margin:0;border-top:2px solid rgba(255,255,255,.75);padding-top:14px;display:grid;gap:8px;align-content:start;align-self:stretch}
+#hm .hm-fig b{display:block;font-family:var(--hummf);font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em;font-size:clamp(2.2rem,3.2vw,3.1rem)}
+#hm .hm-fig > span{display:block;font-family:var(--hummf);font-weight:700;font-size:19px;line-height:1.3;color:#fff;max-width:19ch}
+#hm .hm-fig--hero{display:flex;align-items:flex-end;gap:14px;padding-right:4px}
+#hm .hm-fig--hero b{font-size:clamp(4rem,6.2vw,6rem);line-height:.86;flex:0 0 auto}
+#hm .hm-fig--hero > span{max-width:9ch;padding-bottom:2px}
+#hm .hm-fig > span .hm-s{display:none}
+#hm .hm-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:36px}
+#hm .hm-cta .btn,#hm .rc .rcgo .btn,#hm .rcask .btn{font-family:var(--hummf);font-weight:700}
+#hm .hm-cta .btn{--bg:#fff;--fg:var(--hgrey);--bgh:var(--ink);--fgh:#fff}
+#hm .hm-link{color:#fff;font-family:var(--hummf);font-weight:700;font-size:19px;text-decoration:underline;text-decoration-color:rgba(255,255,255,.55);text-decoration-thickness:1px;text-underline-offset:6px;transition:text-decoration-color .3s ease-in-out;display:inline-flex;align-items:center;min-height:44px}
+@media (hover:hover) and (pointer:fine){#hm .hm-link:hover{text-decoration-color:#fff}}
 
-.hmtop{padding:136px 0 64px}
-.hmtop .in{width:100%}
-.rc{padding-top:8px}
-.hmbottom{padding:84px 0 88px}
-.humm .in{position:relative}
-.hmbird{position:absolute;right:-150px;top:-30px;width:min(760px,60vw);height:auto;opacity:.13;
-  transform:rotate(-10deg);pointer-events:none;user-select:none}
-.hmbottom .hmbird{right:auto;left:-180px;top:auto;bottom:-120px;transform:rotate(12deg) scaleX(-1)}
-.hmhead{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.humm .lab{color:#fff;font-size:19px;font-weight:700}
-.hmlogo{width:min(210px,44vw);height:auto;display:block}
-.hmh2{font-family:var(--hummf);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:.96;
-  font-size:clamp(3.2rem,8.6vw,7.2rem);margin:26px 0 0}
-.hmlede{font-family:var(--sans);font-weight:700;color:#fff;font-size:clamp(1.25rem,1.9vw,1.7rem);line-height:1.4;
-  max-width:44ch;margin:22px 0 0}
-.hmstats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:44px}
-.hmstat{border-top:2px solid rgba(255,255,255,.75);padding-top:16px}
-.hmstat b{display:block;font-family:var(--hummf);font-weight:800;font-size:clamp(2.4rem,4vw,3.8rem);
-  line-height:1;letter-spacing:-.02em;color:#fff}
-.hmstat span{display:block;font-family:var(--hummf);font-weight:700;font-size:19px;line-height:1.3;
-  margin-top:9px;color:#fff;max-width:20ch}
-.hmcta{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:40px}
-.humm .btn{--bg:#fff;--fg:#333333;--bgh:var(--ink);--fgh:#fff;font-family:var(--hummf);font-weight:700}
-.hmlink{color:#fff;font-family:var(--hummf);font-weight:700;font-size:19px;text-decoration:underline transparent;
-  text-decoration-thickness:1px;text-underline-offset:6px;transition:text-decoration-color .3s ease-in-out;
-  display:inline-flex;align-items:center;min-height:44px}
-@media(hover:hover){ .hmlink:hover{text-decoration-color:#fff} }
-.hmkick{display:inline-flex;background:#333333;color:#fff;font-family:var(--hummf);font-weight:700;
-  font-size:13px;letter-spacing:.06em;text-transform:uppercase;border-radius:var(--r-full);padding:7px 13px}
-.hmticks{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:14px;max-width:52ch}
-.hmticks li{display:flex;gap:12px;align-items:flex-start;font-family:var(--hummf);font-weight:700;font-size:19px;
-  line-height:1.3;color:#fff}
-.hmticks li svg{width:22px;height:22px;flex:0 0 22px;margin-top:1px}
+#hm .hm-offer{position:relative;display:grid;grid-template-columns:118px minmax(0,1fr);gap:0 18px;align-items:center;padding:20px;border-radius:26px;background:var(--paper);color:var(--ink);text-decoration:none;box-shadow:0 3px 8px rgba(4,16,46,.06),0 26px 60px -22px rgba(4,16,46,.45);transition:transform .45s var(--e-out),box-shadow .45s var(--e-out)}
+#hm .hm-offer__img{grid-row:1;width:118px;height:118px;border-radius:18px;overflow:hidden;background:#EDEAE6}
+#hm .hm-offer__img img{width:100%;height:100%;object-fit:cover}
+#hm .hm-offer__t{display:grid;gap:4px;min-width:0}
+#hm .hm-offer__t b{font-size:22px;font-weight:600;letter-spacing:-.025em;line-height:1.2}
+#hm .hm-offer__line{font-size:15px;line-height:1.4;color:var(--muted)}
+#hm .hm-offer__price{font-size:16px;font-weight:600;margin-top:4px}
+#hm .hm-offer__humm{grid-column:1/-1;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(15,39,72,.1)}
+#hm .hm-offer__or,#hm .hm-offer__per{font-size:17px;font-weight:600;color:var(--ink)}
+#hm .hm-offer__n{font-family:var(--hummf);font-weight:800;font-size:clamp(2.6rem,3.6vw,3.4rem);line-height:1;letter-spacing:-.02em;color:var(--tang)}
+#hm .hm-offer__go{grid-column:1/-1;display:inline-flex;align-items:center;gap:8px;margin-top:14px;min-height:44px;font-size:15px;font-weight:600;color:var(--blue);text-decoration:underline;text-decoration-color:rgba(11,97,244,.35);text-underline-offset:4px}
+#hm .hm-offer__go svg{width:16px;height:16px}
+@media (hover:hover) and (pointer:fine){#hm .hm-offer:hover{transform:translateY(-3px);box-shadow:0 3px 8px rgba(4,16,46,.06),0 34px 70px -24px rgba(4,16,46,.5)}#hm .hm-offer:hover .hm-offer__go{text-decoration-color:var(--blue)}}
+#hm .hm-offer:focus-visible{outline:2px solid #fff;outline-offset:4px}
 
-.widget{padding:0 0 8px}
-.hummwrap{min-height:120vh}
-@media(min-width:768px){ .widget .in{max-width:none;padding:0} .widget .fine{max-width:1100px;margin-left:auto;margin-right:auto;padding:0 22px} }
-.fine{font-size:13px;line-height:1.55;color:var(--muted);max-width:70ch;margin:34px auto 44px}
-@media(max-width:1100px){ .hmstats{grid-template-columns:repeat(2,1fr)} }
-@media(max-width:767px){
-  .hmtop{padding:104px 0 48px}   
-  .hmbottom{padding:60px 0 64px}
-  .hmbird{width:320px;right:-100px;top:-10px;opacity:.14}
-  .hmbottom .hmbird{left:-120px;bottom:-80px}
-  .hmh2{font-size:clamp(3rem,15.5vw,3.8rem);margin-top:22px}
-  .hmlede{font-size:19px}
-  .hmstats{gap:20px 18px;margin-top:34px}
-  .hmstat b{font-size:2.4rem}
-  .hmcta{margin-top:30px;gap:14px}
-  .humm .btn{width:100%;justify-content:center}
+#hm .hm-frame{position:relative;margin-top:calc((var(--r-hero) + var(--hframe)) * -1);padding:0 var(--hframe) var(--hframe);background:var(--range-bg,#E4EBF3)}
+#hm .rc{background:var(--tang);color:#fff;position:relative;overflow:hidden;margin:0;border-radius:0 0 var(--r-hero) var(--r-hero);padding:calc(var(--r-hero) + var(--hframe) + 56px) 0 64px}
+#hm .rc .rcbird{position:absolute;right:-120px;bottom:-70px;width:min(560px,50vw);height:auto;opacity:.12;transform:rotate(-10deg);pointer-events:none;user-select:none}
+#hm .rcgrid{position:relative;display:grid;gap:22px}
+#hm .rchead{display:flex;align-items:center;justify-content:space-between;gap:16px}
+#hm .rc .lab{color:#fff;font-size:19px;font-weight:700}
+#hm .rclogo{width:160px;height:auto;display:block}
+#hm .rcttl{font-family:var(--hummf);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:.96;font-size:clamp(2.35rem,4.4vw,4.2rem);margin:18px 0 0}
+#hm .rclede{font-family:var(--hummf);font-weight:700;color:#fff;font-size:19px;line-height:1.35;margin:12px 0 0;max-width:36ch}
+
+#hm .rc-modes{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,.8fr);gap:0;margin-top:24px;padding:4px;border-radius:var(--r-full);background:#fff;box-shadow:0 10px 26px -14px rgba(4,16,46,.45)}
+#hm .rc-modes button{position:relative;z-index:1;appearance:none;-webkit-appearance:none;border:0;background:none;cursor:pointer;min-height:46px;padding:0 8px;border-radius:var(--r-full);font:inherit;font-size:15.5px;font-weight:600;color:var(--ink);transition:color .35s var(--e-out)}
+#hm .rc-modes button[aria-selected="true"]{color:#fff}
+#hm .rc-modes button:focus-visible{outline:2px solid var(--ink-blue);outline-offset:2px}
+#hm .rc-modes__glide{position:absolute;z-index:0;top:4px;bottom:4px;left:0;width:var(--gw,0);border-radius:var(--r-full);background:var(--ink-blue);transform:translateX(var(--gx,0));transition:transform .45s var(--e-out),width .45s var(--e-out)}
+html:not(.hm-js) #hm .rc-modes__glide{display:none}
+html:not(.hm-js) #hm .rc-modes button[aria-selected="true"]{background:var(--ink-blue)}
+#hm .rc-models-wrap{position:relative;margin-top:14px;min-height:44px}
+#hm .rc-models{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+#hm .rc-models[hidden]{display:none}
+#hm .rc-models__note{display:none;margin:4px 0 0;flex:0 0 100%;font-family:var(--hummf);font-weight:700;font-size:19px;line-height:1.25;color:#fff}
+#hm .rc-models button{appearance:none;-webkit-appearance:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 16px;border-radius:var(--r-full);background:#fff;color:var(--ink);font:inherit;font-size:15px;font-weight:600;box-shadow:inset 0 0 0 1px #fff;transition:background .3s ease-in-out,color .3s ease-in-out,box-shadow .3s ease-in-out}
+#hm .rc-models button svg{width:14px;height:14px;display:none}
+#hm .rc-models button[aria-pressed="true"]{background:var(--ink-blue);color:#fff;box-shadow:inset 0 0 0 1px var(--ink-blue)}
+#hm .rc-models button[aria-pressed="true"] svg{display:block}
+#hm .rc-models button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (hover:hover) and (pointer:fine){#hm .rc-models button:not([aria-pressed="true"]):hover{background:#fff;box-shadow:inset 0 0 0 2px var(--ink-blue)}}
+
+#hm .rc-card{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px 16px;align-items:center;margin-top:14px;padding:12px;border-radius:var(--r-card);background:#fff;color:var(--ink);box-shadow:0 12px 28px -16px rgba(4,16,46,.45)}
+#hm .rc-card__img{width:104px;height:104px;border-radius:12px;overflow:hidden;background:#EDEAE6}
+#hm .rc-card__img img{width:100%;height:100%;object-fit:cover;transition:opacity .28s ease-in-out}
+#hm .rc-card__t{display:grid;gap:3px;min-width:0}
+#hm .rc-card__name{display:inline-flex;align-items:center;gap:6px;font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.2;color:var(--ink);text-decoration:none;min-height:44px;margin:-8px 0 -7px;width:max-content;max-width:100%}
+#hm .rc-card__name svg{width:14px;height:14px;flex:0 0 14px;color:var(--blue)}
+#hm .rc-card__line{font-size:14.5px;line-height:1.4;color:var(--muted)}
+#hm .rc-card__price{font-size:15px;color:var(--muted);margin-top:3px}
+#hm .rc-card__price b{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+#hm .rc-card__view{display:inline-flex;align-items:center;min-height:44px;margin:-8px 0 -10px;font-size:14.5px;font-weight:600;color:var(--blue);text-decoration:underline;text-decoration-color:rgba(11,97,244,.35);text-underline-offset:4px;width:max-content}
+@media (hover:hover) and (pointer:fine){#hm .rc-card__name:hover,#hm .rc-card__view:hover{text-decoration:underline;text-decoration-color:var(--blue)}}
+#hm .rc-extra{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:10px;border-top:1px solid var(--rule)}
+#hm .rc-extra b{font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.3}
+#hm .rc-extra label{display:flex;align-items:center;gap:4px;font-size:17px;font-weight:800;color:var(--ink);flex:0 0 132px}
+#hm .rc-extra input{width:100%;min-width:0;min-height:44px;font:inherit;font-size:17px;font-weight:800;color:var(--ink);border:0;border-bottom:2px solid var(--rule);background:transparent;padding:0;outline:0;-moz-appearance:textfield;transition:border-color .3s ease-in-out}
+#hm .rc-extra input::-webkit-outer-spin-button,#hm .rc-extra input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#hm .rc-extra input:focus{border-color:var(--ink-blue)}
+
+#hm .rcres{background:#fff;color:var(--ink);border-radius:var(--r-card);box-shadow:var(--shadow-lg);overflow:hidden}
+#hm .rcres__in{padding:18px 16px 16px;display:grid;gap:12px;align-content:start}
+#hm .rcsum{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+#hm .rcsum .k{font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#hm .rcsum .v{font-weight:800;letter-spacing:-.02em;font-size:clamp(1.5rem,2.4vw,2rem);line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+#hm .rcterms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#hm .rcterm{appearance:none;-webkit-appearance:none;border:0;cursor:pointer;font:inherit;color:var(--ink);background:var(--mist);border-radius:var(--r-sm);padding:12px 4px 10px;text-align:center;display:grid;gap:4px;min-height:84px;align-content:center;box-shadow:inset 0 0 0 1px var(--rule);transition:background .3s ease-in-out,color .3s ease-in-out,box-shadow .3s ease-in-out}
+#hm .rcterm .rcmo{font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+#hm .rcterm .rcnum{display:block;font-family:var(--hummf);font-weight:800;font-size:clamp(1.45rem,2vw,1.9rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+#hm .rcterm .rcper{font-size:11.5px;font-weight:700;color:var(--muted);line-height:1.2}
+#hm .rcterm[aria-pressed="true"]{background:var(--ink-blue);color:#fff;box-shadow:inset 0 0 0 1px var(--ink-blue)}
+#hm .rcterm[aria-pressed="true"] .rcmo,#hm .rcterm[aria-pressed="true"] .rcper{color:rgba(255,255,255,.82)}
+#hm .rcterm[disabled]{cursor:not-allowed;color:var(--muted);background:var(--mist-2)}
+#hm .rcterm[disabled] .rcnum{opacity:.55}
+#hm .rcterm:focus-visible{outline:2px solid var(--ink-blue);outline-offset:2px}
+#hm .rchint{font-size:14px;line-height:1.45;color:var(--muted);margin:0}
+#hm .rclist{display:none;margin:0;padding:0}
+#hm .rclist > div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7px 0;border-bottom:1px solid var(--rule)}
+#hm .rclist dt{font-size:14px;font-weight:600;color:var(--ink);margin:0}
+#hm .rclist dt small{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-top:1px}
+#hm .rclist dd{margin:0;font-weight:800;font-size:15.5px;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
+#hm .rclist .tot{border-bottom:0;padding-top:10px}
+#hm .rclist .tot dt{font-weight:800;font-size:15px}
+#hm .rclist .tot dt small{color:var(--ink);font-weight:800;font-size:14px;margin-top:3px}
+#hm .rclist .tot dd{font-size:clamp(1.3rem,2vw,1.6rem);color:var(--ink-blue)}
+#hm .rcres.term .rchint{display:none}
+#hm .rcres.term .rclist{display:block}
+#hm .rcgo{display:grid;gap:8px}
+#hm .rcgo .btn,#hm .rcask .btn{--bg:var(--ink-blue);--fg:#fff;--bgh:var(--tang);--fgh:#fff;--ringh:transparent;width:100%;justify-content:center;font-size:17px;min-height:56px}
+#hm .rcgo .btn i,#hm .rcask .btn i{background:rgba(255,255,255,.16)}
+#hm .rcgo .btn:disabled{opacity:.4;cursor:not-allowed}
+#hm .rcnote{font-size:12.5px;line-height:1.4;color:var(--muted);margin:0;text-align:center}
+#hm .rcnojs{font-size:14px;line-height:1.45;color:var(--ink);margin:0}
+#hm .rcnojs a{color:var(--blue);font-weight:700}
+html:not(.hm-js) #hm .rcgo,html:not(.hm-js) #hm .rchint{display:none}
+#hm .rcask{display:none;gap:10px}
+#hm .rcasksum{font-size:14px;line-height:1.4;color:var(--ink);font-weight:800;margin:0}
+#hm .rcask input{width:100%;min-height:54px;border-radius:var(--r-sm);border:1px solid var(--rule);background:var(--mist);color:var(--ink);font:inherit;font-size:17px;font-weight:600;padding:0 16px;outline:0;transition:border-color .3s ease-in-out,box-shadow .3s ease-in-out}
+#hm .rcask input::placeholder{color:var(--muted)}
+#hm .rcask input:focus{border-color:var(--ink-blue);box-shadow:0 0 0 3px rgba(4,16,46,.12)}
+#hm .rcask input.bad{border:2px solid var(--tang)}
+#hm .rcerr{margin:-2px 0 0;font-size:13px;font-weight:700;color:var(--tang-ink);line-height:1.35}
+#hm .rcback{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:14px;font-weight:700;cursor:pointer;min-height:44px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+#hm .rcres.asking .rcterms,#hm .rcres.asking .rchint,#hm .rcres.asking .rclist,#hm .rcres.asking .rcgo,#hm .rcres.asking .rcfine{display:none}
+#hm .rcres.asking .rcask{display:grid}
+#hm .rcdone{display:none;text-align:center;padding:10px 0 6px}
+#hm .rcdone svg{width:44px;height:44px;margin:0 auto 10px;display:block}
+#hm .rcdone b{display:block;font-family:var(--hummf);font-weight:800;font-size:22px;color:var(--ink)}
+#hm .rcdone p{margin:8px 0 0;font-size:14px;line-height:1.45;color:var(--muted)}
+#hm .rcres.finished .rcterms,#hm .rcres.finished .rchint,#hm .rcres.finished .rclist,#hm .rcres.finished .rcgo,#hm .rcres.finished .rcask{display:none}
+#hm .rcres.finished .rcdone{display:block}
+#hm .rcfine{font-size:12.5px;line-height:1.45;color:var(--muted);margin:0;font-weight:600}
+#hm .rcfine a{color:var(--ink);display:inline-block;padding:14px 0;margin:-14px 0}
+@media (hover:hover) and (pointer:fine){
+  #hm .rcterm:not([disabled]):not([aria-pressed="true"]):hover{background:var(--mist-2);box-shadow:inset 0 0 0 1px var(--ink-blue)}
+  #hm .rcback:hover{color:var(--ink)}
 }
 
+#hm .hm-ex{background:var(--paper);padding:96px 0 88px}
+#hm .hm-ex__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"head bill" "photo bill";grid-template-rows:auto 1fr;gap:32px 56px;align-items:start}
+#hm .hm-ex__head{grid-area:head}
+#hm .hm-ex__bill{grid-area:bill}
+#hm .hm-ex__photo{grid-area:photo;position:relative;margin:0;border-radius:var(--hm-r);overflow:hidden;background:#E9E3DC;aspect-ratio:16/10}
+#hm .hm-ex__photo img{width:100%;height:100%;object-fit:cover;object-position:52% 50%}
+#hm .hm-ex__photo picture{display:block;height:100%}
+#hm .hm-pin{position:absolute;z-index:6;left:5%;top:36%;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:8px 14px 8px 16px;border-radius:var(--r-full);background:var(--paper);color:var(--ink);text-decoration:none;box-shadow:0 14px 30px -14px rgba(4,16,46,.55);transition:transform .35s var(--e-out)}
+#hm .hm-pin__label{display:grid;gap:1px;line-height:1.2}
+#hm .hm-pin__label b{font-size:15px;font-weight:700}
+#hm .hm-pin__label span{font-size:13px;color:var(--muted)}
+#hm .hm-pin > svg{width:14px;height:14px;color:var(--blue);flex:0 0 14px}
+#hm .hm-dot{position:absolute;z-index:5;left:0;top:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 3px rgba(255,255,255,.92),0 4px 10px rgba(4,16,46,.35);opacity:0;transition:opacity .4s var(--e-out)}
+#hm .hm-dot.is-set{opacity:1}
+#hm .hm-dot::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:2px solid var(--yellow);opacity:0}
+#hm .hm-lead{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:visible}
+#hm .hm-lead line{stroke:var(--yellow);stroke-width:2;stroke-linecap:round}
+html:not(.hm-js) #hm .hm-lead,html:not(.hm-js) #hm .hm-dot{display:none}
+@media (prefers-reduced-motion:no-preference){#hm .hm-dot::after{animation:hmpulse 2.6s var(--e-out) infinite}}
+@keyframes hmpulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+@media (hover:hover) and (pointer:fine){#hm .hm-pin:hover{transform:translateY(-2px)}}
+#hm .hm-pin:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+#hm .hm-ex__bill{display:grid;gap:18px;align-content:start}
+#hm .hm-bill{margin:0;padding:10px 24px;border-radius:var(--hm-r);background:#fff;box-shadow:0 1px 2px rgba(15,39,72,.04),0 18px 40px -24px rgba(15,39,72,.35);border:1px solid var(--rule)}
+#hm .hm-bill > div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule)}
+#hm .hm-bill > div:last-child{border-bottom:0}
+#hm .hm-bill dt{margin:0;font-size:16px;font-weight:600;color:var(--ink);line-height:1.35}
+#hm .hm-bill dt small{display:block;font-size:13.5px;font-weight:500;color:var(--muted);margin-top:2px}
+#hm .hm-bill dt a{color:var(--blue);text-decoration:underline;text-decoration-color:rgba(11,97,244,.35);text-underline-offset:3px}
+#hm .hm-bill dd{margin:0;font-size:17px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+#hm .hm-bill .sub{background:linear-gradient(90deg,var(--mist-2),var(--mist-2)) no-repeat;background-size:calc(100% + 48px) 100%;background-position:-24px 0;margin:0 -24px;padding-left:24px;padding-right:24px}
+#hm .hm-bill .sub dt{font-weight:700}
+#hm .hm-bill .tot dt{font-size:17px;font-weight:800}
+#hm .hm-bill .tot dd{font-size:clamp(1.35rem,2vw,1.6rem);color:var(--ink-blue)}
+#hm .hm-ftn{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;padding:20px 24px;border-radius:var(--hm-r);background:var(--tang);color:#fff}
+#hm .hm-ftn__n{font-family:var(--hummf);font-weight:800;font-size:clamp(3.4rem,5.4vw,4.8rem);line-height:.95;letter-spacing:-.02em}
+#hm .hm-ftn__t{display:grid;gap:6px}
+#hm .hm-ftn__t b{font-family:var(--hummf);font-weight:700;font-size:19px;line-height:1.3}
+#hm .hm-ftn__t span{font-size:14.5px;line-height:1.45;font-weight:600;color:#fff}
+#hm .hm-ex__note{margin:0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+html.hm-js #hm [data-hm-bill] > div{opacity:0;transform:translateY(8px)}
+html.hm-js #hm [data-hm-bill].is-in > div{opacity:1;transform:none;transition:opacity .45s var(--e-out),transform .55s var(--e-out);transition-delay:calc(var(--i) * 90ms)}
 
-
-.rc{background:#EE6604;color:#fff;position:relative;overflow:hidden;
-  
-  margin:calc((var(--r-hero) + var(--hframe)) * -1) var(--hframe) 0;
-  border-radius:0 0 var(--r-hero) var(--r-hero);
-  min-height:calc(100svh - 72px - var(--r-hero) - var(--hframe));display:grid;align-content:center;
-  padding:calc(var(--r-hero) + var(--hframe) + 40px) 0 60px}
-.rc .rcbird{position:absolute;right:-120px;bottom:-70px;width:min(560px,50vw);height:auto;opacity:.12;
-  transform:rotate(-10deg);pointer-events:none;user-select:none}
-.rcgrid{position:relative;display:grid;gap:22px}
-.rchead{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.rc .lab{color:#fff;font-size:19px;font-weight:700}
-.rclogo{width:min(140px,34vw);height:auto;display:block}
-.rcttl{font-family:var(--hummf);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:.96;
-  font-size:clamp(2.35rem,4.6vw,4.4rem);margin:16px 0 0}
-.rclede{font-family:var(--hummf);font-weight:700;color:#fff;font-size:19px;line-height:1.35;
-  margin:10px 0 0;max-width:34ch}
-
-.rcpick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.rcopt{appearance:none;-webkit-appearance:none;border:0;cursor:pointer;font:inherit;text-align:left;
-  display:grid;grid-template-columns:64px 1fr;align-items:center;gap:10px;min-height:76px;
-  padding:8px 30px 8px 8px;border-radius:var(--r-card);background:#fff;color:var(--ink);
-  box-shadow:inset 0 0 0 0 var(--ink-blue);position:relative;
-  transition:box-shadow .3s ease-in-out,background .3s ease-in-out}
-.rcopt .rcimg{height:60px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.rcopt .rcimg img{height:60px;width:auto;max-width:64px;object-fit:contain;display:block;
-  transition:transform .3s ease-in-out}
-.rcopt .rcimg img+img{margin-left:-26px}
-
-
-.rcopt.rcdx{grid-template-columns:100px 1fr}
-.rcopt.rcdx .rcimg{justify-content:flex-start;overflow:visible;position:relative;padding-top:12px}
-.rcopt.rcdx .rcimg img:first-child{margin-left:6px}
-.rcopt.rcdx .rcimg img:nth-child(2){height:52px}
-.rcopt.rcdx .rcimg img:last-child{position:absolute;left:0;top:-6px;height:34px;
-  width:auto;max-width:none;margin:0;z-index:2;
-  filter:drop-shadow(0 3px 5px rgba(4,16,46,.22))}
-.rcopt b{display:block;font-size:15px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
-.rcopt span span{display:block;font-size:13.5px;font-weight:600;color:var(--muted);margin-top:3px}
-.rcopt i{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--ink-blue);
-  display:grid;place-items:center;opacity:0;transform:scale(.6);
-  transition:opacity .3s ease-in-out,transform .3s ease-in-out}
-.rcopt i svg{width:12px;height:12px}
-.rcopt[aria-pressed="true"]{box-shadow:inset 0 0 0 3px var(--ink-blue)}
-.rcopt[aria-pressed="true"] i{opacity:1;transform:none}
-.rcopt:focus-visible{outline:2px solid #fff;outline-offset:3px}
-.rcextra{display:grid;align-content:center;gap:2px;min-height:76px;padding:8px 12px;
-  border-radius:var(--r-card);background:#fff;color:var(--ink)}
-.rcextra b{font-size:15px;font-weight:800;line-height:1.15;letter-spacing:-.01em}
-.rcextra b small{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-top:2px}
-.rcextra label{display:flex;align-items:center;gap:3px;font-size:17px;font-weight:800;color:var(--ink);margin-top:2px}
-.rcextra input{width:100%;min-width:0;min-height:44px;font:inherit;font-size:17px;font-weight:800;color:var(--ink);
-  border:0;border-bottom:2px solid var(--rule);background:transparent;padding:0;outline:0;
-  -moz-appearance:textfield;transition:border-color .3s ease-in-out}
-.rcextra input::-webkit-outer-spin-button,.rcextra input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.rcextra input:focus{border-color:var(--ink-blue)}
-
-.rcres{background:#fff;color:var(--ink);border-radius:var(--r-card);padding:18px 16px 16px;
-  box-shadow:var(--shadow-lg);display:grid;gap:12px;align-content:start}
-.rcsum{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.rcsum .k{font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.rcsum .v{font-weight:800;letter-spacing:-.02em;font-size:clamp(1.5rem,2.4vw,2rem);line-height:1;
-  font-variant-numeric:tabular-nums;color:var(--ink)}
-
-.rc .wm{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.14em;margin-bottom:-.1em}
-.rc .wm > span{display:inline-block}
-.rc .wm > span.up{animation:rcup .62s var(--e-out) both}
-@keyframes rcup{from{transform:translateY(108%)}to{transform:none}}
-@media(prefers-reduced-motion:reduce){ .rc .wm > span.up{animation:none} }
-.rcterms{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.rcterm{appearance:none;-webkit-appearance:none;border:0;cursor:pointer;font:inherit;color:var(--ink);
-  background:var(--mist);border-radius:var(--r-sm);padding:12px 4px 10px;text-align:center;
-  display:grid;gap:4px;min-height:84px;align-content:center;box-shadow:inset 0 0 0 1px var(--rule);
-  transition:background .3s ease-in-out,color .3s ease-in-out,box-shadow .3s ease-in-out}
-.rcterm .rcmo{font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.rcterm .rcnum{display:block;font-family:var(--hummf);font-weight:800;font-size:clamp(1.45rem,2vw,1.9rem);
-  line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.rcterm .rcper{font-size:11px;font-weight:700;color:var(--muted);line-height:1.2}
-.rcterm[aria-pressed="true"]{background:var(--ink-blue);color:#fff;box-shadow:inset 0 0 0 1px var(--ink-blue)}
-.rcterm[aria-pressed="true"] .rcmo,.rcterm[aria-pressed="true"] .rcper{color:rgba(255,255,255,.82)}
-.rcterm[disabled]{cursor:not-allowed;color:var(--muted);background:var(--mist-2)}
-.rcterm[disabled] .rcnum{opacity:.55}
-.rcterm:focus-visible{outline:2px solid var(--ink-blue);outline-offset:2px}
-
-.rchint{font-size:14px;line-height:1.45;color:var(--muted);margin:0}
-.rclist{display:none;margin:0;padding:0}
-.rclist > div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7px 0;
-  border-bottom:1px solid var(--rule)}
-.rclist dt{font-size:14px;font-weight:600;color:var(--ink);margin:0}
-.rclist dt small{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-top:1px}
-.rclist dd{margin:0;font-weight:800;font-size:15.5px;letter-spacing:-.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
-.rclist .tot{border-bottom:0;padding-top:10px}
-.rclist .tot dt{font-weight:800;font-size:15px}
-.rclist .tot dt small{color:var(--ink);font-weight:800;font-size:14px;margin-top:3px}
-.rclist .tot dd{font-size:clamp(1.3rem,2vw,1.6rem);color:var(--ink-blue)}
-.rcres.term .rchint{display:none}
-.rcres.term .rclist{display:block}
-.rcgo{display:grid;gap:8px}
-
-.rcgo .btn,.rcask .btn{--bg:var(--ink-blue);--fg:#fff;--bgh:#EE6604;--fgh:#fff;--ringh:transparent;width:100%;
-  justify-content:center;font-family:var(--hummf);font-weight:700;font-size:17px;min-height:56px}
-.rcgo .btn i,.rcask .btn i{background:rgba(255,255,255,.16)}
-.rcgo .btn:disabled{opacity:.4;cursor:not-allowed}
-.rcnote{font-size:12.5px;line-height:1.4;color:var(--muted);margin:0;text-align:center}
-
-.rcask{display:none;gap:10px}
-.rcasksum{font-size:14px;line-height:1.4;color:var(--ink);font-weight:800;margin:0}
-.rcask input{width:100%;min-height:54px;border-radius:var(--r-sm);border:1px solid var(--rule);background:var(--mist);
-  color:var(--ink);font:inherit;font-size:17px;font-weight:600;padding:0 16px;outline:0;
-  transition:border-color .3s ease-in-out,box-shadow .3s ease-in-out}
-.rcask input::placeholder{color:var(--muted)}
-.rcask input:focus{border-color:var(--ink-blue);box-shadow:0 0 0 3px rgba(4,16,46,.12)}
-.rcask input.bad{border:2px solid #EE6604}
-.rcerr{margin:-2px 0 0;font-size:13px;font-weight:700;color:#C24F00;line-height:1.35}
-@media(max-width:999px){ .rcask input{min-height:48px} .rcask .btn{min-height:50px} }
-.rcback{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:14px;font-weight:700;
-  cursor:pointer;min-height:44px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
-.rcres.asking .rcterms,.rcres.asking .rchint,.rcres.asking .rclist,.rcres.asking .rcgo,.rcres.asking .rcfine{display:none}
-.rcres.asking .rcask{display:grid}
-.rcdone{display:none;text-align:center;padding:10px 0 6px}
-.rcdone svg{width:44px;height:44px;margin:0 auto 10px;display:block}
-.rcdone b{display:block;font-family:var(--hummf);font-weight:800;font-size:22px;color:var(--ink)}
-.rcdone p{margin:8px 0 0;font-size:14px;line-height:1.45;color:var(--muted)}
-.rcres.finished .rcterms,.rcres.finished .rchint,.rcres.finished .rclist,.rcres.finished .rcgo,.rcres.finished .rcask{display:none}
-.rcres.finished .rcdone{display:block}
-.rcfine{font-size:12px;line-height:1.45;color:var(--muted);margin:0;font-weight:600}
-
-.rcfine a{color:var(--ink);display:inline-block;padding:15px 0;margin:-15px 0}
-@media(hover:hover) and (pointer:fine){
-  .rcopt:hover{box-shadow:inset 0 0 0 3px rgba(4,16,46,.32)}
-  .rcopt[aria-pressed="true"]:hover{box-shadow:inset 0 0 0 3px var(--ink-blue)}
-  .rcterm:not([disabled]):not([aria-pressed="true"]):hover{background:var(--mist-2);box-shadow:inset 0 0 0 1px var(--ink-blue)}
-  .rcback:hover{color:var(--ink)}
-}
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
-  .rcopt:hover .rcimg img{transform:scale(1.05)}
-}
-@media(min-width:1000px){
-  .rcgrid{grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
-  .rcttl{margin-top:22px}
-  .rclede{margin-top:14px}
-  .rcpick{gap:12px;margin-top:28px}
-  .rcopt{grid-template-columns:96px 1fr;min-height:108px;padding:10px 34px 10px 12px;gap:12px}
-  .rcopt .rcimg,.rcopt .rcimg img{height:90px}
-  .rcopt .rcimg img{max-width:96px}
-  .rcopt .rcimg img+img{margin-left:-38px}
-  .rcopt.rcdx{grid-template-columns:150px 1fr}
-  .rcopt.rcdx .rcimg{padding-top:16px}
-  .rcopt.rcdx .rcimg img:first-child{margin-left:10px}
-  .rcopt.rcdx .rcimg img:nth-child(2){height:78px}
-  .rcopt.rcdx .rcimg img:last-child{height:48px;left:4px;top:-10px}
-  .rcopt b{font-size:17.5px}
-  .rcopt span span{font-size:15px}
-  .rcextra{min-height:108px;padding:10px 16px}
-  .rcextra b{font-size:17.5px}
-  .rcres{padding:28px 26px 24px;gap:16px}
-  .rcterm{min-height:108px;padding:14px 8px 12px;gap:6px}
-  .rclist dt{font-size:15px}
-  .rclist dd{font-size:17px}
-  .rcfine{font-size:12.5px}
+#hm .hm-how{position:relative;overflow:hidden;margin:0 var(--hframe);border-radius:var(--r-hero);background:radial-gradient(ellipse 70% 60% at 88% 8%,rgba(11,97,244,.34),transparent 62%),radial-gradient(ellipse 50% 50% at 0% 100%,rgba(11,97,244,.16),transparent 60%),var(--ink-blue);color:#fff;padding:96px 0}
+#hm .hm-how::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.11) 1px,transparent 1.2px);background-size:18px 18px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 70%);mask-image:linear-gradient(180deg,#000,transparent 70%);pointer-events:none}
+#hm .hm-how .in{position:relative}
+#hm .hm-how .hm-kick{color:var(--yellow)}
+#hm .hm-how .d2{color:#fff;font-size:clamp(2.2rem,3.5vw,3.2rem)}
+#hm .hm-how .hm-dim{color:rgba(255,255,255,.55)}
+#hm .hm-how .lede{color:rgba(255,255,255,.78)}
+#hm .hm-how__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+#hm .hm-how__photo{margin:0;border-radius:var(--hm-r);overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);aspect-ratio:16/10;position:relative;background:#1b2440}
+#hm .hm-how__photo::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(234,214,160,.55);pointer-events:none}
+#hm .hm-how__photo img{width:100%;height:100%;object-fit:cover;object-position:52% 50%}
+#hm .hm-steps{position:relative;display:grid;gap:22px;margin:40px 0 0;padding:0;list-style:none}
+#hm .hm-steps::before{content:"";position:absolute;left:21px;top:22px;bottom:22px;width:2px;background:linear-gradient(180deg,#c6a66b,#eedb9d 50%,#c6a66b);transform-origin:50% 0}
+#hm .hm-steps li{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr);gap:18px;align-items:start}
+#hm .hm-step__n{position:relative;z-index:1;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--ink-blue);color:var(--yellow);font-size:17px;font-weight:700;box-shadow:inset 0 0 0 1.5px #c6a66b,0 0 0 6px var(--ink-blue)}
+#hm .hm-step__t{display:grid;gap:4px;padding-top:9px}
+#hm .hm-step__t b{font-size:19px;font-weight:600;line-height:1.3;color:#fff}
+#hm .hm-step__t > span{font-size:16px;line-height:1.5;color:rgba(255,255,255,.72)}
+#hm .hm-out{display:inline-flex;align-items:center;gap:6px;min-height:44px;width:max-content;font-size:15.5px;font-weight:600;color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.4);text-underline-offset:4px}
+#hm .hm-out svg{width:14px;height:14px}
+@media (hover:hover) and (pointer:fine){#hm .hm-out:hover{text-decoration-color:#fff}}
+@media (prefers-reduced-motion:no-preference){
+  html.hm-js #hm [data-hm-steps]::before{transform:scaleY(0)}
+  html.hm-js #hm [data-hm-steps] li{opacity:0;transform:translateY(10px)}
+  html.hm-js #hm [data-hm-steps].is-in::before{transform:scaleY(1);transition:transform 1.3s var(--e-out) .15s}
+  html.hm-js #hm [data-hm-steps].is-in li{opacity:1;transform:none;transition:opacity .5s var(--e-out),transform .6s var(--e-out);transition-delay:calc(var(--i) * 220ms)}
 }
 
-.rcs{display:none}
-@media(max-width:999px){
-  .rcl{display:none}
-  .rcs{display:inline}
-  .rc{padding:calc(var(--r-hero) + var(--hframe) + 30px) 0 34px;min-height:calc(100svh - 72px - var(--r-hero) - var(--hframe))}
-  .rcgrid{gap:16px}
-  .rclogo{width:120px}   
-  .rc .lab{white-space:nowrap}
-  .rcttl{font-size:clamp(2rem,8.8vw,2.2rem);margin-top:10px}
-  .rclede{display:none}
-  .rcpick{margin-top:16px}
-  .rcopt{grid-template-columns:48px 1fr;gap:8px;padding:8px 10px 8px 8px}
-  .rcopt .rcimg,.rcopt .rcimg img{height:52px}
-  .rcopt .rcimg img{max-width:48px}
-  .rcopt .rcimg img+img{margin-left:-20px}
-  .rcopt.rcdx{grid-template-columns:78px 1fr}
-  .rcopt.rcdx .rcimg{padding-top:10px}
-  .rcopt.rcdx .rcimg img:first-child{margin-left:4px}
-  .rcopt.rcdx .rcimg img:nth-child(2){height:44px}
-  .rcopt.rcdx .rcimg img:last-child{height:28px;left:-2px;top:-5px}
-  .rcopt b{font-size:14px;letter-spacing:-.02em}
-  .rcopt span span{font-size:13px}
-  .rcopt i{top:6px;left:6px;right:auto;width:20px;height:20px}
-  .rcextra{padding:8px 12px}
-  .rcextra b{font-size:14px}
-  .rcextra b small{display:none}
-  
-  .rc{padding:calc(var(--r-hero) + var(--hframe) + 26px) 0 26px}
-  
-  .rchead{display:none}
-  .rcttl{margin-top:0}
-  .rcres{padding:14px 14px 12px;gap:8px}
-  .rcterm{min-height:72px;padding:10px 4px 8px}
-  .rchint{font-size:13px}
-  
-  .rcres.term .rcsum{display:none}
-  .rcres.term .rcterm{min-height:52px;padding:7px 4px 5px;gap:2px}
-  .rcres.term .rcterm .rcper{display:none}
-  .rclist > div{padding:4px 0;flex-wrap:nowrap}
-  .rclist dt{font-size:13px;line-height:1.25}
-  .rclist dt small{font-size:11px;margin-top:0;line-height:1.2}
-  .rclist dd{font-size:14.5px}
-  .rclist .tot{padding-top:6px}
-  .rclist .tot dt small{font-size:13px}
-  .rcgo .btn,.rcask .btn{min-height:52px}
-  .rcgo .btn,.rcask .btn{min-height:54px}
-  .rcnote{display:none}
-  .rcask{gap:8px}
-  .rcasksum{font-size:13px}
+#hm .hm-cover{background:var(--paper);padding:104px 0}
+#hm .hm-cover__grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:64px;align-items:center}
+#hm .hm-cover__photo{position:relative;margin:0;border-radius:var(--hm-r);overflow:hidden;aspect-ratio:16/10;background:#E9E3DC}
+#hm .hm-cover__photo picture{display:block;height:100%}
+#hm .hm-cover__photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+#hm .hm-pin--tr{left:auto;right:18px;top:18px}
+#hm .hm-textlink{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:26px;font-size:16px;font-weight:600;color:var(--blue);text-decoration:underline;text-decoration-color:rgba(11,97,244,.35);text-underline-offset:4px}
+#hm .hm-textlink svg{width:14px;height:14px}
+@media (hover:hover) and (pointer:fine){#hm .hm-textlink:hover{text-decoration-color:var(--blue)}}
+
+#hm .hm-seals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:36px 0 0;padding:0;list-style:none;max-width:560px}
+#hm .hm-seals li{display:grid;justify-items:center;align-content:start;gap:12px;text-align:center}
+#hm .hm-seals p{display:grid;gap:3px;margin:0}
+#hm .hm-seals p b{font-size:14.5px;font-weight:600;line-height:1.25;color:var(--ink)}
+#hm .hm-seals p span{font-size:13px;line-height:1.35;color:var(--muted)}
+#hm .hm-seal{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;width:92px;height:92px;border-radius:50%;padding:10px;text-align:center;line-height:1.15;font-family:var(--sans);flex:0 0 auto}
+#hm .hm-seal b{font-size:13px;font-weight:800;letter-spacing:-.02em}
+#hm .hm-seal span{font-size:10.5px;font-weight:600}
+#hm .hm-seal svg{width:21px;height:21px;margin-bottom:4px}
+#hm .hm-seal--gold{color:#513b13;background:radial-gradient(ellipse at 25% 15%,#fff4cc 0,transparent 44%),linear-gradient(125deg,#a17a31,#eedb9d 25%,#c8a34e 44%,#fff0b5 58%,#b48b38 80%,#e9d38f);box-shadow:inset 0 0 0 1px #a47c35,inset 0 0 0 5px #f9e7b266,inset 0 0 0 6px #8a67285c,0 12px 24px -12px rgba(53,38,13,.55)}
+#hm .hm-seal--google{color:var(--ink);background:radial-gradient(ellipse at 30% 15%,#fff 0,transparent 55%),linear-gradient(160deg,#fff,#eef2f7);box-shadow:inset 0 0 0 1px #d9e0ea,inset 0 0 0 5px #fff,inset 0 0 0 6px #d9e0ea,0 12px 24px -12px rgba(4,16,46,.35)}
+#hm .hm-seal--google b{font-size:19px;letter-spacing:-.03em;margin:-1px 0 2px;color:var(--ink)}
+#hm .hm-seal--google .hm-g{width:17px;height:17px;margin-bottom:2px}
+#hm .hm-stars{display:flex;gap:1px}
+#hm .hm-seal--google .hm-stars svg{width:9px;height:9px;margin:0}
+#hm .hm-seal--navy{color:#fff;background:radial-gradient(ellipse at 30% 15%,#23427a 0,transparent 58%),var(--ink);box-shadow:inset 0 0 0 1px #0a1c3a,inset 0 0 0 5px var(--ink),inset 0 0 0 6.5px #c6a66b,0 12px 24px -12px rgba(4,16,46,.6)}
+#hm .hm-seal--navy svg{width:30px;height:30px;color:var(--yellow);margin-bottom:3px}
+#hm .hm-seal--navy span{font-size:9.5px;color:rgba(255,255,255,.75)}
+#hm .hm-seal--navy b{font-size:12.5px}
+#hm .hm-seal--blue{color:#fff;background:radial-gradient(ellipse at 30% 15%,#5a97ff 0,transparent 58%),var(--blue);box-shadow:inset 0 0 0 1px #0848b8,inset 0 0 0 5px var(--blue),inset 0 0 0 6.5px rgba(255,255,255,.6),0 12px 24px -12px rgba(11,97,244,.6)}
+@keyframes hmshine{0%,60%{background-position:130% 0}100%{background-position:-30% 0}}
+@media (prefers-reduced-motion:no-preference){
+  #hm .hm-seal--gold::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(115deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.7) 50%,rgba(255,255,255,0) 62%) no-repeat;background-size:260% 100%;animation:hmshine 5.5s var(--e-soft) infinite}
+  html.hm-js #hm .hm-seals li{opacity:0;transform:scale(.55) rotate(-8deg)}
+  html.hm-js #hm .hm-seals.is-in li{opacity:1;transform:none;transition:opacity .45s var(--e-out),transform .75s cubic-bezier(.34,1.56,.64,1);transition-delay:calc(var(--i) * 110ms)}
 }
-@media(max-width:360px){
-  .rcopt b{font-size:13.5px}
+
+#hm .faq{background:var(--paper);padding:40px 0 96px;color:var(--ink);border-top:1px solid var(--rule)}
+#hm .hm-faq{border-top:0}
+#hm .fwrap{display:grid;gap:36px;align-items:start}
+#hm .fside .d2{font-size:clamp(2.1rem,3.4vw,3rem);line-height:1.05;max-width:12ch}
+#hm .fside .lede{max-width:30ch}
+#hm .fgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0;counter-reset:faq}
+#hm .fq{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-card);overflow:hidden;transition:border-color .3s ease-in-out,box-shadow .3s ease-in-out,background-color .3s ease-in-out}
+#hm .fq[open]{border-color:#CBD9EE;background:#fff;box-shadow:0 1px 2px rgba(15,39,72,.04),0 14px 34px -20px rgba(15,39,72,.34)}
+#hm .fq summary{display:flex;align-items:center;gap:14px;cursor:pointer;list-style:none;padding:17px 18px;min-height:44px;user-select:none}
+#hm .fq summary::before{content:counter(faq,decimal-leading-zero);counter-increment:faq;font-family:var(--badge);font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--blue);flex:0 0 26px;line-height:1}
+#hm .fq summary::-webkit-details-marker{display:none}
+#hm .fq summary h3{flex:1 1 auto;margin:0;font-size:16.5px;font-weight:700;line-height:1.35;letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+#hm .fq .chev{flex:0 0 20px;width:20px;height:20px;color:var(--blue);transition:transform .42s var(--e-out)}
+#hm .fq.is-open .chev{transform:rotate(180deg)}
+#hm .fq:not(.is-open)[open] .chev{transform:none}
+html:not(.hm-js) #hm .fq[open] .chev{transform:rotate(180deg)}
+#hm .fq .fa{padding:0 18px 20px 58px;overflow:hidden}
+#hm .fq .fa p{font-size:15.5px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch}
+#hm .fq .fa p + p,#hm .fq .fa p + ul,#hm .fq .fa ul + p{margin-top:10px}
+#hm .fq .fa ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+#hm .fq .fa li{position:relative;padding-left:18px;font-size:15.5px;line-height:1.5;color:var(--muted)}
+#hm .fq .fa li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+#hm .fq .fa a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(11,97,244,.4);padding-block:12px}
+@media (hover:hover) and (pointer:fine){#hm .fq:hover{border-color:#CBD9EE}#hm .fq .fa a:hover{text-decoration-color:var(--blue)}}
+#hm .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:var(--r-card)}
+@media (prefers-reduced-motion:reduce){#hm .fq,#hm .fq .chev{transition:none}}
+#hm .hm-call{--bg:#fff;--fg:var(--ink);--bgh:var(--ink);--fgh:#fff;--ring:var(--rule);margin-top:24px;gap:12px;padding:0 22px 0 7px}
+#hm .hm-call i{background:var(--blue);color:#fff}
+#hm .hm-call i svg{width:17px;height:17px}
+#hm .hm-call__n{font-weight:500;color:var(--muted);transition:color .3s ease-in-out}
+@media (hover:hover) and (pointer:fine){#hm .hm-call:hover .hm-call__n{color:rgba(255,255,255,.8)}}
+
+#hm .hm-terms{background:var(--mist-2);padding:88px 0 96px;border-top:1px solid var(--rule)}
+#hm .hm-terms .d2{font-size:clamp(1.9rem,3vw,2.6rem)}
+#hm .hm-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:36px 0 0;padding:0}
+#hm .hm-facts > div{padding:18px 18px 20px;border-radius:var(--r-card);background:#fff;border:1px solid var(--rule)}
+#hm .hm-facts dt{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0}
+#hm .hm-facts dd{margin:8px 0 0;font-size:19px;font-weight:700;letter-spacing:-.015em;line-height:1.3;color:var(--ink)}
+#hm .hm-facts dd small{display:block;font-size:14px;font-weight:500;color:var(--muted);letter-spacing:0;margin-top:3px}
+#hm .hm-fine{margin-top:28px;max-width:88ch;display:grid;gap:10px}
+#hm .hm-fine p{margin:0;font-size:14px;line-height:1.6;color:var(--muted)}
+#hm .hm-fine a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;display:inline-block;padding:12px 0;margin:-12px 0}
+#hm .hm-guides{margin-top:40px;padding-top:26px;border-top:1px solid var(--rule)}
+#hm .hm-guides__title{margin:0 0 14px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+#hm .hm-guides__row{display:flex;flex-wrap:wrap;gap:10px}
+#hm .hm-guides__row a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:var(--r-full);background:#fff;box-shadow:inset 0 0 0 1px var(--rule);font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;transition:box-shadow .2s,color .2s}
+@media (hover:hover) and (pointer:fine){#hm .hm-guides__row a:hover{box-shadow:inset 0 0 0 1px var(--blue);color:var(--blue)}}
+
+#hm .hm-bar{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:40;display:none;align-items:center;gap:10px;padding:8px 8px 8px 10px;border-radius:var(--r-full);background:var(--paper);box-shadow:0 1px 2px rgba(4,16,46,.08),0 16px 38px -14px rgba(4,16,46,.45);transition:transform .45s var(--e-out),opacity .35s var(--e-out)}
+#hm .hm-bar.off{transform:translateY(130%);opacity:0;pointer-events:none}
+#hm .hm-bar__img{width:44px;height:44px;border-radius:50%;overflow:hidden;flex:0 0 44px;background:#EDEAE6}
+#hm .hm-bar__img img{width:100%;height:100%;object-fit:cover}
+#hm .hm-bar__t{display:grid;min-width:0;flex:1 1 auto;line-height:1.2}
+#hm .hm-bar__t small{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#hm .hm-bar__t b{font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#hm .hm-bar .btn{min-height:48px;padding:0 18px 0 6px;font-size:15px;flex:0 0 auto}
+#hm .hm-bar .btn i{width:34px;height:34px;flex-basis:34px}
+
+@media (min-width:1000px){
+  #hm .rcgrid{grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+  #hm .rcres__in{padding:28px 26px 24px;gap:16px}
+  #hm .rcterm{min-height:108px;padding:14px 8px 12px;gap:6px}
+  #hm .rclist dt{font-size:15px}
+  #hm .rclist dd{font-size:17px}
+  #hm .rcfine{font-size:12.5px}
+}
+@media (max-width:1180px){
+  #hm .hm-open__grid{grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:36px}
+  #hm .hm-offer{grid-template-columns:96px minmax(0,1fr);padding:18px}
+  #hm .hm-offer__img{width:96px;height:96px}
+  #hm .hm-figs{grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:0 20px}
+  #hm .hm-fig > span .hm-l{display:none}
+  #hm .hm-fig > span .hm-s{display:inline}
+  #hm .hm-fig--hero > span{max-width:8ch}
+}
+@media (max-width:999px){
+  #hm .hm-open__grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  #hm .hm-offer{max-width:520px}
+  #hm .hm-ex__grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "photo" "bill";grid-template-rows:auto;gap:28px}
+  #hm .hm-how__grid,#hm .hm-cover__grid{grid-template-columns:minmax(0,1fr);gap:32px}
+  #hm .hm-how__photo{aspect-ratio:16/10}
+  #hm .hm-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:900px){
+  #hm .fwrap{grid-template-columns:.7fr 1.3fr;gap:64px}
+  #hm .fside{position:sticky;top:110px}
+  #hm .fq summary{padding:19px 22px}
+  #hm .fq summary h3{font-size:17.5px}
+  #hm .fq .fa{padding:0 22px 22px 62px}
+  #hm .fq .fa p,#hm .fq .fa li{font-size:16px}
+}
+@media (max-width:999px){
+  #hm .rchead .rclogo{width:150px}
+}
+@media (max-width:859px){
+  #hm [id]{scroll-margin-top:80px}
+  #hm .hm-open__in{padding-top:96px;padding-bottom:34px}
+  #hm .hm-bird{width:320px;right:-100px;top:-10px;opacity:.14}
+  #hm .hm-open .lab{display:none}
+  #hm .hm-logo{width:150px}
+  #hm .hm-open__grid{margin-top:18px;gap:22px}
+  #hm .hm-h1{font-size:clamp(3rem,15.5vw,3.8rem)}
+  #hm .hm-lede{font-size:19px;margin-top:16px}
+  #hm .hm-figs{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px 18px;margin-top:22px}
+  #hm .hm-fig{padding-top:10px;gap:4px}
+  #hm .hm-fig b{font-size:2rem}
+  #hm .hm-fig--hero{grid-column:1/-1;grid-row:auto;display:flex;align-items:flex-end;gap:14px;padding-right:0}
+  #hm .hm-fig--hero b{font-size:clamp(3.5rem,18vw,4.4rem);flex:0 0 auto}
+  #hm .hm-fig > span{font-size:19px;max-width:none}
+  #hm .hm-fig--hero > span{max-width:12ch;padding-bottom:4px}
+  #hm .hm-fig > span .hm-l{display:none}
+  #hm .hm-fig > span .hm-s{display:inline}
+  #hm .hm-cta{margin-top:22px;gap:4px 18px}
+  #hm .hm-cta .btn{width:100%;justify-content:center}
+  #hm .hm-offer{grid-template-columns:84px minmax(0,1fr) 20px;grid-template-rows:auto auto;gap:2px 14px;padding:12px 14px 12px 12px;border-radius:22px;max-width:none}
+  #hm .hm-offer__img{grid-row:1/3;width:84px;height:84px;border-radius:14px}
+  #hm .hm-offer__t{grid-column:2;gap:1px;align-self:end}
+  #hm .hm-offer__t b{font-size:17px}
+  #hm .hm-offer__line{display:none}
+  #hm .hm-offer__price{font-size:14.5px;margin-top:0;color:var(--muted);font-weight:500}
+  #hm .hm-offer__humm{grid-column:2;grid-row:2;align-self:start;margin-top:0;padding-top:0;border-top:0;gap:0 6px}
+  #hm .hm-offer__or,#hm .hm-offer__per{font-size:15px}
+  #hm .hm-offer__n{font-size:1.9rem}
+  #hm .hm-offer__go{grid-column:3;grid-row:1/3;align-self:center;margin:0;min-height:44px;width:20px;font-size:0;gap:0;text-decoration:none}
+  #hm .hm-offer__go svg{width:20px;height:20px;transform:rotate(-90deg)}
+  #hm .hm-cta .hm-link{display:none}
+
+  #hm .rc{padding:calc(var(--r-hero) + var(--hframe) + 30px) 0 22px}
+  #hm .rcgrid{gap:14px}
+  #hm .rchead{display:none}
+  #hm .rcttl{font-size:clamp(2rem,8.8vw,2.3rem);margin-top:0}
+  #hm .rclede{display:none}
+  #hm .rc-modes{margin-top:14px}
+  #hm .rc-modes button{font-size:14.5px;min-height:44px;padding:0 2px;white-space:nowrap}
+  #hm .rc-models-wrap{margin-top:10px}
+  #hm .rc-models{gap:5px;flex-wrap:nowrap}
+  #hm .rc-models button{flex:1 1 auto;justify-content:center;min-width:44px;padding:0 8px;font-size:14px}
+  #hm .rcres:not(.has-extra) .rcsum{display:none}
+  #hm .rc-card{grid-template-columns:76px minmax(0,1fr);gap:8px 12px;padding:10px;margin-top:10px}
+  #hm .rc-card__img{width:76px;height:76px;border-radius:10px}
+  #hm .rc-card__name{font-size:17px;margin:-10px 0 -9px}
+  #hm .rc-card__line{font-size:13.5px}
+  #hm .rc-card__price{font-size:14px;margin-top:0}
+  #hm .rc-card__price b{font-size:18px}
+  #hm .rc-card__view{display:none}
+  #hm .rc-extra{padding-top:8px}
+  #hm .rc-extra b{font-size:14px}
+  #hm .rc-extra label{flex-basis:118px}
+  #hm .rcres__in{padding:14px 14px 12px;gap:8px}
+  #hm .rcsum .v{font-size:1.45rem}
+  #hm .rcterm{min-height:72px;padding:10px 4px 8px}
+  #hm .rchint{font-size:13.5px}
+  #hm .rcres.term .rcsum{display:none}
+  #hm .rcres.term .rcterm{min-height:52px;padding:7px 4px 5px;gap:2px}
+  #hm .rcres.term .rcterm .rcper{display:none}
+  #hm .rclist > div{padding:4px 0;flex-wrap:nowrap}
+  #hm .rclist dt{font-size:13px;line-height:1.25}
+  #hm .rclist dt small{font-size:11.5px;margin-top:0;line-height:1.2}
+  #hm .rclist dd{font-size:14.5px}
+  #hm .rclist .tot{padding-top:6px}
+  #hm .rclist .tot dt small{font-size:13px}
+  #hm .rcgo .btn,#hm .rcask .btn{min-height:54px}
+  #hm .rcnote{display:none}
+  #hm .rcask{gap:8px}
+  #hm .rcask input{min-height:50px}
+  #hm .rcasksum{font-size:13px}
+  #hm .rcfine{font-size:12px}
+
+  #hm .hm-ex{padding:68px 0 64px}
+  #hm .hm-ex__grid{gap:20px}
+  #hm .hm-ex__photo{aspect-ratio:4/3}
+  #hm .hm-pin{min-height:44px;padding:6px 10px 6px 12px;gap:8px}
+  #hm .hm-pin--ex{left:3%;top:4%}
+  #hm .hm-pin--ex .hm-pin__label span{display:none}
+  #hm .hm-lead,#hm .hm-dot{display:none}
+  #hm .hm-pin--tr{right:10px;top:10px}
+  #hm .hm-pin__label b{font-size:14px}
+  #hm .hm-pin__label span{font-size:12px}
+  #hm .hm-bill{padding:4px 16px}
+  #hm .hm-bill > div{padding:11px 0}
+  #hm .hm-bill .sub{margin:0 -16px;padding-left:16px;padding-right:16px}
+  #hm .hm-bill dt{font-size:15px}
+  #hm .hm-bill dt small{font-size:12.5px}
+  #hm .hm-bill dd{font-size:16px}
+  #hm .hm-ftn{grid-template-columns:auto minmax(0,1fr);gap:4px 14px;padding:16px}
+  #hm .hm-ftn__t{display:contents}
+  #hm .hm-ftn__t b{align-self:center}
+  #hm .hm-ftn__t span{grid-column:1/-1;font-size:14px;margin-top:6px}
+  #hm .hm-how{padding:64px 0}
+  #hm .hm-steps{margin-top:28px;gap:18px}
+  #hm .hm-step__t{padding-top:8px}
+  #hm .hm-step__t b{font-size:18px}
+  #hm .hm-step__t > span{font-size:15.5px}
+  #hm .hm-how__photo{aspect-ratio:4/3}
+  #hm .hm-cover{padding:68px 0}
+  #hm .hm-cover__photo{aspect-ratio:4/3}
+  #hm .hm-seals{gap:6px;margin-top:26px}
+  #hm .hm-seals li{gap:9px}
+  #hm .hm-seal{width:78px;height:78px;padding:9px}
+  #hm .hm-seal b{font-size:11px;line-height:1.05}
+  #hm .hm-seal span{font-size:8.5px;line-height:1.1}
+  #hm .hm-seal svg{width:15px;height:15px;margin-bottom:2px}
+  #hm .hm-seal--google b{font-size:15px;margin:0 0 1px}
+  #hm .hm-seal--google .hm-g{width:13px;height:13px;margin-bottom:1px}
+  #hm .hm-seal--google .hm-stars svg{width:6.5px;height:6.5px}
+  #hm .hm-seal--navy svg{width:19px;height:19px;margin-bottom:1px}
+  #hm .hm-seal--navy span{font-size:7.5px}
+  #hm .hm-seal--navy b{font-size:10px}
+  #hm .hm-seals p b{font-size:12.5px}
+  #hm .hm-seals p span{font-size:11.5px}
+  #hm .faq{padding:24px 0 66px}
+  #hm .fwrap{gap:26px}
+  #hm .fgrid{gap:9px}
+  #hm .fq summary{padding:15px;gap:11px}
+  #hm .fq summary::before{flex:0 0 22px;font-size:11.5px}
+  #hm .fq summary h3{font-size:16.5px;line-height:1.3;text-wrap:wrap}
+  #hm .fq .fa{padding:0 15px 18px}
+  #hm .fq .fa p,#hm .fq .fa li{font-size:16px;line-height:1.58}
+  #hm .fside .d2{font-size:clamp(28px,7.8vw,34px);max-width:none}
+  #hm .hm-terms{padding:60px 0 110px}
+  #hm .hm-facts{gap:8px;margin-top:26px}
+  #hm .hm-facts > div{padding:14px}
+  #hm .hm-facts dd{font-size:17px}
+  #hm .hm-facts dd small{font-size:13px}
+  #hm .hm-guides__row a{min-height:44px;padding:0 14px;font-size:14.5px}
+  #hm .hm-bar{display:flex}
+  #hm .hm-bar[hidden]{display:none}
+}
+@media (min-width:600px) and (max-width:859px){
+  #hm .hm-bar{left:50%;right:auto;width:460px;margin-left:-230px}
+  #hm .hm-ex__photo,#hm .hm-how__photo,#hm .hm-cover__photo{aspect-ratio:16/10}
+}
+@media (max-width:859px) and (max-height:700px){
+  #hm .hm-open__in{padding-top:88px}
+  #hm .hm-h1{font-size:clamp(2.6rem,13.4vw,3.2rem)}
+  #hm .hm-lede{font-size:17px;margin-top:12px}
+  #hm .hm-figs{margin-top:16px}
+  #hm .hm-figs .hm-fig:not(.hm-fig--hero){display:none}
+  #hm .hm-fig--hero b{font-size:3.2rem}
+  #hm .hm-cta{margin-top:16px}
+}
+@media (max-width:374px){
+  #hm .rc-models button{font-size:13px;padding:0 7px}
+}
+@media (max-width:339px){
+  #hm .rc-models{flex-wrap:wrap}
+  #hm .rc-models button{flex:0 1 auto;padding:0 11px}
+  #hm .rc-models__note{display:block}
+}
+@media (max-width:359px){
+  #hm .rcterms{gap:5px}
+  #hm .rcterm{padding-left:1px;padding-right:1px}
+  #hm .rcterm .rcnum{font-size:1.2rem}
+  #hm .rcterm .rcmo{font-size:11.5px;letter-spacing:.04em}
+  #hm .rcterm .rcper{font-size:10.5px}
+  #hm .hm-bar__img{display:none}
+  #hm .hm-bar .btn{padding-right:14px}
+  #hm .hm-bar__t small .hm-l4{display:none}
+  #hm .rcgo .hm-l3{display:none}
+  #hm .hm-seal{width:68px;height:68px;padding:7px}
+  #hm .hm-seal b{font-size:9.5px}
+  #hm .hm-seal span{display:none}
+  #hm .hm-seal--google b{font-size:13px}
+  #hm .hm-seal--google .hm-stars svg{width:5.5px;height:5.5px}
+  #hm .hm-seal--navy svg{width:16px;height:16px}
+  #hm .hm-seal--navy b{font-size:9px}
+  #hm .hm-seals p span{display:none}
+  #hm .rc-modes button{font-size:13.5px}
+  #hm .hm-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  #hm .wm > span.up{animation:none}
+  #hm .rc-modes__glide,#hm .hm-offer,#hm .hm-bar{transition:none}
 }
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage",
- "name":"humm – Big Buys Made Easy | Flexible Payment Plans",
- "url":"https://filtersforyou.com.au/humm",
- "description":"Filters For You offers finance through humm. Interest free terms up to 24 months on water filtration systems installed across Sydney.",
- "isPartOf":{"@type":"WebSite","name":"Filters For You","url":"https://filtersforyou.com.au"}}
+{
+ "@context": "https://schema.org",
+ "@type": "WebPage",
+ "@id": "https://filtersforyou.com.au/humm#webpage",
+ "name": "humm – Big Buys Made Easy | Flexible Payment Plans",
+ "url": "https://filtersforyou.com.au/humm",
+ "description": "Pay off your water filter over time with humm. Interest free on purchases up to $10,000, over 6 to 24 months with fortnightly repayments. Every system, every fee.",
+ "inLanguage": "en-AU",
+ "isPartOf": {
+  "@type": "WebSite",
+  "name": "Filters For You",
+  "url": "https://filtersforyou.com.au"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Filters For You",
+  "url": "https://filtersforyou.com.au",
+  "telephone": "+61 430 546 749"
+ },
+ "about": {
+  "@type": "Thing",
+  "name": "Payment plans through humm for water filtration systems"
+ },
+ "mainEntity": {
+  "@id": "https://filtersforyou.com.au/humm#questions"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "@id": "https://filtersforyou.com.au/humm#questions",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What is humm?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "humm offers payment plans that let you buy now and pay over time. Plans are provided by Once Credit Pty Limited, a member of humm group, Australian Credit Licence No. 386194. Filters For You offers finance through humm on every system we install."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I pay off a water filter over time?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Choose your system, pick a humm term of 6, 12, 18 or 24 months and pay it off with fortnightly repayments. Interest free applies to purchases up to $10,000. Payment plans are for approved applicants only."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it interest free?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, on purchases up to $10,000. humm charges no interest on its 6, 12, 18 or 24 month plans up to that amount. humm’s own fees still apply: an $80 establishment fee and a $9.95 monthly fee. Our price with humm also carries humm’s merchant fee, the cost of having the plan available to you. Every fee shows in the bill before you ask for a plan."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How much is it a fortnight?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It depends on the system and the term. Pure Home, installed from $3,850, comes to $84 a fortnight over 24 months, plus humm’s $9.95 monthly fee, a total amount payable of $4,572.94. The repayments calculator shows every system and every term side by side."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What fees does humm charge?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "humm charges an $80 establishment fee, added to the amount financed and spread across the term, and a $9.95 monthly fee that humm bills separately to your fortnightly repayment. Then there is humm’s merchant fee, the cost of having the plan available to you. We build it into your price, which is how your plan stays interest free on purchases up to $10,000."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which systems can I pay off with humm?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Every system we install. At its listed price, each one comes in under humm’s $10,000 interest free limit on at least one term. Prices include installation and GST. Pure Home, from $3,850 installed; Pure Home Reserve, from $5,150 installed; Pure Flow, $810 installed; Pure Essential, $1,180 installed; Pure Plus, $1,280 installed; Pure Premium, $1,590 installed; Pure Luxe, $2,290 installed; Deluxe Home Package, from $6,290 installed; Deluxe Home Reserve, from $8,640 installed."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Who can apply for humm?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "humm decides who is approved. In humm’s own words, before you apply you need to: Be 18+ years old; Permanently reside in Australia; Hold a valid Australian ID; Have a regular source of income. Payment plans are for approved applicants only. humm’s full terms are on hummloan.com."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I apply?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Pick your system in the calculator and tap Request this payment plan. We call you and confirm your price in writing, then send you humm’s link. You apply with humm directly, online or in the humm app, and humm decides on your application. We never fill in the application for you."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which term should I choose?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "That is your call. The calculator shows every term side by side, each with its fortnightly repayment and its total amount payable, and none is chosen for you. A term that is not available at your price says why."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does paying with humm change my warranty?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Your system carries the same lifetime warranty however you pay. It is covered for life while you stay serviced with us. Read the warranty terms."
+   }
+  }
+ ]
+}
 </script>
 <!-- HUMM:DATA -->
 <script type="application/json" id="humm-fee-table">{"currency":"AUD","establishment_fee":{"amount":80.0,"paid_by":"customer","financed":true},"account_keeping_fee":{"amount":9.95,"frequency":"monthly","paid_by":"customer","collected_with_repayment":false},"interest_free":{"min_purchase":80.0,"customer_interest_rate":0.0,"cap_applies_to":"purchase_price_excluding_establishment_fee","terms":[{"months":6,"merchant_service_fee_pct":4.5,"max_financed":2000.0,"repayment_frequency":"fortnightly"},{"months":12,"merchant_service_fee_pct":6.7,"max_financed":5000.0,"repayment_frequency":"fortnightly"},{"months":18,"merchant_service_fee_pct":7.5,"max_financed":7000.0,"repayment_frequency":"fortnightly"},{"months":24,"merchant_service_fee_pct":9.5,"max_financed":10000.0,"repayment_frequency":"fortnightly"}]},"large_purchase":{"offered_in_calculator":false,"customer_interest_rate_pa":11.99,"merchant_service_fee_pct":0.0,"repayment_frequency":"fortnightly","bands":[{"min_purchase":10000.01,"max_purchase":15000.0,"term_months":40},{"min_purchase":15000.01,"max_purchase":20000.0,"term_months":50},{"min_purchase":20000.01,"max_purchase":30000.0,"term_months":60}],"min_purchase":10000.01,"max_purchase":30000.0,"interest_compounding":null,"repayment_computable":false},"display_rounding":{"fortnightly":"ceil_whole_dollar","monthly":"half_up_2dp","financed_total":"exact_2dp"},"fortnights_per_year":26,"repayment_frequencies":["fortnightly","monthly"],"display_rules":{"repayment_is_indicative_only":true,"indicative_note":"Repayment shown is indicative only and depends on the amount financed, the term and applicable fees.","disclaimer":"Payment plan to approved applicants only; fees, terms, minimum amounts and conditions apply. Payment plan provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of humm group.","no_recommended_term":true}}</script>
@@ -790,7 +1177,6 @@ main:has(> .pgtop){padding-top:0}
 <!-- /HUMM:DATA -->
 </head>
 <body>
-
 <!-- SHELL:HEADER -->
 <header class="hdr" id="hdr">
 <div class="util"><div class="in rowu">
@@ -937,86 +1323,85 @@ main:has(> .pgtop){padding-top:0}
 </nav>
 <!-- /SHELL:HEADER -->
 
-<main>
-  
-  
+<main id="hm" class="hm">
   <div class="pgtop">
-  <section class="humm hmtop pgcard">
-    <img class="hmbird" src="media/humm/humm-bird-white.webp" alt="" width="900" height="751" aria-hidden="true">
-    <div class="in">
-      <div class="hmhead">
+  <section class="pgcard humm hm-open" aria-labelledby="hmTitle">
+    <img class="hm-bird" src="media/humm/humm-bird-white.webp" alt="" width="900" height="751" aria-hidden="true">
+    <div class="in hm-open__in">
+      <div class="hm-open__head">
         <span class="lab">humm and Filters For You</span>
-        <img class="hmlogo" src="media/humm/humm-tag-white.webp" alt="humm. Made for living." width="480" height="161">
+        <img class="hm-logo" src="media/humm/humm-tag-white.webp" alt="humm. Made for living." width="480" height="161">
       </div>
-      <h1 class="hmh2">Big buys<br>made easy.</h1>
-      <p class="hmlede">Filtered water now. Pay it off over time. Interest free through humm, on every system we install.</p>
-      <div class="hmstats">
-        <div class="hmstat"><b>0%</b><span>interest on your new system</span></div>
-        <div class="hmstat"><b>24</b><span>months interest free, on 12, 18 or 24 month terms</span></div>
-        <div class="hmstat"><b>$10k</b><span>of interest free finance</span></div>
-        <div class="hmstat"><b>10 min</b><span>to apply online</span></div>
-      </div>
-      <div class="hmcta">
-        <a class="btn" href="/#ask"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</a>
-        <a class="hmlink" href="#terms">How humm works, and the terms</a>
+      <div class="hm-open__grid">
+        <div class="hm-open__copy">
+          <h1 class="hm-h1" id="hmTitle">Big buys<br>made easy.</h1>
+          <p class="hm-lede">Filtered water now. Pay it off over time, interest free, through humm.</p>
+          <div class="hm-figs">
+            <p class="hm-fig hm-fig--hero"><b><span class="wm"><span data-hm-up>0%</span></span></b><span>interest on purchases up to $10,000</span></p>
+            <p class="hm-fig"><b>24</b><span><span class="hm-l">months to repay, on 6, 12, 18 or 24 month terms</span><span class="hm-s">months to repay</span></span></p>
+            <p class="hm-fig"><b>10 min</b><span><span class="hm-l">to apply online with humm</span><span class="hm-s">to apply online</span></span></p>
+          </div>
+          <div class="hm-cta">
+            <a class="btn" href="#repayments" data-hm-go><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Work out my payments</a>
+            <a class="hm-link" href="#how" data-hm-go>How it works</a>
+          </div>
+        </div>
+        <a class="hm-offer" href="#example" data-hm-go aria-label="Pure Home, installed from $3,850, or from $84 a fortnight with humm. See how it adds up.">
+          <span class="hm-offer__img" data-studio-gold><img src="/media/locations/v2/shared/sys-home.webp" alt="" width="400" height="400" fetchpriority="high" decoding="async"></span>
+          <span class="hm-offer__t">
+            <b>Pure Home</b>
+            <span class="hm-offer__line">Three stage whole house filtration. Every tap and shower.</span>
+            <span class="hm-offer__price">Installed from $3,850</span>
+          </span>
+          <span class="hm-offer__humm">
+            <span class="hm-offer__or">or from</span>
+            <b class="hm-offer__n"><span class="wm"><span data-hm-up>$84</span></span></b>
+            <span class="hm-offer__per">a fortnight with humm</span>
+          </span>
+          <span class="hm-offer__go">See how it adds up<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
       </div>
     </div>
   </section>
   </div>
 
-  
+  <div class="hm-frame">
   <section class="rc" id="repayments" aria-labelledby="rcTitle">
     <img class="rcbird" src="media/humm/humm-bird-white.webp" alt="" width="900" height="751" loading="lazy" aria-hidden="true">
     <div class="in rcgrid">
       <div class="rcleft">
         <div class="rchead">
-          <span class="lab"><span class="rcl">Flexible payment plans</span><span class="rcs">Payment plans</span></span>
+          <span class="lab">Flexible payment plans</span>
           <img class="rclogo" src="media/humm/humm-tag-white-300.webp" alt="humm. Made for living." width="300" height="101" loading="lazy">
         </div>
         <h2 class="rcttl" id="rcTitle">Repayments<br>Calculator</h2>
-        <p class="rclede">Tap what you are after. Every humm term appears side by side, interest free up to $10,000.</p>
-        <div class="rcpick" role="group" aria-label="Choose your systems">
-          <button class="rcopt" type="button" aria-pressed="false" data-key="whole-house">
-            <span class="rcimg"><img src="media/systems/thumb/pure-home-300.webp" alt="" width="244" height="300" loading="lazy" decoding="async"></span>
-            <span><b>Whole house</b><span data-price>from $3,850</span></span>
-            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-          </button>
-          <button class="rcopt" type="button" aria-pressed="false" data-key="pure-plus">
-            <span class="rcimg"><img src="media/systems/thumb/pure-plus-300.webp" alt="" width="202" height="300" loading="lazy" decoding="async"></span>
-            <span><b>Pure Plus</b><span data-price>$1,280</span></span>
-            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-          </button>
-          <button class="rcopt" type="button" aria-pressed="false" data-key="pure-premium">
-            <span class="rcimg"><img src="media/systems/thumb/pure-premium-300.webp" alt="" width="200" height="300" loading="lazy" decoding="async"></span>
-            <span><b>Pure Premium</b><span data-price>$1,590</span></span>
-            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-          </button>
-          <button class="rcopt" type="button" aria-pressed="false" data-key="pure-luxe">
-            <span class="rcimg"><img src="media/systems/thumb/pure-luxe-300.webp" alt="" width="192" height="300" loading="lazy" decoding="async"></span>
-            <span><b>Pure Luxe</b><span data-price>$2,290</span></span>
-            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-          </button>
-          <button class="rcopt rcdx" type="button" aria-pressed="false" data-key="deluxe-home">
-            <span class="rcimg"><img src="media/systems/thumb/pure-home-300.webp" alt="" width="244" height="300" loading="lazy" decoding="async"><img src="media/systems/thumb/pure-premium-300.webp" alt="" width="200" height="300" loading="lazy" decoding="async"><img src="media/systems/thumb/mixer-gold-300.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></span>
-            <span><b>Deluxe package</b><span data-price>from $6,290</span></span>
-            <i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
-          </button>
-          <div class="rcextra">
-            <b>Anything else<small>A tap or an extra, in dollars</small></b>
-            <label><span>$</span><input type="number" id="rcExtra" inputmode="decimal" min="0" step="1" placeholder="0" aria-label="Anything else, in dollars"></label>
-          </div>
+        <p class="rclede">Pick a system. Every humm term shows side by side, interest free up to $10,000.</p>
+        <div class="rc-modes" role="tablist" aria-label="Where you want filtered water"><button type="button" role="tab" id="rcTab-every" aria-selected="true" aria-controls="rcModels-every" tabindex="0" data-mode="every">Every tap</button><button type="button" role="tab" id="rcTab-drink" aria-selected="false" aria-controls="rcModels-drink" tabindex="-1" data-mode="drink">Drinking water</button><button type="button" role="tab" id="rcTab-both" aria-selected="false" aria-controls="rcModels-both" tabindex="-1" data-mode="both">Both</button><span class="rc-modes__glide" aria-hidden="true"></span></div>
+        <div class="rc-models-wrap">
+          <div class="rc-models" role="tabpanel" id="rcModels-every" aria-labelledby="rcTab-every" data-group="every"><button type="button" aria-pressed="true" aria-label="Pure Home" data-key="home" data-name="Pure Home" data-mode="every" data-price="3850" data-from="1" data-url="/pure-home-water-filter-sydney" data-img="/media/locations/v2/shared/sys-home.webp" data-line="Three stage whole house filtration. Every tap and shower.">Pure Home</button><button type="button" aria-pressed="false" aria-label="Pure Home Reserve" data-key="reserve" data-name="Pure Home Reserve" data-mode="every" data-price="5150" data-from="1" data-url="/pure-home-reserve-water-filter-sydney" data-img="/media/locations/v2/shared/sys-reserve.webp" data-line="Whole house filtration in a cabinet in your colour.">Reserve</button><p class="rc-models__note">Filtered at the mains, for every tap and shower.</p></div>
+          <div class="rc-models" role="tabpanel" id="rcModels-drink" aria-labelledby="rcTab-drink" data-group="drink" hidden><button type="button" aria-pressed="false" aria-label="Pure Flow" data-key="flow" data-name="Pure Flow" data-mode="drink" data-price="810" data-from="0" data-url="/pure-flow-water-filter-sydney" data-img="/media/locations/v2/shared/sys-flow.webp" data-line="Three in one inline filtration. Keeps your kitchen mixer.">Flow</button><button type="button" aria-pressed="false" aria-label="Pure Essential" data-key="essential" data-name="Pure Essential" data-mode="drink" data-price="1180" data-from="0" data-url="/pure-essential-water-filter-sydney" data-img="/media/locations/v2/shared/sys-essential.webp" data-line="Four stage reverse osmosis. Purified water on tap.">Essential</button><button type="button" aria-pressed="true" aria-label="Pure Plus" data-key="plus" data-name="Pure Plus" data-mode="drink" data-price="1280" data-from="0" data-url="/pure-plus-water-filter-sydney" data-img="/media/locations/v2/shared/sys-plus.webp" data-line="Five stage alkaline reverse osmosis. Minerals back in.">Plus</button><button type="button" aria-pressed="false" aria-label="Pure Premium" data-key="premium" data-name="Pure Premium" data-mode="drink" data-price="1590" data-from="0" data-url="/pure-premium-water-filter-sydney" data-img="/media/locations/v2/shared/sys-premium.webp" data-line="Seven stage hydrogen rich alkaline reverse osmosis.">Premium</button><button type="button" aria-pressed="false" aria-label="Pure Luxe" data-key="luxe" data-name="Pure Luxe" data-mode="drink" data-price="2290" data-from="0" data-url="/pure-luxe-water-filter-sydney" data-img="/media/locations/v2/shared/sys-luxe.webp" data-line="Smart five stage alkaline reverse osmosis.">Luxe</button></div>
+          <div class="rc-models" role="tabpanel" id="rcModels-both" aria-labelledby="rcTab-both" data-group="both" hidden><button type="button" aria-pressed="true" aria-label="Deluxe Home Package" data-key="deluxe" data-name="Deluxe Home Package" data-mode="both" data-price="6290" data-from="1" data-url="/pure-home-water-filter-sydney#deluxe" data-img="/media/locations/v2/shared/sys-deluxe.webp" data-line="Pure Home, Pure Premium and a three way mixer.">Deluxe Home</button><button type="button" aria-pressed="false" aria-label="Deluxe Home Reserve" data-key="deluxe-reserve" data-name="Deluxe Home Reserve" data-mode="both" data-price="8640" data-from="1" data-url="/pure-home-reserve-water-filter-sydney#deluxe" data-img="/media/locations/v2/shared/sys-deluxe-reserve.webp" data-line="Pure Home Reserve, Pure Luxe and an Antique three way mixer.">Deluxe Reserve</button><p class="rc-models__note">Every tap, plus drinking water in the kitchen.</p></div>
+        </div>
+        <div class="rc-card">
+          <span class="rc-card__img" data-studio-gold><img src="/media/locations/v2/shared/sys-home.webp" alt="" width="400" height="400" decoding="async"></span>
+          <span class="rc-card__t" aria-live="polite">
+            <a class="rc-card__name" href="/pure-home-water-filter-sydney"><span>Pure Home</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <span class="rc-card__line">Three stage whole house filtration. Every tap and shower.</span>
+            <span class="rc-card__price"><span class="pre">From </span><b>$3,850</b> installed</span>
+          </span>
+          <div class="rc-extra"><b>Adding a tap or an extra?</b><label><span aria-hidden="true">$</span><input type="number" id="rcExtra" inputmode="decimal" min="0" step="1" placeholder="0" aria-label="Anything else, in dollars"></label></div>
         </div>
       </div>
       <div class="rcres" id="rcRes">
-        <div class="rcsum"><span class="k">System cost</span><span class="v"><span class="wm"><span id="rcPrice">Pick a system</span></span></span></div>
+        <div class="rcres__in">
+        <div class="rcsum"><span class="k">System cost</span><span class="v"><span class="wm"><span id="rcPrice">$3,850</span></span></span></div>
         <div class="rcterms" role="group" aria-label="humm terms. All shown, none chosen for you">
-          <button class="rcterm" type="button" aria-pressed="false" data-months="6" disabled><span class="rcmo">6 mo</span><span class="rcnum"><span class="wm"><span>&mdash;</span></span></span><span class="rcper">a fortnight</span></button>
-          <button class="rcterm" type="button" aria-pressed="false" data-months="12" disabled><span class="rcmo">12 mo</span><span class="rcnum"><span class="wm"><span>&mdash;</span></span></span><span class="rcper">a fortnight</span></button>
-          <button class="rcterm" type="button" aria-pressed="false" data-months="18" disabled><span class="rcmo">18 mo</span><span class="rcnum"><span class="wm"><span>&mdash;</span></span></span><span class="rcper">a fortnight</span></button>
-          <button class="rcterm" type="button" aria-pressed="false" data-months="24" disabled><span class="rcmo">24 mo</span><span class="rcnum"><span class="wm"><span>&mdash;</span></span></span><span class="rcper">a fortnight</span></button>
+          <button class="rcterm" type="button" aria-pressed="false" data-months="6" aria-label="6 months: not above $2,000 financed" disabled><span class="rcmo">6 mo</span><span class="rcnum"><span class="wm"><span>&mdash;</span></span></span><span class="rcper">not above $2,000 financed</span></button>
+          <button class="rcterm" type="button" aria-pressed="false" data-months="12" aria-label="12 months: $162 a fortnight"><span class="rcmo">12 mo</span><span class="rcnum"><span class="wm"><span>$162</span></span></span><span class="rcper">a fortnight</span></button>
+          <button class="rcterm" type="button" aria-pressed="false" data-months="18" aria-label="18 months: $109 a fortnight"><span class="rcmo">18 mo</span><span class="rcnum"><span class="wm"><span>$109</span></span></span><span class="rcper">a fortnight</span></button>
+          <button class="rcterm" type="button" aria-pressed="false" data-months="24" aria-label="24 months: $84 a fortnight"><span class="rcmo">24 mo</span><span class="rcnum"><span class="wm"><span>$84</span></span></span><span class="rcper">a fortnight</span></button>
         </div>
-        <p class="rchint" id="rcHint" aria-live="polite">Pick a system, then a term. Every humm term shows side by side and none is chosen for you.</p>
-        
+        <p class="rchint" id="rcHint" aria-live="polite">Tap a term to see the bill: what it costs and what it adds up to.</p>
         <dl class="rclist" id="rcList" aria-live="polite">
           <div><dt>System cost</dt><dd id="rcRowSys">&mdash;</dd></div>
           <div><dt>Merchant fee<small>the cost of having this plan available to you</small></dt><dd id="rcRowMf">&mdash;</dd></div>
@@ -1025,13 +1410,12 @@ main:has(> .pgtop){padding-top:0}
           <div class="tot"><dt>Total amount payable<small id="rcRowPer"></small></dt><dd id="rcRowTot">&mdash;</dd></div>
         </dl>
         <div class="rcgo">
-          <button class="btn" type="button" id="rcGo" disabled><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Request this payment plan</button>
+          <button class="btn" type="button" id="rcGo"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Request this <span class="hm-l3">payment </span>plan</span></button>
           <p class="rcnote">We call you, confirm the price in writing, and send you humm&rsquo;s link to apply.</p>
         </div>
-        
+        <noscript><p class="rcnojs">Figures shown for Pure Home. For any other system, call <a href="tel:0430546749">0430 546 749</a> and we take you through every term.</p></noscript>
         <form class="rcask" novalidate action="https://formspree.io/f/mbdqdlve" method="POST" data-callback>
           <p class="rcasksum" id="rcAskSum"></p>
-          
           <input type="text" name="name" autocomplete="name" placeholder="Your name" aria-label="Your name" required minlength="2">
           <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Your mobile" aria-label="Your mobile number" required pattern="^(\+?61|0)4\d{8}$">
           <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="Your email" aria-label="Your email address" required>
@@ -1045,39 +1429,140 @@ main:has(> .pgtop){padding-top:0}
           <b>Done. We will call you.</b>
           <p>Your plan request is with us. A person confirms the exact figures in writing, then sends you humm&rsquo;s link to apply.</p>
         </div>
-        <p class="rcfine"><span class="rcl">*An estimate, rounded up to the dollar. Every figure is confirmed in writing before anything goes ahead. Payment plans to approved applicants only. Fees, terms and conditions apply, </span><span class="rcs">*An estimate. Confirmed in writing before anything goes ahead. Approved applicants only, </span><a href="#terms">full terms below</a>.</p>
+        <p class="rcfine">*An estimate, rounded up to the dollar. Every figure is confirmed in writing before anything goes ahead. Payment plans to approved applicants only. <a href="#terms" data-hm-go>Full terms below</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <section class="hm-ex" id="example" aria-labelledby="exTitle">
+    <div class="in">
+      <div class="hm-ex__grid">
+        <header class="hm-ex__head">
+          <span class="hm-kick">Worked example · Pure Home</span>
+          <h2 class="d2" id="exTitle">From only $84<br>a fortnight.</h2>
+          <p class="lede">Every line of the bill for Pure Home over 24 months. Pick any system above to see yours.</p>
+        </header>
+        <figure class="hm-ex__photo" data-studio-gold data-hm-lead>
+          <picture>
+            <source media="(max-width:859px)" srcset="/media/humm/page/care-home-m-1000.webp" width="1000" height="750">
+            <img src="/media/humm/page/care-home-1320.webp" alt="Pure Home whole house filtration, a brushed stainless cabinet with three pressure gauges, set in a timber and stone alcove" width="1320" height="737" loading="lazy" decoding="async">
+          </picture>
+          <svg class="hm-lead" aria-hidden="true" focusable="false"><line x1="0" y1="0" x2="0" y2="0"/></svg>
+          <span class="hm-dot" aria-hidden="true" data-at="care-home-1320.webp:0.53,0.52|care-home-m-1000.webp:0.41,0.47"></span>
+          <a class="hm-pin hm-pin--ex" href="/pure-home-water-filter-sydney"><span class="hm-pin__label"><b>Pure Home</b><span>Installed from $3,850</span></span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </figure>
+        <div class="hm-ex__bill">
+          <dl class="hm-bill" data-hm-bill>
+            <div style="--i:0"><dt><a href="/pure-home-water-filter-sydney">Pure Home</a>, installed<small>the listed price, including GST</small></dt><dd>$3,850.00</dd></div>
+            <div style="--i:1"><dt>Merchant fee<small>the cost of having this plan available to you</small></dt><dd>$404.14</dd></div>
+            <div class="sub" style="--i:2"><dt>Price with humm</dt><dd>$4,254.14</dd></div>
+            <div style="--i:3"><dt>Establishment fee<small>humm&rsquo;s, added to the amount financed</small></dt><dd>$80.00</dd></div>
+            <div class="sub" style="--i:4"><dt>Amount financed<small>repaid over 52 fortnights</small></dt><dd>$4,334.14</dd></div>
+            <div style="--i:5"><dt>Monthly fee, separate<small>$9.95 a month for 24 months, billed by humm</small></dt><dd>$238.80</dd></div>
+            <div class="tot" style="--i:6"><dt>Total amount payable</dt><dd>$4,572.94</dd></div>
+          </dl>
+          <div class="hm-ftn">
+            <b class="hm-ftn__n"><span class="wm"><span data-hm-up>$84</span></span></b>
+            <span class="hm-ftn__t"><b>a fortnight for 24 months</b><span>$4,334.14 over 52 fortnights is $83.35. We round the fortnightly figure up to the next whole dollar. The amount financed is the exact figure shown.</span></span>
+          </div>
+          <p class="hm-ex__note">Repayment shown is indicative only and depends on the amount financed, the term and applicable fees.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  
-  <section class="widget" id="terms">
-    <div class="in">
-      <div class="hummwrap">
-      <script id="humm-landing-page-big-online" src="https://widgets.shophumm.com.au/content/scripts/landing-page-big-online.js"></script>
+  <section class="hm-how" id="how" aria-labelledby="howTitle">
+    <div class="in hm-how__grid">
+      <div class="hm-how__copy">
+        <span class="hm-kick">How it works</span>
+        <h2 class="d2" id="howTitle">Four steps.<br><span class="hm-dim">The application is yours.</span></h2>
+        <p class="lede">You see every term here. You apply with humm directly, and humm decides.</p>
+        <ol class="hm-steps" data-hm-steps>
+          <li style="--i:0"><span class="hm-step__n">1</span><span class="hm-step__t"><b>Pick your system</b><span>Every humm term side by side, with every fee.</span></span></li>
+          <li style="--i:1"><span class="hm-step__n">2</span><span class="hm-step__t"><b>Your price, in writing</b><span>We call you and confirm the figures before anything is booked.</span></span></li>
+          <li style="--i:2"><span class="hm-step__n">3</span><span class="hm-step__t"><b>Apply with humm, directly</b><span>Online or in the humm app. We never fill it in for you.</span><a class="hm-out" href="https://www.hummloan.com" target="_blank" rel="noopener">Visit humm&rsquo;s site<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></span></li>
+          <li style="--i:3"><span class="hm-step__n">4</span><span class="hm-step__t"><b>Installed and walked through</b><span>Tested, explained and serviced every year.</span></span></li>
+        </ol>
       </div>
-      <p class="fine">Interest free terms apply to purchases up to $10,000. Repayment shown is indicative only and depends on the amount financed, the term and applicable fees. Payment plan to approved applicants only; fees, terms, minimum amounts and conditions apply. Payment plan provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of humm group. Filters For You can tell you that humm is available and answer factual questions. The application is yours, made directly with humm.</p>
+      <figure class="hm-how__photo">
+        <img src="/media/locations/v2/shared/jp/jp-kneeling-under-sink-oak-kitchen-01.webp" alt="Illustrative photo of a Filters For You plumber, seen from behind, kneeling at an open kitchen cabinet beside a Pure Plus reverse osmosis system" width="1400" height="788" loading="lazy" decoding="async">
+      </figure>
     </div>
   </section>
 
-  
-  <section class="humm hmbottom">
-    <img class="hmbird" src="media/humm/humm-bird-white.webp" alt="" width="900" height="751" aria-hidden="true" loading="lazy">
-    <div class="in">
-      <span class="hmkick">Whole house system</span>
-      <h2 class="hmh2">From only<br>$84 a fortnight.</h2>
-      <p class="hmlede">Custom quoted for your home and the term you choose. Installed across Sydney by licensed plumbers.</p>
-      <ul class="hmticks">
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Interest free on purchases up to $10,000</li>
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Fortnightly repayments, spread across the term</li>
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Covered for life while you stay serviced with us</li>
-      </ul>
-      <div class="hmcta">
-        <a class="btn" href="/#ask"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</a>
-        <a class="hmlink" href="tel:0430546749">or call 0430 546 749</a>
+  <section class="hm-cover" id="cover" aria-labelledby="coverTitle">
+    <div class="in hm-cover__grid">
+      <div class="hm-cover__copy">
+        <span class="hm-kick">Same system, same cover</span>
+        <h2 class="d2" id="coverTitle">Covered for life.<br><span class="hm-dim">However you pay.</span></h2>
+        <p class="lede">humm changes how you pay, nothing else. The same system and licensed installation, covered for life while you stay serviced with us.</p>
+        <ul class="hm-seals"><li style="--i:0"><span class="hm-seal hm-seal--gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m8 11 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Lifetime</b><span>Warranty</span></span><p><b>Lifetime warranty</b><span>With annual servicing</span></p></li><li style="--i:1"><span class="hm-seal hm-seal--google" aria-hidden="true"><svg class="hm-g" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z" fill="#4285F4"/><path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z" fill="#34A853"/><path d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z" fill="#FBBC05"/><path d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z" fill="#EA4335"/></svg><b>5.0</b><span class="hm-stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z" fill="#FBBC04"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z" fill="#FBBC04"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z" fill="#FBBC04"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z" fill="#FBBC04"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z" fill="#FBBC04"/></svg></span></span><p><b>5.0 on Google</b><span>Sydney homes like yours</span></p></li><li style="--i:2"><span class="hm-seal hm-seal--navy" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.1 11.6L1.5 9.3L4.0 8.5L5.9 7.3L7.4 5.4L8.8 5.1L9.6 5.7L10.6 4.3L11.5 3.7L13.6 4.1L13.4 4.9L13.1 5.7L15.2 7.0L16.3 6.5L16.4 4.3L16.8 3.4L17.4 5.1L18.6 6.7L18.9 7.8L20.4 9.0L21.4 10.4L22.5 11.3L22.7 12.4L22.8 13.0L22.5 14.3L21.6 15.8L21.0 17.0L20.8 17.8L18.9 18.6L18.1 18.2L17.4 18.5L16.0 18.1L15.3 17.6L15.1 16.7L14.7 16.7L14.2 16.5L14.3 15.1L13.2 16.4L12.4 15.2L10.7 14.5L9.5 14.7L6.9 15.4L5.8 15.8L3.6 16.4L2.1 16.1L2.4 14.8L1.9 13.1ZM18.0 19.5L20.0 19.6L20.0 20.3L19.3 21.0L18.3 20.3Z" fill="currentColor" stroke="currentColor" stroke-linejoin="round" stroke-width=".3"/><circle cx="21.1" cy="15.4" r="1.9" fill="#fff"/></svg><span>Based in</span><b>Sydney</b></span><p><b>Sydney based</b><span>Installed and serviced by us</span></p></li><li style="--i:3"><span class="hm-seal hm-seal--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4Z"/></svg><b>Licensed</b><span>Install</span></span><p><b>Licensed install</b><span>NSW licence 461511C</span></p></li></ul>
+        <a class="hm-textlink" href="/lifetime-warranty">See the warranty terms<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <figure class="hm-cover__photo" data-studio-gold>
+        <picture>
+          <source media="(max-width:859px)" srcset="/media/humm/page/care-deluxe-m-1000.webp" width="1000" height="750">
+          <img src="/media/humm/page/care-deluxe-1320.webp" alt="The Deluxe Home Package: Pure Home whole house filtration, Pure Premium reverse osmosis and a brushed gold three way mixer" width="1320" height="737" loading="lazy" decoding="async">
+        </picture>
+        <a class="hm-pin hm-pin--tr" href="/pure-home-water-filter-sydney#deluxe"><span class="hm-pin__label"><b>Deluxe Home Package</b><span>Installed from $6,290</span></span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </figure>
+    </div>
+  </section>
+
+  <section class="faq hm-faq" id="questions" aria-labelledby="faqTitle">
+    <div class="in fwrap">
+      <div class="fside">
+        <span class="hm-kick">Your questions</span>
+        <h2 class="d2" id="faqTitle">Buy now, pay later questions.</h2>
+        <p class="lede">Straight answers before you apply.</p>
+        <a class="btn hm-call" href="tel:0430546749" aria-label="Call us now on 0430 546 749"><i aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i>Call us now<span class="hm-call__n">0430 546 749</span></a>
+      </div>
+      <div class="fgrid">
+        <details class="fq" open><summary><h3>What is humm?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>humm offers payment plans that let you buy now and pay over time. Plans are provided by Once Credit Pty Limited, a member of humm group, Australian Credit Licence No. 386194. Filters For You offers finance through humm on every system we install.</p></div></details>
+        <details class="fq"><summary><h3>Can I pay off a water filter over time?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>Yes. Choose your system, pick a humm term of 6, 12, 18 or 24 months and pay it off with fortnightly repayments. Interest free applies to purchases up to $10,000. Payment plans are for approved applicants only.</p></div></details>
+        <details class="fq"><summary><h3>Is it interest free?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>Yes, on purchases up to $10,000. humm charges no interest on its 6, 12, 18 or 24 month plans up to that amount. humm&rsquo;s own fees still apply: an $80 establishment fee and a $9.95 monthly fee. Our price with humm also carries humm&rsquo;s merchant fee, the cost of having the plan available to you. Every fee shows in the bill before you ask for a plan.</p></div></details>
+        <details class="fq"><summary><h3>How much is it a fortnight?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>It depends on the system and the term. Pure Home, installed from $3,850, comes to $84 a fortnight over 24 months, plus humm&rsquo;s $9.95 monthly fee, a total amount payable of $4,572.94. The <a href="#repayments" data-hm-go>repayments calculator</a> shows every system and every term side by side.</p></div></details>
+        <details class="fq"><summary><h3>What fees does humm charge?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>humm charges an $80 establishment fee, added to the amount financed and spread across the term, and a $9.95 monthly fee that humm bills separately to your fortnightly repayment. Then there is humm&rsquo;s merchant fee, the cost of having the plan available to you. We build it into your price, which is how your plan stays interest free on purchases up to $10,000.</p></div></details>
+        <details class="fq"><summary><h3>Which systems can I pay off with humm?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>Every system we install. At its listed price, each one comes in under humm&rsquo;s $10,000 interest free limit on at least one term. Prices include installation and GST.</p><ul><li><a href="/pure-home-water-filter-sydney">Pure Home</a>, from $3,850 installed</li><li><a href="/pure-home-reserve-water-filter-sydney">Pure Home Reserve</a>, from $5,150 installed</li><li><a href="/pure-flow-water-filter-sydney">Pure Flow</a>, $810 installed</li><li><a href="/pure-essential-water-filter-sydney">Pure Essential</a>, $1,180 installed</li><li><a href="/pure-plus-water-filter-sydney">Pure Plus</a>, $1,280 installed</li><li><a href="/pure-premium-water-filter-sydney">Pure Premium</a>, $1,590 installed</li><li><a href="/pure-luxe-water-filter-sydney">Pure Luxe</a>, $2,290 installed</li><li><a href="/pure-home-water-filter-sydney#deluxe">Deluxe Home Package</a>, from $6,290 installed</li><li><a href="/pure-home-reserve-water-filter-sydney#deluxe">Deluxe Home Reserve</a>, from $8,640 installed</li></ul></div></details>
+        <details class="fq"><summary><h3>Who can apply for humm?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>humm decides who is approved. In humm&rsquo;s own words, before you apply you need to:</p><ul><li>Be 18+ years old</li><li>Permanently reside in Australia</li><li>Hold a valid Australian ID</li><li>Have a regular source of income</li></ul><p>Payment plans are for approved applicants only. humm&rsquo;s full terms are on <a href="https://www.hummloan.com" target="_blank" rel="noopener">hummloan.com</a>.</p></div></details>
+        <details class="fq"><summary><h3>How do I apply?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>Pick your system in the calculator and tap Request this payment plan. We call you and confirm your price in writing, then send you humm&rsquo;s link. You apply with humm directly, online or in the humm app, and humm decides on your application. We never fill in the application for you.</p></div></details>
+        <details class="fq"><summary><h3>Which term should I choose?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>That is your call. The calculator shows every term side by side, each with its fortnightly repayment and its total amount payable, and none is chosen for you. A term that is not available at your price says why.</p></div></details>
+        <details class="fq"><summary><h3>Does paying with humm change my warranty?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="2"/></svg></summary><div class="fa"><p>No. Your system carries the same lifetime warranty however you pay. It is covered for life while you stay serviced with us. Read the <a href="/lifetime-warranty">warranty terms</a>.</p></div></details>
       </div>
     </div>
   </section>
+
+  <section class="hm-terms" id="terms" aria-labelledby="termsTitle">
+    <div class="in">
+      <header class="hm-terms__head">
+        <span class="hm-kick">The terms</span>
+        <h2 class="d2" id="termsTitle">humm at Filters For You,<br>in writing.</h2>
+      </header>
+      <dl class="hm-facts"><div><dt>Terms</dt><dd>6, 12, 18 or 24 months<small>every term shown, none chosen for you</small></dd></div><div><dt>Repayments</dt><dd>Fortnightly<small>on every term</small></dd></div><div><dt>Interest</dt><dd>0%<small>on purchases up to $10,000</small></dd></div><div><dt>Minimum purchase</dt><dd>$80<small>humm plans start here</small></dd></div><div><dt>Establishment fee</dt><dd>$80<small>humm&rsquo;s, added to the amount financed</small></dd></div><div><dt>Monthly fee</dt><dd>$9.95<small>humm&rsquo;s, billed separately</small></dd></div><div><dt>Merchant fee</dt><dd>In the price<small>the cost of having the plan available to you</small></dd></div><div><dt>Credit provider</dt><dd>Once Credit Pty Limited<small>Australian Credit Licence No. 386194</small></dd></div></dl>
+      <div class="hm-fine">
+        <p>Interest free terms apply to purchases up to $10,000. Repayment shown is indicative only and depends on the amount financed, the term and applicable fees. Payment plan to approved applicants only; fees, terms, minimum amounts and conditions apply. Payment plan provided by Once Credit Pty Limited ABN 99 112 319 632, Australian Credit Licence No. 386194. Once Credit Pty Limited is a member of humm group.</p>
+        <p>Filters For You can tell you that humm is available and answer factual questions. The application is yours, made directly with humm. Read humm&rsquo;s own terms at <a href="https://www.hummloan.com" target="_blank" rel="noopener">hummloan.com</a>.</p>
+      </div>
+      <div class="hm-guides">
+        <p class="hm-guides__title">Explore the range</p>
+        <nav class="hm-guides__row" aria-label="Water filtration systems and guides">
+          <a href="/water-filter-systems">View all systems ↗</a>
+          <a href="/whole-house-water-filter-sydney">Whole house filtration ↗</a>
+          <a href="/reverse-osmosis-water-filter-sydney">Reverse osmosis ↗</a>
+          <a href="/sydney-water-filter-cost-guide">Water filter cost guide ↗</a>
+          <a href="/lifetime-warranty">Lifetime warranty ↗</a>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <div class="hm-bar off" id="hmBar" hidden>
+    <span class="hm-bar__img"><img src="/media/locations/v2/shared/sys-home.webp" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+    <span class="hm-bar__t"><small id="hmBarPrice"><span class="hm-l4">Installed </span>from $3,850</small><b id="hmBarName">Pure Home</b></span>
+    <a class="btn" href="#repayments" data-hm-go><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>My payments</a>
+  </div>
 </main>
 
 <!-- SHELL:FOOTER -->
@@ -1643,7 +2128,6 @@ main:has(> .pgtop){padding-top:0}
   </div>
 </footer>
 <!-- /SHELL:FOOTER -->
-
 <!-- SHELL:JS -->
 <script type="speculationrules">{"prerender":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*\\?*"}},{"not":{"selector_matches":"[target=_blank]"}}]},"eagerness":"moderate"}]}</script>
 <script>
@@ -1904,6 +2388,7 @@ main:has(> .pgtop){padding-top:0}
 <!-- /SHELL:JS -->
 <!-- FFY ATTRIBUTION -->
 <script src="assets/js/ffy-attribution.js?v=2"></script>
+<script src="/vendor/lenis-1.1.18.min.js" defer></script>
 <!-- HUMM:CALC -->
 <script>
  
@@ -2179,22 +2664,178 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
 </script>
 <!-- /HUMM:CALC -->
 <script>
- 
-(function(){
-  var root = document.getElementById('repayments');
-  if (!root || typeof HummCalc === 'undefined') return;
-  var fees, products;
-  try { fees = HummCalc.loadFees(); products = HummCalc.loadProducts(); } catch (e) { return; }
+(function () {
+  'use strict';
+  var doc = document.documentElement;
+  doc.classList.add('hm-js');
+  var main = document.getElementById('hm');
+  if (!main) return;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phoneQ = matchMedia('(max-width:859px)');
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return [].slice.call((r || document).querySelectorAll(s)); }
 
-  var opts    = [].slice.call(root.querySelectorAll('.rcopt'));
+  var lenis = null;
+  function startLenis() {
+    if (lenis || !window.Lenis || reduce || !matchMedia('(pointer:fine)').matches) return;
+    lenis = new window.Lenis({ duration: 1.35, smoothWheel: true, syncTouch: false });
+    var raf = function (t) { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
+  if (document.readyState === 'complete') startLenis(); else addEventListener('load', startLenis);
+
+  function goTo(el) {
+    if (!el) return;
+    var off = parseFloat(getComputedStyle(el).scrollMarginTop) || 80;
+    var y = el.getBoundingClientRect().top + scrollY - off;
+    if (lenis) { lenis.resize(); lenis.scrollTo(y, { duration: 1.1, force: true }); }
+    else scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  $$('[data-hm-go]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = (a.getAttribute('href') || '').replace(/^.*#/, '');
+      var el = id && document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      goTo(el);
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
+    });
+  });
+
+  function riseIn(span) {
+    if (!span || span.classList.contains('done') || span.classList.contains('up')) return;
+    if (reduce) { span.classList.add('done'); return; }
+    span.classList.add('up');
+  }
+  var ups = $$('[data-hm-up]');
+  var bills = $$('[data-hm-bill]');
+  var groups = $$('[data-hm-steps], .hm-seals');
+  if (reduce || !('IntersectionObserver' in window)) {
+    ups.forEach(function (s) { s.classList.add('done'); });
+    bills.concat(groups).forEach(function (g) { g.classList.add('is-in'); });
+  } else {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var t = e.target, up = $('[data-hm-up]', t);
+        if (up && t.classList.contains('wm')) riseIn(up); else t.classList.add('is-in');
+        io.unobserve(t);
+      });
+    }, { threshold: 0.3 });
+    ups.forEach(function (s) { io.observe(s.parentNode); });
+    bills.concat(groups).forEach(function (g) { io.observe(g); });
+    addEventListener('scroll', function () {
+      ups.forEach(function (s) { if (s.parentNode.getBoundingClientRect().bottom < 0) riseIn(s); });
+      bills.concat(groups).forEach(function (g) { if (!g.classList.contains('is-in') && g.getBoundingClientRect().bottom < 0) g.classList.add('is-in'); });
+    }, { passive: true });
+  }
+
+  function coverPoint(img, fx, fy) {
+    var W = img.clientWidth, H = img.clientHeight, iw = img.naturalWidth, ih = img.naturalHeight;
+    if (!W || !H || !iw || !ih) return null;
+    var s = Math.max(W / iw, H / ih), rw = iw * s, rh = ih * s;
+    var pos = getComputedStyle(img).objectPosition.split(' ');
+    var ox = parseFloat(pos[0]) / 100, oy = parseFloat(pos[1] || pos[0]) / 100;
+    if (isNaN(ox)) ox = .5; if (isNaN(oy)) oy = .5;
+    return [(W - rw) * ox + fx * rw, (H - rh) * oy + fy * rh];
+  }
+  function placeLeads() {
+    $$('[data-hm-lead]').forEach(function (fig) {
+      var pin = $('.hm-pin', fig), dot = $('.hm-dot', fig), line = $('.hm-lead line', fig), svg = $('.hm-lead', fig), img = $('img', fig);
+      if (!pin || !dot || !line || !img) return;
+      var file = (img.currentSrc || img.src).split('/').pop().split('?')[0], at = null;
+      (dot.getAttribute('data-at') || '').split('|').forEach(function (pair) {
+        var p = pair.split(':'); if (p[0] === file) at = p[1].split(',').map(parseFloat);
+      });
+      var fb = fig.getBoundingClientRect(), ib = img.getBoundingClientRect();
+      var pt = at && coverPoint(img, at[0], at[1]);
+      if (!pt || !fb.width) return;
+      var dx = ib.left - fb.left + pt[0], dy = ib.top - fb.top + pt[1];
+      dot.style.left = dx.toFixed(1) + 'px'; dot.style.top = dy.toFixed(1) + 'px'; dot.classList.add('is-set');
+      var pb = pin.getBoundingClientRect();
+      var l = pb.left - fb.left, r = pb.right - fb.left, t = pb.top - fb.top, b = pb.bottom - fb.top, px, py;
+      if (dx > r) { px = r - 2; py = t + (b - t) / 2; }
+      else if (dx < l) { px = l + 2; py = t + (b - t) / 2; }
+      else { px = Math.min(Math.max(dx, l + 24), r - 24); py = dy > b ? b - 1 : t + 1; }
+      var len = Math.hypot(dx - px, dy - py), stop = Math.max(0, (len - 12) / (len || 1));
+      svg.setAttribute('viewBox', '0 0 ' + fb.width.toFixed(1) + ' ' + fb.height.toFixed(1));
+      line.setAttribute('x1', px.toFixed(1)); line.setAttribute('y1', py.toFixed(1));
+      line.setAttribute('x2', (px + (dx - px) * stop).toFixed(1)); line.setAttribute('y2', (py + (dy - py) * stop).toFixed(1));
+    });
+  }
+  addEventListener('resize', placeLeads);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeLeads);
+  $$('[data-hm-lead] img').forEach(function (im) { im.addEventListener('load', placeLeads); });
+  placeLeads();
+
+  $$('details', main).forEach(function (d) {
+    var sum = $('summary', d);
+    if (!sum) return;
+    var anim = null, closing = false;
+    if (d.open) d.classList.add('is-open');
+    function closedH() {
+      var cs = getComputedStyle(d);
+      return sum.offsetHeight + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+    }
+    sum.addEventListener('click', function (e) {
+      if (reduce || !d.animate) { setTimeout(function () { d.classList.toggle('is-open', d.open); }, 0); return; }
+      e.preventDefault();
+      var from = d.offsetHeight, to;
+      if (anim) { anim.cancel(); anim = null; }
+      d.style.overflow = 'hidden';
+      if (!d.open || closing) { closing = false; d.open = true; to = d.offsetHeight; d.classList.add('is-open'); }
+      else { closing = true; to = closedH(); d.classList.remove('is-open'); }
+      anim = d.animate({ height: [from + 'px', to + 'px'] }, { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+      anim.onfinish = function () { anim = null; if (closing) { d.open = false; closing = false; } d.style.overflow = ''; };
+    });
+  });
+
+  var root = document.getElementById('repayments');
+  var calcOK = root && typeof HummCalc !== 'undefined';
+  var fees = null;
+  if (calcOK) { try { fees = HummCalc.loadFees(); } catch (err) { calcOK = false; } }
+
+  var chips = $$('.rc-models button');
+  var byKey = {};
+  var range = { combo_rule: { extra_system_discount: 0, taps_discounted: false }, products: [], extras: { free_entry_field: true, free_entry_label: 'Anything else' } };
+  chips.forEach(function (c) {
+    var d = c.dataset;
+    var p = { key: d.key, name: d.name, mode: d.mode, price: parseFloat(d.price), from: d.from === '1', url: d.url, img: d.img, line: d.line, atomic: true };
+    byKey[p.key] = p; range.products.push(p);
+  });
+
+  var bar = document.getElementById('hmBar');
+  var chosen = null;
+
+  function whole(n) { return '$' + Number(n).toLocaleString('en-AU', { maximumFractionDigits: 0 }); }
+  function money(n) { return '$' + Number(n).toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function priceText(p) { return (p.from ? 'from ' : '') + whole(p.price); }
+
+  function paintBar() {
+    if (!bar || !chosen) return;
+    $('#hmBarName').textContent = chosen.name;
+    $('#hmBarPrice').innerHTML = '<span class="hm-l4">Installed </span>' + priceText(chosen);
+    var im = $('.hm-bar__img img', bar);
+    if (im.getAttribute('src') !== chosen.img) im.src = chosen.img;
+  }
+
+  if (!calcOK) { if (bar) bar.hidden = true; return; }
+
+  var modes = $$('.rc-modes [role=tab]');
+  var groupsM = $$('.rc-models');
+  var modesWrap = $('.rc-modes');
+  var card = $('.rc-card');
+  var cardImg = $('.rc-card__img img', card), cardName = $('.rc-card__name', card), cardNameText = $('.rc-card__name span', card);
+  var cardLine = $('.rc-card__line', card), cardPrice = $('.rc-card__price b', card), cardPre = $('.rc-card__price .pre', card), cardView = $('.rc-card__view', card);
   var extraIn = document.getElementById('rcExtra');
-  var terms   = [].slice.call(root.querySelectorAll('.rcterm'));
+  var terms = $$('.rcterm', root);
   var priceEl = document.getElementById('rcPrice');
-  var hint    = document.getElementById('rcHint');
-  var goBtn   = document.getElementById('rcGo');
-  var res     = document.getElementById('rcRes');
-  var form    = res.querySelector('form');
-  var askSum  = document.getElementById('rcAskSum');
+  var hint = document.getElementById('rcHint');
+  var goBtn = document.getElementById('rcGo');
+  var res = document.getElementById('rcRes');
+  var inner = $('.rcres__in', res);
+  var form = $('form', res);
+  var askSum = document.getElementById('rcAskSum');
   var sendBtn = document.getElementById('rcSend');
   var sendLbl = document.getElementById('rcSendLabel');
   var row = {
@@ -2203,135 +2844,175 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
     acctSub: document.getElementById('rcRowAcctSub'), tot: document.getElementById('rcRowTot'),
     per: document.getElementById('rcRowPer')
   };
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var memory = {}, mode = null, term = null, combo = null, quote = null, painted = false;
+  groupsM.forEach(function (g) { var on = $('button[aria-pressed="true"]', g); memory[g.dataset.group] = on ? on.dataset.key : $('button', g).dataset.key; });
 
-  var byKey = {}; products.products.forEach(function(p){ byKey[p.key] = p; });
-  var chosen = [], term = null, combo = null, quote = null;
+  var preload = {};
+  function warm(src) { if (preload[src]) return preload[src]; var im = new Image(); im.src = src; preload[src] = im; return im; }
 
-   
-  opts.forEach(function(o){
-    var p = byKey[o.getAttribute('data-key')], el = o.querySelector('[data-price]');
-    if (p && el) el.textContent = p.site_price_string;
-  });
-
-  function money(n){ return '$' + Number(n).toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-  function whole(n){ return '$' + Number(n).toLocaleString('en-AU', {maximumFractionDigits:0}); }
-  function hid(name, value){
-    var el = form.querySelector('input[type="hidden"][name="' + name + '"]');
-    if (!el){ el = document.createElement('input'); el.type = 'hidden'; el.name = name; form.appendChild(el); }
-    el.value = value;
+  function soft(change) {
+    if (reduce || !res.animate) { change(); return; }
+    var from = res.offsetHeight;
+    change();
+    var to = res.offsetHeight;
+    if (Math.abs(to - from) < 2) return;
+    if (res._anim) res._anim.cancel();
+    res.style.overflow = 'hidden';
+    res._anim = res.animate({ height: [from + 'px', to + 'px'] }, { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+    res._anim.onfinish = function () { res._anim = null; res.style.overflow = ''; };
   }
-  function termQuote(m){ var q = null; if (quote) quote.terms.forEach(function(x){ if (x.months === m) q = x; }); return q; }
-  function names(){ return chosen.map(function(k){ return byKey[k].name; }); }
-  function extraAmt(){ return Math.max(0, parseFloat(extraIn.value) || 0); }
 
-   
-  function rise(span, text){
+  function rise(span, text, quiet) {
     if (span.textContent === text) return;
     span.textContent = text;
-    if (reduce) return;
+    if (reduce || quiet) return;
     span.classList.remove('up'); void span.offsetWidth; span.classList.add('up');
   }
+  function termQuote(m) { var q = null; if (quote) quote.terms.forEach(function (x) { if (x.months === m) q = x; }); return q; }
+  function extraAmt() { return Math.max(0, parseFloat(extraIn && extraIn.value) || 0); }
 
-  function render(){
-    var extra = extraAmt();
-    res.classList.remove('term');
-    if (!chosen.length && !extra){
-      combo = quote = null; term = null;
-      rise(priceEl, 'Pick a system');
-      terms.forEach(function(t){
-        t.disabled = true; t.setAttribute('aria-pressed', 'false');
-        rise(t.querySelector('.wm > span'), '—');
-        t.querySelector('.rcper').textContent = 'a fortnight';
-      });
-      hint.textContent = 'Pick a system, then a term. Every humm term shows side by side and none is chosen for you.';
-      goBtn.disabled = true;
-      return;
-    }
-    combo = HummCalc.comboPrice(chosen, extra, products);
-    quote = HummCalc.quote(combo.total, fees);
-    rise(priceEl, whole(combo.total));
-
-    var ok = quote.mode === 'interest_free';
-    terms.forEach(function(t){
-      var m = +t.getAttribute('data-months'), q = termQuote(m);
-      var live = ok && q && q.eligible;
-      t.disabled = !live;
-      rise(t.querySelector('.wm > span'), q ? whole(q.fortnightly_displayed) : '—');
-      t.querySelector('.rcper').textContent = live ? 'a fortnight'
-        : (q && q.ineligible_reason ? q.ineligible_reason.replace('not available ', '') : 'a fortnight');
-      if (!live && term === m) term = null;
-      t.setAttribute('aria-pressed', term === m ? 'true' : 'false');
+  var modelsWrap = $('.rc-models-wrap');
+  function glide() {
+    var on = modes.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0];
+    if (!on) return;
+    modesWrap.style.setProperty('--gx', on.offsetLeft + 'px');
+    modesWrap.style.setProperty('--gw', on.offsetWidth + 'px');
+  }
+  function reserve() {
+    var h = 0;
+    groupsM.forEach(function (g) {
+      var was = g.hidden;
+      if (was) { g.hidden = false; g.style.position = 'absolute'; g.style.visibility = 'hidden'; g.style.width = '100%'; }
+      h = Math.max(h, g.offsetHeight);
+      if (was) { g.hidden = true; g.style.position = ''; g.style.visibility = ''; g.style.width = ''; }
     });
-    goBtn.disabled = false;
+    if (h) modelsWrap.style.minHeight = h + 'px';
+  }
+  addEventListener('resize', function () { glide(); reserve(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { glide(); reserve(); });
+  reserve();
 
-    var tiers = fees.interest_free.terms, top = tiers[tiers.length - 1];
-    if (quote.mode === 'below_minimum'){
-      hint.textContent = 'humm plans start at ' + whole(fees.interest_free.min_purchase) + '.';
-    } else if (quote.mode === 'large_purchase'){
-      var b = quote.band;
-      hint.textContent = 'Over ' + whole(top.max_financed) + ' humm runs a different plan: interest at '
-        + fees.large_purchase.customer_interest_rate_pa + '% p.a. paid by you'
-        + (b ? ', ' + b.term_months + ' months to repay' : '') + ', and our price stays as it is. Request it and we walk you through it.';
-    } else if (quote.mode === 'no_plan_available'){
-      hint.textContent = 'At this price the interest free plan does not quite reach. Request it and we price the job to fit.';
-    } else if (term === null){
-      hint.textContent = 'Tap a term to see the bill: what it costs and what it adds up to.';
-    } else {
-       
-      var q = termQuote(term);
-      row.sys.textContent = money(combo.total);
-      row.mf.textContent  = money(q.merchant_fee);
-      row.est.textContent = money(q.establishment_fee);
-      if (q.account_fee_monthly != null){
-        row.acct.textContent = money(q.account_fee_monthly * q.months);
-        row.acctSub.textContent = money(q.account_fee_monthly) + ' a month for ' + q.months + ' months';
-        row.tot.textContent = money(q.total_amount_payable);
-      } else {
-        row.acct.textContent = 'humm’s monthly fee';
-        row.acctSub.textContent = 'for ' + q.months + ' months';
-        row.tot.textContent = money(q.total_financed) + ' plus the monthly fee';
-      }
-      row.per.textContent = whole(q.fortnightly_displayed) + ' a fortnight for ' + q.months + ' months';
-      res.classList.add('term');
-    }
+  function setMode(k, opts) {
+    opts = opts || {};
+    mode = k;
+    modes.forEach(function (t) {
+      var on = t.dataset.mode === k;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    glide();
+    groupsM.forEach(function (g) { g.hidden = g.dataset.group !== k; });
+    setModel(memory[k], opts);
   }
 
-  opts.forEach(function(o){
-    o.addEventListener('click', function(){
-      var k = o.getAttribute('data-key');
-      var on = o.getAttribute('aria-pressed') === 'true';
-      if (on){ chosen = chosen.filter(function(x){ return x !== k; }); }
-      else {
-         
-        var ex = byKey[k].excludes || [];
-        chosen = chosen.filter(function(x){ return ex.indexOf(x) === -1 && (byKey[x].excludes || []).indexOf(k) === -1; });
-        chosen.push(k);
+  function setModel(key, opts) {
+    opts = opts || {};
+    var p = byKey[key];
+    if (!p) return;
+    chosen = p; memory[p.mode] = key;
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.key === key ? 'true' : 'false'); });
+    var im = warm(p.img);
+    var swap = function () {
+      cardImg.src = p.img;
+      cardImg.alt = '';
+    };
+    if (im.complete) swap(); else { im.onload = swap; im.onerror = swap; }
+    cardName.href = p.url; cardNameText.textContent = p.name;
+    cardLine.textContent = p.line;
+    cardPre.textContent = p.from ? 'From ' : '';
+    cardPrice.textContent = whole(p.price);
+    if (cardView) { cardView.href = p.url; cardView.textContent = 'View ' + p.name; }
+    paintBar();
+    render(opts.quiet);
+    if (!opts.quiet) window.ffyTrack && window.ffyTrack('repay_pick', { system: key, on: true });
+  }
+
+  function render(quiet) {
+    soft(function () {
+      var extra = extraAmt();
+      res.classList.remove('term');
+      res.classList.toggle('has-extra', extra > 0);
+      combo = HummCalc.comboPrice([chosen.key], extra, range);
+      quote = HummCalc.quote(combo.total, fees);
+      rise(priceEl, whole(combo.total), quiet);
+      var ok = quote.mode === 'interest_free';
+      terms.forEach(function (t) {
+        var m = +t.getAttribute('data-months'), q = termQuote(m);
+        var live = ok && q && q.eligible;
+        t.disabled = !live;
+        rise($('.wm > span', t), live ? whole(q.fortnightly_displayed) : '—', quiet);
+        var per = $('.rcper', t);
+        per.textContent = live ? 'a fortnight' : (q && q.ineligible_reason ? q.ineligible_reason.replace('not available ', 'not ') : 'not available');
+        t.setAttribute('aria-label', m + ' months: ' + (live ? whole(q.fortnightly_displayed) + ' a fortnight' : per.textContent));
+        if (!live && term === m) term = null;
+        t.setAttribute('aria-pressed', term === m ? 'true' : 'false');
+      });
+      goBtn.disabled = false;
+      var tiers = fees.interest_free.terms, top = tiers[tiers.length - 1];
+      if (quote.mode === 'below_minimum') {
+        hint.textContent = 'humm plans start at ' + whole(fees.interest_free.min_purchase) + '.';
+      } else if (quote.mode === 'large_purchase') {
+        var b = quote.band;
+        hint.textContent = 'Above ' + whole(top.max_financed) + ' humm runs a different plan, with interest at '
+          + fees.large_purchase.customer_interest_rate_pa + '% p.a. paid by you' + (b ? ' over ' + b.term_months + ' months' : '')
+          + '. Our price stays as it is. Request it and humm shows you the exact repayment when you apply.';
+      } else if (quote.mode === 'no_plan_available') {
+        hint.textContent = 'At this price the interest free plan does not quite reach. Request it and we talk you through the options.';
+      } else if (term === null) {
+        hint.textContent = 'Tap a term to see the bill: what it costs and what it adds up to.';
+      } else {
+        var q = termQuote(term);
+        row.sys.textContent = money(combo.total);
+        row.mf.textContent = money(q.merchant_fee);
+        row.est.textContent = money(q.establishment_fee);
+        if (q.account_fee_monthly != null) {
+          row.acct.textContent = money(q.account_fee_monthly * q.months);
+          row.acctSub.textContent = money(q.account_fee_monthly) + ' a month for ' + q.months + ' months';
+          row.tot.textContent = money(q.total_amount_payable);
+        } else {
+          row.acct.textContent = 'humm’s monthly fee';
+          row.acctSub.textContent = 'for ' + q.months + ' months';
+          row.tot.textContent = money(q.total_financed) + ' plus the monthly fee';
+        }
+        row.per.textContent = whole(q.fortnightly_displayed) + ' a fortnight for ' + q.months + ' months';
+        res.classList.add('term');
       }
-      opts.forEach(function(x){ x.setAttribute('aria-pressed', chosen.indexOf(x.getAttribute('data-key')) !== -1 ? 'true' : 'false'); });
-      render();
-      window.ffyTrack && window.ffyTrack('repay_pick', {system: k, on: !on});
+    });
+    painted = true;
+  }
+
+  modes.forEach(function (t, i) {
+    t.addEventListener('click', function () { if (mode !== t.dataset.mode) { setMode(t.dataset.mode); } });
+    t.addEventListener('keydown', function (e) {
+      var k = e.key, n = modes.length, j = null;
+      if (k === 'ArrowRight') j = (i + 1) % n; else if (k === 'ArrowLeft') j = (i - 1 + n) % n;
+      else if (k === 'Home') j = 0; else if (k === 'End') j = n - 1;
+      if (j === null) return;
+      e.preventDefault(); modes[j].focus(); setMode(modes[j].dataset.mode);
     });
   });
-  extraIn.addEventListener('input', render);
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () { if (!chosen || chosen.key !== c.dataset.key) setModel(c.dataset.key); });
+    c.addEventListener('pointerenter', function () { warm(c.dataset.img); });
+  });
+  if (extraIn) extraIn.addEventListener('input', function () { render(); });
 
-  terms.forEach(function(t){
-    t.addEventListener('click', function(){
+  terms.forEach(function (t) {
+    t.addEventListener('click', function () {
       if (t.disabled) return;
       var m = +t.getAttribute('data-months');
       term = term === m ? null : m;
       render();
-      window.ffyTrack && window.ffyTrack('repay_term', {months: term});
+      window.ffyTrack && window.ffyTrack('repay_term', { months: term });
     });
   });
 
-   
-  function planText(){
-    var parts = names(), extra = extraAmt();
+  function planText() {
+    var parts = [chosen.name], extra = extraAmt();
     if (extra) parts.push('extras ' + whole(extra));
     var s = parts.join(' + ') + ' at ' + whole(combo.total) + ' installed';
-    if (quote && quote.mode === 'interest_free'){
-      if (term !== null){
+    if (quote && quote.mode === 'interest_free') {
+      if (term !== null) {
         var q = termQuote(term);
         s += '. ' + term + ' months, ' + whole(q.fortnightly_displayed) + ' a fortnight, financed ' + money(q.total_financed)
           + (q.total_amount_payable != null ? ', total ' + money(q.total_amount_payable) : '');
@@ -2339,68 +3020,86 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
     } else if (quote) s += '. ' + quote.mode.replace(/_/g, ' ');
     return s;
   }
-  goBtn.addEventListener('click', function(){
+  goBtn.addEventListener('click', function () {
     if (!combo) return;
     askSum.textContent = planText();
-    res.classList.add('asking');
+    soft(function () { res.classList.add('asking'); });
     var inp = form.querySelector('input[name="name"]');
-    if (inp) setTimeout(function(){ inp.focus({preventScroll:true}); }, 60);
-    window.ffyTrack && window.ffyTrack('repay_request_open', {plan: planText()});
+    if (inp) setTimeout(function () { inp.focus({ preventScroll: true }); }, 60);
+    window.ffyTrack && window.ffyTrack('repay_request_open', { system: chosen.key, months: term });
   });
-  document.getElementById('rcBack').addEventListener('click', function(){ res.classList.remove('asking'); });
+  document.getElementById('rcBack').addEventListener('click', function () {
+    soft(function () { res.classList.remove('asking'); });
+    goBtn.focus({ preventScroll: true });
+  });
 
+  function hid(name, value) {
+    var el = form.querySelector('input[type="hidden"][name="' + name + '"]');
+    if (!el) { el = document.createElement('input'); el.type = 'hidden'; el.name = name; form.appendChild(el); }
+    el.value = value;
+  }
   var sending = false;
-  form.addEventListener('submit', function(e){
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (sending) return;
-     
     var err = document.getElementById('rcErr');
     var checks = [
-      ['name',  function(v){ return v.length >= 2; },                                   'Your name, please.'],
-      ['phone', function(v){ return /^(\+?61|0)4\d{8}$/.test(v.replace(/[\s()-]/g, '')); }, 'A mobile number, like 04XX XXX XXX.'],
-      ['email', function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); },         'An email address, like you@example.com.']
+      ['name', function (v) { return v.length >= 2; }, 'Your name, please.'],
+      ['phone', function (v) { return /^(\+?61|0)4\d{8}$/.test(v.replace(/[\s()-]/g, '')); }, 'A mobile number, like 04XX XXX XXX.'],
+      ['email', function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }, 'An email address, like you@example.com.']
     ];
     var bad = null;
-    checks.forEach(function(c){
+    checks.forEach(function (c) {
       var i = form.querySelector('input[name="' + c[0] + '"]'), ok = c[1](i.value.trim());
       i.classList.toggle('bad', !ok); i.setAttribute('aria-invalid', ok ? 'false' : 'true');
       if (!ok && !bad) bad = [i, c[2]];
     });
-    if (bad){ err.textContent = bad[1]; err.hidden = false; bad[0].focus(); return; }
+    if (bad) { err.textContent = bad[1]; err.hidden = false; bad[0].focus(); return; }
     err.hidden = true;
-     
     var phEl = form.querySelector('input[name="phone"]'); phEl.value = phEl.value.replace(/[\s()-]/g, '');
-     
+    var extra = extraAmt() > 0;
     hid('subject', 'Payment plan request');
-    hid('_subject', 'Payment plan request: ' + (names().join(' + ') || 'extras only'));
-    hid('system', names().join(' + ') || 'Extras only');
-     
-     
+    hid('_subject', 'Payment plan request: ' + chosen.name);
+    hid('system', chosen.name);
     hid('term_months', term === null ? '' : String(term));
-    hid('message', 'Payment plan request from the repayments calculator. Chosen: '
-      + (names().join(' + ') || 'extras only')
+    hid('message', 'Payment plan request from the repayments calculator. Chosen: ' + chosen.name
+      + (extra ? ', plus an extra they entered' : '')
       + (term === null ? '. No term picked yet.' : '. Term picked: ' + term + ' months.')
       + ' Call to confirm the figures in writing, then send the application link.');
     if (window.ffyStampForm) window.ffyStampForm(form);
     sending = true; sendBtn.disabled = true; sendLbl.textContent = 'Sending…';
-    var done = function(){
-      res.classList.remove('asking'); res.classList.add('finished');
-      window.ffyLeadSuccess && window.ffyLeadSuccess(form, {form:'repayments', label:'humm_repayments', system: names().join(' + ')});
-       
+    var done = function () {
+      soft(function () { res.classList.remove('asking'); res.classList.add('finished'); });
+      window.ffyLeadSuccess && window.ffyLeadSuccess(form, { form: 'repayments', label: 'humm_repayments', system: chosen.name });
     };
-    fetch(form.action, {method:'POST', body:new FormData(form), headers:{'Accept':'application/json'}})
-      .then(function(r){ if (!r.ok) throw new Error('formspree ' + r.status); done(); })
-      .catch(function(){
-         
-        try { form.submit(); }
-        catch (err){
-          sending = false; sendBtn.disabled = false; sendLbl.textContent = 'Send my request';
-          alert('Sorry, that did not send. Please call us on 0430 546 749.');
-        }
-      });
+    var fail = function () {
+      sending = false; sendBtn.disabled = false; sendLbl.textContent = 'Try again';
+      err.textContent = 'That did not send. Try again, or call us on 0430 546 749.'; err.hidden = false;
+    };
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(function (r) { if (!r.ok) throw new Error('send ' + r.status); done(); })
+      .catch(function () { try { form.submit(); } catch (x) { fail(); } });
   });
 
-  render();
+  if (bar) {
+    var barQueued = false;
+    var inView = function (el) { if (!el) return false; var b = el.getBoundingClientRect(); return b.top < innerHeight && b.bottom > 0; };
+    var barCheck = function () {
+      barQueued = false;
+      var rb = root.getBoundingClientRect();
+      var past = rb.bottom < innerHeight * 0.35;
+      var off = !phoneQ.matches || !past || inView(root) || inView($('footer'));
+      bar.hidden = false; bar.classList.toggle('off', off);
+    };
+    addEventListener('scroll', function () { if (!barQueued) { barQueued = true; requestAnimationFrame(barCheck); } }, { passive: true });
+    addEventListener('resize', barCheck);
+    barCheck();
+  }
+
+  var want = new URLSearchParams(location.search).get('system');
+  var start = want && byKey[want] ? byKey[want] : byKey[memory[(modes.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || modes[0]).dataset.mode]];
+  if (start) { memory[start.mode] = start.key; setMode(start.mode, { quiet: true }); }
+  if (want && byKey[want] && location.hash !== '#repayments') { setTimeout(function () { goTo(root); }, 60); }
 })();
 </script>
 
