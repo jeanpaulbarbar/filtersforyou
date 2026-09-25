@@ -87,6 +87,28 @@
     const tk = $('[data-lp-hero-tick]'); if (tk) { tk.textContent = tab.dataset.tick; tk.nextSibling.textContent = ' ' + tab.dataset.title + '.'; }
   }
   heroTabs.forEach(a => a.addEventListener('click', e => { e.preventDefault(); setMode(a.dataset.lpMode); }));
+  const heroCard = $('.ocard');
+  function lockHero() {
+    if (!heroCard || !heroTabs.length) return;
+    const t = $('#cp-hero-product-title'), l = $('#cp-hero-product-link'), p = $('#cp-hero-product-price'), tk = $('[data-lp-hero-tick]');
+    const keep = [t && t.textContent, l && l.textContent, p && p.innerHTML, tk && tk.textContent, tk && tk.nextSibling && tk.nextSibling.textContent];
+    heroCard.style.minHeight = '';
+    let max = heroCard.offsetHeight;
+    offers.forEach(o => {
+      const r = byKey[o.dataset.key], tab = heroTabs.find(a => a.dataset.lpMode === r.mode); if (!tab) return;
+      if (t) t.textContent = tab.dataset.title;
+      if (l) l.textContent = r.name + ' ↗';
+      if (p) p.innerHTML = r.price + ' <i>installed</i>';
+      if (tk) { tk.textContent = tab.dataset.tick; tk.nextSibling.textContent = ' ' + tab.dataset.title + '.'; }
+      max = Math.max(max, heroCard.offsetHeight);
+    });
+    if (t) t.textContent = keep[0]; if (l) l.textContent = keep[1]; if (p) p.innerHTML = keep[2];
+    if (tk) { tk.textContent = keep[3]; tk.nextSibling.textContent = keep[4]; }
+    heroCard.style.minHeight = max + 'px';
+  }
+  let lockQueued = 0;
+  addEventListener('resize', () => { cancelAnimationFrame(lockQueued); lockQueued = requestAnimationFrame(lockHero); });
+  document.fonts?.ready.then(lockHero);
   $('[data-lp-choose]')?.addEventListener('click', e => { e.preventDefault(); goTo($('#lp-fit-title'), 20); });
 
   
@@ -129,14 +151,26 @@
     const sysBtns = $$('[data-step="1"] .sysopt', q), whenBtns = $$('.lp-when__b', q);
     let step = 0, system = '', when = '', sending = false, started = false;
     const hidden = (n, v) => { let i = f.elements[n]; if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.append(i); } i.value = v; };
+    let formAnim = null;
     function show(n) {
+      const moved = n !== step && !reduce && started0;
+      const from = moved ? f.offsetHeight : 0;
       step = n; panes.forEach((p, i) => p.hidden = i !== n); dots.forEach((d, i) => d.classList.toggle('on', i <= n));
       back.hidden = n === 0; nextLabel.textContent = n === 2 ? 'Request my installation date' : 'Next';
       error.hidden = true;
+      if (!moved) return;
+      const pane = panes[n]; pane.classList.remove('is-enter'); void pane.offsetWidth; pane.classList.add('is-enter');
+      if (formAnim) formAnim.cancel();
+      const to = f.offsetHeight; f.style.overflow = 'hidden';
+      formAnim = f.animate({ height: [from + 'px', to + 'px'] }, { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+      formAnim.onfinish = formAnim.oncancel = () => { f.style.overflow = ''; formAnim = null; };
     }
+    let started0 = false;
     function summary() {
       const r = bySys[system];
+      const appear = r && card.hidden && started0 && !reduce;
       card.hidden = !r;
+      if (appear) { card.classList.remove('is-enter'); void card.offsetWidth; card.classList.add('is-enter'); }
       if (r) { $('img', card).src = r.img; $('[data-lp-chosen-name]', card).textContent = r.name; $('[data-lp-chosen-price]', card).textContent = r.price + ' installed'; }
     }
     function pick(v, quiet) {
@@ -188,7 +222,7 @@
         fail();
       } finally { sending = false; send.disabled = false; }
     });
-    show(0);
+    show(0); started0 = true;
     return { pick };
   })();
 
@@ -214,10 +248,34 @@
   });
 
   
+  if (!reduce) {
+    const drift = $$('[data-lp-parallax]', main), grow = $$('.lp-near3 .syd__fr', main), live = new Set();
+    const seen = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? live.add(e.target) : live.delete(e.target)), { rootMargin: '10% 0px' });
+    drift.forEach(el => seen.observe(el)); grow.forEach(el => seen.observe(el));
+    let queued = false;
+    const frame = () => {
+      queued = false; const vh = innerHeight;
+      live.forEach(el => {
+        const box = (el.closest('.lp-sys__img, .lp-water2__photo, .lp-visit--photo, .syd__fr, .lp-intro__local') || el).getBoundingClientRect();
+        if (el.matches('.syd__fr')) { const k = Math.min(1, Math.max(0, (vh - box.top) / (vh * .7))); el.style.setProperty('--lp-s', (.94 + .06 * k).toFixed(4)); return; }
+        const p = ((box.top + box.height / 2) - vh / 2) / (vh / 2 + box.height / 2);
+        el.style.setProperty('--lp-p', Math.max(-1, Math.min(1, p)).toFixed(4));
+      });
+    };
+    const ask = () => { if (!queued) { queued = true; requestAnimationFrame(frame); } };
+    addEventListener('scroll', ask, { passive: true }); addEventListener('resize', ask); ask();
+    const rise = $$('.lp-intro__copy > .lp-kick, .lp-intro__copy > .d2, .lp-sysband__head > *, .lp-water2__copy > .lp-kick, .lp-water2__copy > .d2, .lp-care2__head > div > .lp-kick, .lp-care2__head > div > .d2, .lp-near__copy > .lp-kick, .lp-near__copy > .d2', main);
+    const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); rio.unobserve(e.target); } }), { threshold: 0.2 });
+    rise.forEach(el => { el.classList.add('lp-rise'); rio.observe(el); });
+    addEventListener('scroll', () => rise.forEach(el => { if (!el.classList.contains('is-in') && el.getBoundingClientRect().bottom < 0) el.classList.add('is-in'); }), { passive: true });
+  }
+
+  
   const want = new URLSearchParams(location.search).get('system');
   const start = want && byKey[want] ? byKey[want] : null;
   if (start) { chosen[start.mode] = start.key; setMode(start.mode, { quiet: true }); }
   else setMode('every', { quiet: true });
   form.pick('', true);
   barCheck();
+  lockHero();
 })();
