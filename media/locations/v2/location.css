@@ -1118,3 +1118,14 @@ html.lp-js .lp .lp-offer.is-new{animation:lp-card .42s var(--e-out)}
 .lp .lp-care4 .lp-cprice--cards .lp-cprice__free{white-space:nowrap}
 @media(max-width:859px){.lp .lp-care4 .lp-cprice--cards .lp-cprice__free{font-size:10px!important;padding:2px 6px}.lp .lp-care4 .lp-cprice--cards .lp-cprice__p span{line-height:1.25}}
 .lp .lp-care4__photo img{object-position:var(--fx,50%) 50%}
+
+@media(min-width:860px){
+ .lp .lp-care4{padding:76px 0 80px}
+ .lp .lp-care4__visits{display:flex;flex-direction:column}
+ .lp .lp-care4__visits .lp-vlist{flex:1;grid-auto-rows:1fr}
+ .lp .lp-care4__visits .lp-vlist li{padding:14px 16px 14px 12px;gap:14px;grid-template-columns:42px minmax(0,1fr)}
+ .lp .lp-care4__visits .lp-vlist .lp-visit__i{width:42px;height:42px}
+ .lp .lp-care4__visits .lp-vlist__t b{font-size:16px}
+ .lp .lp-care4__visits .lp-vlist__t span{font-size:14px;line-height:1.4}
+}
+@media(max-width:859px){.lp .lp-care4{padding:64px 0 68px}}
