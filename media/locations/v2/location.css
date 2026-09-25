@@ -792,3 +792,6 @@ html.lp-js .lp .lp-offer.is-new{animation:lp-card .42s var(--e-out)}
 .lp .lp-intro{padding:96px 0 104px}
 .lp .lp-intro__grid{border-top:0;padding-top:0}
 @media(max-width:859px){.lp .lp-intro{padding:56px 0}.lp .lp-intro__grid{padding-top:0}}
+
+.lp .lp-cprice__img img,.lp .qform .lp-systile__img img,.lp .lp-bar__img img,.lp .lp-chosen__img img{transform:scale(1.28);transform-origin:50% 55%}
+.lp .lp-cprice__img,.lp .qform .lp-systile__img{background:linear-gradient(160deg,#eef1f5,#dfe4ea)}
