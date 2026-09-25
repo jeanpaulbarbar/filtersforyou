@@ -1117,3 +1117,4 @@ html.lp-js .lp .lp-offer.is-new{animation:lp-card .42s var(--e-out)}
 }
 .lp .lp-care4 .lp-cprice--cards .lp-cprice__free{white-space:nowrap}
 @media(max-width:859px){.lp .lp-care4 .lp-cprice--cards .lp-cprice__free{font-size:10px!important;padding:2px 6px}.lp .lp-care4 .lp-cprice--cards .lp-cprice__p span{line-height:1.25}}
+.lp .lp-care4__photo img{object-position:var(--fx,50%) 50%}
