@@ -35,11 +35,10 @@ const whenSeen=(el,fn,at=.45)=>{if(!el)return;let done=false;const go=()=>{if(do
  const past=()=>{if(done)return;if(el.getBoundingClientRect().bottom<0){io.disconnect();go()}};addEventListener('scroll',past,{passive:true})};
 const stagger=(box,sel,gap,at=.35,after)=>{if(!box)return;box.classList.add('rv-anim');whenSeen(box,()=>{const items=$$(sel,box);items.forEach((x,i)=>setTimeout(()=>{x.classList.add('on');if(after)after(x,i)},i*gap))},at)};
 
-const gauge=$('[data-wh-gauge]'),mgl=$('[data-wh-count]');
-if(gauge&&mgl&&!reduce){const num=mgl.querySelector('[data-wh-num]'),fill=gauge.querySelector('.wh-gauge__fill'),line=gauge.querySelector('.wh-gauge__line'),band=gauge.querySelector('.wh-gauge__band'),end=+mgl.dataset.whCount,scaleMax=1.4;
- gauge.classList.add('wh-anim');mgl.classList.add('wh-anim');fill.style.width='0%';
- whenSeen(mgl,()=>{mgl.classList.add('on');const t0=performance.now(),D=1900;(function step(t){const k=clamp((t-t0)/D),v=end*easeOut(k);num.textContent=v.toFixed(2);fill.style.width=(v/scaleMax*100)+'%';
-  if(v>=.5)line.classList.add('on');if(v>=.72)band.classList.add('on');if(k<1)requestAnimationFrame(step);else{num.textContent=end.toFixed(2);gauge.classList.add('done')}})(t0)},.55)}
+const bars=$('[data-wh-bars]'),mgl=$('[data-wh-count]');
+if(bars&&mgl&&!reduce){const num=mgl.querySelector('[data-wh-num]'),end=+mgl.dataset.whCount;
+ bars.classList.add('wh-anim');mgl.classList.add('wh-anim');
+ whenSeen(mgl,()=>{mgl.classList.add('on');bars.classList.add('on');const t0=performance.now(),D=1600;(function step(t){const k=clamp((t-t0)/D);num.textContent=(end*easeOut(k)).toFixed(2);if(k<1)requestAnimationFrame(step);else num.textContent=end.toFixed(2)})(t0)},.55)}
 
 const legend=$$('[data-wh-legend] li');
 if(!reduce){const cut=$('.wh-cut__calls');if(cut)stagger(cut,'.rv-callout',320,.4,(x,i)=>{if(legend[i])legend[i].classList.add('on')});if(legend.length){$('[data-wh-legend]').classList.add('wh-anim')}
@@ -77,15 +76,15 @@ function summary(timing){const o=OFFERS[chosenKey()];if(!o)return'';let s=o.name
 function setOffer(key,opts2={}){const o=OFFERS[key];if(!o)return;const prev=current;current=key;
  opts.forEach(b=>{const on=b.dataset.offer===key;b.setAttribute('aria-checked',String(on));b.tabIndex=on?0:-1;b.classList.toggle('on',on)});
  $$('.wh-change__list [data-offer]').forEach(b=>{const on=b.dataset.offer===key;b.setAttribute('aria-checked',String(on));b.classList.toggle('on',on)});
- if(card){card.dataset.tier=o.tier;fade($('[data-wh-o-img]',card),o.card,o.alt);
-  $('[data-wh-o-name]',card).textContent=o.name;$('[data-wh-o-note]',card).textContent=o.note;$('[data-wh-o-price]',card).textContent=o.price;
-  $('[data-wh-o-slabel]',card).textContent=o.serviceLabel;$('[data-wh-o-sval]',card).innerHTML=o.serviceValue;
-  
+ if(card){card.dataset.tier=o.tier;fade($('[data-wh-o-img]',card),o.tile,o.alt);
+  $('[data-wh-o-name]',card).textContent=o.name;$('[data-wh-o-price]',card).textContent=o.price;
+  const sv=$('[data-wh-o-sval]',card),sn=$('[data-wh-o-snote]',card);if(sv)sv.textContent=o.svc[0];if(sn)sn.textContent=o.svc[1];
+  $$('[data-wh-ticks]',card).forEach(u=>{const on=u.dataset.whTicks===key;u.classList.toggle('on',on);if(on)u.removeAttribute('aria-hidden');else u.setAttribute('aria-hidden','true')});
   const link=$('[data-wh-o-link]',card);if(link){link.href=o.link[0];link.textContent=o.link[1]}
   const ins=INSTALLS[o.cab]||[];const txt=$('[data-wh-o-installs]',card);if(txt)txt.textContent=ins.length+' photos from Sydney homes';
   $$('.rv-installs__thumbs img',card).forEach((im,i)=>{if(ins[i])im.src=ins[i].thumb||ins[i].src})}
  if(upgrade){const up=o.upgrade&&OFFERS[o.upgrade];upgrade.hidden=!up;if(addon){addon.checked=false}
-  if(up){$('[data-wh-addon-name]').textContent='Upgrade to the '+up.name;$('[data-wh-addon-line]').textContent=up.price.replace('$','From $')+' installed, first year of servicing free'}}
+  if(up){$('[data-wh-addon-name]').textContent='Upgrade to '+up.name;$('[data-wh-addon-line]').textContent=up.price.replace('$','From $')+' installed, first year of servicing free'}}
  const ap=$('[data-wh-ask-photo]');if(ap&&ASK[o.cab])fade(ap,ASK[o.cab].src,ASK[o.cab].alt);
  const cp=$('[data-wh-care-photo]');if(cp&&CARE[o.cab])fade(cp,CARE[o.cab].src,CARE[o.cab].alt);
  if(o.tier==='deluxe'||!opts2.keepDeluxe)setDeluxeCab(o.cab,true);
@@ -145,11 +144,11 @@ function closeDetails(d){if(!d.open)return;if(reduce){d.open=false;d.classList.r
 $$('details').forEach(d=>{const s=d.querySelector('summary');if(!s)return;if(d.open)d.classList.add('is-open');
  s.addEventListener('click',e=>{e.preventDefault();if(d.open&&d.dataset.closing!=='1')closeDetails(d);else openDetails(d)})});
 
-const bar=$('#rv-bar'),foot=document.querySelector('footer.foot'),water=$('#water'),ask=$('#ask'),ctas=$$('.btn').filter(x=>!x.closest('#rv-bar'));
+const bar=$('#rv-bar'),foot=document.querySelector('footer.foot'),water=$('#water'),ask=$('#ask'),pick=$('[data-wh-pick]'),ctas=$$('.btn').filter(x=>!x.closest('#rv-bar'));
 if(bar&&water&&ask){bar.hidden=false;bar.classList.add('off');let queued=false;
  const onScreen=el=>{if(!el)return false;const r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0};
  const check=()=>{queued=false;const h=innerHeight,w=water.getBoundingClientRect(),a=ask.getBoundingClientRect();
-  const show=w.top<h*.5&&(a.top>h*.9||a.bottom<0)&&!(foot&&foot.getBoundingClientRect().top<h)&&!ctas.some(onScreen);bar.classList.toggle('off',!show)};
+  const show=w.top<h*.5&&(a.top>h*.9||a.bottom<0)&&!(foot&&foot.getBoundingClientRect().top<h)&&!ctas.some(onScreen)&&!onScreen(pick);bar.classList.toggle('off',!show)};
  addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(check)}},{passive:true});addEventListener('resize',check);check()}
 
 setOffer(current);
