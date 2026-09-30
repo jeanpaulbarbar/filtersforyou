@@ -25,7 +25,7 @@ const finishes={
 };
 const models={
   pullout:{label:'Premium pull out three way mixer',short:'Premium pull out mixer',kicker:'The premium mixer',title:'One beautiful tap.<br>Every kind of water.',description:'A concealed pull out hose gives you extra reach for rinsing and filling. Hot and cold use the main handle, with a separate lever for purified drinking water.',finishes:['gold','black','stainless','gunmetal','copper'],cut:f=>'3way-mixer-pullout-'+f,scene:true,price:'From <strong>$1,050</strong>',note:'Installed with your system',details:['Hot, cold and filtered water connections','Separate filtered water control','Concealed pull out hose']},
-  classic:{label:'Classic three way mixer',short:'Classic three way mixer',kicker:'The everyday original',title:'A cleaner bench.<br>A classic curve.',description:'Replace your kitchen mixer with one tap for hot, cold and filtered water. The familiar gooseneck shape, with a little more going on inside.',finishes:['chrome','black'],cut:(f,shape)=>'3way-mixer-'+shape+'-'+(f==='chrome'?'stainless':f),scene:false,price:'From <strong>$500</strong>',note:'Installed with your system',details:['Classic fixed gooseneck spout','Hot, cold and filtered water','Your existing mixer is replaced']},
+  classic:{label:'Classic three way mixer',short:'Classic three way mixer',kicker:'The everyday original',title:'A cleaner bench.<br>A classic curve.',description:'Replace your kitchen mixer with one tap for hot, cold and filtered water. The familiar gooseneck shape, with a little more going on inside.',get finishes(){return shape==='square'?['chrome','black']:['gold','stainless','gunmetal','black','chrome']},cut:(f,shape)=>'3way-mixer-'+shape+'-'+(f==='chrome'?'stainless':f),scene:false,price:'<strong>$480</strong>',note:'Installed with your system',get details(){return [shape==='square'?'Square profile spout':'Classic fixed gooseneck spout','Hot, cold and filtered water','Your existing mixer is replaced']}},
   deluxe:{label:'Deluxe three way mixer',short:'Deluxe mixer',kicker:'Deluxe',title:'Pure water.<br>With a simple twist.',description:'Twist the ribbed end of the spout to turn on filtered water, delivered through that spout. The side handle controls your everyday hot and cold water.',finishes:['chrome','warmnickel','black','brass','bronze','gunmetal'],price:'<strong>$680</strong>',note:'Installed with your system',details:['Twist the ribbed spout to turn filtered water on','Side handle controls normal hot and cold water','Warm Nickel has a subtle warm tone']},
   filter:{label:'Dedicated filtered water tap',short:'Dedicated filter tap',kicker:'The little finishing touch',title:'Your mixer stays.<br>Pure water joins it.',description:'A dedicated drinking tap beside your existing mixer. Chrome comes with your system. Or match your kitchen with a premium finish.',finishes:['chrome','gold','black','stainless','gunmetal','copper'],cut:f=>'filter-tap-'+({chrome:'chrome',gold:'brushed-gold',black:'matte-black',stainless:'brushed',gunmetal:'gunmetal',copper:'copper'}[f]),scene:false,price:'<strong>Included</strong>',note:'Chrome with your system',details:['Dedicated filtered water only','Your kitchen mixer stays in place','Separate sink or benchtop opening required']}
 };
@@ -36,13 +36,15 @@ const premiumStyles={
 };
 const filterStyles={classic:models.filter,premium:{...models.filter,label:'Premium dedicated filter tap',short:'Premium filter tap',kicker:'The premium filter tap',title:'A finer detail.<br>A fresh glass.',description:'A slender curved spout and a neat side paddle, dedicated to your filtered drinking water. Your kitchen mixer stays right where it is.',finishes:['gold','black','stainless','gunmetal','copper'],price:'<strong>$480</strong>',note:'Installed with your system',details:['Dedicated filtered drinking water','Side paddle control and swivel spout','Your existing hot and cold mixer stays']}};
 let model='deluxe',finish='brass',shape='gooseneck',premiumStyle='modern',filterStyle='classic',lastFocus=null,lastKey='';
+const onSale=()=>model==='classic';
+const salePrice=()=>shape==='square'?550:480;
 const current=()=>model==='pullout'?premiumStyles[premiumStyle]:model==='filter'?filterStyles[filterStyle]:models[model];
-const namedFinish=k=>model==='pullout'&&premiumStyle==='antique'&&k==='bronze'?'Bronze':model==='deluxe'?({chrome:'Chrome',black:'Matte Black',gunmetal:'Gun Metal'}[k]||finishes[k].name):finishes[k].name;
+const namedFinish=k=>model==='pullout'&&premiumStyle==='antique'&&k==='bronze'?'Bronze':model==='classic'?({gold:'Brushed gold',stainless:'Stainless steel',gunmetal:'Gunmetal',black:'Matte black',chrome:'Chrome'}[k]||finishes[k].name):model==='deluxe'?({chrome:'Chrome',black:'Matte Black',gunmetal:'Gun Metal'}[k]||finishes[k].name):finishes[k].name;
 const sceneSrc=(f,m)=>f==='gold'?M+'tap-studio/gold-callouts/premium-gold'+(m?'-m':'')+'.webp':M+'ro/tap-'+finishes[f].scene+(m?'-m':'')+'.webp';
 const finishName=()=>namedFinish(finish);
 const selection=()=>current().label+(model==='classic'?' ('+shape+')':'')+' · '+finishName();
 const styleKey=()=>model==='pullout'?premiumStyle:model==='filter'?filterStyle:model==='classic'?shape:null;
-const lifestyleSrc=(f=finish)=>model==='deluxe'?(f==='brass'?M+'tap-studio/gold-callouts/deluxe-brass.webp':M+'tap-studio/deluxe/deluxe-'+f+'.webp'):model==='pullout'?M+'tap-studio/ranges/'+premiumStyle+'-'+f+'.webp':model==='filter'&&filterStyle==='premium'?M+'tap-studio/filter-premium/filter-'+f+'.webp':M+'tap-studio/polish-nanopro/'+(model==='classic'?'classic-'+shape:model)+'-'+f+'.webp';
+const lifestyleSrc=(f=finish)=>model==='deluxe'?(f==='brass'?M+'tap-studio/gold-callouts/deluxe-brass.webp':M+'tap-studio/deluxe/deluxe-'+f+'.webp'):model==='pullout'?M+'tap-studio/ranges/'+premiumStyle+'-'+f+'.webp':model==='filter'&&filterStyle==='premium'?M+'tap-studio/filter-premium/filter-'+f+'.webp':model==='classic'?M+'tap-studio/classic/classic-'+shape+'-'+f+'.webp':M+'tap-studio/polish-nanopro/'+model+'-'+f+'.webp';
 const usesScene=()=>model==='pullout'&&premiumStyle==='modern';
 const stage=byId('product-stage');
 const studioModels=$('.ts-models'),studioFinishes=byId('finish-controls'),studioPrice=$('.ts-price-line'),studioAction=$('.ts-action');
@@ -64,7 +66,7 @@ function showLifestyle(src){
   if(!pic){pic=document.createElement('picture');pic.dataset.src=src;const source=document.createElement('source');source.media='(max-width:859px)';source.srcset=src.replace('.webp','-m.webp');const im=new Image();im.alt=selection();im.width=1200;im.height=1600;pic.append(source,im);stack.append(pic);im.src=src}
   pic.querySelector('img').decode().then(()=>{if(request!==imageRequest)return;stack.querySelectorAll('picture').forEach(p=>p.classList.toggle('on',p===pic));stage.setAttribute('aria-busy','false')}).catch(()=>{if(request===imageRequest)stage.setAttribute('aria-busy','false')});
 }
-const priceText=()=>byId('price-label').textContent.trim();
+const priceText=()=>onSale()?'$'+salePrice():byId('price-label').textContent.trim();
 const shownImage=()=>usesScene()?sceneSrc(finish):lifestyleSrc();
 const INCLUDED={model:'filter',style:'classic',finish:'chrome',label:'Classic chrome filter tap',price:'Included',image:M+'tap-studio/polish-nanopro/filter-chrome.webp'};
 const isIncluded=()=>model==='filter'&&filterStyle==='classic'&&finish==='chrome';
@@ -94,10 +96,10 @@ function update(animate=true){
   const big=scene?sceneSrc(finish):lifestyleSrc().replace('.webp','-full.webp');
   const lbImg=byId('lightbox-image');if(lbImg){lbImg.src=big;lbImg.alt=selection()}
   const lbCap=byId('lightbox-caption');if(lbCap)lbCap.textContent=selection();
-  byId('price-label').innerHTML=model==='deluxe'?'<strong>$'+(['brass','bronze','gunmetal'].includes(finish)?800:680)+'</strong>':model==='filter'&&filterStyle==='classic'?(finish==='chrome'?'<strong>Included</strong>':'<strong>$150</strong>'):model==='classic'?(finish==='black'?'From <strong>$550</strong>':m.price):m.price;
-  byId('price-note').textContent=model==='filter'&&filterStyle==='classic'?(finish==='chrome'?'Chrome with your system':'Finish upgrade with your system'):m.note;
+  byId('price-label').innerHTML=model==='deluxe'?'<strong>$'+(['brass','bronze','gunmetal'].includes(finish)?800:680)+'</strong>':model==='filter'&&filterStyle==='classic'?(finish==='chrome'?'<strong>Included</strong>':'<strong>$150</strong>'):model==='classic'?'<s class="ts-was"><span class="ts-vh">Was </span>$700</s><strong><span class="ts-vh">now </span>$'+salePrice()+'</strong>':m.price;
+  byId('price-note').textContent=model==='filter'&&filterStyle==='classic'?(finish==='chrome'?'Chrome with your system':'Finish upgrade with your system'):onSale()?'On sale, installed with your system':m.note;
   const dn=byId('details-name');
-  if(dn){dn.textContent=m.short;byId('details-description').textContent=byId('model-description').textContent;byId('details-finish').textContent=finishName();byId('details-price').textContent=byId('price-label').textContent;byId('details-list').replaceChildren(...m.details.map(t=>{const li=document.createElement('li');li.textContent=t;return li}))}
+  if(dn){dn.textContent=m.short;byId('details-description').textContent=byId('model-description').textContent;byId('details-finish').textContent=finishName();byId('details-price').textContent=onSale()?'$'+salePrice()+' on sale, was $700':byId('price-label').textContent;byId('details-list').replaceChildren(...m.details.map(t=>{const li=document.createElement('li');li.textContent=t;return li}))}
   $$('[data-model]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.model===model)));
   byId('classic-shapes').hidden=model!=='classic';byId('shape-summary').hidden=model!=='deluxe';byId('premium-styles').hidden=model!=='pullout';byId('filter-styles').hidden=model!=='filter';
   $$('[data-premium-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.premiumStyle===premiumStyle)));
@@ -105,7 +107,7 @@ function update(animate=true){
   byId('shape-summary').textContent=m.short;
   $$('[data-shape]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.shape===shape)));
   const focused=document.activeElement&&section.contains(document.activeElement)&&document.activeElement.dataset&&document.activeElement.dataset.finish;
-  byId('finish-options').replaceChildren(...m.finishes.map(k=>{const b=document.createElement('button');b.type='button';b.className='sw'+(k===finish?' on':'');b.dataset.finish=k;const name=namedFinish(k);b.setAttribute('aria-label',name);b.setAttribute('aria-pressed',String(k===finish));b.title=name;b.style.setProperty('--f',finishes[k].sw);const i=document.createElement('i');b.append(i,document.createTextNode(name));b.addEventListener('click',()=>{finish=k;update()});return b}));
+  byId('finish-options').replaceChildren(...m.finishes.map(k=>{const b=document.createElement('button');b.type='button';b.className='sw'+(k===finish?' on':'');b.dataset.finish=k;const name=namedFinish(k);b.setAttribute('aria-label',name);b.setAttribute('aria-pressed',String(k===finish));b.title=name;b.style.setProperty('--f',finishes[k].sw);const i=document.createElement('i');b.append(i,document.createTextNode(name));if(onSale()){const d=document.createElement('span');d.className='ts-sale-dot';d.setAttribute('aria-hidden','true');d.textContent='$';b.append(d);b.setAttribute('aria-label',name+', on sale')}b.addEventListener('click',()=>{finish=k;update()});return b}));
   if(focused){const b=section.querySelector(`[data-finish="${finish}"]`);b&&b.focus({preventScroll:true})}
   if(animate&&!reduce){stage.classList.remove('wipe-on');void stage.offsetWidth;stage.classList.add('wipe-on')}
   const key=[model,styleKey(),finish].join('|');
@@ -121,7 +123,7 @@ function setModel(m){if(!models[m])return;model=m;if(m==='filter')filterStyle='c
 function setStyle(kind,value){if(kind==='premium')premiumStyle=value;else filterStyle=value;if(!current().finishes.includes(finish))finish=current().finishes[0];update();warmFamily()}
 $$('[data-premium-style]').forEach(b=>b.addEventListener('click',()=>setStyle('premium',b.dataset.premiumStyle)));
 $$('[data-filter-style]').forEach(b=>b.addEventListener('click',()=>setStyle('filter',b.dataset.filterStyle)));
-$$('[data-shape]').forEach(b=>b.addEventListener('click',()=>{shape=b.dataset.shape;update();warmFamily()}));
+$$('[data-shape]').forEach(b=>b.addEventListener('click',()=>{shape=b.dataset.shape;if(!current().finishes.includes(finish))finish=current().finishes[0];update();warmFamily()}));
 $$('[data-model]').forEach(b=>b.addEventListener('click',()=>setModel(b.dataset.model)));
 byId('finish-options').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const a=current().finishes;let i=a.indexOf(finish);i=e.key==='Home'?0:e.key==='End'?a.length-1:(i+(e.key==='ArrowRight'?1:-1)+a.length)%a.length;finish=a[i];update();const b=section.querySelector(`[data-finish="${finish}"]`);b&&b.focus({preventScroll:true})});
 byId('surprise').addEventListener('click',()=>{const a=current().finishes.filter(f=>f!==finish);finish=a[Math.floor(Math.random()*a.length)];update()});

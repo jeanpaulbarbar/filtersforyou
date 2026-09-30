@@ -3685,7 +3685,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
 }
 </script>
 <link rel="stylesheet" href="assets/css/product-hero-card.css">
-<link rel="stylesheet" href="media/ro/ro-studio.css?v=73b3bee4">
+<link rel="stylesheet" href="media/ro/ro-studio.css?v=f566b7ca">
 <script src="assets/js/product-hero-card.js" defer></script>
 </head>
 <body>
@@ -4031,7 +4031,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
   </figure></div>
   <div id="mobile-finishes"></div></div>
   <div class="ts-card" id="studioCard">
-   <div class="ts-models" role="group" aria-label="Tap style"><button type="button" data-model="deluxe" aria-pressed="true" aria-label="Deluxe, Bestseller"><span class="ts-bestseller" aria-hidden="true">Bestseller</span>Deluxe</button><button type="button" data-model="pullout" aria-pressed="false">Premium</button><button type="button" data-model="classic" aria-pressed="false">Classic</button><button type="button" data-model="filter" aria-pressed="false">Filter</button></div>
+   <div class="ts-models" role="group" aria-label="Tap style"><button type="button" data-model="deluxe" aria-pressed="true" aria-label="Deluxe, Bestseller"><span class="ts-bestseller" aria-hidden="true">Bestseller</span>Deluxe</button><button type="button" data-model="pullout" aria-pressed="false">Premium</button><button type="button" data-model="classic" aria-pressed="false" aria-label="Classic, on sale"><span class="ts-bestseller ts-onsale" aria-hidden="true">SALE</span>Classic</button><button type="button" data-model="filter" aria-pressed="false">Filter</button></div>
 
    <div class="ts-card-copy"><div class="ts-card-head"><span class="ts-kicker" id="model-kicker">Deluxe</span><div class="ts-card-links"><button type="button" class="ts-warranty-link" id="warranty-open" aria-haspopup="dialog" aria-controls="warranty-dialog" hidden>Warranty <span aria-hidden="true">↗</span></button><button type="button" class="ts-details-btn" id="details-toggle" aria-haspopup="dialog" aria-controls="details-dialog">The details</button></div></div>
    <h3 id="model-title">Pure water.<br>With a simple twist.</h3>
@@ -4048,7 +4048,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
    <p class="ts-quote-note">Your full price, in writing, before we start.</p>
   </div>
  </div>
-<noscript><div class="ts-wrap"><h3>Choose your tap</h3><p>Premium Modern mixers start at $1,050. Victorian mixers are $1,150. Antique mixers are $1,400 in Bronze, Aurum, Slate or Steel. Classic mixers start at $500. Premium dedicated filter taps are $480 in Brushed gold, Matte black, Brushed stainless, Gunmetal or Brushed copper. Classic Chrome filter taps are included with your system, with other finishes a $150 upgrade.</p><h3>Deluxe three way mixer</h3><p>Twist the ribbed end of the spout to turn on filtered water through that spout. The side handle controls hot and cold water. Chrome, Warm Nickel and Matte Black are $680. Brushed Brass, Brushed Bronze and Gun Metal are $800, installed with your system.</p><p>Warm Nickel has a subtle warm tone. <a href="tel:0430546749">Call 0430 546 749 to choose your tap.</a></p></div></noscript>
+<noscript><div class="ts-wrap"><h3>Choose your tap</h3><p>Premium Modern mixers start at $1,050. Victorian mixers are $1,150. Antique mixers are $1,400 in Bronze, Aurum, Slate or Steel. Classic gooseneck mixers are on sale at $480, down from $700, in Brushed gold, Stainless steel, Gunmetal, Matte black or Chrome. Square Classic mixers are on sale at $550, down from $700, in Chrome or Matte black. Premium dedicated filter taps are $480 in Brushed gold, Matte black, Brushed stainless, Gunmetal or Brushed copper. Classic Chrome filter taps are included with your system, with other finishes a $150 upgrade.</p><h3>Deluxe three way mixer</h3><p>Twist the ribbed end of the spout to turn on filtered water through that spout. The side handle controls hot and cold water. Chrome, Warm Nickel and Matte Black are $680. Brushed Brass, Brushed Bronze and Gun Metal are $800, installed with your system.</p><p>Warm Nickel has a subtle warm tone. <a href="tel:0430546749">Call 0430 546 749 to choose your tap.</a></p></div></noscript>
 </section>
 
 <section class="rst" id="how" data-sc-act="flow" aria-labelledby="hw-title">
@@ -6500,7 +6500,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
 <script>
 (function(){
   var s = document.getElementById('studio'), done = false;
-  function go(){ if (done) return; done = true; var t = document.createElement('script'); t.src = 'media/ro/ro-studio.js?v=339c3791'; document.body.appendChild(t); }
+  function go(){ if (done) return; done = true; var t = document.createElement('script'); t.src = 'media/ro/ro-studio.js?v=245d1b07'; document.body.appendChild(t); }
   if (!s || !('IntersectionObserver' in window) || /^#(studio|mixertapstudio)$/i.test(location.hash)){ go(); return; }
   var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); go(); } }, {rootMargin:'150% 0px'});
   io.observe(s);
