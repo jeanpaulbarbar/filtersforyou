@@ -59,7 +59,8 @@ const fade=(img,src,alt)=>{if(!img)return Promise.resolve();if(img.getAttribute(
 
 let current=Object.keys(OFFERS).find(k=>OFFERS[k].default)||Object.keys(OFFERS)[0];let project=false;
 const want=new URLSearchParams(location.search).get('system');if(want&&OFFERS[want])current=want;
-const opts=$$('.wh-opt'),card=$('[data-wh-offer]');
+const opts=$$('.wh-opt'),card=$('[data-wh-offer]'),tabs=$$('.wh-mtab'),mtrack=$('[data-wh-track]'),slides=mtrack?$$('.wh-mslide',mtrack):[],dots=$$('.wh-mdots i');let trackLock=0;
+function showSlide(key,smooth){if(!mtrack||!mtrack.clientWidth)return;const i=slides.findIndex(x=>x.dataset.offer===key);if(i<0)return;trackLock=performance.now();mtrack.scrollTo({left:i*mtrack.clientWidth,behavior:smooth&&!reduce?'smooth':'auto'})}
 const q=$('[data-qform]'),form=q?q.querySelector('form'):null;
 const addon=$('[data-wh-addon]'),upgrade=$('[data-wh-upgrade]');
 
@@ -75,6 +76,9 @@ function summary(timing){const o=OFFERS[chosenKey()];if(!o)return'';let s=o.name
 
 function setOffer(key,opts2={}){const o=OFFERS[key];if(!o)return;const prev=current;current=key;
  opts.forEach(b=>{const on=b.dataset.offer===key;b.setAttribute('aria-checked',String(on));b.tabIndex=on?0:-1;b.classList.toggle('on',on)});
+ tabs.forEach(b=>{const on=b.dataset.offer===key;b.setAttribute('aria-checked',String(on));b.tabIndex=on?0:-1;b.classList.toggle('on',on)});
+ dots.forEach((d,i)=>d.classList.toggle('on',!!slides[i]&&slides[i].dataset.offer===key));
+ if(!opts2.fromTrack)showSlide(key,!!opts2.user);
  $$('.wh-change__list [data-offer]').forEach(b=>{const on=b.dataset.offer===key;b.setAttribute('aria-checked',String(on));b.classList.toggle('on',on)});
  if(card){card.dataset.tier=o.tier;fade($('[data-wh-o-img]',card),o.tile,o.alt);
   $('[data-wh-o-name]',card).textContent=o.name;$('[data-wh-o-price]',card).textContent=o.price;
@@ -93,6 +97,10 @@ function setOffer(key,opts2={}){const o=OFFERS[key];if(!o)return;const prev=curr
 opts.forEach((b,i)=>{b.addEventListener('click',()=>setOffer(b.dataset.offer,{user:true}));
  b.addEventListener('keydown',e=>{const k={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key];if(!k)return;e.preventDefault();const n=opts[(i+k+opts.length)%opts.length];n.focus();setOffer(n.dataset.offer,{user:true})})});
 
+tabs.forEach((b,i)=>{b.addEventListener('click',()=>setOffer(b.dataset.offer,{user:true}));
+ b.addEventListener('keydown',e=>{const k={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key];if(!k)return;e.preventDefault();const n=tabs[(i+k+tabs.length)%tabs.length];n.focus();setOffer(n.dataset.offer,{user:true})})});
+if(mtrack){whenSeen(card,()=>slides.forEach(f=>{const im=f.querySelector('img');if(im)im.loading='eager'}),0);let tt=null;mtrack.addEventListener('scroll',()=>{clearTimeout(tt);tt=setTimeout(()=>{if(performance.now()-trackLock<650)return;const i=Math.round(mtrack.scrollLeft/Math.max(1,mtrack.clientWidth)),k=slides[i]&&slides[i].dataset.offer;if(k&&k!==current)setOffer(k,{user:true,fromTrack:true})},110)},{passive:true});
+ addEventListener('resize',()=>showSlide(current,false))}
 const segs=$$('[data-wh-deluxe-cab]');let deluxeCab='stainless';
 function setDeluxeCab(cab,quiet){const d=DELUXE[cab];if(!d)return;deluxeCab=cab;
  segs.forEach(b=>{const on=b.dataset.whDeluxeCab===cab;b.classList.toggle('on',on);b.setAttribute('aria-checked',String(on));b.tabIndex=on?0:-1});
@@ -144,11 +152,11 @@ function closeDetails(d){if(!d.open)return;if(reduce){d.open=false;d.classList.r
 $$('details').forEach(d=>{const s=d.querySelector('summary');if(!s)return;if(d.open)d.classList.add('is-open');
  s.addEventListener('click',e=>{e.preventDefault();if(d.open&&d.dataset.closing!=='1')closeDetails(d);else openDetails(d)})});
 
-const bar=$('#rv-bar'),foot=document.querySelector('footer.foot'),water=$('#water'),ask=$('#ask'),pick=$('[data-wh-pick]'),ctas=$$('.btn').filter(x=>!x.closest('#rv-bar'));
+const bar=$('#rv-bar'),foot=document.querySelector('footer.foot'),water=$('#water'),ask=$('#ask'),pick=$('[data-wh-pick]'),offerCard=$('[data-wh-offer]'),ctas=$$('.btn').filter(x=>!x.closest('#rv-bar'));
 if(bar&&water&&ask){bar.hidden=false;bar.classList.add('off');let queued=false;
  const onScreen=el=>{if(!el)return false;const r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0};
  const check=()=>{queued=false;const h=innerHeight,w=water.getBoundingClientRect(),a=ask.getBoundingClientRect();
-  const show=w.top<h*.5&&(a.top>h*.9||a.bottom<0)&&!(foot&&foot.getBoundingClientRect().top<h)&&!ctas.some(onScreen)&&!onScreen(pick);bar.classList.toggle('off',!show)};
+  const show=w.top<h*.5&&(a.top>h*.9||a.bottom<0)&&!(foot&&foot.getBoundingClientRect().top<h)&&!ctas.some(onScreen)&&!onScreen(pick)&&!onScreen(offerCard);bar.classList.toggle('off',!show)};
  addEventListener('scroll',()=>{if(!queued){queued=true;requestAnimationFrame(check)}},{passive:true});addEventListener('resize',check);check()}
 
 setOffer(current);
