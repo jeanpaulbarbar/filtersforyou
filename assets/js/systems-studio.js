@@ -78,7 +78,7 @@ window.ffyTapIncluded={...INCLUDED};
 function update(animate=true){
   const m=current(),f=finishes[finish];
   section.dataset.tapModel=model;section.dataset.tapStyle=model==='pullout'?premiumStyle:model==='filter'?filterStyle:shape;
-  byId('warranty-open').hidden=!(model==='deluxe'||model==='pullout'||model==='filter'&&filterStyle==='premium');
+  byId('warranty-open').hidden=!(model==='filter'&&filterStyle==='premium');
   [section,...dialogs].forEach(el=>{el.style.setProperty('--ts-metal',f.color);el.dataset.tapModel=model});
   byId('model-kicker').textContent=m.kicker;
   byId('model-title').innerHTML=model==='classic'&&shape==='square'?'A cleaner bench.<br>A sharper line.':m.title;
@@ -101,7 +101,7 @@ function update(animate=true){
   const dn=byId('details-name');
   if(dn){dn.textContent=m.short;byId('details-description').textContent=byId('model-description').textContent;byId('details-finish').textContent=finishName();byId('details-price').textContent=onSale()?'$'+salePrice()+' on sale, was $700':byId('price-label').textContent;byId('details-list').replaceChildren(...m.details.map(t=>{const li=document.createElement('li');li.textContent=t;return li}))}
   $$('[data-model]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.model===model)));
-  byId('classic-warranty-slot').hidden=model!=='classic';byId('shape-summary').hidden=model!=='deluxe';byId('premium-styles').hidden=model!=='pullout';byId('filter-styles').hidden=model!=='filter';
+  const wl={deluxe:'25 year warranty',pullout:'Lifetime warranty',classic:'25 year warranty'}[model];byId('warranty-slot').hidden=!wl;if(wl)byId('warranty-slot-label').textContent=wl;$('.ts-shape-slot').hidden=model==='deluxe'||model==='classic';byId('shape-summary').hidden=model!=='deluxe';byId('premium-styles').hidden=model!=='pullout';byId('filter-styles').hidden=model!=='filter';
   $$('[data-premium-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.premiumStyle===premiumStyle)));
   $$('[data-filter-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filterStyle===filterStyle)));
   byId('shape-summary').textContent=m.short;
@@ -123,7 +123,7 @@ function setModel(m){if(!models[m])return;model=m;if(m==='filter')filterStyle='c
 function setStyle(kind,value){if(kind==='premium')premiumStyle=value;else filterStyle=value;if(!current().finishes.includes(finish))finish=current().finishes[0];update();warmFamily()}
 $$('[data-premium-style]').forEach(b=>b.addEventListener('click',()=>setStyle('premium',b.dataset.premiumStyle)));
 $$('[data-filter-style]').forEach(b=>b.addEventListener('click',()=>setStyle('filter',b.dataset.filterStyle)));
-byId('classic-warranty-open').addEventListener('click',()=>byId('warranty-open').click());
+byId('warranty-slot-open').addEventListener('click',()=>byId('warranty-open').click());
 $$('[data-model]').forEach(b=>b.addEventListener('click',()=>setModel(b.dataset.model)));
 byId('finish-options').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const a=current().finishes;let i=a.indexOf(finish);i=e.key==='Home'?0:e.key==='End'?a.length-1:(i+(e.key==='ArrowRight'?1:-1)+a.length)%a.length;finish=a[i];update();const b=section.querySelector(`[data-finish="${finish}"]`);b&&b.focus({preventScroll:true})});
 byId('surprise').addEventListener('click',()=>{const a=current().finishes.filter(f=>f!==finish);finish=a[Math.floor(Math.random()*a.length)];update()});

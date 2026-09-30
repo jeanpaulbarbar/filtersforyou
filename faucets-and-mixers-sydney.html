@@ -1435,6 +1435,7 @@ html.lenis{scroll-behavior:auto}
  .ts-studio .ts-preview .ts-stage .ts-zoom{top:auto;right:12px;bottom:12px}
  .ts-studio #mobile-finishes{order:2;padding:0;margin:12px 0 0;display:flex;flex-direction:column}
  .ts-studio #mobile-finishes .ts-shape-slot{margin-bottom:4px}
+ .ts-studio #mobile-finishes .ts-warranty-slot{margin-bottom:4px}
  .ts-studio #mobile-finishes .ts-shape{margin:0;padding:0;gap:8px}
  .ts-studio #mobile-finishes .ts-shape button{height:44px;min-height:44px;font-size:13px;padding:0 8px}
  .ts-studio #mobile-finishes .ts-shape button svg{width:24px;height:24px}
@@ -1547,7 +1548,9 @@ html.lenis{scroll-behavior:auto}
 .ts-onsale::after{background:var(--sale)}
 .ts-swatches .sw{position:relative}
 .ts-sale-dot{position:absolute;top:-5px;right:-5px;z-index:1;display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:var(--sale);color:#fff;font-family:var(--badge);font-size:11.5px;font-weight:800;line-height:1;box-shadow:0 0 0 2px #fff,0 2px 5px rgba(4,16,46,.24);pointer-events:none}
-.ts-studio .ts-warranty-slot{grid-template-columns:1fr}
+.ts-studio .ts-warranty-slot{grid-template-columns:1fr;height:44px;margin:0 0 8px}
+.ts-studio .ts-shape-slot[hidden],.ts-studio .ts-warranty-slot[hidden]{display:none}
+@media(min-width:860px){.ts-studio .ts-shape-slot:not([hidden]):has(+ .ts-warranty-slot:not([hidden])){margin-bottom:4px}.ts-studio .ts-shape-slot:not([hidden]) + .ts-warranty-slot{margin-bottom:4px}}
 .ts-studio .ts-warranty-slot button{justify-content:center;gap:9px}
 .ts-studio .ts-warranty-slot svg{width:22px;height:22px;color:#B8923F}
 .ts-studio .ts-warranty-slot .ts-warranty-arrow{width:14px;height:14px;color:var(--blue)}
@@ -2485,7 +2488,7 @@ html.lenis{scroll-behavior:auto}
    <h3 id="model-title">Pure water.<br>With a simple twist.</h3>
    <p class="ts-card-desc" id="model-description">Twist the ribbed end of the spout to turn on filtered water, delivered through that spout. The side handle controls your everyday hot and cold water.</p>
 
-   </div><div class="ts-finish-controls" id="finish-controls"><div class="ts-shape-slot"><div class="ts-style-pills" id="premium-styles" role="group" aria-label="Premium style" hidden><button type="button" data-premium-style="modern" aria-pressed="true">Modern</button><button type="button" data-premium-style="victorian" aria-pressed="false">Victorian</button><button type="button" data-premium-style="antique" aria-pressed="false">Antique</button></div><div class="ts-style-pills" id="filter-styles" role="group" aria-label="Filter tap range" hidden><button type="button" data-filter-style="classic" aria-pressed="true">Classic</button><button type="button" data-filter-style="premium" aria-pressed="false">Premium</button></div><span id="shape-summary">Deluxe mixer</span><div class="ts-shape ts-warranty-slot" id="classic-warranty-slot" hidden><button type="button" id="classic-warranty-open" aria-haspopup="dialog" aria-controls="warranty-dialog"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5.5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6l-7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>25 year warranty</span><svg class="ts-warranty-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div><div class="ts-finish-head"><span class="ts-kicker">The finish</span><b id="finish-name" aria-live="polite">Brushed Brass</b><button type="button" class="ts-surprise" id="surprise">Surprise me</button></div>
+   </div><div class="ts-finish-controls" id="finish-controls"><div class="ts-shape-slot"><div class="ts-style-pills" id="premium-styles" role="group" aria-label="Premium style" hidden><button type="button" data-premium-style="modern" aria-pressed="true">Modern</button><button type="button" data-premium-style="victorian" aria-pressed="false">Victorian</button><button type="button" data-premium-style="antique" aria-pressed="false">Antique</button></div><div class="ts-style-pills" id="filter-styles" role="group" aria-label="Filter tap range" hidden><button type="button" data-filter-style="classic" aria-pressed="true">Classic</button><button type="button" data-filter-style="premium" aria-pressed="false">Premium</button></div><span id="shape-summary">Deluxe mixer</span></div><div class="ts-shape ts-warranty-slot" id="warranty-slot" hidden><button type="button" id="warranty-slot-open" aria-haspopup="dialog" aria-controls="warranty-dialog"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5.5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6l-7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="warranty-slot-label">25 year warranty</span><svg class="ts-warranty-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="ts-finish-head"><span class="ts-kicker">The finish</span><b id="finish-name" aria-live="polite">Brushed Brass</b><button type="button" class="ts-surprise" id="surprise">Surprise me</button></div>
    <div class="swatches ts-swatches" id="finish-options" role="group" aria-label="Choose a finish"></div></div>
    <div class="ts-price-line"><span class="ts-price" id="price-label"><strong>$800</strong></span><span class="ts-price-note" id="price-note">Installed with your system</span></div>
    <button type="button" class="btn ts-action" data-quote><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Add this tap to my quote</button>
@@ -4967,7 +4970,7 @@ function showLifestyle(src){
 
 function update(animate=true){
   const m=current(),f=finishes[finish];
-  root.dataset.tapModel=model;root.dataset.tapStyle=model==='pullout'?premiumStyle:model==='filter'?filterStyle:shape;$('#warranty-open').hidden=!(model==='deluxe'||model==='pullout'||model==='filter'&&filterStyle==='premium');
+  root.dataset.tapModel=model;root.dataset.tapStyle=model==='pullout'?premiumStyle:model==='filter'?filterStyle:shape;$('#warranty-open').hidden=!(model==='filter'&&filterStyle==='premium');
   root.style.setProperty('--ts-metal',f.color);
   $('#model-kicker').textContent=m.kicker;
   $('#model-title').innerHTML=model==='classic'&&shape==='square'?'A cleaner bench.<br>A sharper line.':m.title;
@@ -4993,7 +4996,7 @@ function update(animate=true){
   $('#quote-price').textContent=tapPriceLine();
   const barName=$('#tx-bar-name'),barModel=$('#tx-bar-model');if(barName){barName.textContent=finishName();barModel.textContent=current().short}
   $$('[data-model]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.model===model)));
-  $('#classic-warranty-slot').hidden=model!=='classic';$('#shape-summary').hidden=model!=='deluxe';$('#premium-styles').hidden=model!=='pullout';$('#filter-styles').hidden=model!=='filter';$$('[data-premium-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.premiumStyle===premiumStyle)));$$('[data-filter-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filterStyle===filterStyle)));$('#shape-summary').textContent=m.short;$$('[data-shape]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.shape===shape)));
+  const wl={deluxe:'25 year warranty',pullout:'Lifetime warranty',classic:'25 year warranty'}[model];$('#warranty-slot').hidden=!wl;if(wl)$('#warranty-slot-label').textContent=wl;$('.ts-shape-slot').hidden=model==='deluxe'||model==='classic';$('#shape-summary').hidden=model!=='deluxe';$('#premium-styles').hidden=model!=='pullout';$('#filter-styles').hidden=model!=='filter';$$('[data-premium-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.premiumStyle===premiumStyle)));$$('[data-filter-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filterStyle===filterStyle)));$('#shape-summary').textContent=m.short;$$('[data-shape]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.shape===shape)));
    
   const focused=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.finish;
   $('#finish-options').replaceChildren(...m.finishes.map(k=>{const b=document.createElement('button');b.type='button';b.className='sw'+(k===finish?' on':'');b.dataset.finish=k;const name=namedFinish(k);b.setAttribute('aria-label',name);b.setAttribute('aria-pressed',String(k===finish));b.title=name;b.style.setProperty('--f',finishes[k].sw);const i=document.createElement('i');b.append(i,document.createTextNode(name));if(onSale(k)){const d=document.createElement('span');d.className='ts-sale-dot';d.setAttribute('aria-hidden','true');d.textContent='$';b.append(d);b.setAttribute('aria-label',name+', on sale')}b.addEventListener('click',()=>{finish=k;update()});return b}));
@@ -5011,7 +5014,7 @@ function setStyle(kind,value){if(kind==='premium')premiumStyle=value;else filter
 $$('[data-premium-style]').forEach(b=>b.addEventListener('click',()=>setStyle('premium',b.dataset.premiumStyle)));
 $$('[data-filter-style]').forEach(b=>b.addEventListener('click',()=>setStyle('filter',b.dataset.filterStyle)));
 
-$('#classic-warranty-open').addEventListener('click',()=>$('#warranty-open').click());
+$('#warranty-slot-open').addEventListener('click',()=>$('#warranty-open').click());
 $$('[data-model]').forEach(b=>b.addEventListener('click',()=>{setModel(b.dataset.model)}));
 $$('[data-pick]').forEach(b=>b.addEventListener('click',()=>{if(b.closest('#finishes'))finish=SWEEP[sweepI].f;setModel(b.dataset.pick)}));
 $('#finish-options').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const a=current().finishes;let i=a.indexOf(finish);i=e.key==='Home'?0:e.key==='End'?a.length-1:(i+(e.key==='ArrowRight'?1:-1)+a.length)%a.length;finish=a[i];update();const b=$(`[data-finish="${finish}"]`);b&&b.focus({preventScroll:true})});

@@ -2601,7 +2601,8 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
 @media (min-width:860px){main#ro-page .ts-studio{zoom:1}}
 @media (min-width:1101px){
   main#ro-page .ts-studio.ts-studio .ts-bench{--studio-height:clamp(560px,calc(100svh - 150px),740px);max-width:1180px;grid-template-columns:calc(var(--studio-height) * .75) minmax(0,1fr);gap:44px}
-  main#ro-page .ts-studio.ts-studio .ts-card{padding:32px 34px 28px;gap:14px;border-radius:26px}
+  main#ro-page .ts-studio.ts-studio .ts-card{padding:32px 34px 28px;gap:14px;border-radius:26px;height:auto;min-height:var(--studio-height)}
+  main#ro-page .ts-studio.ts-studio .ts-card-copy{flex:1 0 auto}
   main#ro-page .ts-studio.ts-studio .ts-models{height:62px}
   main#ro-page .ts-studio.ts-studio .ts-models button{min-height:52px;font-size:16px}
   main#ro-page .ts-studio.ts-studio .ts-card-head{height:32px;margin-bottom:12px}
@@ -3685,7 +3686,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
 }
 </script>
 <link rel="stylesheet" href="assets/css/product-hero-card.css">
-<link rel="stylesheet" href="media/ro/ro-studio.css?v=4ecf5ae8">
+<link rel="stylesheet" href="media/ro/ro-studio.css?v=1ac1a824">
 <script src="assets/js/product-hero-card.js" defer></script>
 </head>
 <body>
@@ -4037,7 +4038,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
    <h3 id="model-title">Pure water.<br>With a simple twist.</h3>
    <p class="ts-card-desc" id="model-description">Twist the ribbed end of the spout to turn on filtered water, delivered through that spout. The side handle controls your everyday hot and cold water.</p>
 
-   </div><div class="ts-finish-controls" id="finish-controls"><div class="ts-shape-slot"><div class="ts-style-pills" id="premium-styles" role="group" aria-label="Premium style" hidden><button type="button" data-premium-style="modern" aria-pressed="true">Modern</button><button type="button" data-premium-style="victorian" aria-pressed="false">Victorian</button><button type="button" data-premium-style="antique" aria-pressed="false">Antique</button></div><div class="ts-style-pills" id="filter-styles" role="group" aria-label="Filter tap range" hidden><button type="button" data-filter-style="classic" aria-pressed="true">Classic</button><button type="button" data-filter-style="premium" aria-pressed="false">Premium</button></div><span id="shape-summary">Deluxe mixer</span><div class="ts-shape ts-warranty-slot" id="classic-warranty-slot" hidden><button type="button" id="classic-warranty-open" aria-haspopup="dialog" aria-controls="warranty-dialog"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5.5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6l-7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>25 year warranty</span><svg class="ts-warranty-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div><div class="ts-finish-head"><span class="ts-kicker">The finish</span><b id="finish-name" aria-live="polite">Brushed Brass</b><button type="button" class="ts-surprise" id="surprise">Surprise me</button></div>
+   </div><div class="ts-finish-controls" id="finish-controls"><div class="ts-shape-slot"><div class="ts-style-pills" id="premium-styles" role="group" aria-label="Premium style" hidden><button type="button" data-premium-style="modern" aria-pressed="true">Modern</button><button type="button" data-premium-style="victorian" aria-pressed="false">Victorian</button><button type="button" data-premium-style="antique" aria-pressed="false">Antique</button></div><div class="ts-style-pills" id="filter-styles" role="group" aria-label="Filter tap range" hidden><button type="button" data-filter-style="classic" aria-pressed="true">Classic</button><button type="button" data-filter-style="premium" aria-pressed="false">Premium</button></div><span id="shape-summary">Deluxe mixer</span></div><div class="ts-shape ts-warranty-slot" id="warranty-slot" hidden><button type="button" id="warranty-slot-open" aria-haspopup="dialog" aria-controls="warranty-dialog"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5.5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6l-7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="warranty-slot-label">25 year warranty</span><svg class="ts-warranty-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="ts-finish-head"><span class="ts-kicker">The finish</span><b id="finish-name" aria-live="polite">Brushed Brass</b><button type="button" class="ts-surprise" id="surprise">Surprise me</button></div>
    <div class="swatches ts-swatches" id="finish-options" role="group" aria-label="Choose a finish"></div></div>
    <div class="ts-price-line"><span class="ts-price" id="price-label"><strong>$800</strong></span><span class="ts-price-note" id="price-note">Installed with your system</span></div>
    <button type="button" class="btn ts-action" data-ts-add><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Add this tap to my request</button>
@@ -6500,7 +6501,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
 <script>
 (function(){
   var s = document.getElementById('studio'), done = false;
-  function go(){ if (done) return; done = true; var t = document.createElement('script'); t.src = 'media/ro/ro-studio.js?v=f1434fb1'; document.body.appendChild(t); }
+  function go(){ if (done) return; done = true; var t = document.createElement('script'); t.src = 'media/ro/ro-studio.js?v=a91c4fe1'; document.body.appendChild(t); }
   if (!s || !('IntersectionObserver' in window) || /^#(studio|mixertapstudio)$/i.test(location.hash)){ go(); return; }
   var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ io.disconnect(); go(); } }, {rootMargin:'150% 0px'});
   io.observe(s);
