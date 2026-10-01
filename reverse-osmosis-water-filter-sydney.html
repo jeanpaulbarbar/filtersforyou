@@ -2597,51 +2597,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
 
 
 
-
-@media (min-width:860px){main#ro-page .ts-studio{zoom:1}}
-@media (min-width:1101px){
-  main#ro-page .ts-studio.ts-studio .ts-bench{--studio-height:clamp(560px,calc(100svh - 150px),740px);max-width:1180px;grid-template-columns:calc(var(--studio-height) * .75) minmax(0,1fr);gap:44px}
-  main#ro-page .ts-studio.ts-studio .ts-card{padding:32px 34px 28px;gap:14px;border-radius:26px;height:auto;min-height:var(--studio-height)}
-  main#ro-page .ts-studio.ts-studio .ts-card-copy{flex:1 0 auto}
-  main#ro-page .ts-studio.ts-studio .ts-models{height:62px}
-  main#ro-page .ts-studio.ts-studio .ts-models button{min-height:52px;font-size:16px}
-  main#ro-page .ts-studio.ts-studio .ts-card-head{height:32px;margin-bottom:12px}
-  main#ro-page .ts-studio.ts-studio .ts-card .ts-kicker{font-size:13px}
-  main#ro-page .ts-studio.ts-studio .ts-card h3{font-size:36px;height:82px;line-height:1.12}
-  main#ro-page .ts-studio.ts-studio .ts-card-desc{font-size:17px;line-height:1.5;margin-top:12px}
-  main#ro-page .ts-studio.ts-studio #shape-summary{font-size:16px}
-  main#ro-page .ts-studio.ts-studio .ts-shape-slot{height:48px;margin-bottom:10px}
-  main#ro-page .ts-studio.ts-studio .ts-shape,main#ro-page .ts-studio.ts-studio .ts-shape button{height:48px;min-height:48px}
-  main#ro-page .ts-studio.ts-studio .ts-shape button{font-size:14.5px}
-  main#ro-page .ts-studio.ts-studio .ts-finish-head{height:36px;min-height:36px}
-  main#ro-page .ts-studio.ts-studio .ts-finish-head b{font-size:16px}
-  main#ro-page .ts-studio.ts-studio .ts-surprise{font-size:13.5px}
-  main#ro-page .ts-studio.ts-studio .ts-swatches{height:56px;min-height:56px;gap:12px;margin-top:6px}
-  main#ro-page .ts-studio.ts-studio .ts-swatches .sw{width:56px;height:56px;min-height:56px}
-  main#ro-page .ts-studio.ts-studio .ts-swatches .sw i{width:38px;height:38px}
-  main#ro-page .ts-studio.ts-studio .ts-price-line{height:72px;min-height:72px;padding-top:14px}
-  main#ro-page .ts-studio.ts-studio .ts-price strong{font-size:40px}
-  main#ro-page .ts-studio.ts-studio .ts-price-note{font-size:14px}
-  main#ro-page .ts-studio.ts-studio .ts-action{height:58px;min-height:58px;font-size:17px}
-  main#ro-page .ts-studio.ts-studio .ts-quote-note{height:20px;font-size:13px;line-height:20px}
-  main#ro-page .ts-studio.ts-studio .ts-stage-tag,main#ro-page .ts-studio.ts-studio .ts-stage figcaption{font-size:14px}
-}
-@media (min-width:1101px) and (max-height:850px){
-  main#ro-page .ts-studio.ts-studio .ts-card-desc{display:block}
-}
-@media (max-width:859px){
-  main#ro-page .ts-studio.ts-studio .ts-bench{max-width:520px;padding-inline:20px}
-  main#ro-page .ts-studio.ts-studio .ts-preview .ts-stage{--photo-height:min(clamp(160px,calc(100svh - 330px),480px),calc((min(100vw,520px) - 40px) / .75))}
-  main#ro-page .ts-studio.ts-studio .ts-mobile-models button{min-height:48px;font-size:15px}
-  main#ro-page .ts-studio.ts-studio #mobile-finishes .ts-finish-head b{font-size:16px}
-  main#ro-page .ts-studio.ts-studio #mobile-finishes .ts-swatches{gap:8px;height:auto;min-height:0;margin-top:14px}
-  main#ro-page .ts-studio.ts-studio #mobile-finishes .ts-swatches .sw{--sw:min(50px,calc((100vw - 80px) / 6));width:var(--sw);height:var(--sw);min-height:var(--sw)}
-  main#ro-page .ts-studio.ts-studio #mobile-finishes .ts-swatches .sw i{width:calc(var(--sw) - 14px);height:calc(var(--sw) - 14px)}
-  main#ro-page .ts-studio.ts-studio #mobile-finishes .ts-price strong{font-size:30px}
-  main#ro-page .ts-studio.ts-studio #mobile-finishes .ts-action{height:52px;min-height:52px;font-size:16px}
-}
 @media (max-width:359px){
-  main#ro-page .ts-studio.ts-studio #mobile-finishes .ts-action{font-size:15px;white-space:nowrap}
   .ryr__tile{width:64px;height:64px;border-radius:14px}
   .ryr__k{font-size:11px;letter-spacing:.1em}
   .ryr__name{font-size:20px}
@@ -2649,9 +2605,6 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
   .ryr__rows b{font-size:19px}
   .ryr__over{padding:18px 16px 16px}
   .ryr__ours{padding:18px 16px}
-  main#ro-page .ts-studio.ts-studio .ts-bench{padding-inline:16px}
-  main#ro-page .ts-studio.ts-studio #mobile-finishes .ts-swatches{gap:4px!important}
-  main#ro-page .ts-studio.ts-studio #mobile-finishes .ts-swatches .sw{--sw:44px}
 }
 
 
@@ -3074,6 +3027,143 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
 
 
 @media (max-width:859px){body > .mrail.mrail{display:none}}
+
+
+.sys__shop{display:contents}
+.sys__mview{display:none}
+.sys{padding:32px 0 40px}
+.sys__ts{display:none}
+.sys__grid{grid-template-areas:"head seals" "head pick" "photo cards";grid-template-rows:auto auto auto;row-gap:14px}
+.sys__head{align-self:start}
+#ro-page .sys__seals{margin-bottom:0}
+.sys__pick{align-self:end}
+.sys__head{gap:10px}
+.sys__head h2{max-width:none}
+.sys__head .lede{text-wrap:balance}
+.sys__photo{align-self:stretch;aspect-ratio:auto;min-height:100%}
+.sys__photo > img{object-position:50% 32%}
+@media(min-width:860px){.sys__grid{grid-template-columns:minmax(0,.86fr) minmax(0,1fr)}}
+.sys__pill{min-height:58px}
+.sys__pill span{font-size:13.5px;font-weight:500}
+#ro-page .sys__card{padding:20px 24px 10px}
+.sys__top{padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.sys__spec{margin-top:4px;font-size:15.5px}
+.sys__ticks{display:grid;gap:7px;margin:12px 0 0;padding:0;list-style:none}
+.sys__ticks li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:11px;align-items:start;font-size:16.5px;line-height:1.35;color:var(--ink)}
+.sys__ticks i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;transition:background-color .7s ease-in-out}
+.sys__ticks i svg{width:12px;height:12px}
+.sys__ticks .sys__life i{background:radial-gradient(ellipse at 25% 15%,#fff4cc 0,transparent 44%),linear-gradient(125deg,#a17a31,#eedb9d 25%,#c8a34e 44%,#fff0b5 58%,#b48b38 80%,#e9d38f);color:#513b13;box-shadow:inset 0 0 0 1px #a47c35}
+.sys__ticks .sys__life i svg{width:13px;height:13px}
+.sys__ticks .sys__life span{font-weight:600}
+.sys__buy{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:12px;margin:12px 0 10px;padding-top:12px;border-top:1px solid var(--rule)}
+.sys__buy .sys__price{margin:0}
+.sys__buy .sys__price strong{font-size:46px}
+.sys__svc{display:grid;justify-items:end;gap:2px;margin:0 0 4px;text-align:right}
+.sys__svc span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sys__svc b{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.1;color:var(--ink)}
+.sys__svc small{font-size:13.5px;color:var(--muted)}
+#ro-page .sys__card .rv-chip--tap{margin:0 0 12px}
+.sys__more{margin-top:8px}
+.sys__more > summary{min-height:44px;padding-top:8px}
+@media(min-width:860px) and (max-height:860px){
+  .sys{padding:24px 0 32px}
+  #ro-page .sys__card{padding:18px 22px 6px}
+  .sys__spec{font-size:15px}
+  .sys__ticks{gap:7px}
+  .sys__ticks li{font-size:15.5px}
+  .sys__buy .sys__price strong{font-size:46px}
+}
+
+@media(max-width:859px){
+  .sys{padding:44px 0 52px}
+  .sys__grid,
+  .sys__grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "seals" "shop";row-gap:18px}
+  .sys__shop{grid-area:shop;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"pick" "view" "cards";row-gap:10px;
+    width:100%;max-width:560px;justify-self:center;padding:12px;border:1px solid rgba(198,166,107,.6);border-radius:22px;background:#fff;
+    box-shadow:0 30px 50px -36px rgba(4,16,46,.4),0 2px 6px -2px rgba(4,16,46,.08)}
+  .sys__photo{display:none}
+  .sys__pick{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:0;background:none;box-shadow:none;border-radius:0}
+  .sys__pill{min-height:54px;padding:6px 2px;border-radius:14px;box-shadow:inset 0 0 0 1.5px #d3dbe7;background:#fff;row-gap:1px;grid-template-columns:auto;
+    transition:background-color .25s var(--e-out),box-shadow .25s var(--e-out),color .25s var(--e-out)}
+  .sys__pill b{font-size:14.5px}
+  .sys__pill span{font-size:11.5px;line-height:1.2;font-weight:500}
+  .sys__tl{display:none}
+  .sys__ts{display:block}
+  .sys__pill.on{background:var(--pc);color:#fff;box-shadow:0 10px 20px -12px rgba(4,16,46,.6)}
+  .sys__pill.on span{color:rgba(255,255,255,.88)}
+  .sys__mview{grid-area:view;display:block;position:relative;border-radius:16px;overflow:hidden;background:#efece8;box-shadow:inset 0 0 0 1px #c6a66b}
+  .sys__mtrack{display:flex;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .sys__mtrack::-webkit-scrollbar{display:none}
+  .sys__slide{position:relative;flex:0 0 100%;aspect-ratio:100/92;margin:0;scroll-snap-align:start;scroll-snap-stop:always}
+  .sys__slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+  .sys__slide figcaption{position:absolute;left:10px;bottom:10px;display:grid;gap:1px;padding:8px 14px 9px;border-radius:14px;background:rgba(255,254,252,.96);
+    box-shadow:0 10px 22px -12px rgba(4,16,46,.55)}
+  .sys__slide figcaption b{font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+  .sys__slide figcaption span{font-size:13px;color:var(--muted)}
+  .sys__slide figcaption strong{font-size:17px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+  #ro-page .sys__mseal{position:absolute;top:10px;right:10px;z-index:2;width:60px;height:60px}
+  .sys__mdots{position:absolute;right:14px;bottom:16px;display:flex;gap:5px;pointer-events:none}
+  .sys__mdots i{width:7px;height:7px;border-radius:4px;background:rgba(15,39,72,.25);transition:width .3s var(--e-out),background-color .3s var(--e-out)}
+  .sys__mdots i.on{width:18px;background:var(--ink)}
+  #ro-page .sys__card{padding:2px 2px 0;border:0;border-radius:0;background:none;box-shadow:none}
+  .sys__top,.sys__buy .sys__price{display:none}
+  .sys__ticks{gap:6px;margin:4px 0 0}
+  .sys__ticks li{grid-template-columns:20px minmax(0,1fr);gap:9px;font-size:14.5px;line-height:1.35}
+  .sys__ticks i{width:20px;height:20px}
+  .sys__ticks i svg{width:11px;height:11px}
+  .sys__buy{display:block;margin:10px 0 4px;padding-top:10px}
+  .sys__svc{display:flex;align-items:baseline;justify-items:start;gap:6px;margin:0;text-align:left}
+  .sys__svc span{font-size:11px}
+  .sys__svc b{font-size:16px}
+  .sys__svc small{font-size:13px}
+  #ro-page .sys__card .rv-chip--tap{margin:0 0 10px;font-size:14px}
+  .sys__more{margin-top:8px}
+  .sys__more > summary{min-height:44px;padding-top:6px}
+}
+@media(min-width:600px) and (max-width:859px){
+  .sys__grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "seals" "shop"}
+}
+@media(max-width:359px){
+  .sys__pick{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .sys__pill b{font-size:12.5px}
+  .sys__pill span{font-size:10.5px}
+  .sys__shop{padding:10px}
+  .sys__ticks li{font-size:13.5px}
+  #ro-page .sys__mseal{width:64px;height:64px}
+  #ro-page .sys__card .rv-chip--tap{font-size:13px}
+  #ro-page .sys__card .rv-offer__cta{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  .sys__pill,.sys__mdots i,.sys__ticks i{transition:none}
+}
+@media(max-width:859px){html.ro-ph body.sys-shop-on .totop{opacity:0;visibility:hidden;pointer-events:none}}
+
+
+@media(min-width:860px){
+  .rst{padding:56px 0 48px}
+  .rst__run{margin-top:30px}
+  .rst__cart{height:210px}
+  .rst__end{height:210px}
+  .rst__pipe{top:105px}
+  .rst__cart::before{width:180px;height:180px;margin:-90px 0 0 -90px}
+  .rst__st--core .rst__cart::before{width:216px;height:216px;margin:-108px 0 0 -108px}
+  .rst__txt{margin-top:14px;gap:5px}
+  .rst__foot{margin-top:26px;padding-top:20px}
+}
+@media(min-width:860px) and (max-height:860px){
+  .rst{padding:44px 0 40px}
+  .rst__cart,.rst__end{height:186px}
+  .rst__pipe{top:93px}
+  .rst__run{margin-top:24px}
+}
+@media(min-width:860px){
+  .ryr{padding-top:56px;padding-bottom:56px}
+}
+@media(max-width:859px){
+  .sys:not(.is-live) .sys__top{display:block;padding-top:6px}
+  .sys:not(.is-live) .sys__pick,.sys:not(.is-live) .sys__mdots{display:none}
+  .sys:not(.is-live) .sys__card + .sys__card{margin-top:18px;padding-top:16px;border-top:1px solid var(--rule)}
+}
 
 </style>
 <noscript><style>[data-sc-in],[data-sc-stagger] > *,.hch{opacity:1!important;transform:none!important}@media(max-width:859px){main#ro-page .hero{--product-card-height:330px}}</style></noscript>
@@ -3686,7 +3776,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
 }
 </script>
 <link rel="stylesheet" href="assets/css/product-hero-card.css">
-<link rel="stylesheet" href="media/ro/ro-studio.css?v=1ac1a824">
+<link rel="stylesheet" href="media/ro/ro-studio.css?v=3e0a95d2">
 <script src="assets/js/product-hero-card.js" defer></script>
 </head>
 <body>
@@ -3914,21 +4004,24 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
   <div class="zone sys__grid">
     <header class="sys__head" data-sc-in data-sc-stagger="80">
       <span class="kick">Four systems</span>
-      <h2 class="d2">Reverse osmosis systems, tailored for your needs.</h2>
+      <h2 class="d2">Reverse osmosis, tailored to you.</h2>
       <p class="lede">Every one has the same 0.0001 micron membrane. The difference is what goes back in after it.</p>
     </header>
     <ul class="rv-seals sys__seals" aria-label="Why Filters For You"><li><span class="rv-seal rv-seal--gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m8 11 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Lifetime</b><span>Warranty</span></span><p><b>Lifetime warranty</b><span>With annual servicing</span></p></li><li><span class="rv-seal rv-seal--google" aria-hidden="true"><svg class="rv-g" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg><b>5.0</b><span class="rv-stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span></span><p><b>5.0 on Google</b><span>Sydney homes like yours</span></p></li><li><span class="rv-seal rv-seal--navy" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="currentColor" stroke-linejoin="round" stroke-width=".3" d="M1.1 11.6L1.5 9.3L4.0 8.5L5.9 7.3L7.4 5.4L8.8 5.1L9.6 5.7L10.6 4.3L11.5 3.7L13.6 4.1L13.4 4.9L13.1 5.7L15.2 7.0L16.3 6.5L16.4 4.3L16.8 3.4L17.4 5.1L18.6 6.7L18.9 7.8L20.4 9.0L21.4 10.4L22.5 11.3L22.7 12.4L22.8 13.0L22.5 14.3L21.6 15.8L21.0 17.0L20.8 17.8L18.9 18.6L18.1 18.2L17.4 18.5L16.0 18.1L15.3 17.6L15.1 16.7L14.7 16.7L14.2 16.5L14.3 15.1L13.2 16.4L12.4 15.2L10.7 14.5L9.5 14.7L6.9 15.4L5.8 15.8L3.6 16.4L2.1 16.1L2.4 14.8L1.9 13.1ZM18.0 19.5L20.0 19.6L20.0 20.3L19.3 21.0L18.3 20.3Z"/><circle cx="21.1" cy="15.4" r="1.9" fill="#fff"/></svg><span>Based in</span><b>Sydney</b></span><p><b>Sydney based</b><span>Installed and serviced by us</span></p></li><li><span class="rv-seal rv-seal--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.1L4 16.8V20h3.2l5.2-5.2a4 4 0 0 0 5.1-5.3l-2.4 2.4-2.8-.4-.4-2.8 2.6-2.2Z"/></svg><b>Licensed</b><span>Install</span></span><p><b>Licensed install</b><span>By a licensed plumber</span></p></li></ul>
-    <div class="sys__pick" role="group" aria-label="Choose a system"><button type="button" class="sys__pill" data-k="essential" aria-pressed="false" aria-controls="pure-essential"><i aria-hidden="true"></i><b>Essential</b><span>$1,180</span></button><button type="button" class="sys__pill" data-k="plus" aria-pressed="false" aria-controls="pure-plus"><i aria-hidden="true"></i><b>Plus</b><span>$1,280</span></button><button type="button" class="sys__pill on" data-k="premium" aria-pressed="true" aria-controls="pure-premium"><i aria-hidden="true"></i><b>Premium</b><span>$1,590</span></button><button type="button" class="sys__pill" data-k="luxe" aria-pressed="false" aria-controls="pure-luxe"><i aria-hidden="true"></i><b>Luxe</b><span>$2,290</span></button></div>
+    <div class="sys__shop">
+    <div class="sys__pick" role="group" aria-label="Choose a system"><button type="button" class="sys__pill" data-k="essential" aria-pressed="false" aria-controls="pure-essential"><i aria-hidden="true"></i><b>Essential</b><span class="sys__tl">Neutral</span><span class="sys__ts">Neutral</span></button><button type="button" class="sys__pill" data-k="plus" aria-pressed="false" aria-controls="pure-plus"><i aria-hidden="true"></i><b>Plus</b><span class="sys__tl">Alkaline</span><span class="sys__ts">Alkaline</span></button><button type="button" class="sys__pill on" data-k="premium" aria-pressed="true" aria-controls="pure-premium"><i aria-hidden="true"></i><b>Premium</b><span class="sys__tl">Hydrogen rich</span><span class="sys__ts">Hydrogen</span></button><button type="button" class="sys__pill" data-k="luxe" aria-pressed="false" aria-controls="pure-luxe"><i aria-hidden="true"></i><b>Luxe</b><span class="sys__tl">Live TDS</span><span class="sys__ts">Live TDS</span></button></div>
+    <div class="sys__mview"><div class="sys__mtrack" data-sys-track><figure class="sys__slide" data-k="essential"><img src="media/products/photos/landing/essential-card.webp" alt="The Pure Essential four stage reverse osmosis system" width="900" height="900" loading="lazy" decoding="async"><figcaption><b>Pure Essential</b><span><strong>$1,180</strong> installed</span></figcaption></figure><figure class="sys__slide" data-k="plus"><img src="media/products/photos/landing/plus-card.webp" alt="The Pure Plus five stage alkaline reverse osmosis system" width="900" height="900" loading="lazy" decoding="async"><figcaption><b>Pure Plus</b><span><strong>$1,280</strong> installed</span></figcaption></figure><figure class="sys__slide" data-k="premium"><img src="media/products/photos/landing/premium-card.webp" alt="The Pure Premium seven stage hydrogen rich alkaline reverse osmosis system" width="900" height="900" loading="lazy" decoding="async"><figcaption><b>Pure Premium</b><span><strong>$1,590</strong> installed</span></figcaption></figure><figure class="sys__slide" data-k="luxe"><img src="media/products/photos/landing/luxe-card.webp" alt="The Pure Luxe smart five stage reverse osmosis system" width="900" height="900" loading="lazy" decoding="async"><figcaption><b>Pure Luxe</b><span><strong>$2,290</strong> installed</span></figcaption></figure></div><span class="rv-seal rv-seal--gold sys__mseal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m8 11 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Lifetime</b><span>Warranty</span></span><span class="sys__mdots" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i></span></div>
     <figure class="sys__photo" data-studio-gold>
       <img id="sysImg" src="media/products/photos/landing/premium-card.webp" alt="The Pure Premium seven stage hydrogen rich alkaline reverse osmosis system" width="900" height="900" loading="lazy" decoding="async">
       <span class="rv-seal rv-seal--gold sys__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m8 11 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Lifetime</b><span>Warranty</span></span>
     </figure>
     <div class="sys__cards" aria-live="polite">
       <article class="rv-offer sys__card" id="pure-essential" data-k="essential" aria-label="Pure Essential">
-        <h3 class="sys__name"><a href="/pure-essential-water-filter-sydney">Pure Essential <span aria-hidden="true">↗</span></a></h3>
-        <p class="sys__spec">Four stage reverse osmosis. Calcium back in for a gentler pH.</p>
-        <p class="sys__price"><strong>$1,180</strong><span>installed</span></p>
-        <p class="rv-offer__service"><span>Annual servicing</span><b>$580<small> / year</small></b></p>
+        <div class="sys__top"><h3 class="sys__name"><a href="/pure-essential-water-filter-sydney">Pure Essential <span aria-hidden="true">↗</span></a></h3>
+        <p class="sys__spec">Four stage reverse osmosis. Calcium back in for a gentler pH.</p></div>
+        <ul class="sys__ticks"><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Up to 99% of dissolved contaminants out</span></li><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Designed for about pH 7 to 8</span></li><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>No more bottled water</span></li><li class="sys__life"><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m8 11 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Covered for life with annual servicing</span></li></ul>
+        <div class="sys__buy"><p class="sys__price"><strong>$1,180</strong><span>installed</span></p>
+        <p class="sys__svc"><span>Servicing</span> <b>$580</b> <small>a year</small></p></div>
         <p class="rv-chip rv-chip--tap"><span>Your tap:</span> <b data-rv-name>Chrome filtered tap</b> <a href="#studio">Change</a></p>
         <p class="rv-offer__note" data-rv-tapline hidden></p>
         <a class="btn rv-offer__cta" href="#ask" data-ro-request data-k="essential"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Request an installation date</a>
@@ -3943,10 +4036,11 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
         </details>
       </article>
       <article class="rv-offer sys__card" id="pure-plus" data-k="plus" aria-label="Pure Plus">
-        <h3 class="sys__name"><a href="/pure-plus-water-filter-sydney">Pure Plus <span aria-hidden="true">↗</span></a></h3>
-        <p class="sys__spec">Five stage alkaline reverse osmosis. The good minerals go back in.</p>
-        <p class="sys__price"><strong>$1,280</strong><span>installed</span></p>
-        <p class="rv-offer__service"><span>Annual servicing</span><b>$600<small> / year</small></b></p>
+        <div class="sys__top"><h3 class="sys__name"><a href="/pure-plus-water-filter-sydney">Pure Plus <span aria-hidden="true">↗</span></a></h3>
+        <p class="sys__spec">Five stage alkaline reverse osmosis. The good minerals go back in.</p></div>
+        <ul class="sys__ticks"><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Up to 99% of dissolved contaminants out</span></li><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>The good minerals go back in</span></li><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Alkaline, mineral rich water</span></li><li class="sys__life"><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m8 11 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Covered for life with annual servicing</span></li></ul>
+        <div class="sys__buy"><p class="sys__price"><strong>$1,280</strong><span>installed</span></p>
+        <p class="sys__svc"><span>Servicing</span> <b>$600</b> <small>a year</small></p></div>
         <p class="rv-chip rv-chip--tap"><span>Your tap:</span> <b data-rv-name>Chrome filtered tap</b> <a href="#studio">Change</a></p>
         <p class="rv-offer__note" data-rv-tapline hidden></p>
         <a class="btn rv-offer__cta" href="#ask" data-ro-request data-k="plus"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Request an installation date</a>
@@ -3961,10 +4055,11 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
         </details>
       </article>
       <article class="rv-offer sys__card on" id="pure-premium" data-k="premium" aria-label="Pure Premium">
-        <h3 class="sys__name"><a href="/pure-premium-water-filter-sydney">Pure Premium <span aria-hidden="true">↗</span></a></h3>
-        <p class="sys__spec">Seven stage hydrogen rich alkaline reverse osmosis.</p>
-        <p class="sys__price"><strong>$1,590</strong><span>installed</span></p>
-        <p class="rv-offer__service"><span>Annual servicing</span><b>$650<small> / year</small></b></p>
+        <div class="sys__top"><h3 class="sys__name"><a href="/pure-premium-water-filter-sydney">Pure Premium <span aria-hidden="true">↗</span></a></h3>
+        <p class="sys__spec">Seven stage hydrogen rich alkaline reverse osmosis.</p></div>
+        <ul class="sys__ticks"><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Up to 99% of dissolved contaminants out</span></li><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Magnesium and potassium back in</span></li><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Hydrogen rich and alkaline</span></li><li class="sys__life"><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m8 11 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Covered for life with annual servicing</span></li></ul>
+        <div class="sys__buy"><p class="sys__price"><strong>$1,590</strong><span>installed</span></p>
+        <p class="sys__svc"><span>Servicing</span> <b>$650</b> <small>a year</small></p></div>
         <p class="rv-chip rv-chip--tap"><span>Your tap:</span> <b data-rv-name>Chrome filtered tap</b> <a href="#studio">Change</a></p>
         <p class="rv-offer__note" data-rv-tapline hidden></p>
         <a class="btn rv-offer__cta" href="#ask" data-ro-request data-k="premium"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Request an installation date</a>
@@ -3979,10 +4074,11 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
         </details>
       </article>
       <article class="rv-offer sys__card" id="pure-luxe" data-k="luxe" aria-label="Pure Luxe">
-        <h3 class="sys__name"><a href="/pure-luxe-water-filter-sydney">Pure Luxe <span aria-hidden="true">↗</span></a></h3>
-        <p class="sys__spec">Smart five stage reverse osmosis. Live TDS on the display.</p>
-        <p class="sys__price"><strong>$2,290</strong><span>installed</span></p>
-        <p class="rv-offer__service"><span>Annual servicing</span><b>$680<small> / year</small></b></p>
+        <div class="sys__top"><h3 class="sys__name"><a href="/pure-luxe-water-filter-sydney">Pure Luxe <span aria-hidden="true">↗</span></a></h3>
+        <p class="sys__spec">Smart five stage reverse osmosis. Live TDS on the display.</p></div>
+        <ul class="sys__ticks"><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Up to 99% of dissolved contaminants out</span></li><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Live TDS on the display</span></li><li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Calcium back in</span></li><li class="sys__life"><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5l-8-3Z" stroke="currentColor" stroke-width="1.5"/><path d="m8 11 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Covered for life with annual servicing</span></li></ul>
+        <div class="sys__buy"><p class="sys__price"><strong>$2,290</strong><span>installed</span></p>
+        <p class="sys__svc"><span>Servicing</span> <b>$680</b> <small>a year</small></p></div>
         <p class="rv-chip rv-chip--tap"><span>Your tap:</span> <b data-rv-name>Chrome filtered tap</b> <a href="#studio">Change</a></p>
         <p class="rv-offer__note" data-rv-tapline hidden></p>
         <a class="btn rv-offer__cta" href="#ask" data-ro-request data-k="luxe"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Request an installation date</a>
@@ -3996,6 +4092,7 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
           </div>
         </details>
       </article>
+    </div>
     </div>
   </div>
 </section>
@@ -5744,9 +5841,42 @@ main#ro-page .hero [data-product-card] a.pure{display:inline-block;padding:6px 0
     each('[data-ro-sysname]', function(e){ e.textContent = d.name; });
     paintMoney(d); paintPack(); paintForm();
     each('[data-svc-k]', function(a){ a.classList.toggle('on', a.getAttribute('data-svc-k') === k); });
+    syncTrack(k, why);
     if (why && why !== 'init' && changed && window.ffyTrack) window.ffyTrack('system_select', {system: d.name, form: why});
   }
   window.roSetSystem = setSystem;
+  var mtrack = sysSec ? sysSec.querySelector('[data-sys-track]') : null, trackLock = 0;
+  function syncTrack(k, why){
+    var t = mtrack || (sysSec && sysSec.querySelector('[data-sys-track]'));
+    if (!t) return;
+    var i = [].map.call(t.children, function(x){ return x.getAttribute('data-k'); }).indexOf(k);
+    [].forEach.call(sysSec.querySelectorAll('.sys__mdots i'), function(dt, n){ dt.classList.toggle('on', n === i); });
+    if (why === 'swipe' || i < 0 || !t.clientWidth) return;
+    trackLock = Date.now();
+    t.scrollTo({left: i * t.clientWidth, behavior: why === 'systems' && !reduce ? 'smooth' : 'auto'});
+  }
+  if (mtrack){
+    var trackT = 0;
+    mtrack.addEventListener('scroll', function(){
+      clearTimeout(trackT);
+      trackT = setTimeout(function(){
+        if (Date.now() - trackLock < 650) return;
+        var sl = mtrack.children[Math.round(mtrack.scrollLeft / Math.max(1, mtrack.clientWidth))], k = sl && sl.getAttribute('data-k');
+        if (k && k !== choice.k){ warm(); setSystem(k, 'swipe'); }
+      }, 110);
+    }, {passive:true});
+    addEventListener('resize', function(){ syncTrack(choice.k, 'resize'); });
+    addEventListener('load', function(){ syncTrack(choice.k, 'resize'); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(es, o){
+      if (!es[0].isIntersecting) return; o.disconnect();
+      [].forEach.call(mtrack.querySelectorAll('img'), function(im){ im.loading = 'eager'; });
+      syncTrack(choice.k, 'resize');
+    }, {rootMargin:'80% 0px'}).observe(mtrack);
+    var shop = sysSec.querySelector('.sys__shop');
+    if (shop && 'IntersectionObserver' in window) new IntersectionObserver(function(es){
+      document.body.classList.toggle('sys-shop-on', es[0].isIntersecting);
+    }, {threshold:0}).observe(shop);
+  }
   pills.forEach(function(p, i){
     p.addEventListener('click', function(){ warm(); setSystem(p.getAttribute('data-k'), 'systems'); });
     p.addEventListener('keydown', function(e){
