@@ -2453,7 +2453,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hd-offer span{flex:none;margin-top:1px;background:var(--yellow);border-radius:999px;padding:4px 9px;font-size:10px;font-weight:700;line-height:1.3;letter-spacing:.07em;text-transform:uppercase}
   @media(max-width:859px){.hdeck .hd-choice-bubble.is-offer{padding:4px 10px 4px 4px;font-size:10px;gap:6px;line-height:1.15}.hdeck .hd-choice-bubble.is-offer b{flex:none;white-space:nowrap;font-size:8.5px;padding:3px 7px}.hdeck:not(.open) .hd-choice-bubble.is-offer{white-space:normal;max-width:calc(100% - 167px);border-radius:16px}.hdeck.open .hd-choice-bubble.is-offer{max-width:calc(100% - 140px)}.hd-offer{font-size:14px;padding:11px 12px}}
   @media(max-width:359px){.hdeck:not(.open) .hd-choice-bubble.is-offer{padding:6px 9px}.hdeck:not(.open) .hd-choice-bubble.is-offer b{display:none}}
-  .hero #heroVideo{transition:opacity .9s ease}
+  .hero #heroVideo{transition:opacity .35s ease}
   @media(max-width:859px){.hdeck .stkr{filter:opacity(1);transition:filter .3s ease .4s,visibility 0s linear 0s}.hdeck.open .stkr{top:-57px;right:2px;filter:opacity(0);visibility:hidden;pointer-events:none;transition:filter .18s ease,visibility 0s linear .18s}}
 </style>
 </head>
@@ -2617,16 +2617,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     v.addEventListener('playing',function(){if (v.requestVideoFrameCallback) v.requestVideoFrameCallback(shown); else shown();});
     v.addEventListener('error',function(){v.classList.remove('is-playing')});
     v.poster = big ? 'media/hero-poster.webp' : 'media/hero-poster-m.webp';
-    var started = false;
-    function start(){
-      if (started) return; started = true;
-      v.src = 'media/hero-' + (big ? '1600' : 'portrait') + (hevc ? '-hevc' : '') + '.mp4';
-      var go = v.play && v.play(); if (go && go.catch) go.catch(function(){});
-    }
-    setTimeout(function(){
-      if (document.readyState === 'complete') start();
-      else { addEventListener('load', start); setTimeout(start, 3300); }
-    }, 2700);
+    v.src = 'media/hero-' + (big ? '1600' : 'portrait') + (hevc ? '-hevc' : '') + '.mp4';
+    var go = v.play && v.play(); if (go && go.catch) go.catch(function(){});
      
   })();
   </script>
