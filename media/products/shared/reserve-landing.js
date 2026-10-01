@@ -109,3 +109,5 @@ if(!reduce&&'IntersectionObserver' in window){
  if(specs){const nums=[...specs.querySelectorAll('[data-rv-to]')];stagger(specs,':scope>li',80);
   whenSeen(specs,()=>{const t0=performance.now();(function step(t){const k=Math.min(1,(t-t0)/1400),e=1-Math.pow(1-k,3);nums.forEach(n=>n.textContent=Math.round(+n.dataset.rvTo*e));if(k<1)requestAnimationFrame(step)})(t0)},.35)}}
 })();
+
+document.querySelectorAll('[data-offer-ends]').forEach(el=>{if(Date.now()>=Date.parse(el.dataset.offerEnds+'T00:00:00+11:00')+864e5)el.remove()});

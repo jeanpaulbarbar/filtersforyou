@@ -2445,6 +2445,15 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 <script defer src="assets/js/scrollcraft.js"></script>
 <script defer src="assets/js/homepage-scroll.js?v=5"></script>
 <link rel="stylesheet" href="assets/css/homepage-refresh.css">
+<style>
+  .hd-choice-bubble.is-offer{display:inline-flex;align-items:center;gap:8px;max-width:none;white-space:nowrap;padding:5px 14px 5px 5px;font-size:12px}
+  .hd-choice-bubble.is-offer b{background:var(--ink);color:var(--yellow);border-radius:999px;padding:4px 9px;font-size:10px;letter-spacing:.07em;text-transform:uppercase}
+  .hd-offer{display:flex;align-items:flex-start;gap:10px;margin:0 0 14px;padding:10px 14px;border-radius:14px;background:#FFF6C7;color:var(--ink);font:600 14.5px/1.4 var(--sans)}
+  .hd-offer[hidden]{display:none}
+  .hd-offer span{flex:none;margin-top:1px;background:var(--yellow);border-radius:999px;padding:4px 9px;font-size:10px;font-weight:700;line-height:1.3;letter-spacing:.07em;text-transform:uppercase}
+  @media(max-width:859px){.hdeck .hd-choice-bubble.is-offer{padding:4px 10px 4px 4px;font-size:10px;gap:6px;line-height:1.15}.hdeck .hd-choice-bubble.is-offer b{flex:none;white-space:nowrap;font-size:8.5px;padding:3px 7px}.hdeck:not(.open) .hd-choice-bubble.is-offer{white-space:normal;max-width:calc(100% - 167px);border-radius:16px}.hdeck.open .hd-choice-bubble.is-offer{max-width:calc(100% - 140px)}.hd-offer{font-size:14px;padding:11px 12px}}
+  @media(max-width:359px){.hdeck:not(.open) .hd-choice-bubble.is-offer{padding:6px 9px}.hdeck:not(.open) .hd-choice-bubble.is-offer b{display:none}}
+</style>
 </head>
 <body>
 
@@ -2637,9 +2646,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         <button class="tgl" type="button" id="hdTgl" aria-label="Show what is included" aria-expanded="false" aria-controls="hdMore"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
       <button class="face" type="button" id="hdFace" aria-expanded="false" aria-controls="hdMore">
-        <span class="hdstudio" data-studio-gold><img id="hdImg" src="media/v7/prod-home-studio.webp" alt="" width="600" height="600"></span>
+        <span class="hdstudio" data-studio-gold><img id="hdImg" src="media/systems-hub/pure-home-reserve.webp" alt="" width="600" height="600"></span>
         
-        <span class="t"><b id="hdName">Whole House Filtration System</b><span class="p" id="hdPrice"><i class="pre">from</i><b>$3,850</b></span></span>
+        <span class="t"><b id="hdName">Deluxe Whole House Filtration System</b><span class="p" id="hdPrice"><i class="pre">from</i><b>$5,150</b></span></span>
       </button>
       <div class="more" id="hdMore"><div><div class="inner2">
         <div class="dscroll">
@@ -2652,7 +2661,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
           <div><b>$10k</b><span>interest free</span></div>
           <div><b>10 min</b><span>to apply</span></div>
         </div>
-        <a class="hd-product-link" id="hdProductLink" href="pure-home-water-filter-sydney">Pure Home ↗</a><p class="who" id="hdWho"></p>
+        <a class="hd-product-link" id="hdProductLink" href="pure-home-reserve-water-filter-sydney">Pure Home Reserve ↗</a><p class="hd-offer" id="hdOffer" hidden><span>October offer</span>Book before 31 October and get your first year service free.</p><p class="who" id="hdWho"></p>
         <ul id="hdTicks"></ul>
         
         <ul class="assure">
@@ -2662,7 +2671,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
         </ul>
         <span class="loc" id="hdLoc"></span>
         </div>
-        <button class="btn btn-sm js-open" type="button" id="hdGet" data-sys="Pure Home"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
+        <button class="btn btn-sm js-open" type="button" id="hdGet" data-sys="Pure Home Reserve"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get a fixed price</button>
         
         <a class="btn btn-sm hmgo" href="humm"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Get started with humm</a>
       </div></div></div>
@@ -4286,12 +4295,10 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
    
    
    
+  
+  var OCT_OFFER = Date.now() < Date.parse('2026-11-01T00:00:00+11:00');
   var HD = [
-    {sys:'Pure Home', set:'home', img:'media/v7/prod-home-studio.webp', tag:'', tagc:'var(--blue)',
-     name:'Whole House Filtration System', pure:'Pure Home', pre:'from', amt:'$3,850', suf:'installed', cta:'Book a free inspection',
-     who:'For families who want the chlorine taste and smell gone from every tap in the house, not just the kitchen one.',
-     loc:'Whole home water filtration, installed across Sydney',
-     ticks:['Chlorine and chloramines out','Sediment, rust and microplastics','No pool water taste or smell','The good minerals stay in']},
+    {"sys": "Pure Home Reserve", "set": "reserve", "img": "media/systems-hub/pure-home-reserve.webp", "name": "Deluxe Whole House Filtration System", "pure": "Pure Home Reserve", "pre": "from", "amt": "$5,150", "suf": "installed", "cta": "Get a fixed price", "who": "Whole home filtration, in a colour that belongs with your home.", "ticks": ["Helps reduce chlorine and chloramine", "Every tap and shower covered", "Robust stainless steel cabinet", "22 colours to complement your home"], "bubble": "20+ colours to choose from", "offer": OCT_OFFER, "href": "pure-home-reserve-water-filter-sydney", "tag": "", "tagc": "var(--blue)", "loc": "Supplied and installed across Sydney"},
      
     {humm:true, tagc:'#EE6604',
      who:'For families who want the system in now and the cost spread into easy repayments.',
@@ -4312,7 +4319,11 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
      who:'For families who want the same pure, alkaline water and a screen that shows them the purity as they pour it.',
      loc:'Smart under sink water filtration, installed across Sydney',
      ticks:['Up to 99% of contaminants out','PFAS and microplastics gone','Alkaline, mineral rich water','Watch the purity live on screen']},
-{"sys": "Pure Home Reserve", "set": "reserve", "img": "media/systems-hub/pure-home-reserve.webp", "name": "Deluxe Whole House Filtration System", "pure": "Pure Home Reserve", "pre": "from", "amt": "$5,150", "suf": "installed", "cta": "Get a fixed price", "who": "Whole home filtration, in a colour that belongs with your home.", "ticks": ["Helps reduce chlorine and chloramine", "Every tap and shower covered", "Robust stainless steel cabinet", "22 colours to complement your home"], "bubble": "20+ colours to choose from", "href": "pure-home-reserve-water-filter-sydney", "tag": "", "tagc": "var(--blue)", "loc": "Supplied and installed across Sydney"},
+    {sys:'Pure Home', set:'home', img:'media/v7/prod-home-studio.webp', tag:'', tagc:'var(--blue)',
+     name:'Whole House Filtration System', pure:'Pure Home', pre:'from', amt:'$3,850', suf:'installed', cta:'Book a free inspection',
+     who:'For families who want the chlorine taste and smell gone from every tap in the house, not just the kitchen one.',
+     loc:'Whole home water filtration, installed across Sydney',
+     ticks:['Chlorine and chloramines out','Sediment, rust and microplastics','No pool water taste or smell','The good minerals stay in']},
 {"sys": "Deluxe Home Package", "set": "deluxe", "img": "media/homepage-refresh/deluxe-card.webp", "name": "Deluxe Home Filtration Package", "pure": "View all systems", "pre": "from", "amt": "$6,290", "suf": "installed", "cta": "Get my Deluxe quote", "who": "Whole house filtration, purified drinking water and a premium mixer together.", "ticks": ["Pure Home whole house filtration", "Pure Premium 7 stage reverse osmosis", "Premium three way mixer", "First year service free"], "bubble": "First year service free", "href": "water-filter-systems", "tag": "", "tagc": "var(--blue)", "loc": "Supplied and installed across Sydney"},
 {"sys": "Deluxe Home Reserve", "set": "deluxe-reserve", "img": "media/homepage-refresh/reserve-package-v2-card.webp", "name": "Deluxe Reserve Filtration Package", "pure": "View all systems", "pre": "from", "amt": "$8,640", "suf": "installed", "cta": "Get my Reserve quote", "who": "A colour matched whole house system, smart drinking water and an Antique mixer.", "ticks": ["Pure Home Reserve whole house filtration", "Pure Luxe smart reverse osmosis", "Premium Antique three way mixer", "First year service free"], "bubble": "First year service free", "href": "water-filter-systems", "tag": "", "tagc": "var(--blue)", "loc": "Supplied and installed across Sydney"},
 {"sys": "Taps and mixers", "set": "taps", "img": "media/nav/taps-collection.webp", "name": "Three Way Mixers & Filter Taps", "pure": "Explore taps and mixers", "pre": "", "amt": "35 styles", "suf": "", "cta": "Choose your tap", "who": "Choose a dedicated drinking tap or bring hot, cold and purified water into one mixer.", "ticks": ["Dedicated filtered water taps", "Three way kitchen mixers", "Classic, Deluxe and Premium ranges", "35 styles and finishes to choose from"], "bubble": "35 styles & finishes", "href": "faucets-and-mixers-sydney", "tap": true, "tag": "", "tagc": "var(--blue)", "loc": "Supplied and installed across Sydney"}
@@ -4335,7 +4346,9 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     function hdApply(keepOpen){
       var d = HD[hdi];
       var bubble = document.getElementById('hdChoiceBubble');
-      bubble.hidden = !d.bubble; bubble.textContent = d.bubble || '';
+      bubble.hidden = !d.bubble; bubble.classList.toggle('is-offer', !!d.offer);
+      if (d.offer) bubble.innerHTML = '<b>October offer</b>First year service free'; else bubble.textContent = d.bubble || '';
+      document.getElementById('hdOffer').hidden = !d.offer;
       hdeck.classList.toggle('is-tap', !!d.tap);
       var productLink = document.getElementById('hdProductLink');
       productLink.hidden = !!(d.google || d.humm);
