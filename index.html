@@ -2453,6 +2453,8 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   .hd-offer span{flex:none;margin-top:1px;background:var(--yellow);border-radius:999px;padding:4px 9px;font-size:10px;font-weight:700;line-height:1.3;letter-spacing:.07em;text-transform:uppercase}
   @media(max-width:859px){.hdeck .hd-choice-bubble.is-offer{padding:4px 10px 4px 4px;font-size:10px;gap:6px;line-height:1.15}.hdeck .hd-choice-bubble.is-offer b{flex:none;white-space:nowrap;font-size:8.5px;padding:3px 7px}.hdeck:not(.open) .hd-choice-bubble.is-offer{white-space:normal;max-width:calc(100% - 167px);border-radius:16px}.hdeck.open .hd-choice-bubble.is-offer{max-width:calc(100% - 140px)}.hd-offer{font-size:14px;padding:11px 12px}}
   @media(max-width:359px){.hdeck:not(.open) .hd-choice-bubble.is-offer{padding:6px 9px}.hdeck:not(.open) .hd-choice-bubble.is-offer b{display:none}}
+  .hero #heroVideo{transition:opacity .9s ease}
+  @media(max-width:859px){.hdeck .stkr{filter:opacity(1);transition:filter .3s ease .4s,visibility 0s linear 0s}.hdeck.open .stkr{top:-57px;right:2px;filter:opacity(0);visibility:hidden;pointer-events:none;transition:filter .18s ease,visibility 0s linear .18s}}
 </style>
 </head>
 <body>
@@ -2611,12 +2613,20 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     var v = document.getElementById('heroVideo');
     var big = matchMedia('(min-width:860px)').matches;
     var hevc = big && v.canPlayType('video/mp4; codecs="hvc1.1.6.L123.b0"') !== '';
-    v.addEventListener('playing',function(){v.classList.add('is-playing')});
+    function shown(){v.classList.add('is-playing')}
+    v.addEventListener('playing',function(){if (v.requestVideoFrameCallback) v.requestVideoFrameCallback(shown); else shown();});
     v.addEventListener('error',function(){v.classList.remove('is-playing')});
-     
-    v.src = 'media/hero-' + (big ? '1600' : 'portrait') + (hevc ? '-hevc' : '') + '.mp4';
-     
     v.poster = big ? 'media/hero-poster.webp' : 'media/hero-poster-m.webp';
+    var started = false;
+    function start(){
+      if (started) return; started = true;
+      v.src = 'media/hero-' + (big ? '1600' : 'portrait') + (hevc ? '-hevc' : '') + '.mp4';
+      var go = v.play && v.play(); if (go && go.catch) go.catch(function(){});
+    }
+    setTimeout(function(){
+      if (document.readyState === 'complete') start();
+      else { addEventListener('load', start); setTimeout(start, 3300); }
+    }, 2700);
      
   })();
   </script>
@@ -4105,7 +4115,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     var cv = document.getElementById('caustics'); if (!cv) return;
     var gl = cv.getContext('webgl', {alpha:true, antialias:false, premultipliedAlpha:false});
     if (!gl){ cv.style.display = 'none'; return; }
-    function size(){ var d = Math.min(devicePixelRatio||1, 1.5);
+    function size(){ var d = 1;
       cv.width = cv.clientWidth*d; cv.height = cv.clientHeight*d; gl.viewport(0,0,cv.width,cv.height); }
     var VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
     var FS = [
@@ -4135,11 +4145,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     var uR = gl.getUniformLocation(pr,'r'), uT = gl.getUniformLocation(pr,'t');
     gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
     size(); addEventListener('resize', size);
-    var t0 = performance.now(), running = false, causticsRaf = null;
+    var t0 = performance.now(), running = false, causticsRaf = null, held = true;
+    cv.style.opacity = '0';
+    setTimeout(function(){ held = false; cv.style.transition = 'opacity 1.4s ease'; cv.style.opacity = ''; syncCaustics(); }, 3200);
     function syncCaustics(){
       if (causticsRaf !== null) cancelAnimationFrame(causticsRaf);
       causticsRaf = null;
-      if (running && !document.hidden) causticsRaf = requestAnimationFrame(loop);
+      if (running && !held && !document.hidden) causticsRaf = requestAnimationFrame(loop);
     }
     new IntersectionObserver(function(e){ running = e[0].isIntersecting; syncCaustics(); })
       .observe(document.querySelector('.hero'));
@@ -4427,12 +4439,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     var hdHover = false;
     hdeck.addEventListener('mouseenter', function(){ hdHover = true; });
     hdeck.addEventListener('mouseleave', function(){ hdHover = false; });
-    if (!reduce) setInterval(function(){
+    function hdTick(){
       if (hdHover || hdeck.classList.contains('open') || document.body.classList.contains('dopen') || document.hidden) return;
       if (scrollY > innerHeight * .8) return;
       hdSet(hdi + 1, 1);
-       
-    }, 3200);
+    }
+    if (!reduce) setTimeout(function(){ hdTick(); setInterval(hdTick, 3200); }, 7500);
      
     var hdFace = document.getElementById('hdFace');
     var hdTgl = document.getElementById('hdTgl');
