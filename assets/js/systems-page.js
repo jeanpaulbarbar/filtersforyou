@@ -38,60 +38,27 @@
     heroSec.classList.add('fs-animated');
     gsap.to($$('.hch', h), { opacity: 1, y: 0, duration: .55, ease: 'power3.out', stagger: .018, delay: .8 });
   }
-  const offers = $$('.fs-offer', main);
-  const byKey = {}, bySys = {};
-  offers.forEach(o => {
+  const byKey = {}, bySys = {}, chosen = {};
+  $$('[data-fs-item]', main).forEach(o => {
     const r = { key: o.dataset.key, mode: o.dataset.mode, sys: o.dataset.sys, name: o.dataset.name, price: o.dataset.price,
-      url: $('.fs-offer__name a', o).getAttribute('href'), el: o,
+      url: o.dataset.url, el: o,
       thumb: '/media/systems-hub/range/' + o.dataset.key + '-thumb.webp', card: '/media/systems-hub/range/' + o.dataset.key + '-card.webp' };
     byKey[r.key] = r; bySys[r.sys] = r;
+    if (o.hasAttribute('data-lead')) chosen[r.mode] = r.key;
   });
-  const chosen = {};
-  $$('.fs-group').forEach(g => { chosen[g.dataset.group] = $('.fs-row[aria-pressed=true]', g)?.dataset.fsModel; });
   let mode = 'every', model = chosen.every;
-  const house = $('[data-fs-house]'), tabs = $$('.fs-modes [role=tab]'), glide = $('.fs-modes__glide');
-  function placeGlide() {
-    const on = tabs.find(t => t.getAttribute('aria-selected') === 'true'); if (!on || !glide) return;
-    glide.style.setProperty('--gx', on.offsetLeft + 'px'); glide.style.setProperty('--gw', on.offsetWidth + 'px');
-  }
+  const target = m => m === 'both' ? $('#deluxe') : $('#range-' + m);
   function setMode(m, opts = {}) {
     if (!chosen[m]) return;
     mode = m;
-    tabs.forEach(t => { const on = t.dataset.fsMode === m; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
-    $('#fs-pick')?.setAttribute('aria-labelledby', 'fs-tab-' + m);
-    placeGlide();
-    $$('.fs-fit__line').forEach(l => l.toggleAttribute('data-idle', l.dataset.line !== m));
-    if (house) house.dataset.mode = m;
-    $$('.fs-group').forEach(g => g.toggleAttribute('data-idle', g.dataset.group !== m));
     setModel(chosen[m], opts);
   }
   function setModel(k, opts = {}) {
     const r = byKey[k]; if (!r) return;
-    chosen[r.mode] = k; model = k;
-    $$(`.fs-group[data-group="${r.mode}"] .fs-row`).forEach(b => b.setAttribute('aria-pressed', b.dataset.fsModel === k));
-    offers.filter(o => o.dataset.mode === r.mode).forEach(o => {
-      const on = o === r.el, was = !o.hasAttribute('data-idle');
-      o.toggleAttribute('data-idle', !on);
-      if (on && !was && !opts.quiet && !reduce) { o.classList.remove('is-new'); void o.offsetWidth; o.classList.add('is-new'); }
-    });
+    chosen[r.mode] = k; model = k; mode = r.mode;
     hero(r); bar(r); deluxe.sync(r.key); if (!opts.keepForm) form.pick(r.sys, true);
     if (!opts.quiet) relayout();
   }
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => setMode(t.dataset.fsMode));
-    t.addEventListener('keydown', e => {
-      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
-      e.preventDefault(); const n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); setMode(n.dataset.fsMode);
-    });
-  });
-  $$('.fs-row', main).forEach(b => b.addEventListener('click', () => {
-    setModel(b.dataset.fsModel);
-    const card = byKey[model] && byKey[model].el; if (!card) return;
-    const box = card.getBoundingClientRect();
-    if (box.top < hdrH() + 8) goTo(card, 44);
-  }));
-  addEventListener('resize', placeGlide);
-  document.fonts?.ready.then(placeGlide);
   const heroTabs = $$('.ocdots [data-fs-mode]');
   function hero(r) {
     const tab = heroTabs.find(a => a.dataset.fsMode === r.mode); if (!tab) return;
@@ -110,8 +77,8 @@
     const keep = [t.textContent, l.textContent, p.innerHTML, tk.textContent, sub.textContent];
     heroCard.style.minHeight = '';
     let max = heroCard.offsetHeight;
-    offers.forEach(o => {
-      const r = byKey[o.dataset.key], tab = heroTabs.find(a => a.dataset.fsMode === r.mode); if (!tab) return;
+    Object.values(byKey).forEach(r => {
+      const tab = heroTabs.find(a => a.dataset.fsMode === r.mode); if (!tab) return;
       t.textContent = tab.dataset.title; l.textContent = r.name + ' ↗'; p.innerHTML = r.price + '<i> installed</i>';
       tk.textContent = tab.dataset.tick; sub.textContent = tab.dataset.title + '.';
       max = Math.max(max, heroCard.offsetHeight);
@@ -122,7 +89,7 @@
   let lockQueued = 0;
   addEventListener('resize', () => { cancelAnimationFrame(lockQueued); lockQueued = requestAnimationFrame(lockHero); });
   document.fonts?.ready.then(lockHero);
-  $('[data-fs-choose]')?.addEventListener('click', e => { e.preventDefault(); goTo($('#fs-fit-title'), 20); });
+  $('[data-fs-choose]')?.addEventListener('click', e => { e.preventDefault(); goTo(target(mode), 20); });
   $('#fsHeroLink')?.addEventListener('click', e => {
     const h = e.currentTarget.getAttribute('href'); if (!h || h[0] !== '#') return;
     e.preventDefault(); deluxe.sync(model); goTo($(h), 12);
@@ -170,10 +137,9 @@
   function barCheck() {
     barQueued = false; if (!barEl) return;
     const vh = innerHeight, inView = el => { if (!el || !el.offsetParent) return false; const b = el.getBoundingClientRect(); return b.top < vh && b.bottom > 0; };
-    const fit = $('#systems')?.getBoundingClientRect();
-    const past = fit && fit.top < vh * 0.2;
-    const cta = byKey[model] && $('.fs-offer__cta', byKey[model].el);
-    const busy = inView(cta) || $$('.fs-deluxe__cta, .ts-studio .ts-action, .est .fs-call').some(inView) || inView($('#ask')) || inView($('footer'));
+    const grid = $('#systems')?.getBoundingClientRect();
+    const past = grid && grid.top < vh * 0.2;
+    const busy = $$('.fs-sys__btn, .fs-deluxe__cta, .ts-studio .ts-action, .est .fs-call').some(inView) || inView($('#ask')) || inView($('footer'));
     barEl.hidden = false; barEl.classList.toggle('off', !past || busy);
   }
   addEventListener('scroll', () => { if (!barQueued) { barQueued = true; requestAnimationFrame(barCheck); } }, { passive: true });
@@ -181,14 +147,14 @@
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: 0.35 });
   const staged = $$('[data-fs-seals], [data-fs-years], [data-fs-visits]', main);
   staged.forEach(el => reduce ? el.classList.add('is-in') : io.observe(el));
-  const rise = reduce ? [] : $$('.fs-answer .kick, .fs-answer .d2, .fs-fit__head > *, .fs-deluxe__head > *, .fs-care__head > div > *', main);
+  const rise = reduce ? [] : $$('.fs-answer .kick, .fs-answer .d2, .fs-range__head > div:first-child > *, .fs-deluxe__head > *, .fs-care__head > div > *', main);
   const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); rio.unobserve(e.target); } }), { threshold: 0.2 });
   rise.forEach(el => { el.classList.add('fs-rise'); rio.observe(el); });
   addEventListener('scroll', () => {
     staged.concat(rise).forEach(el => { if (!el.classList.contains('is-in') && el.getBoundingClientRect().bottom < 0) el.classList.add('is-in'); });
   }, { passive: true });
   if (!reduce) {
-    const drift = $$('.fs-care__photo img, .fs-answer__photo img', main); drift.forEach(el => el.setAttribute('data-fs-drift', ''));
+    const drift = $$('.fs-answer__photo img', main); drift.forEach(el => el.setAttribute('data-fs-drift', ''));
     const live = new Set(), seen = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? live.add(e.target) : live.delete(e.target)), { rootMargin: '10% 0px' });
     drift.forEach(el => seen.observe(el));
     let queued = false;
@@ -282,7 +248,7 @@
     sysBtns.forEach(b => b.addEventListener('click', () => {
       pick(b.dataset.v); error.hidden = true;
       window.ffyTrack && window.ffyTrack('system_select', { system, form: 'systems' });
-      const r = bySys[system]; if (r) { chosen[r.mode] = r.key; setMode(r.mode, { quiet: true, keepForm: true }); }
+      const r = bySys[system]; if (r) setModel(r.key, { quiet: true, keepForm: true });
     }));
     whenBtns.forEach(b => b.addEventListener('click', () => {
       when = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.when;
@@ -296,7 +262,7 @@
       const b = e.target.closest('[data-fs-cta]'); if (!b) return;
       e.preventDefault();
       const v = b.dataset.sys || '';
-      if (v) { pick(v); const r = bySys[v]; if (r && !b.closest('.fs-offer')) { chosen[r.mode] = r.key; setMode(r.mode, { quiet: true, keepForm: true }); } }
+      if (v) { pick(v); const r = bySys[v]; if (r) setModel(r.key, { quiet: true, keepForm: true }); }
       const suburbOk = f.elements.suburb.checkValidity();
       trail.length = 0; if (!q.classList.contains('finished')) show(system ? (suburbOk ? 2 : 0) : (suburbOk ? 1 : 0));
       goTo($('#ask'), 0);
@@ -357,9 +323,9 @@
   })();
   const want = new URLSearchParams(location.search).get('system') || (location.hash === '#deluxe-reserve' ? 'deluxe-reserve' : '');
   const start = want && byKey[want] ? byKey[want] : null;
-  if (start) { chosen[start.mode] = start.key; setMode(start.mode, { quiet: true, keepForm: true }); }
+  if (start) setModel(start.key, { quiet: true, keepForm: true });
   else setMode('every', { quiet: true, keepForm: true });
   form.pick('');
-  barCheck(); lockHero(); placeGlide();
+  barCheck(); lockHero();
   addEventListener('load', () => { relayout(); barCheck(); });
 })();
