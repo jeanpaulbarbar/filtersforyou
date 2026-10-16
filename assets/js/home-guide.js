@@ -522,7 +522,7 @@
     if (bump && !reduce) { totalEl.classList.remove('hx-bump'); void totalEl.offsetWidth; totalEl.classList.add('hx-bump'); }
     carry(s);
   }
-  var PLAN_LABEL = { life: 'Filtered for Life', service: 'yearly service', diy: 'DIY cartridge kit' };
+  var PLAN_LABEL = { life: 'Filtered for Life', service: 'professional yearly service', diy: 'DIY cartridge kit' };
   var FORM_NAME = { deluxe: 'Deluxe Home Package', 'deluxe-reserve': 'Deluxe Home Reserve' };
   function describe(s) {
     var parts = s.items.map(function (k) { var it = SYS[k]; return it.name + ' (' + (it.from ? 'from ' : '') + fmt(it.price) + ')'; });
