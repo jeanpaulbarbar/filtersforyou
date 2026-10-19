@@ -498,7 +498,7 @@
       if (r) { r.checked = true; custom = null; }
       else {
         group('system').forEach(function (i) { i.checked = false; });
-        var parts = v.split('+').map(find);
+        var parts = v.split('+').map(function (part) { return find(part); });
         if (parts.length > 1 && parts.every(Boolean)) {
           var nm = parts.map(function (p) { return p.getAttribute('data-name'); }).join(' and ');
           custom = { value: nm, name: nm, img: parts[0].getAttribute('data-img'), price: 'Two systems at one address' };

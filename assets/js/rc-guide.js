@@ -22,6 +22,8 @@
     if (l && l.scrollTo) l.scrollTo(y, { duration: 1 });
     else window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
   }
+  
+  window.ffyGoTo = goTo;
   function priceLabel(s) { return (s.frm ? 'From ' : '') + fmt(s.price); }
 
   
@@ -389,7 +391,7 @@
       o('note').textContent = notes.join(' ');
       o('cover').textContent = COVER[st.care];
       o('seal').className = 'rc-seal ' + (st.care === 'life' ? 'rc-seal--gold' : 'rc-seal--blue');
-      o('cta').setAttribute('data-rc-sys', pack || (w && d ? st.whole + '+' + st.drink : st.whole !== 'none' ? st.whole : st.drink !== 'none' ? st.drink : ''));
+      o('cta').setAttribute('data-rc-sys', pack || (w && d ? w.name + ' + ' + d.name : st.whole !== 'none' ? st.whole : st.drink !== 'none' ? st.drink : ''));
       o('cta').setAttribute('data-rc-addon', st.chill ? 'chiller' : '');
     }
     box.addEventListener('click', function (e) {
@@ -433,85 +435,6 @@
     document.addEventListener('visibilitychange', sync);
   })();
 
-  
-  var ask = $('[data-rc-ask]', root);
-  if (ask) (function () {
-    var f = $('form', ask), panes = $$('.rc-q__pane', ask), bars = $$('.rc-q__steps i', ask), back = $('.rc-q__back', ask);
-    var next = $('[data-next]', ask), nextLabel = $('[data-nextlabel]', ask), err = $('.rc-q__err', ask);
-    var opts = $$('.rc-q__opt', ask), whens = $$('[data-when]', ask), chosen = $('.rc-q__chosen', ask), chill = $('[data-q-chill]', ask);
-    var step = 0, system = '', picked = false, when = '', addon = false, sending = false, started = false, trail = [];
-    var page = ask.getAttribute('data-page') || 'guide';
-    var ADDON = 'Undersink chiller, $1,050 installed with a system';
-    function hidden(n, v) { var i = f.elements[n]; if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.appendChild(i); } i.value = v; }
-    function nameOf(k) { if (!k) return ''; if (SYS[k]) return SYS[k].name; if (k.indexOf('+') > 0) return k.split('+').map(function (x) { return SYS[x] ? SYS[x].name : x; }).join(' and '); return k; }
-    function show(n) {
-      step = n;
-      panes.forEach(function (p, k) { p.hidden = k !== n; if (k === n) swap(p, 'is-enter'); });
-      bars.forEach(function (b, k) { b.classList.toggle('on', k <= n); });
-      back.hidden = n === 0; nextLabel.textContent = n === 2 ? 'Send my request' : 'Next'; err.hidden = true;
-    }
-    function summary() {
-      var s = SYS[system];
-      chosen.hidden = !system;
-      if (system) {
-        var img = s ? (s.img || (s.parts_img && s.parts_img[0])) : (SYS[system.split('+')[0]] || {}).img;
-        $('img', chosen).src = img || '';
-        $('b', chosen).textContent = nameOf(system);
-        $('small', chosen).textContent = s ? priceLabel(s) + ' installed' + (addon ? ', plus the undersink chiller' : '') : (addon ? 'Plus the undersink chiller' : 'Two systems at one address');
-      }
-    }
-    function pick(k) {
-      if (ask.classList.contains('is-sent')) return;
-      system = k || '';
-      opts.forEach(function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-k') === system ? 'true' : 'false'); });
-      summary();
-    }
-    function setAddon(on) { addon = !!on; if (chill) chill.setAttribute('aria-pressed', addon ? 'true' : 'false'); hidden('add_on', addon ? ADDON : ''); summary(); }
-    opts.forEach(function (o) { o.addEventListener('click', function () { pick(o.getAttribute('data-k')); picked = true; err.hidden = true; window.ffyTrack && window.ffyTrack('system_select', { system: system || 'not sure', form: page }); }); });
-    whens.forEach(function (b) { b.addEventListener('click', function () { when = when === b.getAttribute('data-when') ? '' : b.getAttribute('data-when'); whens.forEach(function (x) { x.setAttribute('aria-pressed', x.getAttribute('data-when') === when ? 'true' : 'false'); }); }); });
-    if (chill) chill.addEventListener('click', function () { setAddon(!addon); });
-    $('[data-q-change]', ask).addEventListener('click', function () { trail.push(step); show(1); });
-    back.addEventListener('click', function () { show(trail.length ? trail.pop() : Math.max(0, step - 1)); });
-    document.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-rc-sys],.js-open'); if (!b) return;
-      if (b.tagName === 'A' && b.getAttribute('href') && !b.hasAttribute('data-rc-sys')) return;
-      e.preventDefault();
-      var k = b.getAttribute('data-rc-sys') || b.getAttribute('data-sys') || '';
-      if (k && k !== 'Not sure yet') pick(k);
-      if (b.getAttribute('data-rc-addon') === 'chiller') setAddon(true);
-      var ok = f.elements.suburb.value.trim().length > 1;
-      trail = [];
-      if (!ask.classList.contains('is-sent')) show(ok ? (system ? 2 : 1) : 0);
-      goTo(ask);
-      setTimeout(function () { var i = $('.rc-q__pane:not([hidden]) input:not([type=hidden])', ask); if (i && innerWidth > 899) i.focus({ preventScroll: true }); }, 700);
-    }, true);
-    var message = function () {
-      return [(nameOf(system) || 'Not sure yet') + ' installation request.', 'Suburb: ' + f.elements.suburb.value.trim() + '.', when ? 'Timing: ' + when + '.' : '', addon ? 'Add on: ' + ADDON + '.' : '', 'From the ' + (ask.getAttribute('data-title') || 'guide') + ' page.'].filter(Boolean).join(' ');
-    };
-    f.addEventListener('submit', function (e) {
-      e.preventDefault(); if (sending) return;
-      if (!started) { started = true; window.ffyTrack && window.ffyTrack('form_start', { form: page }); }
-      var ins = $$('input:not([type=hidden])', panes[step]);
-      for (var j = 0; j < ins.length; j++) if (!ins[j].reportValidity()) return;
-      if (step === 0) { if (f.elements.suburb.value.trim().length < 2) { err.textContent = 'Please add your suburb or postcode.'; err.hidden = false; return; } trail.push(0); show(system ? 2 : 1); return; }
-      if (step === 1) { if (!system && !picked) { err.textContent = 'Please choose a system, or Not sure yet.'; err.hidden = false; return; } trail.push(1); show(2); return; }
-      hidden('system', nameOf(system) || 'Not sure yet'); hidden('installation_preference', when); hidden('message', message());
-      hidden('_subject', (nameOf(system) || 'Installation') + ' request, ' + f.elements.suburb.value.trim());
-      if (window.ffyStampForm) window.ffyStampForm(f);
-      sending = true; next.disabled = true; nextLabel.textContent = 'Sending…'; err.hidden = true;
-      var fail = function () { err.textContent = 'That did not send. Please try again, or call 0430 546 749.'; err.hidden = false; nextLabel.textContent = 'Try again'; };
-      fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } }).then(function (r) {
-        if (r.ok) {
-          ask.classList.add('is-sent');
-          window.ffyLeadSuccess && window.ffyLeadSuccess(f, { form: page, label: page, system: nameOf(system) || 'not chosen' });
-          var d = $('.rc-q__done', ask); d.setAttribute('tabindex', '-1'); d.focus({ preventScroll: true });
-        } else fail();
-      }).catch(fail).then(function () { sending = false; next.disabled = false; });
-    });
-    show(0);
-    var want = new URLSearchParams(location.search).get('system');
-    if (want && SYS[want]) pick(want);
-  })();
 })();
 (function () {
   document.querySelectorAll('#rc [data-rc-copy]').forEach(function (b) {
@@ -524,4 +447,132 @@
       function sel() { var r = document.createRange(); r.selectNodeContents(txt); var s = getSelection(); s.removeAllRanges(); s.addRange(r); lab.textContent = 'Selected, now copy it'; }
     });
   });
+})();
+
+(function () {
+  'use strict';
+  var root = document.getElementById('rc');
+  if (!root) return;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  var clamp = function (v, a, b) { return v < a ? a : (v > b ? b : v); };
+
+  
+  var mph = matchMedia('(max-width:859px)').matches;
+  var lenis = null;
+  if (!reduce && typeof Lenis !== 'undefined' && matchMedia('(pointer:fine)').matches && !mph) {
+    lenis = new Lenis({ duration: 1.35, smoothWheel: true, syncTouch: false, wheelMultiplier: 1.0,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); } });
+    document.documentElement.classList.add('lenis');
+    window.lenis = lenis;
+    window.__ffyLenis = lenis;
+    var loop = function (t) { lenis.raf(t); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  }
+  
+  $$('dialog, .msheet, [data-sx-scroll]').forEach(function (d) { d.setAttribute('data-lenis-prevent', ''); });
+
+  
+  var eGlide = function (t) { return t <= 0 ? 0 : (t >= 1 ? 1 : -(Math.cos(Math.PI * t) - 1) / 2); };
+  function room() { return innerWidth < 1080 ? 84 : 100; }
+  root.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
+    var id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    var t = document.getElementById(id);
+    if (!t) return;
+    e.preventDefault();
+    var want = a.getAttribute('data-sx-pick');
+    if (want) { var tile = t.querySelector('[data-fb-pick="' + want + '"]'); if (tile && tile.getAttribute('aria-pressed') !== 'true') tile.click(); }
+    if (t.tagName === 'DETAILS' && !t.open) { t.open = true; t.classList.add('is-open'); }
+    var y = Math.max(0, t.getBoundingClientRect().top + scrollY - room() + 12);
+    if (lenis) lenis.scrollTo(y, { duration: 1.0, easing: eGlide });
+    else window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+  });
+
+  
+  var scenes = $$('[data-sx]', root);
+  if (reduce || !scenes.length) return;
+  document.documentElement.classList.add('sx-on');
+  var items = scenes.map(function (el) {
+    el.classList.add('is-armed');
+    var it = { el: el, type: el.getAttribute('data-sx'), run: el.querySelector('[data-sx-run]') || el,
+      steps: $$('[data-sx-step]', el), ats: $$('[data-at]', el).map(function (a) { return { el: a, at: parseFloat(a.getAttribute('data-at')) || 0, on: false }; }),
+      stops: $$('[data-stops]', el).map(function (s) { return { el: s, at: s.getAttribute('data-stops').split(',').map(parseFloat) }; }),
+      p: -1, cur: -1, state: 0, dur: parseFloat(el.getAttribute('data-dur') || '2200') };
+    setP(it, 0);
+    return it;
+  });
+  function setP(it, p) {
+    if (Math.abs(p - it.p) < 0.0005) return;
+    it.p = p;
+    it.el.style.setProperty('--p', p.toFixed(4));
+    it.ats.forEach(function (a) {
+      var on = p >= a.at - 0.0001;
+      if (on !== a.on) { a.on = on; a.el.classList.toggle('is-lit', on); if (on && a.el.classList.contains('sx-count')) count(a.el); }
+    });
+    it.stops.forEach(function (s) { s.at.forEach(function (v, i) { s.el.classList.toggle('is-s' + (i + 1), p >= v - 0.0001); }); });
+  }
+  
+  
+  function count(el) {
+    if (el._ran) return; el._ran = true;
+    var done = el.textContent, to = parseFloat(el.getAttribute('data-to')), from = parseFloat(el.getAttribute('data-from') || '0');
+    var log = el.hasAttribute('data-log'), dur = parseFloat(el.getAttribute('data-ms') || '1600'), t0 = performance.now();
+    var fmt = function (v) {
+      if (v >= 100) return Math.round(v).toLocaleString('en-AU');
+      if (v >= 10) return String(Math.round(v));
+      if (v >= 1) return v.toFixed(log ? 1 : 0);
+      var d = Math.min(4, Math.max(1, 1 - Math.floor(Math.log(v) / Math.LN10)));
+      return v.toFixed(d);
+    };
+    el.classList.add('is-run');
+    if (el.parentNode && el.parentNode.classList) el.parentNode.classList.add('is-on');
+    (function f(now) {
+      var k = clamp((now - t0) / dur, 0, 1), e = 1 - Math.pow(1 - k, 3);
+      if (k >= 1) { el.textContent = done; return; }
+      var v = log ? Math.exp(Math.log(from) + (Math.log(to) - Math.log(from)) * e) : from + (to - from) * e;
+      el.textContent = fmt(v);
+      requestAnimationFrame(f);
+    })(t0);
+  }
+  function setCur(it, cur) {
+    if (cur === it.cur) return;
+    it.cur = cur;
+    it.el.setAttribute('data-cur', String(cur));
+    it.steps.forEach(function (s, i) { s.classList.toggle('is-lit', i <= cur); s.classList.toggle('is-cur', i === cur); });
+  }
+  function play(it) {
+    it.state = 1;
+    var t0 = performance.now(), from = it.p > 0 ? it.p : 0;
+    (function f(now) {
+      var k = clamp((now - t0) / it.dur, 0, 1);
+      setP(it, from + (1 - from) * k);
+      if (k < 1) requestAnimationFrame(f); else it.state = 2;
+    })(t0);
+  }
+  function frame() {
+    var vh = innerHeight, line = vh * (vh < 700 ? 0.66 : 0.6);
+    items.forEach(function (it) {
+      if (it.type === 'track') {
+        var rr = it.run.getBoundingClientRect();
+        setP(it, clamp((line - rr.top) / Math.max(1, rr.height), 0, 1));
+        var cur = 0;
+        it.steps.forEach(function (s, i) { if (s.getBoundingClientRect().top < line) cur = i; });
+        setCur(it, cur);
+      } else if (it.state === 0) {
+        var r = it.el.getBoundingClientRect();
+        if (r.bottom < 0) { it.state = 2; setP(it, 1); }
+        else if (r.top < vh * 0.8 && r.bottom > vh * 0.12) play(it);
+      }
+    });
+  }
+  var raf = 0;
+  var onScroll = function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; frame(); }); };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  addEventListener('load', onScroll);
+  frame();
 })();
