@@ -577,36 +577,17 @@ html.hm-js #hm [data-hm-up]:not(.up):not(.done){transform:translateY(135%)}
 #hm .rcttl{font-family:var(--hummf);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:.96;font-size:clamp(2.35rem,4.4vw,4.2rem);margin:18px 0 0}
 #hm .rclede{font-family:var(--hummf);font-weight:700;color:#fff;font-size:19px;line-height:1.35;margin:12px 0 0;max-width:36ch}
 
-#hm .rc-modes{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,.8fr);gap:0;margin-top:24px;padding:4px;border-radius:var(--r-full);background:#fff;box-shadow:0 10px 26px -14px rgba(4,16,46,.45)}
-#hm .rc-modes button{position:relative;z-index:1;appearance:none;-webkit-appearance:none;border:0;background:none;cursor:pointer;min-height:46px;padding:0 8px;border-radius:var(--r-full);font:inherit;font-size:15.5px;font-weight:600;color:var(--ink);transition:color .35s var(--e-out)}
-#hm .rc-modes button[aria-selected="true"]{color:#fff}
-#hm .rc-modes button:focus-visible{outline:2px solid var(--ink-blue);outline-offset:2px}
-#hm .rc-modes__glide{position:absolute;z-index:0;top:4px;bottom:4px;left:0;width:var(--gw,0);border-radius:var(--r-full);background:var(--ink-blue);transform:translateX(var(--gx,0));transition:transform .45s var(--e-out),width .45s var(--e-out)}
-html:not(.hm-js) #hm .rc-modes__glide{display:none}
-html:not(.hm-js) #hm .rc-modes button[aria-selected="true"]{background:var(--ink-blue)}
-#hm .rc-models-wrap{position:relative;margin-top:14px;min-height:44px}
-#hm .rc-models{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
-#hm .rc-models[hidden]{display:none}
-#hm .rc-models__note{display:none;margin:4px 0 0;flex:0 0 100%;font-family:var(--hummf);font-weight:700;font-size:19px;line-height:1.25;color:#fff}
-#hm .rc-models button{appearance:none;-webkit-appearance:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 16px;border-radius:var(--r-full);background:#fff;color:var(--ink);font:inherit;font-size:15px;font-weight:600;box-shadow:inset 0 0 0 1px #fff;transition:background .3s ease-in-out,color .3s ease-in-out,box-shadow .3s ease-in-out}
-#hm .rc-models button svg{width:14px;height:14px;display:none}
-#hm .rc-models button[aria-pressed="true"]{background:var(--ink-blue);color:#fff;box-shadow:inset 0 0 0 1px var(--ink-blue)}
-#hm .rc-models button[aria-pressed="true"] svg{display:block}
-#hm .rc-models button:focus-visible{outline:2px solid #fff;outline-offset:2px}
-@media (hover:hover) and (pointer:fine){#hm .rc-models button:not([aria-pressed="true"]):hover{background:#fff;box-shadow:inset 0 0 0 2px var(--ink-blue)}}
-
-#hm .rc-card{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px 16px;align-items:center;margin-top:14px;padding:12px;border-radius:var(--r-card);background:#fff;color:var(--ink);box-shadow:0 12px 28px -16px rgba(4,16,46,.45)}
-#hm .rc-card__img{width:104px;height:104px;border-radius:12px;overflow:hidden;background:#EDEAE6}
-#hm .rc-card__img img{width:100%;height:100%;object-fit:cover;transition:opacity .28s ease-in-out}
-#hm .rc-card__t{display:grid;gap:3px;min-width:0}
+#hm .rc-card{margin-top:24px;padding:20px 20px 14px;border-radius:var(--r-card);background:#fff;color:var(--ink);box-shadow:0 12px 28px -16px rgba(4,16,46,.45)}
+#hm .rc-syss{margin-top:18px;padding-top:14px;border-top:1px solid var(--rule)}
+#hm .rc-sys{display:grid;gap:3px;min-width:0}
 #hm .rc-card__name{display:inline-flex;align-items:center;gap:6px;font-size:19px;font-weight:700;letter-spacing:-.02em;line-height:1.2;color:var(--ink);text-decoration:none;min-height:44px;margin:-8px 0 -7px;width:max-content;max-width:100%}
 #hm .rc-card__name svg{width:14px;height:14px;flex:0 0 14px;color:var(--blue)}
 #hm .rc-card__line{font-size:14.5px;line-height:1.4;color:var(--muted)}
 #hm .rc-card__price{font-size:15px;color:var(--muted);margin-top:3px}
 #hm .rc-card__price b{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
-#hm .rc-card__view{display:inline-flex;align-items:center;min-height:44px;margin:-8px 0 -10px;font-size:14.5px;font-weight:600;color:var(--blue);text-decoration:underline;text-decoration-color:rgba(11,97,244,.35);text-underline-offset:4px;width:max-content}
-@media (hover:hover) and (pointer:fine){#hm .rc-card__name:hover,#hm .rc-card__view:hover{text-decoration:underline;text-decoration-color:var(--blue)}}
-#hm .rc-extra{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:10px;border-top:1px solid var(--rule)}
+@media (hover:hover) and (pointer:fine){#hm .rc-card__name:hover{text-decoration:underline;text-decoration-color:var(--blue)}}
+html:not(.fb-js) #hm .rc-sys + .rc-sys{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+#hm .rc-extra{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule)}
 #hm .rc-extra b{font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.3}
 #hm .rc-extra label{display:flex;align-items:center;gap:4px;font-size:17px;font-weight:800;color:var(--ink);flex:0 0 132px}
 #hm .rc-extra input{width:100%;min-width:0;min-height:44px;font:inherit;font-size:17px;font-weight:800;color:var(--ink);border:0;border-bottom:2px solid var(--rule);background:transparent;padding:0;outline:0;-moz-appearance:textfield;transition:border-color .3s ease-in-out}
@@ -911,19 +892,13 @@ html:not(.hm-js) #hm .fq[open] .chev{transform:rotate(180deg)}
   #hm .rchead{display:none}
   #hm .rcttl{font-size:clamp(2rem,8.8vw,2.3rem);margin-top:0}
   #hm .rclede{display:none}
-  #hm .rc-modes{margin-top:14px}
-  #hm .rc-modes button{font-size:14.5px;min-height:44px;padding:0 2px;white-space:nowrap}
-  #hm .rc-models-wrap{margin-top:10px}
-  #hm .rc-models{gap:5px;flex-wrap:nowrap}
-  #hm .rc-models button{flex:1 1 auto;justify-content:center;min-width:44px;padding:0 8px;font-size:14px}
   #hm .rcres:not(.has-extra) .rcsum{display:none}
-  #hm .rc-card{grid-template-columns:76px minmax(0,1fr);gap:8px 12px;padding:10px;margin-top:10px}
-  #hm .rc-card__img{width:76px;height:76px;border-radius:10px}
+  #hm .rc-card{padding:14px 12px 10px;margin-top:14px}
+  #hm .rc-syss{margin-top:14px;padding-top:10px}
   #hm .rc-card__name{font-size:17px;margin:-10px 0 -9px}
   #hm .rc-card__line{font-size:13.5px}
   #hm .rc-card__price{font-size:14px;margin-top:0}
   #hm .rc-card__price b{font-size:18px}
-  #hm .rc-card__view{display:none}
   #hm .rc-extra{padding-top:8px}
   #hm .rc-extra b{font-size:14px}
   #hm .rc-extra label{flex-basis:118px}
@@ -1020,14 +995,6 @@ html:not(.hm-js) #hm .fq[open] .chev{transform:rotate(180deg)}
   #hm .hm-fig--hero b{font-size:3.2rem}
   #hm .hm-cta{margin-top:16px}
 }
-@media (max-width:374px){
-  #hm .rc-models button{font-size:13px;padding:0 7px}
-}
-@media (max-width:339px){
-  #hm .rc-models{flex-wrap:wrap}
-  #hm .rc-models button{flex:0 1 auto;padding:0 11px}
-  #hm .rc-models__note{display:block}
-}
 @media (max-width:359px){
   #hm .rcterms{gap:5px}
   #hm .rcterm{padding-left:1px;padding-right:1px}
@@ -1046,14 +1013,14 @@ html:not(.hm-js) #hm .fq[open] .chev{transform:rotate(180deg)}
   #hm .hm-seal--navy svg{width:16px;height:16px}
   #hm .hm-seal--navy b{font-size:9px}
   #hm .hm-seals p span{display:none}
-  #hm .rc-modes button{font-size:13.5px}
   #hm .hm-facts{grid-template-columns:minmax(0,1fr)}
 }
 @media (prefers-reduced-motion:reduce){
   #hm .wm > span.up{animation:none}
-  #hm .rc-modes__glide,#hm .hm-offer,#hm .hm-bar{transition:none}
+  #hm .hm-offer,#hm .hm-bar{transition:none}
 }
 </style>
+<link rel="stylesheet" href="/assets/css/ffy-blocks.css?v=13c54840">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -1379,19 +1346,9 @@ html:not(.hm-js) #hm .fq[open] .chev{transform:rotate(180deg)}
         </div>
         <h2 class="rcttl" id="rcTitle">Repayments<br>Calculator</h2>
         <p class="rclede">Pick a system. Every humm term shows side by side, interest free up to $10,000.</p>
-        <div class="rc-modes" role="tablist" aria-label="Where you want filtered water"><button type="button" role="tab" id="rcTab-every" aria-selected="true" aria-controls="rcModels-every" tabindex="0" data-mode="every">Every tap</button><button type="button" role="tab" id="rcTab-drink" aria-selected="false" aria-controls="rcModels-drink" tabindex="-1" data-mode="drink">Drinking water</button><button type="button" role="tab" id="rcTab-both" aria-selected="false" aria-controls="rcModels-both" tabindex="-1" data-mode="both">Both</button><span class="rc-modes__glide" aria-hidden="true"></span></div>
-        <div class="rc-models-wrap">
-          <div class="rc-models" role="tabpanel" id="rcModels-every" aria-labelledby="rcTab-every" data-group="every"><button type="button" aria-pressed="true" aria-label="Pure Home" data-key="home" data-name="Pure Home" data-mode="every" data-price="2950" data-from="1" data-url="/pure-home-water-filter-sydney" data-img="/media/home-guide/pure-home-card.webp" data-line="Three stage whole house filtration. Every tap and shower.">Pure Home</button><button type="button" aria-pressed="false" aria-label="Pure Home Reserve" data-key="reserve" data-name="Pure Home Reserve" data-mode="every" data-price="4150" data-from="1" data-url="/pure-home-reserve-water-filter-sydney" data-img="/media/whole-house/card-reserve.webp" data-line="The same whole house filtration in a lockable cabinet, in 22 colours.">Reserve</button><p class="rc-models__note">Filtered at the mains, for every tap and shower.</p></div>
-          <div class="rc-models" role="tabpanel" id="rcModels-drink" aria-labelledby="rcTab-drink" data-group="drink" hidden><button type="button" aria-pressed="false" aria-label="Pure Flow" data-key="flow" data-name="Pure Flow" data-mode="drink" data-price="760" data-from="0" data-url="/pure-flow-water-filter-sydney" data-img="/media/products/photos/landing/flow-card.webp" data-line="Three in one inline filtration. Keeps your kitchen mixer.">Flow</button><button type="button" aria-pressed="false" aria-label="Pure Essential" data-key="essential" data-name="Pure Essential" data-mode="drink" data-price="1090" data-from="0" data-url="/pure-essential-water-filter-sydney" data-img="/media/products/photos/landing/essential-card.webp" data-line="Four stage neutralising reverse osmosis.">Essential</button><button type="button" aria-pressed="true" aria-label="Pure Premium" data-key="premium" data-name="Pure Premium" data-mode="drink" data-price="1490" data-from="0" data-url="/pure-premium-water-filter-sydney" data-img="/media/products/photos/landing/premium-card.webp" data-line="Seven stage hydrogen rich alkaline reverse osmosis.">Premium</button><button type="button" aria-pressed="false" aria-label="Pure Luxe" data-key="luxe" data-name="Pure Luxe" data-mode="drink" data-price="1990" data-from="0" data-url="/pure-luxe-water-filter-sydney" data-img="/media/products/photos/landing/luxe-card.webp" data-line="Smart five stage alkaline reverse osmosis.">Luxe</button></div>
-          <div class="rc-models" role="tabpanel" id="rcModels-both" aria-labelledby="rcTab-both" data-group="both" hidden><button type="button" aria-pressed="true" aria-label="Deluxe Home" data-key="deluxe" data-name="Deluxe Home" data-mode="both" data-price="4040" data-from="1" data-url="/water-filter-systems" data-img="/media/range-2026-10/deluxe-home-square-600.webp" data-line="Pure Home, Pure Essential and a Classic three way mixer, free.">Deluxe Home</button><button type="button" aria-pressed="false" aria-label="Deluxe Home Reserve" data-key="deluxe-reserve" data-name="Deluxe Home Reserve" data-mode="both" data-price="5640" data-from="1" data-url="/water-filter-systems" data-img="/media/range-2026-10/deluxe-reserve-square-600.webp" data-line="Pure Home Reserve, Pure Premium and a Classic three way mixer, free.">Deluxe Reserve</button><p class="rc-models__note">Every tap, plus drinking water in the kitchen.</p></div>
-        </div>
-        <div class="rc-card">
-          <span class="rc-card__img" data-studio-gold><img src="/media/home-guide/pure-home-card.webp" alt="" width="400" height="400" decoding="async"></span>
-          <span class="rc-card__t" aria-live="polite">
-            <a class="rc-card__name" href="/pure-home-water-filter-sydney"><span>Pure Home</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <span class="rc-card__line">Three stage whole house filtration. Every tap and shower.</span>
-            <span class="rc-card__price"><span class="pre">From </span><b>$2,950</b> installed</span>
-          </span>
+        <div class="rc-card fb">
+          <div class="fb-ppick" data-fb-picker="rcSys" role="group" aria-label="Choose a system" style="--n:4;--pn:4"><button type="button" class="fb-ppick__t" data-fb-pick="flow" aria-pressed="false" aria-controls="rcSys"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/flow-card.webp" srcset="/media/systems-hub/range-v2/flow-thumb.webp 160w, /media/systems-hub/range-v2/flow-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Flow</span></button><button type="button" class="fb-ppick__t" data-fb-pick="essential" aria-pressed="false" aria-controls="rcSys"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/essential-card.webp" srcset="/media/systems-hub/range-v2/essential-thumb.webp 160w, /media/systems-hub/range-v2/essential-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Essential</span></button><button type="button" class="fb-ppick__t" data-fb-pick="premium" aria-pressed="false" aria-controls="rcSys"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/premium-card.webp" srcset="/media/systems-hub/range-v2/premium-thumb.webp 160w, /media/systems-hub/range-v2/premium-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Premium</span></button><button type="button" class="fb-ppick__t" data-fb-pick="luxe" aria-pressed="false" aria-controls="rcSys"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/luxe-card.webp" srcset="/media/systems-hub/range-v2/luxe-thumb.webp 160w, /media/systems-hub/range-v2/luxe-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Luxe</span></button><button type="button" class="fb-ppick__t" data-fb-pick="home" aria-pressed="true" aria-controls="rcSys"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/home-card.webp" srcset="/media/systems-hub/range-v2/home-thumb.webp 160w, /media/systems-hub/range-v2/home-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n">Pure Home</span></button><button type="button" class="fb-ppick__t" data-fb-pick="reserve" aria-pressed="false" aria-controls="rcSys"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/reserve-card.webp" srcset="/media/systems-hub/range-v2/reserve-thumb.webp 160w, /media/systems-hub/range-v2/reserve-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span><span class="fb-sr">Home </span>Reserve</span></button><button type="button" class="fb-ppick__t" data-fb-pick="deluxe" aria-pressed="false" aria-controls="rcSys"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/deluxe-card.webp" srcset="/media/systems-hub/range-v2/deluxe-thumb.webp 160w, /media/systems-hub/range-v2/deluxe-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n">Deluxe Home</span></button><button type="button" class="fb-ppick__t" data-fb-pick="deluxe-reserve" aria-pressed="false" aria-controls="rcSys"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/deluxe-reserve-card.webp" srcset="/media/systems-hub/range-v2/deluxe-reserve-thumb.webp 160w, /media/systems-hub/range-v2/deluxe-reserve-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n">Deluxe <span class="fb-sr">Home </span>Reserve</span></button></div>
+          <div class="rc-syss" id="rcSys" data-fb-panels aria-live="polite"><div class="rc-sys" data-fb-panel="flow" data-name="Pure Flow" data-price="760" data-from="0" data-url="/pure-flow-water-filter-sydney" data-img="/media/products/photos/landing/flow-card.webp" data-line="Three in one inline filtration. Keeps your kitchen mixer."><a class="rc-card__name" href="/pure-flow-water-filter-sydney"><span>Pure Flow</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="rc-card__line">Three in one inline filtration. Keeps your kitchen mixer.</span><span class="rc-card__price"><span class="pre"></span><b>$760</b> installed</span></div><div class="rc-sys" data-fb-panel="essential" data-name="Pure Essential" data-price="1090" data-from="0" data-url="/pure-essential-water-filter-sydney" data-img="/media/products/photos/landing/essential-card.webp" data-line="Four stage neutralising reverse osmosis."><a class="rc-card__name" href="/pure-essential-water-filter-sydney"><span>Pure Essential</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="rc-card__line">Four stage neutralising reverse osmosis.</span><span class="rc-card__price"><span class="pre"></span><b>$1,090</b> installed</span></div><div class="rc-sys" data-fb-panel="premium" data-name="Pure Premium" data-price="1490" data-from="0" data-url="/pure-premium-water-filter-sydney" data-img="/media/products/photos/landing/premium-card.webp" data-line="Seven stage hydrogen rich alkaline reverse osmosis."><a class="rc-card__name" href="/pure-premium-water-filter-sydney"><span>Pure Premium</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="rc-card__line">Seven stage hydrogen rich alkaline reverse osmosis.</span><span class="rc-card__price"><span class="pre"></span><b>$1,490</b> installed</span></div><div class="rc-sys" data-fb-panel="luxe" data-name="Pure Luxe" data-price="1990" data-from="0" data-url="/pure-luxe-water-filter-sydney" data-img="/media/products/photos/landing/luxe-card.webp" data-line="Smart five stage alkaline reverse osmosis."><a class="rc-card__name" href="/pure-luxe-water-filter-sydney"><span>Pure Luxe</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="rc-card__line">Smart five stage alkaline reverse osmosis.</span><span class="rc-card__price"><span class="pre"></span><b>$1,990</b> installed</span></div><div class="rc-sys is-on" data-fb-panel="home" data-name="Pure Home" data-price="2950" data-from="1" data-url="/pure-home-water-filter-sydney" data-img="/media/home-guide/pure-home-card.webp" data-line="Three stage whole house filtration. Every tap and shower."><a class="rc-card__name" href="/pure-home-water-filter-sydney"><span>Pure Home</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="rc-card__line">Three stage whole house filtration. Every tap and shower.</span><span class="rc-card__price"><span class="pre">From </span><b>$2,950</b> installed</span></div><div class="rc-sys" data-fb-panel="reserve" data-name="Pure Home Reserve" data-price="4150" data-from="1" data-url="/pure-home-reserve-water-filter-sydney" data-img="/media/whole-house/card-reserve.webp" data-line="The same whole house filtration in a lockable cabinet, in 22 colours."><a class="rc-card__name" href="/pure-home-reserve-water-filter-sydney"><span>Pure Home Reserve</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="rc-card__line">The same whole house filtration in a lockable cabinet, in 22 colours.</span><span class="rc-card__price"><span class="pre">From </span><b>$4,150</b> installed</span></div><div class="rc-sys" data-fb-panel="deluxe" data-name="Deluxe Home" data-price="4040" data-from="1" data-url="/water-filter-systems" data-img="/media/range-2026-10/deluxe-home-square-600.webp" data-line="Pure Home, Pure Essential and a Classic three way mixer, free."><a class="rc-card__name" href="/water-filter-systems"><span>Deluxe Home</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="rc-card__line">Pure Home, Pure Essential and a Classic three way mixer, free.</span><span class="rc-card__price"><span class="pre">From </span><b>$4,040</b> installed</span></div><div class="rc-sys" data-fb-panel="deluxe-reserve" data-name="Deluxe Home Reserve" data-price="5640" data-from="1" data-url="/water-filter-systems" data-img="/media/range-2026-10/deluxe-reserve-square-600.webp" data-line="Pure Home Reserve, Pure Premium and a Classic three way mixer, free."><a class="rc-card__name" href="/water-filter-systems"><span>Deluxe Home Reserve</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="rc-card__line">Pure Home Reserve, Pure Premium and a Classic three way mixer, free.</span><span class="rc-card__price"><span class="pre">From </span><b>$5,640</b> installed</span></div></div>
           <div class="rc-extra"><b>Adding a tap or an extra?</b><label><span aria-hidden="true">$</span><input type="number" id="rcExtra" inputmode="decimal" min="0" step="1" placeholder="0" aria-label="Anything else, in dollars"></label></div>
         </div>
       </div>
@@ -2681,6 +2638,7 @@ var HummCalc = (function () {
 if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc; }
 </script>
 <!-- /HUMM:CALC -->
+<script defer src="/assets/js/ffy-blocks.js?v=e1061196"></script>
 <script>
 (function () {
   'use strict';
@@ -2813,12 +2771,13 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
   var fees = null;
   if (calcOK) { try { fees = HummCalc.loadFees(); } catch (err) { calcOK = false; } }
 
-  var chips = $$('.rc-models button');
+  var sysBox = document.getElementById('rcSys');
+  var panels = sysBox ? $$('[data-fb-panel]', sysBox) : [];
   var byKey = {};
   var range = { combo_rule: { extra_system_discount: 0, taps_discounted: false }, products: [], extras: { free_entry_field: true, free_entry_label: 'Anything else' } };
-  chips.forEach(function (c) {
+  panels.forEach(function (c) {
     var d = c.dataset;
-    var p = { key: d.key, name: d.name, mode: d.mode, price: parseFloat(d.price), from: d.from === '1', url: d.url, img: d.img, line: d.line, atomic: true };
+    var p = { key: d.fbPanel, name: d.name, price: parseFloat(d.price), from: d.from === '1', url: d.url, img: d.img, line: d.line, atomic: true };
     byKey[p.key] = p; range.products.push(p);
   });
 
@@ -2839,12 +2798,6 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
 
   if (!calcOK) { if (bar) bar.hidden = true; return; }
 
-  var modes = $$('.rc-modes [role=tab]');
-  var groupsM = $$('.rc-models');
-  var modesWrap = $('.rc-modes');
-  var card = $('.rc-card');
-  var cardImg = $('.rc-card__img img', card), cardName = $('.rc-card__name', card), cardNameText = $('.rc-card__name span', card);
-  var cardLine = $('.rc-card__line', card), cardPrice = $('.rc-card__price b', card), cardPre = $('.rc-card__price .pre', card), cardView = $('.rc-card__view', card);
   var extraIn = document.getElementById('rcExtra');
   var terms = $$('.rcterm', root);
   var priceEl = document.getElementById('rcPrice');
@@ -2862,11 +2815,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
     acctSub: document.getElementById('rcRowAcctSub'), tot: document.getElementById('rcRowTot'),
     per: document.getElementById('rcRowPer')
   };
-  var memory = {}, mode = null, term = null, combo = null, quote = null, painted = false;
-  groupsM.forEach(function (g) { var on = $('button[aria-pressed="true"]', g); memory[g.dataset.group] = on ? on.dataset.key : $('button', g).dataset.key; });
-
-  var preload = {};
-  function warm(src) { if (preload[src]) return preload[src]; var im = new Image(); im.src = src; preload[src] = im; return im; }
+  var term = null, combo = null, quote = null;
 
   function soft(change) {
     if (reduce || !res.animate) { change(); return; }
@@ -2889,57 +2838,11 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
   function termQuote(m) { var q = null; if (quote) quote.terms.forEach(function (x) { if (x.months === m) q = x; }); return q; }
   function extraAmt() { return Math.max(0, parseFloat(extraIn && extraIn.value) || 0); }
 
-  var modelsWrap = $('.rc-models-wrap');
-  function glide() {
-    var on = modes.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0];
-    if (!on) return;
-    modesWrap.style.setProperty('--gx', on.offsetLeft + 'px');
-    modesWrap.style.setProperty('--gw', on.offsetWidth + 'px');
-  }
-  function reserve() {
-    var h = 0;
-    groupsM.forEach(function (g) {
-      var was = g.hidden;
-      if (was) { g.hidden = false; g.style.position = 'absolute'; g.style.visibility = 'hidden'; g.style.width = '100%'; }
-      h = Math.max(h, g.offsetHeight);
-      if (was) { g.hidden = true; g.style.position = ''; g.style.visibility = ''; g.style.width = ''; }
-    });
-    if (h) modelsWrap.style.minHeight = h + 'px';
-  }
-  addEventListener('resize', function () { glide(); reserve(); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { glide(); reserve(); });
-  reserve();
-
-  function setMode(k, opts) {
-    opts = opts || {};
-    mode = k;
-    modes.forEach(function (t) {
-      var on = t.dataset.mode === k;
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.tabIndex = on ? 0 : -1;
-    });
-    glide();
-    groupsM.forEach(function (g) { g.hidden = g.dataset.group !== k; });
-    setModel(memory[k], opts);
-  }
-
   function setModel(key, opts) {
     opts = opts || {};
     var p = byKey[key];
     if (!p) return;
-    chosen = p; memory[p.mode] = key;
-    chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.key === key ? 'true' : 'false'); });
-    var im = warm(p.img);
-    var swap = function () {
-      cardImg.src = p.img;
-      cardImg.alt = '';
-    };
-    if (im.complete) swap(); else { im.onload = swap; im.onerror = swap; }
-    cardName.href = p.url; cardNameText.textContent = p.name;
-    cardLine.textContent = p.line;
-    cardPre.textContent = p.from ? 'From ' : '';
-    cardPrice.textContent = whole(p.price);
-    if (cardView) { cardView.href = p.url; cardView.textContent = 'View ' + p.name; }
+    chosen = p;
     paintBar();
     render(opts.quiet);
     if (!opts.quiet) window.ffyTrack && window.ffyTrack('repay_pick', { system: key, on: true });
@@ -2996,22 +2899,11 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
         res.classList.add('term');
       }
     });
-    painted = true;
   }
 
-  modes.forEach(function (t, i) {
-    t.addEventListener('click', function () { if (mode !== t.dataset.mode) { setMode(t.dataset.mode); } });
-    t.addEventListener('keydown', function (e) {
-      var k = e.key, n = modes.length, j = null;
-      if (k === 'ArrowRight') j = (i + 1) % n; else if (k === 'ArrowLeft') j = (i - 1 + n) % n;
-      else if (k === 'Home') j = 0; else if (k === 'End') j = n - 1;
-      if (j === null) return;
-      e.preventDefault(); modes[j].focus(); setMode(modes[j].dataset.mode);
-    });
-  });
-  chips.forEach(function (c) {
-    c.addEventListener('click', function () { if (!chosen || chosen.key !== c.dataset.key) setModel(c.dataset.key); });
-    c.addEventListener('pointerenter', function () { warm(c.dataset.img); });
+  sysBox.addEventListener('fb:pick', function (e) {
+    var k = e.detail && e.detail.key;
+    if (k && byKey[k] && (!chosen || chosen.key !== k)) setModel(k);
   });
   if (extraIn) extraIn.addEventListener('input', function () { render(); });
 
@@ -3115,8 +3007,12 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = HummCalc
   }
 
   var want = new URLSearchParams(location.search).get('system');
-  var start = want && byKey[want] ? byKey[want] : byKey[memory[(modes.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || modes[0]).dataset.mode]];
-  if (start) { memory[start.mode] = start.key; setMode(start.mode, { quiet: true }); }
+  if (want && byKey[want]) {
+    $$('[data-fb-pick]', root).forEach(function (t) { t.setAttribute('aria-pressed', t.getAttribute('data-fb-pick') === want ? 'true' : 'false'); });
+    panels.forEach(function (c) { c.classList.toggle('is-on', c.dataset.fbPanel === want); });
+  }
+  var startEl = panels.filter(function (c) { return c.classList.contains('is-on'); })[0] || panels[0];
+  if (startEl) setModel(want && byKey[want] ? want : startEl.dataset.fbPanel, { quiet: true });
   if (want && byKey[want] && location.hash !== '#repayments') { setTimeout(function () { goTo(root); }, 60); }
 })();
 </script>

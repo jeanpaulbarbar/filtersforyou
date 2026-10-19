@@ -747,7 +747,6 @@ video[data-sc-scrub].sc-has-clip { opacity: 1; }
 
 :root{
   --blue:#0B61F4; --blue-deep:#0846BE; --blue-pale:#E8F0FE; --ink-blue:#04102E;
-  --purple:#6D28D9;
   --yellow:#FFD900; --paper:#FFFEFC; --mist:#EDF3F7; --mist-2:#F4F8F9;
   --ink:#0F2748; --muted:#4E5B75; --rule:#E3E9F3;
   --sans:"Plus Jakarta Sans","PJS Fallback",-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,sans-serif;
@@ -887,8 +886,6 @@ a{color:inherit}
   .rrow:hover{background:var(--mist-2)}
   .rrow:hover .rrow__go b{background:var(--blue);transform:translateY(-1px)}
 }
-.reg__note{margin-top:clamp(24px,3vw,36px);padding:4px 0 4px 22px;border-left:3px solid var(--blue);font-size:16px;line-height:1.55;color:var(--muted);max-width:76ch}
-.reg__note b{color:var(--ink)}
 
 
 .mean{padding:clamp(72px,8vw,120px) 0;background:var(--mist-2)}
@@ -908,14 +905,8 @@ a{color:inherit}
 .mean__go{margin-top:8px}
 
 
-.lic{padding:clamp(72px,8vw,120px) 0;color:#fff;background-color:#0846BE;
-  background-image:
-    radial-gradient(52% 46% at 6% 6%,rgba(255,255,255,.3),transparent 62%),
-    radial-gradient(36% 40% at 92% 92%,rgba(255,217,0,.2),transparent 62%),
-    linear-gradient(118deg,#0B61F4 0%,#3B82F6 16%,#6D28D9 38%,#0846BE 56%,#22B8F0 76%,#0B61F4 100%);
-  background-size:200% 200%,200% 200%,320% 320%;background-position:0% 0%,100% 100%,0% 50%}
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.lic{animation:auroraflow 44s ease-in-out infinite}}
-@keyframes auroraflow{0%{background-position:0% 0%,100% 100%,0% 50%}50%{background-position:30% 40%,70% 60%,100% 50%}100%{background-position:0% 0%,100% 100%,0% 50%}}
+.lic{padding:clamp(72px,8vw,120px) 0;color:#fff;background-color:var(--ink-blue);
+  background-image:radial-gradient(60% 70% at 0% 0%,rgba(11,97,244,.34),transparent 64%),radial-gradient(42% 55% at 100% 100%,rgba(11,97,244,.16),transparent 62%),linear-gradient(160deg,#0F2748 0%,#04102E 70%)}
 .lic__grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.45fr);gap:clamp(32px,5vw,88px);align-items:start}
 .lic__mark{display:grid;gap:16px;position:sticky;top:calc(var(--top) + 18px)}
 .lic__plate{display:grid;place-items:center;padding:clamp(28px,4vw,52px);border-radius:var(--r-hero);background:#fff;box-shadow:0 30px 60px -30px rgba(4,16,46,.6)}
@@ -1081,7 +1072,7 @@ body.dopen .drawer{transform:none}
 .srail ul{display:grid;gap:2px}
 .srail a{position:relative;display:flex;align-items:center;justify-content:flex-end;gap:12px;height:27px;padding-right:9px;text-decoration:none;color:var(--ink)}
 .srail a i{display:block;flex:none;width:16px;height:2px;border-radius:2px;background:rgba(15,39,72,.26);transition:width .45s var(--e-out),background .45s ease-in-out}
-.srail a span{font-size:12.5px;font-weight:700;white-space:nowrap;padding:4px 11px;border-radius:9px;
+.srail a span{position:absolute;right:50px;top:50%;margin-top:-13px;font-size:12.5px;font-weight:700;white-space:nowrap;padding:4px 11px;border-radius:9px;
   background:rgba(255,254,252,.9);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);
   box-shadow:0 8px 22px -12px rgba(4,16,46,.55), inset 0 0 0 1px rgba(255,255,255,.6);
   opacity:0;transform:translateX(10px);transition:opacity .48s ease-in-out,transform .45s var(--e-out)}
@@ -1111,40 +1102,12 @@ body.dopen .drawer{transform:none}
 .tveil.on{opacity:1;transition:opacity .44s cubic-bezier(.4,0,.2,1)}
 @media(prefers-reduced-motion:reduce){.srail a i,.srail a span,.totop,.tveil{transition-duration:.001s}}
 .sbar{display:none}
-.mrail,.mpick,.mscrim{display:none}
 
 
 .est{position:relative;z-index:19;background:var(--paper);color:var(--ink);padding:clamp(72px,8vw,120px) 0 clamp(64px,7vw,104px);border-top:1px solid var(--rule)}
-.est__head{max-width:64ch}
 .est__lab{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--blue);letter-spacing:.01em}
 .est__lab img{width:24px;height:24px}
-.est__head h2{margin:14px 0 0;color:var(--ink);max-width:18ch}
-.est__head .lede{margin-top:16px}
-.est__grid{display:grid;gap:40px;margin-top:clamp(40px,5vw,64px)}
-.est__nav{display:none}
-.est__body{min-width:0;max-width:70ch}
-.ch{border-top:1px solid var(--rule)}
-.ch:first-of-type{border-top:0}
-.ch > summary{display:flex;align-items:flex-start;gap:18px;cursor:pointer;list-style:none;padding:22px 0;min-height:44px;-webkit-tap-highlight-color:transparent}
-.ch > summary::-webkit-details-marker{display:none}
-.ch > summary h2{flex:1 1 auto;margin:0;font-size:clamp(1.34rem,2.1vw,1.85rem);font-weight:700;line-height:1.2;letter-spacing:-.018em;color:var(--ink);text-wrap:balance;transition:color .45s ease-in-out}
-.ch > summary .chev{flex:0 0 22px;width:22px;height:22px;margin-top:6px;color:var(--blue);transition:transform .48s var(--e-out)}
-.ch[open] > summary .chev{transform:rotate(180deg)}
-.ch > summary:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:var(--r-sm)}
-.ch__a{overflow:hidden;padding-bottom:26px}
-.ch__a p{margin:0;font-size:17px;line-height:1.62;color:var(--muted);text-wrap:pretty}
-.ch__a p + p,.ch__a ul + p,.ch__a p + ul{margin-top:14px}
-.ch__a .est__lift{font-size:clamp(1.12rem,1.5vw,1.28rem);line-height:1.5;font-weight:500;color:var(--ink)}
-.ch__a ul{display:grid;gap:8px;padding-left:0}
-.ch__a ul li{position:relative;padding-left:22px;font-size:16.5px;line-height:1.55;color:var(--muted)}
-.ch__a ul li::before{content:"";position:absolute;left:0;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--blue)}
-.ch__a ul li b{color:var(--ink);font-weight:700}
-.ch__a p a,.est .fq .fa a,.est__head a,.ch__a li a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(11,97,244,.4);transition:text-decoration-color .45s ease-in-out}
-.est__areas{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
-.est__areas li{padding:0}
-.est__areas li::before{display:none}
-.est__areas a{display:inline-flex;align-items:center;min-height:40px;padding:0 15px;border-radius:var(--r-full);border:1px solid var(--rule);background:#fff;font-size:14.5px;font-weight:600;color:var(--ink);text-decoration:none;transition:border-color .45s ease-in-out,color .45s ease-in-out}
-.est__faq{margin-top:clamp(48px,6vw,80px);padding-top:clamp(40px,5vw,64px);border-top:1px solid var(--rule)}
+.est__faq{margin:0;padding:0}
 .est .fwrap{display:grid;gap:36px;align-items:start}
 .est .fside h2{margin:14px 0 0;max-width:14ch;color:var(--ink);font-size:clamp(1.7rem,2.6vw,2.4rem)}
 .est .fside .lede{margin-top:16px;max-width:30ch}
@@ -1158,8 +1121,10 @@ body.dopen .drawer{transform:none}
 .est .fq summary h3{flex:1 1 auto;margin:0;font-size:16.5px;font-weight:700;line-height:1.35;letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
 .est .fq .chev{flex:0 0 16px;width:16px;height:16px;color:var(--blue);transition:transform .45s var(--e-out)}
 .est .fq[open] .chev{transform:rotate(180deg)}
+.est .fq[open].is-shut .chev{transform:none}
 .est .fq .fa{padding:0 18px 20px 58px;overflow:hidden}
 .est .fq .fa p{font-size:15.5px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch}
+.est .fq .fa a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(11,97,244,.4);transition:text-decoration-color .45s ease-in-out}
 .est .fq summary:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;border-radius:var(--r-card)}
 .est__ask{margin-top:clamp(48px,6vw,80px);padding:clamp(30px,4vw,56px) clamp(22px,3.4vw,56px);border-radius:var(--r-card);background:var(--mist-2)}
 .est__ask h2{margin:0;color:var(--ink);max-width:14ch}
@@ -1169,11 +1134,6 @@ body.dopen .drawer{transform:none}
 .est__call{margin:16px 0 0;font-size:15.5px;color:var(--muted)}
 .est__call .ul{color:var(--ink);font-weight:600}
 @media(min-width:960px){
-  .est__grid{grid-template-columns:232px minmax(0,1fr);gap:80px;align-items:start}
-  .est__nav{display:block;position:sticky;top:calc(var(--top) + 18px)}
-  .est__nav b{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-  .est__nav a{display:block;padding:6px 0 6px 14px;border-left:2px solid var(--rule);font-size:14.5px;font-weight:600;line-height:1.35;color:var(--muted);text-decoration:none;transition:color .45s ease-in-out,border-color .45s ease-in-out}
-  .est__nav a.on{color:var(--blue);border-color:var(--blue)}
   .est .fwrap{grid-template-columns:.7fr 1.3fr;gap:64px}
   .est .fside{position:sticky;top:calc(var(--top) + 18px)}
   .est .fq summary{padding:19px 22px}
@@ -1181,12 +1141,7 @@ body.dopen .drawer{transform:none}
   .est .fq .fa{padding:0 22px 22px 62px}
   .est .fq .fa p{font-size:16px}
 }
-@media(hover:hover) and (pointer:fine){
-  .ch__a p a:hover,.est .fq .fa a:hover,.est__head a:hover,.ch__a li a:hover{text-decoration-color:var(--blue)}
-  .ch > summary:hover h2{color:var(--blue-deep)}
-  .est__areas a:hover{border-color:var(--blue);color:var(--blue)}
-  .est__nav a:hover{color:var(--ink)}
-}
+@media(hover:hover) and (pointer:fine){.est .fq .fa a:hover{text-decoration-color:var(--blue)}}
 .rotate{display:none}
 @media (orientation:landscape) and (max-height:520px) and (pointer:coarse){.rotate{display:flex;position:fixed;inset:0;z-index:200;
   flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;background:var(--paper);color:var(--ink)}
@@ -1245,7 +1200,6 @@ body.dopen .drawer{transform:none}
   .rrow__meta b{font-size:15px}
   .rrow__go{grid-column:2;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;margin-top:4px}
   .rrow__go b{min-height:44px;padding:0 16px}
-  .reg__note{margin-top:18px;padding-left:16px;font-size:15px}
   
   .mean{padding:56px 0 var(--fabclear)}
   .mean__grid{grid-template-columns:1fr;gap:20px}
@@ -1322,6 +1276,8 @@ body.dopen .drawer{transform:none}
   .syd__copy h2{color:var(--ink);font-size:clamp(1.7rem,7.4vw,2.1rem);max-width:none}
   .syd__copy .lede{color:var(--muted);font-size:1rem}
   .syd__areas a{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule);min-height:44px;padding:0 14px;font-size:15px}
+  
+  .syd__copy[data-sc-stagger] > *{transition-delay:0s!important}
   .syd__go{gap:8px 16px}
   .syd__go .ul{color:var(--ink);font-size:15px}
   
@@ -1352,44 +1308,14 @@ body.dopen .drawer{transform:none}
   .sbar{position:fixed;left:auto;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:55;display:flex;align-items:center;
     padding:0;background:none;box-shadow:none;transform:translateY(140%);transition:transform .45s var(--e-out)}
   .sbar.on{transform:none}
-  body.dopen .sbar,body.pickopen .sbar{transform:translateY(140%)}
+  body.dopen .sbar{transform:translateY(140%)}
   .sbar .btn{flex:0 0 auto;min-height:52px;padding-inline:22px;box-shadow:0 12px 30px rgba(4,16,46,.28),0 2px 6px rgba(4,16,46,.18)}
   
-  .mrail{display:block;position:fixed;z-index:58;right:0;top:42%;width:44px;height:26vh;
-    touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;
-    opacity:0;visibility:hidden;transition:opacity .5s ease-out,visibility 0s linear .5s}
-  .mrail.on{opacity:1;visibility:visible;transition:opacity .5s ease-out,visibility 0s}
-  body.dopen .mrail{opacity:0;visibility:hidden}
-  .mrail .tr{position:absolute;right:8px;top:0;bottom:0;width:24px;border-radius:12px;display:flex;flex-direction:column;justify-content:space-between;padding:12px 0;
-    background:rgba(255,254,252,.9);-webkit-backdrop-filter:blur(16px) saturate(1.3);backdrop-filter:blur(16px) saturate(1.3);
-    box-shadow:0 14px 30px -14px rgba(4,16,46,.55), inset 0 0 0 1px rgba(15,39,72,.1);transition:background .4s ease,box-shadow .4s ease,width .4s var(--e-out),right .4s var(--e-out)}
-  .mrail .tr s{display:block;width:5px;height:5px;border-radius:50%;background:rgba(15,39,72,.26);margin:0 auto}
-  .mrail .th{position:absolute;right:14px;top:calc(12px + var(--mp,0) * (26vh - 24px - 12px));width:12px;height:12px;border-radius:50%;background:var(--blue);transition:top .48s var(--e-out)}
-  .mrail.dark .tr{background:rgba(4,16,46,.74);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
-  .mrail.dark .tr s{background:rgba(255,255,255,.36)}
-  .mrail.dark .th{background:#fff}
-  .mrail.armed .tr{width:30px;right:6px}
-  .mrail .bb{position:absolute;right:52px;top:0;transform:translateY(-50%);padding:9px 14px;border-radius:12px;white-space:nowrap;font-size:14px;font-weight:700;color:var(--ink);
-    background:rgba(255,254,252,.96);box-shadow:0 14px 30px -14px rgba(4,16,46,.55), inset 0 0 0 1px rgba(15,39,72,.1);opacity:0;transition:opacity .4s ease-out}
-  .mrail.armed .bb{opacity:1}
-  .mscrim{display:block;position:fixed;inset:0;z-index:57;background:rgba(4,16,46,.18);opacity:0;pointer-events:none;transition:opacity .45s ease-out}
-  body.pickopen .mscrim{opacity:1;pointer-events:auto}
-  .mpick{display:block;position:fixed;z-index:59;right:52px;top:55%;width:min(240px,calc(100vw - 80px));padding:8px;border-radius:20px;
-    background:rgba(255,254,252,.96);-webkit-backdrop-filter:blur(20px) saturate(1.3);backdrop-filter:blur(20px) saturate(1.3);
-    box-shadow:0 30px 60px -24px rgba(4,16,46,.6), inset 0 0 0 1px rgba(15,39,72,.08);
-    opacity:0;visibility:hidden;transform:translate(14px,-50%);transition:opacity .4s ease-out,transform .48s var(--e-out),visibility 0s linear .48s}
-  body.pickopen .mpick{opacity:1;visibility:visible;transform:translate(0,-50%);transition:opacity .4s ease-out,transform .48s var(--e-out),visibility 0s}
-  .mpick > b{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 12px 8px}
-  .mpick button{display:flex;align-items:center;gap:12px;width:100%;min-height:42px;padding:0 12px;margin:0;border:0;border-radius:14px;background:transparent;
-    font-family:var(--sans);font-weight:600;font-size:15px;color:var(--ink);text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
-  .mpick button i{width:8px;height:8px;border-radius:50%;background:rgba(15,39,72,.18);flex:0 0 8px}
-  .mpick button.on{background:var(--blue-pale)}
-  .mpick button.on i{background:var(--blue)}
-  
   .est{padding:56px 0 var(--fabclear)}
-  .est__grid{margin-top:26px}
-  .est .fq .fa p,.ch__a ul li{font-size:16px}
+  .est .fq .fa p{font-size:16px}
 }
+
+@media(max-width:359px){.rrow__go i{white-space:normal;letter-spacing:.06em;line-height:1.3}}
 @media(max-width:859px) and (max-height:700px){
   .hero .copy{bottom:186px}
   .hero h1{font-size:clamp(1.5rem,6.4vw,1.8rem)}
@@ -1583,7 +1509,7 @@ body.dopen .drawer{transform:none}
       },
       "primaryImageOfPage": "https://filtersforyou.com.au/media/wm/sydney.webp",
       "datePublished": "2025-02-01",
-      "dateModified": "2026-09-08",
+      "dateModified": "2026-10-19",
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -1606,7 +1532,7 @@ body.dopen .drawer{transform:none}
         "cssSelector": [
           ".hero h1",
           ".hero .lede",
-          ".est__lift"
+          ".est .fq:first-of-type .fa p"
         ]
       }
     },
@@ -1662,7 +1588,7 @@ body.dopen .drawer{transform:none}
           "name": "What is WaterMark certification on a water filter?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "WaterMark is Australia's mandatory certification for plumbing products. Anything connected to a building's drinking water supply has to carry it, and it has to be installed by a licensed plumber. A WaterMark certified water filter has been tested by an accredited body to the Australian standard, AS 3497:2021 for drinking water treatment systems, and is listed on the Australian Building Codes Board register. Every reverse osmosis and under sink system Filters For You installs in Sydney is on that register under certificate 23247 or 22780."
+            "text": "WaterMark is Australia's mandatory certification for plumbing products, run by the Australian Building Codes Board. Anything connected to a building's drinking water supply has to carry it, and it has to be installed by a licensed plumber. A WaterMark certified water filter has been tested by an accredited body to AS 3497:2021 and is listed on the Australian Building Codes Board register. Every reverse osmosis and under sink system Filters For You installs in Sydney is on that register under certificate 23247 or 22780."
           }
         },
         {
@@ -1670,7 +1596,15 @@ body.dopen .drawer{transform:none}
           "name": "Are the water filters Filters For You installs WaterMark certified?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Our reverse osmosis and under sink systems are. The Pure reverse osmosis and under sink range is listed on WaterMark certificate 23247, 131 models, every one active, valid to 3 October 2028. The High Performance Filtration EQ and LSRO systems are listed on certificate 22780, 292 models, valid to 14 November 2028. Both certificates are published on this page and both link to the government register, so you can check them yourself."
+            "text": "Our reverse osmosis and under sink systems are. The Pure reverse osmosis and under sink range is on certificate 23247, 131 models, every one active, valid to 3 October 2028. Our quick change under sink filtration systems are on certificate 22780, 292 models, valid to 14 November 2028. Both certificates are published on this page and both link to the government register."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which certificate covers my system?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The two certificates are not interchangeable. 23247 is the AS 3497:2021 certificate for the Pure range, the standard for drinking water treatment systems, design and performance, installed in accordance with the Plumbing Code of Australia. It was issued by Pro-Switch Pty Ltd, a JAS-ANZ accredited conformity assessment body, first in December 2016. Its schedule lists the sediment and carbon block cartridges, the granular carbon, the 50 GPD reverse osmosis membrane, the alkaline and hydrogen rich alkaline cartridges, and the housings and manifolds they sit in. 22780 is the certificate for our quick change under sink systems and their cartridges, issued by IAPMO Oceania under WMTS-103:2016, the WaterMark technical specification for water treatment systems, first certified in November 2018. Ask, and we point you at the exact line on the register for the system in your kitchen."
           }
         },
         {
@@ -1678,7 +1612,7 @@ body.dopen .drawer{transform:none}
           "name": "Is NSF certification the same as WaterMark?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No, they cover different things. WaterMark is the Australian plumbing approval: the product is safe to connect to drinking water and may legally be installed. NSF/ANSI standards are international performance standards for filter media, such as 42 for taste and odour, 53 for health related contaminants and 58 for reverse osmosis. The filter media in the systems Filters For You installs is manufactured in compliance with NSF/ANSI 42, 53 and 58. NSF is not an Australian legal requirement and never replaces WaterMark."
+            "text": "No, they answer different questions, and a good system answers both. WaterMark is the Australian plumbing approval: the product is safe to connect to drinking water and may legally be installed. NSF/ANSI standards are international performance standards for filter media: 42 for chlorine, taste and odour, 53 for health related contaminants such as lead and cysts, and 58 for reverse osmosis systems and their membranes. The carbon blocks, sediment cartridges and membranes in the systems Filters For You installs are manufactured in compliance with NSF/ANSI 42, 53 and 58. That is the manufacturer's statement about how the media is built, and we describe it exactly that way. NSF is not an Australian legal requirement and never replaces WaterMark."
           }
         },
         {
@@ -1686,7 +1620,7 @@ body.dopen .drawer{transform:none}
           "name": "Does WaterMark certification guarantee the water quality?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "WaterMark certifies the product: its materials, its design and that it will not contaminate the drinking water supply. It is a plumbing approval, not a health claim. What the system does to the water is shown separately. The independent laboratory report published on this page measures tap water beside reverse osmosis water across more than 40 parameters, and the cartridge specification sheets show the supplier's own performance data."
+            "text": "WaterMark certifies the product: its materials, its design and that it will not contaminate the drinking water supply. The mark on the housing means the product is fit to connect to the mains. It is a plumbing approval, not a health claim, and we never present it as one. What the system does to the water is shown separately. The independent laboratory report on this page measures tap water beside reverse osmosis water across more than 40 parameters, and the hydrogen alkaline cartridge specification is the supplier's own data across the life of the cartridge, labelled that way."
           }
         },
         {
@@ -1694,7 +1628,7 @@ body.dopen .drawer{transform:none}
           "name": "How do I check a WaterMark certificate myself?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Open the Australian Building Codes Board WaterMark product search at watermark.abcb.gov.au and enter the certificate number. Filters For You's certificates are 23247 and 22780, and the links on this page open those exact register entries. The register shows the certifier, the standard, every model listed and the expiry date. If a product is not on that register, it is not WaterMark certified, whatever the box says."
+            "text": "Open the Australian Building Codes Board WaterMark product search at watermark.abcb.gov.au and enter the certificate number. The certificates behind our systems are 23247 and 22780, and the links on this page open those exact entries. The register shows the certifier, the standard, every model listed and the expiry date. If a product is not on that register, it is not WaterMark certified, whatever the box says. Comparing a system from anywhere else? Ask for its certificate number and look it up the same way."
           }
         },
         {
@@ -1702,7 +1636,7 @@ body.dopen .drawer{transform:none}
           "name": "Who installs a WaterMark certified water filter in Sydney?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A licensed plumber has to. In NSW the licence number must appear on all advertising, and it can be checked on the NSW Government's Verify NSW register. Filters For You installations are carried out by licensed plumbers across Greater Sydney from Croydon Park. Our founder, Jean-Paul Barbar, holds NSW plumbing licence 461511C, current to March 2027."
+            "text": "A licensed plumber has to. In NSW the Home Building Act requires the licence number on all advertising, on every contract and on every quote, and it can be checked on the NSW Government's Verify NSW register. Filters For You installations are carried out by licensed plumbers across Greater Sydney from Croydon Park. Our founder, Jean-Paul Barbar, holds NSW plumbing licence 461511C, current to March 2027."
           }
         },
         {
@@ -1710,7 +1644,7 @@ body.dopen .drawer{transform:none}
           "name": "What does the certificate of analysis actually show?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Laboratory report B767408 compares a tap water sample with the same water after reverse osmosis and after the alkaline stages, across more than 40 parameters including fluoride, dissolved solids, chlorine and a full metals panel. Fluoride measured 0.74 mg/L in the tap water and under 0.05 mg/L after reverse osmosis. It was run on the laboratory's own supply as a demonstration of what the membrane does, so it is not a test of Sydney water, and it is published so you can read it in full."
+            "text": "Laboratory report B767408 compares a tap water sample with the same water after reverse osmosis and after the alkaline stages, across more than 40 parameters: fluoride, dissolved solids, chlorine, hardness and a metals panel of lead, arsenic, cadmium, chromium, copper, nickel and antimony, each measured before and after. Fluoride measured 0.74 mg/L in the tap water and under 0.05 mg/L after reverse osmosis. It was run on the laboratory's own supply as a demonstration of what the membrane does, so it is not a test of Sydney water, and it is published so you can read it in full. The numbers we quote are the numbers you can read."
           }
         }
       ]
@@ -1718,7 +1652,8 @@ body.dopen .drawer{transform:none}
   ]
 }
 </script>
-<link rel="stylesheet" href="/assets/css/ffy-blocks.css?v=5e59ebf8">
+<noscript><style>[data-sc-in],[data-sc-stagger] > *,[data-sc-cue],.hch{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="stylesheet" href="/assets/css/ffy-blocks.css?v=13c54840">
 </head>
 <body>
 
@@ -1926,7 +1861,7 @@ body.dopen .drawer{transform:none}
       </a></li>
       <li><a class="rrow" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener">
         <span class="rrow__n">02</span>
-        <span class="rrow__main"><b>WaterMark certificate 22780</b><span>The High Performance Filtration EQ and LSRO under sink systems and their cartridges. 292 models, every one active.</span></span>
+        <span class="rrow__main"><b>WaterMark certificate 22780</b><span>Our quick change under sink filtration systems and their cartridges. 292 models, every one active.</span></span>
         <span class="rrow__meta"><span><i>Standard</i><b>WMTS-103:2016</b></span><span><i>Issued by</i><b>IAPMO Oceania</b></span><span><i>Valid to</i><b>14 Nov 2028</b></span></span>
         <span class="rrow__go"><i>Government register</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
       </a></li>
@@ -1955,7 +1890,6 @@ body.dopen .drawer{transform:none}
         <span class="rrow__go"><i>Government register</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
       </a></li>
     </ol>
-    <p class="reg__note" data-sc-in><b>Reading these honestly.</b> WaterMark is Australia's mandatory plumbing product certification. It confirms a product is fit to connect to drinking water and may legally be installed by a licensed plumber. It is a plumbing approval, not a health claim. The filter media in our systems is manufactured in compliance with NSF/ANSI standards 42, 53 and 58.</p>
   </div>
 </section>
 
@@ -1963,15 +1897,15 @@ body.dopen .drawer{transform:none}
   <div class="zone mean__grid">
     <div class="mean__mark" data-sc-in>
       <span class="mean__plate"><img src="media/cert-watermark.webp" alt="The WaterMark certification mark" width="851" height="583" loading="lazy"></span>
-      <p>Australia's mandatory certification for plumbing products, run by the Australian Building Codes Board. Filters For You holds certificates <a class="ul" href="https://watermark.abcb.gov.au/product-search/certificate/023247" target="_blank" rel="noopener">23247</a> and <a class="ul" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener">22780</a>.</p>
+      <p>Australia's mandatory certification for plumbing products, run by the Australian Building Codes Board. It is a plumbing approval, not a health claim.</p>
     </div>
     <div class="mean__copy" data-sc-in data-sc-stagger="90">
       <span class="kick">What WaterMark means</span>
       <h2 class="d2">One mark. Three things it proves.</h2>
       <ol class="mean__list">
         <li><span class="mean__n">01</span><div><h3>Tested to the Australian standard.</h3><p>AS 3497:2021, drinking water treatment systems, design and performance. Tested by a JAS-ANZ accredited body, not by the people who sell it.</p></div></li>
-        <li><span class="mean__n">02</span><div><h3>Listed on the government register.</h3><p>Certificate 23247 on the Australian Building Codes Board's WaterMark register. 131 models, every one active, valid to 3 October 2028. You can search it yourself.</p></div></li>
-        <li><span class="mean__n">03</span><div><h3>Installed by a licensed plumber.</h3><p>Anything connected to drinking water in NSW has to be. Every Filters For You installation is carried out by a licensed plumber. Our founder holds NSW plumbing licence 461511C.</p></div></li>
+        <li><span class="mean__n">02</span><div><h3>Listed on the government register.</h3><p>A certificate number, every model it covers and an expiry date, on the public WaterMark register. Both certificates behind our systems open from the list above.</p></div></li>
+        <li><span class="mean__n">03</span><div><h3>Installed by a licensed plumber.</h3><p>Anything connected to drinking water in NSW has to be. A certified product fitted by an unlicensed person is not a compliant installation, so the two always go together.</p></div></li>
       </ol>
       <p class="mean__go"><a class="btn" href="free-assessment"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book a free inspection</a></p>
     </div>
@@ -2005,7 +1939,7 @@ body.dopen .drawer{transform:none}
     <header class="sys__head" data-sc-in data-sc-stagger="90">
       <span class="kick">What we install</span>
       <h2 class="d2">Every drinking water system, on the register.</h2>
-      <p class="lede">Filters For You installs High Performance Filtration reverse osmosis and under sink systems and cartridges across Sydney. Every one is on the WaterMark register.</p>
+      <p class="lede">Filters For You installs reverse osmosis and under sink water filtration systems, and their cartridges, across Sydney. Every one is on the WaterMark register.</p>
     </header>
     <div class="sys__grid">
       <figure class="sys__shelf" data-sc-in aria-label="The systems">
@@ -2015,7 +1949,7 @@ body.dopen .drawer{transform:none}
       <div class="sys__table" role="table" aria-label="Systems and their certificates" data-sc-in data-sc-stagger="70">
         <div class="srow head" role="row"><span role="columnheader">System</span><span role="columnheader">Certificate</span><span role="columnheader">Standard</span><span role="columnheader">Valid to</span></div>
         <a class="srow" role="row" href="reverse-osmosis-water-filter-sydney"><span role="cell"><b>Pure reverse osmosis range</b><span>Pure Essential, Pure Premium and Pure Luxe. Under the sink, on their own tap.</span></span><span role="cell">23247</span><span role="cell">AS 3497:2021</span><span role="cell">3 Oct 2028</span></a>
-        <a class="srow" role="row" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener"><span role="cell"><b>EQ and LSRO, under sink</b><span>High Performance Filtration's quick change under sink systems and their cartridges.</span></span><span role="cell">22780</span><span role="cell">WMTS-103:2016</span><span role="cell">14 Nov 2028</span></a>
+        <a class="srow" role="row" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener"><span role="cell"><b>Quick change, under sink</b><span>Our quick change under sink filtration systems and their cartridges.</span></span><span role="cell">22780</span><span role="cell">WMTS-103:2016</span><span role="cell">14 Nov 2028</span></a>
       </div>
     </div>
     <p class="sys__line" data-sc-in>The filter media inside every one is manufactured in compliance with NSF/ANSI 42, 53 and 58. NSF is an international standard for the media, never an Australian requirement. WaterMark is the Australian one, and every system carries both.</p>
@@ -2114,98 +2048,15 @@ body.dopen .drawer{transform:none}
       <div class="ask__certs" data-sc-in>
         <a href="#documents" aria-label="WaterMark certificates 23247 and 22780, published on this page"><img src="media/cert-watermark.webp" alt="WaterMark certified" width="851" height="583" loading="lazy"></a>
         <a href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener" aria-label="Check NSW plumbing licence 461511C on the government register"><img class="nsw" src="media/cert-nsw.webp" alt="NSW Government" width="617" height="590" loading="lazy"></a>
-        <p><b>WaterMark certified systems, NSF/ANSI compliant media.</b> Fitted by a licensed plumber. Founder Jean-Paul Barbar, NSW plumbing licence 461511C.</p>
+        <p><b>WaterMark certified systems.</b> Fitted by a licensed plumber.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="est" id="details" aria-label="WaterMark certification in Sydney, in writing">
+<section class="est" id="details" aria-label="Questions about WaterMark certification">
   <div class="zone">
-    <header class="est__head" data-sc-in data-sc-stagger="90">
-      <span class="est__lab"><img src="media/mark.svg" alt="" width="48" height="48">The written version</span>
-      <h2 class="d2">WaterMark certified water filters in Sydney, written down.</h2>
-      <p class="lede">Everything the page shows, in plain words. What WaterMark certification is, what NSF/ANSI compliance means and does not mean, what each of the two certificates covers, the licence, the laboratory report and where Filters For You installs. Open what you want to read.</p>
-    </header>
-    <div class="est__grid">
-      <nav class="est__nav" aria-label="On this page">
-        <b>On this page</b>
-        <a href="#det-watermark">What WaterMark is</a>
-        <a href="#det-nsf">NSF/ANSI, honestly</a>
-        <a href="#det-23247">Certificate 23247</a>
-        <a href="#det-22780">Certificate 22780</a>
-        <a href="#det-licence">The licence</a>
-        <a href="#det-lab">The laboratory report</a>
-        <a href="#det-where">Where we install</a>
-        <a href="#det-faq">Questions</a>
-      </nav>
-      <div class="est__body">
-        <details class="ch" id="det-watermark" data-sc-in open>
-          <summary><h2>What WaterMark certification is, and why a water filter needs it</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="ch__a">
-            <p class="est__lift">WaterMark is Australia's mandatory certification for plumbing products. A water filter connected to a home's drinking water supply has to carry it, and it has to be installed by a licensed plumber.</p>
-            <p>The scheme is run by the Australian Building Codes Board. A product is tested by an accredited conformity assessment body against the relevant Australian standard, for drinking water treatment systems that is AS 3497:2021, and if it passes it is listed on the public WaterMark register with a certificate number, the models covered and an expiry date. The mark on the housing means the product is fit to connect to the mains: its materials will not contaminate the water and its design will hold pressure. It is a plumbing approval. It is not a health claim, and Filters For You never presents it as one.</p>
-            <p>Every reverse osmosis and under sink system Filters For You installs across Sydney is on that register, under certificate 23247 or certificate 22780. Both are published above and both open the government's own entry, so the check takes a minute and does not rely on us.</p>
-          </div>
-        </details>
-        <details class="ch" id="det-nsf" data-sc-in>
-          <summary><h2>NSF/ANSI standards, and what they mean beside WaterMark</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="ch__a">
-            <p class="est__lift">WaterMark says a product may legally be connected to drinking water in Australia. NSF/ANSI standards describe what filter media is built to do. They are different questions, and a good system answers both.</p>
-            <p>NSF/ANSI 42 covers aesthetic effects, chlorine, taste and odour. NSF/ANSI 53 covers health related contaminants such as lead and cysts. NSF/ANSI 58 covers reverse osmosis systems and their membranes. The carbon blocks, sediment cartridges and membranes in the systems Filters For You installs are manufactured in compliance with those standards, and the reverse osmosis membrane's tested rejection rates are published on the reverse osmosis page.</p>
-            <p>Two things we hold to. NSF is international and is never an Australian legal requirement; WaterMark is. And compliance with a standard is the manufacturer's statement about how the media is built, which is exactly how we describe it. The plumbing approval and the media standard sit side by side on every reverse osmosis and under sink system we fit, and neither one stands in for the other.</p>
-          </div>
-        </details>
-        <details class="ch" id="det-23247" data-sc-in>
-          <summary><h2>WaterMark certificate 23247, the one behind the Pure range</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="ch__a">
-            <p class="est__lift">Certificate 23247 covers 131 models to AS 3497:2021, every one active, valid to 3 October 2028. The Pure reverse osmosis and under sink range sits on it.</p>
-            <ul>
-              <li><b>Certifier.</b> Pro-Switch Pty Ltd, a JAS-ANZ accredited conformity assessment body. First issued 15 December 2016, current revision 21 April 2026.</li>
-              <li><b>Standard.</b> AS 3497:2021, drinking water treatment systems, design and performance requirements, to be installed in accordance with the Plumbing Code of Australia.</li>
-              <li><b>On the schedule.</b> The sediment and carbon block cartridges, the granular carbon, the 50 GPD reverse osmosis membrane, the alkaline and the hydrogen rich alkaline cartridges, and the housings and manifolds they sit in.</li>
-            </ul>
-            <p>The certificate of conformity is published above as a 15 page PDF, and the register entry is one click from it. If you are comparing a system from anywhere else, ask for the certificate number and look it up the same way.</p>
-          </div>
-        </details>
-        <details class="ch" id="det-22780" data-sc-in>
-          <summary><h2>WaterMark certificate 22780, the EQ and LSRO systems</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="ch__a">
-            <p class="est__lift">Certificate 22780 is the second register entry behind what Filters For You installs. It covers the High Performance Filtration EQ and LSRO under sink systems and the cartridges that feed them: 292 active models, valid to 14 November 2028.</p>
-            <p>It was issued by IAPMO Oceania under WMTS-103:2016, the WaterMark technical specification for water treatment systems, first certified in November 2018. The two certificates are not interchangeable. 23247 is the AS 3497 certificate for the Pure range; 22780 is the WMTS-103 certificate for the EQ and LSRO systems. When you want to know which one covers the system in your kitchen, ask, and we will point you at the exact line on the register.</p>
-          </div>
-        </details>
-        <details class="ch" id="det-licence" data-sc-in>
-          <summary><h2>The NSW plumbing licence behind Filters For You</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="ch__a">
-            <p class="est__lift">Filters For You installations are carried out by licensed plumbers. Our founder, Jean-Paul Barbar, holds NSW plumbing licence 461511C, current to 26 March 2027, in four classes: plumber, drainer, gasfitter and LP gasfitter.</p>
-            <p>In NSW the Home Building Act requires the licence number on all advertising, on every contract and on every quote, which is why it is on every page of this site. The licence is held on the NSW Government's Verify NSW register, and the link above opens that register so you can enter the number and read the record yourself. A WaterMark certified product installed by an unlicensed person is not a compliant installation, so the two always go together.</p>
-          </div>
-        </details>
-        <details class="ch" id="det-lab" data-sc-in>
-          <summary><h2>The laboratory report, and what it does and does not show</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="ch__a">
-            <p class="est__lift">Independent laboratory report B767408 measures a tap water sample beside the same water after reverse osmosis and after the alkaline stages, across more than 40 parameters.</p>
-            <ul>
-              <li><b>Fluoride.</b> 0.74 mg/L in the tap water, under 0.05 mg/L after reverse osmosis.</li>
-              <li><b>Dissolved solids.</b> 220 mg/L in the tap water, 5.0 mg/L after reverse osmosis.</li>
-              <li><b>Free chlorine.</b> 0.52 mg/L in the tap water, 0.02 mg/L after reverse osmosis.</li>
-              <li><b>The metals panel.</b> Lead, arsenic, cadmium, chromium, copper, nickel and antimony, each measured before and after.</li>
-            </ul>
-            <p>Read it for what it is. The sample was the laboratory's own supply, so it demonstrates what the membrane does to water; it is not a test of Sydney's water, and we never present it as one. The hydrogen alkaline cartridge specification published beside it is the supplier's own data across the life of the cartridge, and we label it that way. Both are there so the numbers we quote are the numbers you can read.</p>
-          </div>
-        </details>
-        <details class="ch" id="det-where" data-sc-in>
-          <summary><h2>Where Filters For You installs WaterMark certified systems</h2><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="ch__a">
-            <p>Across Greater Sydney, from our base in Croydon Park. The same certified systems, the same licensed plumber and the same published paperwork in every district.</p>
-            <ul class="est__areas">
-              <li><a href="locations-inner-west">Inner West</a></li><li><a href="locations-inner-city">Inner City</a></li><li><a href="locations-eastern-suburbs">Eastern Suburbs</a></li><li><a href="locations-south-sydney">South Sydney</a></li><li><a href="locations-st-george">St George</a></li><li><a href="locations-sutherland-shire">Sutherland Shire</a></li><li><a href="locations-canterbury-bankstown">Canterbury Bankstown</a></li><li><a href="locations-south-west-sydney">South West Sydney</a></li><li><a href="locations-western-sydney">Western Sydney</a></li><li><a href="locations-hills-district">Hills District</a></li><li><a href="locations-north-shore">North Shore</a></li><li><a href="locations-forest-district">Forest District</a></li><li><a href="locations-northern-beaches">Northern Beaches</a></li>
-            </ul>
-          </div>
-        </details>
-
-        <div class="est__faq" id="det-faq">
+    <div class="est__faq" id="det-faq">
           <div class="fwrap">
             <div class="fside" data-sc-in data-sc-stagger="80">
               <span class="est__lab"><img src="media/mark.svg" alt="" width="48" height="48">The WaterMark questions we get asked most</span>
@@ -2216,43 +2067,45 @@ body.dopen .drawer{transform:none}
             <div class="fgrid" data-sc-in>
               <details class="fq" open>
                 <summary><h3>What is WaterMark certification on a water filter?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>WaterMark is Australia's mandatory certification for plumbing products. Anything connected to a building's drinking water supply has to carry it, and it has to be installed by a licensed plumber. A WaterMark certified water filter has been tested by an accredited body to AS 3497:2021 and is listed on the Australian Building Codes Board register. Every reverse osmosis and under sink system Filters For You installs in Sydney is on that register under certificate 23247 or 22780.</p></div>
+                <div class="fa"><p>WaterMark is Australia's mandatory certification for plumbing products, run by the Australian Building Codes Board. Anything connected to a building's drinking water supply has to carry it, and it has to be installed by a licensed plumber. A WaterMark certified water filter has been tested by an accredited body to AS 3497:2021 and is listed on the Australian Building Codes Board register. Every reverse osmosis and under sink system Filters For You installs in Sydney is on that register under certificate 23247 or 22780.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>Are the water filters Filters For You installs WaterMark certified?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>Our reverse osmosis and under sink systems are. The Pure reverse osmosis and under sink range is on certificate 23247, 131 models, every one active, valid to 3 October 2028. The High Performance Filtration EQ and LSRO systems are on certificate 22780, 292 models, valid to 14 November 2028. Both certificates are published on this page and both link to the government register.</p></div>
+                <div class="fa"><p>Our reverse osmosis and under sink systems are. The Pure reverse osmosis and under sink range is on certificate 23247, 131 models, every one active, valid to 3 October 2028. Our quick change under sink filtration systems are on certificate 22780, 292 models, valid to 14 November 2028. Both certificates are published on this page and both link to the government register.</p></div>
+              </details>
+              <details class="fq">
+                <summary><h3>Which certificate covers my system?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+                <div class="fa"><p>The two certificates are not interchangeable. 23247 is the AS 3497:2021 certificate for the Pure range, the standard for drinking water treatment systems, design and performance, installed in accordance with the Plumbing Code of Australia. It was issued by Pro-Switch Pty Ltd, a JAS-ANZ accredited conformity assessment body, first in December 2016. Its schedule lists the sediment and carbon block cartridges, the granular carbon, the 50 GPD reverse osmosis membrane, the alkaline and hydrogen rich alkaline cartridges, and the housings and manifolds they sit in. 22780 is the certificate for our quick change under sink systems and their cartridges, issued by IAPMO Oceania under WMTS-103:2016, the WaterMark technical specification for water treatment systems, first certified in November 2018. Ask, and we point you at the exact line on the register for the system in your kitchen.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>Is NSF certification the same as WaterMark?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>No, they cover different things. WaterMark is the Australian plumbing approval: the product is safe to connect to drinking water and may legally be installed. NSF/ANSI standards are international performance standards for filter media, 42 for taste and odour, 53 for health related contaminants and 58 for reverse osmosis. The media in the systems Filters For You installs is manufactured in compliance with NSF/ANSI 42, 53 and 58. NSF is not an Australian legal requirement and never replaces WaterMark.</p></div>
+                <div class="fa"><p>No, they answer different questions, and a good system answers both. WaterMark is the Australian plumbing approval: the product is safe to connect to drinking water and may legally be installed. NSF/ANSI standards are international performance standards for filter media: 42 for chlorine, taste and odour, 53 for health related contaminants such as lead and cysts, and 58 for reverse osmosis systems and their membranes. The carbon blocks, sediment cartridges and membranes in the systems Filters For You installs are manufactured in compliance with NSF/ANSI 42, 53 and 58. That is the manufacturer's statement about how the media is built, and we describe it exactly that way. NSF is not an Australian legal requirement and never replaces WaterMark.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>Does WaterMark certification guarantee the water quality?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>WaterMark certifies the product: its materials, its design and that it will not contaminate the drinking water supply. It is a plumbing approval, not a health claim. What the system does to the water is shown separately. The independent laboratory report on this page measures tap water beside reverse osmosis water across more than 40 parameters, and the cartridge specification sheets show the supplier's own performance data.</p></div>
+                <div class="fa"><p>WaterMark certifies the product: its materials, its design and that it will not contaminate the drinking water supply. The mark on the housing means the product is fit to connect to the mains. It is a plumbing approval, not a health claim, and we never present it as one. What the system does to the water is shown separately. The independent laboratory report on this page measures tap water beside reverse osmosis water across more than 40 parameters, and the hydrogen alkaline cartridge specification is the supplier's own data across the life of the cartridge, labelled that way.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>How do I check a WaterMark certificate myself?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>Open the Australian Building Codes Board WaterMark product search at watermark.abcb.gov.au and enter the certificate number. Filters For You's certificates are 23247 and 22780, and the links on this page open those exact entries. The register shows the certifier, the standard, every model listed and the expiry date. If a product is not on that register, it is not WaterMark certified, whatever the box says.</p></div>
+                <div class="fa"><p>Open the Australian Building Codes Board WaterMark product search at watermark.abcb.gov.au and enter the certificate number. The certificates behind our systems are 23247 and 22780, and the links on this page open those exact entries. The register shows the certifier, the standard, every model listed and the expiry date. If a product is not on that register, it is not WaterMark certified, whatever the box says. Comparing a system from anywhere else? Ask for its certificate number and look it up the same way.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>Who installs a WaterMark certified water filter in Sydney?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>A licensed plumber has to. In NSW the licence number must appear on all advertising, and it can be checked on the NSW Government's Verify NSW register. Filters For You installations are carried out by licensed plumbers across Greater Sydney from Croydon Park. Our founder, Jean-Paul Barbar, holds NSW plumbing licence 461511C, current to March 2027.</p></div>
+                <div class="fa"><p>A licensed plumber has to. In NSW the Home Building Act requires the licence number on all advertising, on every contract and on every quote, and it can be checked on the NSW Government's Verify NSW register. Filters For You installations are carried out by licensed plumbers across Greater Sydney from Croydon Park. Our founder, Jean-Paul Barbar, holds NSW plumbing licence 461511C, current to March 2027.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>What does the certificate of analysis actually show?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>Laboratory report B767408 compares a tap water sample with the same water after reverse osmosis and after the alkaline stages, across more than 40 parameters including fluoride, dissolved solids, chlorine and a full metals panel. Fluoride measured 0.74 mg/L in the tap water and under 0.05 mg/L after reverse osmosis. It was run on the laboratory's own supply as a demonstration of what the membrane does, so it is not a test of Sydney water, and it is published so you can read it in full.</p></div>
+                <div class="fa"><p>Laboratory report B767408 compares a tap water sample with the same water after reverse osmosis and after the alkaline stages, across more than 40 parameters: fluoride, dissolved solids, chlorine, hardness and a metals panel of lead, arsenic, cadmium, chromium, copper, nickel and antimony, each measured before and after. Fluoride measured 0.74 mg/L in the tap water and under 0.05 mg/L after reverse osmosis. It was run on the laboratory's own supply as a demonstration of what the membrane does, so it is not a test of Sydney water, and it is published so you can read it in full. The numbers we quote are the numbers you can read.</p></div>
               </details>
             </div>
           </div>
-        </div>
+    </div>
 
-        <div class="est__ask" data-sc-in data-sc-stagger="80">
-          <h2 class="d3">Ready when you are.</h2>
-          <p class="lede">A WaterMark certified system, fitted by a licensed plumber, with the paperwork you have just read. Installed in about two hours, serviced every year after, and covered for life while you stay on the Filtered for Life plan.</p>
-          <p class="est__go"><button class="btn js-open" type="button" data-sys=""><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book an installation</button><a class="ul" href="free-assessment">or book a free inspection</a></p>
-          <p class="est__call">Rather talk it through? <a class="ul" href="tel:0430546749">Call 0430 546 749</a>.</p>
-        </div>
-      </div>
+    <div class="est__ask" data-sc-in data-sc-stagger="80">
+      <h2 class="d3">Ready when you are.</h2>
+      <p class="lede">A WaterMark certified system, fitted by a licensed plumber, with the paperwork you have just read. Installed in about two hours, serviced every year after, and covered for life while you stay on the Filtered for Life plan.</p>
+      <p class="est__go"><button class="btn js-open" type="button" data-sys=""><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book an installation</button><a class="ul" href="free-assessment">or book a free inspection</a></p>
+      <p class="est__call">Rather talk it through? <a class="ul" href="tel:0430546749">Call 0430 546 749</a>.</p>
     </div>
   </div>
 </section>
@@ -2272,7 +2125,7 @@ body.dopen .drawer{transform:none}
     <li><a href="#sydney"><i></i><span>Across Sydney</span></a></li>
     <li><a href="#reviews"><i></i><span>Reviews</span></a></li>
     <li><a href="#ask"><i></i><span>Book it</span></a></li>
-    <li><a href="#details"><i></i><span>The details</span></a></li>
+    <li><a href="#details"><i></i><span>Questions</span></a></li>
   </ul>
 </nav>
 <button class="totop" id="totop" type="button">
@@ -3492,16 +3345,16 @@ body.dopen .drawer{transform:none}
     var links = [].slice.call(rail.querySelectorAll('a'));
     var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
     var DARK = {licence:1, sydney:1};
-    var cur = -1, on = false, dark = false, tOn = false, mrail = null;
+    var cur = -1, on = false, dark = false, tOn = false;
     var vh = innerHeight;
     function drive(){
       var y = scrollY, mid = y + vh * .45, best = 0, i;
       for (i = 0; i < secs.length; i++){ if (secs[i] && secs[i].getBoundingClientRect().top + y <= mid) best = i; }
-      if (best !== cur){ cur = best; for (i = 0; i < links.length; i++) links[i].classList.toggle('on', i === best); if (mrail) mrail.style.setProperty('--mp', (best / Math.max(links.length - 1, 1)).toFixed(3)); if (document.body.classList.contains('pickopen')) document.body.classList.remove('pickopen'); }
+      if (best !== cur){ cur = best; for (i = 0; i < links.length; i++) links[i].classList.toggle('on', i === best); }
       var wantOn = y > vh * .72;
-      if (wantOn !== on){ on = wantOn; rail.classList.toggle('on', on); if (mrail) mrail.classList.toggle('on', on); }
+      if (wantOn !== on){ on = wantOn; rail.classList.toggle('on', on); }
       var wantDark = !!(secs[best] && DARK[secs[best].id]) && !(mph && secs[best] && secs[best].id === 'sydney');
-      if (wantDark !== dark){ dark = wantDark; rail.classList.toggle('dark', dark); if (mrail) mrail.classList.toggle('dark', dark); }
+      if (wantDark !== dark){ dark = wantDark; rail.classList.toggle('dark', dark); }
       var wantT = y > vh * 1.6;
       if (wantT !== tOn){ tOn = wantT; if (top) top.classList.toggle('on', tOn); }
     }
@@ -3546,67 +3399,28 @@ body.dopen .drawer{transform:none}
       if (window.PointerEvent) top.addEventListener('pointerdown', function(e){ if (e.pointerType === 'mouse') return; goTop(e); });
       else top.addEventListener('touchstart', goTop, {passive:false});
     }
-    if (mph && veil){
-      mrail = document.createElement('div'); mrail.className = 'mrail'; mrail.setAttribute('aria-hidden', 'true');
-      var names = links.map(function(a){ var s = a.querySelector('span'); return s ? s.textContent : a.textContent; });
-      mrail.innerHTML = '<i class="tr">' + names.map(function(){ return '<s></s>'; }).join('') + '</i><i class="th"></i><b class="bb"></b>';
-      document.body.appendChild(mrail);
-      var bb = mrail.querySelector('.bb');
-      var mscrim = document.createElement('div'); mscrim.className = 'mscrim'; mscrim.setAttribute('aria-hidden', 'true');
-      var mpick = document.createElement('nav'); mpick.className = 'mpick'; mpick.setAttribute('aria-label', 'Jump to a section');
-      mpick.innerHTML = '<b>Jump to</b>' + names.map(function(n){ return '<button type="button"><i></i>' + n + '</button>'; }).join('');
-      document.body.appendChild(mscrim); document.body.appendChild(mpick);
-      var prows = [].slice.call(mpick.querySelectorAll('button'));
-      var pickOpen = function(on){ document.body.classList.toggle('pickopen', on); if (on) prows.forEach(function(b, i){ b.classList.toggle('on', i === cur); }); };
-      var pickGo = function(i){ pickOpen(false); fadeTo(targetOf(links[i].getAttribute('href'))); };
-      prows.forEach(function(b, i){
-        var pt = 0, go = function(e){ var now = Date.now(); if (now - pt < 900) return; pt = now; if (e && e.cancelable) e.preventDefault(); pickGo(i); };
-        b.addEventListener('click', go);
-        if (window.PointerEvent) b.addEventListener('pointerdown', function(e){ if (e.pointerType === 'mouse') return; go(e); });
-        else b.addEventListener('touchstart', go, {passive:false});
-      });
-      mscrim.addEventListener('pointerdown', function(){ pickOpen(false); });
-      mscrim.addEventListener('touchstart', function(){ pickOpen(false); }, {passive:true});
-      var HOLD = 180, armed = false, fx0 = 0, fy0 = 0, pick = -1, tid = null, pid = null;
-      var pickAt = function(clientY){
-        var b = mrail.getBoundingClientRect(), k = clamp((clientY - b.top) / Math.max(b.height, 1), 0, .9999);
-        var i = Math.floor(k * links.length);
-        if (i !== pick){ pick = i; bb.textContent = names[i]; }
-        bb.style.top = (clamp(clientY, b.top, b.bottom) - b.top).toFixed(1) + 'px';
-      };
-      var disarm = function(){ armed = false; mrail.classList.remove('armed'); clearTimeout(tid); tid = null; };
-      var down = function(cx, cy){
-        if (fading) return;
-        fx0 = cx; fy0 = cy; pick = -1;
-        clearTimeout(tid);
-        tid = setTimeout(function(){ tid = null; armed = true; mrail.classList.add('armed'); pickAt(fy0); }, HOLD);
-      };
-      var move = function(cx, cy, e){
-        if (!armed){ if (Math.abs(cy - fy0) > 10 || Math.abs(cx - fx0) > 10){ clearTimeout(tid); tid = null; } return; }
-        if (e && e.cancelable) e.preventDefault();
-        pickAt(cy);
-      };
-      var release = function(){
-        var was = armed, k = pick, quick = tid !== null;
-        disarm();
-        if (quick){ pickOpen(!document.body.classList.contains('pickopen')); return; }
-        if (!was || k < 0) return;
-        fadeTo(targetOf(links[k].getAttribute('href')));
-      };
-      if (window.PointerEvent){
-        mrail.addEventListener('pointerdown', function(e){ if (e.isPrimary === false) return; pid = e.pointerId; try { mrail.setPointerCapture(pid); } catch(err){} down(e.clientX, e.clientY); if (e.cancelable) e.preventDefault(); });
-        mrail.addEventListener('pointermove', function(e){ if (pid !== null && e.pointerId !== pid) return; move(e.clientX, e.clientY, e); });
-        var pend = function(e){ if (pid !== null && e.pointerId !== pid) return; pid = null; release(); };
-        mrail.addEventListener('pointerup', pend); mrail.addEventListener('pointercancel', pend);
-      } else {
-        mrail.addEventListener('touchstart', function(e){ var t = e.touches[0]; down(t.clientX, t.clientY); if (e.cancelable) e.preventDefault(); }, {passive:false});
-        mrail.addEventListener('touchmove', function(e){ var t = e.touches[0]; move(t.clientX, t.clientY, e); }, {passive:false});
-        mrail.addEventListener('touchend', release); mrail.addEventListener('touchcancel', release);
-      }
-    }
     addEventListener('scroll', drive, {passive:true});
     addEventListener('resize', function(){ vh = innerHeight; drive(); }, {passive:true});
     drive();
+  })();
+
+   
+  (function softFaq(){
+    [].forEach.call(document.querySelectorAll('.est details.fq'), function(d){
+      var sum = d.querySelector('summary'); if (!sum) return;
+      var anim = null, closing = false;
+      function shutH(){ var cs = getComputedStyle(d); return sum.offsetHeight + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) + parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth); }
+      sum.addEventListener('click', function(e){
+        if (reduce || !d.animate) return;
+        e.preventDefault();
+        var from = d.offsetHeight, to;
+        if (anim){ anim.cancel(); anim = null; }
+        if (!d.open || closing){ closing = false; d.classList.remove('is-shut'); d.open = true; to = d.offsetHeight; }
+        else { closing = true; d.classList.add('is-shut'); to = shutH(); }
+        anim = d.animate({height:[from + 'px', to + 'px']}, {duration:420, easing:'cubic-bezier(.22,1,.36,1)'});
+        anim.onfinish = function(){ anim = null; if (closing){ d.open = false; closing = false; d.classList.remove('is-shut'); } };
+      });
+    });
   })();
 
    
@@ -3622,21 +3436,6 @@ body.dopen .drawer{transform:none}
     driveBar(); addEventListener('scroll', driveBar, {passive:true});
   })();
 
-   
-  (function estnav(){
-    var links = [].slice.call(document.querySelectorAll('.est__nav a'));
-    if (!links.length || !('IntersectionObserver' in window)) return;
-    var map = {};
-    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if (!e.isIntersecting) return;
-        links.forEach(function(a){ a.classList.remove('on'); });
-        var a = map[e.target.id]; if (a) a.classList.add('on');
-      });
-    }, {rootMargin:'-30% 0px -60% 0px'});
-    [].forEach.call(document.querySelectorAll('.est [id^="det-"]'), function(s){ io.observe(s); });
-  })();
 })();
 
 </script>
@@ -3693,6 +3492,6 @@ body.dopen .drawer{transform:none}
 </script>
 <!-- FFY ATTRIBUTION -->
 <script src="assets/js/ffy-attribution.js?v=2"></script>
-<script defer src="/assets/js/ffy-blocks.js?v=e84991b2"></script>
+<script defer src="/assets/js/ffy-blocks.js?v=e1061196"></script>
 </body>
 </html>
