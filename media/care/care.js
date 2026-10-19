@@ -28,12 +28,13 @@
     e.preventDefault(); goTo(el, 12);
     if (history.replaceState) history.replaceState(null, '', '#' + id);
   });
-  const anims = $$('[data-cp-anim], [data-wy-anim], [data-cp-carts]', root);
+  const anims = $$('[data-cp-anim], [data-wy-anim], [data-cp-in]', root);
   anims.forEach(el => $$(':scope > li, :scope > article', el).forEach((c, i) => { if (!c.style.getPropertyValue('--i')) c.style.setProperty('--i', i); }));
   const reveal = el => {
+    if (el.classList.contains('is-in')) return;
     el.classList.add('is-in');
-    const z = el.matches('.cp-member') ? $('[data-cp-count]', el) : null;
-    if (z) countDown(z);
+    const m = $('[data-cp-months]', el);
+    if (m) months(m);
   };
   if (reduce || !('IntersectionObserver' in window)) anims.forEach(reveal);
   else {
@@ -43,15 +44,15 @@
     addEventListener('scroll', sweep, { passive: true });
   }
 
-  function countDown(el) {
-    if (el.dataset.done) return; el.dataset.done = '1';
-    const from = parseInt(el.dataset.cpFrom || '0', 10);
-    if (reduce || !from) { el.textContent = '$0'; return; }
-    const t0 = performance.now(), dur = 1700;
+  function months(el) {
+    const to = parseInt(el.textContent, 10) || 12;
+    if (reduce) { el.textContent = to; return; }
+    const t0 = performance.now() + 100, step = 110;
+    el.textContent = '1';
     const tick = t => {
-      const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = '$' + Math.round(from * (1 - e)).toLocaleString('en-AU');
-      if (p < 1) requestAnimationFrame(tick);
+      const n = Math.max(1, Math.min(to, Math.floor((t - t0) / step) + 1));
+      el.textContent = n;
+      if (n < to) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
   }
@@ -73,72 +74,18 @@
     });
   });
   const form = { pick: null, started: false };
-  const imgTag = (src, w, h, alt = '') => { const i = new Image(w, h); i.src = src; i.alt = alt; i.decoding = 'async'; return i; };
-  const warm = new Set();
-  function preload(k) {
-    const d = DATA[k]; if (!d || warm.has(k)) return; warm.add(k);
-    (d.parts.length ? d.parts : [k]).forEach(p => { new Image().src = `/media/warranty/r-${p}-480.webp`; new Image().src = `/media/warranty/r-${p}.webp`; });
-    (d.carts || []).forEach(c => { new Image().src = c; });
-  }
-  function roll(el, text) {
-    if (!el || el.textContent === text) return;
-    el.textContent = text;
-    if (reduce) return;
-    el.classList.remove('is-roll'); void el.offsetWidth; el.classList.add('is-roll');
-  }
-  function paintPic(pic, k) {
-    const d = DATA[k]; if (!pic || !d) return;
-    pic.classList.toggle('cp-stage__pic--parts', d.parts.length > 0);
-    const imgs = d.parts.length
-      ? d.parts.map(p => imgTag(`/media/warranty/r-${p}.webp`, 240, 240))
-      : [(() => { const i = imgTag(`/media/warranty/r-${k}-480.webp`, 480, 480, d.name); i.srcset = `/media/warranty/r-${k}.webp 240w, /media/warranty/r-${k}-480.webp 480w`; i.sizes = '(max-width:859px) 96px, 160px'; return i; })()];
-    pic.replaceChildren(...imgs);
-    if (!reduce) { pic.classList.remove('is-swap'); void pic.offsetWidth; pic.classList.add('is-swap'); }
-  }
-  function paintCarts(list, k) {
-    const d = DATA[k]; if (!list || !d) return;
-    const items = d.carts.map((c, i) => {
-      const li = document.createElement('li'); li.style.setProperty('--i', i);
-      li.append(imgTag(c, 300, 1209)); return li;
-    });
-    if (d.split && items.length > d.split) { const gap = document.createElement('li'); gap.className = 'is-gap'; items.splice(d.split, 0, gap); }
-    list.classList.remove('is-in');
-    list.replaceChildren(...items);
-    if (reduce) { list.classList.add('is-in'); return; }
-    void list.offsetWidth;
-    requestAnimationFrame(() => list.classList.add('is-in'));
-  }
-  $$('[data-cp-chips]', root).forEach(group => {
-    const chips = $$('.cp-chip', group);
-    const stage = group.parentElement.querySelector('[data-cp-stage]');
-    function select(chip, focus) {
-      const k = chip.dataset.k, d = DATA[k]; if (!d) return;
-      chips.forEach(c => { const on = c === chip; c.setAttribute('aria-checked', on ? 'true' : 'false'); c.tabIndex = on ? 0 : -1; });
-      if (focus) chip.focus();
-      if (!stage || stage.dataset.k === k) return;
-      stage.dataset.k = k;
-      const a = $('[data-cp-href]', stage); if (a) a.href = d.parts.length ? '/water-filter-systems' : d.href;
-      roll($('[data-cp-name]', stage), d.name);
-      const spec = $('[data-cp-spec]', stage); if (spec) spec.textContent = d.spec;
-      const note = $('[data-cp-note]', stage); if (note) { note.textContent = d.note; note.hidden = !d.note; }
-      ['life', 'service', 'diy'].forEach(o => roll($(`[data-cp-p="${o}"]`, stage), d[o]));
-      paintPic($('[data-cp-pic]', stage), k);
-      const cl = $('[data-cp-cartlabel]', stage); if (cl) cl.textContent = d.cartLabel;
-      paintCarts($('[data-cp-carts]', stage), k);
-      if (form.pick && !form.started) form.pick(d.name, false);
-      window.ffyTrack && window.ffyTrack('system_select', { system: d.name, form: page + '_chooser' });
+  let touched = false, following = false;
+  root.addEventListener('pointerdown', e => { if (e.target.closest('[data-fb-pick]')) touched = true; }, true);
+  root.addEventListener('keydown', e => { if (e.target.closest('[data-fb-pick]')) touched = true; }, true);
+  root.addEventListener('fb:pick', e => {
+    const k = e.detail && e.detail.key, d = DATA[k];
+    if (!touched || following || !d) return;
+    if (e.target.id === 'cr-carts') {
+      const t = $('#care [data-fb-pick="' + k + '"]');
+      if (t && t.getAttribute('aria-pressed') !== 'true') { following = true; t.click(); following = false; }
     }
-    chips.forEach((c, i) => {
-      c.addEventListener('click', () => select(c, false));
-      c.addEventListener('pointerenter', () => preload(c.dataset.k));
-      c.addEventListener('focus', () => preload(c.dataset.k));
-      c.addEventListener('keydown', e => {
-        const n = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
-        if (n) { e.preventDefault(); select(chips[(i + n + chips.length) % chips.length], true); }
-        else if (e.key === 'Home') { e.preventDefault(); select(chips[0], true); }
-        else if (e.key === 'End') { e.preventDefault(); select(chips[chips.length - 1], true); }
-      });
-    });
+    if (form.pick && !form.started) form.pick(d.name, false);
+    window.ffyTrack && window.ffyTrack('system_select', { system: d.name, form: page + '_chooser' });
   });
   (() => {
     const wrap = $('#rmq', root); if (!wrap) return;
