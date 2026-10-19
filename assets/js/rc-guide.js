@@ -24,7 +24,7 @@
   }
   function priceLabel(s) { return (s.frm ? 'From ' : '') + fmt(s.price); }
 
-  // ---------------------------------------------------------------- entrances: rise and pop, finished by a fast scroll too
+  
   var pending = $$('.rc-rise,.rc-pop', root);
   function scan() {
     var h = innerHeight;
@@ -40,7 +40,7 @@
   if (reduce) { pending.forEach(function (el) { el.classList.add('is-in'); }); pending = []; }
   else { addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); requestAnimationFrame(scan); }
 
-  // ---------------------------------------------------------------- every disclosure opens and closes softly
+  
   $$('details', root).forEach(function (d) {
     var sum = $('summary', d); if (!sum) return;
     var anim = null, closing = false;
@@ -62,7 +62,7 @@
     });
   });
 
-  // ---------------------------------------------------------------- contents rail follows the chapter in view
+  
   var railLinks = $$('.rc-est__nav a', root);
   if (railLinks.length && 'IntersectionObserver' in window) {
     var mark = function (id) { railLinks.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + id); }); };
@@ -78,7 +78,7 @@
     });
   }
 
-  // ---------------------------------------------------------------- the range: drinking water, every tap, both
+  
   $$('[data-rc-range]', root).forEach(function (box) {
     var tabs = $$('[data-panel-tab]', box), panels = $$('.rc-panel', box);
     tabs.forEach(function (t) {
@@ -99,7 +99,7 @@
     });
   });
 
-  // ---------------------------------------------------------------- follow the water through each stage
+  
   $$('[data-rc-flow]', root).forEach(function (box) {
     var STAGES = DATA.stages || {};
     var chips = $$('[data-flow-sys]', box);
@@ -171,7 +171,7 @@
     $$('img', carts).forEach(function (im) { if (!im.complete) im.addEventListener('load', place, { once: true }); });
   });
 
-  // ---------------------------------------------------------------- how fine is fine
+  
   $$('[data-rc-scale]', root).forEach(function (box) {
     var btns = $$('[data-x]', box), knob = $('.rc-scale__knob', box), val = $('[data-scale-v]', box), txt = $('[data-scale-t]', box);
     btns.forEach(function (b) {
@@ -185,7 +185,7 @@
     });
   });
 
-  // ---------------------------------------------------------------- the finder: a few taps to a system
+  
   $$('[data-rc-quiz]', root).forEach(function (box) {
     var steps = $$('.rc-quiz__step', box), bars = $$('.rc-quiz__prog i', box), back = $('.rc-quiz__back', box);
     var res = $('.rc-res', box), cards = $$('[data-res]', box), empty = $('.rc-res__empty', box);
@@ -222,11 +222,11 @@
     show(steps[0].getAttribute('data-step'), true);
   });
 
-  // ---------------------------------------------------------------- shared: a system picker, the care switch, a range slider
+  
   function fill(r) { var p = (r.value - r.min) / (r.max - r.min) * 100; r.style.setProperty('--fill', p + '%'); }
   var CARE = { diy: 'DIY kit', service: 'Professional yearly service', life: 'Filtered for Life' };
   var COVER = { life: 'Lifetime warranty: parts, labour and the callout, while you stay on the Filtered for Life plan.', diy: 'The maker’s parts warranty, plus our lifetime promise on our own workmanship.', service: 'The maker’s parts warranty, plus our lifetime promise on our own workmanship.' };
-  // money figures count from the old value to the new one, so a change travels instead of jumping
+  
   function bump(el, v) {
     if (el.textContent === v) return;
     var re = /^(From )?\$([\d,]+)$/, a = re.exec(el.textContent.trim()), b = re.exec(v);
@@ -240,7 +240,7 @@
     })(t0);
   }
 
-  // ---------------------------------------------------------------- what it really costs
+  
   $$('[data-rc-cost]', root).forEach(function (box) {
     var picks = $$('[data-k]', box), cares = $$('[data-care]', box), yrs = $('input[type=range]', box);
     var k = box.getAttribute('data-start') || 'premium', care = 'life';
@@ -269,7 +269,7 @@
     paint();
   });
 
-  // ---------------------------------------------------------------- bottles against water on tap
+  
   $$('[data-rc-save]', root).forEach(function (box) {
     var picks = $$('[data-k]', box), cares = $$('[data-care]', box), price = $('input[type=range]', box);
     var n = +box.getAttribute('data-bottles') || 12, k = box.getAttribute('data-start') || 'premium', care = 'life';
@@ -316,7 +316,7 @@
     paint();
   });
 
-  // ---------------------------------------------------------------- one type against another
+  
   $$('[data-rc-vs]', root).forEach(function (box) {
     var TYPES = DATA.types || {}, ROWS = DATA.rows || [];
     var sides = { a: box.getAttribute('data-a'), b: box.getAttribute('data-b') };
@@ -354,7 +354,7 @@
     paint('none');
   });
 
-  // ---------------------------------------------------------------- question finder
+  
   $$('[data-rc-faqf]', root).forEach(function (box) {
     var input = $('input', box), chips = $$('[data-cat]', box), count = $('.rc-faqf__count', box);
     var list = $('[data-faq-list]', root), qs = $$('.rc-fq', list), cats = $$('.rc-faqcat', list), none = $('.rc-faqnone', list);
@@ -377,7 +377,7 @@
     run();
   });
 
-  // ---------------------------------------------------------------- build your family's setup
+  
   $$('[data-rc-build]', root).forEach(function (box) {
     var R = DATA.build || {};
     var st = { whole: box.getAttribute('data-whole') || 'home', drink: box.getAttribute('data-drink') || 'premium', chill: false, mixer: false, care: 'life' };
@@ -440,7 +440,7 @@
     paint();
   });
 
-  // ---------------------------------------------------------------- best for: one need, one system
+  
   $$('[data-rc-board]', root).forEach(function (box) {
     var btns = $$('.rc-board__list button', box), cards = $$('.rc-board__show', box);
     btns.forEach(function (b) {
@@ -453,7 +453,7 @@
     });
   });
 
-  // ---------------------------------------------------------------- the shared reviews lane (same behaviour as the water guides)
+  
   (function () {
     var wrap = $('#rmq', root); if (!wrap) return;
     var phone = matchMedia('(max-width:859px)');
@@ -483,13 +483,13 @@
     document.addEventListener('visibilitychange', sync);
   })();
 
-  // ---------------------------------------------------------------- the request form, with the system chosen anywhere on the page
+  
   var ask = $('[data-rc-ask]', root);
   if (ask) (function () {
     var f = $('form', ask), panes = $$('.rc-q__pane', ask), bars = $$('.rc-q__steps i', ask), back = $('.rc-q__back', ask);
     var next = $('[data-next]', ask), nextLabel = $('[data-nextlabel]', ask), err = $('.rc-q__err', ask);
     var opts = $$('.rc-q__opt', ask), whens = $$('[data-when]', ask), chosen = $('.rc-q__chosen', ask), chill = $('[data-q-chill]', ask);
-    var step = 0, system = '', when = '', addon = false, sending = false, started = false, trail = [];
+    var step = 0, system = '', picked = false, when = '', addon = false, sending = false, started = false, trail = [];
     var page = ask.getAttribute('data-page') || 'guide';
     var ADDON = 'Undersink chiller, $1,050 installed with a system';
     function hidden(n, v) { var i = f.elements[n]; if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.appendChild(i); } i.value = v; }
@@ -513,11 +513,11 @@
     function pick(k) {
       if (ask.classList.contains('is-sent')) return;
       system = k || '';
-      opts.forEach(function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-v') === system ? 'true' : 'false'); });
+      opts.forEach(function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-k') === system ? 'true' : 'false'); });
       summary();
     }
     function setAddon(on) { addon = !!on; if (chill) chill.setAttribute('aria-pressed', addon ? 'true' : 'false'); hidden('add_on', addon ? ADDON : ''); summary(); }
-    opts.forEach(function (o) { o.addEventListener('click', function () { pick(o.getAttribute('data-v')); err.hidden = true; window.ffyTrack && window.ffyTrack('system_select', { system: system || 'not sure', form: page }); }); });
+    opts.forEach(function (o) { o.addEventListener('click', function () { pick(o.getAttribute('data-k')); picked = true; err.hidden = true; window.ffyTrack && window.ffyTrack('system_select', { system: system || 'not sure', form: page }); }); });
     whens.forEach(function (b) { b.addEventListener('click', function () { when = when === b.getAttribute('data-when') ? '' : b.getAttribute('data-when'); whens.forEach(function (x) { x.setAttribute('aria-pressed', x.getAttribute('data-when') === when ? 'true' : 'false'); }); }); });
     if (chill) chill.addEventListener('click', function () { setAddon(!addon); });
     $('[data-q-change]', ask).addEventListener('click', function () { trail.push(step); show(1); });
@@ -544,7 +544,7 @@
       var ins = $$('input:not([type=hidden])', panes[step]);
       for (var j = 0; j < ins.length; j++) if (!ins[j].reportValidity()) return;
       if (step === 0) { if (f.elements.suburb.value.trim().length < 2) { err.textContent = 'Please add your suburb or postcode.'; err.hidden = false; return; } trail.push(0); show(system ? 2 : 1); return; }
-      if (step === 1) { if (!system) { err.textContent = 'Please choose a system, or Not sure yet.'; err.hidden = false; return; } trail.push(1); show(2); return; }
+      if (step === 1) { if (!system && !picked) { err.textContent = 'Please choose a system, or Not sure yet.'; err.hidden = false; return; } trail.push(1); show(2); return; }
       hidden('system', nameOf(system) || 'Not sure yet'); hidden('installation_preference', when); hidden('message', message());
       hidden('_subject', (nameOf(system) || 'Installation') + ' request, ' + f.elements.suburb.value.trim());
       if (window.ffyStampForm) window.ffyStampForm(f);
