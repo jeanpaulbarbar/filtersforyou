@@ -36,6 +36,11 @@
       "source": "/pure-plus-water-filter-sydney",
       "destination": "/pure-essential-water-filter-sydney",
       "statusCode": 301
+    },
+    {
+      "source": "/pure-advanced-water-filter-sydney",
+      "destination": "/reverse-osmosis-water-filter-sydney",
+      "statusCode": 301
     }
   ],
   "headers": [
