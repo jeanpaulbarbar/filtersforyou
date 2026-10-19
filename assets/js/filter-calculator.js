@@ -3,13 +3,11 @@
 
    
   var SYSTEMS = [
-    { id: 'essential',  label: 'Pure Essential',               filterMonths: 12, annualCost: 80  },
-    { id: 'plus',       label: 'Pure Plus+ (5-stage RO)',       filterMonths: 12, annualCost: 120 },
-    { id: 'compact',    label: 'Pure Compact (3-stage RO)',     filterMonths: 12, annualCost: 100 },
-    { id: 'premium',    label: 'Pure Premium (7-stage RO)',     filterMonths: 12, annualCost: 150 },
-    { id: 'advanced',   label: 'Pure Advanced',                 filterMonths: 12, annualCost: 130 },
-    { id: 'luxe',       label: 'Pure Luxe (smart monitoring)',  filterMonths: 12, annualCost: 150 },
-    { id: 'hpf3',       label: 'HPF-3 Whole House',            filterMonths: 12, annualCost: 200 }
+    { id: 'flow',       label: 'Pure Flow',                          filterMonths: 12, diy: 140, service: 310 },
+    { id: 'essential',  label: 'Pure Essential (4 stage RO)',        filterMonths: 12, diy: 150, service: 310 },
+    { id: 'premium',    label: 'Pure Premium (7 stage RO)',          filterMonths: 12, diy: 250, service: 390 },
+    { id: 'luxe',       label: 'Pure Luxe (smart 5 stage RO)',       filterMonths: 12, diy: 270, service: 420 },
+    { id: 'home',       label: 'Pure Home or Pure Home Reserve',     filterMonths: 12, diy: 390, service: 550 }
   ];
 
    
@@ -20,7 +18,7 @@
   ];
 
    
-  var TODAY = new Date(2026, 4, 1); 
+  var TODAY = new Date(); 
 
   var MONTH_NAMES = [
     'January','February','March','April','May','June',
@@ -135,7 +133,7 @@
 
       var nextDate = addMonths(TODAY, adjustedMonths);
       nextEl.textContent = 'Next filter change: ' + formatDate(nextDate);
-      costEl.textContent = 'Annual maintenance cost: ~$' + system.annualCost;
+      costEl.textContent = 'DIY kit $' + system.diy + ' a year, or $' + system.service + ' for a professional yearly service';
     }
 
     calculate();

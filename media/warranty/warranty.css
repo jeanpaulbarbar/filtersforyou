@@ -116,7 +116,7 @@ html.wy-js .wy-docket[data-wy-anim].is-in .wy-docket__total strong{opacity:1;tra
 html.wy-js .wy-docket[data-wy-anim].is-in .wy-docket__stamp{opacity:1;transform:rotate(-10deg);transition:transform .8s cubic-bezier(.2,1.5,.4,1) 1.3s,opacity .35s var(--e-out) 1.3s}
 
 .wy-cover{position:relative;overflow:clip;color:#fff;background:radial-gradient(52% 60% at 88% 8%,rgba(11,97,244,.34),transparent 62%),radial-gradient(40% 50% at 4% 96%,rgba(11,97,244,.2),transparent 64%),var(--ink-blue);padding:clamp(72px,7vw,104px) 0}
-.wy-cover::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.11) 1px,transparent 1.2px);background-size:18px 18px;-webkit-mask:radial-gradient(70% 60% at 80% 20%,#000,transparent 72%);mask:radial-gradient(70% 60% at 80% 20%,#000,transparent 72%)}
+.wy-cover::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 55% at 80% 20%,rgba(11,97,244,.22),transparent 70%)}
 .wy-cover .in{position:relative}
 .wy-cover__grid{display:grid;grid-template-columns:minmax(0,.74fr) minmax(0,1.26fr);grid-template-areas:"photo head" "photo list";gap:26px clamp(40px,5.4vw,88px);align-items:start}
 .wy-cover__head{grid-area:head;display:grid;gap:18px}
@@ -201,13 +201,22 @@ html.wy-js .wy-years[data-wy-anim].is-in .wy-years__life i{transform:none;opacit
 .wy-costs__top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;margin-bottom:20px}
 .wy-costs__t{font-family:var(--badge);font-size:13.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink)}
 .wy-costs__top .arrow{font-size:16px;min-height:44px}
-.wy-costs__grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
-.wy-costs__grid a{display:grid;grid-template-rows:auto 1fr auto;justify-items:center;align-items:center;gap:10px;height:100%;padding:12px 10px 16px;border-radius:var(--r-card);background:#fff;text-decoration:none;text-align:center;box-shadow:var(--shadow-sm);transition:transform .45s var(--e-out),box-shadow .45s var(--e-out)}
-.wy-costs__img{display:block;width:100%;max-width:120px;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#ECEAE7}
+.wy-costs__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.wy-costs__grid a{display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:auto 1fr;align-items:center;gap:12px 14px;height:100%;padding:12px 14px 14px 12px;border-radius:var(--r-card);background:#fff;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .45s var(--e-out),box-shadow .45s var(--e-out)}
+.wy-costs__img{display:block;width:72px;aspect-ratio:1;border-radius:12px;overflow:hidden;background:#ECEAE7}
 .wy-costs__img img{width:100%;height:100%;object-fit:cover}
-.wy-costs__grid b{font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.2}
-.wy-costs__grid span.p{font-size:14.5px;color:var(--muted);line-height:1.2}
-.wy-costs__grid strong{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.wy-costs__img--parts{display:flex;align-items:center}
+.wy-costs__img--parts img{width:33.34%;height:auto;aspect-ratio:1}
+.wy-costs__grid b{font-size:16px;font-weight:700;color:var(--ink);line-height:1.2}
+.wy-opts{grid-column:1/-1;display:grid;gap:6px;align-self:end}
+.wy-opt{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 10px;border-radius:10px;background:var(--mist-2);font-size:14px;line-height:1.25;color:var(--muted)}
+.wy-opt strong{font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.01em;white-space:nowrap}
+.wy-opt--life{background:linear-gradient(180deg,#FFF8E4,#F8EBC8);box-shadow:inset 0 0 0 1px rgba(200,163,78,.55);color:var(--wy-gold-ink);font-weight:700}
+.wy-opt--life i{display:grid;place-items:center;flex:0 0 20px;width:20px;height:20px;color:var(--wy-gold-ink)}
+.wy-opt--life i svg{width:20px;height:20px}
+.wy-opt--life > span{flex:1 1 auto}
+.wy-opt--life strong{color:var(--wy-gold-ink)}
+.wy-costs__foot{margin-top:16px;font-size:15px;line-height:1.5;color:var(--muted);max-width:72ch}
 @media (hover:hover) and (pointer:fine){.wy-costs__grid a:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}}
 .wy-costs__grid a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 
@@ -275,7 +284,7 @@ html.wy-js .wy-conds[data-wy-anim] .wy-cond{opacity:0;transform:translateY(16px)
 html.wy-js .wy-conds[data-wy-anim].is-in .wy-cond{opacity:1;transform:none;transition:opacity .5s var(--e-out) calc(var(--i,0) * 90ms),transform .7s var(--e-out) calc(var(--i,0) * 90ms),box-shadow .45s ease-in-out}
 
 .wy-claim{position:relative;overflow:clip;color:#fff;background:radial-gradient(50% 60% at 6% 0%,rgba(11,97,244,.3),transparent 62%),var(--ink-blue);padding:var(--wy-pad) 0}
-.wy-claim::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.1) 1px,transparent 1.2px);background-size:18px 18px;-webkit-mask:radial-gradient(60% 50% at 15% 10%,#000,transparent 70%);mask:radial-gradient(60% 50% at 15% 10%,#000,transparent 70%)}
+.wy-claim::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 55% at 15% 10%,rgba(11,97,244,.22),transparent 70%)}
 .wy-claim .in{position:relative}
 .wy-claim__grid{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(40px,6vw,96px);align-items:center}
 .wy-claim__photo{aspect-ratio:4/5;box-shadow:0 40px 80px -40px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.12)}
@@ -435,7 +444,7 @@ html.wy-js .qform [data-step].is-enter{animation:wy-rise .45s var(--e-out)}
   :where(#warranty-page) .est .fq .fa p{font-size:16px}}
 
 @media (min-width:860px) and (max-width:1199px){
-  .wy-costs__grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .wy-costs__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .wy-promise__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .wy-cover__grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
   .wy-ticks{grid-template-columns:minmax(0,1fr)}
@@ -512,10 +521,9 @@ html.wy-js .qform [data-step].is-enter{animation:wy-rise .45s var(--e-out)}
   .wy-grace{font-size:15px;border-radius:18px}
   .wy-costs{padding:20px 16px;border-radius:20px}
   .wy-costs__grid{grid-template-columns:minmax(0,1fr);gap:8px}
-  .wy-costs__grid a{grid-template-columns:56px minmax(0,1fr) auto;grid-template-rows:auto;justify-items:start;text-align:left;gap:14px;padding:8px 16px 8px 8px;min-height:72px}
-  .wy-costs__img{width:56px;max-width:none;border-radius:10px}
-  .wy-costs__grid b{font-size:16px}
-  .wy-costs__grid span.p{justify-self:end;text-align:right}
+  .wy-costs__grid a{grid-template-columns:56px minmax(0,1fr);gap:10px 12px;padding:10px 12px 12px 10px}
+  .wy-costs__img{width:56px;border-radius:10px}
+  .wy-costs__grid b{font-size:16.5px}
   .wy-costs__top{margin-bottom:14px}
   .wy-visit__grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "photos" "body";gap:28px}
   .wy-visit__photos{padding:0 34px 64px 0}
@@ -570,7 +578,7 @@ html.wy-js .qform [data-step].is-enter{animation:wy-rise .45s var(--e-out)}
   .wy-hero__seal{margin-bottom:10px}
   .wy-hero__go{margin-top:14px}}
 @media (max-width:359px){.wy-docket__head{padding-right:70px}.wy-docket .wy-docket__stamp{width:66px;height:66px}.wy-docket__lines li{font-size:15px}.wy-docket__lines b i{display:none}
-  .wy-costs__img{width:44px}.wy-costs__grid a{grid-template-columns:44px minmax(0,1fr) auto;gap:10px;padding-right:12px}.wy-costs__grid span.p{display:grid;justify-items:end;line-height:1.15}
+  .wy-opt{font-size:13.5px;padding:7px 8px}
   .wy-seals .wy-seal{width:64px;height:64px;padding:6px}.wy-seals .wy-seal span{display:none}.wy-seals .wy-seal--google .wy-stars{display:flex}.wy-seals .wy-seal--navy b{font-size:8px}.wy-seals .wy-seal--navy svg{width:19px;height:19px}
   .wy-years span{font-size:11.5px}.wy-years__life i{padding:3px 7px;font-size:11px}}
 @media (prefers-reduced-motion:reduce){html.wy-js #warranty-page [data-wy-anim] *,html.wy-js #warranty-page [data-wy-anim],html.wy-js #warranty-page [data-wy-anim]::after{transition:none !important;animation:none !important}}
