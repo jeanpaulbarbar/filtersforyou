@@ -48,7 +48,7 @@
   const reveal = el => { el.classList.add('is-in'); $$('[data-co-count]', el).forEach(countUp); if (el.matches('[data-co-count]')) countUp(el); };
   if (reduce || !('IntersectionObserver' in window)) anims.forEach(reveal);
   else {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }), { threshold: 0.2 });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }), { threshold: 0, rootMargin: '0px 0px -15% 0px' });
     anims.forEach(el => io.observe(el));
     const sweep = () => anims.forEach(el => { if (!el.classList.contains('is-in') && el.getBoundingClientRect().bottom < innerHeight * 0.6) reveal(el); });
     addEventListener('scroll', sweep, { passive: true });
