@@ -9,9 +9,15 @@
   try { DATA = JSON.parse($('#wg-data')?.textContent || '{}'); } catch (e) { DATA = {}; }
   const page = root.dataset.page || '';
 
+  
+  
   let lenis = null;
-  if (window.Lenis && !reduce && matchMedia('(pointer:fine)').matches) {
-    lenis = new Lenis({ duration: 1.25, smoothWheel: true, syncTouch: false });
+  const mph = matchMedia('(max-width:859px)').matches;
+  if (!reduce && typeof Lenis !== 'undefined' && matchMedia('(pointer:fine)').matches && !mph) {
+    lenis = new Lenis({ duration: 1.35, smoothWheel: true, syncTouch: false, wheelMultiplier: 1.0,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    document.documentElement.classList.add('lenis');
+    window.lenis = lenis;
     const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf);
   }
   const hdrH = () => (document.getElementById('hdr')?.offsetHeight || 72);
@@ -21,6 +27,8 @@
     if (lenis) { lenis.resize(); lenis.scrollTo(y, { duration: 1.1, force: true }); }
     else scrollTo({ top: y, behavior: reduce ? 'instant' : 'smooth' });
   }
+  
+  window.ffyGoTo = el => goTo(el, 16);
   root.addEventListener('click', e => {
     const a = e.target.closest('a[href^="#"]'); if (!a) return;
     const id = a.getAttribute('href').slice(1); const el = id && document.getElementById(id);
@@ -53,6 +61,79 @@
     const sweep = () => all.forEach(el => { if (!el.classList.contains('is-in') && el.getBoundingClientRect().top < innerHeight * 0.6) reveal(el); });
     addEventListener('scroll', sweep, { passive: true }); sweep();
   }
+
+  
+  
+  
+  const clamp = (v, a = 0, b = 1) => v < a ? a : (v > b ? b : v);
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const scenes = $$('[data-wg-scene]', root).map(el => ({ el, p: 0, t0: 0, from: 0, done: false, dur: parseFloat(el.dataset.dur || '2400'),
+    steps: $$('[data-at]', el), segs: $$('[data-seg]', el), mode: el.dataset.mode || '' }));
+  
+  const lite = (s, st) => { st.classList.add('is-lit'); if (st.dataset.pair != null) $$(`[data-pair-of="${st.dataset.pair}"]`, s.el).forEach(x => x.classList.add('is-lit')); };
+  const paint = s => {
+    s.el.style.setProperty('--p', s.p.toFixed(4));
+    s.steps.forEach(st => { if (!st.classList.contains('is-lit') && s.p >= parseFloat(st.dataset.at) - 1e-4) lite(s, st); });
+    if (s.el.dataset.minp && s.p >= parseFloat(s.el.dataset.minp)) s.el.classList.add('is-min');
+    if (s.p >= 1 && !s.done) { s.done = true; s.el.classList.add('is-done'); s.segs.forEach(g => g.style.setProperty('--s', 1)); s.steps.forEach(st => lite(s, st)); }
+  };
+  const finish = s => { s.p = 1; paint(s); };
+  const replay = s => {
+    if (!s) return;
+    s.done = false; s.el.classList.remove('is-done', 'is-min'); $$('.is-lit', s.el).forEach(st => st.classList.remove('is-lit'));
+    if (reduce) { finish(s); return; }
+    s.p = 0; s.from = 0; s.t0 = performance.now(); paint(s); kick();
+  };
+  let pending = false;
+  const frame = now => {
+    pending = false;
+    const vh = innerHeight, read = vh * .64; let again = false;
+    scenes.forEach(s => {
+      if (s.done || reduce) return;
+      const r = s.el.getBoundingClientRect(); if (!r.height) return;
+      if (r.bottom < 0) { finish(s); return; }
+      const follow = s.mode === 'scroll' || (s.mode !== 'play' && r.height > vh * .78);
+      if (follow) {
+        
+        s.steps.forEach(st => { if (st.classList.contains('is-lit')) return; const b = st.getBoundingClientRect(); if (b.top + Math.min(b.height, 120) * .5 < read) lite(s, st); });
+        s.segs.forEach((g, i) => {
+          const a = g.querySelector('[data-node]') || g, nx = s.segs[i + 1] && (s.segs[i + 1].querySelector('[data-node]') || s.segs[i + 1]);
+          if (!nx) return;
+          const y0 = a.getBoundingClientRect().top + a.offsetHeight / 2, y1 = nx.getBoundingClientRect().top + nx.offsetHeight / 2;
+          const f = clamp((read - y0) / Math.max(1, y1 - y0)); if (f > (g._s || 0)) { g._s = f; g.style.setProperty('--s', f.toFixed(4)); }
+        });
+        const p = clamp((vh * .82 - r.top) / (r.height + vh * .32));
+        if (p > s.p) { s.p = p; paint(s); }
+      } else {
+        if (!s.t0 && r.top < vh * .74 && r.bottom > vh * .1) { s.t0 = now; s.from = s.p; }
+        if (s.t0) {
+          const k = clamp((now - s.t0) / s.dur); s.p = s.from + (1 - s.from) * ease(k);
+          const n = s.segs.length; s.segs.forEach((g, i) => g.style.setProperty('--s', clamp(s.p * (n - 1 || 1) * 1.08 - i).toFixed(4)));
+          paint(s); if (k < 1) again = true;
+        }
+      }
+    });
+    if (again) kick();
+  };
+  const kick = () => { if (!pending) { pending = true; requestAnimationFrame(frame); } };
+  if (reduce) scenes.forEach(finish);
+  else {
+    scenes.forEach(s => { s.p = 0; s.segs.forEach(g => g.style.setProperty('--s', 0)); paint(s); });
+    addEventListener('scroll', kick, { passive: true }); addEventListener('resize', kick);
+    if (lenis) lenis.on('scroll', kick);
+    kick(); addEventListener('load', kick);
+  }
+  
+  const warm = $$('[data-wg-warm]', root);
+  const heat = box => $$('img[loading="lazy"]', box).forEach(im => { im.loading = 'eager'; if (im.decode) im.decode().catch(() => {}); });
+  if ('IntersectionObserver' in window) { const wo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { heat(e.target); wo.unobserve(e.target); } }), { rootMargin: '900px 0px' }); warm.forEach(b => wo.observe(b)); }
+  else warm.forEach(heat);
+  
+  root.addEventListener('fb:pick', e => {
+    const box = e.target; if (!box || !box.querySelector) return;
+    const on = box.querySelector(':scope > .is-on [data-wg-scene]'); if (!on) return;
+    replay(scenes.find(s => s.el === on));
+  });
 
   
   $$('[data-wg-tcols]', root).forEach(g => {
@@ -104,6 +185,8 @@
       Object.entries(d.a || {}).forEach(([k, v]) => $$(`[data-a="${k}"]`, box).forEach(el => el.style.setProperty('--at', v + '%')));
       Object.entries(d.h || {}).forEach(([k, v]) => $$(`[data-h="${k}"]`, box).forEach(el => { el.hidden = !!v; }));
       Object.entries(d.l || {}).forEach(([k, v]) => $$(`[data-l="${k}"]`, box).forEach(el => { el.href = v; }));
+      Object.entries(d.r || {}).forEach(([k, v]) => $$(`[data-r="${k}"]`, box).forEach(el => el.style.setProperty('--r', v)));
+      Object.entries(d.sk || {}).forEach(([k, v]) => $$(`[data-sk="${k}"]`, box).forEach(el => { el.textContent = v; }));
       $$('tr[data-row]', box).forEach(tr => tr.classList.toggle('is-on', tr.dataset.row === key));
     };
     const group = $('[data-wg-pick]', box);
@@ -200,73 +283,4 @@
     document.addEventListener('visibilitychange', sync);
   })();
 
-  
-  (() => {
-    const q = $('[data-qform]', root); if (!q) return;
-    const f = $('form', q), panes = $$('[data-step]', q), dots = $$('.steps i', q);
-    const nextLabel = $('[data-nextlabel]', q), back = $('[data-back]', q), send = $('[data-next]', q), error = $('[role=alert]', q);
-    const card = $('[data-wy-chosen]', q);
-    const sysBtns = $$('[data-step="0"] .sysopt', q), whenBtns = $$('[data-when]', q);
-    const finalLabel = q.dataset.final || 'Get my fixed price';
-    let step = 0, system = '', when = '', sending = false, started = false, ready = false, formAnim = null;
-    const hidden = (n, v) => { let i = f.elements[n]; if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.append(i); } i.value = v; };
-    function show(n) {
-      const moved = n !== step && !reduce && ready;
-      const from = moved ? f.offsetHeight : 0;
-      step = n; panes.forEach((p, i) => { p.hidden = i !== n; }); dots.forEach((d, i) => d.classList.toggle('on', i <= n));
-      back.hidden = n === 0; nextLabel.textContent = n === 2 ? finalLabel : 'Next';
-      error.hidden = true;
-      if (!moved) return;
-      const pane = panes[n]; pane.classList.remove('is-enter'); void pane.offsetWidth; pane.classList.add('is-enter');
-      if (formAnim) formAnim.cancel();
-      const to = f.offsetHeight; f.style.overflow = 'hidden';
-      formAnim = f.animate({ height: [from + 'px', to + 'px'] }, { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
-      formAnim.onfinish = formAnim.oncancel = () => { f.style.overflow = ''; formAnim = null; };
-    }
-    function summary() {
-      const b = sysBtns.find(x => x.dataset.v === system);
-      const real = b && !b.hasAttribute('data-help');
-      card.hidden = !real || step === 0;
-      if (real) { $('img', card).src = $('img', b).getAttribute('src'); $('[data-wy-chosen-name]', card).textContent = b.dataset.name; $('[data-wy-chosen-price]', card).textContent = b.dataset.price; }
-    }
-    function pick(v) {
-      q.classList.remove('finished'); system = v || '';
-      sysBtns.forEach(b => { const on = b.dataset.v === system; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-      summary();
-    }
-    sysBtns.forEach(b => b.addEventListener('click', () => { pick(b.dataset.v); error.hidden = true; window.ffyTrack && window.ffyTrack('system_select', { system, form: 'water-' + page }); }));
-    whenBtns.forEach(b => b.addEventListener('click', () => {
-      when = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.when;
-      whenBtns.forEach(o => { const on = o.dataset.when === when; o.classList.toggle('on', on); o.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-    }));
-    
-    root.addEventListener('click', e => { const a = e.target.closest('[data-ask]'); if (a) pick(a.dataset.ask); });
-    back.addEventListener('click', () => { show(Math.max(0, step - 1)); summary(); });
-    $('[data-wy-change]', q)?.addEventListener('click', () => { show(0); summary(); });
-    f.elements.phone && (f.elements.phone.pattern = '[0-9 +()]{8,18}');
-    const from = q.dataset.from || 'a water guide';
-    const message = () => [`${system || 'Not sure yet'} quote request.`, `Suburb: ${f.elements.suburb?.value || ''}.`, when ? `Timing: ${when}.` : '', `From the ${from} page.`].filter(Boolean).join(' ');
-    f.addEventListener('submit', async e => {
-      e.preventDefault(); if (sending) return;
-      if (!started) { started = true; window.ffyTrack && window.ffyTrack('form_start', { form: 'water-' + page }); }
-      if (step === 0) { if (!system) { error.textContent = 'Please choose a system, or Help me choose.'; error.hidden = false; return; } show(1); summary(); return; }
-      for (const i of $$('input:not([type=hidden])', panes[step])) if (!i.reportValidity()) return;
-      if (step === 1) { show(2); summary(); return; }
-      if (!f.elements.suburb.checkValidity()) { show(1); f.elements.suburb.reportValidity(); return; }
-      hidden('system', system || 'Not sure yet'); hidden('installation_preference', when); hidden('message', message());
-      hidden('_subject', `${system || 'Water filter'} quote request, ${f.elements.suburb.value}`);
-      if (window.ffyStampForm) window.ffyStampForm(f);
-      sending = true; send.disabled = true; nextLabel.textContent = 'Sending…'; error.hidden = true;
-      const done = () => { q.classList.add('finished'); $('.done', q)?.setAttribute('role', 'status'); window.ffyLeadSuccess && window.ffyLeadSuccess(f, { form: 'water-' + page, label: page.replace(/-/g, '_'), system: system || 'not chosen' }); };
-      const fail = () => { error.textContent = 'That did not send. Please try again, or call 0430 546 749.'; error.hidden = false; nextLabel.textContent = 'Try again'; };
-      try {
-        const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
-        r.ok ? done() : fail();
-      } catch (err) {
-        try { f.submit(); return; } catch (x) {}
-        fail();
-      } finally { sending = false; send.disabled = false; if (!q.classList.contains('finished') && nextLabel.textContent === 'Sending…') nextLabel.textContent = finalLabel; }
-    });
-    show(0); pick(''); ready = true;
-  })();
 })();
