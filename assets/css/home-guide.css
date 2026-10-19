@@ -634,6 +634,8 @@ main .d2{font-size:clamp(2.2rem,4.6vw,3.8rem)}
 .hx-pc__row b{font-size:15px;font-weight:800;color:var(--ink)}
 .hx-pc__row{padding-inline:0}
 .hx-plans__foot{margin:18px 0 0;font-size:14px;font-weight:600;color:var(--muted)}
+.hx-pc__chip{justify-self:start;margin:4px 0 6px;font-size:11px}
+@media(min-width:1180px){.hx-pcs{grid-template-columns:repeat(6,minmax(0,1fr))}.hx-pc{grid-column:span 2}.hx-pc:nth-child(n+7){grid-column:span 3}}
 @media(max-width:1179px){.hx-pcs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:979px){.hx-plan-grid{grid-template-columns:1fr}}
 @media(max-width:699px){
