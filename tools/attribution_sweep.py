@@ -23,7 +23,7 @@ import sys
 
 WEB = pathlib.Path(__file__).resolve().parent.parent
 ASSET = "assets/js/ffy-attribution.js"
-VERSION = "1"
+VERSION = "2"  # every page has loaded v=2 since 23 Sep 2026
 MARKER = "<!-- FFY ATTRIBUTION -->"
 LOADER = f'{MARKER}\n<script src="{ASSET}?v={VERSION}"></script>'
 

@@ -946,3 +946,7 @@ html.wg-js #water-page .wg-x:not(.is-in) .wg-m__fill{transform:scaleX(0)}
 }
 @media (max-width:359px){#water-page .wg-ings{grid-template-columns:minmax(0,1fr)}#water-page .wg-card{grid-template-columns:96px minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){html.wg-js #water-page [data-wg-anim] > *{opacity:1 !important;transform:none !important;transition:none !important}#water-page .wg-m__fill,#water-page .wg-m__dot{transition:none}#water-page .wg-glass__wave{animation:none}#water-page .wg-card.is-enter,#water-page .wg-glass__p.is-pop,#water-page .wg-ingcard.is-swap{animation:none}}
+#water-page .wg-areas{flex-wrap:wrap;overflow:visible;margin:0;padding:0;list-style:none}
+#water-page .wg-areas li{display:flex}
+#water-page .wg-areas a.wg-chip{text-decoration:none}
+#water-page .wg-areas + .wg-src-line{margin-top:22px}
