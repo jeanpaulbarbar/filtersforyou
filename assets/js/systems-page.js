@@ -95,9 +95,10 @@
     e.preventDefault(); deluxe.sync(model); goTo($(h), 12);
   });
   const deluxe = (() => {
-    const btns = $$('[data-fs-deluxe]'), shots = $$('.fs-deluxe__shot'), packs = $$('.fs-deluxe__pack');
-    if (!btns.length) return { sync() {} };
-    let current = btns[0].dataset.fsDeluxe, ticket = 0;
+    const box = $('#fs-packs'), tiles = $$('#deluxe [data-fb-pick]'), shots = $$('.fs-deluxe__shot');
+    if (!box || !tiles.length) return { sync() {} };
+    const pressed = () => (tiles.find(t => t.getAttribute('aria-pressed') === 'true') || tiles[0]).dataset.fbPick;
+    let current = pressed(), ticket = 0, quiet = false;
     const decoded = new Map();
     const decode = k => {
       if (!decoded.has(k)) {
@@ -107,30 +108,38 @@
       }
       return decoded.get(k);
     };
-    async function show(k, opts = {}) {
-      if (!k || k === current && !opts.force) return;
+    async function cross(k, still) {
+      if (!k || k === current) return;
       current = k; const mine = ++ticket;
-      btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.fsDeluxe === k));
-      packs.forEach(p => {
-        const on = p.dataset.pack === k, was = !p.hasAttribute('data-idle');
-        p.toggleAttribute('data-idle', !on);
-        if (on && !was && !reduce && !opts.quiet) { p.classList.remove('is-new'); void p.offsetWidth; p.classList.add('is-new'); }
-      });
       await decode(k); if (mine !== ticket) return;
       shots.forEach(s => {
         const on = s.dataset.pack === k;
         s.toggleAttribute('data-idle', !on);
-        if (on && !reduce && !opts.quiet) { s.classList.remove('is-pop'); void s.offsetWidth; s.classList.add('is-pop'); }
+        if (on && !reduce && !still) { s.classList.remove('is-pop'); void s.offsetWidth; s.classList.add('is-pop'); }
       });
     }
-    btns.forEach(b => b.addEventListener('click', () => { show(b.dataset.fsDeluxe); setModel(b.dataset.fsDeluxe, { keepForm: false }); }));
-    btns.forEach(b => b.addEventListener('pointerenter', () => decode(b.dataset.fsDeluxe), { once: true }));
+    box.addEventListener('fb:pick', e => {
+      const k = e.detail && e.detail.key; if (!k || k === current) return;
+      const still = quiet; cross(k, still);
+      if (!still && byKey[k]) setModel(k, { keepForm: false });
+    });
+    function show(k, still) {
+      const t = tiles.find(x => x.dataset.fbPick === k); if (!t) return;
+      if (t.getAttribute('aria-pressed') === 'true') { cross(k, still); return; }
+      if (!box.hasAttribute('data-fb-on')) {
+        tiles.forEach(x => x.setAttribute('aria-pressed', x === t ? 'true' : 'false'));
+        $$('[data-fb-panel]', box).forEach(p => p.classList.toggle('is-on', p.dataset.fbPanel === k));
+        cross(k, true); return;
+      }
+      quiet = true; t.click(); quiet = false;
+    }
+    tiles.forEach(t => t.addEventListener('pointerenter', () => decode(t.dataset.fbPick), { once: true }));
     $$('[data-fs-pack]').forEach(a => a.addEventListener('click', e => {
-      e.preventDefault(); const k = a.dataset.fsPack; show(k);
+      e.preventDefault(); const k = a.dataset.fsPack; show(k, false);
       if (byKey[k]) setModel(k, { quiet: true });
       goTo($('#deluxe'), 12);
     }));
-    return { sync(k) { if (byKey[k] && byKey[k].mode === 'both') show(k, { quiet: true }); } };
+    return { sync(k) { if (byKey[k] && byKey[k].mode === 'both') show(k, true); } };
   })();
   const barEl = $('#fs-bar');
   function bar(r) {
