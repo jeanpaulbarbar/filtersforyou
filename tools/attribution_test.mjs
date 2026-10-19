@@ -162,6 +162,31 @@ async function fillHomepage(page, who = {}) {
   await new Promise(r => setTimeout(r, 1200));
 }
 
+// The kit request form (19 Oct 2026), on every page but the homepage: where's home, the systems as photo tiles, the
+// page's own question, when, who do we call. Each step answered the way a visitor would, then Next.
+async function fillKit(page, sel = '[data-fb-ask]', who = {}) {
+  const d = { suburb: 'Earlwood', name: 'ZZ TEST', phone: '0400000000', email: 'zz@example.com', ...who };
+  for (let i = 0; i < 6; i++) {
+    const step = await page.evaluate((s, v) => {
+      const box = document.querySelector(s), st = box.querySelector('[data-fb-step]:not([hidden])');
+      const name = st.getAttribute('data-fb-step');
+      if (name === 'where') st.querySelector('input[name="suburb"]').value = v.suburb;
+      else if (name === 'contact') {
+        st.querySelector('input[name="name"]').value = v.name;
+        st.querySelector('input[name="phone"]').value = v.phone;
+        st.querySelector('input[name="email"]').value = v.email;
+      } else {
+        const r = st.querySelector('.fb-ask__r');
+        if (r && !st.querySelector('.fb-ask__r:checked')) r.closest('label').click();
+      }
+      box.querySelector('[data-fb-ask-next]').click();
+      return name;
+    }, sel, d);
+    await new Promise(r => setTimeout(r, step === 'contact' ? 1200 : 500));
+    if (step === 'contact') return;
+  }
+}
+
 const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null;
 const run = n => !ONLY || ONLY.includes(String(n));
 const step = (n, what) => { if (run(n)) console.error(`  … ${n} ${what}`); };
@@ -279,16 +304,12 @@ try {
     const sent = [];
     const page = await newPage(browser, sent);
     await goto(page, U('contact.html'), { waitUntil: 'networkidle2' });
-    await page.type('#contactForm input[name="full-name"]', 'ZZ TEST');
-    await page.type('#contactForm input[name="phone"]', '0400000000');
-    await page.type('#contactForm input[name="email"]', 'zz@example.com');
-    await page.evaluate(() => document.querySelector('#contactForm .form-submit').click());
-    await new Promise(r => setTimeout(r, 900));
+    await fillKit(page);
     const ev = await events(page), mt = await meta(page);
     const shown = await page.evaluate(() =>
-      getComputedStyle(document.querySelector('#formSuccess')).display);
+      getComputedStyle(document.querySelector('[data-fb-ask] [data-fb-ask-done]')).display);
     results.push('\n6 · Contact page enquiry, accepted');
-    check('the success message is shown', shown, 'flex');
+    check('the success message is shown', shown !== 'none', true);
     check('one submission reached Formspree', sent.length, 1);
     check('it carried the landing page', sent[0]?.landing_page, P('contact.html'));
     check('a form_submit fired', ev.filter(e => e[0] === 'form_submit').length, 1);
@@ -321,13 +342,9 @@ try {
     await page.evaluateOnNewDocument(SHIM);
     await goto(page, U('contact.html'), { waitUntil: 'networkidle2' });
     page.on('dialog', d => d.dismiss());
-    await page.type('#contactForm input[name="full-name"]', 'ZZ TEST');
-    await page.type('#contactForm input[name="phone"]', '0400000000');
-    await page.type('#contactForm input[name="email"]', 'zz@example.com');
-    await page.evaluate(() => document.querySelector('#contactForm .form-submit').click());
-    await new Promise(r => setTimeout(r, 700));
+    await fillKit(page);
     const afterFail = (await events(page)).filter(e => e[0] === 'form_submit').length;
-    await page.evaluate(() => document.querySelector('#contactForm .form-submit').click());
+    await page.evaluate(() => document.querySelector('[data-fb-ask] [data-fb-ask-next]').click());
     await new Promise(r => setTimeout(r, 900));
     const afterRetry = (await events(page)).filter(e => e[0] === 'form_submit').length;
     results.push('\n7 · A failed send, then a retry that is accepted');
@@ -378,33 +395,35 @@ try {
   }
 
   if (run(10))
-  // ── 10 · a legacy suburb page, which posts natively ───────────────────────
+  // ── 10 · a suburb page (475 of them, on the kit request form) ─────────────
   {
     const sent = [];
     const page = await newPage(browser, sent);
     await arriveFrom(page, 'https://www.google.com/');
     await goto(page, U('water-filter-installation-bayview.html'), { waitUntil: 'networkidle2' });
     const f = await fields(page);
-    results.push('\n10 · A suburb page (native POST, 537 of them)');
+    results.push('\n10 · A suburb page, on the kit request form');
     check('landing page', f.landing_page, P('water-filter-installation-bayview.html'));
     check('referrer', f.referrer, 'https://www.google.com/');
-    check('the subject directive is untouched', f._subject, 'Water Filter Quote Request, Bayview');
-    await page.evaluate(() => {
-      const f = document.querySelector('form[action*="formspree"]');
-      f.querySelector('input[name=name]').value = 'ZZ TEST';
-      f.querySelector('input[name=phone]').value = '0400000000';
-      f.querySelector('input[name=consent]').checked = true;
-      // The real thing navigates away on submit, which would take the page with it.
-      // Cancelling AFTER the module's listener has run measures the same decision.
-      document.addEventListener('submit', e => e.preventDefault(), false);
-      f.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-      f.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    check('the subject the page carries without a script', f._subject, 'Bayview installation request');
+    // When Formspree cannot be reached at all, the form posts the plain way: one conversion, delivered by navigation.
+    // The real thing navigates away, which would take the page with it, so a listener added after the module's cancels it.
+    await page.setRequestInterception(false);
+    await page.setRequestInterception(true);
+    page.removeAllListeners('request');
+    page.on('request', req => {
+      const url = req.url();
+      if (url.includes('formspree.io') && req.resourceType() === 'fetch') return req.abort();
+      if (BLOCK.some(b => url.includes(b))) return req.respond(OK);
+      req.continue();
     });
-    await new Promise(r => setTimeout(r, 300));
+    await page.evaluate(() => document.addEventListener('submit', e => e.preventDefault(), false));
+    await fillKit(page, '[data-fb-ask]', { suburb: 'Bayview' });
     const ev = (await events(page)).filter(e => e[0] === 'form_submit');
-    check('a native submit fires one conversion', ev.length, 1);
+    check('a plain post fires one conversion', ev.length, 1);
     check('and says how it was delivered', ev[0]?.[1]?.delivery, 'navigate');
-    check('a second submit of the same form does not double it', ev.length, 1);
+    check('the lead names the suburb', await page.evaluate(() =>
+      [...document.querySelectorAll('[data-fb-ask] input[type=hidden]')].find(i => i.name === '_subject').value), 'Pure Flow request, Bayview');
     await page.close(); await page.__ctx.close();
   }
 } finally {

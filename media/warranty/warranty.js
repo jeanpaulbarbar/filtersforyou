@@ -19,6 +19,7 @@
     if (lenis) { lenis.resize(); lenis.scrollTo(y, { duration: 1.1, force: true }); }
     else scrollTo({ top: y, behavior: reduce ? 'instant' : 'smooth' });
   }
+  window.ffyGoTo = el => goTo(el, 16);
   root.addEventListener('click', e => {
     const a = e.target.closest('a[href^="#"]'); if (!a) return;
     const id = a.getAttribute('href').slice(1); const el = id && document.getElementById(id);
@@ -104,68 +105,4 @@
     document.addEventListener('visibilitychange', sync);
   })();
 
-  (() => {
-    const q = $('[data-qform]', root); if (!q) return;
-    const f = $('form', q), panes = $$('[data-step]', q), dots = $$('.steps i', q);
-    const nextLabel = $('[data-nextlabel]', q), back = $('[data-back]', q), send = $('[data-next]', q), error = $('[role=alert]', q);
-    const card = $('[data-wy-chosen]', q);
-    const sysBtns = $$('[data-step="0"] .sysopt', q), whenBtns = $$('[data-when]', q);
-    let step = 0, system = '', when = '', sending = false, started = false, ready = false, formAnim = null;
-    const hidden = (n, v) => { let i = f.elements[n]; if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.append(i); } i.value = v; };
-    function show(n) {
-      const moved = n !== step && !reduce && ready;
-      const from = moved ? f.offsetHeight : 0;
-      step = n; panes.forEach((p, i) => { p.hidden = i !== n; }); dots.forEach((d, i) => d.classList.toggle('on', i <= n));
-      back.hidden = n === 0; nextLabel.textContent = n === 2 ? 'Request my installation date' : 'Next';
-      error.hidden = true;
-      if (!moved) return;
-      const pane = panes[n]; pane.classList.remove('is-enter'); void pane.offsetWidth; pane.classList.add('is-enter');
-      if (formAnim) formAnim.cancel();
-      const to = f.offsetHeight; f.style.overflow = 'hidden';
-      formAnim = f.animate({ height: [from + 'px', to + 'px'] }, { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
-      formAnim.onfinish = formAnim.oncancel = () => { f.style.overflow = ''; formAnim = null; };
-    }
-    function summary() {
-      const b = sysBtns.find(x => x.dataset.v === system);
-      const real = b && !b.hasAttribute('data-help');
-      card.hidden = !real || step === 0;
-      if (real) { $('img', card).src = $('img', b).getAttribute('src'); $('[data-wy-chosen-name]', card).textContent = b.dataset.name; $('[data-wy-chosen-price]', card).textContent = b.dataset.price; }
-    }
-    function pick(v) {
-      q.classList.remove('finished'); system = v || '';
-      sysBtns.forEach(b => { const on = b.dataset.v === system; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-      summary();
-    }
-    sysBtns.forEach(b => b.addEventListener('click', () => { pick(b.dataset.v); error.hidden = true; window.ffyTrack && window.ffyTrack('system_select', { system, form: 'warranty' }); }));
-    whenBtns.forEach(b => b.addEventListener('click', () => {
-      when = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.when;
-      whenBtns.forEach(o => { const on = o.dataset.when === when; o.classList.toggle('on', on); o.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-    }));
-    back.addEventListener('click', () => { show(Math.max(0, step - 1)); summary(); });
-    $('[data-wy-change]', q)?.addEventListener('click', () => { show(0); summary(); });
-    f.elements.phone && (f.elements.phone.pattern = '[0-9 +()]{8,18}');
-    const message = () => [`${system || 'Not sure yet'} installation request.`, `Suburb: ${f.elements.suburb?.value || ''}.`, when ? `Timing: ${when}.` : '', 'From the lifetime warranty page.'].filter(Boolean).join(' ');
-    f.addEventListener('submit', async e => {
-      e.preventDefault(); if (sending) return;
-      if (!started) { started = true; window.ffyTrack && window.ffyTrack('form_start', { form: 'warranty' }); }
-      if (step === 0) { if (!system) { error.textContent = 'Please choose a system, or Help me choose.'; error.hidden = false; return; } show(1); summary(); return; }
-      for (const i of $$('input:not([type=hidden])', panes[step])) if (!i.reportValidity()) return;
-      if (step === 1) { show(2); summary(); return; }
-      if (!f.elements.suburb.checkValidity()) { show(1); f.elements.suburb.reportValidity(); return; }
-      hidden('system', system || 'Not sure yet'); hidden('installation_preference', when); hidden('message', message());
-      hidden('_subject', `${system || 'Installation'} request, ${f.elements.suburb.value}`);
-      if (window.ffyStampForm) window.ffyStampForm(f);
-      sending = true; send.disabled = true; nextLabel.textContent = 'Sending…'; error.hidden = true;
-      const done = () => { q.classList.add('finished'); $('.done', q)?.setAttribute('role', 'status'); window.ffyLeadSuccess && window.ffyLeadSuccess(f, { form: 'warranty', label: 'lifetime_warranty', system: system || 'not chosen' }); };
-      const fail = () => { error.textContent = 'That did not send. Please try again, or call 0430 546 749.'; error.hidden = false; nextLabel.textContent = 'Try again'; };
-      try {
-        const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
-        r.ok ? done() : fail();
-      } catch (err) {
-        try { f.submit(); return; } catch (x) {}
-        fail();
-      } finally { sending = false; send.disabled = false; if (!q.classList.contains('finished') && nextLabel.textContent === 'Sending…') nextLabel.textContent = 'Request my installation date'; }
-    });
-    show(0); pick(''); ready = true;
-  })();
 })();

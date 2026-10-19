@@ -210,119 +210,43 @@
     }
     requestAnimationFrame(tick);
   })();
+  window.ffyGoTo = el => goTo(el, 16);
   const form = (() => {
-    const q = $('[data-qform]'); if (!q) return { pick() {} };
-    const f = $('form', q), panes = $$('[data-step]', q), dots = $$('.steps i', q);
-    const nextLabel = $('[data-nextlabel]', q), back = $('[data-back]', q), send = $('[data-next]', q), error = $('[role=alert]', q);
-    const card = $('[data-fs-chosen]', q), tapRow = $('[data-fs-tap]', q), addonRow = $('[data-fs-addon-row]', q);
+    const box = $('[data-fb-ask]', main); if (!box) return { pick() {} };
+    const api = () => box.ffyAsk;
+    const tapRow = $('[data-fs-tap]', box), tapField = $$('input[type="hidden"]', box).find(i => i.name === 'tap_choice');
     const addonBtns = $$('[data-fs-addon]', main);
-    const sysBtns = $$('[data-step="1"] .sysopt', q), whenBtns = $$('.fs-when__b', q);
-    let step = 0, system = '', when = '', tap = null, addon = false, sending = false, started = false, ready = false, formAnim = null;
-    const hidden = (n, v) => { let i = f.elements[n]; if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.append(i); } i.value = v; };
-    function show(n) {
-      const moved = n !== step && !reduce && ready;
-      const from = moved ? f.offsetHeight : 0;
-      step = n; panes.forEach((p, i) => p.hidden = i !== n); dots.forEach((d, i) => d.classList.toggle('on', i <= n));
-      back.hidden = n === 0; nextLabel.textContent = n === 2 ? 'Request my installation date' : 'Next';
-      error.hidden = true;
-      if (!moved) { relayout(); return; }
-      const pane = panes[n]; pane.classList.remove('is-enter'); void pane.offsetWidth; pane.classList.add('is-enter');
-      if (formAnim) formAnim.cancel();
-      const to = f.offsetHeight; f.style.overflow = 'hidden';
-      formAnim = f.animate({ height: [from + 'px', to + 'px'] }, { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
-      formAnim.onfinish = formAnim.oncancel = () => { f.style.overflow = ''; formAnim = null; relayout(); };
-    }
-    function enter(el) { if (!reduce && ready) { el.classList.remove('is-enter'); void el.offsetWidth; el.classList.add('is-enter'); } }
-    function summary() {
-      const r = bySys[system], was = card.hidden;
-      card.hidden = !r;
-      if (r) {
-        const im = $('img', card); if (im.getAttribute('src') !== r.thumb) im.src = r.thumb;
-        $('[data-fs-chosen-name]', card).textContent = r.name; $('[data-fs-chosen-price]', card).textContent = r.price + ' installed';
-        if (was) enter(card);
-      }
-    }
-    function pick(v) {
-      if (q.classList.contains('sent')) return;
-      system = v || '';
-      sysBtns.forEach(b => { const on = b.dataset.v === system; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
-      summary();
-    }
+    function enter(el) { if (!reduce) { el.classList.remove('is-enter'); void el.offsetWidth; el.classList.add('is-enter'); } }
     function setTap(t) {
-      tap = t && t.label ? t : null;
+      if (box.classList.contains('is-sent')) return;
+      const tap = t && t.label ? t : null;
       const included = tap && (!tap.price || /included/i.test(tap.price));
-      tapRow.hidden = !tap;
-      if (tap) {
-        $('[data-fs-tap-name]', tapRow).textContent = tap.label;
-        $('[data-fs-tap-price]', tapRow).textContent = included ? 'Included with your system' : tap.price + ', installed with your system';
-        if (tap.image) $('img', tapRow).src = tap.image;
-        enter(tapRow);
+      if (tapRow) {
+        tapRow.hidden = !tap;
+        if (tap) {
+          $('[data-fs-tap-name]', tapRow).textContent = tap.label;
+          $('[data-fs-tap-price]', tapRow).textContent = included ? 'Included with your system' : tap.price + ', installed with your system';
+          if (tap.image) $('img', tapRow).src = tap.image;
+          enter(tapRow);
+        }
       }
-      hidden('tap_choice', tap ? tap.label + (included ? ' (included)' : ', ' + tap.price + ' upgrade') : '');
+      if (tapField) tapField.value = tap ? tap.label + (included ? ' (included)' : ', ' + tap.price + ' upgrade') : '';
+      relayout();
     }
     document.addEventListener('ffy:tap', e => setTap(e.detail));
-    const ADDON = 'Undersink chiller, $1,050 installed with a system';
-    function setAddon(on) {
-      if (q.classList.contains('sent')) return;
-      addon = !!on;
-      if (addonRow) { const was = addonRow.hidden; addonRow.hidden = !addon; if (addon && was) enter(addonRow); }
+    $('[data-fs-tap-remove]', box)?.addEventListener('click', () => setTap(null));
+    addonBtns.forEach(b => b.addEventListener('click', () => { const a = api(); if (a) a.addon(!a.state().add_on); }));
+    box.addEventListener('fb:ask', e => {
+      const on = !!e.detail.add_on;
       addonBtns.forEach(b => {
-        b.setAttribute('aria-pressed', addon); b.classList.toggle('on', addon);
-        const l = $('[data-fs-addon-label]', b); if (l) l.textContent = addon ? 'Added to your request' : 'Add it to my request';
+        b.setAttribute('aria-pressed', on); b.classList.toggle('on', on);
+        const l = $('[data-fs-addon-label]', b); if (l) l.textContent = on ? 'Added to your request' : 'Add it to my request';
       });
-      hidden('add_on', addon ? ADDON : '');
-    }
-    addonBtns.forEach(b => b.addEventListener('click', () => setAddon(!addon)));
-    $('[data-fs-addon-remove]', q)?.addEventListener('click', () => setAddon(false));
-    $('[data-fs-tap-remove]', q)?.addEventListener('click', () => setTap(null));
-    sysBtns.forEach(b => b.addEventListener('click', () => {
-      pick(b.dataset.v); error.hidden = true;
-      window.ffyTrack && window.ffyTrack('system_select', { system, form: 'systems' });
-      const r = bySys[system]; if (r) setModel(r.key, { quiet: true, keepForm: true });
-    }));
-    whenBtns.forEach(b => b.addEventListener('click', () => {
-      when = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.when;
-      whenBtns.forEach(o => { const on = o.dataset.when === when; o.classList.toggle('on', on); o.setAttribute('aria-pressed', on); });
-    }));
-    const trail = [];
-    const go = n => { if (n !== step) trail.push(step); show(n); };
-    back.addEventListener('click', () => { show(trail.length ? trail.pop() : Math.max(0, step - 1)); });
-    $('[data-fs-change]', q)?.addEventListener('click', () => { go(1); $('.fs-tile.on', q)?.focus({ preventScroll: true }); });
-    document.addEventListener('click', e => {
-      const b = e.target.closest('[data-fs-cta]'); if (!b) return;
-      e.preventDefault();
-      const v = b.dataset.sys || '';
-      if (v) { pick(v); const r = bySys[v]; if (r) setModel(r.key, { quiet: true, keepForm: true }); }
-      const suburbOk = f.elements.suburb.checkValidity();
-      trail.length = 0; if (!q.classList.contains('finished')) show(system ? (suburbOk ? 2 : 0) : (suburbOk ? 1 : 0));
-      goTo($('#ask'), 0);
+      const r = bySys[e.detail.system]; if (r) setModel(r.key, { quiet: true, keepForm: true });
     });
-    const message = () => [`${system || 'Not sure yet'} installation request.`, `Suburb: ${f.elements.suburb.value.trim()}.`,
-      when ? `Timing: ${when}.` : '', tap ? `Tap: ${f.elements.tap_choice.value}.` : '', addon ? `Add on: ${ADDON}.` : '', 'From the water filter systems page.'].filter(Boolean).join(' ');
-    f.addEventListener('submit', async e => {
-      e.preventDefault(); if (sending) return;
-      if (!started) { started = true; window.ffyTrack && window.ffyTrack('form_start', { form: 'systems' }); }
-      for (const i of $$('input:not([type=hidden])', panes[step])) if (!i.reportValidity()) return;
-      if (step === 0) { go(system ? 2 : 1); return; }
-      if (step === 1) { if (!system) { error.textContent = 'Please choose a system, or Help me choose.'; error.hidden = false; return; } go(2); return; }
-      if (!f.elements.suburb.checkValidity()) { go(0); f.elements.suburb.reportValidity(); return; }
-      hidden('system', system || 'Not sure yet'); hidden('installation_preference', when); hidden('message', message());
-      hidden('_subject', `${system || 'Installation'} request, ${f.elements.suburb.value.trim()}`);
-      if (window.ffyStampForm) window.ffyStampForm(f);
-      sending = true; send.disabled = true; nextLabel.textContent = 'Sending…'; error.hidden = true;
-      const fail = () => { error.textContent = 'That did not send. Please try again, or call 0430 546 749.'; error.hidden = false; nextLabel.textContent = 'Try again'; };
-      try {
-        const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
-        if (r.ok) {
-          q.classList.add('finished', 'sent');
-          window.ffyLeadSuccess && window.ffyLeadSuccess(f, { form: 'systems', label: 'systems_page', system: system || 'not chosen' });
-          const d = $('.done', q); d.setAttribute('tabindex', '-1'); d.focus({ preventScroll: true });
-        } else fail();
-      } catch (err) { fail(); }
-      finally { sending = false; send.disabled = false; relayout(); }
-    });
-    show(0); ready = true;
-    return { pick };
+    box.addEventListener('fb:ask-step', () => setTimeout(relayout, 460));
+    box.addEventListener('fb:ask-sent', () => setTimeout(relayout, 520));
+    return { pick(v) { const a = api(); if (v && a) a.pick(v); } };
   })();
   $$('details', main).forEach(d => {
     const sum = $('summary', d); if (!sum) return;

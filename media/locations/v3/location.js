@@ -399,88 +399,9 @@
   addEventListener('scroll', () => { $$('.lp .lp-seals:not(.is-in), [data-lp-steps]:not(.is-in), [data-lp-years]:not(.is-in), [data-lp-map]:not(.is-in), [data-lp-visits]:not(.is-in)').forEach(el => { if (el.getBoundingClientRect().bottom < 0) el.classList.add('is-in'); }); }, { passive: true });
 
   
-  const form = (() => {
-    const q = $('[data-qform]'); if (!q) return { pick() {} };
-    const f = $('form', q), panes = $$('[data-step]', q), dots = $$('.steps i', q);
-    const nextLabel = $('[data-nextlabel]', q), back = $('[data-back]', q), send = $('[data-next]', q), error = $('[role=alert]', q);
-    const card = $('[data-lp-chosen]', q), preview = f.hasAttribute('data-preview');
-    const sysBtns = $$('[data-step="1"] .sysopt', q), whenBtns = $$('.lp-when__b', q);
-    let step = 0, system = '', when = '', sending = false, started = false;
-    const hidden = (n, v) => { let i = f.elements[n]; if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.append(i); } i.value = v; };
-    let formAnim = null;
-    function show(n) {
-      const moved = n !== step && !reduce && started0;
-      const from = moved ? f.offsetHeight : 0;
-      step = n; panes.forEach((p, i) => p.hidden = i !== n); dots.forEach((d, i) => d.classList.toggle('on', i <= n));
-      back.hidden = n === 0; nextLabel.textContent = n === 2 ? 'Request my installation date' : 'Next';
-      error.hidden = true;
-      if (!moved) return;
-      const pane = panes[n]; pane.classList.remove('is-enter'); void pane.offsetWidth; pane.classList.add('is-enter');
-      if (formAnim) formAnim.cancel();
-      const to = f.offsetHeight; f.style.overflow = 'hidden';
-      formAnim = f.animate({ height: [from + 'px', to + 'px'] }, { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
-      formAnim.onfinish = formAnim.oncancel = () => { f.style.overflow = ''; formAnim = null; };
-    }
-    let started0 = false;
-    function summary() {
-      const r = bySys[system];
-      const appear = r && card.hidden && started0 && !reduce;
-      card.hidden = !r;
-      if (appear) { card.classList.remove('is-enter'); void card.offsetWidth; card.classList.add('is-enter'); }
-      if (r) { $('img', card).src = r.img; $('[data-lp-chosen-name]', card).textContent = r.name; $('[data-lp-chosen-price]', card).textContent = r.price + ' installed'; }
-    }
-    function pick(v, quiet) {
-      q.classList.remove('finished'); system = v || '';
-      sysBtns.forEach(b => { const on = b.dataset.v === system; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
-      summary();
-    }
-    sysBtns.forEach(b => b.addEventListener('click', () => { pick(b.dataset.v); error.hidden = true; window.ffyTrack && window.ffyTrack('system_select', { system, form: 'location' }); }));
-    whenBtns.forEach(b => b.addEventListener('click', () => {
-      when = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.when;
-      whenBtns.forEach(o => { const on = o.dataset.when === when; o.classList.toggle('on', on); o.setAttribute('aria-pressed', on); });
-    }));
-    back.addEventListener('click', () => show(Math.max(0, step === 2 && system && bySys[system] ? 0 : step - 1)));
-    $('[data-lp-change]', q)?.addEventListener('click', () => show(1));
-    document.addEventListener('click', e => {
-      const b = e.target.closest('.js-open, [data-lp-help]'); if (!b) return;
-      e.preventDefault(); e.stopImmediatePropagation();
-      const v = b.dataset.sys || ''; if (v || b.hasAttribute('data-lp-help')) pick(v);
-      const suburbOk = f.elements.suburb?.checkValidity();
-      show(system ? (suburbOk ? 2 : 0) : (suburbOk ? 1 : 0));
-      goTo($('#quote'), 0);
-    }, true);
-    f.elements.phone && (f.elements.phone.pattern = '[0-9 +()]{8,18}');
-    const message = () => [`${system || 'Not sure yet'} installation request.`, `Suburb: ${f.elements.suburb?.value || ''}.`, when ? `Timing: ${when}.` : '', `From the ${main.querySelector('h1 .cp-place')?.textContent.replace('.', '') || slug} page.`].filter(Boolean).join(' ');
-    f.addEventListener('submit', async e => {
-      e.preventDefault(); if (sending) return;
-      if (!started) { started = true; window.ffyTrack && window.ffyTrack('form_start', { form: 'location' }); }
-      for (const i of $$('input:not([type=hidden])', panes[step])) if (!i.reportValidity()) return;
-      if (step === 0) { show(system ? 2 : 1); return; }
-      if (step === 1) { if (!system) { error.textContent = 'Please choose a system, or Help me choose.'; error.hidden = false; return; } show(2); return; }
-      if (!f.elements.suburb.checkValidity()) { show(0); f.elements.suburb.reportValidity(); return; }
-      hidden('system', system || 'Not sure yet'); hidden('installation_preference', when); hidden('message', message());
-      hidden('_subject', `${system || 'Installation'} request, ${f.elements.suburb.value}`);
-      if (window.ffyStampForm) window.ffyStampForm(f);
-      sending = true; send.disabled = true; nextLabel.textContent = 'Sending…'; error.hidden = true;
-      const done = () => { q.classList.add('finished'); $('.done', q)?.setAttribute('role', 'status'); window.ffyLeadSuccess && window.ffyLeadSuccess(f, { form: 'location', label: 'location_' + slug, system: system || 'not chosen' }); };
-      if (preview && !window.__LP_QA) {
-        q.classList.add('finished'); const d = $('.done', q);
-        $('b', d).textContent = 'Preview only. Nothing was sent.'; $('p', d).textContent = message();
-        d.setAttribute('role', 'status'); sending = false; send.disabled = false; nextLabel.textContent = 'Request my installation date'; return;
-      }
-      const fail = () => { error.textContent = 'That did not send. Please try again, or call 0430 546 749.'; error.hidden = false; nextLabel.textContent = 'Try again'; };
-      try {
-        const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
-        r.ok ? done() : fail();
-      } catch (err) {
-        
-        if (!preview) { try { f.submit(); return; } catch (x) {} }
-        fail();
-      } finally { sending = false; send.disabled = false; }
-    });
-    show(0); started0 = true;
-    return { pick };
-  })();
+  
+  
+  const form = { pick(v) { const a = $('[data-fb-ask]'); if (v && a && a.ffyAsk) a.ffyAsk.pick(v); } };
 
   
   

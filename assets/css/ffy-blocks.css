@@ -812,3 +812,124 @@ html.fb-fff-on{overflow:hidden}
 @media(max-width:359px){.fb-js :is(main,#fb) .fb-cmp__grid[data-fb-mode="narrow"] .fb-cmp__name{font-size:22px}
 .fb-js :is(main,#fb) .fb-cmp__grid[data-fb-mode="narrow"] .fb-cmp__v{font-size:15.5px}
 .fb-js :is(main,#fb) .fb-cmp__grid[data-fb-mode="narrow"] .fb-cmp__k{font-size:11.5px}}
+:is(main,#fb) .fb-ask{container:fbask/inline-size;position:relative;width:100%;min-width:0;padding:32px;border-radius:22px;background:#fff;color:var(--ink);box-shadow:var(--shadow-lg);text-align:left;font-size:16px;line-height:1.5;scroll-margin-top:88px}
+:is(main,#fb) .fb-ask.fb-ask--flat{padding:0;border-radius:0;background:none;box-shadow:none}
+:is(main,#fb) .fb-ask__bar{display:flex;gap:6px;margin:0 0 22px}
+:is(main,#fb) .fb-ask__bar i{flex:1;height:3px;border-radius:2px;background:#DCE7FB;transition:background-color .4s var(--e-out)}
+:is(main,#fb) .fb-ask__bar i.is-on{background:var(--blue)}
+:is(main,#fb) .fb-ask__form{margin:0;min-width:0}
+:is(main,#fb) .fb-ask__step{min-width:0;margin:0;padding:0;border:0}
+:is(main,#fb) .fb-ask__step[hidden]{display:none!important}
+:is(main,#fb) .fb-ask__step + .fb-ask__step{margin-top:26px;padding-top:22px;border-top:1px solid var(--rule)}
+.fb-js :is(main,#fb) .fb-ask__step + .fb-ask__step{margin-top:0;padding-top:0;border-top:0}
+:is(main,#fb) .fb-ask__q{margin:0;font-size:19px;font-weight:600;line-height:1.35;letter-spacing:.0025em;color:var(--ink);outline:none}
+:is(main,#fb) .fb-ask__hint{margin:6px 0 0;font-size:15px;line-height:1.5;color:var(--muted)}
+:is(main,#fb) .fb-ask__body{margin-top:16px}
+:is(main,#fb) .fb-ask__fields{display:grid;gap:10px}
+:is(main,#fb) .fb-ask__in{display:block;box-sizing:border-box;width:100%;min-height:54px;margin:0;padding:0 18px;border:1px solid var(--rule);border-radius:12px;background:var(--mist);color:var(--ink);font:500 16px/1.3 var(--sans);box-shadow:none;-webkit-appearance:none;appearance:none;transition:border-color .2s var(--e-out),box-shadow .2s var(--e-out),background-color .2s var(--e-out)}
+:is(main,#fb) .fb-ask__ta{min-height:96px;padding:14px 18px;line-height:1.5;resize:vertical}
+:is(main,#fb) .fb-ask__in::placeholder{color:#76839A;opacity:1}
+:is(main,#fb) .fb-ask__in:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(11,97,244,.18)}
+:is(main,#fb) .fb-ask__note{margin:12px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+:is(main,#fb) .fb-ask__note a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+:is(main,#fb) .fb-ask__in[aria-invalid="true"]{border-color:#C23A1E;box-shadow:0 0 0 3px rgba(194,58,30,.14)}
+:is(main,#fb) .fb-ask__r{position:absolute;top:0;left:0;width:1px;height:1px;margin:0;padding:0;opacity:0;pointer-events:none}
+:is(main,#fb) .fb-ask__tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 12px}
+:is(main,#fb) .fb-ask .fb-ask__t{position:relative}
+:is(main,#fb) .fb-ask .fb-ask__t:has(.fb-ask__r:checked),:is(main,#fb) .fb-ask .fb-ask__t.is-on{color:var(--ink)}
+:is(main,#fb) .fb-ask .fb-ask__t:has(.fb-ask__r:checked) .fb-ppick__img,:is(main,#fb) .fb-ask .fb-ask__t.is-on .fb-ppick__img{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--yellow),0 14px 26px -16px rgba(4,16,46,.5)}
+:is(main,#fb) .fb-ask .fb-ask__t:has(.fb-ask__r:focus-visible) .fb-ppick__img{outline:2px solid var(--blue);outline-offset:9px}
+:is(main,#fb) .fb-ask .fb-ask__t .fb-ppick__n{min-height:2.4em}
+:is(main,#fb) .fb-ask__xs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+:is(main,#fb) .fb-ask__x{position:relative;display:flex;align-items:center;gap:10px;min-width:0;min-height:58px;padding:9px 12px 9px 12px;border-radius:16px;background:var(--mist);box-shadow:inset 0 0 0 1px var(--rule);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:box-shadow .3s var(--e-out),background-color .3s var(--e-out),transform .5s var(--fb-spring)}
+:is(main,#fb) .fb-ask__x > i{display:grid;place-items:center;flex:none;width:28px;height:28px;color:var(--blue)}
+:is(main,#fb) .fb-ask__x > i svg{width:28px;height:28px}
+:is(main,#fb) .fb-ask__x > i svg *{stroke-width:1.6}
+:is(main,#fb) .fb-ask__x > span{min-width:0}
+:is(main,#fb) .fb-ask__x b{display:block;font-size:14.5px;font-weight:700;line-height:1.25;color:var(--ink)}
+:is(main,#fb) .fb-ask__x small{display:block;margin-top:1px;font-size:12.5px;font-weight:500;line-height:1.3;color:var(--muted)}
+:is(main,#fb) .fb-ask__x:has(.fb-ask__r:checked),:is(main,#fb) .fb-ask__x.is-on{background:#FFFBE0;box-shadow:inset 0 0 0 2px var(--yellow)}
+:is(main,#fb) .fb-ask__x:has(.fb-ask__r:focus-visible){outline:2px solid var(--blue);outline-offset:3px}
+:is(main,#fb) .fb-ask__x:active{transform:scale(.97)}
+:is(main,#fb) .fb-ask__add{position:relative;display:flex;align-items:center;gap:12px;margin-top:12px;padding:9px 14px 9px 9px;border-radius:16px;background:var(--mist);box-shadow:inset 0 0 0 1px var(--rule);cursor:pointer}
+:is(main,#fb) .fb-ask__addimg{flex:none;width:44px;height:44px;border-radius:12px;overflow:hidden;background:#EAE6E1}
+:is(main,#fb) .fb-ask__addimg img{width:100%;height:100%;object-fit:cover}
+:is(main,#fb) .fb-ask__addt{flex:1;min-width:0}
+:is(main,#fb) .fb-ask__addt b{display:block;font-size:14.5px;font-weight:700;line-height:1.25}
+:is(main,#fb) .fb-ask__addt small{display:block;font-size:12.5px;color:var(--muted)}
+:is(main,#fb) .fb-ask__sw{position:relative;flex:none;width:44px;height:26px;border-radius:13px;background:#C9D3E3;transition:background-color .3s var(--e-out)}
+:is(main,#fb) .fb-ask__sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(4,16,46,.25);transition:transform .4s var(--fb-spring)}
+:is(main,#fb) .fb-ask__add:has(.fb-ask__r:checked) .fb-ask__sw{background:var(--blue)}
+:is(main,#fb) .fb-ask__add:has(.fb-ask__r:checked) .fb-ask__sw::after{transform:translateX(18px)}
+:is(main,#fb) .fb-ask__add:has(.fb-ask__r:focus-visible){outline:2px solid var(--blue);outline-offset:3px}
+:is(main,#fb) .fb-ask__opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+:is(main,#fb) .fb-ask__opts--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+:is(main,#fb) .fb-ask__o{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;min-height:56px;padding:10px 12px;border-radius:14px;background:var(--mist);box-shadow:inset 0 0 0 1px var(--rule);font-size:15px;font-weight:600;line-height:1.25;text-align:center;color:var(--ink);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:box-shadow .3s var(--e-out),background-color .3s var(--e-out),transform .5s var(--fb-spring)}
+:is(main,#fb) .fb-ask__o--card{justify-content:flex-start;min-height:66px;padding:12px 14px;text-align:left}
+:is(main,#fb) .fb-ask__o > i{display:grid;place-items:center;flex:none;width:24px;height:24px;color:var(--blue)}
+:is(main,#fb) .fb-ask__o > i svg{width:24px;height:24px}
+:is(main,#fb) .fb-ask__o > span{min-width:0}
+:is(main,#fb) .fb-ask__o b{display:block;font-size:15px;font-weight:700;line-height:1.25}
+:is(main,#fb) .fb-ask__o small{display:block;margin-top:2px;font-size:13px;font-weight:500;line-height:1.3;color:var(--muted)}
+:is(main,#fb) .fb-ask__o:has(.fb-ask__r:checked),:is(main,#fb) .fb-ask__o.is-on{background:#FFFBE0;box-shadow:inset 0 0 0 2px var(--yellow)}
+:is(main,#fb) .fb-ask__o:has(.fb-ask__r:focus-visible){outline:2px solid var(--blue);outline-offset:3px}
+:is(main,#fb) .fb-ask__o:active{transform:scale(.97)}
+:is(main,#fb) .fb-ask__chosen:not([hidden]){display:flex;align-items:center;gap:12px;margin:0 0 18px;padding:8px 8px 8px 8px;border-radius:16px;background:var(--mist-2);box-shadow:inset 0 0 0 1px var(--rule)}
+:is(main,#fb) .fb-ask__ci{flex:none;width:48px;height:48px;border-radius:12px;overflow:hidden;background:#EAE6E1}
+:is(main,#fb) .fb-ask__ci[hidden]{display:none}
+:is(main,#fb) .fb-ask__ci img{width:100%;height:100%;object-fit:cover}
+:is(main,#fb) .fb-ask__ct{flex:1;min-width:0;padding-left:4px}
+:is(main,#fb) .fb-ask__ct small{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;line-height:1.3;text-transform:uppercase;color:var(--muted)}
+:is(main,#fb) .fb-ask__ct b{display:block;font-size:15.5px;font-weight:700;line-height:1.25;color:var(--ink)}
+:is(main,#fb) .fb-ask__ct span{display:block;font-size:13.5px;line-height:1.35;color:var(--muted)}
+:is(main,#fb) .fb-ask__change{flex:none;min-height:44px;margin:0;padding:0 10px;border:0;border-radius:10px;background:none;color:var(--blue);font:600 14.5px/1 var(--sans);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+:is(main,#fb) .fb-ask__change:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+:is(main,#fb) .fb-ask__err{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:#FDEEEA;color:#962A13;font-size:14.5px;font-weight:600;line-height:1.45}
+:is(main,#fb) .fb-ask__err[hidden]{display:none}
+:is(main,#fb) .fb-ask__nav{display:flex;flex-wrap:wrap-reverse;align-items:center;gap:8px 12px;margin-top:24px}
+:is(main,#fb) .fb-ask__back{min-height:48px;margin:0;padding:0 10px;border:0;border-radius:10px;background:none;color:var(--muted);font:600 15px/1 var(--sans);cursor:pointer}
+:is(main,#fb) .fb-ask__back[hidden]{display:none}
+:is(main,#fb) .fb-ask__back:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+:is(main,#fb) .fb-ask .fb-ask__next{margin-left:auto;white-space:nowrap}
+:is(main,#fb) .fb-ask .fb-ask__next[disabled]{opacity:.72;cursor:progress}
+:is(main,#fb) .fb-ask__fine{margin:16px 0 0;font-size:13px;line-height:1.5;color:var(--muted)}
+:is(main,#fb) .fb-ask__fine a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+:is(main,#fb) .fb-ask__done{display:none}
+:is(main,#fb) .fb-ask.is-sent .fb-ask__form,:is(main,#fb) .fb-ask.is-sent .fb-ask__bar,:is(main,#fb) .fb-ask.is-sent .fb-ask__chosen{display:none}
+:is(main,#fb) .fb-ask.is-sent .fb-ask__done{display:grid;justify-items:start;gap:8px;padding:4px 0;outline:none}
+:is(main,#fb) .fb-ask__done svg{width:48px;height:48px}
+:is(main,#fb) .fb-ask__done b{font-size:21px;font-weight:700;line-height:1.3}
+:is(main,#fb) .fb-ask__done p{font-size:16px;line-height:1.5;color:var(--muted)}
+@keyframes fbAskIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes fbAskBack{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+@keyframes fbAskUp{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+:is(main,#fb) .fb-ask__step.is-enter{animation:fbAskIn .42s var(--e-out) both}
+:is(main,#fb) .fb-ask__step.is-back{animation:fbAskBack .42s var(--e-out) both}
+:is(main,#fb) .fb-ask__chosen.is-enter{animation:fbAskUp .4s var(--e-out) both}
+:is(main,#fb) .fb-ask.is-sent .fb-ask__done{animation:fbAskUp .5s var(--e-out) both}
+@media(hover:hover) and (pointer:fine){:is(main,#fb) .fb-ask__x:hover,:is(main,#fb) .fb-ask__o:hover,:is(main,#fb) .fb-ask__add:hover{box-shadow:inset 0 0 0 1px #C5D3EA}
+:is(main,#fb) .fb-ask__x:has(.fb-ask__r:checked):hover,:is(main,#fb) .fb-ask__o:has(.fb-ask__r:checked):hover{box-shadow:inset 0 0 0 2px var(--yellow)}
+:is(main,#fb) .fb-ask__back:hover{color:var(--ink)}}
+@media(max-width:599px){:is(main,#fb) .fb-ask{padding:24px 18px 20px;border-radius:20px}
+:is(main,#fb) .fb-ask__bar{margin-bottom:18px}
+:is(main,#fb) .fb-ask__q{font-size:18px}
+:is(main,#fb) .fb-ask__tiles{gap:14px 10px}
+:is(main,#fb) .fb-ask__nav{margin-top:20px}}
+@media(max-width:359px){:is(main,#fb) .fb-ask{padding:20px 14px 18px}
+:is(main,#fb) .fb-ask__tiles{gap:12px 8px}
+:is(main,#fb) .fb-ask__x{gap:8px;padding:8px 10px}
+:is(main,#fb) .fb-ask__x > i,:is(main,#fb) .fb-ask__x > i svg{width:24px;height:24px}
+:is(main,#fb) .fb-ask__x b{font-size:13.5px}
+:is(main,#fb) .fb-ask__x small{font-size:12px}}
+@container fbask (max-width:380px){:is(main,#fb) .fb-ask__x small{display:none}}
+@container fbask (max-width:300px){:is(main,#fb) .fb-ask__opts--3{grid-template-columns:minmax(0,1fr)}}
+@container fbask (max-width:270px){:is(main,#fb) .fb-ask__opts--2{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){:is(main,#fb) .fb-ask *,:is(main,#fb) .fb-ask{animation:none!important;transition:none!important}}
+:is(main,#fb) .fb-asksec{padding-block:clamp(56px,7vw,104px);background:var(--paper);scroll-margin-top:72px}
+:is(main,#fb) .fb-asksec__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px);gap:clamp(28px,5vw,72px);align-items:start}
+:is(main,#fb) .fb-asksec .fb-h2{margin-top:12px}
+:is(main,#fb) .fb-asksec__lede{margin:16px 0 0;max-width:46ch;font-size:clamp(1.05rem,1.3vw,1.2rem);line-height:1.5;color:var(--muted)}
+:is(main,#fb) .fb-asksec__call{margin:22px 0 0;font-size:16px;font-weight:500;color:var(--muted)}
+:is(main,#fb) .fb-asksec__call a,:is(main,#fb) .fb-asksec__note a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+:is(main,#fb) .fb-asksec__note{margin:16px 0 0;max-width:46ch;font-size:15px;line-height:1.5;color:var(--muted)}
+@media(max-width:859px){:is(main,#fb) .fb-asksec__grid{grid-template-columns:minmax(0,1fr)}}

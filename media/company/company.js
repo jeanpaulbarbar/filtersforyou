@@ -21,6 +21,7 @@
     if (lenis) { lenis.resize(); lenis.scrollTo(y, { duration: 1.1, force: true }); }
     else scrollTo({ top: y, behavior: reduce ? 'instant' : 'smooth' });
   }
+  window.ffyGoTo = el => goTo(el, 16);
   root.addEventListener('click', e => {
     const a = e.target.closest('a[href^="#"]'); if (!a) return;
     const id = a.getAttribute('href').slice(1); const el = id && document.getElementById(id);
@@ -114,80 +115,4 @@
     rail.addEventListener('scroll', sync, { passive: true }); addEventListener('resize', sync); sync();
   });
 
-  (() => {
-    const q = $('[data-qform]', root); if (!q) return;
-    const f = $('form', q), panes = $$('[data-step]', q), dots = $$('.steps i', q);
-    const nextLabel = $('[data-nextlabel]', q), back = $('[data-back]', q), send = $('[data-next]', q), error = $('[role=alert]', q);
-    const card = $('[data-wy-chosen]', q);
-    const sendLabel = q.dataset.send || 'Send it';
-    const picks = {};
-    let step = 0, sending = false, ready = false, started = false, formAnim = null;
-    const hidden = (n, v) => { let i = f.elements[n]; if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.append(i); } i.value = v; };
-    const begin = () => { if (!started) { started = true; track('form_start', { form: page }); } };
-    function show(n) {
-      const moved = n !== step && !reduce && ready;
-      const from = moved ? f.offsetHeight : 0;
-      step = n; panes.forEach((p, i) => { p.hidden = i !== n; }); dots.forEach((d, i) => d.classList.toggle('on', i <= n));
-      back.hidden = n === 0; nextLabel.textContent = n === panes.length - 1 ? sendLabel : 'Next';
-      error.hidden = true;
-      if (card) {
-        const b = $(`[data-pick="system"] .sysopt.on`, q);
-        card.hidden = !b || n === 0 || !$('[data-pick="system"]', panes[0]);
-        if (b) {
-          const img = $('img', b), box = $('.wy-chosen__img', card);
-          box.hidden = !img; if (img) $('img', card).src = img.getAttribute('src');
-          $('[data-wy-chosen-name]', card).textContent = b.dataset.v;
-          $('[data-wy-chosen-price]', card).textContent = b.dataset.price || 'We help you choose';
-        }
-      }
-      if (!moved) return;
-      const pane = panes[n]; pane.classList.remove('is-enter'); void pane.offsetWidth; pane.classList.add('is-enter');
-      if (formAnim) formAnim.cancel();
-      const to = f.offsetHeight; f.style.overflow = 'hidden';
-      formAnim = f.animate({ height: [from + 'px', to + 'px'] }, { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
-      formAnim.onfinish = formAnim.oncancel = () => { f.style.overflow = ''; formAnim = null; };
-    }
-    $$('[data-pick]', q).forEach(group => {
-      const field = group.dataset.pick;
-      $$('.sysopt', group).forEach(b => b.addEventListener('click', () => {
-        begin();
-        picks[field] = picks[field] === b.dataset.v ? '' : b.dataset.v;
-        $$('.sysopt', group).forEach(x => { const on = x.dataset.v === picks[field]; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-        error.hidden = true;
-        if (field === 'system' && picks[field]) track('system_select', { system: picks[field], form: page });
-      }));
-    });
-    $$('input, textarea', f).forEach(i => i.addEventListener('input', begin, { once: true }));
-    back.addEventListener('click', () => show(Math.max(0, step - 1)));
-    $('[data-wy-change]', q)?.addEventListener('click', () => show(0));
-    if (f.elements.phone) f.elements.phone.pattern = '[0-9 +()]{8,18}';
-    const message = () => {
-      const v = n => (f.elements[n]?.value || '').trim();
-      return [picks.need ? `Help with: ${picks.need}.` : '', `System: ${picks.system || 'Not sure yet'}.`, v('suburb') ? `Suburb: ${v('suburb')}.` : '',
-        v('details') ? `Message: ${v('details')}` : '', `From the ${label} page.`].filter(Boolean).join(' ');
-    };
-    f.addEventListener('submit', async e => {
-      e.preventDefault(); if (sending) return;
-      begin();
-      const pane = panes[step];
-      for (const g of $$('[data-pick][data-required]', pane)) if (!picks[g.dataset.pick]) { error.textContent = g.dataset.required; error.hidden = false; return; }
-      for (const i of $$('input:not([type=hidden]), textarea', pane)) if (!i.reportValidity()) return;
-      if (step < panes.length - 1) { show(step + 1); return; }
-      hidden('system', picks.system || 'Not sure yet');
-      if (picks.need) hidden('subject', picks.need);
-      hidden('message', message());
-      const sub = f.elements.suburb?.value || '';
-      hidden('_subject', [picks.need || 'Enquiry', picks.system, sub].filter(Boolean).join(', ') + ` (${label})`);
-      if (window.ffyStampForm) window.ffyStampForm(f);
-      sending = true; send.disabled = true; nextLabel.textContent = 'Sending…'; error.hidden = true;
-      const done = () => { q.classList.add('finished'); $('.done', q)?.setAttribute('role', 'status'); window.ffyLeadSuccess && window.ffyLeadSuccess(f, { form: page, label: page.replace(/-/g, '_'), system: picks.system || 'not chosen' }); };
-      const fail = () => { error.textContent = 'That did not send. Please try again, or call 0430 546 749.'; error.hidden = false; nextLabel.textContent = 'Try again'; };
-      try {
-        const r = await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } });
-        r.ok ? done() : fail();
-      } catch (err) { fail(); }
-      finally { sending = false; send.disabled = false; if (!q.classList.contains('finished') && nextLabel.textContent === 'Sending…') nextLabel.textContent = sendLabel; }
-    });
-    show(0); ready = true;
-  })();
 })();
