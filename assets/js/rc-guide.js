@@ -164,6 +164,7 @@
     carts.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); stage(i + (e.key === 'ArrowRight' ? 1 : -1)); var b = $$('.rc-cart', carts)[i]; if (b) b.focus(); }
     });
+    box.addEventListener('fb:pick', function (e) { var k = e.detail && e.detail.key; if (k && k !== sys) system(k); });
     addEventListener('resize', place);
     if ('ResizeObserver' in window) new ResizeObserver(place).observe(shelf);
     system(sys, true);
@@ -242,7 +243,7 @@
 
   
   $$('[data-rc-cost]', root).forEach(function (box) {
-    var picks = $$('[data-k]', box), cares = $$('[data-care]', box), yrs = $('input[type=range]', box);
+    var cares = $$('[data-care]', box), yrs = $('input[type=range]', box);
     var k = box.getAttribute('data-start') || 'premium', care = 'life';
     var o = function (n) { return $('[data-o="' + n + '"]', box); };
     function paint() {
@@ -263,7 +264,7 @@
       var lk = o('link'); lk.href = s.href; lk.querySelector('span').textContent = 'See ' + s.name;
       fill(yrs);
     }
-    picks.forEach(function (b) { b.addEventListener('click', function () { k = b.getAttribute('data-k'); press(picks, b); paint(); }); });
+    box.addEventListener('fb:pick', function (e) { var key = e.detail && e.detail.key; if (key && SYS[key] && key !== k) { k = key; paint(); } });
     cares.forEach(function (b) { b.addEventListener('click', function () { care = b.getAttribute('data-care'); press(cares, b); paint(); }); });
     yrs.addEventListener('input', paint);
     paint();
@@ -271,7 +272,7 @@
 
   
   $$('[data-rc-save]', root).forEach(function (box) {
-    var picks = $$('[data-k]', box), cares = $$('[data-care]', box), price = $('input[type=range]', box);
+    var cares = $$('[data-care]', box), price = $('input[type=range]', box);
     var n = +box.getAttribute('data-bottles') || 12, k = box.getAttribute('data-start') || 'premium', care = 'life';
     var o = function (x) { return $('[data-o="' + x + '"]', box); };
     var lastIcons = 0;
@@ -310,48 +311,10 @@
       fill(price);
     }
     $$('[data-step-by]', box).forEach(function (b) { b.addEventListener('click', function () { n = Math.max(0, Math.min(80, n + +b.getAttribute('data-step-by'))); paint(); }); });
-    picks.forEach(function (b) { b.addEventListener('click', function () { k = b.getAttribute('data-k'); press(picks, b); paint(); }); });
+    box.addEventListener('fb:pick', function (e) { var key = e.detail && e.detail.key; if (key && SYS[key] && key !== k) { k = key; paint(); } });
     cares.forEach(function (b) { b.addEventListener('click', function () { care = b.getAttribute('data-care'); press(cares, b); paint(); }); });
     price.addEventListener('input', paint);
     paint();
-  });
-
-  
-  $$('[data-rc-vs]', root).forEach(function (box) {
-    var TYPES = DATA.types || {}, ROWS = DATA.rows || [];
-    var sides = { a: box.getAttribute('data-a'), b: box.getAttribute('data-b') };
-    function cell(v) { return v === true ? TICK + '<span class="rc-sr">Yes</span>' : v === false ? '<span class="no" aria-hidden="true"></span><span class="rc-sr">No</span>' : esc(v); }
-    var outBox = [$('.rc-vs__cards', box), $('tbody', box)];
-    function paint(changed) {
-      if (changed !== 'none' && !reduce) {
-        clearTimeout(box._t); outBox.forEach(function (e) { e.classList.add('is-out'); });
-        box._t = setTimeout(function () { draw(changed); outBox.forEach(function (e) { e.classList.remove('is-out'); }); }, 150);
-        $$('[data-vs-side] button', box).forEach(function (b) { var s = b.closest('[data-vs-side]').getAttribute('data-vs-side'), k = b.getAttribute('data-t'); b.setAttribute('aria-pressed', k === sides[s] ? 'true' : 'false'); b.disabled = k === sides[s === 'a' ? 'b' : 'a']; });
-        return;
-      }
-      draw(changed);
-    }
-    function draw(changed) {
-      ['a', 'b'].forEach(function (s) {
-        var t = TYPES[sides[s]], card = $('[data-vs-card="' + s + '"]', box);
-        $$('[data-vs-side="' + s + '"] button', box).forEach(function (b) {
-          var k = b.getAttribute('data-t'); b.setAttribute('aria-pressed', k === sides[s] ? 'true' : 'false'); b.disabled = k === sides[s === 'a' ? 'b' : 'a'];
-        });
-        $('img', card).src = t.img; $('b', card).textContent = t.name; $('small', card).textContent = t.sub; $('em', card).textContent = t.price;
-        if (changed === 'none' && false) swap(card, 'is-swap');
-      });
-      ROWS.forEach(function (r, n) {
-        var tr = $$('tbody tr', box)[n]; if (!tr) return;
-        var tds = $$('td', tr);
-        ['a', 'b'].forEach(function (s, j) { var v = cell(TYPES[sides[s]].rows[n]); if (tds[j].innerHTML !== v) tds[j].innerHTML = v; });
-      });
-      $$('[data-vs-head]', box).forEach(function (h) { h.textContent = TYPES[sides[h.getAttribute('data-vs-head')]].short; });
-    }
-    $$('[data-vs-side] button', box).forEach(function (b) {
-      b.addEventListener('click', function () { var s = b.closest('[data-vs-side]').getAttribute('data-vs-side'); sides[s] = b.getAttribute('data-t'); paint(s); });
-    });
-    $('.rc-vs__mid', box).addEventListener('click', function () { var t = sides.a; sides.a = sides.b; sides.b = t; paint(); });
-    paint('none');
   });
 
   
@@ -438,19 +401,6 @@
       else if (b.hasAttribute('data-care')) { st.care = b.getAttribute('data-care'); press($$('[data-care]', box), b); paint(); }
     });
     paint();
-  });
-
-  
-  $$('[data-rc-board]', root).forEach(function (box) {
-    var btns = $$('.rc-board__list button', box), cards = $$('.rc-board__show', box);
-    btns.forEach(function (b) {
-      b.addEventListener('click', function () {
-        press(btns, b);
-        var k = b.getAttribute('data-show');
-        cards.forEach(function (c) { var on = c.getAttribute('data-card') === k; c.hidden = !on; if (on) swap(c, 'is-swap'); });
-        if (innerWidth < 1080) goTo(cards.filter(function (c) { return !c.hidden; })[0]);
-      });
-    });
   });
 
   

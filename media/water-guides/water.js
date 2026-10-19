@@ -29,7 +29,7 @@
     if (history.replaceState) history.replaceState(null, '', '#' + id);
   });
 
-  // count up, only the first time a number comes into view
+  
   const fmt = (n, d) => d ? n.toFixed(d) : Math.round(n).toLocaleString('en-AU');
   function countUp(el) {
     if (el.dataset.done) return; el.dataset.done = '1';
@@ -41,20 +41,33 @@
     node.textContent = fmt(0, d); requestAnimationFrame(tick);
   }
 
-  // reveal
+  
   const anims = $$('[data-wg-anim]', root), ios = $$('[data-wg-io]', root);
   anims.forEach(el => [...el.children].forEach((c, i) => { if (!c.style.getPropertyValue('--i')) c.style.setProperty('--i', i); }));
   const reveal = el => { el.classList.add('is-in'); $$('[data-count]', el).forEach(countUp); };
   const all = [...anims, ...ios, ...$$('[data-wy-anim]', root)];
   if (reduce || !('IntersectionObserver' in window)) all.forEach(reveal);
   else {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }), { threshold: 0.2 });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } }), { threshold: 0.01 });
     all.forEach(el => io.observe(el));
     const sweep = () => all.forEach(el => { if (!el.classList.contains('is-in') && el.getBoundingClientRect().top < innerHeight * 0.6) reveal(el); });
     addEventListener('scroll', sweep, { passive: true }); sweep();
   }
 
-  // a radio group of buttons with roving focus and arrow keys
+  
+  $$('[data-wg-tcols]', root).forEach(g => {
+    const wrap = document.getElementById(g.dataset.wgTcols); if (!wrap) return;
+    const btns = $$('.wg-tcol', g);
+    btns.forEach(b => b.addEventListener('click', () => {
+      if (b.getAttribute('aria-pressed') === 'true') return;
+      btns.forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+      if (reduce) { wrap.dataset.col = b.dataset.col; return; }
+      clearTimeout(wrap._t); wrap.classList.remove('is-swap'); wrap.classList.add('is-out');   
+      wrap._t = setTimeout(() => { wrap.dataset.col = b.dataset.col; wrap.classList.remove('is-out'); void wrap.offsetWidth; wrap.classList.add('is-swap'); }, 170);
+    }));
+  });
+
+  
   function radios(group, sel, onPick) {
     const btns = $$(sel, group);
     const set = (b, focus) => {
@@ -75,7 +88,7 @@
     return btns;
   }
 
-  // explorers: one JSON section per board, chips pick the key, fields follow
+  
   $$('[data-wg-x]', root).forEach(box => {
     const section = DATA[box.dataset.wgX] || {};
     const apply = (key, flash) => {
@@ -98,7 +111,7 @@
     const start = $('[data-key][aria-checked="true"]', box); if (start) apply(start.dataset.key, false);
   });
 
-  // what is in your glass
+  
   $$('[data-wg-glass]', root).forEach(box => {
     const sect = DATA.glass || {};
     let sys = $('[data-gsys][aria-checked="true"]', box)?.dataset.gsys || Object.keys(sect)[0];
@@ -118,7 +131,7 @@
     paint(false);
   });
 
-  // the chooser
+  
   $$('[data-wg-paths]', root).forEach(box => {
     const cards = $$('[data-paths]', box);
     const show = (path, animate) => {
@@ -135,10 +148,10 @@
     const s = $('[data-path][aria-checked="true"]', box); if (s) show(s.dataset.path, false);
   });
 
-  // flip cards
+  
   $$('[data-wg-flip]', root).forEach(b => b.addEventListener('click', () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true')));
 
-  // soft open and close on every disclosure
+  
   $$('details', root).forEach(d => {
     const sum = $('summary', d); if (!sum) return;
     let anim = null, closing = false;
@@ -157,7 +170,7 @@
     });
   });
 
-  // reviews lane
+  
   (() => {
     const wrap = $('#rmq', root); if (!wrap) return;
     const phone = matchMedia('(max-width:859px)');
@@ -187,7 +200,7 @@
     document.addEventListener('visibilitychange', sync);
   })();
 
-  // the three step request form
+  
   (() => {
     const q = $('[data-qform]', root); if (!q) return;
     const f = $('form', q), panes = $$('[data-step]', q), dots = $$('.steps i', q);
@@ -226,7 +239,7 @@
       when = b.getAttribute('aria-pressed') === 'true' ? '' : b.dataset.when;
       whenBtns.forEach(o => { const on = o.dataset.when === when; o.classList.toggle('on', on); o.setAttribute('aria-pressed', on ? 'true' : 'false'); });
     }));
-    // a chooser card can preselect the form
+    
     root.addEventListener('click', e => { const a = e.target.closest('[data-ask]'); if (a) pick(a.dataset.ask); });
     back.addEventListener('click', () => { show(Math.max(0, step - 1)); summary(); });
     $('[data-wy-change]', q)?.addEventListener('click', () => { show(0); summary(); });
