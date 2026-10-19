@@ -141,3 +141,106 @@
     });
   });
 })();
+(function () {
+  'use strict';
+  if (!document.querySelector('.fb')) return;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  var mod = function (a, n) { return ((a % n) + n) % n; };
+  var now = function () { return window.performance && performance.now ? performance.now() : Date.now(); };
+  var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+  $$('[data-fb-picker]').forEach(function (pk) {
+    var box = document.getElementById(pk.getAttribute('data-fb-picker'));
+    var tiles = $$('[data-fb-pick]', pk);
+    if (!box || !tiles.length) return;
+    var panels = $$('[data-fb-panel]', box).filter(function (p) { return p.parentNode === box; });
+    var grow = null;
+    var set = function (k, focus, still) {
+      var h0 = box.offsetHeight;
+      tiles.forEach(function (t) {
+        var on = t.getAttribute('data-fb-pick') === k;
+        t.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (on && focus) t.focus();
+      });
+      panels.forEach(function (p) { p.classList.toggle('is-on', p.getAttribute('data-fb-panel') === k); });
+      box.setAttribute('data-fb-on', k);
+      var h1 = box.offsetHeight;
+      if (grow) { grow.cancel(); grow = null; }
+      if (!still && !reduce && h0 && h0 !== h1 && box.animate) {
+        grow = box.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: 420, easing: 'cubic-bezier(.22,1,.36,1)' });
+        grow.onfinish = function () { grow = null; };
+      }
+      try { box.dispatchEvent(new CustomEvent('fb:pick', { detail: { key: k }, bubbles: true })); } catch (e) {}
+    };
+    var first = tiles.filter(function (t) { return t.getAttribute('aria-pressed') === 'true'; })[0] || tiles[0];
+    set(first.getAttribute('data-fb-pick'), false, true);
+    tiles.forEach(function (t, i) {
+      t.addEventListener('click', function () {
+        if (t.getAttribute('aria-pressed') !== 'true') set(t.getAttribute('data-fb-pick'), false);
+      });
+      t.addEventListener('keydown', function (e) {
+        var k = e.key, j = null;
+        if (k === 'ArrowRight' || k === 'ArrowDown') j = i + 1;
+        else if (k === 'ArrowLeft' || k === 'ArrowUp') j = i - 1;
+        else if (k === 'Home') j = 0;
+        else if (k === 'End') j = tiles.length - 1;
+        if (j === null) return;
+        e.preventDefault();
+        set(tiles[mod(j, tiles.length)].getAttribute('data-fb-pick'), true);
+      });
+    });
+  });
+  var movers = $$('.fb [data-fb-count], .fb [data-fb-fig]');
+  if (reduce || !movers.length) return;
+  var fig = function (v, dec) {
+    if (v >= 10) return String(Math.round(v));
+    if (v >= 1) return v.toFixed(1);
+    var d = Math.min(dec, Math.max(1, 1 - Math.floor(Math.log(v) / Math.LN10)));
+    return v.toFixed(d);
+  };
+  var start = function (el) {
+    var done = el.textContent.trim(), t0 = now() + 120, tick;
+    el.style.visibility = '';
+    if (el.hasAttribute('data-fb-count')) {
+      var to = parseFloat(el.getAttribute('data-fb-count')), from = parseFloat(el.getAttribute('data-fb-from') || '0');
+      var pre = el.getAttribute('data-fb-prefix') || '', dur = parseFloat(el.getAttribute('data-fb-dur') || '1500');
+      var show = function (v) { el.textContent = pre + Math.round(v).toLocaleString('en-AU'); };
+      show(from);
+      tick = function () {
+        var p = Math.min(1, Math.max(0, (now() - t0) / dur));
+        if (p >= 1) { el.textContent = done; return; }
+        show(from + (to - from) * easeOut(p)); requestAnimationFrame(tick);
+      };
+    } else {
+      var raw = el.getAttribute('data-fb-fig'), target = parseFloat(raw), dec = (raw.split('.')[1] || '').length;
+      var a = Math.log(70), b = Math.log(target), dur2 = 1900;
+      el.textContent = '70';
+      tick = function () {
+        var p = Math.min(1, Math.max(0, (now() - t0) / dur2));
+        if (p >= 1) { el.textContent = done; return; }
+        el.textContent = fig(Math.exp(a + (b - a) * easeOut(p)), dec); requestAnimationFrame(tick);
+      };
+    }
+    requestAnimationFrame(tick);
+  };
+  movers.forEach(function (el) { el.style.visibility = 'hidden'; });
+  var pending = movers.slice();
+  var scan = function () {
+    if (!pending.length) return;
+    pending = pending.filter(function (el) {
+      if (!el.isConnected) return false;
+      if (el.getClientRects().length === 0) return true;
+      var panel = el.closest('[data-fb-panel]');
+      if (panel && getComputedStyle(panel).visibility === 'hidden') return true;
+      var r = el.getBoundingClientRect(), line = innerHeight * (el.hasAttribute('data-fb-fig') ? 0.8 : 0.9);
+      if (r.top < line || r.bottom < 0) { start(el); return false; }
+      return true;
+    });
+  };
+  var raf = 0;
+  var queue = function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; scan(); }); };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  queue(); setTimeout(queue, 600);
+  document.addEventListener('fb:pick', function () { setTimeout(queue, 60); });
+})();
