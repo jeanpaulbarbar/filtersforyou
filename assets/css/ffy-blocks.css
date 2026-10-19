@@ -606,6 +606,10 @@ html.fb-fff-on{overflow:hidden}
 :is(main,#fb) .fb-pc__row b{font-size:15px;font-weight:800;color:var(--ink)}
 :is(main,#fb) .fb-pc__row{padding-inline:0}
 :is(main,#fb) .fb-plans__foot{margin:18px 0 0;font-size:14px;font-weight:600;color:var(--muted)}
+:is(main,#fb) .fb-pc__chip{justify-self:start;margin:4px 0 6px;font-size:11px}
+@media(min-width:1180px){:is(main,#fb) .fb-pcs{grid-template-columns:repeat(6,minmax(0,1fr))}
+:is(main,#fb) .fb-pc{grid-column:span 2}
+:is(main,#fb) .fb-pc:nth-child(n+7){grid-column:span 3}}
 @media(max-width:1179px){:is(main,#fb) .fb-pcs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:699px){:is(main,#fb) .fb-pcs{grid-template-columns:1fr;gap:10px}
 :is(main,#fb) .fb-member{min-height:300px}

@@ -213,6 +213,14 @@
       };
     } else {
       var raw = el.getAttribute('data-fb-fig'), target = parseFloat(raw), dec = (raw.split('.')[1] || '').length;
+      if (!dec && target >= 1) {
+        el.textContent = '0';
+        tick = function () {
+          var p = Math.min(1, Math.max(0, (now() - t0) / 1200));
+          if (p >= 1) { el.textContent = done; return; }
+          el.textContent = String(Math.round(target * easeOut(p))); requestAnimationFrame(tick);
+        };
+      } else {
       var a = Math.log(70), b = Math.log(target), dur2 = 1900;
       el.textContent = '70';
       tick = function () {
@@ -220,6 +228,7 @@
         if (p >= 1) { el.textContent = done; return; }
         el.textContent = fig(Math.exp(a + (b - a) * easeOut(p)), dec); requestAnimationFrame(tick);
       };
+      }
     }
     requestAnimationFrame(tick);
   };
