@@ -38,16 +38,16 @@
     heroSec.classList.add('fs-animated');
     gsap.to($$('.hch', h), { opacity: 1, y: 0, duration: .55, ease: 'power3.out', stagger: .018, delay: .8 });
   }
+  $$('.fs-sys', main).forEach(c => { const d = $('.fs-sys__deal', c), k = $('.fs-sys__care', c); if (d && !d.hidden && k) k.hidden = true; });
   const byKey = {}, bySys = {}, chosen = {};
   $$('[data-fs-item]', main).forEach(o => {
     const r = { key: o.dataset.key, mode: o.dataset.mode, sys: o.dataset.sys, name: o.dataset.name, price: o.dataset.price,
-      url: o.dataset.url, el: o,
-      thumb: '/media/systems-hub/range/' + o.dataset.key + '-thumb.webp', card: '/media/systems-hub/range/' + o.dataset.key + '-card.webp' };
+      url: o.dataset.url, el: o, thumb: o.dataset.thumb, card: o.dataset.card };
     byKey[r.key] = r; bySys[r.sys] = r;
     if (o.hasAttribute('data-lead')) chosen[r.mode] = r.key;
   });
   let mode = 'every', model = chosen.every;
-  const target = m => m === 'both' ? $('#deluxe') : $('#range-' + m);
+  const target = m => $('#range-' + m) || $('#systems');
   function setMode(m, opts = {}) {
     if (!chosen[m]) return;
     mode = m;
@@ -101,10 +101,9 @@
     const decoded = new Map();
     const decode = k => {
       if (!decoded.has(k)) {
-        const img = $(`.fs-deluxe__shot[data-pack="${k}"] img`);
-        if (!img) return Promise.resolve();
-        img.loading = 'eager';
-        decoded.set(k, (img.decode ? img.decode() : Promise.resolve()).catch(() => {}));
+        const imgs = $$(`.fs-deluxe__shot[data-pack="${k}"] img`);
+        if (!imgs.length) return Promise.resolve();
+        decoded.set(k, Promise.all(imgs.map(img => { img.loading = 'eager'; return (img.decode ? img.decode() : Promise.resolve()).catch(() => {}); })));
       }
       return decoded.get(k);
     };
@@ -118,11 +117,19 @@
         if (on && !was && !reduce && !opts.quiet) { p.classList.remove('is-new'); void p.offsetWidth; p.classList.add('is-new'); }
       });
       await decode(k); if (mine !== ticket) return;
-      shots.forEach(s => s.toggleAttribute('data-idle', s.dataset.pack !== k));
+      shots.forEach(s => {
+        const on = s.dataset.pack === k;
+        s.toggleAttribute('data-idle', !on);
+        if (on && !reduce && !opts.quiet) { s.classList.remove('is-pop'); void s.offsetWidth; s.classList.add('is-pop'); }
+      });
     }
     btns.forEach(b => b.addEventListener('click', () => { show(b.dataset.fsDeluxe); setModel(b.dataset.fsDeluxe, { keepForm: false }); }));
     btns.forEach(b => b.addEventListener('pointerenter', () => decode(b.dataset.fsDeluxe), { once: true }));
-    $$('[data-fs-pack]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); show(a.dataset.fsPack); goTo($('#deluxe'), 12); }));
+    $$('[data-fs-pack]').forEach(a => a.addEventListener('click', e => {
+      e.preventDefault(); const k = a.dataset.fsPack; show(k);
+      if (byKey[k]) setModel(k, { quiet: true });
+      goTo($('#deluxe'), 12);
+    }));
     return { sync(k) { if (byKey[k] && byKey[k].mode === 'both') show(k, { quiet: true }); } };
   })();
   const barEl = $('#fs-bar');
@@ -139,15 +146,15 @@
     const vh = innerHeight, inView = el => { if (!el || !el.offsetParent) return false; const b = el.getBoundingClientRect(); return b.top < vh && b.bottom > 0; };
     const grid = $('#systems')?.getBoundingClientRect();
     const past = grid && grid.top < vh * 0.2;
-    const busy = $$('.fs-sys__btn, .fs-deluxe__cta, .ts-studio .ts-action, .est .fs-call').some(inView) || inView($('#ask')) || inView($('footer'));
+    const busy = $$('.fs-sys__btn, .fs-deluxe__cta, .fs-addon__add, .ts-studio .ts-action, .est .fs-call').some(inView) || inView($('#ask')) || inView($('footer'));
     barEl.hidden = false; barEl.classList.toggle('off', !past || busy);
   }
   addEventListener('scroll', () => { if (!barQueued) { barQueued = true; requestAnimationFrame(barCheck); } }, { passive: true });
   addEventListener('resize', barCheck);
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: 0.35 });
-  const staged = $$('[data-fs-seals], [data-fs-years], [data-fs-visits]', main);
+  const staged = $$('[data-fs-seals], [data-fs-years], [data-fs-ways], [data-fs-pop]', main);
   staged.forEach(el => reduce ? el.classList.add('is-in') : io.observe(el));
-  const rise = reduce ? [] : $$('.fs-answer .kick, .fs-answer .d2, .fs-range__head > div:first-child > *, .fs-deluxe__head > *, .fs-care__head > div > *', main);
+  const rise = reduce ? [] : $$('.fs-answer .kick, .fs-answer .d2, .fs-range__head > div:first-child > *, .fs-deluxe__head > *, .fs-care__head > div > *, .fs-addon__body > .kick, .fs-addon__body > .d2', main);
   const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); rio.unobserve(e.target); } }), { threshold: 0.2 });
   rise.forEach(el => { el.classList.add('fs-rise'); rio.observe(el); });
   addEventListener('scroll', () => {
@@ -198,9 +205,10 @@
     const q = $('[data-qform]'); if (!q) return { pick() {} };
     const f = $('form', q), panes = $$('[data-step]', q), dots = $$('.steps i', q);
     const nextLabel = $('[data-nextlabel]', q), back = $('[data-back]', q), send = $('[data-next]', q), error = $('[role=alert]', q);
-    const card = $('[data-fs-chosen]', q), tapRow = $('[data-fs-tap]', q);
+    const card = $('[data-fs-chosen]', q), tapRow = $('[data-fs-tap]', q), addonRow = $('[data-fs-addon-row]', q);
+    const addonBtns = $$('[data-fs-addon]', main);
     const sysBtns = $$('[data-step="1"] .sysopt', q), whenBtns = $$('.fs-when__b', q);
-    let step = 0, system = '', when = '', tap = null, sending = false, started = false, ready = false, formAnim = null;
+    let step = 0, system = '', when = '', tap = null, addon = false, sending = false, started = false, ready = false, formAnim = null;
     const hidden = (n, v) => { let i = f.elements[n]; if (!i) { i = document.createElement('input'); i.type = 'hidden'; i.name = n; f.append(i); } i.value = v; };
     function show(n) {
       const moved = n !== step && !reduce && ready;
@@ -244,6 +252,19 @@
       hidden('tap_choice', tap ? tap.label + (included ? ' (included)' : ', ' + tap.price + ' upgrade') : '');
     }
     document.addEventListener('ffy:tap', e => setTap(e.detail));
+    const ADDON = 'Undersink chiller, $1,050 installed with a system';
+    function setAddon(on) {
+      if (q.classList.contains('sent')) return;
+      addon = !!on;
+      if (addonRow) { const was = addonRow.hidden; addonRow.hidden = !addon; if (addon && was) enter(addonRow); }
+      addonBtns.forEach(b => {
+        b.setAttribute('aria-pressed', addon); b.classList.toggle('on', addon);
+        const l = $('[data-fs-addon-label]', b); if (l) l.textContent = addon ? 'Added to your request' : 'Add it to my request';
+      });
+      hidden('add_on', addon ? ADDON : '');
+    }
+    addonBtns.forEach(b => b.addEventListener('click', () => setAddon(!addon)));
+    $('[data-fs-addon-remove]', q)?.addEventListener('click', () => setAddon(false));
     $('[data-fs-tap-remove]', q)?.addEventListener('click', () => setTap(null));
     sysBtns.forEach(b => b.addEventListener('click', () => {
       pick(b.dataset.v); error.hidden = true;
@@ -268,7 +289,7 @@
       goTo($('#ask'), 0);
     });
     const message = () => [`${system || 'Not sure yet'} installation request.`, `Suburb: ${f.elements.suburb.value.trim()}.`,
-      when ? `Timing: ${when}.` : '', tap ? `Tap: ${f.elements.tap_choice.value}.` : '', 'From the water filter systems page.'].filter(Boolean).join(' ');
+      when ? `Timing: ${when}.` : '', tap ? `Tap: ${f.elements.tap_choice.value}.` : '', addon ? `Add on: ${ADDON}.` : '', 'From the water filter systems page.'].filter(Boolean).join(' ');
     f.addEventListener('submit', async e => {
       e.preventDefault(); if (sending) return;
       if (!started) { started = true; window.ffyTrack && window.ffyTrack('form_start', { form: 'systems' }); }
@@ -321,7 +342,7 @@
     o.observe(st);
     addEventListener('hashchange', () => { if (location.hash === '#studio' || location.hash === '#MixerTapStudio') load(); });
   })();
-  const want = new URLSearchParams(location.search).get('system') || (location.hash === '#deluxe-reserve' ? 'deluxe-reserve' : '');
+  const want = new URLSearchParams(location.search).get('system') || (/^#(pack-)?deluxe-reserve$/.test(location.hash) ? 'deluxe-reserve' : '');
   const start = want && byKey[want] ? byKey[want] : null;
   if (start) setModel(start.key, { quiet: true, keepForm: true });
   else setMode('every', { quiet: true, keepForm: true });

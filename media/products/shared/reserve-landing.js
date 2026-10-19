@@ -29,8 +29,8 @@ const wanted=new URLSearchParams(location.search).get('colour');
 if(wanted){const b=list.find(x=>x.dataset.finish.toLowerCase().replace(/ /g,'-')===wanted.toLowerCase());if(b)set(b.dataset.finish)}else set(current,false);
 
 window.reservePackage=()=>addon&&addon.checked?'Deluxe Home Reserve':'Pure Home Reserve';
-window.reserveSummary=timing=>{const pk=window.reservePackage();return pk+' installation request. Colour: '+current+'.'+(timing?' Timing: '+timing+'.':'')+(pk==='Deluxe Home Reserve'?' Includes Pure Luxe reverse osmosis and a three way mixer.':'')};
-function priceLine(){if(!price)return;price.innerHTML=addon&&addon.checked?'Deluxe Home Reserve from <b>$8,640</b> installed · first year of servicing free':basePrice}
+window.reserveSummary=timing=>{const pk=window.reservePackage();return pk+' installation request. Colour: '+current+'.'+(timing?' Timing: '+timing+'.':'')+(pk==='Deluxe Home Reserve'?' Includes Pure Premium reverse osmosis and a Classic three way mixer, free, with the first year of servicing free on both.':'')};
+function priceLine(){if(!price)return;price.innerHTML=addon&&addon.checked?'Deluxe Home Reserve from <b>$5,640</b> installed · first year of servicing free on both':basePrice}
 if(addon)addon.addEventListener('change',priceLine);
 root.querySelectorAll('[data-rv-deluxe]').forEach(a=>a.addEventListener('click',()=>{if(addon){addon.checked=true;priceLine()}}));
 
@@ -109,5 +109,3 @@ if(!reduce&&'IntersectionObserver' in window){
  if(specs){const nums=[...specs.querySelectorAll('[data-rv-to]')];stagger(specs,':scope>li',80);
   whenSeen(specs,()=>{const t0=performance.now();(function step(t){const k=Math.min(1,(t-t0)/1400),e=1-Math.pow(1-k,3);nums.forEach(n=>n.textContent=Math.round(+n.dataset.rvTo*e));if(k<1)requestAnimationFrame(step)})(t0)},.35)}}
 })();
-
-document.querySelectorAll('[data-offer-ends]').forEach(el=>{if(Date.now()>=Date.parse(el.dataset.offerEnds+'T00:00:00+11:00')+864e5)el.remove()});
