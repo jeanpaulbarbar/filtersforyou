@@ -162,30 +162,8 @@
 }
 @media(prefers-reduced-motion:reduce){#pure-plus-page .rv-offer--v2,#pure-plus-page .rv-member,#pure-plus-page .rv-way,#pure-plus-page .rv-pack,#pure-plus-page .rv-pack__img{transition:none}}
 
-/* ---------------------------------------------------------------------------------------------- WaterMark (20 Oct 2026)
-   The last seal in the set, as a row of its own under the four round seals: the official mark at its own proportions on a
-   white chip with clear space, "WaterMark certified" and this system's certificate. The whole row opens the certificates. */
-#pure-plus-page .rv-seals .rv-seals__wm{grid-column:1/-1;display:block;justify-items:stretch;margin-top:6px;text-align:left}
-#pure-plus-page .rv-wm{display:flex;align-items:center;gap:16px;padding:10px 14px 10px 10px;border:1px solid var(--rule);border-radius:20px;background:#fff;color:var(--ink);text-decoration:none;transition:border-color .2s,background .2s}
-#pure-plus-page .rv-wm:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
-#pure-plus-page .rv-seals .rv-seal--wm{flex:none;width:92px;height:62px;padding:0;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1px #d9e0ea,0 8px 18px -12px rgba(4,16,46,.4)}
-#pure-plus-page .rv-seals .rv-seal--wm img{display:block;width:62px;height:auto;margin:0}
-#pure-plus-page .rv-seals .rv-wm p{display:grid;gap:2px;flex:1;min-width:0;margin:0}
-#pure-plus-page .rv-seals .rv-wm p b{font-size:16px;font-weight:700;line-height:1.25}
-#pure-plus-page .rv-seals .rv-wm p span{display:block;font-size:14px;line-height:1.35;color:var(--muted)}
-#pure-plus-page .rv-wm__go{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--mist-2);color:var(--ink)}
-#pure-plus-page .rv-wm__go svg{width:14px;height:14px}
-@media(hover:hover) and (pointer:fine){
- #pure-plus-page .rv-wm:hover{border-color:var(--blue);background:var(--blue-pale)}
- #pure-plus-page .rv-seals li.rv-seals__wm:hover .rv-seal{transform:none}
-}
-@media(max-width:859px){
- #pure-plus-page .rv-seals .rv-seals__wm{margin-top:10px}
- #pure-plus-page .rv-wm{gap:12px;padding:8px 12px 8px 8px;border-radius:18px}
- #pure-plus-page .rv-seals .rv-seal--wm{width:76px;height:52px;border-radius:12px}
- #pure-plus-page .rv-seals .rv-seal--wm img{width:50px}
- #pure-plus-page .rv-seals .rv-wm p b{font-size:14.5px}
- #pure-plus-page .rv-seals .rv-wm p span{display:block;font-size:12.5px}
-}
-@media(max-width:359px){#pure-plus-page .rv-seals .rv-wm p span{display:block}#pure-plus-page .rv-wm__go{display:none}}
-#pure-plus-page .rv-seals.rv-anim .rv-seal.rv-seal--wm{transform:translateY(8px) scale(.94)}
+#pure-plus-page .rv-cert{margin:22px 0 0;max-width:46ch;font-size:15px;font-weight:500;line-height:1.55;color:var(--muted)}
+#pure-plus-page .rv-cert a{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-color:rgba(15,39,72,.3);text-decoration-thickness:1.5px;text-underline-offset:3px;transition:text-decoration-color .2s}
+#pure-plus-page .rv-cert a:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:3px}
+@media(hover:hover) and (pointer:fine){#pure-plus-page .rv-cert a:hover{text-decoration-color:currentColor}}
+@media(max-width:859px){#pure-plus-page .rv-cert{margin-top:18px;font-size:14px}}
