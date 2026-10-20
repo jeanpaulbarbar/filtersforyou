@@ -798,8 +798,6 @@ a{color:inherit}
 .money{font-weight:800;font-size:clamp(2.9rem,4.4vw,4.2rem);line-height:1.04;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
 .kick{display:inline-flex;align-items:center;gap:11px;font-family:var(--badge);font-size:13.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
 .kick::before{content:"";width:3px;height:16px;background:currentColor;border-radius:2px}
-.hw{display:inline-block}
-.hch{display:inline-block;opacity:0;transform:translateY(.26em) scale(.92);transform-origin:50% 80%}
 .arrow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--ink);text-decoration:none;min-height:44px}
 .arrow svg{width:16px;height:16px;transition:transform .45s var(--e-out)}
 @media(hover:hover) and (pointer:fine){.arrow:hover svg{transform:translateX(4px)}}
@@ -813,55 +811,14 @@ a{color:inherit}
 .lab__frame .ul,.mean__mark .ul{min-height:0;padding:11px 0;margin:-11px 0}
 
 
-.hero{min-height:calc(100svh - var(--utilh) - 2*var(--hframe));background:var(--ink-blue);color:#fff;display:flex;align-items:flex-end}
-.hero .hbg{position:absolute;inset:0;z-index:0;overflow:clip}
-.hero .hbg picture{position:absolute;inset:0;opacity:0;transition:opacity 2.2s ease-in-out}
-.hero .hbg picture.on{opacity:1}
-.hero img.hph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,34% 56%);max-width:none;filter:saturate(.98) contrast(1.02) brightness(.97)}
-.hero .veil{position:absolute;inset:0;z-index:1;
-  background:linear-gradient(90deg,rgba(4,16,46,.78) 0%,rgba(4,16,46,.5) 38%,rgba(4,16,46,.14) 66%,rgba(4,16,46,.32) 100%)}
-.hero .copy{position:relative;z-index:3;color:#fff;width:100%;padding-block:150px 150px}
-.hero .kick{color:var(--yellow)}
-.hero h1{color:#fff;font-weight:700;font-size:clamp(2.6rem,6vw,5.2rem);letter-spacing:-.01em;line-height:1.04;max-width:14ch;margin-top:16px}
-.hero h1 .hw{vertical-align:bottom;padding-bottom:.14em;margin-bottom:-.1em}
-.hero .lede{color:rgba(255,255,255,.86);max-width:44ch;margin-top:22px}
-@media(min-width:860px) and (max-width:1469px){
-  .hero .copy{padding-right:calc(min(500px,46vw) + 60px)}
-  .hero h1{font-size:clamp(2.4rem,4.6vw,3.6rem)}
-}
-.ocardwrap{display:contents}
 
-.ocard{position:absolute;right:36px;bottom:36px;z-index:12;width:min(500px,94vw);
-  background:#F6F7F7;color:var(--ink);border-radius:36px 36px 24px 24px;overflow:hidden;box-shadow:var(--shadow-cc)}
-.ochead{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;padding:14px 20px 8px 14px}
-.ochead .oth{width:120px;height:120px;border-radius:20px;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px rgba(4,16,46,.06);display:grid;place-items:center;padding:18px}
-.ochead .oth img{width:100%;height:auto;max-width:none;object-fit:contain}
-.ochead .ot b{display:block;font-size:24px;font-weight:600;letter-spacing:-.005em;line-height:1.22}
-.ochead .ot > span{display:block;font-size:16px;font-weight:500;color:var(--muted);margin-top:8px;line-height:1.3}
-.ochead .ot .pure{color:var(--blue);font-weight:700}
-.ocspec{display:grid;gap:9px;padding:6px 20px 18px}
-.ocspec li{display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:500;line-height:1.35;color:var(--muted)}
-.ocspec li b{font-weight:700;color:var(--ink)}
-.ocspec i{display:grid;place-items:center;width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:var(--blue-pale);color:var(--blue)}
-.ocspec i svg{width:18px;height:18px}
-.ocfoot{display:flex;align-items:center;justify-content:space-between;gap:12px 16px;padding:16px;border-top:1px solid var(--rule);background:#fff}
-.ocproof{display:inline-flex;align-items:center;gap:10px;color:var(--ink)}
-.ocproof > b{font-size:48px;font-weight:600;line-height:1;letter-spacing:-.02em}
-.ocproof .ocp{display:flex;flex-direction:column;gap:4px;font-size:15px;font-weight:500;color:var(--muted);line-height:1.2}
-.ocproof .ocp > span{display:inline-flex;align-items:center;gap:6px}
+
 .stars5{display:inline-flex;gap:1px}
 .stars5 svg{width:15px;height:15px}
 .gicon{width:16px;height:16px}
-.ocfoot .btn{white-space:nowrap;flex:0 0 auto}
-@media (prefers-reduced-motion: no-preference){ .ocard{animation:ocardin .9s var(--e-out) 1.5s backwards} }
+
 @keyframes ocardin{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-@media(min-width:860px) and (max-width:1469px){
-  .ocard{width:min(500px,40vw)}
-  .ochead .oth{padding:14px}
-  .ochead .ot b{font-size:21px}
-  .ocfoot{flex-wrap:wrap}
-  .ocfoot .btn{flex:1 1 100%;justify-content:center}
-}
+
 
 
 .reg{position:relative;z-index:2;padding:clamp(72px,8vw,120px) 0 clamp(56px,6vw,88px);background:var(--paper)}
@@ -888,21 +845,149 @@ a{color:inherit}
 }
 
 
+.wmf{--wm-spring:cubic-bezier(.34,1.56,.64,1);--wm-gold:rgba(201,162,74,.6)}
+.wmf__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(28px,4.5vw,72px);align-items:start}
+.wmf__head{display:grid;gap:14px;align-content:start}
+.wmf__head h2{color:var(--ink);font-size:clamp(2.1rem,3.6vw,3.2rem)}
+.wmf__head .lede{max-width:34ch}
+.wmf__pick{margin-top:clamp(10px,1.6vw,18px)}
+#documents .wmf__pick .fb-ppick{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 16px;max-width:30rem}
+.wmf__cards{min-width:0}
+html:not(.fb-js) .wmc + .wmc{margin-top:18px}
+.wmc{position:relative;display:grid;align-content:start;padding:clamp(24px,2.6vw,34px);border-radius:28px;background:#FFFDF8;color:var(--ink);
+  box-shadow:0 0 0 1px rgba(15,39,72,.07),0 34px 64px -36px rgba(4,16,46,.5),0 10px 22px -14px rgba(4,16,46,.16)}
+.wmc::before{content:"";position:absolute;inset:10px;border-radius:20px;border:1px solid var(--wm-gold);pointer-events:none}
+.wmc__top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.wmc__mark{flex:none;display:grid;place-items:center;width:84px;padding:10px 11px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px rgba(15,39,72,.08)}
+.wmc__mark img{width:100%;height:auto}
+.wmc__seal{flex:none;display:grid;place-items:center;align-content:center;gap:1px;width:84px;height:84px;border-radius:50%;color:#fff;
+  background:radial-gradient(circle at 34% 28%,#4A8CFF 0%,#0B61F4 55%,#0846BE 100%);
+  box-shadow:inset 0 0 0 4px #0B61F4,inset 0 0 0 6px rgba(255,255,255,.9),inset 0 0 0 7px #0846BE,0 14px 26px -14px rgba(11,97,244,.75);transform:rotate(-8deg)}
+.wmc__seal svg{width:26px;height:26px}
+.wmc__seal b{font-family:var(--badge);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;line-height:1}
+.wmc__lab{margin-top:22px;font-family:var(--badge);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.wmc__no{margin-top:4px;font-size:clamp(3.1rem,5vw,4.4rem);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums}
+.wmc__sys{margin-top:12px;font-size:16.5px;font-weight:500;line-height:1.45;color:var(--muted);max-width:40ch}
+.wmc__sys a{color:var(--ink);font-weight:700;text-decoration:none;box-shadow:inset 0 -3px 0 var(--yellow)}
+.wmc__facts{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin-top:20px;border-top:1px dashed rgba(15,39,72,.2)}
+.wmc__facts div{display:grid;gap:3px;padding:12px 0;border-bottom:1px dashed rgba(15,39,72,.16);min-width:0}
+.wmc__facts dt{font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.wmc__facts dd{display:flex;align-items:center;font-size:16.5px;font-weight:700;line-height:1.3;color:var(--ink);font-variant-numeric:tabular-nums}
+.wmc__live{flex:none;width:10px;height:10px;margin-right:8px;border-radius:50%;background:#16A34A;box-shadow:0 0 0 0 rgba(22,163,74,.45)}
+.wmc__go{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;margin-top:22px}
+.wmc__docs{display:flex;flex-wrap:wrap;gap:4px 18px}
+.wmc__doc{display:inline-flex;align-items:center;gap:7px;min-height:44px;font-size:15.5px;font-weight:700;color:var(--ink);text-decoration:none}
+.wmc__doc svg{width:18px;height:18px;color:var(--blue)}
+@media(hover:hover) and (pointer:fine){.wmc__doc:hover{color:var(--blue)}.wmc__sys a:hover{box-shadow:inset 0 -1.2em 0 rgba(255,217,0,.45)}}
+.wmc__sys a{transition:box-shadow .35s var(--e-out)}
+
+.wm-js .wmf:not(.is-seen) .wmc__seal{opacity:0;transform:scale(.55) rotate(-26deg)}
+.wm-js .wmf.is-seen:not(.is-instant) .wmc.is-on .wmc__seal{animation:wmSeal .75s var(--wm-spring) .3s both}
+@keyframes wmSeal{from{opacity:0;transform:scale(.55) rotate(-26deg)}to{opacity:1;transform:scale(1) rotate(-8deg)}}
+.wm-js .wmc__live{animation:wmLive 2.6s ease-out infinite}
+@keyframes wmLive{0%{box-shadow:0 0 0 0 rgba(22,163,74,.45)}70%,100%{box-shadow:0 0 0 9px rgba(22,163,74,0)}}
+.wmf__docs{margin-top:clamp(52px,6vw,88px)}
+.wmf__docs-head{display:grid;gap:8px}
+.wmf__docs-h{font-weight:500;letter-spacing:.0025em;line-height:1.14;font-size:clamp(1.7rem,3vw,2.5rem);color:var(--ink);text-wrap:balance}
+.wmf__docs-head p{font-size:16.5px;line-height:1.5;color:var(--muted)}
+.wmf__docs .reg__list{margin-top:18px}
+.wmf__note{margin-top:clamp(20px,2.6vw,28px);font-size:16px;line-height:1.55;color:var(--muted);max-width:76ch}
+
+
 .mean{padding:clamp(72px,8vw,120px) 0;background:var(--mist-2)}
-.mean__grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.35fr);gap:clamp(32px,5vw,88px);align-items:start}
-.mean__mark{display:grid;gap:18px;position:sticky;top:calc(var(--top) + 18px)}
-.mean__plate{display:grid;place-items:center;padding:clamp(28px,4vw,56px);border-radius:var(--r-hero);background:#fff;box-shadow:var(--shadow-sm)}
-.mean__plate img{width:min(100%,340px);height:auto}
-.mean__mark p{font-size:16px;line-height:1.55;color:var(--muted);max-width:40ch}
-.mean__mark .ul{color:var(--ink);font-weight:700}
-.mean__copy{display:grid;gap:16px}
-.mean__copy h2{color:var(--ink)}
-.mean__list{display:grid;border-top:1px solid var(--rule);margin-top:8px}
-.mean__list li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;padding:26px 0;border-bottom:1px solid var(--rule)}
-.mean__n{font-family:var(--badge);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--blue);padding-top:9px}
-.mean__list h3{font-size:clamp(1.35rem,2vw,1.8rem);font-weight:600;letter-spacing:-.012em;line-height:1.15;color:var(--ink);text-wrap:balance}
-.mean__list p{margin-top:8px;font-size:16.5px;line-height:1.55;color:var(--muted);max-width:54ch}
 .mean__go{margin-top:8px}
+.wmp{--wm-spring:cubic-bezier(.34,1.56,.64,1)}
+.wmp__grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(32px,5vw,88px);align-items:center}
+.wmp__ph{margin:0;border-radius:var(--r-hero);overflow:clip;aspect-ratio:1;background:#E8E0E2;box-shadow:var(--shadow-sm)}
+.wmp__ph img{width:100%;height:100%;object-fit:cover;max-width:none}
+.wmp__copy{display:grid;gap:16px;align-content:start}
+.wmp__copy h2{color:var(--ink)}
+.wmp__lede{font-size:clamp(1.05rem,1.3vw,1.2rem);font-weight:500;line-height:1.5;color:var(--muted);max-width:46ch}
+.wmp__path{display:grid;margin-top:10px}
+.wmp__path li{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:20px;padding-bottom:28px}
+.wmp__path li:last-child{padding-bottom:6px}
+.wmp__path li:not(:last-child)::before,.wmp__path li:not(:last-child)::after{content:"";position:absolute;left:30px;top:70px;bottom:6px;width:4px;border-radius:4px}
+.wmp__path li:not(:last-child)::before{background:rgba(15,39,72,.1)}
+.wmp__path li:not(:last-child)::after{background:linear-gradient(180deg,#0B61F4,#4A8CFF);transform-origin:50% 0;
+  transition:transform .7s var(--e-soft) calc(var(--i) * .85s + .35s)}
+.wmp__seal{position:relative;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:#fff;color:var(--blue);
+  box-shadow:inset 0 0 0 3px var(--blue),inset 0 0 0 6px #fff,inset 0 0 0 7px rgba(11,97,244,.28),0 12px 22px -14px rgba(4,16,46,.5);
+  transition:color .4s ease calc(var(--i) * .85s + .2s),box-shadow .4s ease calc(var(--i) * .85s + .2s)}
+.wmp__seal > svg{width:28px;height:28px}
+.wmp__tick{position:absolute;right:-5px;bottom:-5px;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--yellow);color:var(--ink);box-shadow:0 0 0 3px var(--mist-2);
+  transition:transform .55s var(--wm-spring) calc(var(--i) * .85s + .2s),opacity .2s linear calc(var(--i) * .85s + .2s)}
+.wmp__tick svg{width:15px;height:15px}
+.wmp__path li > div{padding-top:6px;transition:opacity .5s ease calc(var(--i) * .85s + .2s)}
+.wmp__path h3{font-size:clamp(1.3rem,1.9vw,1.7rem);font-weight:600;letter-spacing:-.012em;line-height:1.15;color:var(--ink);text-wrap:balance}
+.wmp__path p{margin-top:7px;font-size:16.5px;line-height:1.55;color:var(--muted);max-width:50ch}
+
+.wm-js .wmp__path:not(.is-play) li::after{transform:scaleY(0)}
+.wm-js .wmp__path:not(.is-play) .wmp__seal{color:#9AA6B8;box-shadow:inset 0 0 0 3px #C9D2DE,inset 0 0 0 6px #fff,inset 0 0 0 7px rgba(15,39,72,.08),0 12px 22px -14px rgba(4,16,46,.3)}
+.wm-js .wmp__path:not(.is-play) .wmp__tick{transform:scale(0);opacity:0}
+.wm-js .wmp__path:not(.is-play) li > div{opacity:.42}
+.wmp__path.is-instant li::after,.wmp__path.is-instant .wmp__seal,.wmp__path.is-instant .wmp__tick,.wmp__path.is-instant li > div{transition:none!important}
+@media(prefers-reduced-motion:reduce){
+  .wmc__seal,.wm-js .wmc__live{animation:none!important}
+  .wm-js .wmf:not(.is-seen) .wmc__seal{opacity:1;transform:rotate(-8deg)}
+  .wmp__path li::after,.wmp__seal,.wmp__tick,.wmp__path li > div,.wmc__sys a{transition:none!important}
+}
+@media(min-width:860px) and (max-width:1079px){
+  .wmf__grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px}
+  #documents .wmf__pick .fb-ppick{gap:14px 12px}
+  .wmp__grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:40px}
+}
+@media(max-width:859px){
+  .wmf__grid{grid-template-columns:1fr;gap:22px}
+  .wmf__head{gap:10px}
+  .wmf__head h2{font-size:clamp(1.7rem,7.4vw,2.1rem);max-width:none}
+  .wmf__head .lede{font-size:1rem}
+  #documents .wmf__pick .fb-ppick{max-width:none;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px 10px}
+  .wmc{padding:20px 18px 18px;border-radius:24px}
+  .wmc::before{inset:8px;border-radius:18px}
+  .wmc__mark{width:70px;padding:8px 9px;border-radius:14px}
+  .wmc__seal{width:68px;height:68px}
+  .wmc__seal svg{width:20px;height:20px}
+  .wmc__seal b{font-size:10px}
+  .wmc__lab{margin-top:14px;font-size:11.5px}
+  .wmc__no{font-size:clamp(2.6rem,12vw,3.2rem)}
+  .wmc__sys{margin-top:8px;font-size:15px}
+  .wmc__facts{gap:0 14px;margin-top:14px}
+  .wmc__facts div{padding:10px 0}
+  .wmc__facts dd{font-size:15px}
+  .wmc__go{margin-top:16px;gap:6px 16px}
+  .wmc__go .btn{width:100%;justify-content:center;min-height:50px}
+  .wmc__doc{font-size:15px}
+  .wmf__docs{margin-top:48px}
+  .wmf__docs-h{font-size:clamp(1.45rem,6.4vw,1.75rem)}
+  .wmf__docs-head p{font-size:15px}
+  .wmf__note{font-size:15px;margin-top:16px}
+  .mean{padding:56px 0 var(--fabclear)}
+  .wmp__grid{grid-template-columns:1fr;gap:24px}
+  .wmp__ph{aspect-ratio:16/11}
+  .wmp__ph img{object-position:50% 58%}
+  .wmp__copy{gap:10px}
+  .wmp__copy h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
+  .wmp__lede{font-size:15.5px}
+  .wmp__path li{grid-template-columns:52px minmax(0,1fr);gap:14px;padding-bottom:22px}
+  .wmp__path li:not(:last-child)::before,.wmp__path li:not(:last-child)::after{left:24px;top:58px}
+  .wmp__seal{width:52px;height:52px}
+  .wmp__seal > svg{width:23px;height:23px}
+  .wmp__tick{width:24px;height:24px;right:-6px;bottom:-6px}
+  .wmp__tick svg{width:13px;height:13px}
+  .wmp__path li > div{padding-top:2px}
+  .wmp__path h3{font-size:1.2rem}
+  .wmp__path p{font-size:15px;line-height:1.45}
+}
+@media(max-width:699px){
+  #documents .wmf__pick .fb-ppick{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 10px}
+}
+@media(max-width:359px){
+  .wmc{padding:18px 14px 16px}
+  .wmc__facts{gap:0 12px}
+  .wmc__facts dd{font-size:14.5px}
+  .wmc__go .btn{font-size:14.5px;padding-left:8px;padding-right:14px;gap:8px}
+  #documents .wmf__pick .fb-ppick{gap:12px 8px}
+}
 
 
 .lic{padding:clamp(72px,8vw,120px) 0;color:#fff;background-color:var(--ink-blue);
@@ -924,22 +1009,6 @@ a{color:inherit}
 .lic .fine{color:rgba(255,255,255,.74);max-width:56ch}
 
 
-.sys{padding:clamp(72px,8vw,120px) 0;background:var(--paper)}
-.sys__head{display:grid;gap:14px;max-width:64ch}
-.sys__head h2{color:var(--ink)}
-.sys__grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.5fr);gap:clamp(32px,5vw,80px);align-items:center;margin-top:clamp(32px,4vw,52px)}
-.sys__shelf{display:flex;align-items:flex-end;justify-content:center;gap:clamp(12px,2vw,28px);margin:0;padding:0 0 14px;border-bottom:1px solid var(--rule)}
-.sys__shelf img{height:min(46vh,420px);width:auto;max-width:48%;object-fit:contain;filter:drop-shadow(0 30px 28px rgba(4,16,46,.18))}
-.sys__table{display:grid;border-top:1px solid var(--rule)}
-.srow{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,.7fr) minmax(0,.95fr) minmax(0,.8fr);gap:8px 20px;align-items:center;padding:18px 10px;border-bottom:1px solid var(--rule);
-  text-decoration:none;color:var(--ink);border-radius:var(--r-sm);transition:background .45s ease-in-out}
-.srow.head{padding:10px;border-radius:0}
-.srow.head span{font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
-.srow > span{font-size:15.5px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink)}
-.srow > span > b{display:block;font-size:clamp(1.05rem,1.3vw,1.2rem);font-weight:700;line-height:1.25;letter-spacing:-.01em}
-.srow > span > span{display:block;margin-top:4px;font-size:15px;font-weight:500;line-height:1.45;color:var(--muted)}
-@media(hover:hover) and (pointer:fine){a.srow:hover{background:var(--mist-2)}}
-.sys__line{margin-top:clamp(22px,3vw,32px);font-size:16px;line-height:1.55;color:var(--muted);max-width:76ch}
 
 
 .lab-act .sc-stage{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0;padding:0;background:radial-gradient(46% 46% at 100% 0%,rgba(11,97,244,.08),transparent 60%),var(--paper)}
@@ -1013,13 +1082,7 @@ a{color:inherit}
 .askbox .qform{margin-top:6px;box-shadow:var(--shadow-sm);border:1px solid var(--rule)}
 .ask__call{font-size:15.5px;color:var(--muted)}
 .ask__call .ul{color:var(--ink);font-weight:700}
-.ask__certs{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;padding:14px 18px;border-radius:var(--r-card);background:var(--mist-2);box-shadow:inset 0 0 0 1px var(--rule)}
-.ask__certs a{display:grid;place-items:center;height:52px;padding:0 14px;border-radius:12px;background:#fff;box-shadow:var(--shadow-sm);transition:transform .45s var(--e-out),box-shadow .45s var(--e-out)}
-.ask__certs a img{height:32px;width:auto;max-width:none}
-.ask__certs a img.nsw{height:36px}
-.ask__certs p{margin:0;font-size:15px;color:var(--muted);line-height:1.45;flex:1 1 220px}
-.ask__certs p b{color:var(--ink);font-weight:700}
-@media(hover:hover) and (pointer:fine){.ask__certs a:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}}
+
 
 
 .qform{background:var(--paper);color:var(--ink);border-radius:var(--r-card);padding:28px 24px;display:flex;flex-direction:column;gap:16px;
@@ -1155,36 +1218,12 @@ body.dopen .drawer{transform:none}
   .rrow{grid-template-columns:40px minmax(0,1fr) auto;gap:12px 22px}
   .rrow__meta{grid-column:2;grid-row:2;grid-template-columns:repeat(3,minmax(0,1fr))}
   .rrow__go{grid-column:3;grid-row:1/3}
-  .mean__grid,.lic__grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:40px}
-  .sys__grid{grid-template-columns:1fr;gap:28px}
-  .sys__shelf img{height:min(34vh,300px)}
+  .lic__grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:40px}
 }
 
 
 @media(max-width:859px){
   .sc-stage{height:100dvh;min-height:100svh}
-  
-  .hero{min-height:calc(100svh - 2*var(--hframe));display:block}
-  .hero .hbg{position:absolute;left:0;right:0;top:0;bottom:auto;height:56svh;overflow:clip}
-  .hero .hbg::after{content:"";position:absolute;inset:0;pointer-events:none;
-    background:linear-gradient(180deg,rgba(4,16,46,.44) 0%,rgba(4,16,46,0) 24%,rgba(4,16,46,0) 50%,rgba(4,16,46,.6) 76%,var(--ink-blue) 100%)}
-  .hero .veil{display:none}
-  .hero .copy{position:absolute;left:0;right:0;bottom:248px;height:auto;padding:0 var(--gut);display:block}
-  .hero .kick,.hero .lede{display:none}
-  .hero h1{font-size:clamp(1.7rem,7.2vw,2.15rem);max-width:none;line-height:1.1;margin:0}
-  .ocardwrap{position:absolute;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));z-index:12;width:auto;padding:0 12px;margin:0;display:flex;flex-direction:column}
-  .ocard{position:relative;right:auto;bottom:auto;width:auto;margin:0;background:transparent;box-shadow:none;border-radius:0;overflow:visible;display:flex;flex-direction:column}
-  .ochead{order:1;background:#F6F7F7;border-radius:28px 28px 0 0;grid-template-columns:84px 1fr;gap:10px;padding:10px 12px 8px 10px;box-shadow:var(--shadow-cc)}
-  .ochead .oth{width:84px;height:84px;border-radius:16px;padding:10px}
-  .ochead .ot b{font-size:15.5px;line-height:1.18}
-  .ochead .ot > span{font-size:15px;margin-top:3px;line-height:1.25}
-  .ocfoot{order:2;background:#fff;border-radius:0 0 22px 22px;flex-direction:column;align-items:stretch;padding:8px 12px 10px;gap:8px;border-top:1px solid var(--rule)}
-  .ocproof{justify-content:center;gap:8px}
-  .ocproof .ocp{flex-direction:row;align-items:center;gap:8px;font-size:15px}
-  .ocproof .stars5 svg{width:13px;height:13px}
-  .ocproof > b{font-size:15px;font-weight:800}
-  .ocfoot .btn{width:100%;justify-content:center;min-height:50px}
-  .ocspec{display:none}
   
   .reg{padding:56px 0 var(--fabclear)}
   .reg__head{gap:10px}
@@ -1200,19 +1239,6 @@ body.dopen .drawer{transform:none}
   .rrow__meta b{font-size:15px}
   .rrow__go{grid-column:2;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;margin-top:4px}
   .rrow__go b{min-height:44px;padding:0 16px}
-  
-  .mean{padding:56px 0 var(--fabclear)}
-  .mean__grid{grid-template-columns:1fr;gap:20px}
-  .mean__mark{position:static;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:14px}
-  .mean__plate{padding:14px;border-radius:16px}
-  .mean__plate img{width:100%}
-  .mean__mark p{font-size:15px;max-width:none}
-  .mean__copy{gap:10px}
-  .mean__copy h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
-  .mean__list li{grid-template-columns:34px minmax(0,1fr);gap:10px;padding:18px 0}
-  .mean__n{padding-top:6px}
-  .mean__list h3{font-size:1.25rem}
-  .mean__list p{font-size:15px;line-height:1.45;max-width:none}
   .mean__go .btn{min-height:46px}
   
   .lic{padding:56px 0 var(--fabclear)}
@@ -1231,26 +1257,7 @@ body.dopen .drawer{transform:none}
   .lic__go .ul{font-size:15px}
   .lic .fine{font-size:15px}
   
-  .sys{padding:56px 0 var(--fabclear)}
-  .sys__head{gap:10px}
-  .sys__head h2{font-size:clamp(1.7rem,7.4vw,2.1rem)}
-  .sys__head .lede{font-size:1rem}
-  .sys__grid{grid-template-columns:1fr;gap:18px;margin-top:20px}
   
-  .sys__shelf{gap:0;padding-bottom:10px}
-  .sys__shelf img{height:min(48svh,420px);max-width:88%}
-  .sys__shelf img + img{display:none}
-  .srow.head{display:none}
-  .srow{grid-template-columns:1fr 1fr;gap:10px 14px;padding:16px 0;border-radius:0}
-  .srow > span:first-child{grid-column:1/-1}
-  .srow > span:not(:first-child)::before{display:block;font-family:var(--badge);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
-  .srow > span:nth-child(2)::before{content:"Certificate"}
-  .srow > span:nth-child(3)::before{content:"Standard"}
-  .srow > span:nth-child(4)::before{content:"Valid to"}
-  .srow > span{font-size:15px}
-  .srow > span > b{font-size:1.1rem}
-  .srow > span > span{font-size:15px;line-height:1.42}
-  .sys__line{font-size:15px;margin-top:16px}
   
   .lab-act .sc-stage{grid-template-columns:1fr;grid-template-rows:32svh minmax(0,1fr)}
   .lab__ph{position:relative;height:auto;align-self:stretch;margin:var(--hframe) var(--hframe) 0;border-radius:var(--r-hero);overflow:clip;background:var(--mist)}
@@ -1293,10 +1300,6 @@ body.dopen .drawer{transform:none}
   
   .ask__grid{grid-template-columns:1fr;gap:18px}
   .ask__fr{min-height:0;aspect-ratio:4/3}
-  .ask__certs{padding:12px 14px;gap:10px 12px}
-  .ask__certs a{height:46px;padding:0 10px}
-  .ask__certs a img{height:26px}
-  .ask__certs a img.nsw{height:30px}
   .frame figcaption{font-size:15px}
   .ask__call{font-size:15px}
   .qform .hint{font-size:15px}
@@ -1317,10 +1320,7 @@ body.dopen .drawer{transform:none}
 
 @media(max-width:359px){.rrow__go i{white-space:normal;letter-spacing:.06em;line-height:1.3}}
 @media(max-width:859px) and (max-height:700px){
-  .hero .copy{bottom:186px}
-  .hero h1{font-size:clamp(1.5rem,6.4vw,1.8rem)}
   .lab-act .sc-stage{grid-template-rows:24svh minmax(0,1fr)}
-  .sys__shelf img{height:min(30svh,260px)}
 }
 
 </style>
@@ -1475,7 +1475,7 @@ body.dopen .drawer{transform:none}
         "name": "Pro-Switch Pty Ltd",
         "description": "JAS-ANZ accredited WaterMark conformity assessment body"
       },
-      "about": "Drinking water treatment systems certified to AS 3497:2021, 131 models, listed on the Australian Building Codes Board WaterMark register",
+      "about": "Drinking water treatment systems certified to AS 3497:2021, including Pure Flow, Pure Essential and Pure Premium, listed on the Australian Building Codes Board WaterMark register",
       "validFrom": "2016-12-15",
       "expires": "2028-10-03",
       "url": "https://watermark.abcb.gov.au/product-search/certificate/023247"
@@ -1491,7 +1491,7 @@ body.dopen .drawer{transform:none}
         "name": "IAPMO Oceania Pty Ltd",
         "description": "WaterMark conformity assessment body"
       },
-      "about": "Water treatment systems and cartridges certified to WMTS-103:2016, 292 models, listed on the Australian Building Codes Board WaterMark register",
+      "about": "Water treatment systems and cartridges certified to WMTS-103:2016, including Pure Luxe, listed on the Australian Building Codes Board WaterMark register",
       "validFrom": "2018-11-15",
       "expires": "2028-11-14",
       "url": "https://watermark.abcb.gov.au/product-search/certificate/022780"
@@ -1507,7 +1507,7 @@ body.dopen .drawer{transform:none}
         "name": "CMI Certification Pty Ltd",
         "description": "WaterMark conformity assessment body"
       },
-      "about": "Whole house water filtration systems certified to AS 3497:2021, 6 models, listed on the Australian Building Codes Board WaterMark register",
+      "about": "Whole house water filtration systems certified to AS 3497:2021, Pure Home and Pure Home Reserve, listed on the Australian Building Codes Board WaterMark register",
       "validFrom": "2025-10-03",
       "expires": "2030-10-03",
       "url": "https://watermark.abcb.gov.au/product-search/certificate/080113"
@@ -1621,7 +1621,7 @@ body.dopen .drawer{transform:none}
           "name": "Are the water filters Filters For You installs WaterMark certified?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Our reverse osmosis, under sink and whole house systems are. Pure Essential and Pure Premium are on certificate 23247, 131 models, every one active, valid to 3 October 2028. Pure Luxe, our smart reverse osmosis system, is on certificate 22780, 292 models, valid to 14 November 2028. Pure Home and Pure Home Reserve, our whole house filtration systems, are on certificate 080113, every model active, valid to 3 October 2030. All three certificates are published on this page and each links to the government register."
+            "text": "Yes. Every reverse osmosis, under sink and whole house system we install is on the government register. Pure Flow, Pure Essential and Pure Premium are on certificate 23247, active, valid to 3 October 2028. Pure Luxe, our smart reverse osmosis system, is on certificate 22780, active, valid to 14 November 2028. Pure Home and Pure Home Reserve, our whole house filtration systems, are on certificate 080113, every model active, valid to 3 October 2030. Choose your system in the finder on this page and its certificate opens on the government register."
           }
         },
         {
@@ -1629,7 +1629,7 @@ body.dopen .drawer{transform:none}
           "name": "Which certificate covers my system?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The three certificates are not interchangeable. 23247 is the AS 3497:2021 certificate for Pure Essential and Pure Premium, the standard for drinking water treatment systems, design and performance, installed in accordance with the Plumbing Code of Australia. It was issued by Pro-Switch Pty Ltd, a JAS-ANZ accredited conformity assessment body, first in December 2016. Its schedule lists the sediment and carbon block cartridges, the granular carbon, the 50 GPD reverse osmosis membrane, the alkaline and hydrogen rich alkaline cartridges, and the housings and manifolds they sit in. 22780 is the certificate for Pure Luxe, our smart reverse osmosis system with its live purity display, issued by IAPMO Oceania under WMTS-103:2016, the WaterMark technical specification for water treatment systems, first certified in November 2018. 080113 is the AS 3497:2021 certificate for Pure Home and Pure Home Reserve, our whole house systems, issued by CMI Certification Pty Ltd, first in October 2025. Ask, and we point you at the exact line on the register for the system in your kitchen."
+            "text": "The three certificates are not interchangeable. 23247 is the AS 3497:2021 certificate for Pure Flow, Pure Essential and Pure Premium, the standard for drinking water treatment systems, design and performance, installed in accordance with the Plumbing Code of Australia. It was issued by Pro-Switch Pty Ltd, a JAS-ANZ accredited conformity assessment body, first in December 2016. Its schedule lists the sediment and carbon block cartridges, the granular carbon, the 50 GPD reverse osmosis membrane, the alkaline and hydrogen rich alkaline cartridges, the housings and manifolds they sit in, and the quick change inline filter in Pure Flow. 22780 is the certificate for Pure Luxe, our smart reverse osmosis system with its live purity display, issued by IAPMO Oceania under WMTS-103:2016, the WaterMark technical specification for water treatment systems, first certified in November 2018. 080113 is the AS 3497:2021 certificate for Pure Home and Pure Home Reserve, our whole house systems, issued by CMI Certification Pty Ltd, first in October 2025. Ask, and we point you at the exact line on the register for the system in your kitchen."
           }
         },
         {
@@ -1637,7 +1637,7 @@ body.dopen .drawer{transform:none}
           "name": "Is NSF certification the same as WaterMark?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No, they answer different questions, and a good system answers both. WaterMark is the Australian plumbing approval: the product is safe to connect to drinking water and may legally be installed. NSF/ANSI standards are international performance standards for filter media: 42 for chlorine, taste and odour, 53 for health related contaminants such as lead and cysts, and 58 for reverse osmosis systems and their membranes. The carbon blocks, sediment cartridges and membranes in the reverse osmosis and under sink systems Filters For You installs are manufactured in compliance with NSF/ANSI 42, 53 and 58. That is the manufacturer's statement about how the media is built, and we describe it exactly that way. NSF is not an Australian legal requirement and never replaces WaterMark."
+            "text": "No, they answer different questions, and a good system answers both. WaterMark is the Australian plumbing approval: the product is safe to connect to drinking water and may legally be installed. NSF/ANSI standards are international performance standards for filter media: 42 for chlorine, taste and odour, 53 for health related contaminants such as lead and cysts, and 58 for reverse osmosis systems and their membranes. The carbon blocks, sediment cartridges and membranes in Pure Essential and Pure Premium are manufactured in compliance with NSF/ANSI 42, 53 and 58. That is the manufacturer's statement about how the media is built, and we describe it exactly that way. NSF is not an Australian legal requirement and never replaces WaterMark."
           }
         },
         {
@@ -1678,7 +1678,7 @@ body.dopen .drawer{transform:none}
 }
 </script>
 <noscript><style>[data-sc-in],[data-sc-stagger] > *,[data-sc-cue],.hch{opacity:1!important;transform:none!important}</style></noscript>
-<link rel="stylesheet" href="/assets/css/ffy-blocks.css?v=543ba021">
+<link rel="stylesheet" href="/assets/css/ffy-blocks.css?v=21bfce1d">
 </head>
 <body>
 
@@ -1745,8 +1745,8 @@ body.dopen .drawer{transform:none}
 </a>
 <div class="ddcol">
 <span class="ddlab">Owning one</span>
-<a class="ddrow pic" href="watermark-certified-water-filter-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/range-2026-10/watermark-menu-600.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>WaterMark certified</b><span>Every certificate, open to read</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
-<a class="ddrow pic" href="filtered-for-life"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/filtered-for-life/ffl-card-square-600.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Filtered for Life</b><span>Lifetime warranty and member perks</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="watermark-certified-water-filter-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/range-2026-10/watermark-studio-600.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>WaterMark certified</b><span>Every certificate, open to read</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="filtered-for-life"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/filtered-for-life/ffl-card-square-600.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Filtered for Life</b><span>Lifetime warranty plus member perks</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
 <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" data-src="media/nav/cartridge-replacement-studio.webp" decoding="async" height="112" loading="lazy" width="112"/></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
 </div>
 <div class="ddcol">
@@ -1818,8 +1818,8 @@ body.dopen .drawer{transform:none}
 <button class="mback" data-back="" type="button"><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="m10 3.5-5 4.5 5 4.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i><b>Servicing &amp; prices</b></button>
 <div class="ddcol">
 <a class="ddrow pic" href="service-plans"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="600" loading="lazy" src="media/range-2026-10/service-prices-studio-600.webp" width="600"/></span><span><b>Servicing &amp; prices</b><span>Service costs at a glance</span></span></a>
-<a class="ddrow pic" href="watermark-certified-water-filter-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/range-2026-10/watermark-menu-600.webp" width="112"/></span><span><b>WaterMark certified</b><span>Every certificate, open to read</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
-<a class="ddrow pic" href="filtered-for-life"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/filtered-for-life/ffl-card-square-600.webp" width="112"/></span><span><b>Filtered for Life</b><span>Lifetime warranty and member perks</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="watermark-certified-water-filter-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/range-2026-10/watermark-studio-600.webp" width="112"/></span><span><b>WaterMark certified</b><span>Every certificate, open to read</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
+<a class="ddrow pic" href="filtered-for-life"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/filtered-for-life/ffl-card-square-600.webp" width="112"/></span><span><b>Filtered for Life</b><span>Lifetime warranty plus member perks</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
 <a class="ddrow pic" href="water-filter-cartridge-replacement-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/cartridge-replacement-studio.webp" width="112"/></span><span><b>Filter &amp; cartridge replacement</b><span>Cartridges for every system we fit</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
 <a class="ddrow pic" href="water-filters-new-developments-sydney"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/range-2026-10/new-developments-studio-600.webp" width="112"/></span><span><b>New developments</b><span>Filtration built into the build</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
 <a class="ddrow pic" href="resources#areas-we-cover"><span class="ddthumb" data-studio-gold=""><img alt="" decoding="async" height="112" loading="lazy" src="media/nav/areas-covered-studio.webp" width="112"/></span><span><b>Areas we cover</b><span>Across Greater Sydney</span></span><i><svg aria-hidden="true" fill="none" viewbox="0 0 16 16"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg></i></a>
@@ -1831,112 +1831,65 @@ body.dopen .drawer{transform:none}
 <!-- /SHELL:HEADER -->
 
 <main>
-<div class="pgtop">
-<section class="pgcard hero" id="top">
-  <div class="hbg" id="hbg">
-    
-    <picture class="on" style="--pos:50% 40%">
-      <source media="(max-width:859px)" srcset="media/wm/sydney-m.webp">
-      <img class="hph" src="media/wm/sydney.webp" alt="Rows of Sydney terrace houses and jacarandas at first light, with the Harbour Bridge and the city on the horizon" width="2400" height="1340" fetchpriority="high">
-    </picture>
-    <picture style="--pos:70% 55%" data-src="media/wm/hero.webp" data-srcm="media/wm/hero-m.webp"></picture>
-    <picture style="--pos:64% 50%" data-src="media/wm/hero-life.webp" data-srcm="media/wm/hero-life-m.webp"></picture>
-    <picture style="--pos:62% 50%" data-src="media/wm/hero-child.webp" data-srcm="media/wm/hero-child-m.webp"></picture>
-  </div>
-  <div class="veil" aria-hidden="true"></div>
-  <div class="in copy">
-    <span class="kick">WaterMark certified &middot; Sydney</span>
-    <h1 id="heroLine" aria-label="WaterMark certified water filters, installed across Sydney."><span aria-hidden="true"><span class="hw"><span class="hch">W</span><span class="hch">a</span><span class="hch">t</span><span class="hch">e</span><span class="hch">r</span><span class="hch">M</span><span class="hch">a</span><span class="hch">r</span><span class="hch">k</span></span> <span class="hw"><span class="hch">c</span><span class="hch">e</span><span class="hch">r</span><span class="hch">t</span><span class="hch">i</span><span class="hch">f</span><span class="hch">i</span><span class="hch">e</span><span class="hch">d</span></span> <span class="hw"><span class="hch">w</span><span class="hch">a</span><span class="hch">t</span><span class="hch">e</span><span class="hch">r</span></span> <span class="hw"><span class="hch">f</span><span class="hch">i</span><span class="hch">l</span><span class="hch">t</span><span class="hch">e</span><span class="hch">r</span><span class="hch">s</span><span class="hch">,</span></span> <span class="hw"><span class="hch">i</span><span class="hch">n</span><span class="hch">s</span><span class="hch">t</span><span class="hch">a</span><span class="hch">l</span><span class="hch">l</span><span class="hch">e</span><span class="hch">d</span></span> <span class="hw"><span class="hch">a</span><span class="hch">c</span><span class="hch">r</span><span class="hch">o</span><span class="hch">s</span><span class="hch">s</span></span> <span class="hw"><span class="hch">S</span><span class="hch">y</span><span class="hch">d</span><span class="hch">n</span><span class="hch">e</span><span class="hch">y</span><span class="hch">.</span></span></span></h1>
-    <p class="lede">Every reverse osmosis and under sink system we fit is certified to the Australian standard, installed by a licensed plumber, and every certificate is on this page.</p>
-  </div>
-  <div class="ocardwrap"><div class="ocard" id="ocard">
-    <div class="ochead">
-      <span class="oth"><img src="media/cert-watermark.webp" alt="The WaterMark certification mark" width="851" height="583"></span>
-      <span class="ot">
-        <b>WaterMark certificate 23247</b>
-        <span><span class="pure">AS 3497:2021.</span> 131 models, every one active, valid to October 2028.</span>
-      </span>
-    </div>
-    <ul class="ocspec">
-      <li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="9" r="5.2" stroke="currentColor" stroke-width="2"/><path d="m8.4 13.4-1.6 7.2 5.2-2.6 5.2 2.6-1.6-7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span><b>NSW plumbing licence 461511C.</b> Current, on the government register.</span></li>
-      <li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span><b>NSF/ANSI 42, 53 and 58</b> compliant filter media inside.</span></li>
-      <li><i><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M10 13h6M10 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></i><span><b>Independent laboratory report B767408.</b> Published in full below.</span></li>
-    </ul>
-    <div class="ocfoot">
-      <span class="ocproof"><b>5.0</b><span class="ocp"><span class="stars5" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><span><svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg>33 Google reviews</span></span></span>
-      <a class="btn" href="#documents"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>See the certificates</a>
-    </div>
-  </div></div>
-</section>
-</div><div class="fb fb-trust"><div class="in"><ul class="fb-ribbon fb-ribbon--wm" aria-label="Why Sydney homes choose us"><li class="fb-rise" style="--d:0.00s"><span class="fb-seal fb-seal--ffl fb-seal--trust" aria-hidden="true"><img src="/media/home-guide/ffl-medallion-256.webp" alt="" width="256" height="256" decoding="async"></span><p><b>Filtered for Life</b><span>Lifetime warranty for members</span></p></li><li class="fb-rise" style="--d:0.07s"><span class="fb-seal fb-seal--google fb-seal--trust" aria-hidden="true"><svg class="fb-g" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></span><p><b>5.0 on Google</b><span>33 Google reviews</span></p></li><li class="fb-rise" style="--d:0.14s"><span class="fb-seal fb-seal--blue fb-seal--trust" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.1L4 16.8V20h3.2l5.2-5.2a4 4 0 0 0 5.1-5.3l-2.4 2.4-2.8-.4-.4-2.8 2.6-2.2Z"/></svg></span><p><b>Licensed plumber</b><span>NSW Lic. 461511C</span></p></li><li class="fb-rise" style="--d:0.21s"><span class="fb-seal fb-seal--navy fb-seal--trust" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg></span><p><b>Sydney based</b><span>We install and we service</span></p></li><li class="fb-rise fb-ribbon__wm" style="--d:0.28s"><a href="/watermark-certified-water-filter-sydney#documents"><span class="fb-seal fb-seal--wm fb-seal--trust" aria-hidden="true"><img src="/media/cert-watermark.webp" alt="" width="851" height="583" loading="lazy" decoding="async"></span><p><b>WaterMark certified</b><span>Every certificate, open to read</span></p></a></li></ul></div></div>
+<div class="pgtop"><section class="pgcard fb fb-hero" id="top" aria-labelledby="fb-h1" style="--pos:50% 40%;--mpos:50% 50%"><div class="fb-hero__bg"><picture><source media="(max-width:859px)" srcset="/media/wm/sydney-m.webp"><img class="fb-hero__img" src="/media/wm/sydney.webp" alt="Rows of Sydney terrace houses and jacarandas at first light, with the Harbour Bridge and the city on the horizon" width="2400" height="1340" fetchpriority="high" decoding="async"></picture></div><div class="fb-hero__veil" aria-hidden="true"></div><div class="in fb-hero__copy"><span class="fb-hero__kick">WaterMark certified · Sydney</span><h1 class="fb-hero__h1" id="fb-h1">WaterMark certified water filters, <br><em>installed across Sydney.</em></h1><p class="fb-hero__lede">Tested to the Australian standard, listed on the government register, fitted by a licensed plumber. Every certificate opens from this page.</p></div><div class="fb-hero__cardwrap"><div class="fb-hcard" data-fb-hcard><div class="fb-hcard__head"><span class="fb-hcard__pic" data-studio-gold><img src="/media/range-2026-10/watermark-studio-600.webp" alt="" width="400" height="400" decoding="async"></span><span class="fb-hcard__t"><b>Every system we install, on the register.</b><span class="fb-hcard__sub">WaterMark is Australia’s mandatory plumbing certification.</span></span></div><ul class="fb-hcard__spec"><li><i><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3Z" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></i><span><b>Certificate 23247</b> Pure Flow, Essential and Premium.</span></li><li><i><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3Z" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></i><span><b>Certificate 22780</b> Pure Luxe.</span></li><li><i><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3Z" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg></i><span><b>Certificate 080113</b> Pure Home and Pure Home Reserve.</span></li></ul><div class="fb-hcard__foot"><span class="fb-hcard__proof"><b>5.0</b><span class="fb-hcard__p"><span class="fb-stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg><svg viewBox="0 0 24 24" fill="#FBBC04" aria-hidden="true"><path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.7 6.6 19.6l1.2-6-4.5-4.2 6.1-.8Z"/></svg></span><span><svg class="fb-g" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg>Google reviews</span></span></span><a class="btn" href="#documents"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Find my certificate</a></div></div></div></section></div><div class="fb fb-trust"><div class="in"><ul class="fb-seals" aria-label="Why Sydney homes choose us"><li style="--i:0"><a class="fb-seals__a" href="/filtered-for-life" aria-label="Filtered for Life, lifetime warranty. Go to the Filtered for Life plan"><span class="fb-tseal fb-tseal--ffl" aria-hidden="true"><img src="/media/home-guide/ffl-medallion-256.webp" srcset="/media/home-guide/ffl-medallion-256.webp 256w, /media/home-guide/ffl-medallion.webp 640w" sizes="92px" alt="" width="256" height="256" decoding="async"></span><span class="fb-seals__t"><b><span class="fb-seals__w">Filtered for Life</span><span class="fb-seals__n">Lifetime</span></b><small><span class="fb-seals__w">Lifetime warranty</span><span class="fb-seals__n">warranty</span></small></span></a></li><li style="--i:1"><a class="fb-seals__a" href="https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs" target="_blank" rel="noopener" aria-label="5.0 on Google, 33 Google reviews. Read them on Google, opens in a new tab"><span class="fb-tseal fb-tseal--google" aria-hidden="true"><svg class="fb-g" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6Z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.1 0-5.8-2.1-6.8-5l-3.9 3C3.3 21.3 7.3 24 12 24Z"/><path fill="#FBBC05" d="M5.2 14.4A7.3 7.3 0 0 1 4.8 12c0-.8.2-1.6.4-2.4l-3.9-3A12 12 0 0 0 0 12c0 1.9.5 3.8 1.3 5.4l3.9-3Z"/><path fill="#EA4335" d="M12 4.6c2.2 0 3.7 1 4.6 1.8L20 3.2C17.9 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c1-2.9 3.7-5 6.8-5Z"/></svg></span><span class="fb-seals__t"><b><span class="fb-seals__w">5.0 on Google</span><span class="fb-seals__n">5.0</span></b><small><span class="fb-seals__w">33 Google reviews</span><span class="fb-seals__n">Google</span></small></span></a></li><li style="--i:2"><a class="fb-seals__a" href="/licensed-plumber-water-filter-sydney" aria-label="Licensed plumber, NSW licence 461511C. Go to our licensed plumber page"><span class="fb-tseal fb-tseal--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.1L4 16.8V20h3.2l5.2-5.2a4 4 0 0 0 5.1-5.3l-2.4 2.4-2.8-.4-.4-2.8 2.6-2.2Z"/></svg></span><span class="fb-seals__t"><b><span class="fb-seals__w">Licensed plumber</span><span class="fb-seals__n">Licensed</span></b><small><span class="fb-seals__w">NSW Lic. 461511C</span><span class="fb-seals__n">plumber</span></small></span></a></li><li style="--i:3"><a class="fb-seals__a" href="/resources#areas-we-cover" aria-label="Sydney based, we install and service. Go to the areas we cover"><span class="fb-tseal fb-tseal--navy" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/></svg></span><span class="fb-seals__t"><b><span class="fb-seals__w">Sydney based</span><span class="fb-seals__n">Sydney</span></b><small><span class="fb-seals__w">We install and service</span><span class="fb-seals__n">based</span></small></span></a></li><li style="--i:4"><a class="fb-seals__a" href="/watermark-certified-water-filter-sydney" aria-label="WaterMark certified. Go to every certificate"><span class="fb-tseal fb-tseal--wm" aria-hidden="true"><img src="/media/cert-watermark.webp" alt="" width="851" height="583" decoding="async"></span><span class="fb-seals__t"><b><span class="fb-seals__w">WaterMark certified</span><span class="fb-seals__n">WaterMark</span></b><small><span class="fb-seals__w">Read every certificate</span><span class="fb-seals__n">certified</span></small></span></a></li></ul></div></div>
 
-<section class="reg" id="documents" data-sc-act="flow" aria-label="Every certificate, open to read">
+<section class="reg wmf" id="documents" aria-labelledby="wmf-t">
   <div class="zone">
-    <header class="reg__head" data-sc-in data-sc-stagger="90">
-      <span class="kick">Open records</span>
-      <h2 class="d2">Every certificate, open to read.</h2>
-      <p class="lede">We do not ask you to take our word for it. All three WaterMark certificates, the certificate of conformity, the laboratory report, the cartridge specification and the licence. The registers are the government's own, not ours.</p>
-    </header>
-    <ol class="reg__list" data-sc-in data-sc-stagger="70">
-      <li><a class="rrow" href="https://watermark.abcb.gov.au/product-search/certificate/023247" target="_blank" rel="noopener">
-        <span class="rrow__n">01</span>
-        <span class="rrow__main"><b>WaterMark certificate 23247</b><span>Pure Essential and Pure Premium, our reverse osmosis systems. 131 models, every one active.</span></span>
-        <span class="rrow__meta"><span><i>Standard</i><b>AS 3497:2021</b></span><span><i>Issued by</i><b>Pro-Switch Pty Ltd</b></span><span><i>Valid to</i><b>3 Oct 2028</b></span></span>
-        <span class="rrow__go"><i>Government register</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
-      </a></li>
-      <li><a class="rrow" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener">
-        <span class="rrow__n">02</span>
-        <span class="rrow__main"><b>WaterMark certificate 22780</b><span>Pure Luxe, our smart reverse osmosis system with its live purity display. 292 models, every one active.</span></span>
-        <span class="rrow__meta"><span><i>Standard</i><b>WMTS-103:2016</b></span><span><i>Issued by</i><b>IAPMO Oceania</b></span><span><i>Valid to</i><b>14 Nov 2028</b></span></span>
-        <span class="rrow__go"><i>Government register</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
-      </a></li>
-      <li><a class="rrow" href="https://watermark.abcb.gov.au/product-search/certificate/080113" target="_blank" rel="noopener">
-        <span class="rrow__n">03</span>
-        <span class="rrow__main"><b>WaterMark certificate 080113</b><span>Pure Home and Pure Home Reserve, our whole house filtration systems. 6 models, every one active.</span></span>
-        <span class="rrow__meta"><span><i>Standard</i><b>AS 3497:2021</b></span><span><i>Issued by</i><b>CMI Certification Pty Ltd</b></span><span><i>Valid to</i><b>3 Oct 2030</b></span></span>
-        <span class="rrow__go"><i>Government register</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
-      </a></li>
+    <div class="wmf__grid">
+      <div class="wmf__head" data-sc-in data-sc-stagger="90">
+        <span class="kick">Find your certificate</span>
+        <h2 class="d2" id="wmf-t">Every drinking water system, on the register.</h2>
+        <p class="lede">Choose your system. Its WaterMark certificate answers, with the open link to the government register.</p>
+        <div class="fb wmf__pick"><div class="fb-ppick" data-fb-picker="wmf-cards" role="group" aria-label="Choose your system" style="--n:6;--pn:4"><button type="button" class="fb-ppick__t" data-fb-pick="flow" aria-pressed="false" aria-controls="wmf-cards"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/flow-card.webp" srcset="/media/systems-hub/range-v2/flow-thumb.webp 160w, /media/systems-hub/range-v2/flow-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Flow</span></button><button type="button" class="fb-ppick__t" data-fb-pick="essential" aria-pressed="false" aria-controls="wmf-cards"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/essential-card.webp" srcset="/media/systems-hub/range-v2/essential-thumb.webp 160w, /media/systems-hub/range-v2/essential-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Essential</span></button><button type="button" class="fb-ppick__t" data-fb-pick="premium" aria-pressed="true" aria-controls="wmf-cards"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/premium-card.webp" srcset="/media/systems-hub/range-v2/premium-thumb.webp 160w, /media/systems-hub/range-v2/premium-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Premium</span></button><button type="button" class="fb-ppick__t" data-fb-pick="luxe" aria-pressed="false" aria-controls="wmf-cards"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/luxe-card.webp" srcset="/media/systems-hub/range-v2/luxe-thumb.webp 160w, /media/systems-hub/range-v2/luxe-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Luxe</span></button><button type="button" class="fb-ppick__t" data-fb-pick="home" aria-pressed="false" aria-controls="wmf-cards"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/home-card.webp" srcset="/media/systems-hub/range-v2/home-thumb.webp 160w, /media/systems-hub/range-v2/home-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n">Pure Home</span></button><button type="button" class="fb-ppick__t" data-fb-pick="reserve" aria-pressed="false" aria-controls="wmf-cards"><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/reserve-card.webp" srcset="/media/systems-hub/range-v2/reserve-thumb.webp 160w, /media/systems-hub/range-v2/reserve-card.webp 400w" sizes="(max-width:699px) 23vw, 150px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span><span class="fb-sr">Home </span>Reserve</span></button></div></div>
+      </div>
+      <div class="wmf__cards" id="wmf-cards" data-fb-panels><article class="wmc" data-fb-panel="flow" aria-label="Pure Flow, WaterMark certificate 23247"><div class="wmc__top"><span class="wmc__mark"><img src="/media/cert-watermark.webp" alt="" width="851" height="583" loading="lazy" decoding="async"></span><span class="wmc__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Active</b></span></div><p class="wmc__lab">WaterMark certificate</p><p class="wmc__no">23247</p><p class="wmc__sys"><a href="/pure-flow-water-filter-sydney">Pure Flow</a>, Three in One Inline Filtration</p><dl class="wmc__facts"><div><dt>Status</dt><dd><i class="wmc__live" aria-hidden="true"></i>Active</dd></div><div><dt>Standard</dt><dd>AS 3497:2021</dd></div><div><dt>Expires</dt><dd><time datetime="2028-10-03">3 Oct 2028</time></dd></div><div><dt>Certified by</dt><dd>Pro-Switch Pty Ltd</dd></div></dl><div class="wmc__go"><a class="btn" href="https://watermark.abcb.gov.au/product-search?model_id=H1-CBG-14EP-SS" target="_blank" rel="noopener"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>On the government register</a><span class="wmc__docs"><a class="wmc__doc" href="/assets/compliance/watermark-certificate-of-conformity-23247.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M10 13h6M10 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Full certificate (PDF)</a><a class="wmc__doc" href="https://www.filtersystemsaustralia.com.au/amfile/file/download/file/529/product/2069/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M10 13h6M10 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Maker’s guide (PDF)</a></span></div></article><article class="wmc" data-fb-panel="essential" aria-label="Pure Essential, WaterMark certificate 23247"><div class="wmc__top"><span class="wmc__mark"><img src="/media/cert-watermark.webp" alt="" width="851" height="583" loading="lazy" decoding="async"></span><span class="wmc__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Active</b></span></div><p class="wmc__lab">WaterMark certificate</p><p class="wmc__no">23247</p><p class="wmc__sys"><a href="/pure-essential-water-filter-sydney">Pure Essential</a>, 4 Stage Neutralising Reverse Osmosis</p><dl class="wmc__facts"><div><dt>Status</dt><dd><i class="wmc__live" aria-hidden="true"></i>Active</dd></div><div><dt>Standard</dt><dd>AS 3497:2021</dd></div><div><dt>Expires</dt><dd><time datetime="2028-10-03">3 Oct 2028</time></dd></div><div><dt>Certified by</dt><dd>Pro-Switch Pty Ltd</dd></div></dl><div class="wmc__go"><a class="btn" href="https://watermark.abcb.gov.au/product-search?model_id=GT1-26" target="_blank" rel="noopener"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>On the government register</a><span class="wmc__docs"><a class="wmc__doc" href="/assets/compliance/watermark-certificate-of-conformity-23247.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M10 13h6M10 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Full certificate (PDF)</a><a class="wmc__doc" href="https://www.filtersystemsaustralia.com.au/amfile/file/download/file/626/product/1532/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M10 13h6M10 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Maker’s guide (PDF)</a></span></div></article><article class="wmc is-on" data-fb-panel="premium" aria-label="Pure Premium, WaterMark certificate 23247"><div class="wmc__top"><span class="wmc__mark"><img src="/media/cert-watermark.webp" alt="" width="851" height="583" loading="lazy" decoding="async"></span><span class="wmc__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Active</b></span></div><p class="wmc__lab">WaterMark certificate</p><p class="wmc__no">23247</p><p class="wmc__sys"><a href="/pure-premium-water-filter-sydney">Pure Premium</a>, 7 Stage Hydrogen Rich Alkaline Reverse Osmosis</p><dl class="wmc__facts"><div><dt>Status</dt><dd><i class="wmc__live" aria-hidden="true"></i>Active</dd></div><div><dt>Standard</dt><dd>AS 3497:2021</dd></div><div><dt>Expires</dt><dd><time datetime="2028-10-03">3 Oct 2028</time></dd></div><div><dt>Certified by</dt><dd>Pro-Switch Pty Ltd</dd></div></dl><div class="wmc__go"><a class="btn" href="https://watermark.abcb.gov.au/product-search?model_id=GT1-26" target="_blank" rel="noopener"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>On the government register</a><span class="wmc__docs"><a class="wmc__doc" href="/assets/compliance/watermark-certificate-of-conformity-23247.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M10 13h6M10 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Full certificate (PDF)</a><a class="wmc__doc" href="https://www.filtersystemsaustralia.com.au/amfile/file/download/file/551/product/457/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M10 13h6M10 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Maker’s guide (PDF)</a></span></div></article><article class="wmc" data-fb-panel="luxe" aria-label="Pure Luxe, WaterMark certificate 22780"><div class="wmc__top"><span class="wmc__mark"><img src="/media/cert-watermark.webp" alt="" width="851" height="583" loading="lazy" decoding="async"></span><span class="wmc__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Active</b></span></div><p class="wmc__lab">WaterMark certificate</p><p class="wmc__no">22780</p><p class="wmc__sys"><a href="/pure-luxe-water-filter-sydney">Pure Luxe</a>, Smart 5 Stage Alkaline Reverse Osmosis</p><dl class="wmc__facts"><div><dt>Status</dt><dd><i class="wmc__live" aria-hidden="true"></i>Active</dd></div><div><dt>Standard</dt><dd>WMTS-103:2016</dd></div><div><dt>Expires</dt><dd><time datetime="2028-11-14">14 Nov 2028</time></dd></div><div><dt>Certified by</dt><dd>IAPMO Oceania</dd></div></dl><div class="wmc__go"><a class="btn" href="https://watermark.abcb.gov.au/product-search/certificate/022780" target="_blank" rel="noopener"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>On the government register</a></div></article><article class="wmc" data-fb-panel="home" aria-label="Pure Home, WaterMark certificate 080113"><div class="wmc__top"><span class="wmc__mark"><img src="/media/cert-watermark.webp" alt="" width="851" height="583" loading="lazy" decoding="async"></span><span class="wmc__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Active</b></span></div><p class="wmc__lab">WaterMark certificate</p><p class="wmc__no">080113</p><p class="wmc__sys"><a href="/pure-home-water-filter-sydney">Pure Home</a>, 3 Stage Whole House Filtration</p><dl class="wmc__facts"><div><dt>Status</dt><dd><i class="wmc__live" aria-hidden="true"></i>Active</dd></div><div><dt>Standard</dt><dd>AS 3497:2021</dd></div><div><dt>Expires</dt><dd><time datetime="2030-10-03">3 Oct 2030</time></dd></div><div><dt>Certified by</dt><dd>CMI Certification Pty Ltd</dd></div></dl><div class="wmc__go"><a class="btn" href="https://watermark.abcb.gov.au/product-search/certificate/080113" target="_blank" rel="noopener"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>On the government register</a></div></article><article class="wmc" data-fb-panel="reserve" aria-label="Pure Home Reserve, WaterMark certificate 080113"><div class="wmc__top"><span class="wmc__mark"><img src="/media/cert-watermark.webp" alt="" width="851" height="583" loading="lazy" decoding="async"></span><span class="wmc__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Active</b></span></div><p class="wmc__lab">WaterMark certificate</p><p class="wmc__no">080113</p><p class="wmc__sys"><a href="/pure-home-reserve-water-filter-sydney">Pure Home Reserve</a>, Deluxe Whole House Filtration System</p><dl class="wmc__facts"><div><dt>Status</dt><dd><i class="wmc__live" aria-hidden="true"></i>Active</dd></div><div><dt>Standard</dt><dd>AS 3497:2021</dd></div><div><dt>Expires</dt><dd><time datetime="2030-10-03">3 Oct 2030</time></dd></div><div><dt>Certified by</dt><dd>CMI Certification Pty Ltd</dd></div></dl><div class="wmc__go"><a class="btn" href="https://watermark.abcb.gov.au/product-search/certificate/080113" target="_blank" rel="noopener"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>On the government register</a></div></article></div>
+    </div>
+    <div class="wmf__docs">
+      <div class="wmf__docs-head" data-sc-in><h2 class="wmf__docs-h">Every certificate, open to read.</h2><p>The paperwork behind the certificates, the laboratory report and the licence.</p></div>
+      <ol class="reg__list" data-sc-in data-sc-stagger="70">
       <li><a class="rrow" href="assets/compliance/watermark-certificate-of-conformity-23247.pdf" target="_blank" rel="noopener">
-        <span class="rrow__n">04</span>
+        <span class="rrow__n">01</span>
         <span class="rrow__main"><b>Certificate of Conformity</b><span>Certificate 23247 in full: every model on the schedule, signed by the certifier.</span></span>
         <span class="rrow__meta"><span><i>Issued</i><b>21 April 2026</b></span><span><i>Issued by</i><b>Pro-Switch Pty Ltd, JAS-ANZ accredited</b></span><span><i>Pages</i><b>15</b></span></span>
         <span class="rrow__go"><i>PDF</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
       </a></li>
       <li><a class="rrow" href="assets/compliance/certificate-of-analysis-ro-membrane.pdf" target="_blank" rel="noopener">
-        <span class="rrow__n">05</span>
+        <span class="rrow__n">02</span>
         <span class="rrow__main"><b>Certificate of Analysis</b><span>Tap water measured beside reverse osmosis water and the alkaline stages, across more than 40 parameters.</span></span>
         <span class="rrow__meta"><span><i>Report</i><b>B767408</b></span><span><i>Issued by</i><b>Independent laboratory</b></span><span><i>Pages</i><b>3</b></span></span>
         <span class="rrow__go"><i>PDF</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
       </a></li>
       <li><a class="rrow" href="assets/compliance/hydrogen-alkaline-cartridge-spec-sheet.pdf" target="_blank" rel="noopener">
-        <span class="rrow__n">06</span>
+        <span class="rrow__n">03</span>
         <span class="rrow__main"><b>Hydrogen alkaline cartridge specification</b><span>pH, ORP and dissolved hydrogen across the life of the cartridge. Supplier data, labelled as such.</span></span>
         <span class="rrow__meta"><span><i>Model</i><b>T33-H2-ALK</b></span><span><i>Listed on</i><b>Certificate 23247</b></span><span><i>Pages</i><b>2</b></span></span>
         <span class="rrow__go"><i>PDF</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
       </a></li>
       <li><a class="rrow" href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener">
-        <span class="rrow__n">07</span>
+        <span class="rrow__n">04</span>
         <span class="rrow__main"><b>NSW plumbing licence 461511C</b><span>Jean-Paul Barbar's licence on the NSW Government register. Enter the number and read the record.</span></span>
         <span class="rrow__meta"><span><i>Status</i><b>Current</b></span><span><i>Held by</i><b>Jean-Paul Barbar</b></span><span><i>Valid to</i><b>26 Mar 2027</b></span></span>
         <span class="rrow__go"><i>Government register</i><b>Open<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span>
       </a></li>
-    </ol>
+      </ol>
+      <p class="wmf__note" data-sc-in>The filter media inside Pure Essential and Pure Premium is manufactured in compliance with NSF/ANSI 42, 53 and 58. NSF is an international standard for the media, never an Australian requirement. WaterMark is the Australian one.</p>
+    </div>
   </div>
 </section>
 
-<section class="mean" id="watermark" data-sc-act="flow" aria-label="What WaterMark means">
-  <div class="zone mean__grid">
-    <div class="mean__mark" data-sc-in>
-      <span class="mean__plate"><img src="media/cert-watermark.webp" alt="The WaterMark certification mark" width="851" height="583" loading="lazy"></span>
-      <p>Australia's mandatory certification for plumbing products, run by the Australian Building Codes Board. It is a plumbing approval, not a health claim.</p>
-    </div>
-    <div class="mean__copy" data-sc-in data-sc-stagger="90">
+<section class="mean wmp" id="watermark" aria-labelledby="wmp-t">
+  <div class="zone wmp__grid">
+    <figure class="wmp__ph" data-sc-in>
+      <img src="media/range-2026-10/watermark-studio-1200.webp" alt="A framed WaterMark certificate beside a glass of water" width="1200" height="1200" loading="lazy" decoding="async">
+    </figure>
+    <div class="wmp__copy">
       <span class="kick">What WaterMark means</span>
-      <h2 class="d2">One mark. Three things it proves.</h2>
-      <ol class="mean__list">
-        <li><span class="mean__n">01</span><div><h3>Tested to the Australian standard.</h3><p>AS 3497:2021, drinking water treatment systems, design and performance. Tested by a JAS-ANZ accredited body, not by the people who sell it.</p></div></li>
-        <li><span class="mean__n">02</span><div><h3>Listed on the government register.</h3><p>A certificate number, every model it covers and an expiry date, on the public WaterMark register. All three certificates behind our systems open from the list above.</p></div></li>
-        <li><span class="mean__n">03</span><div><h3>Installed by a licensed plumber.</h3><p>Anything connected to drinking water in NSW has to be. A certified product fitted by an unlicensed person is not a compliant installation, so the two always go together.</p></div></li>
+      <h2 class="d2" id="wmp-t">One mark. Three things it proves.</h2>
+      <p class="wmp__lede">Australia's mandatory certification for plumbing products, run by the Australian Building Codes Board. A plumbing approval, not a health claim.</p>
+      <ol class="wmp__path" data-wmp>
+        <li style="--i:0"><span class="wmp__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 3h6M10 3v6L4.8 18.2A1.9 1.9 0 0 0 6.4 21h11.2a1.9 1.9 0 0 0 1.6-2.8L14 9V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.4 15h9.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><b class="wmp__tick"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span><div><h3>Tested to the Australian standard.</h3><p>AS 3497:2021 or the WaterMark technical specification, by an accredited body. Never by the people who sell it.</p></div></li>
+        <li style="--i:1"><span class="wmp__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="m8 9 1.6 1.6L12.5 7.6M8 15.5l1.6 1.6 2.9-3M14.5 9.5H17M14.5 16H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><b class="wmp__tick"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span><div><h3>Listed on the government register.</h3><p>A certificate number, every model it covers and an expiry date, public for anyone to check. Yours is in the finder above.</p></div></li>
+        <li style="--i:2"><span class="wmp__seal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0 5 5L21 12.6a6 6 0 0 1-7.6 1.5l-6.6 6.6a2.1 2.1 0 0 1-3-3l6.6-6.6A6 6 0 0 1 11.9 3.5l1.3 1.3a4 4 0 0 0 1.5 1.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><b class="wmp__tick"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></b></span><div><h3>Installed by a licensed plumber.</h3><p>Anything connected to drinking water in NSW has to be, so the two always go together.</p></div></li>
       </ol>
       <p class="mean__go"><a class="btn" href="free-assessment"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book a free inspection</a></p>
     </div>
@@ -1962,29 +1915,6 @@ body.dopen .drawer{transform:none}
       <p class="lic__go"><a class="btn" href="free-assessment"><i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Book a free inspection</a><a class="ul" href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener">Check the licence on Verify NSW</a></p>
       <p class="fine">The licence number is on every page of this site, every quote and every invoice. That is the law in NSW, and it is how you know who is at your door.</p>
     </div>
-  </div>
-</section>
-
-<section class="sys" id="systems" data-sc-act="flow" aria-label="What we install">
-  <div class="zone">
-    <header class="sys__head" data-sc-in data-sc-stagger="90">
-      <span class="kick">What we install</span>
-      <h2 class="d2">Every drinking water system, on the register.</h2>
-      <p class="lede">Filters For You installs reverse osmosis, under sink and whole house water filtration systems across Sydney. Every one is on the WaterMark register.</p>
-    </header>
-    <div class="sys__grid">
-      <figure class="sys__shelf" data-sc-in aria-label="The systems">
-        <img src="media/systems/pure-premium.webp" alt="The Pure Premium seven stage hydrogen rich alkaline reverse osmosis system" width="602" height="900" loading="lazy">
-        <img src="media/systems/pure-essential.webp" alt="The Pure Essential four stage neutralising reverse osmosis system" width="579" height="900" loading="lazy">
-      </figure>
-      <div class="sys__table" role="table" aria-label="Systems and their certificates" data-sc-in data-sc-stagger="70">
-        <div class="srow head" role="row"><span role="columnheader">System</span><span role="columnheader">Certificate</span><span role="columnheader">Standard</span><span role="columnheader">Valid to</span></div>
-        <a class="srow" role="row" href="reverse-osmosis-water-filter-sydney"><span role="cell"><b>Pure Essential and Pure Premium</b><span>Reverse osmosis under the sink, on their own tap.</span></span><span role="cell">23247</span><span role="cell">AS 3497:2021</span><span role="cell">3 Oct 2028</span></a>
-        <a class="srow" role="row" href="pure-luxe-water-filter-sydney"><span role="cell"><b>Pure Luxe</b><span>Smart reverse osmosis with a live purity display.</span></span><span role="cell">22780</span><span role="cell">WMTS-103:2016</span><span role="cell">14 Nov 2028</span></a>
-        <a class="srow" role="row" href="https://watermark.abcb.gov.au/product-search/certificate/080113" target="_blank" rel="noopener"><span role="cell"><b>Pure Home and Pure Home Reserve</b><span>Whole house filtration for every tap and shower.</span></span><span role="cell">080113</span><span role="cell">AS 3497:2021</span><span role="cell">3 Oct 2030</span></a>
-      </div>
-    </div>
-    <p class="sys__line" data-sc-in>The filter media inside our reverse osmosis and under sink systems is manufactured in compliance with NSF/ANSI 42, 53 and 58. NSF is an international standard for the media, never an Australian requirement. WaterMark is the Australian one.</p>
   </div>
 </section>
 
@@ -2038,11 +1968,6 @@ body.dopen .drawer{transform:none}
       <p class="lede">Tell us the suburb and what you're thinking about. A person comes back the same day, in writing, and nothing changes on the day.</p>
       <div class="fb fb-ask" id="ask-form" data-fb-ask data-form="inline" data-label="watermark_inline" data-final="Get my fixed price" data-subject="{system|Installation} request, {suburb}" data-message="{system|Not sure yet} installation request. [Suburb: {suburb}. ][Timing: {when}. ][Add on: {add_on}. ]From the WaterMark page."><div class="fb-ask__bar" aria-hidden="true"><i class=is-on></i><i></i><i></i><i></i></div><div class="fb-ask__chosen" data-fb-ask-chosen hidden><span class="fb-ask__ci"><img src="/media/systems-hub/range-v2/premium-thumb.webp" alt="" width="160" height="160" decoding="async"></span><span class="fb-ask__ct"><small>Your system</small><b data-fb-ask-name></b><span data-fb-ask-price></span></span><button class="fb-ask__change" type="button" data-fb-ask-change>Change<span class="fb-sr"> your system</span></button></div><form class="fb-ask__form" action="https://formspree.io/f/mbdqdlve" method="POST"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden"><fieldset class="fb-ask__step" data-fb-step="where" aria-labelledby="ask-q0"><p class="fb-ask__q" id="ask-q0" tabindex="-1"><span class="fb-sr">Step 1 of 4. </span>Where’s home?</p><p class="fb-ask__hint">Suburb or postcode.</p><div class="fb-ask__body"><input class="fb-ask__in" type="text" name="suburb" autocomplete="postal-code" placeholder="Suburb or postcode" aria-label="Your suburb or postcode" required></div></fieldset><fieldset class="fb-ask__step" data-fb-step="system" aria-labelledby="ask-q1"><p class="fb-ask__q" id="ask-q1" tabindex="-1"><span class="fb-sr">Step 2 of 4. </span>Which system?</p><p class="fb-ask__hint">Tap one, then Next. A guess is fine, we confirm it with you.</p><div class="fb-ask__body"><div class="fb-ask__tiles" role="radiogroup" aria-labelledby="ask-q1"><label class="fb-ppick__t fb-ask__t"><input class="fb-ask__r" type="radio" name="system" value="Pure Home" data-fb-field="system" data-k="home" data-name="Pure Home" data-alias="home|Pure Home|Whole House" data-price="From $2,950 installed" data-diy="$390" data-service="$550" data-life="$700" data-img="/media/systems-hub/range-v2/home-thumb.webp" required><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/home-card.webp" srcset="/media/systems-hub/range-v2/home-thumb.webp 160w, /media/systems-hub/range-v2/home-card.webp 400w" sizes="(max-width:699px) 23vw, 130px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n">Pure Home</span></label><label class="fb-ppick__t fb-ask__t"><input class="fb-ask__r" type="radio" name="system" value="Pure Essential" data-fb-field="system" data-k="essential" data-name="Pure Essential" data-alias="essential|Pure Essential|Essential" data-price="$1,090 installed" data-diy="$150" data-service="$310" data-life="$550" data-img="/media/systems-hub/range-v2/essential-thumb.webp" required><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/essential-card.webp" srcset="/media/systems-hub/range-v2/essential-thumb.webp 160w, /media/systems-hub/range-v2/essential-card.webp 400w" sizes="(max-width:699px) 23vw, 130px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Essential</span></label><label class="fb-ppick__t fb-ask__t"><input class="fb-ask__r" type="radio" name="system" value="Pure Premium" data-fb-field="system" data-k="premium" data-name="Pure Premium" data-alias="premium|Pure Premium|Premium" data-price="$1,490 installed" data-diy="$250" data-service="$390" data-life="$650" data-img="/media/systems-hub/range-v2/premium-thumb.webp" required><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/premium-card.webp" srcset="/media/systems-hub/range-v2/premium-thumb.webp 160w, /media/systems-hub/range-v2/premium-card.webp 400w" sizes="(max-width:699px) 23vw, 130px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Premium</span></label><label class="fb-ppick__t fb-ask__t"><input class="fb-ask__r" type="radio" name="system" value="Pure Luxe" data-fb-field="system" data-k="luxe" data-name="Pure Luxe" data-alias="luxe|Pure Luxe|Luxe" data-price="$1,990 installed" data-diy="$270" data-service="$420" data-life="$650" data-img="/media/systems-hub/range-v2/luxe-thumb.webp" required><span class="fb-ppick__img" style="--ar:400/400"><img src="/media/systems-hub/range-v2/luxe-card.webp" srcset="/media/systems-hub/range-v2/luxe-thumb.webp 160w, /media/systems-hub/range-v2/luxe-card.webp 400w" sizes="(max-width:699px) 23vw, 130px" width="400" height="400" alt="" loading="lazy" decoding="async"></span><span class="fb-ppick__n"><span class="fb-sr">Pure </span>Luxe</span></label></div><div class="fb-ask__xs"><label class="fb-ask__x"><input class="fb-ask__r" type="radio" name="system" value="Not sure yet" data-fb-field="system" data-k="unsure" data-name="Not sure yet" data-alias="unsure|not sure|not sure yet|help me choose|not sure yet, help me choose" data-price="We help you choose" required><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.25" stroke="currentColor" stroke-width="1.8"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.85.85c0 1.7-2.45 2.2-2.45 3.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="16.9" r="1.1" fill="currentColor"/></svg></i><span><b>Not sure yet</b><small>We help you choose</small></span></label><label class="fb-ask__x"><input class="fb-ask__r" type="radio" name="system" value="Another brand" data-fb-field="system" data-k="other" data-name="Another brand" data-alias="other|another brand|other brand" data-price="We quote it first" required><i aria-hidden="true"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M4.5 3.5h15a1 1 0 0 1 1 1v2.5a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><path d="M1 5.75h2.5M20.5 5.75H23" stroke="currentColor" stroke-linecap="round" stroke-width="2"/><path d="M7 8v8.5a5 4.5 0 0 0 10 0V8" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><path d="M12 11.6s-2.3 2.5-2.3 4.1a2.3 2.3 0 0 0 4.6 0c0-1.6-2.3-4.1-2.3-4.1z" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/></svg></i><span><b>Another brand</b><small>We quote it first</small></span></label></div></div></fieldset><fieldset class="fb-ask__step" data-fb-step="when" aria-labelledby="ask-q2"><p class="fb-ask__q" id="ask-q2" tabindex="-1"><span class="fb-sr">Step 3 of 4. </span>When would you like it installed?</p><p class="fb-ask__hint">We call to lock in the date.</p><div class="fb-ask__body"><div class="fb-ask__opts fb-ask__opts--3"><label class="fb-ask__o"><input class="fb-ask__r" type="radio" name="installation_preference" value="As soon as possible" data-fb-field="installation_preference"><span>As soon as possible</span></label><label class="fb-ask__o"><input class="fb-ask__r" type="radio" name="installation_preference" value="Within a month" data-fb-field="installation_preference"><span>Within a month</span></label><label class="fb-ask__o"><input class="fb-ask__r" type="radio" name="installation_preference" value="Planning ahead" data-fb-field="installation_preference"><span>Planning ahead</span></label></div></div></fieldset><fieldset class="fb-ask__step" data-fb-step="contact" aria-labelledby="ask-q3"><p class="fb-ask__q" id="ask-q3" tabindex="-1"><span class="fb-sr">Step 4 of 4. </span>Where do we send the price?</p><p class="fb-ask__hint">A person replies, usually the same day.</p><div class="fb-ask__body"><div class="fb-ask__fields"><input class="fb-ask__in" type="text" name="name" autocomplete="name" placeholder="Your name" aria-label="Your name" required><input class="fb-ask__in" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="Your mobile" aria-label="Your mobile number" required><input class="fb-ask__in" type="email" name="email" autocomplete="email" placeholder="Your email address" aria-label="Your email address" required></div></div></fieldset><p class="fb-ask__err" role="alert" hidden></p><div class="fb-ask__nav"><button class="fb-ask__back" type="button" data-fb-ask-back hidden>Back</button><button class="btn fb-ask__next" type="submit" data-fb-ask-next><i aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span data-fb-ask-label>Get my fixed price</span></button></div><input type="hidden" name="source_page" value="watermark-certified-water-filter-sydney"><input type="hidden" name="_subject" value="Quote request from the WaterMark page"><input type="hidden" name="message" value=""><p class="fb-ask__fine">By sending this you agree to our <a href="/terms-and-conditions">terms</a> and <a href="/privacy-policy">privacy policy</a>.</p></form><div class="fb-ask__done" data-fb-ask-done tabindex="-1"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10.5" stroke="#0B61F4" stroke-width="1.6"/><path d="m7.5 12.5 3 3 6-6.5" stroke="#0B61F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Done. We’re onto it.</b><p>Your details are with us. A person will come back to you with a fixed price in writing. Message before 4pm on a weekday and it’s the same day.</p></div></div>
       <p class="ask__call">Rather talk it through? <a class="ul" href="tel:0430546749">Call 0430 546 749</a>, or <a class="ul" href="free-assessment">book a free inspection</a>.</p>
-      <div class="ask__certs" data-sc-in>
-        <a href="#documents" aria-label="WaterMark certificates 23247, 22780 and 080113, published on this page"><img src="media/cert-watermark.webp" alt="WaterMark certified" width="851" height="583" loading="lazy"></a>
-        <a href="https://verify.licence.nsw.gov.au/home/Trades" target="_blank" rel="noopener" aria-label="Check NSW plumbing licence 461511C on the government register"><img class="nsw" src="media/cert-nsw.webp" alt="NSW Government" width="617" height="590" loading="lazy"></a>
-        <p><b>WaterMark certified systems.</b> Fitted by a licensed plumber.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -2064,15 +1989,15 @@ body.dopen .drawer{transform:none}
               </details>
               <details class="fq">
                 <summary><h3>Are the water filters Filters For You installs WaterMark certified?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>Our reverse osmosis, under sink and whole house systems are. Pure Essential and Pure Premium are on certificate 23247, 131 models, every one active, valid to 3 October 2028. Pure Luxe, our smart reverse osmosis system, is on certificate 22780, 292 models, valid to 14 November 2028. Pure Home and Pure Home Reserve, our whole house filtration systems, are on certificate 080113, every model active, valid to 3 October 2030. All three certificates are published on this page and each links to the government register.</p></div>
+                <div class="fa"><p>Yes. Every reverse osmosis, under sink and whole house system we install is on the government register. Pure Flow, Pure Essential and Pure Premium are on certificate 23247, active, valid to 3 October 2028. Pure Luxe, our smart reverse osmosis system, is on certificate 22780, active, valid to 14 November 2028. Pure Home and Pure Home Reserve, our whole house filtration systems, are on certificate 080113, every model active, valid to 3 October 2030. Choose your system in the finder on this page and its certificate opens on the government register.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>Which certificate covers my system?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>The three certificates are not interchangeable. 23247 is the AS 3497:2021 certificate for Pure Essential and Pure Premium, the standard for drinking water treatment systems, design and performance, installed in accordance with the Plumbing Code of Australia. It was issued by Pro-Switch Pty Ltd, a JAS-ANZ accredited conformity assessment body, first in December 2016. Its schedule lists the sediment and carbon block cartridges, the granular carbon, the 50 GPD reverse osmosis membrane, the alkaline and hydrogen rich alkaline cartridges, and the housings and manifolds they sit in. 22780 is the certificate for Pure Luxe, our smart reverse osmosis system with its live purity display, issued by IAPMO Oceania under WMTS-103:2016, the WaterMark technical specification for water treatment systems, first certified in November 2018. 080113 is the AS 3497:2021 certificate for Pure Home and Pure Home Reserve, our whole house systems, issued by CMI Certification Pty Ltd, first in October 2025. Ask, and we point you at the exact line on the register for the system in your kitchen.</p></div>
+                <div class="fa"><p>The three certificates are not interchangeable. 23247 is the AS 3497:2021 certificate for Pure Flow, Pure Essential and Pure Premium, the standard for drinking water treatment systems, design and performance, installed in accordance with the Plumbing Code of Australia. It was issued by Pro-Switch Pty Ltd, a JAS-ANZ accredited conformity assessment body, first in December 2016. Its schedule lists the sediment and carbon block cartridges, the granular carbon, the 50 GPD reverse osmosis membrane, the alkaline and hydrogen rich alkaline cartridges, the housings and manifolds they sit in, and the quick change inline filter in Pure Flow. 22780 is the certificate for Pure Luxe, our smart reverse osmosis system with its live purity display, issued by IAPMO Oceania under WMTS-103:2016, the WaterMark technical specification for water treatment systems, first certified in November 2018. 080113 is the AS 3497:2021 certificate for Pure Home and Pure Home Reserve, our whole house systems, issued by CMI Certification Pty Ltd, first in October 2025. Ask, and we point you at the exact line on the register for the system in your kitchen.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>Is NSF certification the same as WaterMark?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-                <div class="fa"><p>No, they answer different questions, and a good system answers both. WaterMark is the Australian plumbing approval: the product is safe to connect to drinking water and may legally be installed. NSF/ANSI standards are international performance standards for filter media: 42 for chlorine, taste and odour, 53 for health related contaminants such as lead and cysts, and 58 for reverse osmosis systems and their membranes. The carbon blocks, sediment cartridges and membranes in the reverse osmosis and under sink systems Filters For You installs are manufactured in compliance with NSF/ANSI 42, 53 and 58. That is the manufacturer's statement about how the media is built, and we describe it exactly that way. NSF is not an Australian legal requirement and never replaces WaterMark.</p></div>
+                <div class="fa"><p>No, they answer different questions, and a good system answers both. WaterMark is the Australian plumbing approval: the product is safe to connect to drinking water and may legally be installed. NSF/ANSI standards are international performance standards for filter media: 42 for chlorine, taste and odour, 53 for health related contaminants such as lead and cysts, and 58 for reverse osmosis systems and their membranes. The carbon blocks, sediment cartridges and membranes in Pure Essential and Pure Premium are manufactured in compliance with NSF/ANSI 42, 53 and 58. That is the manufacturer's statement about how the media is built, and we describe it exactly that way. NSF is not an Australian legal requirement and never replaces WaterMark.</p></div>
               </details>
               <details class="fq">
                 <summary><h3>Does WaterMark certification guarantee the water quality?</h3><svg class="chev" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6 8 10.5 12.5 6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
@@ -2113,7 +2038,6 @@ body.dopen .drawer{transform:none}
     <li><a href="#documents"><i></i><span>The certificates</span></a></li>
     <li><a href="#watermark"><i></i><span>What WaterMark means</span></a></li>
     <li><a href="#licence"><i></i><span>The licence</span></a></li>
-    <li><a href="#systems"><i></i><span>What we install</span></a></li>
     <li><a href="#analysis"><i></i><span>The lab report</span></a></li>
     <li><a href="#sydney"><i></i><span>Across Sydney</span></a></li>
     <li><a href="#reviews"><i></i><span>Reviews</span></a></li>
@@ -2708,7 +2632,7 @@ body.dopen .drawer{transform:none}
 <!-- /SHELL:FOOTER -->
 
 <div class="dveil" id="dveil"></div>
-<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Book an installation">
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Book an installation" data-lenis-prevent>
   <div class="dhead"><b>Book an installation</b>
     <button class="x" id="dclose" aria-label="Close" type="button"><svg viewBox="0 0 16 16" fill="none"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
   </div>
@@ -2990,6 +2914,7 @@ body.dopen .drawer{transform:none}
 <script>
  
 (function(){
+  document.documentElement.classList.add('wm-js');
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var mph = matchMedia('(max-width:859px)').matches;
   var clamp = function(v,a,b){ return v<a?a:(v>b?b:v); };
@@ -3014,6 +2939,7 @@ body.dopen .drawer{transform:none}
     lenis = new Lenis({duration:1.35, smoothWheel:true, syncTouch:false, wheelMultiplier:1.0,
       easing:function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }});
     document.documentElement.classList.add('lenis');
+    window.lenis = lenis;
   }
 
    
@@ -3067,6 +2993,16 @@ body.dopen .drawer{transform:none}
 
    
   var sc = (window.ScrollCraft && ScrollCraft.mount) ? ScrollCraft.mount(document.body) : null;
+   
+  if (sc && sc.layout && 'ResizeObserver' in window){
+    var lastH = 0, rq = 0;
+    new ResizeObserver(function(){
+      var h = document.documentElement.scrollHeight;
+      if (Math.abs(h - lastH) < 2) return;
+      lastH = h; cancelAnimationFrame(rq);
+      rq = requestAnimationFrame(function(){ sc.layout(); if (window.ScrollTrigger) ScrollTrigger.refresh(); });
+    }).observe(document.querySelector('main') || document.body);
+  }
 
    
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -3124,43 +3060,30 @@ body.dopen .drawer{transform:none}
       gsap.ticker.add(function(t){ lenis.raf(t*1000); });
       gsap.ticker.lagSmoothing(0);
     }
-    if (!reduce){
-      gsap.to('#heroLine .hch', {opacity:1, y:0, scale:1, duration:.55, ease:'power3.out', stagger:.016, delay:.8});
-      if (!mph) gsap.fromTo('.hero .hbg', {scale:1}, {scale:1.06, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
-    } else {
-      gsap.set('#heroLine .hch', {opacity:1, y:0, scale:1});
-    }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ ScrollTrigger.refresh(); });
     addEventListener('load', function(){ ScrollTrigger.refresh(); });
-  } else {
-    document.querySelectorAll('.hch').forEach(function(e){ e.style.opacity = 1; e.style.transform = 'none'; });
   }
 
    
-  (function slides(){
-    var wrap = document.getElementById('hbg'); if (!wrap) return;
-    var pics = [].slice.call(wrap.querySelectorAll('picture'));
-    if (pics.length < 2 || reduce) return;
-    var i = 0, ready = [true], loading = {};
-    function load(n, cb){
-      var pic = pics[n]; if (!pic) return;
-      if (ready[n]){ if (cb) cb(); return; }
-      if (loading[n]) return;
-      loading[n] = true;
-      var src = (mph && pic.getAttribute('data-srcm')) || pic.getAttribute('data-src');
-      var im = new Image(); im.decoding = 'async'; im.className = 'hph'; im.alt = ''; im.width = mph ? 1000 : 2400; im.height = mph ? 1250 : 1340;
-      im.onload = function(){ pic.appendChild(im); ready[n] = true; if (cb) cb(); };
-      im.src = src;
+  (function scenes(){
+    function arm(el, cls, at){
+      if (!el) return;
+      if (reduce){ el.classList.add(cls, 'is-instant'); return; }
+      var done = false;
+      function go(){
+        if (done) return;
+        var r = el.getBoundingClientRect();
+        if (r.top > innerHeight * at) return;
+        done = true;
+        if (r.bottom < 0) el.classList.add('is-instant');
+        el.classList.add(cls);
+        removeEventListener('scroll', go); removeEventListener('resize', go);
+      }
+      addEventListener('scroll', go, {passive:true}); addEventListener('resize', go);
+      go();
     }
-    function show(n){ pics.forEach(function(pic, k){ pic.classList.toggle('on', k === n); }); i = n; }
-    function tick(){
-      if (document.hidden || document.body.classList.contains('dopen') || scrollY > innerHeight * .8) return;
-      var n = (i + 1) % pics.length;
-      if (!ready[n]){ load(n); return; }
-      show(n); load((n + 1) % pics.length);
-    }
-     
-    addEventListener('load', function(){ setTimeout(function(){ load(1); }, 4000); setTimeout(function(){ tick(); setInterval(tick, 8000); }, 12000); });
+    arm(document.getElementById('documents'), 'is-seen', .86);
+    arm(document.querySelector('[data-wmp]'), 'is-play', .78);
   })();
 
    
@@ -3298,7 +3221,7 @@ body.dopen .drawer{transform:none}
    
   (function pill(){
     var sbar = document.getElementById('sbar');
-    var hero = document.querySelector('.hero');
+    var hero = document.getElementById('top');
     var askS = document.getElementById('ask');
     if (!sbar || !hero) return;
     sbar.hidden = false;
@@ -3364,6 +3287,6 @@ body.dopen .drawer{transform:none}
 </script>
 <!-- FFY ATTRIBUTION -->
 <script src="assets/js/ffy-attribution.js?v=2"></script>
-<script defer src="/assets/js/ffy-blocks.js?v=7f17ab71"></script>
+<script defer src="/assets/js/ffy-blocks.js?v=96fcb517"></script>
 </body>
 </html>
