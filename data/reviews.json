@@ -1,9 +1,15 @@
 {
   "source": "Google Business Profile",
   "profile_url": "https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs",
-  "count": 33,
+  "count": 34,
   "rating": 5.0,
   "newest": [
+    {
+      "name": "Dylan C.",
+      "stars": 5,
+      "date": "2026-10-26",
+      "text": "Great service and quick and easy install. My Water tastes great now!!"
+    },
     {
       "name": "Justin M.",
       "stars": 5,
@@ -69,12 +75,6 @@
       "stars": 5,
       "date": "2026-07-14",
       "text": "From start to finish the interaction, communication and experience was positive, fast and comprehensive. Jean-Paul was fantastic to deal with every step of the way and the service and products I had installed work exactly as described. It’s a genuine 5 stars from me."
-    },
-    {
-      "name": "Jye O.",
-      "stars": 5,
-      "date": "2026-07-13",
-      "text": "Had Jean install a 7 Stage Reverse Osmisis system and a new faucet. Great to deal with, quality work. Highly recommend."
     }
   ]
 }
