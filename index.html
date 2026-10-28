@@ -2938,6 +2938,30 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   @media(prefers-reduced-motion:reduce){.hdeck.isbf .hd-choice-bubble{animation:none}}
 
   .hdeck .bf-wty{display:none}
+
+  .qform:not(.bf-claim) .bf-sum{display:none}
+  .qform.bf-claim .steps,.qform.bf-claim [data-back]{display:none!important}
+  .drawer.bf-claim .dhead b{font-family:'BFX',Impact,sans-serif;font-weight:400;font-size:19px;letter-spacing:.01em;text-transform:uppercase}
+  .bf-sum{display:grid;grid-template-columns:76px 1fr;align-items:center;gap:12px;margin:0 0 18px;padding:12px 14px;border-radius:14px;background:#ffd900;color:#0b0b0c}
+  .bf-sum img{width:76px;height:auto;border-radius:10px;background:#fff;padding:4px}
+  .bf-sum b{display:block;font-family:'BFX',Impact,sans-serif;font-weight:400;font-size:15px;line-height:1.15;text-transform:uppercase}
+  .bf-sum span{display:block;margin-top:4px;font:700 14px/1.3 var(--sans)}
+  .bf-sum em{display:inline-block;margin-top:6px;padding:3px 7px;border-radius:6px;background:#e4002b;color:#fff;font:800 11.5px/1.3 var(--sans);font-style:normal}
+  .qform.bf-claim .nav2{margin-top:16px}
+  @media(max-width:859px){
+    .drawer.bf-claim .dbody{padding:18px 18px 24px}
+    .drawer.bf-claim .dbody .qform{border:0;padding:0;background:none}
+    .drawer.bf-claim .dhead{padding:14px 18px}
+  }
+  @media(max-width:374px){
+    .bf-sum{grid-template-columns:1fr;padding:12px}
+    .bf-sum img{display:none}
+    .bf-sum b{font-size:14px}
+    .drawer.bf-claim .dhead b{font-size:16px}
+    .drawer.bf-claim .dfoot span{display:none}
+    .drawer.bf-claim .dfoot{justify-content:center}
+  }
+  .qform.bf-claim [data-next]{width:100%;justify-content:center;min-height:58px;font-family:'BFX',Impact,sans-serif;font-weight:400;font-size:18px;letter-spacing:.02em;text-transform:uppercase}
   @media(max-width:859px){
     .bfx-4 .bfx-ph4{height:104vw}
     .bfx-4 .bfx-ph4 img{object-position:50% 56%}
@@ -3332,6 +3356,51 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
 <script>
 (function(){
   var END = Date.parse('2026-12-01T00:00:00+11:00'), BONUS = Date.parse('2026-11-10T00:00:00+11:00');
+  window.bfClaim = function(qf, sys){
+    var drawer = document.getElementById('drawer');
+    if (!qf || !drawer || !drawer.contains(qf) || !qf._show) return;
+    var on = Date.now() < END && sys === 'Pure Home Reserve';
+    var form = qf.querySelector('form');
+    var nm = form.querySelector('input[name="name"]'), tel = form.querySelector('input[name="phone"]');
+    var sub = form.querySelector('input[name="suburb"]'), mail = form.querySelector('input[name="email"]');
+    var p2 = qf.querySelector('[data-step="2"]');
+    var t = drawer.querySelector('.dhead b'), q2 = p2.querySelector('.qt'), h2 = p2.querySelector('.hint');
+    var done = qf.querySelector('.done'), db = done.querySelector('b'), dp = done.querySelector('p');
+    if (!nm || !tel || !sub || !mail) return;
+    if (!qf._bf) qf._bf = {home: sub.parentNode, t: t.textContent, q2: q2.textContent, h2: h2.textContent, db: db.textContent, dp: dp.innerHTML,
+      mph: mail.placeholder, sph: sub.placeholder, sac: sub.getAttribute('autocomplete') || ''};
+    var o = qf._bf, was = qf.classList.contains('bf-claim'), fin = qf.classList.contains('finished');
+    if (on){
+      var sum = p2.querySelector('.bf-sum');
+      if (!sum){
+        sum = document.createElement('div'); sum.className = 'bf-sum';
+        sum.innerHTML = '<img src="/media/black-friday-2026/ro-cut.webp" alt="" width="900" height="548"><div><b>Pure Home Reserve + free alkaline RO</b><span>$59 a week, or $4,150 upfront</span>'
+          + (Date.now() < BONUS ? '<em>+ Free cartridges, book before 10 Nov</em>' : '') + '</div>';
+        p2.insertBefore(sum, p2.firstChild);
+      }
+      qf.classList.add('bf-claim'); drawer.classList.add('bf-claim');
+      t.textContent = 'Claim your Black Friday deal';
+      q2.textContent = 'Where do we call you?';
+      h2.textContent = 'A person calls you to lock in your install date, usually the same day.';
+      tel.parentNode.insertBefore(sub, tel.nextSibling);
+      sub.setAttribute('autocomplete', 'address-level2'); sub.placeholder = 'Your suburb or postcode';
+      nm.setAttribute('enterkeyhint', 'next'); tel.setAttribute('enterkeyhint', 'next'); sub.setAttribute('enterkeyhint', 'next'); mail.setAttribute('enterkeyhint', 'send');
+      nm.setAttribute('autocapitalize', 'words'); sub.setAttribute('autocapitalize', 'words');
+      mail.setAttribute('data-optional', ''); mail.required = false; mail.placeholder = 'Email (optional)';
+      mail.dispatchEvent(new Event('input'));
+      db.textContent = "You're in. We're onto it.";
+      dp.textContent = "A person will call you to lock in your install date and your free alkaline RO. Message before 4pm on a weekday and it's the same day.";
+      if (!fin) qf._show(2);
+    } else if (was){
+      o.home.appendChild(sub);
+      sub.setAttribute('autocomplete', o.sac); sub.placeholder = o.sph;
+      mail.removeAttribute('data-optional'); mail.required = true; mail.placeholder = o.mph;
+      mail.dispatchEvent(new Event('input'));
+      t.textContent = o.t; q2.textContent = o.q2; h2.textContent = o.h2; db.textContent = o.db; dp.innerHTML = o.dp;
+      qf.classList.remove('bf-claim'); drawer.classList.remove('bf-claim');
+      if (!fin) qf._show(0);
+    }
+  };
   var hero = document.querySelector('.hero');
   if (Date.now() >= END){
     var bx = hero.querySelector('.bfx'); bx.outerHTML = document.getElementById('bfAfter').innerHTML;
@@ -3347,10 +3416,13 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
   document.addEventListener('submit', function(e){
     var f = e.target; if (!f || !f.closest || !f.closest('[data-qform]')) return;
     var on = f.closest('[data-qform]').querySelector('.sysopt.on');
-    var old = f.querySelector('input[name="offer"]'); if (old) old.remove();
-    if (!on || on.getAttribute('data-v') !== 'Pure Home Reserve') return;
-    var i = document.createElement('input'); i.type = 'hidden'; i.name = 'offer';
-    i.value = 'Black Friday: free alkaline RO' + (Date.now() < BONUS ? ' and free cartridge set (booked before 10 Nov)' : '');
+    var old = f.querySelector('input[data-bf-offer]'); if (old) old.remove();
+    if (!on || on.getAttribute('data-v') !== 'Pure Home Reserve' || Date.now() >= END) return;
+    var line = 'Black Friday: free alkaline RO' + (Date.now() < BONUS ? ' and free cartridge set (booked before 10 Nov)' : '');
+    var msg = f.querySelector('[name="message"]');
+    if (msg && msg.value.trim()){ if (msg.value.indexOf('Black Friday:') < 0) msg.value = line + '. ' + msg.value; return; }
+    var i = document.createElement('input'); i.type = 'hidden'; i.name = msg ? 'offer' : 'message'; i.setAttribute('data-bf-offer', '');
+    i.value = line;
     f.appendChild(i);
   }, true);
   var target = bonus ? BONUS : END, cells = {};
@@ -5003,10 +5075,12 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     var tel = form.querySelector('input[type="tel"]');
     if (tel){
       tel.setAttribute('inputmode', 'numeric');
-      tel.setAttribute('maxlength', '10');
       tel.setAttribute('pattern', '\\d{10}');
       var checkTel = function(){
-        var d = (tel.value || '').replace(/\D/g, '').slice(0, 10);
+        var d = (tel.value || '').replace(/\D/g, '');
+        if (d.indexOf('61') === 0 && d.length >= 11) d = '0' + d.slice(2);
+        if (d.length === 9 && d.charAt(0) === '4') d = '0' + d;
+        d = d.slice(0, 10);
         if (tel.value !== d) tel.value = d;
         tel.setCustomValidity(d.length === 10 ? '' : 'Please enter your 10-digit mobile number');
       };
@@ -5019,7 +5093,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       var checkMail = function(){
         var v = (mail.value || '').trim();
         if (v !== mail.value) mail.value = v;
-        mail.setCustomValidity(v === '' ? 'Please enter your email address'
+        mail.setCustomValidity(v === '' ? (mail.hasAttribute('data-optional') ? '' : 'Please enter your email address')
           : (EMAIL_RE.test(v) ? '' : 'Please enter a valid email address (e.g. name@example.com)'));
       };
       mail.addEventListener('input', checkMail);
@@ -5041,7 +5115,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       panes.forEach(function(p, i){ p.hidden = i !== step; });
       dots.forEach(function(d, i){ d.classList.toggle('on', i <= step); });
       back.hidden = step === 0;
-      nextLabel.textContent = step === 2 ? 'Get my fixed price' : 'Next';
+      nextLabel.textContent = step === 2 ? (root.classList.contains('bf-claim') ? 'Claim my deal' : 'Get my fixed price') : 'Next';
       var inp = panes[step].querySelector('input'); if (inp) inp.focus({preventScroll:true});
     }
     root.querySelectorAll('.sysopt').forEach(function(b){
@@ -5098,6 +5172,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
       });
     });
 
+    root._show = show;
     root._setSystem = function(v){
       if (!v) return;
       system = v; preset = true;
@@ -5120,6 +5195,7 @@ src="https://www.facebook.com/tr?id=1519453236218387&ev=PageView&noscript=1"
     if (lenis) lenis.stop();
     var qf = drawer.querySelector('[data-qform]');
     if (qf && qf._setSystem && sys) qf._setSystem(sys);
+    if (window.bfClaim) window.bfClaim(qf, sys);
     var inp = qf.querySelector('input'); if (inp) setTimeout(function(){ inp.focus({preventScroll:true}); }, 480);
   }
   function closeDrawer(){
