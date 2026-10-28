@@ -401,22 +401,32 @@
 
    
   var lines = setupEl && $('[data-hx-lines]', setupEl), totalEl = setupEl && $('[data-hx-total]', setupEl);
-  var shownTotal = 0;
-  function rollTo(el, value, text) {
-    if (reduce) { el.innerHTML = text; shownTotal = value; return; }
-    var from = shownTotal, t0 = now(), dur = 600;
-    shownTotal = value;
-    var pre = /From/.test(text) ? '<small>From</small>' : '';
+  var TICK = '<svg class="hx-tick" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3.5 8.4 2.9 2.9 6.1-6.3" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var PLAN = DATA.plan || { term: 18, ratePct: 7.5, cap: 7000, est: 80, acct: 9.95, fortnights: 39 };
+  function weekly(price) {
+    var cents = Math.round(price * 100), financed = Math.round(cents / (1 - PLAN.ratePct / 100));
+    if (financed > Math.round(PLAN.cap * 100)) return null;
+    var total = financed + Math.round(PLAN.est * 100), fortnight = Math.round(total / PLAN.fortnights);
+    var payable = total + Math.round(PLAN.acct * 100) * PLAN.term;
+    return { week: Math.ceil(fortnight / 200), save: Math.floor((payable - cents) / 100) };
+  }
+  var shownWeek = 0;
+  function rollTo(el, value, pre, suf) {
+    var paint = function (v) { el.innerHTML = pre + '<b>$' + Math.round(v).toLocaleString('en-AU') + '</b>' + suf; };
+    if (reduce || !shownWeek) { paint(value); shownWeek = value; return; }
+    var from = shownWeek, t0 = now(), dur = 600;
+    shownWeek = value;
     (function tick() {
       var p = clamp((now() - t0) / dur, 0, 1);
-      el.innerHTML = pre + fmt(from + (value - from) * easeOut(p));
-      if (p < 1) requestAnimationFrame(tick); else el.innerHTML = text;
+      paint(from + (value - from) * easeOut(p));
+      if (p < 1) requestAnimationFrame(tick);
     })();
   }
   var PARTNER = { home: 'essential', reserve: 'premium' };         
   var HOME_FOR = { essential: 'home', premium: 'reserve', luxe: 'reserve', flow: 'home' };
   var PACKAGE_OF = { 'home+essential': 'deluxe', 'reserve+premium': 'deluxe-reserve' };
   var addKey = { home: 'home', ro: 'premium' };
+  var mine = null;   
   function kindOf(k) { return SYS[k] ? SYS[k].kind : ''; }
   function mixerAllowed() { var k = kindOf(chosen); return k === 'ro' || (k === 'home' && add.ro); }
   function setup() {
@@ -435,10 +445,32 @@
     if (mixer) total += DATA.mixer.price;
     return { kind: k, items: items, total: total, from: from, save: save, mixer: mixer, care: care, free: false };
   }
+  function flipAdd(k) {
+    add[k] = !add[k];
+    if (k === 'ro' && !add.ro) add.mixer = false;
+    if (k === 'mixer' && add.mixer && kindOf(chosen) === 'home' && !add.ro) add.ro = true;   
+  }
+   
+  function stepFor(k) {
+    var keep = { mixer: add.mixer, home: add.home, ro: add.ro };
+    add[k] = false; if (k === 'ro') add.mixer = false;
+    if (k === 'mixer' && kindOf(chosen) === 'home') add.ro = true;
+    var off = setup().total;
+    add[k] = true; if (k === 'mixer' && kindOf(chosen) === 'home') add.ro = true;
+    var on = setup().total;
+    add = keep;
+     
+    var up = on - off;
+    return { up: up, week: weekly(on) ? Math.ceil(up / (1 - PLAN.ratePct / 100) / (PLAN.fortnights * 2)) : 0 };
+  }
   function thumbHTML(key) {
     var s = SYS[key];
     if (s.kind === 'deluxe') { var b = $('.hx-card[data-key="' + key + '"] .hx-bundle', find); return b ? b.outerHTML : ''; }
     return '<img src="' + s.img + '" alt="" width="64" height="64">';
+  }
+  function weekHTML(price, from) {
+    var w = weekly(price);
+    return w ? (from ? '<small>From</small>' : '') + '<b>$' + w.week + '</b><span>a week</span>' : (from ? '<small>From</small>' : '') + '<b>' + fmt(price) + '</b>';
   }
   function dealFor() {
     var k = kindOf(chosen);
@@ -447,78 +479,114 @@
     if (k === 'ro') return PACKAGE_OF[HOME_FOR[chosen] + '+' + chosen] || PACKAGE_OF['reserve+premium'];
     return null;
   }
-  function renderDeal() {
+  function renderDeal(s) {
     var el = $('[data-hx-deal]', setupEl), pk = dealFor();
     if (!pk) { el.hidden = true; return; }
-    var p = SYS[pk], parts = p.parts.map(function (k) {
-      var mix = k === 'mixer';
-      return '<li><img src="' + (mix ? DATA.mixer.img : SYS[k].img) + '" alt="" width="56" height="56"><span>' + (mix ? 'Classic mixer' : SYS[k].name) + '</span>'
-        + '<b>' + (mix ? '<s>' + fmt(DATA.mixer.price) + '</s><em>Free</em>' : fmt(SYS[k].price)) + '</b></li>';
-    });
-    var inPkg = chosen === pk;
-    el.innerHTML = '<b class="hx-deal__name">' + (inPkg ? 'Your ' + p.name + ' package' : 'Make it the ' + p.name) + (p.freeYear ? '<span>First year of servicing free</span>' : '') + '</b>'
-      + '<p class="hx-deal__short"><b>' + fmt(p.price) + '</b><span>' + (p.freeYear ? 'Free mixer, first year free' : 'Free Classic mixer') + '</span></p>'
-      + '<ol class="hx-deal__sum">' + parts.join('<li class="op" aria-hidden="true">+</li>') + '<li class="op" aria-hidden="true">=</li><li class="tot"><b>' + fmt(p.price) + '</b></li></ol>'
-      + '<button type="button" data-hx-godeal>' + (inPkg ? 'Included' : 'Switch to it') + (inPkg ? '' : ' <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>') + '</button>';
-    el.classList.toggle('is-in', inPkg);
+    var p = SYS[pk], inPkg = chosen === pk;
+    var back = inPkg ? (mine ? mine.key : p.parts[0]) : chosen;
+    var backTotal = inPkg ? (mine ? mine.total : SYS[back].price) : s.total;
+    var backName = inPkg && !mine ? 'Just ' + SYS[back].name : 'Your setup';
+    var short = function (k) { return SYS[k].name.replace(/^Pure Home Reserve$/, 'Reserve').replace(/^Pure /, ''); };
+    var backWhat = inPkg ? (mine ? mine.what : SYS[back].spec) : s.items.map(short).concat(s.mixer ? ['mixer'] : []).join(' + ');
+    var bw = weekly(backTotal), pw = weekly(p.price);
+    el.innerHTML = '<p class="hx-adds__lab">Or go Deluxe</p><div class="hx-dlx" role="radiogroup" aria-label="Your setup or the Deluxe package">'
+      + '<button type="button" class="hx-dlx__b" role="radio" aria-checked="' + !inPkg + '" data-hx-mine>'
+      + '<span class="hx-dlx__pic">' + thumbHTML(inPkg ? back : chosen) + '</span><span class="hx-dlx__t"><b>' + backName + '</b>'
+      + '<span class="hx-dlx__what">' + backWhat + '</span>'
+      + '<span class="hx-dlx__p">' + (bw ? '<em>$' + bw.week + '</em> a week' : fmt(backTotal)) + '</span><span class="hx-dlx__off is-none"></span></span><i class="hx-dlx__tick" aria-hidden="true">' + TICK + '</i></button>'
+      + '<button type="button" class="hx-dlx__b hx-dlx__b--gold" role="radio" aria-checked="' + inPkg + '" data-hx-godeal>'
+      + '<span class="hx-dlx__pic">' + thumbHTML(pk) + '</span><span class="hx-dlx__t"><b>' + p.name + '</b>'
+      + '<span class="hx-dlx__what">' + p.spec + '</span>'
+      + '<span class="hx-dlx__p">' + (pw ? '<em>$' + pw.week + '</em> a week' : fmt(p.price)) + '</span>'
+      + '<span class="hx-dlx__off">That’s ' + fmt(p.was - p.price) + ' off</span></span><i class="hx-dlx__tick" aria-hidden="true">' + TICK + '</i></button></div>';
     el.hidden = false;
-    var b = $('[data-hx-godeal]', el);
-    if (!inPkg) b.addEventListener('click', function () { choose(pk, 'deluxe'); if (window.ffyTrack) window.ffyTrack('guide_go_deluxe', { to: pk }); });
-    else b.disabled = true;
+    $('[data-hx-godeal]', el).addEventListener('click', function () {
+      if (chosen === pk) return;
+      mine = { key: chosen, add: { mixer: add.mixer, home: add.home, ro: add.ro }, addKey: { home: addKey.home, ro: addKey.ro }, total: s.total,
+               what: s.items.map(short).concat(s.mixer ? ['mixer'] : []).join(' + ') };
+      choose(pk, null, { noScroll: true, keepMine: true });
+      if (window.ffyTrack) window.ffyTrack('guide_go_deluxe', { to: pk });
+    });
+    $('[data-hx-mine]', el).addEventListener('click', function () {
+      if (chosen !== pk) return;
+      var m = mine;
+      choose(back, null, { noScroll: true });
+      if (m) { add = m.add; addKey = m.addKey; render(true); }
+    });
   }
-  function syncSwitch(group, key) {
-    $$('[data-' + group + ']', setupEl).forEach(function (b) { b.setAttribute('aria-checked', b.getAttribute('data-' + group) === key ? 'true' : 'false'); });
+  function tileFor(k, s) {
+    var el = $('.hx-ao[data-add="' + k + '"]', setupEl), dl = s.kind === 'deluxe';
+    var show = k === 'home' ? (s.kind === 'ro' || s.kind === 'flow' || dl) : k === 'ro' ? s.kind === 'home' : s.kind !== 'flow';
+    el.hidden = !show;
+    if (!show) return;
+    var pkg = dl && k === 'home', incl = dl, on = incl || !!add[k];
+    var it = k === 'mixer' ? null : pkg ? SYS[SYS[chosen].parts[0]] : SYS[addKey[k]];
+    var name = pkg ? SYS[chosen].parts.filter(function (x) { return x !== 'mixer'; }).map(function (x) { return SYS[x].name; }).join(' + ') : (it ? it.name : 'Classic mixer');
+    $('[data-hx-addname]', el).textContent = name;
+    var img = $('[data-hx-addpic]', el), src = it ? it.img : '/media/tap-studio/classic/classic-gooseneck-' + finish + '.webp';
+    if (img.getAttribute('src') !== src) img.src = src;
+    img.alt = it ? name : 'The Classic three way mixer in ' + finishName.toLowerCase();
+    var st = incl ? null : stepFor(k);
+    $('[data-hx-addprice]', el).innerHTML = incl ? (pkg ? '<b class="hx-free">Included</b>' : '<s>' + fmt(DATA.mixer.price) + '</s> <b class="hx-free">Free</b>')
+      : (st.week ? '<b>+$' + st.week + '</b> a week' : '<b>+' + fmt(st.up) + '</b>');
+    var row = $('.hx-ao__opts', el);
+    row.classList.toggle('is-off', pkg);
+    $$('.hx-ao__opt', el).forEach(function (o) { o.setAttribute('aria-checked', o.getAttribute('data-opt') === addKey[k] ? 'true' : 'false'); });
+    var t = $('.hx-ao__btn', el);
+    t.classList.toggle('is-off', incl);
+    t.disabled = incl;
+    t.setAttribute('aria-pressed', on ? 'true' : 'false');
+    t.setAttribute('aria-label', (on ? 'Remove ' : 'Add ') + (it ? it.name : 'the Classic mixer'));
+    $('span', t).textContent = on ? 'Remove' : 'Add';
+    el.classList.toggle('is-added', on);
   }
+   
   function render(bump) {
+    var card = $('.hx-setup__card', setupEl);
+    if (!bump || reduce || !card.animate || !setupEl.classList.contains('is-on')) { paint(bump); return; }
+    var h0 = card.getBoundingClientRect().height;
+    paint(bump);
+    var h1 = card.getBoundingClientRect().height;
+    if (Math.abs(h1 - h0) < 1) return;
+    card.style.overflow = 'hidden';
+    var a = card.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: 440, easing: 'cubic-bezier(.22,1,.36,1)' });
+    a.onfinish = a.oncancel = function () { card.style.overflow = ''; };
+  }
+  function paint(bump) {
     var s = setup(); if (!s) return;
     var main = SYS[chosen];
-    var th = $('[data-hx-pickthumb]', setupEl);
-    th.innerHTML = thumbHTML(chosen);
+    $('[data-hx-pickthumb]', setupEl).innerHTML = thumbHTML(chosen);
     $('[data-hx-pickname]', setupEl).textContent = main.name;
-    $('[data-hx-pickspec]', setupEl).textContent = main.spec;
-    $('[data-hx-pickprice]', setupEl).innerHTML = (main.from ? '<small>From</small>' : '') + (main.was ? '<s>' + fmt(main.was) + '</s>' : '') + '<b>' + fmt(main.price) + '</b><small>installed</small>';
-    var homeRow = $('.hx-add[data-add="home"]', setupEl), roRow = $('.hx-add[data-add="ro"]', setupEl), mixRow = $('.hx-add[data-add="mixer"]', setupEl);
-    homeRow.hidden = !(s.kind === 'ro' || s.kind === 'flow');
-    roRow.hidden = s.kind !== 'home';
-    mixRow.hidden = s.kind === 'flow';
-    syncSwitch('sw-home', addKey.home); syncSwitch('sw-ro', addKey.ro);
-    $('img', homeRow).src = SYS[addKey.home].img;
-    $('[data-hx-addprice]', homeRow).innerHTML = '<small>From</small>' + fmt(SYS[addKey.home].price) + '<span class="hx-off">$200 off</span>';
-    $('img', roRow).src = SYS[addKey.ro].img;
-    $('[data-hx-addprice]', roRow).innerHTML = fmt(SYS[addKey.ro].price) + '<span class="hx-off">$200 off</span>';
-    [['home', homeRow], ['ro', roRow], ['mixer', mixRow]].forEach(function (pair) {
-      var t = $('.hx-toggle', pair[1]), on = !!add[pair[0]];
-      if (pair[0] === 'mixer' && s.kind === 'deluxe') { t.hidden = true; on = true; } else t.hidden = false;
-      t.setAttribute('aria-pressed', on ? 'true' : 'false');
-      $('span', t).textContent = on ? 'Added' : 'Add it';
-      pair[1].classList.toggle('is-added', on);
-    });
-    var mixHead = $('[data-hx-mixhead]', setupEl), mixPrice = $('[data-hx-mixprice]', setupEl);
-    if (s.kind === 'deluxe') { mixHead.textContent = 'Your Classic mixer, free'; mixPrice.innerHTML = '<s>' + fmt(DATA.mixer.was) + '</s>Free'; }
-    else { mixHead.textContent = 'A three way mixer?'; mixPrice.innerHTML = '<s>' + fmt(DATA.mixer.was) + '</s>' + fmt(DATA.mixer.price); }
+    $('[data-hx-pickprice]', setupEl).innerHTML = weekHTML(main.price, main.from);
+    $('[data-hx-pickoff]', setupEl).innerHTML = main.was ? '<span class="hx-off">That’s ' + fmt(main.was - main.price) + ' off</span>' : '';
+    ['home', 'ro', 'mixer'].forEach(function (k) { tileFor(k, s); });
      
-    var off = function (label) { return '<li class="is-off"><span>' + label + '</span><b>Not added</b></li>'; };
     var html = s.items.map(function (key) { var it = SYS[key]; return '<li><span>' + it.name + '</span><b>' + (it.from ? 'From ' : '') + fmt(it.price) + '</b></li>'; });
-    if ((s.kind === 'ro' || s.kind === 'flow') && s.items.length < 2) html.push(off('Every shower and bath'));
-    if (s.kind === 'home' && s.items.length < 2) html.push(off('Drinking water'));
     if (s.kind === 'deluxe') html.push('<li class="is-free"><span>Classic mixer, ' + finishName.toLowerCase() + '</span><b>Free</b></li>');
     else if (s.mixer) html.push('<li><span>Classic mixer, ' + finishName.toLowerCase() + '</span><b>' + fmt(DATA.mixer.price) + '</b></li>');
-    else if (s.kind !== 'flow') html.push(off('Three way mixer'));
     if (s.save) html.push('<li class="is-save"><span>Second system</span><b>&minus;' + fmt(s.save) + '</b></li>');
     lines.innerHTML = html.join('');
-    rollTo(totalEl, s.total, (s.from ? '<small>From</small>' : '') + fmt(s.total));
+    var w = weekly(s.total), up = $('[data-hx-upfront]', setupEl);
+    if (w) {
+      rollTo(totalEl, w.week, s.from ? '<small>From</small>' : '', '<span class="hx-sum__per">a week <i>for ' + PLAN.term + ' months</i></span>');
+      up.innerHTML = 'Or pay ' + (s.from ? 'from ' : '') + fmt(s.total) + ' upfront and <b>save ' + fmt(w.save) + '</b>';
+    } else {
+      shownWeek = 0; totalEl.innerHTML = (s.from ? '<small>From</small>' : '') + '<b>' + fmt(s.total) + '</b><span class="hx-sum__per">installed</span>';
+      up.innerHTML = '';
+    }
      
     var what = s.items.map(function (k) { return SYS[k].name.replace(/^Pure Home Reserve$/, 'Reserve').replace(/^Pure /, ''); });
     if (s.kind === 'deluxe' || s.mixer) what.push('mixer');
     $('[data-hx-barwhat]', setupEl).textContent = what.join(' + ');
-    $('[data-hx-bartotal]', setupEl).innerHTML = (s.from ? '<small>From</small>' : '') + fmt(s.total);
+    $('[data-hx-bartotal]', setupEl).innerHTML = w ? (s.from ? '<small>From</small>' : '') + '$' + w.week + '<small class="hx-bar__wk"><span class="hx-wk-l">a week</span><span class="hx-wk-s">/wk</span></small>' : (s.from ? '<small>From</small>' : '') + fmt(s.total);
     ['life', 'service', 'diy'].forEach(function (p) { $('[data-hx-plan="' + p + '"]', setupEl).textContent = fmt(s.care[p]) + '/yr'; });
     var note = $('[data-hx-plannote]', setupEl), offerItem = s.items.filter(function (k) { return SYS[k].offer; })[0];
-    if (s.free) note.textContent = 'First year free on both systems.';
+    if (s.free) note.textContent = 'First year of cartridges free on both systems.';
     else if (offerItem && OCT) note.textContent = 'October offer: first year of service free.';
     else if (s.items.length > 1) note.textContent = 'Second service $100 off, one visit.';
     else note.textContent = '';
-    renderDeal();
+    renderDeal(s);
+    if (pop && pop.open) fillPop();
     if (bump && !reduce) { totalEl.classList.remove('hx-bump'); void totalEl.offsetWidth; totalEl.classList.add('hx-bump'); }
     carry(s);
   }
@@ -530,8 +598,9 @@
     else if (s.mixer) parts.push('Classic three way mixer in ' + finishName.toLowerCase() + ' (' + fmt(DATA.mixer.price) + ')');
     var txt = 'Chosen on the homepage: ' + parts.join(', ') + '.';
     if (s.save) txt += ' Second system saving of ' + fmt(s.save) + ' applied.';
-    txt += ' Shown total ' + (s.from ? 'from ' : '') + fmt(s.total) + ' installed.';
-    txt += ' Yearly care: ' + PLAN_LABEL[plan] + ', ' + fmt(s.care[plan]) + ' a year' + (s.free ? ', first year free on both.' : '.');
+    var w = weekly(s.total);
+    txt += ' Shown total ' + (s.from ? 'from ' : '') + fmt(s.total) + ' installed' + (w ? ', or $' + w.week + ' a week over ' + PLAN.term + ' months' : '') + '.';
+    txt += ' Yearly care: ' + PLAN_LABEL[plan] + ', ' + fmt(s.care[plan]) + ' a year' + (s.free ? ', first year of cartridges free on both.' : '.');
     return txt;
   }
   function carry(s) {
@@ -553,10 +622,10 @@
   function fillChip(chip, s) {
     var names = s.items.map(function (k) { return SYS[k].name; });
     if (s.kind === 'deluxe' || s.mixer) names.push('Classic mixer, ' + finishName.toLowerCase());
-    var img = SYS[chosen].img || SYS[SYS[chosen].parts[0]].img;
+    var img = SYS[chosen].img || SYS[SYS[chosen].parts[0]].img, w = weekly(s.total);
     $('img', chip).src = img;
     $('b', chip).textContent = 'Your setup: ' + names.join(' + ');
-    $('span span', chip).textContent = (s.from ? 'From ' : '') + fmt(s.total) + ' installed, ' + PLAN_LABEL[plan] + ' ' + fmt(s.care[plan]) + ' a year';
+    $('span span', chip).textContent = (w ? (s.from ? 'From $' : '$') + w.week + ' a week, or ' : (s.from ? 'From ' : '')) + fmt(s.total) + ' upfront. ' + PLAN_LABEL[plan] + ' ' + fmt(s.care[plan]) + ' a year';
     chip.hidden = false;
   }
   function choose(key, path, opts) {
@@ -566,7 +635,8 @@
     var changed = chosen !== key;
     chosen = key;
     if (changed) {
-      add = { mixer: false, home: false, ro: false }; shownTotal = 0;
+      if (!opts.keepMine) mine = null;
+      add = { mixer: false, home: false, ro: false }; shownWeek = 0;
       if (HOME_FOR[key]) addKey.home = HOME_FOR[key];
       if (PARTNER[key]) addKey.ro = PARTNER[key];
     }
@@ -576,24 +646,88 @@
     if (!opts.noScroll) setTimeout(function () { bringIntoView(setupEl, false); }, reduce ? 0 : 40);
     if (window.ffyTrack) window.ffyTrack('guide_choose', { system: SYS[key].name });
   }
+
+   
+  var pop = setupEl ? $('#hx-bkpop', setupEl) : null, popKey = null, popFrom = null;
+  if (!pop || typeof pop.showModal !== 'function') pop = { open: false };
+  function fillPop() {
+    var s = setup(), k = popKey, incl = k === 'mixer' && s.kind === 'deluxe', on = incl || !!add[k];
+    var it = k === 'mixer' ? null : SYS[addKey[k]];
+    var img = $('[data-hx-popimg]', pop), src = it ? it.img : '/media/tap-studio/classic/classic-gooseneck-' + finish + '.webp';
+    if (img.getAttribute('src') !== src) swapImg(img, src);
+    img.alt = it ? it.name + ', studio photo' : 'The Classic three way mixer in ' + finishName.toLowerCase() + ' on a marble kitchen bench';
+    $('[data-hx-popname]', pop).textContent = it ? it.name : 'Classic three way mixer';
+    $('[data-hx-popwhy]', pop).textContent = it ? it.why : DATA.mixer.why;
+    var feats = it ? it.feats : DATA.mixer.feats;
+    $('[data-hx-popfeats]', pop).innerHTML = (feats || []).map(function (f) { return '<li>' + TICK + '<span>' + f + '</span></li>'; }).join('');
+    $('[data-hx-popfin]', pop).hidden = k !== 'mixer';
+    var price = $('[data-hx-popprice]', pop);
+    if (incl) price.innerHTML = '<b class="hx-free">Free with Deluxe</b><span class="hx-off">Worth ' + fmt(DATA.mixer.price) + '</span>';
+    else {
+      var st = stepFor(k), off = k === 'mixer' ? DATA.mixer.was - DATA.mixer.price : (DATA.installOff || 200);
+      price.innerHTML = (st.week ? '<b>+$' + st.week + '</b> a week<small>or +' + fmt(st.up) + ' upfront</small>' : '<b>+' + fmt(st.up) + '</b>')
+        + '<span class="hx-off">That’s ' + fmt(off) + ' off</span>';
+    }
+    var b = $('[data-hx-popadd]', pop);
+    b.hidden = incl;
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    $('span', b).textContent = on ? 'Remove' : 'Add';
+  }
+  function openPop(k, from) {
+    popKey = k; popFrom = from;
+    fillPop();
+    pop.showModal();
+    doc.classList.add('hx-pop-on');
+    var card = $('.hx-bkpop__card', pop);
+    if (!reduce && card.animate && from && innerWidth >= 700) {
+      var a = from.getBoundingClientRect(), b = card.getBoundingClientRect();
+      var sc = Math.max(.2, Math.min(a.width / b.width, 1));
+      card.animate([{ transform: 'translate(' + (a.left + a.width / 2 - b.left - b.width / 2) + 'px,' + (a.top + a.height / 2 - b.top - b.height / 2) + 'px) scale(' + sc + ')', opacity: 0 },
+                    { transform: 'none', opacity: 1 }], { duration: 520, easing: 'cubic-bezier(.22,1.3,.36,1)' });
+    }
+    if (window.ffyTrack) window.ffyTrack('guide_addon_open', { item: k });
+  }
+  function shutPop() {
+    if (!pop.open || pop.classList.contains('is-closing')) return;
+    if (reduce) { pop.close(); return; }
+    pop.classList.add('is-closing');
+    var done = function () { pop.removeEventListener('animationend', done); pop.classList.remove('is-closing'); if (pop.open) pop.close(); };
+    pop.addEventListener('animationend', done);
+    setTimeout(function () { if (pop.open && pop.classList.contains('is-closing')) done(); }, 420);
+  }
+  if (pop.showModal) {
+    pop.addEventListener('close', function () { doc.classList.remove('hx-pop-on'); if (popFrom) popFrom.focus({ preventScroll: true }); });
+    pop.addEventListener('cancel', function (e) { e.preventDefault(); shutPop(); });
+    pop.addEventListener('click', function (e) { if (e.target === pop) shutPop(); });
+    $('[data-hx-popclose]', pop).addEventListener('click', shutPop);
+    $('[data-hx-popadd]', pop).addEventListener('click', function () {
+      var k = popKey, was = !!add[k];
+      flipAdd(k); render(true);
+      if (window.ffyTrack) window.ffyTrack('guide_add', { item: k, on: add[k], from: 'popup' });
+      if (!was) setTimeout(shutPop, reduce ? 0 : 280);
+    });
+  }
+
   if (find) {
     $$('.hx-choose', find).forEach(function (a) {
       a.addEventListener('click', function (e) { e.preventDefault(); choose(a.getAttribute('data-choose'), a.getAttribute('data-path')); });
     });
-    $$('.hx-toggle', setupEl).forEach(function (t) {
+    $$('.hx-ao .hx-ao__btn', setupEl).forEach(function (t) {
       t.addEventListener('click', function () {
         var k = t.getAttribute('data-toggle');
-        add[k] = !add[k];
-        if (k === 'ro' && !add.ro) add.mixer = false;
-        if (k === 'mixer' && add.mixer && kindOf(chosen) === 'home' && !add.ro) add.ro = true;   
-        render(true);
+        flipAdd(k); render(true);
         if (window.ffyTrack) window.ffyTrack('guide_add', { item: k, on: add[k] });
       });
     });
-    [['sw-home', 'home'], ['sw-ro', 'ro']].forEach(function (pair) {
-      $$('[data-' + pair[0] + ']', setupEl).forEach(function (b) {
-        b.addEventListener('click', function () { addKey[pair[1]] = b.getAttribute('data-' + pair[0]); add[pair[1]] = true; render(true); });
+    $$('.hx-ao__opt', setupEl).forEach(function (o) {
+      o.addEventListener('click', function () {
+        var k = o.closest('.hx-ao').getAttribute('data-add');
+        addKey[k] = o.getAttribute('data-opt'); render(!!add[k]);
+        if (window.ffyTrack) window.ffyTrack('guide_addon_pick', { item: k, pick: addKey[k] });
       });
+    });
+    $$('[data-hx-zoom]', setupEl).forEach(function (b) {
+      b.addEventListener('click', function () { if (pop.showModal) openPop(b.getAttribute('data-hx-zoom'), b); });
     });
     $$('input[name="hx-plan"]', setupEl).forEach(function (r) {
       r.addEventListener('change', function () { plan = r.value; render(false); if (window.ffyTrack) window.ffyTrack('guide_plan', { plan: plan }); });
@@ -619,18 +753,18 @@
   }
   function swapImg(img, src) {
     if (img.getAttribute('src') === src) return;
+    if (!img.getAttribute('src')) { img.src = src; return; }
     var n = new Image(); n.src = src;
     var go = function () { img.style.opacity = '0'; setTimeout(function () { img.src = src; img.style.opacity = ''; }, reduce ? 0 : 160); };
     if (n.decode) n.decode().then(go, go); else n.onload = go;
   }
-  if (setupEl) swatches($('.hx-add[data-add="mixer"] .hx-sws', setupEl), function (f, name) {
+  function setFinish(f, name) {
     finish = f; finishName = name;
-    $('[data-hx-swname]', setupEl).textContent = name;
-    var img = $('[data-hx-mixpic]', setupEl); swapImg(img, '/media/tap-studio/classic/classic-gooseneck-' + f + '.webp');
-    img.alt = 'The Classic three way mixer in ' + name.toLowerCase() + ' on a marble kitchen bench';
-    if (SYS[chosen] && SYS[chosen].kind !== 'deluxe' && !add.mixer) add.mixer = true;
-    render(true);
-  });
+    $$('.hx-sw', setupEl).forEach(function (o) { var on = o.getAttribute('data-finish') === f; o.setAttribute('aria-checked', on ? 'true' : 'false'); o.tabIndex = on ? 0 : -1; });
+    $$('[data-hx-swname]', setupEl).forEach(function (n) { n.textContent = name; });
+    render(false);
+  }
+  if (setupEl) $$('.hx-sws', setupEl).forEach(function (g) { swatches(g, setFinish); });
 
    
   if (stage && 'IntersectionObserver' in window) {
