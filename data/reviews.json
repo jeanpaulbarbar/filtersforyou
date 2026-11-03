@@ -1,9 +1,15 @@
 {
   "source": "Google Business Profile",
   "profile_url": "https://search.google.com/local/reviews?placeid=ChIJETR1IheGoY4R18q6hxA3eCs",
-  "count": 34,
+  "count": 35,
   "rating": 5.0,
   "newest": [
+    {
+      "name": "Mani T.",
+      "stars": 5,
+      "date": "2026-11-03",
+      "text": "Excellent service and outstanding quality! Filters for You provided a fantastic experience from start to finish. The team was professional, knowledgeable, friendly and genuinely helpful. Their service was prompt, communication was excellent, and the attention to detail was impressive.\n\nHighly recommend Filters for You to anyone looking for reliable products and exceptional customer service. Will definitely be using them again!"
+    },
     {
       "name": "Dylan C.",
       "stars": 5,
@@ -69,12 +75,6 @@
       "stars": 5,
       "date": "2026-07-19",
       "text": "We recently had a five-stage alkaline water filtration system installed by Filters For You in the back staff room at Haus of Omorfia, and the entire experience was exceptional from start to finish.\n\nJean Paul delivered outstanding customer service throughout the process. His professionalism, knowledge, and genuine care made everything effortless, taking the time to answer our questions and ensuring every detail was completed to the highest standard.\n\nThe quality of the water is incredible—beautifully fresh, crisp, and refreshing. It’s a simple upgrade that has made a noticeable difference to our team’s day-to-day experience.\n\nAt Haus of Omorfia, we value excellence in every detail, and this installation perfectly reflects that. Thank you, Jean Paul and the Filters For You team, for providing such a premium product and an outstanding level of service. We wouldn’t hesitate to recommend Filters For You to anyone looking for a high-quality water filtration solution."
-    },
-    {
-      "name": "Scott P.",
-      "stars": 5,
-      "date": "2026-07-14",
-      "text": "From start to finish the interaction, communication and experience was positive, fast and comprehensive. Jean-Paul was fantastic to deal with every step of the way and the service and products I had installed work exactly as described. It’s a genuine 5 stars from me."
     }
   ]
 }
