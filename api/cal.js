@@ -3,6 +3,8 @@ const TITLE = 'Filters For You installation';
 const PHONE = '0430 546 749';
 const ZONE = 'Australia/Sydney';
 const WINDOW_MINUTES = 30;
+const PICTURE = 'https://filtersforyou.com.au/assets/photos/preview.png';
+const PREVIEWERS = /facebookexternalhit|facebot|twitterbot|whatsapp|slackbot|telegrambot|discordbot|linkedinbot|skypeuripreview|applebot|googlebot|bingbot|crawler|spider|preview/i;
 
 function esc(value) {
   return String(value)
@@ -36,6 +38,38 @@ function clock(date) {
   }).formatToParts(date);
   const get = (type) => (parts.find((p) => p.type === type) || {}).value || '';
   return get('hour') + ':' + get('minute') + get('dayPeriod').toLowerCase().replace(/[^apm]/g, '');
+}
+
+function day(date) {
+  const parts = new Intl.DateTimeFormat('en-AU', {
+    timeZone: ZONE, weekday: 'long', day: 'numeric', month: 'long',
+  }).formatToParts(date);
+  const get = (type) => (parts.find((p) => p.type === type) || {}).value || '';
+  return get('weekday') + ' ' + get('day') + ' ' + get('month');
+}
+
+function html(value) {
+  return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function card(job, until) {
+  const title = 'Your installation, ' + day(job.start);
+  const line = 'Arriving between ' + clock(job.start) + ' and ' + clock(until) + '. Tap to add it to your calendar.';
+  return '<!doctype html><html lang="en-AU"><head><meta charset="utf-8">'
+    + '<title>' + html(title) + '</title>'
+    + '<meta name="robots" content="noindex, nofollow">'
+    + '<meta name="description" content="' + html(line) + '">'
+    + '<meta property="og:type" content="website">'
+    + '<meta property="og:site_name" content="Filters For You">'
+    + '<meta property="og:title" content="' + html(title) + '">'
+    + '<meta property="og:description" content="' + html(line) + '">'
+    + '<meta property="og:image" content="' + PICTURE + '">'
+    + '<meta property="og:image:width" content="1200">'
+    + '<meta property="og:image:height" content="630">'
+    + '<meta name="twitter:card" content="summary_large_image">'
+    + '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">'
+    + '<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">'
+    + '</head><body><h1>' + html(title) + '</h1><p>' + html(line) + '</p></body></html>';
 }
 
 function token(req) {
@@ -86,6 +120,11 @@ module.exports = (req, res) => {
   ].join('\n\n');
   const ua = String(req.headers['user-agent'] || '');
   const wantsFile = String((req.query || {}).f || '') === 'ics';
+  if (PREVIEWERS.test(ua) && !wantsFile) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    return res.end(card(job, until));
+  }
   if (/Android/i.test(ua) && !wantsFile) {
     const google = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
       + '&text=' + encodeURIComponent(TITLE)
