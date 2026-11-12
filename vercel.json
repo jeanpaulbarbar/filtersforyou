@@ -5,6 +5,10 @@
     {
       "source": "/tiktok-media/:path*",
       "destination": "https://d2ol7oe51mr4n9.cloudfront.net/:path*"
+    },
+    {
+      "source": "/cal/:p",
+      "destination": "/api/cal?p=:p"
     }
   ],
   "redirects": [
